@@ -1,0 +1,33 @@
+<div id="header">
+<img src="<?php echo $www_site_url;?>/public/images/xppass.gif"><?php echo lang('web-title');?>
+<div id="language"><?php echo lang('selectlanguage');?>:<select name="select_lang" onchange="window.location.href='<?php echo $www_site_url;?>/index.php/index/setlang/'+this.options[this.selectedIndex].value">
+<option value="zh-cn" <?if($selected_lang=='zh-cn') echo "selected"; ?>><?php echo lang('zh-cn');?></option>
+<option value="zh-tw" <?if($selected_lang=='zh-tw') echo "selected"; ?>><?php echo lang('zh-tw');?></option>
+<option value="en" <?if($selected_lang=='en') echo "selected"; ?>><?php echo lang('en');?></option>
+</select></div>
+</div>
+<div id="menu"> 
+<ul>
+<li>
+  <a <?php if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='index' && ($_GET['view']=='defaults' or $_GET['view']=='')) echo "class='active'";?> href="<?php echo $www_site_url;?>/index.php/index"><?php echo lang('menu1');?></a>
+</li><li>
+  <a <?php if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='passport' && $_GET['view']=='login') echo "class='active'";?> href="<?php echo $www_site_url;?>/index.php/passport/login"><?php echo lang('menu2');?></a>
+</li>
+<li>
+  <a <?php if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='passport' && $_GET['view']=='reg') echo "class='active'";?> href="<?php echo $www_site_url;?>/index.php/passport/reg"><?php echo lang('menu3');?></a> 
+</li>
+<?php if(isset($user['user_id'])&&$user['user_id']=='1'){?>
+<li>    
+  <a href="<?php echo $www_site_url;?>/admin.php"><?php echo lang('menu4');?></a>
+</li>
+<?php }?>
+<li>    
+  <a href="<?php echo $www_site_url;?>/index.php/index/help"><?php echo lang('menu5');?></a>
+</li>
+<?php if(isset($user) && $user['user']){?>
+<li>    
+  <a href="<?php echo $www_site_url;?>/index.php/passport/logout"><?php echo lang('menu6');?></a>
+</li>
+<?php } ?>
+</ul>  
+</div>

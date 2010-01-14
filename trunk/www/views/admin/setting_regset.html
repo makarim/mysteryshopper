@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Xppass Administrator's Control Panel</title>
+<LINK href="<?php echo $www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+</head>
+<body>
+
+<div class="container">
+
+			<div id="msg"></div>
+			<div class="mainbox nomargin">
+			<form action="<?php echo $www_site_url?>/admin.php" method="post">
+				<input type="hidden" name="action" value="setting">
+				<input type="hidden" name="op" value="regset">
+				<table class="opt">
+					<tr>
+						<th colspan="2"><?php echo lang('double_nickname')?>:</th>
+					</tr>
+
+					<tr>
+						<td>
+							<input type="radio" id="yes" class="radio" name="doublenick" value="1" <?php if(isset($doublenick) && $doublenick==1) echo "checked";?> /><label for="yes"><?php echo lang('yes')?></label>
+							<input type="radio" id="no" class="radio" name="doublenick" value="0"  <?php if(isset($doublenick) && $doublenick==0) echo "checked";?>/><label for="no"><?php echo lang('no')?></label>
+						</td>
+					</tr>
+					
+					<tr>
+						<th colspan="2"><?php echo lang('ban_email')?>:</th>
+
+					</tr>
+					<tr>
+						<td><textarea class="textfield" name="banemail" rows="4" style="width:300px"><?php if(isset($banemail)) echo $banemail;?></textarea></td>
+						<td valign="top"><?php echo lang('ban_email_label')?></td>
+					</tr>
+					<tr>
+						<th colspan="2"><?php echo lang('ban_username')?>:</th>
+
+					</tr>
+					<tr>
+						<td><textarea class="textfield" name="banusername" rows="4" style="width:300px"><?php if(isset($banusername)) echo $banusername;?></textarea></td>
+						<td valign="top"><?php echo lang('ban_username_label')?></td>
+					</tr>
+				</table>
+				<div class="opt"><input type="submit" name="submit" value="<?php echo lang('submit')?>" class="button" tabindex="3" /></div>
+			</form>
+
+		</div>
+	</div>
+
+
+</body>
+</html>

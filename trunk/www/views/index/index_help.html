@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title><?php echo $web_title?></title>
+<LINK href="<?php echo $www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+
+</head>
+<body>
+<?php include_once("header.html")?>
+
+
+<br>
+<TABLE width="90%" border=0 cellspacing="1" cellpadding="2" style="border:1px #ccc solid">
+  <TR>
+	<TD height="30px"></TD>
+	<TD><?php echo lang('cookie_solution')?></TD>
+	<TD><?php echo lang('session_solution')?></TD>
+	<TD><?php echo lang('ticket_solution')?></TD>
+  </TR>
+  <TR valign="top">
+	<TD width="50px"><?php echo lang('mentality')?></TD>
+	<TD ><?php echo lang('cookie_mentality')?></TD>
+	<TD>
+	<?php echo lang('session_mentality')?>
+	</TD>
+	<TD>
+	<?php echo lang('ticket_mentality')?>
+</TD>
+  </TR>
+  <TR valign="top">
+	<TD ><?php echo lang('advantage')?></TD>
+	<TD><?php echo lang('cookie_advantage')?></TD>
+	<TD><?php echo lang('session_advantage')?></TD>
+	<TD><?php echo lang('ticket_advantage')?></TD>
+  </TR>
+  <TR valign="top">
+	<TD><?php echo lang('disadvantage')?></TD>
+	<TD><?php echo lang('cookie_disadvantage')?></TD>
+	<TD><?php echo lang('session_disadvantage')?></TD>
+	<TD><?php echo lang('ticket_disadvantage')?></TD>
+  </TR>
+  </TABLE>
+  <br>
+<?php echo $code?>
+  <?php include_once("footer.html")?>
+</body>
+</html>

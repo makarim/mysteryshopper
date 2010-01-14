@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title><?php echo $web_title?></title>
+<LINK href="<?php echo $www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+<script src="<?php echo $www_site_url?>/public/js/yav2.0/yav.js"></script>
+
+<script src="<?php echo $www_site_url?>/public/js/yav2.0/yav-config-<?php echo $selected_lang?>.js"></script>
+
+<script src="<?php echo $www_site_url?>/public/js/ajax.js"></script>
+<SCRIPT>
+//only for test purposes
+function checkOnSubmit(formName, r) {
+   // document.getElementById(yav_config.errorsdiv).className = '';
+   // document.getElementById(yav_config.errorsdiv).style.display = 'none';
+   // var alertType = document.getElementById('alertType').value;
+    if (yav.performCheck(formName, r, 'inline')) {
+    	
+    	var url = "<?php echo $www_site_url?>/index.php";
+		var params = mini.form.serialize($(formName));
+		mini.ajax.post(url, function(r){
+			var r = eval('(' + r + ')');   
+			if(r.s==200){
+				window.location.href = r.d;
+			}
+			if(r.s==400){
+				$('msg').innerHTML = r.m;			
+			}
+		}, params);
+    	
+    	return false;
+       
+    } 
+    return false;
+}
+
+var rules=new Array();
+rules[0]='username|required|<?php echo lang('usernamerule')?>';
+rules[1]='username|regexp|^[a-zA-Z][a-zA-Z0-9_]{1,13}[a-zA-Z0-9]$|<?php echo lang('usernamerule')?>';
+rules[2]='email|required|<?php echo lang('insertemail')?>';
+rules[3]='email|email|<?php echo lang('insertemail')?>';
+rules[4]='password|required|<?php echo lang('insertpwd')?>';
+rules[5]='password|minlength|6|<?php echo lang('pwdrule')?>';
+rules[6]='comfirmpwd|equal|$password|<?php echo lang('pwdnotsame')?>';
+
+rules[7]='sex|required|<?php echo lang('sexrule')?>';
+rules[8]='code|required|<?php echo lang('coderule')?>';
+rules[9]='nickname|required|<?php echo lang('nicknamerule')?>';
+
+rules[10]='nickname|minlength|2|<?php echo lang('nicknamerule')?>';
+rules[11]='nickname|maxlength|16|<?php echo lang('nicknamerule')?>';
+rules[12]='question|required|<?php echo lang('selectaquestion')?>';
+rules[13]='answer|required|<?php echo lang('youranswer')?>';
+
+
+yav.addHelp('username', '<?php echo lang('usernamerule')?>');
+yav.addHelp('password', '');
+yav.addHelp('comfirmpwd', '');
+yav.addHelp('email', '<?php echo lang('insertemail')?>');
+yav.addHelp('question', '');
+yav.addHelp('answer', '');
+yav.addHelp('nickname', '');
+yav.addHelp('sex', '');
+yav.addHelp('code', '');
+yav.postValidation_OnOK('email', 'blur', 'ajaxCall("email")');
+yav.postValidation_OnOK('username', 'blur', 'ajaxCall("username")');
+
+
+
+var captchaOK = 2;  // 2 - not yet checked, 1 - correct, 0 - failed
+var account = '';
+// a simple ajax implementation
+
+function ajaxCall(s) {
+	account = s;
+	mini.ajax.get("<?php echo $www_site_url?>/index.php/passport/checkuser/user/" + escape(document.getElementById(s).value), function(r){
+	    captchaOK = r;  
+	    if(captchaOK != 1) {              
+	      	yav.displayMsg(account, '<?php echo lang('userexist')?>', yav_config.innererror);
+	      	document.registerform.registerbtn.disabled=true;
+	      	return false;
+	      } else {
+	          yav.displayMsg(account, '<?php echo lang('userisok')?>', yav_config.innerhelp);      
+	          document.registerform.registerbtn.disabled=false;
+	          return true;
+	      }
+	});  
+    return false;
+}
+
+function changeCode() {
+	var num = 	new Date().getTime();
+	var rand = Math.round(Math.random() * 10000);
+	num = num + rand;
+	document.getElementById("codeimg").src = "<?php echo $www_site_url?>/index.php/identifycode/generate/" + num;
+	return false;
+}
+</SCRIPT>
+
+</head>
+<body onload="yav.init('registerform', rules);">
+<?php include_once("header.html")?>
+<div id="msg" style="color: red"></div>
+<FORM name="registerform" id="registerform" method="POST" onsubmit="return checkOnSubmit('registerform', rules);" >
+<input type="hidden" name="action" value="passport">
+<input type="hidden" name="op" value="saveuser">
+<input type="hidden" name="reg_type" value="<?php echo $reg_type?>">
+
+<TABLE valign="top" cellspacing="5" border="0" width="600px">
+<TR>
+<TD colspan="2">
+<?php if($reg_type=='email') {?><INPUT class="button" type="button" value="<?php echo lang('regbyusername')?>" onclick="window.location.href='<?php echo $www_site_url?>/index.php/passport/reg/username'"/><?php } ?>
+<?php if($reg_type=='username') {?> <INPUT class="button" type="button" value="<?php echo lang('regbyemail')?>" onclick="history.go(-1);"/><?php }?>
+</TD>
+</TR>
+<?php if($reg_type=='email') {?>
+<TR>
+<TD width="120px"><?php echo lang('email')?>:</TD>
+<TD><div id="errorsDiv_email"></div><INPUT class="textfield" type="text" name="email" value="<?php echo $email?>" id="email" /></TD>
+</TR><?php } ?>
+<?php if($reg_type=='username') {?><TR>
+<TD width="120px"><?php echo lang('username')?>:</TD>
+<TD><div id="errorsDiv_username"></div><INPUT class="textfield" type="text" name="username"  value="<?php echo $username?>" id="username"/>
+</TD>
+</TR><?php } ?>
+<TR><TD><?php echo lang('pwd')?>:</TD>
+<TD><div id="errorsDiv_password"></div><INPUT class="textfield" type="password" name="password"  /></TD>
+</TR>
+<TR>
+<TD><?php echo lang('comfirmpwd')?>:</TD>
+<TD><div id="errorsDiv_comfirmpwd"></div><INPUT class="textfield" type="password" name="comfirmpwd"  /></TD>
+</TR>
+<?php if($reg_type=='username') {?>
+<TR>
+<TD><?php echo lang('pwdquestion')?>:</TD>
+<TD><div id="errorsDiv_question"></div><select class="textfield" id="question" name="question" title="<?php echo lang('pwdquestion')?>">
+
+			<option value="" selected="selected" ><?php echo lang('selectaquestion')?></option>
+
+			<option value="<?php echo lang('q1')?>" ><?php echo lang('q1')?></option>			
+
+			<option value="<?php echo lang('q2')?>" ><?php echo lang('q2')?></option>
+
+			<option value="<?php echo lang('q3')?>" ><?php echo lang('q3')?></option>
+
+			<option value="<?php echo lang('q4')?>" ><?php echo lang('q4')?></option>
+
+			<option value="<?php echo lang('q5')?>" ><?php echo lang('q5')?></option>
+
+			<option value="<?php echo lang('q6')?>" ><?php echo lang('q6')?></option>			
+
+			<option value="<?php echo lang('q7')?>" ><?php echo lang('q7')?></option>
+
+			<option value="<?php echo lang('q8')?>" ><?php echo lang('q8')?></option>
+
+			<option value="<?php echo lang('q9')?>" ><?php echo lang('q9')?></option>
+
+			<option value="<?php echo lang('q10')?>" ><?php echo lang('q10')?></option>
+			
+		</select></TD>
+		</TR>
+<TR>
+<TD><?php echo lang('youranswer')?>:</TD>
+<TD><div id="errorsDiv_answer"></div><INPUT class="textfield" type="text" name="answer" /></TD>
+</TR>
+<?php }?>
+
+<TR>
+<TD><?php echo lang('nickname')?>:</TD>
+<TD><div id="errorsDiv_nickname"></div><INPUT class="textfield" type="text" name="nickname" value="<?php echo $nickname?>" /></TD>
+</TR>
+<TR>
+<TD><?php echo lang('sex')?>:</TD>
+<TD><div id="errorsDiv_sex"></div><INPUT type="radio" name="sex" value="1" <?php if($select_sex==1) echo 'checked';?> /><?php echo lang('boy')?> <INPUT type="radio" name="sex" value="2" <?php if($select_sex==2) echo 'checked';?>/><?php echo lang('girl')?>&nbsp;&nbsp;</TD>
+</TR>
+
+
+<TR>
+<TD><?php echo lang('validatecode')?>:</TD>
+<TD><div id="errorsDiv_code"></div><INPUT type="text" name="code" class="textfield" style="width:60px"/><img id="codeimg" src="<?php echo $www_site_url?>/index.php/identifycode/generate" align="absmiddle" title="<?php echo lang('anotherone')?>" onClick="changeCode();" style="cursor:pointer"></TD>
+</TR>
+
+<TR><TD>&nbsp;</TD><TD></TD></TR>
+<TR><TD colspan="2"><INPUT class="button" type="submit" value="<?php echo lang('signup')?>" name="registerbtn"/> 
+<INPUT class="button" type=reset value="<?php echo lang('reset')?>"/> 
+<INPUT class="button" type="button" value="<?php echo lang('back')?>" onclick="history.go(-1)"/></TD></TR>
+</TABLE>
+</form>
+<?php include_once("footer.html")?>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title><?php echo $web_title?></title>
+<LINK href="<?php echo $www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+<script src="<?php echo $www_site_url?>/public/js/yav2.0/yav.js"></script>
+
+<script src="<?php echo $www_site_url?>/public/js/yav2.0/yav-config-<?php echo $selected_lang?>.js"></script>
+
+
+<SCRIPT>
+//only for test purposes
+function checkOnSubmit(formName, r) {
+  
+    if (yav.performCheck(formName, r, 'inline')) {
+       return true;
+    } 
+    return false;
+}
+
+var rules=new Array();
+
+rules[0]='answer|required|<?php echo lang('insertyouranswer')?>';
+rules[1]='newpwd1|required|<?php echo lang('insertpwd')?>';
+rules[2]='newpwd1|minlength|6|<?php echo lang('pwdrule')?>';
+rules[3]='newpwd2|equal|$newpwd1|<?php echo lang('pwdnotsame')?>';
+
+
+
+
+yav.addHelp('answer', '<?php echo lang('insertyouranswer')?>');
+
+
+
+
+</SCRIPT>
+
+</head>
+<body onload="yav.init('forgetpwdform', rules);">
+<?php include_once("header.html")?>
+<FORM name="forgetpwdform" method="POST" action="<?php echo $www_site_url?>/index.php" onsubmit="return checkOnSubmit('forgetpwdform', rules);" >
+<input type="hidden" name="action" value="passport">
+<input type="hidden" name="op" value="answer">
+<input type="hidden" name="user" value="<?php echo $arr['user']?>">
+<TABLE valign=top>
+
+<TR><TD><?php echo lang('yourquestion')?>:</TD><TD><?php echo $arr['user_question']?></TD></TR>
+<TR><TD><?php echo lang('youranswer')?>:</TD><TD><INPUT class="textfield" type=text name="answer" />&nbsp;&nbsp;<span id="errorsDiv_answer"></span></TD></TR>
+<TR><TD><?php echo lang('newpwd')?>:</TD><TD><INPUT class="textfield" type="password" name=newpwd1 />&nbsp;&nbsp;<span id="errorsDiv_newpwd1"></span></TD></TR>
+<TR><TD><?php echo lang('newpwd2')?>:</TD><TD><INPUT class="textfield" type="password" name=newpwd2 />&nbsp;&nbsp;<span id="errorsDiv_newpwd2"></span></TD></TR>
+
+<TR><TD colspan="2"><INPUT class="button" type=submit value="<?php echo lang('submit')?>" /> 
+<INPUT class="button" type="button" value="<?php echo lang('back')?>" onclick="history.go(-1)"/><br></TD><TD></TD></TR>
+</TABLE>
+</form>
+<?php include_once("footer.html")?>
+</body>
+</html>
