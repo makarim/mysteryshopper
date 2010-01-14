@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Xppass Administrator's Control Panel</title>
+<LINK href="<?=$www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+</head>
+<body>
+<div class="container">
+
+				<div class="mainbox nomargin">
+			<form action="<?=$www_site_url?>/admin.php" method="post">
+				<input type="hidden" name="action" value="setting">
+				<input type="hidden" name="op" value="emailset">
+				<table class="opt">
+					<tr>
+						<th colspan="2"><?=lang('email_from')?>:</th>
+					</tr>
+					<tr>
+
+						<td><input name="smtp_from" value="<?=$smtp_from?>" type="text" class="textfield"></td>
+						<td><?=lang('email_from_label')?></td>
+					
+					<tbody id="hidden1">
+					<tr>
+						<td colspan="2"><?=lang('smtp_server')?>:</td>
+
+					</tr>
+					<tr>
+						<td>
+							<input name="smtp_host" value="<?=$smtp_host?>" class="textfield" type="text">
+						</td>
+						<td valign="top"><?=lang('smtp_server_label')?></td>
+					</tr>
+					<tr>
+
+						<td colspan="2"><?=lang('smtp_port')?>:</td>
+					</tr>
+					<tr>
+						<td>
+							<input name="smtp_port" value="<?=$smtp_port?>" type="text" class="textfield">
+						</td>
+						<td valign="top"><?=lang('smtp_port_label')?></td>
+					</tr>
+
+					</tbody>
+					<tbody id="hidden2">
+					
+					<tr>
+
+						<td colspan="2"><?=lang('smtp_account')?>:</td>
+					</tr>
+					<tr>
+						<td>
+							<input name="smtp_account" value="<?=$smtp_account?>" type="text" class="textfield">
+						</td>
+						<td valign="top"></td>
+					</tr>
+
+					<tr>
+						<td colspan="2"><?=lang('smtp_password')?>:</td>
+					</tr>
+					<tr>
+						<td>
+							<input name="smtp_pass" value="<?=$smtp_pass?>" type="password" class="textfield">
+						</td>
+						<td valign="top"></td>
+
+					</tr>
+					</tbody>
+					
+				</table>
+				<div class="opt"><input type="submit" name="submit" value="<?=lang('submit')?>" class="button" tabindex="3" /></div>
+			</form>
+
+		</div>
+	</div>
+
+
+</body>
+</html>

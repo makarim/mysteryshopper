@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Xppass Administrator's Control Panel</title>
+<LINK href="<?php echo $www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+</head>
+<body>
+
+<div class="container">
+
+			<div class="mainbox nomargin">
+			<form action="<?php echo $www_site_url?>/admin.php" method="post">
+				<input type="hidden" name="action" value="setting">
+				<input type="hidden" name="op" value="basicset">
+				<table class="opt">
+					<tr>
+						<th colspan="2"><?php echo lang('run_mode')?>:</th>
+					</tr>
+					<tr>
+						<td>
+							<label><input type="radio" name="app_status" value="dev" <?php if($app_status=='dev') echo 'checked';?>> <?php echo lang('dev_status')?></label>
+							<label><input type="radio" name="app_status" value="online" <?php if($app_status=='online') echo 'checked';?>> <?php echo lang('online_status')?></label>
+						</td>
+						<td><?php echo lang('app_status_label')?></td>
+					</tr
+					<tr>
+						<th colspan="2"><?php echo lang('sso_mode')?>:</th>
+					</tr>
+					<tr>
+						<td>
+							<label><input type="radio" name="ssomode" value="cookie" <?php if($ssomode=='cookie') echo 'checked';?>> Cookie</label>
+		<label><input type="radio" name="ssomode" value="session" <?php if($ssomode=='session') echo 'checked';?>> Session</label>
+		<label><input type="radio" name="ssomode" value="ticket" <?php if($ssomode=='ticket') echo 'checked';?>> Ticket</label>
+						</td>
+						<td><?php echo lang('ssomode_label')?></td>
+					</tr>					
+					<tr>
+						<th colspan="2"><?php echo lang('timezone')?>:</th>
+					</tr>
+					<tr>
+						<td>
+							<select  name="timezone">
+  <?php foreach($timezonelist as $v){?>
+  <option value="<?php echo $v?>" <?php if($v==$timezoneset) echo 'selected';?> ><?php echo $v?></option>
+<?php }?>
+</select>
+						</td>
+						<td><?php echo lang('timezone_label')?></td>
+					</tr>
+					
+				</table>
+				<div class="opt"><input type="submit" name="submit" value="<?php echo lang('submit')?>" class="button" tabindex="3" /></div>
+			</form>
+		</div>
+
+	</div>
+
+
+</body>
+</html>
