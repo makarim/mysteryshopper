@@ -3,44 +3,44 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Xppass Administrator's Control Panel</title>
-<LINK href="<?=$www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+<LINK href="<?php echo $www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
 </head>
 <body>
 <div class="container">
 
 				<div class="mainbox nomargin">
-			<form action="<?=$www_site_url?>/admin.php" method="post">
+			<form action="<?php echo $www_site_url?>/admin.php" method="post">
 				<input type="hidden" name="action" value="setting">
 				<input type="hidden" name="op" value="emailset">
 				<table class="opt">
 					<tr>
-						<th colspan="2"><?=lang('email_from')?>:</th>
+						<th colspan="2"><?php echo lang('email_from')?>:</th>
 					</tr>
 					<tr>
 
-						<td><input name="smtp_from" value="<?=$smtp_from?>" type="text" class="textfield"></td>
-						<td><?=lang('email_from_label')?></td>
+						<td><input name="smtp_from" value="<?php echo $smtp_from?>" type="text" class="textfield"></td>
+						<td><?php echo lang('email_from_label')?></td>
 					
 					<tbody id="hidden1">
 					<tr>
-						<td colspan="2"><?=lang('smtp_server')?>:</td>
+						<td colspan="2"><?php echo lang('smtp_server')?>:</td>
 
 					</tr>
 					<tr>
 						<td>
-							<input name="smtp_host" value="<?=$smtp_host?>" class="textfield" type="text">
+							<input name="smtp_host" value="<?php echo $smtp_host?>" class="textfield" type="text">
 						</td>
-						<td valign="top"><?=lang('smtp_server_label')?></td>
+						<td valign="top"><?php echo lang('smtp_server_label')?></td>
 					</tr>
 					<tr>
 
-						<td colspan="2"><?=lang('smtp_port')?>:</td>
+						<td colspan="2"><?php echo lang('smtp_port')?>:</td>
 					</tr>
 					<tr>
 						<td>
-							<input name="smtp_port" value="<?=$smtp_port?>" type="text" class="textfield">
+							<input name="smtp_port" value="<?php echo $smtp_port?>" type="text" class="textfield">
 						</td>
-						<td valign="top"><?=lang('smtp_port_label')?></td>
+						<td valign="top"><?php echo lang('smtp_port_label')?></td>
 					</tr>
 
 					</tbody>
@@ -48,21 +48,21 @@
 					
 					<tr>
 
-						<td colspan="2"><?=lang('smtp_account')?>:</td>
+						<td colspan="2"><?php echo lang('smtp_account')?>:</td>
 					</tr>
 					<tr>
 						<td>
-							<input name="smtp_account" value="<?=$smtp_account?>" type="text" class="textfield">
+							<input name="smtp_account" value="<?php echo $smtp_account?>" type="text" class="textfield">
 						</td>
 						<td valign="top"></td>
 					</tr>
 
 					<tr>
-						<td colspan="2"><?=lang('smtp_password')?>:</td>
+						<td colspan="2"><?php echo lang('smtp_password')?>:</td>
 					</tr>
 					<tr>
 						<td>
-							<input name="smtp_pass" value="<?=$smtp_pass?>" type="password" class="textfield">
+							<input name="smtp_pass" value="<?php echo $smtp_pass?>" type="password" class="textfield">
 						</td>
 						<td valign="top"></td>
 
@@ -70,7 +70,7 @@
 					</tbody>
 					
 				</table>
-				<div class="opt"><input type="submit" name="submit" value="<?=lang('submit')?>" class="button" tabindex="3" /></div>
+				<div class="opt"><input type="submit" name="submit" value="<?php echo lang('submit')?>" class="button" tabindex="3" /></div>
 			</form>
 
 		</div>

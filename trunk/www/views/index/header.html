@@ -1,9 +1,9 @@
 <div id="header">
-<img src="<?php echo $www_site_url;?>/public/images/xppass.gif"><?php echo lang('web-title');?>
+<?php echo lang('web-title');?>
 <div id="language"><?php echo lang('selectlanguage');?>:<select name="select_lang" onchange="window.location.href='<?php echo $www_site_url;?>/index.php/index/setlang/'+this.options[this.selectedIndex].value">
-<option value="zh-cn" <?if($selected_lang=='zh-cn') echo "selected"; ?>><?php echo lang('zh-cn');?></option>
-<option value="zh-tw" <?if($selected_lang=='zh-tw') echo "selected"; ?>><?php echo lang('zh-tw');?></option>
-<option value="en" <?if($selected_lang=='en') echo "selected"; ?>><?php echo lang('en');?></option>
+<option value="zh-cn" <?php if($selected_lang=='zh-cn') echo "selected"; ?>><?php echo lang('zh-cn');?></option>
+<option value="zh-tw" <?php if($selected_lang=='zh-tw') echo "selected"; ?>><?php echo lang('zh-tw');?></option>
+<option value="en" <?php if($selected_lang=='en') echo "selected"; ?>><?php echo lang('en');?></option>
 </select></div>
 </div>
 <div id="menu"> 
