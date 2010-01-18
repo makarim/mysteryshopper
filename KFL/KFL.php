@@ -221,9 +221,11 @@ class KFL
 		$exec_time = (getmicrotime ()-$GLOBALS['gAppStartTime']);
 		$memused = memory_get_usage();
 		if($exec_time>$GLOBALS ['gLog'] ['maxExecTime'] || $memused>$GLOBALS ['gLog'] ['maxMemUsed']){
-			$db = Model::dbConnect($GLOBALS ['gDataBase'] ['db_setting.db3']);
-			$datetime = date("Y-m-d H:i:s");
-			$db->execute("replace into eventlog (url,visit,exec_time,memuse) values ('".addslashes(WEB_URL)."','$datetime','$exec_time','$memused')");
+			if(isset($GLOBALS ['gDataBase'] ['db_setting.db3'])){
+				$db = Model::dbConnect($GLOBALS ['gDataBase'] ['db_setting.db3']);
+				$datetime = date("Y-m-d H:i:s");
+				$db->execute("replace into eventlog (url,visit,exec_time,memuse) values ('".addslashes(WEB_URL)."','$datetime','$exec_time','$memused')");
+			}
 		}
 		//exit("<!-- execute time :".$exec_time."-->");
 	}
