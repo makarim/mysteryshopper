@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Xppass Administrator's Control Panel</title>
+<LINK href="<?php echo $www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+<script src="<?php echo $www_site_url?>/public/js/common.js" type="text/javascript"></script>
+
+
+<script>
+
+function viewUser(corporation,c_id){
+	var url = "<?php echo $www_site_url?>/admin.php/corporation/detail/c_id/"+c_id+'/corporation/'+corporation;
+	mini.ajax.get(url, function(r){
+		var r = eval('(' + r + ')');   
+		if(r.s==200){
+			$('corporationid_'+c_id).innerHTML = "<?php echo lang('sex')?>:"+r.d.corporation_sex+ ", <?php echo lang('signup')?>IP:"+ r.d.corporation_reg_ip +", <?php echo lang('lastlogin')?>:"+r.d.corporation_lastlogin_time+
+		", <?php echo lang('lastlogin')?>IP:"+r.d.corporation_lastlogin_ip+" <?php echo lang('email')?>:"+r.d.corporation_email;
+			$('corporationid_'+c_id).style.display = 'block';
+		}
+		if(r.s==400){
+			alert(r.m);
+		}
+	});
+}
+</script>
+</head>
+<body><div id="append"></div>
+<div id="msg" style="color:red;text-align:center"></div>
+
+
+	<div class="container">
+			
+		<h3><?php echo lang('corporation_list')?> <?php echo lang('corporation_total')?>:<?php echo $total?></h3>
+		
+		<div class="mainbox">
+				<form action="<?php echo $www_site_url?>/admin.php" onsubmit="return confirm('<?php echo lang('domain_delete_comfirm')?>');" method="post">
+				<input type="hidden" name="action" value="corporation">
+				<input type="hidden" name="op" value="delcorporation">
+				<table class="datalist fixwidth" onmouseover="addMouseEvent(this);" >
+
+					<tr>
+						<th><input type="checkbox" name="chkall" id="chkall" onclick="checkall('delete[]')" class="checkbox" /><label for="chkall"><?php echo lang('delete')?></label></th>
+						<th>UID</th>
+						<th><?php echo lang('corporation')?></th>
+						<th><?php echo lang('nickname')?></th>
+						<th><?php echo lang('reg_date')?></th>
+						<th><?php echo lang('more')?></th>
+
+						<th><?php echo lang('edit')?></th>
+					</tr>
+						<?php if(isset($corporations['records']) && is_array($corporations['records'])){
+							foreach ($corporations['records'] as $v){?>	
+						<tr>
+							<td class="option"><input type="checkbox" name="delete[]" value="<?php echo $v['corporation']?>" class="checkbox" /></td>
+							<td><?php echo $v['c_id']?></td>
+							<td><strong><?php echo $v['corporation']?></strong></td>
+							<td><?php echo $v['corporation_nickname']?></td>
+							<td><?php echo date('y-m-d H:i:s',$v['corporation_reg_time'])?></td>
+
+							<td><a href="javascript:viewUser('<?php echo $v['corporation']?>','<?php echo $v['c_id']?>')"><?php echo lang('view')?></a></td>
+							<td><a href="/admin.php/corporation/edit/c_id/<?php echo $v['c_id']?>/corporation/<?php echo $v['corporation']?>"><?php echo lang('edit')?></a></td>
+						</tr>
+						<tr>
+						<td colspan="7"><div style="display:none" id="corporationid_<?php echo $v['c_id']?>"></div></td>
+						</tr>
+						
+						<?php }
+						}?>
+										<tr class="nobg">
+						<td><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
+						<td class="tdpage" colspan="7" align="right"><?php echo $corporations['page_array']['pagebar']?></td>
+					</tr>
+				</table>
+
+				</form>
+					</div>
+					<p style="color:#666;font-size:12px"><?php echo lang('admin_remind')?></p>
+	</div>
+
+</body>
+</html>
