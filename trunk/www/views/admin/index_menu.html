@@ -30,7 +30,7 @@ body, ul{ margin:0; padding:0; }
 	}
 	.menu a {
 		display:block;
-		padding:2px 5px;
+		padding:10px 10px;
 		color:#000;
 		background:#ccc;
 		text-decoration:none;
@@ -38,7 +38,7 @@ body, ul{ margin:0; padding:0; }
 	.menu a:hover,
 	.menu a:focus,
 	.menu a:active {background:#d9dcb0;}
-	.menu ul li {padding-left:15px;}
+	.menu ul li {padding-left:10px;}
 	.menu ul a {background:#ced174;}
 	.hidden {display:none;}
 
@@ -53,27 +53,26 @@ body, ul{ margin:0; padding:0; }
 <body>
 <div >
 	<ul class="menu">
-		<li><a href="<?php echo $www_site_url?>/admin.php/index/main">系统管理</a></li>
-		<li><a href="#" target="main">神秘顾客管理</a>
+		<li><a href="<?php echo $www_site_url?>/admin.php/index/main" target="main">系统管理</a></li>
+		<li><a href="<?php echo $www_site_url?>/admin.php/user/defaults">神秘顾客管理</a>
 		<ul>
-					<li><a href="<?php echo $www_site_url?>/admin.php/shopper/defaults" target="main">顾客列表</a></li>
 
-					<li><a href="/">Sub category 1b</a></li>
-					<li><a href="/">Sub category 1c</a></li>
-					<li><a href="/">Sub category 1d</a></li>
+					<li><a  href="<?php echo $www_site_url?>/admin.php/user/defaults" target="main">顾客列表</a></li>
+					<li><a href="/" target="main">查找顾客</a></li>
+					
 				</ul>
 
 		</li>
-		<li><a href="<?php echo $www_site_url?>/admin.php/corp/defaults" target="main">客户管理</a>
-		<ul>
+		<li><a href="#"">客户管理</a>
+				<ul>
+					<li><a href="<?php echo $www_site_url?>/admin.php/corporation/defaults" target="main">客户列表</a></li>
 
-					<li><a href="/">Sub category 2a</a></li>
-					<li><a href="/">Sub category 2b</a></li>
-					<li><a href="/">Sub category 2c</a></li>
-					<li><a href="/">Sub category 2d</a></li>
+					<li><a href="<?php echo $www_site_url?>/admin.php/corporation/search" target="main">查找客户</a></li>
+					<li><a href="<?php echo $www_site_url?>/admin.php/corporation/add" target="main">添加客户</a></li>
 				</ul>
 
 		</li>
+		
 		<li><a href="<?php echo $www_site_url?>/admin.php/assignment/defaults" target="main">任务管理</a></li>
 		<li><a href="<?php echo $www_site_url?>/admin.php/report/defaults" target="main">问卷管理</a></li>
 		<li><a href="<?php echo $www_site_url?>/admin.php/chart/defaults" target="main">报表管理</a></li>

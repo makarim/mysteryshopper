@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Xppass Administrator's Control Panel</title>
+<LINK href="<?php echo $www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+<script src="<?php echo $www_site_url?>/public/js/common.js" type="text/javascript"></script>
+<script src="<?php echo $www_site_url?>/public/js/calendar.js" type="text/javascript"></script>
+<script src="<?php echo $www_site_url?>/public/js/ajax.js" type="text/javascript"></script>
+
+
+<script>
+function checkOnSubmit(formName) {
+  	
+	var url = "<?php echo $www_site_url?>/admin.php";
+	var params = mini.form.serialize($(formName));
+	mini.ajax.post(url, function(r){
+		var r = eval('(' + r + ')');   
+		if(r.s==200){
+			window.location.href = r.d;
+		}
+		if(r.s==400){
+			$('msg').innerHTML = r.m;			
+		}
+	}, params);
+	
+	return false;
+       
+}
+function viewUser(corporation,c_id){
+	var url = "<?php echo $www_site_url?>/admin.php/corporation/detail/c_id/"+c_id+'/corporation/'+corporation;
+	mini.ajax.get(url, function(r){
+		var r = eval('(' + r + ')');   
+		if(r.s==200){
+			$('corporationid_'+c_id).innerHTML = "<?php echo lang('sex')?>:"+r.d.corporation_sex+ ", <?php echo lang('signup')?>IP:"+ r.d.corporation_reg_ip +", <?php echo lang('lastlogin')?>:"+r.d.corporation_lastlogin_time+
+		", <?php echo lang('lastlogin')?>IP:"+r.d.corporation_lastlogin_ip+" <?php echo lang('email')?>:"+r.d.corporation_email;
+			$('corporationid_'+c_id).style.display = 'block';
+		}
+		if(r.s==400){
+			alert(r.m);
+		}
+	});
+}
+</script>
+</head>
+<body><div id="append"></div>
+<div id="msg" style="color:red;text-align:center"></div>
+	<div class="container">
+	
+			<div class="hastabmenu">
+				<ul class="tabmenu">
+					<li id="srchcorporationbtn" class="tabcurrent"><a href="#"><?php echo lang('search_corporation')?></a></li>
+					
+				</ul>
+				
+				<div id="srchcorporationdiv" class="tabcontentcur">
+					<form action="<?php echo $www_site_url?>/admin.php" method="GET">
+					<input type="hidden" name="action" value="corporation">				
+					<input type="hidden" name="view" value="defaults">					
+					<table width="100%">
+						<tr>
+							<td width="10%"><?php echo lang('corporation')?>:</td>
+							<td><input type="text" name="corporation" value="<?php echo $con['corporation']?>" class="textfield" /></td>
+						</tr>
+						<tr>
+							<td>UID:</td>
+							<td><input type="text" name="c_id" value="<?php echo $con['c_id']?>" class="textfield" /></td>
+						</tr>
+						<tr>
+							<td><?php echo lang('nickname')?>:</td>
+							<td><input type="text" name="corporation_nickname" value="<?php echo $con['corporation_nickname']?>" class="textfield" /></td>
+						</tr>
+					
+						<tr>
+							<td><?php echo lang('reg_date')?>:</td>
+	
+							<td><input type="text" name="corporation_reg_time" onclick="showcalendar();" value="<?php echo $con['corporation_reg_time']?>" class="textfield" /> 
+						</td>
+							
+						</tr>					
+						<tr>
+							<td><?php echo lang('reg_date')?>:</td>
+	
+							<td>
+							<input type="text" name="corporation_reg_time1" onclick="showcalendar();" value="<?php echo $con['corporation_reg_time1']?>" class="textfield" /></td>
+							
+						</tr>	
+						<tr>
+							<td colspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
+						</tr>
+					</table>
+					</form>
+				</div>
+
+		</div>
+		
+</div>
+
+</body>
+</html>
