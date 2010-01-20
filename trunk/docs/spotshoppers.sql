@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2010 年 01 月 19 日 17:35
+-- 生成日期: 2010 年 01 月 20 日 18:16
 -- 服务器版本: 5.1.41
 -- PHP 版本: 5.3.1
 
@@ -89,15 +89,21 @@ CREATE TABLE IF NOT EXISTS `client` (
 
 CREATE TABLE IF NOT EXISTS `corporation` (
   `c_id` int(11) NOT NULL AUTO_INCREMENT,
-  `c_name` varchar(100) NOT NULL,
+  `c_name` varchar(18) NOT NULL,
   `c_intro` text NOT NULL,
+  `c_password` char(32) NOT NULL,
+  `c_title` varchar(100) NOT NULL,
+  `c_contacter` varchar(30) NOT NULL,
+  `c_phone` varchar(50) NOT NULL,
   PRIMARY KEY (`c_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- 转存表中的数据 `corporation`
 --
 
+INSERT INTO `corporation` (`c_id`, `c_name`, `c_intro`, `c_password`, `c_title`, `c_contacter`, `c_phone`) VALUES
+(5, 'gmail', '来他家吃过两次了，冲着酸汤鱼来的。环境还不错，适合聚餐。\n他家的酸汤鱼，鱼嫩，汤美。我很喜欢，本人比较喜欢吃酸的。\n干锅鸡，忘了吃的哪两种了，味道不错的。第二次来正好是拿点评优惠券来的，很实惠。\n酸菜鱼，油很多。味道一般。\n点击率很高的土豆泥，个人觉得一般，没大家说的那么好，也挺油的，还算香。\n凉菜一个什么木耳，蕨根粉，都还可以，口味适中。\n新出的酸汤饭，量不小，口味一般，还是觉得酸汤鱼里的酸汤味道比较好。\n饮料喝过几种，但都记不住名和味道，也就没什么可推荐的了。\n总体说来，喜欢酸汤鱼和干锅的朋友可以来试一下。服务时好时坏，看赶上什么服务员了。后来这次服务还不错，经常帮我们炒干锅。吃完还可以免费办点评贵宾卡，我有了，朋友又办了一张。', '96e79218965eb72c92a549dd5a330112', '干锅居餐饮有限公司', '吴先生', '13774424728');
 
 -- --------------------------------------------------------
 
