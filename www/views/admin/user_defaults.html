@@ -49,73 +49,93 @@ function viewUser(user,user_id){
 
 
 	<script type="text/javascript">
-		function switchbtn(btn) {
-			$('srchuserdiv').style.display = btn == 'srch' ? '' : 'none';
-			$('srchuserdiv').className = btn == 'srch' ? 'tabcontentcur' : '' ;
-			$('srchuserbtn').className = btn == 'srch' ? 'tabcurrent' : '';
-			$('adduserdiv').style.display = btn == 'srch' ? 'none' : '';
-			$('adduserdiv').className = btn == 'srch' ? '' : 'tabcontentcur';
-			$('adduserbtn').className = btn == 'srch' ? '' : 'tabcurrent';
+	function setTab(n){
+		document.getElementById("tabs_mainbox").style.display = 'block';
+		document.getElementById("close").style.display = 'block';
+		var tli=document.getElementById("tabs_menu").getElementsByTagName("li");
+		var mli=document.getElementById("tabs_main").getElementsByTagName("div");
+		for(i=0;i<tli.length;i++){
+		  tli[i].className=i==n?"hover":"";
+		  mli[i].style.display=i==n?"block":"none";
 		}
+	}
+	function hid(){
+		document.getElementById("tabs_mainbox").style.display = 'none';
+		document.getElementById("close").style.display = 'none';
+		var tli=document.getElementById("tabs_menu").getElementsByTagName("li");
+		for(i=0;i<tli.length;i++){
+		  tli[i].className="";
+		}
+	}
+
+		
 	</script>
 
 	<div class="container">
-			<div class="hastabmenu">
-				<ul class="tabmenu">
-					<li id="srchuserbtn" class="tabcurrent"><a href="#" onclick="switchbtn('srch')"><?php echo lang('search_user')?></a></li>
-					<li id="adduserbtn"><a href="#" onclick="switchbtn('add')"><?php echo lang('add_user')?></a></li>
 	
-				</ul>
-			<div id="adduserdiv" class="tabcontent" style="display:none;">
-				<form id="adduserform" name="adduserform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('adduserform');" >
-				<input type="hidden" name="action" value="user">
-				<input type="hidden" name="op" value="adduser">
-				<input type="hidden" name="reg_type" value="email">
-				<table width="100%">
-					<tr>
-						<td><?php echo lang('user')?>:</td>
-						<td><input type="text" name="email" class="textfield" /></td>
 
-						<td><?php echo lang('pwd')?>:</td>
-						<td><input type="password" name="password" class="textfield" /></td>
-						<td><?php echo lang('nickname')?>:</td>
-						<td><input type="text" name="nickname" class="textfield" /></td>
-						<td><?php echo lang('sex')?>:</td>
-						<td><input type="radio" name="sex" value="1"/><?php echo lang('boy')?> &nbsp;&nbsp;<input type="radio" name="sex" value="2"/><?php echo lang('girl')?></td>
-						<td><input type="submit" value="<?php echo lang('submit')?>" class="button"/></td>
-					</tr>
-				</table>
-				</form>
-
-			</div>
-			<div id="srchuserdiv" class="tabcontentcur">
-				<form action="<?php echo $www_site_url?>/admin.php" method="GET">
-				<input type="hidden" name="action" value="user">				
-				<input type="hidden" name="view" value="defaults">					
-				<table width="100%">
-					<tr>
-						<td><?php echo lang('user')?>:</td>
-						<td><input type="text" name="user" value="<?php echo $con['user']?>" class="textfield" /></td>
-
-						<td>UID:</td>
-						<td><input type="text" name="user_id" value="<?php echo $con['user_id']?>" class="textfield" /></td>
-						<td><?php echo lang('nickname')?>:</td>
-						<td><input type="text" name="user_nickname" value="<?php echo $con['user_nickname']?>" class="textfield" /></td>
-						<td rowspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
-					</tr>
-					<tr>
-						<td><?php echo lang('reg_date')?>:</td>
-
-						<td colspan="3"><input type="text" name="user_reg_time" onclick="showcalendar();" value="<?php echo $con['user_reg_time']?>" class="textfield" /> <?php echo lang('to')?> <input type="text" name="user_reg_time1" onclick="showcalendar();" value="<?php echo $con['user_reg_time1']?>" class="textfield" /></td>
-						
-					</tr>
-				</table>
-				</form>
+			<div id="tabs">
+				<div class="tabs_menubox">
+					<ul id="tabs_menu">
+						<li onclick="setTab(0)"><?php echo lang('search_user')?></li>
+						<li onclick="setTab(1)"><?php echo lang('add_user')?></li>
+						<li onclick="hid()" id="close" style="display:none;"><?php echo lang('hide')?>×</li>
+		
+					</ul>
+				</div>
+				<div id="tabs_mainbox" class="tabs_mainbox" style="display:none;">
+					<div class="main" id="tabs_main" >
+						<div  style="display:none;">
+							<form action="<?php echo $www_site_url?>/admin.php" method="GET">
+							<input type="hidden" name="action" value="user">				
+							<input type="hidden" name="view" value="defaults">					
+							<table width="100%">
+								<tr>
+									<td align="right"><?php echo lang('user')?>:</td>
+									<td align="left"><input type="text" name="user" value="<?php echo $con['user']?>" class="textfield" /></td>
+			
+									<td>UID:</td>
+									<td align="left"><input type="text" name="user_id" value="<?php echo $con['user_id']?>" class="textfield" /></td>
+									<td><?php echo lang('nickname')?>:</td>
+									<td align="left"><input type="text" name="user_nickname" value="<?php echo $con['user_nickname']?>" class="textfield" /></td>
+									<td rowspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
+								</tr>
+								<tr>
+									<td align="right"><?php echo lang('reg_date')?>:</td>
+			
+									<td colspan="3" align="left"><input type="text" name="user_reg_time" onclick="showcalendar();" value="<?php echo $con['user_reg_time']?>" class="textfield" /> <?php echo lang('to')?> <input type="text" name="user_reg_time1" onclick="showcalendar();" value="<?php echo $con['user_reg_time1']?>" class="textfield" /></td>
+									
+								</tr>
+							</table>
+							</form>
+						</div>	
+						<div class="block" style="display:none;">
+							<form id="adduserform" name="adduserform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('adduserform');" >
+							<input type="hidden" name="action" value="user">
+							<input type="hidden" name="op" value="adduser">
+							<input type="hidden" name="reg_type" value="email">
+							<table width="100%">
+								<tr>
+									<td align="left"><?php echo lang('user')?>:</td>
+									<td align="left"><input type="text" name="email" class="textfield" /></td>
+			
+									<td><?php echo lang('pwd')?>:</td>
+									<td align="left"><input type="password" name="password" class="textfield" /></td>
+									<td><?php echo lang('nickname')?>:</td>
+									<td align="left"><input type="text" name="nickname" class="textfield" /></td>
+									<td><?php echo lang('sex')?>:</td>
+									<td align="left"><input type="radio" name="sex" value="1"/><?php echo lang('boy')?> &nbsp;&nbsp;<input type="radio" name="sex" value="2"/><?php echo lang('girl')?></td>
+									<td><input type="submit" value="<?php echo lang('submit')?>" class="button"/></td>
+								</tr>
+							</table>
+							</form>
+			
+						</div>
+					
+				</div>
 			</div>
 
 		</div>
-<br>
-<br>
 <br>
 		<h3><?php echo lang('user_list')?> <?php echo lang('user_total')?>:<?php echo $total?></h3>
 		

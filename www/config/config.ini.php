@@ -16,7 +16,7 @@
 	$GLOBALS ["gSiteInfo"] ["web_charset"] =  "UTF-8";
 	$GLOBALS ["gSiteInfo"] ["web_keyword"] =  "Xppass";
 	$GLOBALS ["gSiteInfo"] ["web_description"] =  "PHP开源 SSO系统--Xppass";
-	$GLOBALS ["gSiteInfo"] ["web_title"] =  "欢迎使用&quot;Xppass&quot;单点登录系统";
+	$GLOBALS ["gSiteInfo"] ["web_title"] =  "&quot;SPOT&quot;咨询管理系统";
 	
 //////////////////////////////////////////////////////
 //				Email   Settings	                //

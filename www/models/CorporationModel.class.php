@@ -9,11 +9,10 @@ class CorporationModel extends Model {
 		
 		//
 		if(isset($con['order'])) $select->order ( $con['order']." desc" );
-		if(isset($con['corporation']) && !empty($con['corporation'])) $select->where ( " corporation = '".$con['corporation']."'" );
+		if(isset($con['c_name']) && !empty($con['c_name'])) $select->where ( " c_name like '%".$con['c_name']."%'" );
 		if(isset($con['c_id']) && !empty($con['c_id'])) $select->where ( " c_id = '".$con['c_id']."'" );
-		if(isset($con['corporation_nickname']) && !empty($con['corporation_nickname'])) $select->where ( " corporation_nickname like '".$con['corporation_nickname']."%'" );
-		if(isset($con['corporation_reg_time']) && !empty($con['corporation_reg_time'])) $select->where ( " corporation_reg_time >= '".strtotime($con['corporation_reg_time'])."'" );
-		if(isset($con['corporation_reg_time1'])&& !empty($con['corporation_reg_time1'])) $select->where ( " corporation_reg_time < '".strtotime($con['corporation_reg_time1'])."'" );
+		if(isset($con['c_contacter']) && !empty($con['c_contacter'])) $select->where ( " c_contacter like '%".$con['c_contacter']."%'" );
+		if(isset($con['c_title']) && !empty($con['c_title'])) $select->where ( " c_title like '%".$con['c_title']."%'" );
 		
 		$list = array();
 		$offset = '';
@@ -39,7 +38,23 @@ class CorporationModel extends Model {
 		}
 		return (array) $list;
 	}
-	
-}
+	function checkName($name){
+		return $this->db->getOne ( "select c_id from corporation where c_name = '{$name}'" );
+	}
+	function createNewCorporation($corp){
+		//user table
+		return	$this->db->execute ( "insert into corporation ( c_name,c_password,c_title,c_contacter, c_phone, c_intro)
+		values ('{$corp['c_name']}','" . $corp ['c_password'] . "','{$corp['c_title']}','{$corp['c_contacter']}','{$corp['c_phone']}','{$corp['c_intro']}')" );
 
+	}
+	function deleteCorporation($cid){
+		return $this->db->execute("delete from corporation where c_id='{$cid}'");
+	}
+	function getCorporationById($c_id){
+		return $this->db->getRow("select * from corporation where c_id='$c_id'");
+	}
+    function updateCorporation($item,$c_id){
+		return $this->db->update($item,"corporation"," c_id=".$c_id);
+    }
+}
 ?>

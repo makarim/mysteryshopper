@@ -19,7 +19,7 @@ function checkOnSubmit(formName) {
 		var r = eval('(' + r + ')');   
 
 		if(r.s==200){
-			window.location.href = r.d;
+			$('msg').innerHTML = r.m;	
 		}
 		if(r.s==400){
 			$('msg').innerHTML = r.m;			
@@ -38,39 +38,45 @@ function checkOnSubmit(formName) {
 	
 		<div class="hastabmenu">
 				<ul class="tabmenu">
-					<li id="addcorporationbtn" class="tabcurrent"><a href="#"><?php echo lang('add_corporation')?></a></li>	
+					<li id="addcorporationbtn" class="tabcurrent"><a href="#"><?php echo lang('edit_corporation')?></a></li>	
 				</ul>
 				<div id="addcorporationdiv" class="tabcontentcur" style="display:;">
 					<form id="addcorporationform" name="addcorporationform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addcorporationform');" >
 					<input type="hidden" name="action" value="corporation">
 					<input type="hidden" name="op" value="updatecorporation">
+					<input type="hidden" name="c_id" value="<?php echo $info['c_id']?>">
 				
 					<table width="100%">
 						<tr>
 							<td width="10%"><?php echo lang('c_name')?>:</td>
-							<td><input type="text" name="c_name" class="textfield" /> *</td>
-	</tr>					
+							<td><?php echo $info['c_name']?></td>
+						</tr>					
 						<tr>
 							<td><?php echo lang('pwd')?>:</td>
-							<td><input type="password" name="c_password" class="textfield" /> *</td>
+							<td><input type="password" name="c_password" class="textfield" value="" /></td>
+							</tr>					
+						<tr>	
+						<tr>
+							<td><?php echo lang('pwd2')?>:</td>
+							<td><input type="password" name="c_password2" class="textfield" value="" /></td>
 							</tr>					
 						<tr>
 							<td><?php echo lang('c_title')?>:</td>
-							<td><input type="text" name="c_title" class="textfield" /></td>
+							<td><input type="text" name="c_title" class="textfield" value="<?php echo $info['c_title']?>"/></td>
 							</tr>		
 						<tr>
 							<td><?php echo lang('c_contacter')?>:</td>
-							<td><input type="text" name="c_contacter"  class="textfield"/></td>
+							<td><input type="text" name="c_contacter"  class="textfield" value="<?php echo $info['c_contacter']?>"/></td>
 							</tr>					
 						<tr>							
 						<tr>
 							<td><?php echo lang('c_phone')?>:</td>
-							<td><input type="text" name="c_phone"  class="textfield"/></td>
+							<td><input type="text" name="c_phone"  class="textfield" value="<?php echo $info['c_phone']?>"/></td>
 							</tr>					
 						<tr>			
 						<tr>
 							<td><?php echo lang('c_intro')?>:</td>
-							<td><textarea type="text" name="c_intro" rows="10" style="width:500px" class="textfield"/></textarea></td>
+							<td><textarea type="text" name="c_intro" rows="10" style="width:500px" class="textfield"/><?php echo $info['c_intro']?></textarea></td>
 							</tr>					
 						<tr>
 						

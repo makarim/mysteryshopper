@@ -42,24 +42,24 @@ function viewUser(corporation,c_id){
 					<tr>
 						<th><input type="checkbox" name="chkall" id="chkall" onclick="checkall('delete[]')" class="checkbox" /><label for="chkall"><?php echo lang('delete')?></label></th>
 						<th>UID</th>
-						<th><?php echo lang('corporation')?></th>
-						<th><?php echo lang('nickname')?></th>
-						<th><?php echo lang('reg_date')?></th>
-						<th><?php echo lang('more')?></th>
+						<th><?php echo lang('c_name')?></th>
+						<th><?php echo lang('c_title')?></th>
+						<th><?php echo lang('c_contacter')?></th>
+						<th><?php echo lang('c_phone')?></th>
 
 						<th><?php echo lang('edit')?></th>
 					</tr>
 						<?php if(isset($corporations['records']) && is_array($corporations['records'])){
 							foreach ($corporations['records'] as $v){?>	
 						<tr>
-							<td class="option"><input type="checkbox" name="delete[]" value="<?php echo $v['corporation']?>" class="checkbox" /></td>
+							<td class="option"><input type="checkbox" name="delete[]" value="<?php echo $v['c_id']?>" class="checkbox" /></td>
 							<td><?php echo $v['c_id']?></td>
-							<td><strong><?php echo $v['corporation']?></strong></td>
-							<td><?php echo $v['corporation_nickname']?></td>
-							<td><?php echo date('y-m-d H:i:s',$v['corporation_reg_time'])?></td>
+							<td><strong><?php echo $v['c_name']?></strong></td>
+							<td><?php echo $v['c_title']?></td>
+							<td><?php echo $v['c_contacter']?></td>
 
-							<td><a href="javascript:viewUser('<?php echo $v['corporation']?>','<?php echo $v['c_id']?>')"><?php echo lang('view')?></a></td>
-							<td><a href="/admin.php/corporation/edit/c_id/<?php echo $v['c_id']?>/corporation/<?php echo $v['corporation']?>"><?php echo lang('edit')?></a></td>
+							<td><?php echo $v['c_phone']?></td>
+							<td><a href="/admin.php/corporation/edit/c_id/<?php echo $v['c_id']?>"><?php echo lang('edit')?></a></td>
 						</tr>
 						<tr>
 						<td colspan="7"><div style="display:none" id="corporationid_<?php echo $v['c_id']?>"></div></td>
@@ -75,7 +75,7 @@ function viewUser(corporation,c_id){
 
 				</form>
 					</div>
-					<p style="color:#666;font-size:12px"><?php echo lang('admin_remind')?></p>
+
 	</div>
 
 </body>
