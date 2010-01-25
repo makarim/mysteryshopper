@@ -30,33 +30,61 @@ function checkOnSubmit(formName) {
        
 }
 
-</script>
+
+	function setTab(n){
+		document.getElementById("tabs_mainbox").style.display = 'block';
+		document.getElementById("close").style.display = 'block';
+		var tli=document.getElementById("tabs_menu").getElementsByTagName("li");
+		var mli=document.getElementById("tabs_main").getElementsByTagName("div");
+		for(i=0;i<tli.length;i++){
+		  tli[i].className=i==n?"hover":"";
+		  if(mli[i]) mli[i].style.display=i==n?"block":"none";
+		}
+	}
+	function hid(){
+		document.getElementById("tabs_mainbox").style.display = 'none';
+		document.getElementById("close").style.display = 'none';
+		var tli=document.getElementById("tabs_menu").getElementsByTagName("li");
+		for(i=0;i<tli.length;i++){
+		  tli[i].className="";
+		}
+	}
+
+		
+	</script>
 </head>
 <body><div id="append"></div>
 <div id="msg" style="color:red;text-align:center"></div>
 
 	<div class="container">
-			<div class="hastabmenu">
-				<ul class="tabmenu">
-					<li id="srchuserbtn" class="tabcurrent"><a href="#"><?php echo lang('search_user')?></a></li>	
+		<div id="tabs">
+			<div class="tabs_menubox">
+				<ul id="tabs_menu">
+					<li onclick="setTab(0)"><?php echo lang('search_user')?></li>	
+					<li onclick="hid()" id="close" style="display:none;"><?php echo lang('hide')?>×</li>
 				</ul>
-
-			<div id="srchuserdiv" class="tabcontentcur">
-				<form action="<?php echo $www_site_url?>/admin.php" method="GET">
-				<input type="hidden" name="action" value="user">				
-				<input type="hidden" name="view" value="online">				
-				<table width="100%">
-					<tr>
-						<td><?php echo lang('user')?>:</td>
-						<td><input type="text" name="user" value="<?php echo $con['user']?>" class="textfield" /> <input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>						
-					</tr>
-				</table>
-				</form>
+			</div>
+			<div id="tabs_mainbox" class="tabs_mainbox" style="display:none;">
+				<div class="main" id="tabs_main" >
+					<div  style="display:none;">
+						<form action="<?php echo $www_site_url?>/admin.php" method="GET">
+						<input type="hidden" name="action" value="user">				
+						<input type="hidden" name="view" value="online">				
+						<table width="100%">
+							<tr>
+								<td><?php echo lang('user')?>:</td>
+								<td><input type="text" name="user" value="<?php echo $con['user']?>" class="textfield" /> <input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>						
+							</tr>
+						</table>
+						</form>
+					</div>
+				</div>
 			</div>
 
 		</div>
 
-		
+
+		<br>
 		<h3><?php echo lang('user_list')?></h3>
 		<div class="mainbox">
 				<form action="<?php echo $www_site_url?>/admin.php" onsubmit="return confirm('<?php echo lang('domain_delete_comfirm')?>');" method="post">
@@ -91,7 +119,7 @@ function checkOnSubmit(formName) {
 				</table>
 
 				</form>
-					</div>
+		</div>
 					
 	</div>
 
