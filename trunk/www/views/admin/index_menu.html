@@ -27,21 +27,22 @@ body, ul{ margin:0; padding:0; }
 		margin:0;
 		padding:0;
 		margin-bottom:1px;
+		background:#7e858c;
+		font-size:14px;
+		
 	}
 	.menu a {
 		display:block;
 		padding:10px 10px;
-		color:#000;
-		background:#7e858c;
+		color:#000;		
+		
 		text-decoration:none;
 	}
-	.menu a:hover,
-	.menu a:focus,
-	.menu a:active {background:#fff;}
-	.menu ul li {padding-left:10px;}
-	.menu ul a {background:#8d97a1;}
+	.menu a:hover{background:#fff;}
+	.menu ul li a {padding-left:20px;}
+	.menu ul li {background:#8da2b6;font-size:12px;}
 	.hidden {display:none;}
-
+	.tabon{background:#fff;}
 </style>
 <!--[if ie]>
 <style type="text/css" media="screen">
@@ -51,14 +52,21 @@ body, ul{ margin:0; padding:0; }
 <script type="text/javascript" src="<?php echo $www_site_url?>/public/js/togglemenu.js"></script>
 </head>
 <body>
-<div >
+<div id="leftmenu">
 	<ul class="menu">
-		<li><a href="<?php echo $www_site_url?>/admin.php/index/main" target="main">系统管理</a></li>
+		<li><a href="#">系统管理</a>
+		<ul>
+		<li><a href="<?php echo $www_site_url?>/admin.php/setting/basicset" target="main"><?php echo lang('menu_basicset')?></a></li>
+		<li><a href="<?php echo $www_site_url?>/admin.php/setting/regset" target="main" ><?php echo lang('menu_regset')?></a></li>
+		<li><a href="<?php echo $www_site_url?>/admin.php/setting/emailset" target="main" ><?php echo lang('menu_emailset')?></a></li>
+		<li><a href="<?php echo $www_site_url?>/admin.php/client/defaults" target="main" ><?php echo lang('menu_client')?></a></li>
+		<li><a href="<?php echo $www_site_url?>/admin.php/user/online" target="main" ><?php echo lang('menu_onlineuser')?></a></li>
+		</ul>
+		</li>
 		<li><a href="<?php echo $www_site_url?>/admin.php/user/defaults">神秘顾客管理</a>
 		<ul>
 
 					<li><a  href="<?php echo $www_site_url?>/admin.php/user/defaults" target="main">顾客列表</a></li>
-					<li><a href="/" target="main">查找顾客</a></li>
 					
 				</ul>
 
@@ -77,19 +85,38 @@ body, ul{ margin:0; padding:0; }
 		<li><a href="<?php echo $www_site_url?>/admin.php/report/defaults" target="main">问卷管理</a></li>
 		<li><a href="<?php echo $www_site_url?>/admin.php/chart/defaults" target="main">报表管理</a></li>
 		
-		<!--<li><a href="<?php echo $www_site_url?>/admin.php/index/main" target="main" class="tabon"><?php echo lang('menu1')?></a></li>
-		<li><a href="<?php echo $www_site_url?>/admin.php/setting/basicset" target="main"><?php echo lang('menu_basicset')?></a></li>
-		<li><a href="<?php echo $www_site_url?>/admin.php/setting/regset" target="main" ><?php echo lang('menu_regset')?></a></li>
-		<li><a href="<?php echo $www_site_url?>/admin.php/setting/emailset" target="main" ><?php echo lang('menu_emailset')?></a></li>
-		<li><a href="<?php echo $www_site_url?>/admin.php/client/defaults" target="main" ><?php echo lang('menu_client')?></a></li>
-		<li><a href="<?php echo $www_site_url?>/admin.php/user/defaults" target="main" ><?php echo lang('menu_user')?></a></li>
-		<li><a href="<?php echo $www_site_url?>/admin.php/user/online" target="main" ><?php echo lang('menu_onlineuser')?></a></li>-->
+	
 
 
 	</ul>
 
 </div>
+<script type="text/javascript">
+	function cleartabon() {
+		if(lastmenu) {
+			lastmenu.className = '';
+		}
+		for(var i = 0; i < menus.length; i++) {
+			var menu = menus[i];
+			if(menu.className == 'tabon') {
+				lastmenu = menu;
+			}
+		}
+	}
+	var menus = document.getElementById('leftmenu').getElementsByTagName('a');
+	var lastmenu = '';
+	for(var i = 0; i < menus.length; i++) {
+		var menu = menus[i];
+		
+		menu.onclick = function() {
+			setTimeout('cleartabon()', 1);
+			this.className = 'tabon';
+			this.blur();
+		}
+	}
 
+	cleartabon();
+</script>
 
 </body>
 </html>
