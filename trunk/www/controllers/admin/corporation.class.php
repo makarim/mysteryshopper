@@ -78,6 +78,7 @@ class corporation{
 
 		$corporation['c_password'] = md5($_POST ['c_password']);
 		$corporation['c_name'] =  $_POST ['c_name'] ;
+		$corporation['c_initial'] =  $_POST ['c_initial'] ;
 		$corporation['c_title'] = empty($_POST ['c_title'])?"":addslashes($_POST ['c_title']);
 		$corporation['c_contacter'] = empty($_POST ['c_contacter'])?"":addslashes($_POST ['c_contacter']);
 		$corporation['c_phone'] = empty($_POST ['c_phone'])?"":addslashes($_POST ['c_phone']);
@@ -91,7 +92,7 @@ class corporation{
 								
 		}
     }
-    
+ 
     function op_delcorporation(){
     	$t = true;
     	if(isset($_POST['delete']) && is_array($_POST['delete'])){
@@ -156,6 +157,7 @@ class corporation{
 		$corpmod = new CorporationModel();
 	
 		$updates['c_title'] = empty($_POST ['c_title'])?"":addslashes($_POST ['c_title']);
+		$updates['c_initial'] = empty($_POST ['c_initial'])?"":addslashes($_POST ['c_initial']);
 		$updates['c_contacter'] = empty($_POST ['c_contacter'])?"":addslashes($_POST ['c_contacter']);
 		$updates['c_phone'] = empty($_POST ['c_phone'])?"":addslashes($_POST ['c_phone']);
 		$updates['c_intro'] =empty($_POST ['c_intro'])?"":strip_tags($_POST ['c_intro']);
@@ -173,6 +175,97 @@ class corporation{
 			exit(json_output($msg));
 		}
     }
-    
+       
+     
+    function view_store(){
+    	$c_id = $_GET['c_id'];
+    	include_once("CorporationModel.class.php");
+    	$corpmod = new CorporationModel();
+		$stores  = $corpmod->getStoreByCid($c_id);
+		$corp  = $corpmod->getCorporationById($c_id);
+		$total = count($stores);
+		$this->tpl->assign('stores',$stores);
+		$this->tpl->assign('corp',$corp);
+		$this->tpl->assign('total',$total);
+    }
+    function view_addstore(){
+    	$corps = array();
+    	include_once("CorporationModel.class.php");
+		$corpmod = new CorporationModel();
+		$corps  = $corpmod->getAllCorps();
+		$this->tpl->assign('corps',$corps);
+    }
+    function op_savestore(){
+    	$msg = '';
+    	if (empty ( $_POST ['cs_name'] ) ) {
+			$msg = array('s'=> 400,'m'=>lang('cs_name_rule'),'d'=>'');				
+			exit(json_output($msg));
+		}
+		
+		$store['cs_name'] =  addslashes($_POST ['cs_name']) ;
+		$store['c_id'] =  intval($_POST ['c_id']) ;
+		$store['cs_address'] = empty($_POST ['cs_address'])?"":addslashes($_POST ['cs_address']);
+		
+		include_once("CorporationModel.class.php");
+		$corpmod = new CorporationModel();
+		// 1. create db corporation
+		$row = $corpmod->createNewStore ( $store );
+		if ($row !== false) {
+			$msg = array('s'=> 200,'m'=>'ok','d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/corporation/store/c_id/".$store['c_id']);				
+			exit(json_output($msg));
+								
+		}
+    }
+    function op_delstore(){
+    	$t = true;
+    	if(isset($_POST['delete']) && is_array($_POST['delete'])){
+    		include_once("CorporationModel.class.php");
+    		$corporation = new CorporationModel();
+    		foreach ($_POST['delete'] as $u){
+    			
+    			$t *= $corporation->deleteStore($u);
+    			
+    		}
+    		
+    		if($t) show_message_goback(lang('success'));
+    	}
+    	show_message(lang('selectone'));
+    	goback();
+    }
+    function view_editstore(){
+    	$cs_id = $_GET['cs_id'];
+    	$corps = array();
+    	include_once("CorporationModel.class.php");
+		$corpmod = new CorporationModel();
+		$corps  = $corpmod->getAllCorps();
+		$store  = $corpmod->getStoreById($cs_id);
+		$this->tpl->assign('cs_id',$cs_id);
+		$this->tpl->assign('store',$store);
+		$this->tpl->assign('corps',$corps);
+    }
+    function op_updatestore(){
+    	include_once("CorporationModel.class.php");
+		$corpmod = new CorporationModel();
+		$msg = '';
+    	if (empty ( $_POST ['cs_name'] ) ) {
+			$msg = array('s'=> 400,'m'=>lang('cs_name_rule'),'d'=>'');				
+			exit(json_output($msg));
+		}
+		$cs_id = $_POST['cs_id'];
+		$store['cs_name'] =  addslashes($_POST ['cs_name']) ;
+		$store['c_id'] =  intval($_POST ['c_id']) ;
+		$store['cs_address'] = empty($_POST ['cs_address'])?"":addslashes($_POST ['cs_address']);
+		// 1. update db corporation
+		$row = $corpmod->updateStore( $store, $cs_id);
+		if ($row !== false) {
+
+			$msg = array('s'=> 200,'m'=>lang('success'),'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/corporation/store/c_id/".$store['c_id']);				
+			exit(json_output($msg));
+								
+		}else{
+			$msg = array('s'=> 400,'m'=>lang('failed'),'d'=>'');				
+			exit(json_output($msg));
+		}
+    }
 }
 ?>

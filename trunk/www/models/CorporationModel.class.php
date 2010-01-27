@@ -43,18 +43,36 @@ class CorporationModel extends Model {
 	}
 	function createNewCorporation($corp){
 		//user table
-		return	$this->db->execute ( "insert into corporation ( c_name,c_password,c_title,c_contacter, c_phone, c_intro)
-		values ('{$corp['c_name']}','" . $corp ['c_password'] . "','{$corp['c_title']}','{$corp['c_contacter']}','{$corp['c_phone']}','{$corp['c_intro']}')" );
+		return	$this->db->execute ( "insert into corporation ( c_name,c_password,c_title,c_initial,c_contacter, c_phone, c_intro)
+		values ('{$corp['c_name']}','" . $corp ['c_password'] . "','{$corp['c_title']}','{$corp['c_initial']}','{$corp['c_contacter']}','{$corp['c_phone']}','{$corp['c_intro']}')" );
 
+	}
+	function createNewStore($store){
+		return $this->db->execute("insert into store (cs_name,cs_address,c_id) value ('{$store['cs_name']}','{$store['cs_address']}','{$store['c_id']}') ");
+	}
+	function getStoreByCid($c_id){
+		return $this->db->getAll("select * from store where c_id='{$c_id}'");
+	}
+	function getStoreById($cs_id){
+		return $this->db->getRow("select * from store where cs_id='{$cs_id}'");
+	}
+	function updateStore($item,$cs_id){
+		return $this->db->update($item,"store"," cs_id=".$cs_id);
 	}
 	function deleteCorporation($cid){
 		return $this->db->execute("delete from corporation where c_id='{$cid}'");
+	}	
+	function deleteStore($cs_id){
+		return $this->db->execute("delete from store where cs_id='{$cs_id}'");
 	}
 	function getCorporationById($c_id){
 		return $this->db->getRow("select * from corporation where c_id='$c_id'");
 	}
     function updateCorporation($item,$c_id){
 		return $this->db->update($item,"corporation"," c_id=".$c_id);
+    }
+    function getAllCorps(){
+    	return $this->db->getAll("select c_title,c_id,c_initial from corporation order by c_initial");
     }
 }
 ?>
