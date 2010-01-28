@@ -203,6 +203,7 @@ class corporation{
 		}
 		
 		$store['cs_name'] =  addslashes($_POST ['cs_name']) ;
+		$store['cs_abbr'] =  addslashes($_POST ['cs_abbr']) ;
 		$store['c_id'] =  intval($_POST ['c_id']) ;
 		$store['cs_address'] = empty($_POST ['cs_address'])?"":addslashes($_POST ['cs_address']);
 		
@@ -253,6 +254,7 @@ class corporation{
 		}
 		$cs_id = $_POST['cs_id'];
 		$store['cs_name'] =  addslashes($_POST ['cs_name']) ;
+		$store['cs_abbr'] =  addslashes($_POST ['cs_abbr']) ;
 		$store['c_id'] =  intval($_POST ['c_id']) ;
 		$store['cs_address'] = empty($_POST ['cs_address'])?"":addslashes($_POST ['cs_address']);
 		// 1. update db corporation
@@ -266,6 +268,14 @@ class corporation{
 			$msg = array('s'=> 400,'m'=>lang('failed'),'d'=>'');				
 			exit(json_output($msg));
 		}
+    }
+    function view_ajaxstore(){
+    	$c_id = $_GET['c_id'];
+    	include_once("CorporationModel.class.php");
+    	$corpmod = new CorporationModel();
+		$stores  = $corpmod->getStoreByCid($c_id);
+    	$msg = array('s'=> 200,'m'=>'ok','d'=>json_encode($stores));				
+		exit(json_output($msg));
     }
 }
 ?>

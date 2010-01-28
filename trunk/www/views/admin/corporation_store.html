@@ -24,6 +24,7 @@
 					<tr>
 						<th><input type="checkbox" name="chkall" id="chkall" onclick="checkall('delete[]')" class="checkbox" /><label for="chkall"><?php echo lang('delete')?></label></th>
 						<th>ID</th>
+						<th><?php echo lang('cs_abbr')?></th>
 						<th><?php echo lang('cs_name')?></th>
 						<th><?php echo lang('cs_address')?></th>
 						<th><?php echo lang('edit')?></th>
@@ -33,6 +34,7 @@
 						<tr>
 							<td class="option"><input type="checkbox" name="delete[]" value="<?php echo $v['cs_id']?>" class="checkbox" /></td>
 							<td><?php echo $v['cs_id']?></td>
+							<td><?php echo $v['cs_abbr']?></td>
 							<td><strong><?php echo $v['cs_name']?></strong></td>
 							<td><?php echo $v['cs_address']?></td>
 							<td><a href="/admin.php/corporation/editstore/cs_id/<?php echo $v['cs_id']?>"><?php echo lang('edit')?></a></td>
