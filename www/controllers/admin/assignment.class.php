@@ -47,9 +47,13 @@ class assignment{
 		$this->tpl->assign('con',$con);
 	}
 	function view_add(){
-		
+		$corps = array();
+    	include_once("CorporationModel.class.php");
+		$corpmod = new CorporationModel();
+		$corps  = $corpmod->getAllCorps();
+		$this->tpl->assign('corps',$corps);
 	}
-    function op_addassignment(){
+    function op_save(){
     	$msg = '';
 		
 				

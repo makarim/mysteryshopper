@@ -48,7 +48,7 @@ class CorporationModel extends Model {
 
 	}
 	function createNewStore($store){
-		return $this->db->execute("insert into store (cs_name,cs_address,c_id) value ('{$store['cs_name']}','{$store['cs_address']}','{$store['c_id']}') ");
+		return $this->db->execute("insert into store (cs_name,cs_abbr,cs_address,c_id) value ('{$store['cs_name']}','{$store['cs_abbr']}','{$store['cs_address']}','{$store['c_id']}') ");
 	}
 	function getStoreByCid($c_id){
 		return $this->db->getAll("select * from store where c_id='{$c_id}'");
