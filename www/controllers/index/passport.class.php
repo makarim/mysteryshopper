@@ -7,6 +7,9 @@
  **/
 class passport {
 	
+	function view_defaults(){
+		//header("Location: index.php/passport/login");
+	}
 	function view_login() {
 		global $tpl;
 		$forward = isset ( $_GET ['forward'] ) ? $_GET ['forward'] : '';
@@ -76,7 +79,7 @@ class passport {
 						exit(json_output($msg));
 						
 					}else{		
-						$msg = array('s'=> 200,'m'=>"ok",'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/index.php");				
+						$msg = array('s'=> 200,'m'=>"ok",'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php");				
 						exit(json_output($msg));
 					}
 									

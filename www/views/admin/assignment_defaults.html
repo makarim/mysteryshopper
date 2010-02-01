@@ -43,9 +43,10 @@ function viewUser(assignment,c_id){
 						<th><input type="checkbox" name="chkall" id="chkall" onclick="checkall('delete[]')" class="checkbox" /><label for="chkall"><?php echo lang('delete')?></label></th>
 						<th>ID</th>
 						<th><?php echo lang('a_title')?></th>
-						<th><?php echo lang('a_date')?></th>
-						<th><?php echo lang('a_username')?></th>
-						<th><?php echo lang('a_candidate')?></th>
+						<th><?php echo lang('a_sdate')?></th>
+						<th><?php echo lang('a_edate')?></th>
+						<th><?php echo lang('c_name')?></th>
+						<th><?php echo lang('cs_name')?></th>
 
 						<th><?php echo lang('edit')?></th>
 					</tr>
@@ -55,14 +56,15 @@ function viewUser(assignment,c_id){
 							<td class="option"><input type="checkbox" name="delete[]" value="<?php echo $v['a_id']?>" class="checkbox" /></td>
 							<td><?php echo $v['a_id']?></td>
 							<td><strong><?php echo $v['a_title']?></strong></td>
-							<td><?php echo $v['a_date']?></td>
-							<td><?php echo $v['a_username']?></td>
+							<td><?php echo $v['a_sdate']?></td>
+							<td><?php echo $v['a_edate']?></td>
+							<td><?php echo $v['c_name']?></td>
 
-							<td><?php echo $v['a_candidate']?></td>
+							<td><?php echo $v['cs_name']?></td>
 							<td><a href="/admin.php/assignment/edit/a_id/<?php echo $v['a_id']?>"><?php echo lang('edit')?></a></td>
 						</tr>
 						<tr>
-						<td colspan="7"><div style="display:none" id="assignmentid_<?php echo $v['c_id']?>"></div></td>
+						<td colspan="9"><div style="display:none" id="assignmentid_<?php echo $v['a_id']?>"></div></td>
 						</tr>
 						
 						<?php }

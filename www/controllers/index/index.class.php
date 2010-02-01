@@ -3,7 +3,7 @@ class index{
 
     function view_defaults(){
 		global $tpl;	
-		
+		header("Location: /index.php/passport/login");
 		$user = authenticate();	
 		$msg = '';	
 		if($user){
