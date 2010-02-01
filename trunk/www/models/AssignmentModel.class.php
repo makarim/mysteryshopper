@@ -5,13 +5,16 @@ class AssignmentModel extends Model {
 	}
 	function getItems($con,$pageCount){
 		$select =$this->db->select();
-		$select->from ( "assignment ","*");
+		$select->from ( "assignment a","a.*");
+		$select->leftJoin('corporation c','c.c_id=a.c_id','c.c_name');
+		$select->leftJoin('store s','s.cs_id=a.cs_id','s.cs_name');
+		
 		
 		//
-		if(isset($con['order'])) $select->order ( $con['order']." desc" );
-		if(isset($con['a_title']) && !empty($con['a_title'])) $select->where ( " a_title like '%".$con['a_title']."%'" );
-		if(isset($con['a_id']) && !empty($con['a_id'])) $select->where ( " a_id = '".$con['a_id']."'" );
-		if(isset($con['c_desc']) && !empty($con['c_desc'])) $select->where ( " c_desc like '%".$con['c_desc']."%'" );
+		if(isset($con['order'])) $select->order ( 'a.'.$con['order']." desc" );
+		if(isset($con['a_title']) && !empty($con['a_title'])) $select->where ( " a.a_title like '%".$con['a_title']."%'" );
+		if(isset($con['a_id']) && !empty($con['a_id'])) $select->where ( " a.a_id = '".$con['a_id']."'" );
+		if(isset($con['c_desc']) && !empty($con['c_desc'])) $select->where ( " a.c_desc like '%".$con['c_desc']."%'" );
 
 		
 		$list = array();
@@ -30,7 +33,7 @@ class AssignmentModel extends Model {
 		
 		$select->limit ( $list['page']->offset(), $pageCount );
 		$rs = $select->query();
-	
+	//echo $select->getSql();
 		if ($rs) {
 			foreach ( $rs as $key => $record ) {
 				$list ['records'] [$key] = $record;
@@ -43,8 +46,8 @@ class AssignmentModel extends Model {
 	}
 	function createNewAssignment($assignment){
 		//user table
-		return	$this->db->execute ( "insert into assignment ( a_title,c_password,c_title,c_desc, c_phone, c_intro)
-		values ('{$assignment['a_title']}','" . $assignment ['c_password'] . "','{$assignment['c_title']}','{$assignment['c_desc']}','{$assignment['c_phone']}','{$assignment['c_intro']}')" );
+		return	$this->db->execute ( "insert into assignment ( a_title,  a_desc,a_sdate,a_edate, c_id, cs_id,a_hasphoto,a_hasaudio)
+		values ('{$assignment['a_title']}','" . $assignment ['a_desc'] . "','{$assignment['a_sdate']}','{$assignment['a_edate']}','{$assignment['c_id']}','{$assignment['cs_id']}','{$assignment['a_hasphoto']}','{$assignment['a_hasaudio']}')" );
 
 	}
 	function deleteAssignment($a_id){

@@ -19,7 +19,7 @@ function checkOnSubmit(formName) {
 		var r = eval('(' + r + ')');   
 
 		if(r.s==200){
-			window.location.href = r.d;
+			$('msg').innerHTML = r.m;	
 		}
 		if(r.s==400){
 			$('msg').innerHTML = r.m;			
@@ -30,6 +30,14 @@ function checkOnSubmit(formName) {
        
 }
 function getStore(c_id){
+	if(c_id==''){
+		var selobj = $('store_container');
+		for(var i in selobj.options){
+			selobj.options[i] = null;
+		}
+		selobj.options[0] = new Option('--', '');
+		return ;
+	}
 	var url = "<?php echo $www_site_url?>/admin.php?action=corporation&view=ajaxstore&c_id="+c_id;
 	
 	mini.ajax.get(url, function(r){
@@ -65,50 +73,51 @@ function getStore(c_id){
 				<div id="addassignmentdiv" class="tabcontentcur" style="display:;">
 					<form id="addassignmentform" name="addassignmentform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addassignmentform');" >
 					<input type="hidden" name="action" value="assignment">
-					<input type="hidden" name="op" value="save">
+					<input type="hidden" name="op" value="update">
+					<input type="hidden" name="a_id" value="<?php echo $info['a_id'];?>">
 				
 					<table width="100%">
 						<tr>
 							<td width="10%"><?php echo lang('a_title')?>:</td>
-							<td><input type="text" name="a_title" class="textfield" /> *</td>
+							<td><input type="text" name="a_title" class="textfield" value="<?php echo $info['a_title'];?>" /> *</td>
 						</tr>					
 							
 													
 						<tr>
 							<td><?php echo lang('a_sdate')?>:</td>
-							<td><input type="text" name="a_sdate" onclick="showcalendar();" value="" class="textfield" /></td>
+							<td><input type="text" name="a_sdate" onclick="showcalendar();" class="textfield" value="<?php echo $info['a_sdate'];?>" /></td>
 						</tr>								
 						<tr>
 							<td><?php echo lang('a_edate')?>:</td>
-							<td><input type="text" name="a_edate" onclick="showcalendar();" value="" class="textfield" /></td>
+							<td><input type="text" name="a_edate" onclick="showcalendar();" class="textfield" value="<?php echo $info['a_edate'];?>"/></td>
 						</tr>					
 						<tr>
 							<td><?php echo lang('cs_corpration')?>:</td>
 							<td><select name="c_id" onchange="getStore(this.options[this.selectedIndex].value);">
 							<option value="">--</option>
 							<?php foreach ($corps as $v){?>
-							<option value="<?php echo $v['c_id'];?>"><?php echo $v['c_initial']." ". $v['c_title'];?></option>
+							<option value="<?php echo $v['c_id'];?>"  <?php if($v['c_id']==$info['c_id']) echo 'selected';?> ><?php echo $v['c_initial']." ". $v['c_title'];?></option>
 							<?php } ?>
 							</select></td>
 							</tr>	
 						<tr>
 							<td><?php echo lang('cs_store')?>:</td>
 							<td><select id="store_container" name="cs_id">
-							<option value="">--</option>
+							<option value="<?php echo $info['cs_id'];?>"><?php echo $info['cs_abbr']." ".$info['cs_name'];?></option>
 							</select></td>
 							</tr>	
 						<tr>
 							<td><?php echo lang('a_hasphoto')?>:</td>
-							<td><input type="checkbox" name="a_hasphoto" value="1" /></td>
+							<td><input type="checkbox" name="a_hasphoto" value="1" <?php if($info['a_hasphoto']==1) echo 'checked';?>/></td>
 							</tr>				
 						<tr>						
 						<tr>
 							<td><?php echo lang('a_hasaudio')?>:</td>
-							<td><input type="checkbox" name="a_hasaudio" value="1" /></td>
+							<td><input type="checkbox" name="a_hasaudio" value="1" <?php if($info['a_hasaudio']==1) echo 'checked';?>/></td>
 							</tr>				
 						<tr>
 							<td><?php echo lang('a_desc')?>:</td>
-							<td><textarea type="text" name="a_desc" rows="10" style="width:500px" class="textfield"/></textarea></td>
+							<td><textarea type="text" name="a_desc" rows="10" style="width:500px" class="textfield"/><?php echo $info['a_desc'];?></textarea></td>
 							</tr>					
 						<tr>
 						

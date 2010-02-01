@@ -74,7 +74,7 @@
 	$GLOBALS ["gPageCache"] ["index"] ["cachetime"]=  60;
 	$GLOBALS ["gPageCache"] ["index"] ["compressed"]=  1;
 	$GLOBALS ["gPageCache"] ["index"] ["action"]=  "index";
-	$GLOBALS ["gPageCache"] ["index"] ["view"]=  "help";
+	$GLOBALS ["gPageCache"] ["index"] ["view"]=  "";
 	
 //////////////////////////////////////////////////////
 //				Session   Settings	                //

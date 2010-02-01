@@ -1,5 +1,5 @@
 <div id="header">
-<?php echo lang('web-title');?>
+<img src="<?php echo $www_site_url;?>/public/images/logo.png">
 <div id="language"><?php echo lang('selectlanguage');?>:<select name="select_lang" onchange="window.location.href='<?php echo $www_site_url;?>/index.php/index/setlang/'+this.options[this.selectedIndex].value">
 <option value="zh-cn" <?php if($selected_lang=='zh-cn') echo "selected"; ?>><?php echo lang('zh-cn');?></option>
 <option value="zh-tw" <?php if($selected_lang=='zh-tw') echo "selected"; ?>><?php echo lang('zh-tw');?></option>

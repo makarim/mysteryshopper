@@ -59,35 +59,35 @@ class assignment{
 				
 		$pattern = "/^[a-zA-Z][a-zA-Z0-9_]{1,13}[a-zA-Z0-9]$/i";
 		
-		$_POST ['c_name'] = trim ( $_POST ['c_name'] );
-		$c_name_len = mb_strlen ( $_POST ['c_name'], "UTF-8");
-		if (empty ( $_POST ['c_name'] ) || ! preg_match ( $pattern, $_POST ['c_name'] ) || $c_name_len < 2 || $c_name_len > 16 ) {
-			$msg = array('s'=> 400,'m'=>lang('cnamerule'),'d'=>'');				
+		$_POST ['a_title'] = trim ( $_POST ['a_title'] );
+		$_POST ['a_sdate'] = trim ( $_POST ['a_sdate'] );
+		$_POST ['a_edate'] = trim ( $_POST ['a_edate'] );
+		$_POST ['c_id'] = intval( $_POST ['c_id'] );
+		$_POST ['cs_id'] = intval ( $_POST ['cs_id'] );
+		$_POST ['a_desc'] = strip_tags( $_POST ['a_desc'] );
+		$_POST ['a_hasphoto'] = !isset ( $_POST ['a_hasphoto'] )?0:1;
+		$_POST ['a_hasaudio'] = !isset ( $_POST ['a_hasaudio'] )?0:1;
+		
+		if (empty ( $_POST ['a_title'] ) ) {
+			$msg = array('s'=> 400,'m'=>lang('a_titlerule'),'d'=>'');				
 			exit(json_output($msg));
 		}
 		
-		if (strlen($_POST ['c_password']) <6) {
-			$msg = array('s'=> 400,'m'=>lang('pwdrule'),'d'=>'');				
-			exit(json_output($msg));
-		}
-		
-		include_once("AssignmentModel.class.php");
-		$corpmod = new AssignmentModel();
-	
-		if($corpmod->checkName($_POST ['c_name'])){
-			$msg = array('s'=> 400,'m'=>lang('cnameexist'),'d'=>'');				
-			exit(json_output($msg));
-		}	
 
-		$assignment['c_password'] = md5($_POST ['c_password']);
-		$assignment['c_name'] =  $_POST ['c_name'] ;
-		$assignment['a_title'] = empty($_POST ['a_title'])?"":addslashes($_POST ['a_title']);
-		$assignment['a_desc'] = empty($_POST ['a_desc'])?"":addslashes($_POST ['a_desc']);
-		$assignment['c_phone'] = empty($_POST ['c_phone'])?"":addslashes($_POST ['c_phone']);
-		$assignment['c_intro'] =empty($_POST ['c_intro'])?"":strip_tags($_POST ['c_intro']);
+		include_once("AssignmentModel.class.php");
+		$assignmentMod = new AssignmentModel();
+
+		$assignment['a_title'] =  $_POST ['a_title'] ;
+		$assignment['a_sdate'] =  $_POST ['a_sdate'] ;
+		$assignment['a_edate'] =  $_POST ['a_edate'] ;
+		$assignment['c_id'] =  $_POST ['c_id'] ;
+		$assignment['cs_id'] =  $_POST ['cs_id'] ;
+		$assignment['a_desc'] =  $_POST ['a_desc'] ;
+		$assignment['a_hasphoto'] =  $_POST ['a_hasphoto'] ;
+		$assignment['a_hasaudio'] =  $_POST ['a_hasaudio'] ;
 		
 		// 1. create db assignment
-		$row = $corpmod->createNewAssignment ( $assignment );
+		$row = $assignmentMod->createNewAssignment ( $assignment );
 		if ($row !== false) {
 			$msg = array('s'=> 200,'m'=>'ok','d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/assignment/defaults");				
 			exit(json_output($msg));
@@ -134,38 +134,41 @@ class assignment{
   
     	$a_id = $_GET['a_id'];
     	include_once("AssignmentModel.class.php");
+    	include_once("CorporationModel.class.php");
     	$assignment = new AssignmentModel();
+    	$corp = new CorporationModel();
     	$info = $assignment->getAssignmentById($a_id);
+    	$store = $corp->getStoreById($info['cs_id']);
+    	$corps  = $corp->getAllCorps();
+		$this->tpl->assign('corps',$corps);
+    	$info['cs_abbr'] = $store['cs_abbr'];
+    	$info['cs_name'] = $store['cs_name'];
     	$this->tpl->assign('info',$info);
     }
-    function op_updateassignment(){
+    function op_update(){
     	$msg = '';
-		if(!empty($_POST ['c_password']) && $_POST ['c_password']!=$_POST ['c_password2'] ){
-			$msg = array('s'=> 400,'m'=>lang('pwdnotsame'),'d'=>'');				
+		if (empty ( $_POST ['a_title'] ) ) {
+			$msg = array('s'=> 400,'m'=>lang('a_titlerule'),'d'=>'');				
 			exit(json_output($msg));
-		}else{
-			if (!empty($_POST ['c_password']) && strlen($_POST ['c_password']) <6) {
-				$msg = array('s'=> 400,'m'=>lang('pwdrule'),'d'=>'');				
-				exit(json_output($msg));
-			}else if(!empty($_POST ['c_password'])){
-				$updates['c_password'] = md5( $_POST ['c_password']);
-			}
-			
 		}
 
 		$a_id = $_POST['a_id'];
 
 		include_once("AssignmentModel.class.php");
-		$corpmod = new AssignmentModel();
+		$assignment = new AssignmentModel();
 	
 		$updates['a_title'] = empty($_POST ['a_title'])?"":addslashes($_POST ['a_title']);
-		$updates['a_desc'] = empty($_POST ['a_desc'])?"":addslashes($_POST ['a_desc']);
-		$updates['c_phone'] = empty($_POST ['c_phone'])?"":addslashes($_POST ['c_phone']);
-		$updates['c_intro'] =empty($_POST ['c_intro'])?"":strip_tags($_POST ['c_intro']);
+		$updates['a_desc'] = empty($_POST ['a_desc'])?"":strip_tags($_POST ['a_desc']);
+		$updates['a_sdate'] = empty($_POST ['a_sdate'])?"":trim($_POST ['a_sdate']);
+		$updates['a_edate'] =empty($_POST ['a_edate'])?"":trim($_POST ['a_edate']);
+		$updates['c_id'] =empty($_POST ['c_id'])?"":intval($_POST ['c_id']);
+		$updates['cs_id'] =empty($_POST ['cs_id'])?"":intval($_POST ['cs_id']);
+		$updates['a_hasphoto'] =!isset($_POST ['a_hasphoto'])?"0":intval($_POST ['a_hasphoto']);
+		$updates['a_hasaudio'] =!isset($_POST ['a_hasaudio'])?"":intval($_POST ['a_hasaudio']);
 		
 		
 		// 1. update db assignment
-		$row = $corpmod->updateAssignment( $updates, $a_id);
+		$row = $assignment->updateAssignment( $updates, $a_id);
 		if ($row !== false) {
 
 			$msg = array('s'=> 200,'m'=>lang('success'),'d'=>'');				
