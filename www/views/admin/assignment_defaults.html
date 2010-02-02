@@ -5,7 +5,8 @@
 <title>Xppass Administrator's Control Panel</title>
 <LINK href="<?php echo $www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
 <script src="<?php echo $www_site_url?>/public/js/common.js" type="text/javascript"></script>
-
+<script src="<?php echo $www_site_url?>/public/js/ajax.js" type="text/javascript"></script>
+<script src="<?php echo $www_site_url?>/public/js/calendar.js" type="text/javascript"></script>
 
 <script>
 
@@ -27,10 +28,106 @@ function viewUser(assignment,c_id){
 </head>
 <body><div id="append"></div>
 <div id="msg" style="color:red;text-align:center"></div>
+<script type="text/javascript">
+	function setTab(n){
+		document.getElementById("tabs_mainbox").style.display = 'block';
+		document.getElementById("close").style.display = 'block';
+		var tli=document.getElementById("tabs_menu").getElementsByTagName("li");
+		var mli=document.getElementById("tabs_main").getElementsByTagName("div");
+		for(i=0;i<tli.length;i++){
+		  tli[i].className=i==n?"hover":"";
+		  mli[i].style.display=i==n?"block":"none";
+		}
+	}
+	function hid(){
+		document.getElementById("tabs_mainbox").style.display = 'none';
+		document.getElementById("close").style.display = 'none';
+		var tli=document.getElementById("tabs_menu").getElementsByTagName("li");
+		for(i=0;i<tli.length;i++){
+		  tli[i].className="";
+		}
+	}
+function getStore(c_id){
+	if(c_id==''){
+		var selobj = $('store_container');
+		for(var i in selobj.options){
+			selobj.options[i] = null;
+		}
+		selobj.options[0] = new Option('--', '');
+		return ;
+	}
+	var url = "<?php echo $www_site_url?>/admin.php?action=corporation&view=ajaxstore&c_id="+c_id;
+	
+	mini.ajax.get(url, function(r){
 
+		var r = eval('(' + r + ')');   
+
+		if(r.s==200){
+			var obj = eval('(' + r.d + ')');   
+			var selobj = $('store_container');
+			for(var i in obj){
+				//if(i==0) selobj.options[0] = new Option(obj[i].cs_name, obj[i].cs_id) //replace 1st option with a new one
+				selobj.options[i]=new Option(obj[i].cs_abbr+' '+obj[i].cs_name, obj[i].cs_id) //add a new option to the end of SELECT
+			}
+			
+		}
+		if(r.s==400){
+			$('msg').innerHTML = r.m;			
+		}
+	});
+	
+	return false;
+}
+		
+	</script>
 
 	<div class="container">
 			
+			<div id="tabs">
+				<div class="tabs_menubox">
+					<ul id="tabs_menu">
+						<li onclick="setTab(0)"><?php echo lang('search_assignment')?></li>
+						<li onclick="hid()" id="close" style="display:none;"><?php echo lang('hide')?>×</li>
+		
+					</ul>
+				</div>
+				<div id="tabs_mainbox" class="tabs_mainbox" style="display:none;">
+					<div class="main" id="tabs_main" >
+						<div  style="display:none;">
+							<form action="<?php echo $www_site_url?>/admin.php" method="GET">
+							<input type="hidden" name="action" value="assignment">				
+							<input type="hidden" name="view" value="defaults">					
+							<table width="100%">
+								<tr>
+									<td align="right"><?php echo lang('assignment_title')?>:</td>
+									<td align="left"><input type="text" name="a_title" value="<?php echo $con['a_title']?>" class="textfield" /></td>
+			
+									<td>cs_id:</td>
+									<td align="left"><select name="c_id" onchange="getStore(this.options[this.selectedIndex].value);">
+							<option value="">--</option>
+							<?php foreach ($corps as $v){?>
+							<option value="<?php echo $v['c_id'];?>"  <?php if($v['c_id']==$con['c_id']) echo 'selected';?> ><?php echo $v['c_initial']." ". $v['c_title'];?></option>
+							<?php } ?>
+							</select></td>
+									<td><?php echo lang('c_id')?>:</td>
+									<td align="left"><select id="store_container" name="cs_id">
+							<option value="">--</option>
+							</select></td>
+									<td rowspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
+								</tr>
+								<tr>
+									<td align="right"><?php echo lang('assignment_sdate')?>:</td>
+			
+									<td colspan="3" align="left"><input type="text" name="a_sdate" onclick="showcalendar();" value="<?php echo $con['a_sdate']?>" class="textfield" /> <?php echo lang('to')?> <input type="text" name="a_edate" onclick="showcalendar();" value="<?php echo $con['a_edate']?>" class="textfield" /></td>
+									
+								</tr>
+							</table>
+							</form>
+						</div>		
+				</div>
+			</div>
+
+		</div>
 		<h3><?php echo lang('assignment_list')?> <?php echo lang('assignment_total')?>:<?php echo $total?></h3>
 		
 		<div class="mainbox">
@@ -45,7 +142,7 @@ function viewUser(assignment,c_id){
 						<th><?php echo lang('a_title')?></th>
 						<th><?php echo lang('a_sdate')?></th>
 						<th><?php echo lang('a_edate')?></th>
-						<th><?php echo lang('c_name')?></th>
+						<th><?php echo lang('c_title')?></th>
 						<th><?php echo lang('cs_name')?></th>
 
 						<th><?php echo lang('edit')?></th>
@@ -58,7 +155,7 @@ function viewUser(assignment,c_id){
 							<td><strong><?php echo $v['a_title']?></strong></td>
 							<td><?php echo $v['a_sdate']?></td>
 							<td><?php echo $v['a_edate']?></td>
-							<td><?php echo $v['c_name']?></td>
+							<td><?php echo $v['c_title']?></td>
 
 							<td><?php echo $v['cs_name']?></td>
 							<td><a href="/admin.php/assignment/edit/a_id/<?php echo $v['a_id']?>"><?php echo lang('edit')?></a></td>

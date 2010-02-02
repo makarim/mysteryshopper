@@ -14,21 +14,31 @@ class assignment{
     function view_defaults(){
 		$cur_sort = !empty($_GET['sort'])?$_GET['sort']:'a_order';
 
-		$a_id = !empty($_GET['a_id'])?$_GET['a_id']:'';
-		$a_desc = !empty($_GET['a_desc'])?$_GET['a_desc']:'';
 		$a_title = !empty($_GET['a_title'])?$_GET['a_title']:'';
+		$c_id = !empty($_GET['c_id'])?$_GET['c_id']:'';
+		$cs_id= !empty($_GET['cs_id'])?$_GET['cs_id']:'';
+		$a_sdate= !empty($_GET['a_sdate'])?$_GET['a_sdate']:'';
+		$a_edate= !empty($_GET['a_edate'])?$_GET['a_edate']:'';
 		
 		$con['order'] = $cur_sort;
-		$con['a_id'] = $a_id;
-		$con['a_desc'] = $a_desc;
 		$con['a_title'] = $a_title;
+		$con['c_id'] = $c_id;
+		$con['cs_id'] = $cs_id;
+		$con['a_sdate'] = $a_sdate;
+		$con['a_edate'] = $a_edate;
 		
 		include_once("AssignmentModel.class.php");
 		$assignmentModel = new AssignmentModel();
 				
 		$assignments = $assignmentModel->getItems($con,10);
 		$this->tpl->assign('total',$assignments['page']->total);
+		
+		include_once("CorporationModel.class.php");
+		$corpmod = new CorporationModel();
+		$corps  = $corpmod->getAllCorps();
+		$this->tpl->assign('corps',$corps);
 		$this->tpl->assign('assignments',$assignments);
+		$this->tpl->assign('con',$con);
 		
     }   
 
