@@ -358,6 +358,9 @@ $GLOBALS['gLang']['ticket_disadvantage'] = '复杂，需要开发客户端插件
 $GLOBALS['gLang']['menu_onlineuser'] = '在线用户';
 $GLOBALS['gLang']['online_length'] = '过期时间';
 $GLOBALS['gLang']['module_ban'] = '此功能只在Ticket方案下使用。';
+$GLOBALS['gLang']['goback'] = '返回';
+$GLOBALS['gLang']['search_assignment'] = '查找任务';
+$GLOBALS['gLang']['hide'] = '关闭';
 
 
 

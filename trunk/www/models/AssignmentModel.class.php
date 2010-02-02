@@ -6,15 +6,17 @@ class AssignmentModel extends Model {
 	function getItems($con,$pageCount){
 		$select =$this->db->select();
 		$select->from ( "assignment a","a.*");
-		$select->leftJoin('corporation c','c.c_id=a.c_id','c.c_name');
+		$select->leftJoin('corporation c','c.c_id=a.c_id','c.c_title');
 		$select->leftJoin('store s','s.cs_id=a.cs_id','s.cs_name');
 		
 		
 		//
 		if(isset($con['order'])) $select->order ( 'a.'.$con['order']." desc" );
 		if(isset($con['a_title']) && !empty($con['a_title'])) $select->where ( " a.a_title like '%".$con['a_title']."%'" );
-		if(isset($con['a_id']) && !empty($con['a_id'])) $select->where ( " a.a_id = '".$con['a_id']."'" );
-		if(isset($con['c_desc']) && !empty($con['c_desc'])) $select->where ( " a.c_desc like '%".$con['c_desc']."%'" );
+		if(isset($con['c_id']) && !empty($con['c_id'])) $select->where ( " a.c_id = '".$con['c_id']."'" );
+		if(isset($con['cs_id']) && !empty($con['cs_id'])) $select->where ( " a.cs_id = '".$con['cs_id']."'" );
+		if(isset($con['a_sdate']) && !empty($con['a_sdate'])) $select->where ( " a.a_sdate >= '".$con['a_sdate']."'" );
+		if(isset($con['a_edate']) && !empty($con['a_edate'])) $select->where ( " a.a_edate <= '".$con['a_edate']."'" );
 
 		
 		$list = array();
