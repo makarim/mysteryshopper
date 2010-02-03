@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Xppass Administrator's Control Panel</title>
+<LINK href="<?php echo $www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+<script src="<?php echo $www_site_url?>/public/js/common.js" type="text/javascript"></script>
+<script src="<?php echo $www_site_url?>/public/js/ajax.js" type="text/javascript"></script>
+
+
+<script>
+function checkOnSubmit(formName) {
+  	
+	var url = "<?php echo $www_site_url?>/admin.php";
+	var params = mini.form.serialize($(formName));
+	
+	mini.ajax.post(url, function(r){
+		var r = eval('(' + r + ')');   
+
+		if(r.s==200){
+			window.location.href = r.d;
+		}
+		if(r.s==400){
+			$('msg').innerHTML = r.m;			
+		}
+	}, params);
+	
+	return false;
+       
+}
+
+</script>
+</head>
+<body><div id="append"></div>
+<div id="msg" style="color:red;text-align:center"></div>
+	<div class="container">
+	
+		<div class="hastabmenu">
+				<ul class="tabmenu">
+					<li id="addquestionbtn" class="tabcurrent"><a href="#"><?php echo lang('edit_question')?></a></li>	
+				</ul>
+				<div id="addquestiondiv" class="tabcontentcur" style="display:;">
+					<form id="addquestionform" name="addquestionform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addquestionform');" >
+					<input type="hidden" name="action" value="report">
+					<input type="hidden" name="op" value="updateques">
+					<input type="hidden" name="q_id" value="<?php echo $q_id?>">
+				
+					<table width="100%">
+						<tr>
+							<td width="10%"><?php echo lang('question')?>:</td>
+							<td><input type="text" name="q_question" class="textfield" value="<?php echo $question['q_question']?>"/> *</td>
+			
+							</tr>						
+						<tr>
+							<td width="10%"><?php echo lang('question_group')?>:</td>
+							<td><select name="q_group">
+							<option value="">--</option>
+							<?php foreach ($quesgroup as $v){?>
+							<option value="<?php echo $v['g_id'];?>" <?php if( $v['g_id']==$question['q_group']) echo "selected"; ?>><?php echo  $v['g_name'];?></option>
+							<?php } ?>
+							</select> *</td>
+			
+							</tr>
+													
+						<tr>
+							<td><?php echo lang('question_type')?>:</td>
+							<td><select name="q_type">
+									<option value="">--</option>
+							<option value="1" <?php if( 1==$question['q_group']) echo "selected"; ?>><?php echo lang('yesorno')?></option>
+							<option value="2" <?php if( 2==$question['q_group']) echo "selected"; ?>><?php echo lang('score')?></option>
+							<option value="3" <?php if( 3==$question['q_group']) echo "selected"; ?>><?php echo lang('fillblank')?></option>
+							</select></td>
+							</tr>					
+									
+
+						
+							<td colspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button"/></td>
+						</tr>
+					</table>
+					</form>
+	
+				</div>
+		</div>
+</div>
+
+</body>
+</html>
