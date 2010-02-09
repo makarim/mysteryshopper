@@ -47,12 +47,13 @@ function checkOnSubmit(formName) {
 				<div id="addreportdiv" class="tabcontentcur" style="display:;">
 					<form id="addreportform" name="addreportform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addreportform');" >
 					<input type="hidden" name="action" value="report">
-					<input type="hidden" name="op" value="savereport">
+					<input type="hidden" name="op" value="updatereport">
+					<input type="hidden" name="re_id" value="<?php echo $report['re_id']?>">
 				
 					<table width="100%">
 						<tr>
 							<td width="10%"><?php echo lang('re_title')?>:</td>
-							<td><input type="text" name="re_title" class="textfield" /> *</td>
+							<td><input type="text" name="re_title" class="textfield" value="<?php echo $report['re_title']?>" /> *</td>
 						</tr>					
 						<tr>
 							<td><?php echo lang('a_desc')?>:</td>
@@ -66,7 +67,7 @@ function checkOnSubmit(formName) {
  </tr>
     <tr>
       <td width="40%">
-      <select multiple name="fromBox" id="fromBox"  size="8" style="width:300px;height:300px" ondblclick="moveOption(document.getElementById('fromBox'), document.getElementById('toBox'))"> 
+      <select multiple name="fromBox" id="fromBox"  size="8" style="width:300px;height:300px" ondblclick="moveOption(document.getElementById('fromBox'), document.getElementById('toBox[]'))"> 
 	<?php foreach ($questions as $q){?>
     <option value="<?php echo $q['q_id']?>" title="<?php echo $q['q_question']?>">[<?php echo $groups[$q['q_group']];?>]<?php echo $q['q_question']?></option> 
  <?php }?>
@@ -74,23 +75,25 @@ function checkOnSubmit(formName) {
 
    </td>
       <td width="20%" align="center">
-  <input type="button" value=" >> " onclick="moveOption(document.getElementById('fromBox'),document.getElementById('toBox'))"><br><br>
-  <input type="button" value=" << " onclick="moveOption(document.getElementById('toBox'), document.getElementById('fromBox'))">
+  <input type="button" value=" >> " onclick="moveOption(document.getElementById('fromBox'),document.getElementById('toBox[]'))"><br><br>
+  <input type="button" value=" << " onclick="moveOption(document.getElementById('toBox[]'), document.getElementById('fromBox'))">
    </td>
       <td width="40%">
-  <select  multiple name="toBox[]" id="toBox" size="8" style="width:300px;height:300px"
-  ondblclick="moveOption(document.getElementById('toBox'), document.getElementById('fromBox'))">
-
+  <select  multiple name="toBox[]" id="toBox[]" size="8" style="width:300px;height:300px"
+  ondblclick="moveOption(document.getElementById('toBox[]'), document.getElementById('fromBox'))">
+<?php foreach ($report_questions as $q){?>
+    <option value="<?php echo $q['q_id']?>" title="<?php echo $q['rq_question']?>">[<?php echo $groups[$q['rq_group']];?>]<?php echo $q['rq_question']?></option> 
+ <?php }?>
   </select>
    </td>
     </tr>
  <tr>
   <td colspan="3">
   <CENTER>
-  <INPUT TYPE="button" value="置顶" onclick="moveTop(document.getElementById('toBox'));">
-  <INPUT TYPE="button" value="上移" onclick="moveUp(document.getElementById('toBox'));">
-  <INPUT TYPE="button" value="下移" onclick="moveDown(document.getElementById('toBox'));">
-  <INPUT TYPE="button" value="置底" onclick="moveBottom(document.getElementById('toBox'));">
+  <INPUT TYPE="button" value="置顶" onclick="moveTop(document.getElementById('toBox[]'));">
+  <INPUT TYPE="button" value="上移" onclick="moveUp(document.getElementById('toBox[]'));">
+  <INPUT TYPE="button" value="下移" onclick="moveDown(document.getElementById('toBox[]'));">
+  <INPUT TYPE="button" value="置底" onclick="moveBottom(document.getElementById('toBox[]'));">
   </CENTER></td>
  </tr>
   </table>	

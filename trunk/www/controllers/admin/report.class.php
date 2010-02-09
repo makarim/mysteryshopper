@@ -104,52 +104,101 @@ class report{
 	}
 	
 	function view_defaults(){
-		$cur_sort = !empty($_GET['sort'])?$_GET['sort']:'report_id';
-		$domain = !empty($_GET['domain'])?$_GET['domain']:'';
+		$cur_sort = !empty($_GET['sort'])?$_GET['sort']:'re_id';
+		$re_title = !empty($_GET['re_title'])?$_GET['re_title']:'';
 		
 		
 		include_once("ReportModel.class.php");
 		$reportModel = new ReportModel();
 		
 		$con['order'] = $cur_sort;
-		$con['domain'] = $domain;
+		$con['re_title'] = $re_title;
 		
 		$items = $reportModel->getItems($con,10);
 
 		$this->tpl->assign('reports',$items);
+		$this->tpl->assign('total',$items['page']->total);
 		$this->tpl->assign('con',$con);
 	}
 	
 	function view_addreport(){
-		
+		include_once("ReportModel.class.php");
+		$ReportModel = new ReportModel();
+		$group = $ReportModel->getQuesGroup();
+		$arr = array();
+		foreach ($group as $g){
+			$arr[$g['g_id']] = $g['g_name'];
+		}
+		$this->tpl->assign("questions",$ReportModel->getAllQuestion());
+		$this->tpl->assign("groups",$arr);
 	}
-	function op_addreport(){
-		$arr['domain'] = $_POST['adddomain'];
-		$pattern = "/([\w]+\.[\w]+)/i";
-		if(!preg_match($pattern,$arr['domain'])){
-			$msg = array('s'=> 400,'m'=>lang('invaliddomain'),'d'=>'');				
-			exit(json_output($msg));
+	
+	function view_editreport(){
+		$re_id = $_GET['re_id'];
+		include_once("ReportModel.class.php");
+		$ReportModel = new ReportModel();
+		$group = $ReportModel->getQuesGroup();
+		$arr = array();
+		foreach ($group as $g){
+			$arr[$g['g_id']] = $g['g_name'];
+		}
+		$questions  = $ReportModel->getAllQuestion();
+		$report_questions  = $ReportModel->getQuestionsByReId($re_id);
+		$tmp = array();
+		foreach ($report_questions as $v){
+			$tmp[] = $v['q_id'];
+		}
+		$leftquestions = array();
+		foreach ($questions as $k=>$v){
+			if(!in_array($v['q_id'],$tmp)){
+				$leftquestions[] = $v;
+			}
+		}
+		$report = $ReportModel->getReportByReId($re_id);
+		$this->tpl->assign("questions",$leftquestions);
+		$this->tpl->assign("report_questions",$report_questions);
+		$this->tpl->assign("report",$report);
+		$this->tpl->assign("groups",$arr);
+	}
+	
+	function op_savereport(){
+		
+		$arr['re_title'] = $_POST['re_title'];
+		if(empty($arr['re_title'])){
+			show_message_goback(lang('required'));
 		}
 		include_once("ReportModel.class.php");
 		$reportModel = new ReportModel();
-		
-		if($row = $reportModel->getClientByName($arr['domain'])){
-			$msg = array('s'=> 400,'m'=>lang('domainexist'),'d'=>'');				
-			exit(json_output($msg));
-		}
-		
-		$arr['key'] = $reportModel->generateKey();
-		
-		$r = $reportModel->addNewClient($arr);
+		$arr['q_id'] = $_POST['toBox'];
+		$r = $reportModel->addNewReport($arr);
 		
 		if($r){
-			$msg = array('s'=> 200,'m'=>lang('success'),'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/report/defaults");				
-			exit(json_output($msg));
+			show_message(lang('success'));
+			redirect($GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/report/defaults");
 		}else{
-			$msg = array('s'=> 400,'m'=>lang('failed'),'d'=>'');				
-			exit(json_output($msg));
+			show_message_goback(lang('failed'));
+		
 		}
 		
+	}
+	function op_updatereport(){
+		$arr['re_title'] = $_POST['re_title'];
+		$arr['re_id'] = $_POST['re_id'];
+		if(empty($arr['re_title'])){
+			show_message_goback(lang('required'));
+		}
+		include_once("ReportModel.class.php");
+		$reportModel = new ReportModel();
+		$arr['q_id'] = $_POST['toBox'];
+		$r = $reportModel->updateReport($arr);
+
+		if($r){
+			show_message(lang('success'));
+			redirect($GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/report/defaults");
+		}else{
+			show_message_goback(lang('failed'));
+		
+		}
 	}
 	function op_delreport(){
 		$t = true;

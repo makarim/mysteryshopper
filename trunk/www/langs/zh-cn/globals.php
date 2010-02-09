@@ -361,6 +361,11 @@ $GLOBALS['gLang']['module_ban'] = '此功能只在Ticket方案下使用。';
 $GLOBALS['gLang']['goback'] = '返回';
 $GLOBALS['gLang']['search_assignment'] = '查找任务';
 $GLOBALS['gLang']['hide'] = '关闭';
+$GLOBALS['gLang']['search_question'] = '查找问题';
+$GLOBALS['gLang']['add_question'] = '添加问题';
+$GLOBALS['gLang']['question'] = '问题';
+$GLOBALS['gLang']['question_group'] = '问题类别';
+$GLOBALS['gLang']['question_type'] = '问题形式';
 
 
 
