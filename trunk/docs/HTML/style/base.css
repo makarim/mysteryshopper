@@ -1,0 +1,179 @@
+@charset "utf-8";
+
+* {
+	padding:0;
+	margin:0;
+}
+
+body {
+	padding:0;
+	margin:0;
+	background:#FFF url(../images/bg_01.gif) repeat-x;
+	font-size:12px;
+}
+
+li {
+	list-style:none;
+}
+
+
+#hearder, #wrap, #footer {
+	clear:both;
+	width: 950px;
+	margin:0 auto;
+}
+
+#logo {
+	float:left;
+	width: 136px;
+}
+
+#top {
+	float:right;
+	width:814px;
+}
+#language {
+	float:left;
+	width: 50px;
+	padding:22px 0 0 0;
+	margin:0 0 0 20px;
+}
+#login {
+	float:right;
+	width: 113px;
+	height:21px;
+	background-color:#C00;
+	color:#FFF;
+	text-align:center;
+	padding:55px 0 3px 0;
+}
+#login a {
+	color:#FFF;
+	text-decoration:none;
+}
+
+#wrap {
+	padding:12px 0 0 0;
+}
+.clear {
+	clear:both;
+}
+
+.left {
+	float:left;
+}
+.right {
+	float:right;
+}
+/* 首页大FLASH */
+.bigpic {
+	margin-bottom:15px;
+}
+
+.tl4px {
+	width:4px;
+	background:url(../images/table_title_topleft.gif) no-repeat left;
+	height:29px;
+}
+.tr4px {
+	width:4px;
+	background:url(../images/table_title_topright.gif) no-repeat right;
+	height:29px;
+}
+.bl4px {
+	width:4px;
+	height:4px;
+	background:url(../images/table_title_bottomleft.gif) no-repeat top;
+}
+.br4px {
+	width:4px;
+	background:url(../images/table_title_bottomright.gif) no-repeat top right;
+	height:4px;
+}
+.bcenter {
+	height: 4px;
+	background:url(../images/table_title_bottomcenter.gif) repeat-x top;
+}
+.tableCenter {
+	background:url(../images/table_title_topcenter.gif) repeat-x;
+	height:29px;
+}
+.tableTitle {
+	background:url(../images/icon_sanjiao.gif) no-repeat left center;
+	font-size:14px;
+	color:#666;
+	height:29px;
+	line-height:29px;
+	margin:0 10px;
+	padding-left: 15px;
+}
+.tableContent {
+	clear:both;
+	border-left:#666666 solid 1px;
+	border-right:#666666 solid 1px;
+}
+.huodong {
+	background:url(../images/icon_sanjiao.gif) no-repeat 5px 8px;
+	padding:5px 0 5px 15px;
+}
+.hangju {
+	margin:5px 0;
+}
+
+    #tabsD {
+      float:left;
+      width:520px;
+      background:#FFF;
+      font-size:14px;
+      line-height:normal;
+	  border-bottom:2px solid #C00;
+      }
+    #tabsD ul {
+	  margin:0;
+	  list-style:none;
+      }
+    #tabsD li {
+      display:inline;
+      margin:0;
+      padding:0 2px 0 0;
+      }
+    #tabsD a {
+      float:left;
+      background:url("../images/tableft.gif") no-repeat left top;
+      margin:0;
+      padding:0 0 0 4px;
+      text-decoration:none;
+      }
+    #tabsD a span {
+      float:left;
+      display:block;
+      background:url("../images/tabright.gif") no-repeat right top;
+      padding:5px 15px 4px 6px;
+      color:#FFF;
+      }
+    /* Commented Backslash Hack hides rule from IE5-Mac \*/
+    #tabsD a span {float:none;}
+    /* End IE5-Mac hack */
+    #tabsD a:hover span {
+      color:#FFFFFF;
+      }
+    #tabsD a:hover {
+      background-position:0% -29px;
+      }
+    #tabsD a:hover span {
+      background-position:100% -29px;
+      } 
+
+
+#copyright {
+	clear:both;
+	width: 950px;
+	margin:20px auto;
+	border-top:#999 solid 1px;
+	padding:20px 0;
+	text-align:center;
+}
+.indexabout {
+	padding:10px 0;
+	
+}
