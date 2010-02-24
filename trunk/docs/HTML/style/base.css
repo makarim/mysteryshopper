@@ -8,8 +8,14 @@
 body {
 	padding:0;
 	margin:0;
-	background:#FFF url(../images/bg_01.gif) repeat-x;
 	font-size:12px;
+}
+
+.indexbody {
+	background:#FFF url(../images/bg_01.gif) repeat-x;
+}
+.contentbody {
+	background:#FFF url(../images/bg_02.gif) repeat-x;
 }
 
 li {
@@ -38,6 +44,7 @@ li {
 	padding:22px 0 0 0;
 	margin:0 0 0 20px;
 }
+/*右上角登录*/
 #login {
 	float:right;
 	width: 113px;
@@ -55,6 +62,15 @@ li {
 #wrap {
 	padding:12px 0 0 0;
 }
+
+/*登录成功后顶部的欢迎信息*/
+#welcome {
+	float:right;
+	text-align:right;
+	color:#999;
+	margin:32px 10px 0 0;
+	line-height:20px;
+}
 .clear {
 	clear:both;
 }
@@ -65,6 +81,68 @@ li {
 .right {
 	float:right;
 }
+
+.adminmenupanel {
+	width:170px;
+	float:left;
+	clear:both;
+}
+
+.adminmenupanel .panel {
+	border:#BEBEBE solid 1px;
+	margin:0 0 10px 0;
+}
+
+.adminmenupanel .panel .title {
+	background:#E7E7E7 url(../images/bg_panel.gif) repeat-x;
+	font-size:14px;
+	line-height:28px;
+	height:28px;
+	padding:0 5px;
+	border-bottom:#BEBEBE solid 1px;
+}
+
+.adminmenupanel .content {
+	padding:10px 0;
+}
+
+.adminmenupanel .content li{
+		background:url(../images/dot.gif) no-repeat 10px 9px;
+		padding:5px 20px;
+}
+.adminmenupanel .content .selected{
+	background-color:#D7D7D7;
+}
+.adminmenupanel .content a {
+	color:#000;
+	text-decoration:none;
+}
+
+.admincontent {
+	float:right;
+	width:760px;
+}
+
+.announcement {
+	color:#03C;
+	background:url(../images/bg_gonggao.gif) repeat-x;
+	height:39px;
+	line-height:39px;
+	padding:0 10px;
+	font-size:14px;
+}
+.announcementmore {
+	background:url(../images/bg_gonggao_more.gif) repeat-x;
+	height:39px;
+	line-height:39px;
+	text-align:center;
+}
+
+.announcementmore a {
+	color:#FFF;
+	text-decoration:none;
+}
+
 /* 首页大FLASH */
 .bigpic {
 	margin-bottom:15px;
@@ -112,8 +190,48 @@ li {
 	border-left:#666666 solid 1px;
 	border-right:#666666 solid 1px;
 }
+
+.table2Title {
+	background:url(../images/table2_title.gif) no-repeat;
+	width:103px;
+	height:36px;
+	font-size:14px;
+	font-weight:bold;
+	text-align:center;
+	padding-top:10px;
+}
+.table2TitleBg {
+	background:url(../images/table2_topbg.gif) repeat-x bottom;
+}
+.table2TitleBg2 {
+	background:url(../images/table2_toprightborder.gif) no-repeat right bottom;
+}
+
+.table2LeftBorder {
+	background:url(../images/table2_leftborder.gif) repeat-y;
+	width:5px;
+}
+.table2RightBorder {
+	background:url(../images/table2_rightborder.gif) repeat-y right;
+	width:5px;
+}
+.table2BottomLeft {
+	background:url(../images/table2_bottomleft.gif) no-repeat;
+	width:15px;
+	height:15px;
+}
+.table2BottomRight {
+	background:url(../images/table2_bottomright.gif) no-repeat;
+	width:15px;
+	height:15px;
+}
+.table2Bottom {
+	background:url(../images/table2_bottom.gif) repeat-x;
+	height:15px;
+}
+
 .huodong {
-	background:url(../images/icon_sanjiao.gif) no-repeat 5px 8px;
+	background:url(../images/icon_sanjiao.gif) no-repeat 5px 7px;
 	padding:5px 0 5px 15px;
 }
 .hangju {
@@ -162,18 +280,23 @@ li {
       }
     #tabsD a:hover span {
       background-position:100% -29px;
-      } 
+      }
 
 
 #copyright {
 	clear:both;
 	width: 950px;
 	margin:20px auto;
-	border-top:#999 solid 1px;
+	border-top:#bdbdbd solid 1px;
 	padding:20px 0;
 	text-align:center;
 }
 .indexabout {
 	padding:10px 0;
+	
+}
+.logininput {
+	border:#999999 solid 1px;
+	width:100%;
 	
 }
