@@ -35,7 +35,7 @@
 							<td class="option"><input type="checkbox" name="delete[]" value="<?php echo $v['re_id']?>" class="checkbox" /></td>
 							<td><?php echo $v['re_id']?></td>
 							<td><?php echo $v['re_title']?></td>
-							<td><a href="/admin.php/report/detail/re_id/<?php echo $v['re_id']?>"><?php echo lang('report')?></a></td>
+							<td><a href="/admin.php/report/preview/re_id/<?php echo $v['re_id']?>"><?php echo lang('report')?></a></td>
 							<td>
 							<a href="/admin.php/report/editreport/re_id/<?php echo $v['re_id']?>"><?php echo lang('edit')?></a>
 							
@@ -46,7 +46,7 @@
 						
 						<?php }
 						}?>
-										<tr class="nobg">
+						<tr class="nobg">
 						<td><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
 						<td class="tdpage" colspan="7" align="right"><?php echo $reports['page_array']['pagebar']?></td>
 					</tr>

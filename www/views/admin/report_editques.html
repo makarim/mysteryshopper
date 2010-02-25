@@ -65,10 +65,11 @@ function checkOnSubmit(formName) {
 						<tr>
 							<td><?php echo lang('question_type')?>:</td>
 							<td><select name="q_type">
-									<option value="">--</option>
-							<option value="1" <?php if( 1==$question['q_group']) echo "selected"; ?>><?php echo lang('yesorno')?></option>
-							<option value="2" <?php if( 2==$question['q_group']) echo "selected"; ?>><?php echo lang('score')?></option>
-							<option value="3" <?php if( 3==$question['q_group']) echo "selected"; ?>><?php echo lang('fillblank')?></option>
+							<option value="">--</option>
+							<option value="1" <?php if( 1==$question['q_type']) echo "selected"; ?>><?php echo lang('yesorno')?></option>
+							<option value="2" <?php if( 2==$question['q_type']) echo "selected"; ?>><?php echo lang('vote')?></option>
+							<option value="3" <?php if( 3==$question['q_type']) echo "selected"; ?>><?php echo lang('fillblank')?></option>
+							<option value="4" <?php if( 4==$question['q_type']) echo "selected"; ?>><?php echo lang('score')?></option>
 							</select></td>
 							</tr>					
 									

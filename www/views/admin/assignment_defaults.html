@@ -144,6 +144,7 @@ function getStore(c_id){
 						<th><?php echo lang('a_edate')?></th>
 						<th><?php echo lang('c_title')?></th>
 						<th><?php echo lang('cs_name')?></th>
+						<th><?php echo lang('finish')?></th>
 
 						<th><?php echo lang('edit')?></th>
 					</tr>
@@ -158,7 +159,10 @@ function getStore(c_id){
 							<td><?php echo $v['c_title']?></td>
 
 							<td><?php echo $v['cs_name']?></td>
-							<td><a href="/admin.php/assignment/edit/a_id/<?php echo $v['a_id']?>"><?php echo lang('edit')?></a></td>
+							<td><?php echo $v['a_finish']?></td>
+							<td><a href="/admin.php/assignment/edit/a_id/<?php echo $v['a_id']?>"><?php echo lang('edit')?></a>
+							
+							<a href="/admin.php/report/preview/a_id/<?php echo $v['a_id']?>/re_id/<?php echo $v['re_id']?>"><?php echo lang('view')?></a></td>
 						</tr>
 						<tr>
 						<td colspan="9"><div style="display:none" id="assignmentid_<?php echo $v['a_id']?>"></div></td>
