@@ -46,10 +46,10 @@ class AssignmentModel extends Model {
 	function checkName($name){
 		return $this->db->getOne ( "select a_id from assignment where a_title = '{$name}'" );
 	}
-	function createNewAssignment($assignment){
+	function createNewAssignment($as){
 		//user table
-		return	$this->db->execute ( "insert into assignment ( a_title,  a_desc,a_sdate,a_edate, c_id, cs_id,a_hasphoto,a_hasaudio)
-		values ('{$assignment['a_title']}','" . $assignment ['a_desc'] . "','{$assignment['a_sdate']}','{$assignment['a_edate']}','{$assignment['c_id']}','{$assignment['cs_id']}','{$assignment['a_hasphoto']}','{$assignment['a_hasaudio']}')" );
+		return	$this->db->execute ( "insert into assignment ( a_title,  a_desc,a_sdate,a_edate, c_id, cs_id,a_hasphoto,a_hasaudio,re_id)
+		values ('{$as['a_title']}','" . $as ['a_desc'] . "','{$as['a_sdate']}','{$as['a_edate']}','{$as['c_id']}','{$as['cs_id']}','{$as['a_hasphoto']}','{$as['a_hasaudio']}','{$as['re_id']}')" );
 
 	}
 	function deleteAssignment($a_id){

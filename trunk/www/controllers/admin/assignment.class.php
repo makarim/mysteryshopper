@@ -61,7 +61,12 @@ class assignment{
     	include_once("CorporationModel.class.php");
 		$corpmod = new CorporationModel();
 		$corps  = $corpmod->getAllCorps();
+		
+		include_once("ReportModel.class.php");
+    	$reportModel = new ReportModel();
+    	$reports = $reportModel->getAllReports();
 		$this->tpl->assign('corps',$corps);
+		$this->tpl->assign('reports',$reports);
 	}
     function op_save(){
     	$msg = '';
@@ -74,6 +79,7 @@ class assignment{
 		$_POST ['a_edate'] = trim ( $_POST ['a_edate'] );
 		$_POST ['c_id'] = intval( $_POST ['c_id'] );
 		$_POST ['cs_id'] = intval ( $_POST ['cs_id'] );
+		$_POST ['re_id'] = intval ( $_POST ['re_id'] );
 		$_POST ['a_desc'] = strip_tags( $_POST ['a_desc'] );
 		$_POST ['a_hasphoto'] = !isset ( $_POST ['a_hasphoto'] )?0:1;
 		$_POST ['a_hasaudio'] = !isset ( $_POST ['a_hasaudio'] )?0:1;
@@ -92,6 +98,7 @@ class assignment{
 		$assignment['a_edate'] =  $_POST ['a_edate'] ;
 		$assignment['c_id'] =  $_POST ['c_id'] ;
 		$assignment['cs_id'] =  $_POST ['cs_id'] ;
+		$assignment['re_id'] =  $_POST ['re_id'] ;
 		$assignment['a_desc'] =  $_POST ['a_desc'] ;
 		$assignment['a_hasphoto'] =  $_POST ['a_hasphoto'] ;
 		$assignment['a_hasaudio'] =  $_POST ['a_hasaudio'] ;
@@ -143,16 +150,27 @@ class assignment{
     function view_edit(){
   
     	$a_id = $_GET['a_id'];
-    	include_once("AssignmentModel.class.php");
+ 
     	include_once("CorporationModel.class.php");
-    	$assignment = new AssignmentModel();
     	$corp = new CorporationModel();
-    	$info = $assignment->getAssignmentById($a_id);
-    	$store = $corp->getStoreById($info['cs_id']);
     	$corps  = $corp->getAllCorps();
-		$this->tpl->assign('corps',$corps);
+    	
+    	
+    	include_once("AssignmentModel.class.php");
+    	$assignment = new AssignmentModel();
+    	$info = $assignment->getAssignmentById($a_id);
+		
+    	$store = $corp->getStoreById($info['cs_id']);
     	$info['cs_abbr'] = $store['cs_abbr'];
     	$info['cs_name'] = $store['cs_name'];
+    	
+    	
+    	include_once("ReportModel.class.php");
+    	$reportModel = new ReportModel();
+    	$reports = $reportModel->getAllReports();
+
+		$this->tpl->assign('corps',$corps);
+		$this->tpl->assign('reports',$reports);
     	$this->tpl->assign('info',$info);
     }
     function op_update(){
@@ -173,6 +191,7 @@ class assignment{
 		$updates['a_edate'] =empty($_POST ['a_edate'])?"":trim($_POST ['a_edate']);
 		$updates['c_id'] =empty($_POST ['c_id'])?"":intval($_POST ['c_id']);
 		$updates['cs_id'] =empty($_POST ['cs_id'])?"":intval($_POST ['cs_id']);
+		$updates['re_id'] =empty($_POST ['re_id'])?"":intval($_POST ['re_id']);
 		$updates['a_hasphoto'] =!isset($_POST ['a_hasphoto'])?"0":intval($_POST ['a_hasphoto']);
 		$updates['a_hasaudio'] =!isset($_POST ['a_hasaudio'])?"":intval($_POST ['a_hasaudio']);
 		

@@ -128,8 +128,9 @@ function viewUser(report,report_id){
 									<td align="left"><select name="q_type">
 									<option value="">--</option>
 							<option value="1"><?php echo lang('yesorno')?></option>
-							<option value="2"><?php echo lang('score')?></option>
+							<option value="2"><?php echo lang('vote')?></option>
 							<option value="3"><?php echo lang('fillblank')?></option>
+							<option value="4"><?php echo lang('score')?></option>
 							</select></td>
 									<td rowspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
 								</tr>
@@ -168,8 +169,11 @@ function viewUser(report,report_id){
 							<td><strong><?php echo $v['q_question'];?></strong></td>
 							<td><?php echo $v['g_name'];?></td>
 							<td><?php if($v['q_type']==1) echo lang('yesorno');
-							if($v['q_type']==2) echo lang('score');
-							if($v['q_type']==3) echo lang('fillblank');?></td>
+							if($v['q_type']==2) echo lang('vote');
+							if($v['q_type']==3) echo lang('fillblank');
+							if($v['q_type']==4) echo lang('score');
+							?>
+							</td>
 
 							<td><a href="/admin.php/report/editques/q_id/<?php echo $v['q_id']?>"><?php echo lang('edit')?></a></td>
 						</tr>

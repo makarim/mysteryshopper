@@ -161,6 +161,48 @@ class report{
 		$this->tpl->assign("groups",$arr);
 	}
 	
+	function view_preview(){
+		$re_id = $_GET['re_id'];
+		$a_id =isset($_GET['a_id'])?$_GET['a_id']:0;
+		
+		include_once("ReportModel.class.php");
+		$ReportModel = new ReportModel();
+		$report_questions  = $ReportModel->getQuestionsByReId($re_id);
+		if($report_questions){
+			foreach ($report_questions as $k=>$v){
+				$v['answer'] = $ReportModel->getAnswerByAid($a_id,$v['rq_id'],$v['rq_type']);
+				$report_questions[$k] = $v;
+			}
+			
+		}
+		$this->tpl->assign("a_id",$a_id);
+		$this->tpl->assign("report_questions",$report_questions);
+	}
+	function op_saveanswer(){
+		include_once("ReportModel.class.php");
+		$reportModel = new ReportModel();
+		$user = authenticate();	
+		$u_id= $user['user_id'];
+		$a_id= $_POST['a_id'];
+		$r = true;
+		if($_POST){
+			foreach ($_POST as $k=>$v){
+				if(substr($k,0,7)=='rq_ans_'){
+					list(,,$rq_type,$rq_id) = split("_",$k);
+					$r *=$reportModel->saveAnswer($rq_id,$u_id,$a_id,$rq_type,addslashes($v));
+				}
+			}
+		}
+		
+		if($r){
+			show_message_goback(lang('success'));
+			//redirect($GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/assignment/defaults");
+		}else{
+			show_message_goback(lang('failed'));
+		
+		}
+	} 
+	
 	function op_savereport(){
 		
 		$arr['re_title'] = $_POST['re_title'];
@@ -171,7 +213,7 @@ class report{
 		$reportModel = new ReportModel();
 		$arr['q_id'] = $_POST['toBox'];
 		$r = $reportModel->addNewReport($arr);
-		
+
 		if($r){
 			show_message(lang('success'));
 			redirect($GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/report/defaults");
@@ -189,7 +231,7 @@ class report{
 		}
 		include_once("ReportModel.class.php");
 		$reportModel = new ReportModel();
-		$arr['q_id'] = $_POST['toBox'];
+		$arr['q_id'] = isset($_POST['toBox'])?$_POST['toBox']:array(0);
 		$r = $reportModel->updateReport($arr);
 
 		if($r){
@@ -206,7 +248,7 @@ class report{
     		include_once("ReportModel.class.php");
     		$reportModel = new ReportModel();
     		foreach ($_POST['delete'] as $u){
-    			$t *= $reportModel->deleteClient($u);
+    			$t *= $reportModel->deleteReport($u);
     		}
     		if($t) show_message_goback(lang('success'));
     	}

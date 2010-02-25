@@ -96,7 +96,16 @@ function getStore(c_id){
 							<td><select id="store_container" name="cs_id">
 							<option value="">--</option>
 							</select></td>
-							</tr>	
+						</tr>
+						<tr>
+							<td><?php echo lang('report')?>:</td>
+							<td><select id="report" name="re_id">
+							<option value="">--</option>
+							<?php foreach ($reports as $v){?>
+							<option value="<?php echo $v['re_id'];?>"><?php echo $v['re_title'];?></option>
+							<?php } ?>
+							</select></td>
+						</tr>	
 						<tr>
 							<td><?php echo lang('a_hasphoto')?>:</td>
 							<td><input type="checkbox" name="a_hasphoto" value="1" /></td>

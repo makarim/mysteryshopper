@@ -53,7 +53,7 @@ class ReportModel extends Model {
 		return $this->db->getAll("select q_id,q_question,q_group,q_type from question order by q_group desc");
 	}
     function getQuestionsByReId($re_id){
-    	return $this->db->getAll("select rq_id,rq_group,rq_type,rq_question,q_id from report_question where re_id='$re_id'");
+    	return $this->db->getAll("select rq_id,rq_group,rq_type,rq_question,q_id,ordernum from report_question where re_id='$re_id' order by ordernum");
     }
     function getReportByReId($re_id){
     	return $this->db->getRow("select * from report where re_id='$re_id'");
@@ -95,30 +95,24 @@ class ReportModel extends Model {
 		//user table
 		$rs=$this->db->execute ( "insert into report ( re_title,  re_date)
 		values ('{$report['re_title']}',NOW())" );
+		$re_id = $this->db->getOne("select last_insert_id() from report");
 		if($rs){
-			$re_id = $this->db->getOne("select last_insert_id() from report");
-			foreach ($report['q_id'] as $q_id){
+			
+			foreach ($report['q_id'] as $k=>$q_id){
+				
 				$question = $this->getQuestionById($q_id);
-				$this->db->execute("insert into report_question (re_id,rq_group,rq_type,rq_question,q_id)
-				 values ('{$re_id}','{$question['q_group']}','{$question['q_type']}','{$question['q_question']}','{$q_id}')");
+				$this->db->execute("insert into report_question (re_id,rq_group,rq_type,rq_question,q_id,ordernum)
+				 values ('{$re_id}','{$question['q_group']}','{$question['q_type']}','{$question['q_question']}','{$q_id}','{$k}')");
 			}
 			return true;
+		}else{
+			$rs=$this->db->execute ( "delete from report where re_id = $re_id" );
 		}
 		return false;
 	}
 	function updateReport($report){
 		$rs=$this->db->execute ( "update report set re_title='{$report['re_title']}' where re_id='{$report['re_id']}'" );
 		if($rs){
-			//增加问题
-			foreach ($report['q_id'] as $q_id){
-				$rs = $this->db->getOne("select count(*) from report_question where re_id='{$report['re_id']}' and q_id='$q_id'");
-				if($rs==0){
-					$question = $this->getQuestionById($q_id);
-					$this->db->execute("insert into report_question (re_id,rq_group,rq_type,rq_question,q_id)
-				 values ('{$report['re_id']}','{$question['q_group']}','{$question['q_type']}','{$question['q_question']}','{$q_id}')");
-				}
-			}
-			
 			//删除掉问卷的题目和答案
 			$to_delete = $this->db->getAll("select rq_id from report_question where q_id not in (".join(',',$report['q_id']).") and re_id='{$report['re_id']}'");
 			//print_r($to_delete);die;
@@ -130,20 +124,65 @@ class ReportModel extends Model {
 				}
 			}
 			
-			
+			//增加问题
+			foreach ($report['q_id'] as $k=>$q_id){
+				$rss = $this->db->getOne("select count(*) from report_question where re_id='{$report['re_id']}' and q_id='$q_id'");
+				if($rss==0){
+					$question = $this->getQuestionById($q_id);
+					if($question) $this->db->execute("insert into report_question (re_id,rq_group,rq_type,rq_question,q_id,ordernum)
+				 values ('{$report['re_id']}','{$question['q_group']}','{$question['q_type']}','{$question['q_question']}','{$q_id}','$k')");
+				}else{
+					$this->db->execute("update report_question set ordernum='$k' where re_id='{$report['re_id']}' and q_id='$q_id'");
+				}
+			}
+				
 			
 			return true;
 		}
 		return false;
 	}
 	
-	
-	function deleteReport($a_id){
-		return $this->db->execute("delete from report where a_id='{$a_id}'");
+	function saveAnswer($rq_id,$u_id,$a_id,$rq_type,$answer){
+		$ans_id = $this->db->getOne("select ans_id from answer where rq_id='$rq_id' and a_id='$a_id'");
+		if(!$ans_id){
+			$rs =$this->db->execute("insert into answer (rq_id, u_id,a_id, rq_type, ans_answer$rq_type) values ('$rq_id','$u_id','$a_id','$rq_type','{$answer}')");
+		}else{
+			$rs = $this->db->execute("update answer set ans_answer$rq_type='$answer' where ans_id=$ans_id");
+		}
+		if($rs){
+			$this->db->execute("update assignment set a_finish=1 , a_fdate=NOW() where a_id=$a_id");
+			return true;
+		}else{
+			return false;
+		}
+		
 	}
-	function getReportById($a_id){
-		return $this->db->getRow("select * from report where a_id='$a_id'");
+	function getAnswerByAid($a_id,$rq_id,$rq_type){
+		return $this->db->getOne("select ans_answer$rq_type from answer where a_id='$a_id' and rq_id='$rq_id'");
+	}
+	
+	
+	function deleteReport($re_id){
+		$rs = $this->db->execute("delete from report where re_id='{$re_id}'");
+		if($rs) {
+			$report_question = $this->db->getAll("select rq_id from report_question where re_id='{$re_id}'");
+			if($report_question && is_array($report_question)){
+				foreach ($report_question as $rq){
+					$rs1 = $this->db->execute("delete from report_question where rq_id='{$rq['rq_id']}'");
+					if($rs1) $this->db->execute("delete from answer where rq_id='{$rq['rq_id']}'");
+				}
+			}
+		}else{
+			return false;
+		}
+		return true;
+	}
+	function getReportById($re_id){
+		return $this->db->getRow("select * from report where re_id='$re_id'");
 	}
 
+	function getAllReports(){
+		return $this->db->getAll("select re_id,re_title from report");
+	}
 }
 ?>

@@ -19,19 +19,6 @@ function checkOnSubmit(formName) {
             obj.options[no].selected = true; 
     } 
 
-//	mini.ajax.post(url, function(r){
-//
-//		var r = eval('(' + r + ')');   
-//
-//		if(r.s==200){
-//			window.location.href = r.d;
-//		}
-//		if(r.s==400){
-//			$('msg').innerHTML = r.m;			
-//		}
-//	}, params);
-//	
-//	return false;
        
 }
 </script>
@@ -61,9 +48,9 @@ function checkOnSubmit(formName) {
 							
 						<table border="0" width="400">
  <tr>
-  <td><CENTER>可选择排序方式</CENTER></td>
+  <td><CENTER>所有问题</CENTER></td>
   <td> </td>
-  <td><CENTER>已选择排序方式</CENTER></td>
+  <td><CENTER>已选择的问题</CENTER></td>
  </tr>
     <tr>
       <td width="40%">
@@ -94,7 +81,11 @@ function checkOnSubmit(formName) {
   <INPUT TYPE="button" value="上移" onclick="moveUp(document.getElementById('toBox[]'));">
   <INPUT TYPE="button" value="下移" onclick="moveDown(document.getElementById('toBox[]'));">
   <INPUT TYPE="button" value="置底" onclick="moveBottom(document.getElementById('toBox[]'));">
-  </CENTER></td>
+  
+  <br>
+  <font color="Red">*注意：删除掉已经选择的问题，将会连同该问题的所有调查记录一起删掉！！</font>
+  </CENTER>
+  </td>
  </tr>
   </table>	
 
