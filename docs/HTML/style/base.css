@@ -130,6 +130,7 @@ li {
 	line-height:39px;
 	padding:0 10px;
 	font-size:14px;
+	text-align:center;
 }
 .announcementmore {
 	background:url(../images/bg_gonggao_more.gif) repeat-x;
@@ -209,11 +210,11 @@ li {
 
 .table2LeftBorder {
 	background:url(../images/table2_leftborder.gif) repeat-y;
-	width:5px;
+	width:15px;
 }
 .table2RightBorder {
 	background:url(../images/table2_rightborder.gif) repeat-y right;
-	width:5px;
+	width:15px;
 }
 .table2BottomLeft {
 	background:url(../images/table2_bottomleft.gif) no-repeat;
@@ -236,6 +237,55 @@ li {
 }
 .hangju {
 	margin:5px 0;
+}
+
+/*后台任务部分*/
+.mission {
+	float:left;
+	padding:10px 20px 10px 30px;
+}
+.mission .logo {
+	width:96px;
+	height:96px;
+	line-height:96px;
+	background:url(../images/bg_clentlogo.gif) no-repeat;
+	display:table-cell;
+	text-align:center;
+	vertical-align:middle;
+}
+.mission .des {
+	padding:10px 0;
+	color:#999;
+}
+
+/*后台推荐评论*/
+.comments {
+	margin:10px 0;
+	float:left;
+	display:block;
+}
+.comments .userFace {
+	float:left;
+	width:41px;
+	height:41px;
+	padding-right:10px;
+}
+.comments .cText {
+	color:#999;
+}
+
+/*我的日历*/
+.calendar {
+	background-color:#999;
+}
+.calendar td {
+	background-color:#FFF;
+	padding:5px;
+}
+.calendar .title {
+	background-color:#666;
+	color:#FFF;
+	text-align:center;
 }
 
     #tabsD {
