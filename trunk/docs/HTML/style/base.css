@@ -9,6 +9,7 @@ body {
 	padding:0;
 	margin:0;
 	font-size:12px;
+	font-family:Arial, Helvetica, sans-serif, 宋体;
 }
 
 .indexbody {
@@ -280,14 +281,39 @@ li {
 }
 .calendar td {
 	background-color:#FFF;
-	padding:5px;
 }
 .calendar .title {
 	background-color:#666;
 	color:#FFF;
 	text-align:center;
+	padding:5px;
 }
-
+.calendar .chart {
+	height:60px;
+	width:104px;
+}
+.chartHeight {
+	height:20px;
+}
+.color1 {
+	background:#FF0000;
+}
+.color2 {
+	background:#FFCC00;
+}
+.color3 {
+	background:#09F;
+}
+.date {
+	float:left;
+	color:#999;
+	font-size:20px;
+	font-weight:bold;
+	height:60px;
+	width:104px;
+	line-height:60px;
+	text-align:center;
+}
     #tabsD {
       float:left;
       width:520px;
