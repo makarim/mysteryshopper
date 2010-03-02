@@ -45,6 +45,21 @@ li {
 	padding:22px 0 0 0;
 	margin:0 0 0 20px;
 }
+
+#tel {
+	background:url(../images/tel.gif) no-repeat;
+	width:299px;
+	height:48px;
+	float:right;
+	margin:50px 38px 0 0;
+}
+#tel2 {
+	background:url(../images/tel2.gif) no-repeat;
+	width:299px;
+	height:48px;
+	float:right;
+	margin:50px 38px 0 0;
+}
 /*右上角登录*/
 #login {
 	float:right;
@@ -314,6 +329,30 @@ li {
 	line-height:60px;
 	text-align:center;
 }
+
+.tabsA {
+      float:left;
+      width:100%;
+      background:#FFF;
+      font-size:14px;
+      line-height:normal;
+	  border-bottom:2px solid #C00;
+}
+.tabsA .left {
+      background:url("../images/tableft.gif") no-repeat left -29px;
+      padding:0 0 0 4px;
+}
+.tabsA .right {
+      background:url("../images/tabright.gif") no-repeat 100% -29px;
+      padding:5px 15px 4px 6px;
+	  margin-right:8px;
+      display:block;
+	  color:#FFF;
+}
+.tabsA .des {
+	font-size:12px;
+	margin:7px 0 0 10px;
+}
     #tabsD {
       float:left;
       width:520px;
@@ -358,6 +397,36 @@ li {
       background-position:100% -29px;
       }
 
+/*注册步骤*/
+.regStep {
+	background:url(../images/regstep.gif) no-repeat left top;
+	height:24px;
+	width:377px;
+	margin:50px auto;
+}
+.regStep2 {
+	background-position:0% -24px;
+}
+.regStep3 {
+	background-position:0% -48px;
+}
+
+.regInfo {
+	width:100%;
+	line-height:1.5em;
+}
+.regInfo .text {
+	font-size:14px;
+	text-align:right;
+	padding:10px;
+}
+.regInfo .input {
+	border:#C1C1C1 solid 1px;
+	font-size:14px;
+	width:240px;
+	height:25px;
+	line-height:25px;
+}
 
 #copyright {
 	clear:both;
