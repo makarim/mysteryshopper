@@ -443,6 +443,13 @@ float:left;
 	line-height:25px;
 }
 
+/*帮助*/
+.helpTitle {
+	font-size:14px;
+	font-weight:bold;
+	color:#990000;
+}
+
 #copyright {
 	clear:both;
 	width: 950px;
