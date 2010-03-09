@@ -84,7 +84,7 @@ li {
 	float:right;
 	text-align:right;
 	color:#999;
-	margin:32px 10px 0 0;
+	margin:33px 10px 0 0;
 	line-height:20px;
 }
 .clear {
@@ -112,10 +112,14 @@ li {
 .adminmenupanel .panel .title {
 	background:#E7E7E7 url(../images/bg_panel.gif) repeat-x;
 	font-size:14px;
-	line-height:28px;
 	height:28px;
+	line-height:28px;
 	padding:0 5px;
 	border-bottom:#BEBEBE solid 1px;
+}
+.adminmenupanel .panel .title span {
+	background:url(../images/dot_down.gif) no-repeat 0 5px;
+	padding-left:15px;
 }
 
 .adminmenupanel .content {
@@ -302,6 +306,20 @@ li {
 	color:#999;
 }
 
+/*历史任务*/
+.historyMission {
+	background-color:#999;
+}
+.historyMission td{
+	background-color:#FFF;
+	padding:8px;
+}
+.historyMission .title{
+	background-color:#666;
+	color:#FFF;
+	text-align:center;
+}
+
 /*我的日历*/
 .calendar {
 	background-color:#999;
@@ -441,6 +459,13 @@ float:left;
 	width:240px;
 	height:25px;
 	line-height:25px;
+}
+/*分页*/
+.pages {
+	clear:both;
+	text-align:right;
+	border-top:#CCC solid 1px;
+	padding:8px 0;
 }
 
 /*帮助*/
