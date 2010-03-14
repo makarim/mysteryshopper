@@ -1,5 +1,48 @@
 
 <?php include_once("header.html")?>
+
+
+<div id="wrap">  <br />
+  <div class="tabsA">
+    	<div class="left">
+        	<div class="right">用户登录</div>
+    </div>
+      <div class="des">还不是注册用户？请点击<a href="<?php echo $www_site_url?>/index.php/passport/reg">这里</a>免费注册！</div>
+  </div>
+  <div class="regInfo">
+  <div id="msg"></div>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+<FORM name="loginform" id="loginform" method="POST" onsubmit="return checkOnSubmit('loginform', rules);" >
+<input type="hidden" name="action" value="passport">
+<input type="hidden" name="op" value="dologin">
+<input type="hidden" name="forward" value="<?php echo $forward?>">
+<input type="hidden" name="s" id="s" value="">
+<TABLE  width="100%" border="0" cellspacing="0" cellpadding="0">
+
+<TR><TD width="40%" class="text"><?php echo lang('user')?>:</TD>
+<TD width="60%"><div id="errorsDiv_user"></div><INPUT class="textfield" type="text" name="user" value="<?php echo lang('emailorusername')?>" onfocus="this.value='';"/>&nbsp;&nbsp;</TD></TR>
+<TR><TD class="text"><?php echo lang('pwd')?>:</TD>
+<TD><div id="errorsDiv_password"></div><INPUT class="textfield" type="password" name="password" />&nbsp;&nbsp;</TD></TR>
+<?php if($show_code>3){?>
+<TR><TD></TD><TD></TD></TR>
+<TR><TD><?php echo lang('validatecode')?>:</TD>
+<TD><div id="errorsDiv_code"></div><INPUT class="textfield" type="text" name="code" style="width:60px" /><img id="codeimg" src="<?php echo $www_site_url?>/index.php/identifycode/generate" align="absmiddle" title="<?php echo lang('anotherone')?>" onClick="changeCode();" style="cursor:pointer"> <span onClick="changeCode();" style="cursor:pointer"><?php echo lang('notclear')?></span></TD></TR>
+<?php }?>
+<TR><TD>&nbsp;</TD><TD><INPUT  class="checkbox" type="checkbox" name="remember" value="1"/> <?php echo lang('autologin')?>&nbsp;&nbsp;<span id="errorsDiv_remember"></span></TD></TR>
+<tr>
+        <td class="text">&nbsp;</td>
+        <td><a href="<?php echo $www_site_url?>/index.php/passport/forget">忘记密码了？</a></td>
+
+</tr>
+
+<TR> <td class="text">&nbsp;</td>
+<TD ><INPUT type="image" src="<?php echo $www_site_url?>/public/images/btn_login2.gif" value="<?php echo lang('signon')?>" /> 
+</TD><TD></TD></TR>
+</TABLE>
+</form>
+
 <SCRIPT>
 //only for test purposes
 var _key = "<?php echo $_XppassSignKey?>";
@@ -44,49 +87,13 @@ rules[2]='code|required|<?php echo lang('coderule')?>';
 
 yav.addHelp('user', '');
 yav.addHelp('password', '');
-window.onload=yav.init('loginform', rules);
+window.onload = function()
+                {
+                	yav.init('loginform', rules);
+                          // Not coming here at all on first shot   
+                }
 
 </SCRIPT>
-
-<div id="wrap">  <br />
-  <div class="tabsA">
-    	<div class="left">
-        	<div class="right">用户登录</div>
-    </div>
-      <div class="des">还不是注册用户？请点击<a href="<?php echo $www_site_url?>/index.php/passport/reg">这里</a>免费注册！</div>
-  </div>
-  <div class="regInfo">
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-<FORM name="loginform" id="loginform" method="POST" onsubmit="return checkOnSubmit('loginform', rules);" >
-<input type="hidden" name="action" value="passport">
-<input type="hidden" name="op" value="dologin">
-<input type="hidden" name="forward" value="<?php echo $forward?>">
-<input type="hidden" name="s" id="s" value="">
-<TABLE  width="100%" border="0" cellspacing="0" cellpadding="0">
-
-<TR><TD width="40%" class="text"><?php echo lang('user')?>:</TD>
-<TD width="60%"><div id="errorsDiv_user"></div><INPUT class="textfield" type="text" name="user" value="<?php echo lang('emailorusername')?>" onfocus="this.value='';"/>&nbsp;&nbsp;</TD></TR>
-<TR><TD class="text"><?php echo lang('pwd')?>:</TD>
-<TD><div id="errorsDiv_password"></div><INPUT class="textfield" type="password" name="password" />&nbsp;&nbsp;</TD></TR>
-<?php if($show_code>3){?>
-<TR><TD></TD><TD></TD></TR>
-<TR><TD><?php echo lang('validatecode')?>:</TD>
-<TD><div id="errorsDiv_code"></div><INPUT class="textfield" type="text" name="code" style="width:60px" /><img id="codeimg" src="<?php echo $www_site_url?>/index.php/identifycode/generate" align="absmiddle" title="<?php echo lang('anotherone')?>" onClick="changeCode();" style="cursor:pointer"> <span onClick="changeCode();" style="cursor:pointer"><?php echo lang('notclear')?></span></TD></TR>
-<?php }?>
-<TR><TD>&nbsp;</TD><TD><INPUT  class="checkbox" type="checkbox" name="remember" value="1"/> <?php echo lang('autologin')?>&nbsp;&nbsp;<span id="errorsDiv_remember"></span></TD></TR>
-<tr>
-        <td class="text">&nbsp;</td>
-        <td><a href="<?php echo $www_site_url?>/index.php/passport/forget">忘记密码了？</a></td>
-
-</tr>
-
-<TR> <td class="text">&nbsp;</td>
-<TD ><INPUT type="image" src="<?php echo $www_site_url?>/public/images/btn_login2.gif" value="<?php echo lang('signon')?>" /> 
-</TD><TD></TD></TR>
-</TABLE>
-</form>
 <p>&nbsp;</p>
   </div>
 </div>
