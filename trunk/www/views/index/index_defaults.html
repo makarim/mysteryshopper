@@ -1,56 +1,6 @@
 
 <?php include_once("header.html")?>
-<script src="<?php echo $www_site_url?>/public/js/yav2.0/yav.js"></script>
-<script src="<?php echo $www_site_url?>/public/js/yav2.0/yav-config-<?php echo $selected_lang?>.js"></script>
-<script src="<?php echo $www_site_url?>/public/js/md5.js"></script>
-<script src="<?php echo $www_site_url?>/public/js/ajax.js"></script>
-<SCRIPT>
-//only for test purposes
-var _key = "<?php echo $_XppassSignKey?>";
-function checkOnSubmit(formName, r) {
-  
-    if (yav.performCheck(formName, r, 'inline')) {
-    	document.getElementById(formName).password.value = hex_md5(document.getElementById(formName).password.value);
-    	document.getElementById(formName).s.value = hex_hmac_md5(_key,document.getElementById(formName).password.value);
-    	
-		var url = "<?php echo $www_site_url?>/index.php";
-		var params = mini.form.serialize($(formName));
-		mini.ajax.post(url, function(r){
-			var r = eval('(' + r + ')');   
-			if(r.s==200){
-				window.location.replace(r.d);
-			}
-			if(r.s==400){
-				if(r.m=='reload') window.location.reload();
-				else $('msg').innerHTML = r.m;			
-			}
-		}, params);
-    	
-    	return false;
-    } 
-    return false;
-}
-function changeCode() {
-	var num = 	new Date().getTime();
-	var rand = Math.round(Math.random() * 10000);
-	num = num + rand;
-	document.getElementById("codeimg").src = "<?php echo $www_site_url?>/index.php/identifycode/generate/" + num;
-	return false;
-}
-var rules=new Array();
 
-rules[0]='user|required|<?php echo lang('helpmsg1')?>';
-rules[1]='password|required|<?php echo lang('helpmsg2')?>';
-<?php if($show_code){?>
-rules[2]='code|required|<?php echo lang('coderule')?>';
-<?php }?>
-
-
-yav.addHelp('user', '');
-yav.addHelp('password', '');
-window.onload=yav.init('loginform', rules);
-
-</SCRIPT>
 <div id="wrap">
 	<div class="bigpic">
     	<div><img src="<?php echo $www_site_url?>/public/images/tmp_01_16.jpg" width="950" height="245" /></div>
@@ -97,6 +47,7 @@ window.onload=yav.init('loginform', rules);
   <tr>
     <td style="border-left:#BEBEBE solid 1px;">&nbsp;</td>
     <td style="padding:10px;">
+    <div id="msg"></div>
     <FORM name="loginform" id="loginform" method="POST" onsubmit="return checkOnSubmit('loginform', rules);" >
 <input type="hidden" name="action" value="passport">
 <input type="hidden" name="op" value="dologin">
@@ -125,4 +76,58 @@ window.onload=yav.init('loginform', rules);
         </div>
 
 </div>
+
+
+<SCRIPT>
+//only for test purposes
+var _key = "<?php echo $_XppassSignKey?>";
+function checkOnSubmit(formName, r) {
+  
+    if (yav.performCheck(formName, r, 'inline')) {
+    	document.getElementById(formName).password.value = hex_md5(document.getElementById(formName).password.value);
+    	document.getElementById(formName).s.value = hex_hmac_md5(_key,document.getElementById(formName).password.value);
+    	
+		var url = "<?php echo $www_site_url?>/index.php";
+		var params = mini.form.serialize($(formName));
+		mini.ajax.post(url, function(r){
+			var r = eval('(' + r + ')');   
+			if(r.s==200){
+				window.location.replace(r.d);
+			}
+			if(r.s==400){
+				if(r.m=='reload') window.location.reload();
+				else $('msg').innerHTML = r.m;			
+			}
+		}, params);
+    	
+    	return false;
+    } 
+    return false;
+}
+function changeCode() {
+	var num = 	new Date().getTime();
+	var rand = Math.round(Math.random() * 10000);
+	num = num + rand;
+	document.getElementById("codeimg").src = "<?php echo $www_site_url?>/index.php/identifycode/generate/" + num;
+	return false;
+}
+var rules=new Array();
+
+rules[0]='user|required|<?php echo lang('helpmsg1')?>';
+rules[1]='password|required|<?php echo lang('helpmsg2')?>';
+<?php if($show_code){?>
+rules[2]='code|required|<?php echo lang('coderule')?>';
+<?php }?>
+
+
+yav.addHelp('user', '');
+yav.addHelp('password', '');
+window.onload = function()
+                {
+                	yav.init('loginform', rules);
+                          // Not coming here at all on first shot   
+                }
+
+
+</SCRIPT>
 <?php include_once("footer.html")?>
