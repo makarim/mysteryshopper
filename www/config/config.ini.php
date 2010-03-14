@@ -73,7 +73,7 @@
 	$GLOBALS ["gPageCache"] ["index"] ["cachedir"]=  APP_TEMP_DIR;
 	$GLOBALS ["gPageCache"] ["index"] ["cachetime"]=  60;
 	$GLOBALS ["gPageCache"] ["index"] ["compressed"]=  1;
-	$GLOBALS ["gPageCache"] ["index"] ["action"]=  "index";
+	$GLOBALS ["gPageCache"] ["index"] ["action"]=  "";
 	$GLOBALS ["gPageCache"] ["index"] ["view"]=  "";
 	
 //////////////////////////////////////////////////////

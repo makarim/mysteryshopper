@@ -3,15 +3,22 @@ class index{
 
     function view_defaults(){
 		global $tpl;	
-		header("Location: /index.php/passport/login");
 		$user = authenticate();	
 		$msg = '';	
+		$_SESSION['_XppassSignKey'] = uniqid();
 		if($user){
 			$msg = "Welcome ".$user['user_nickname']."";
+		}
+		$show_code = 0;
+		if(isset($_SESSION['pwd_error'])) {
+			$show_code = $_SESSION['pwd_error'];
 		}
 		$tpl->assign('user',$user);
 		$tpl->assign("name","It's a demo.");
 		$tpl->assign("msg",$msg);
+		$tpl->assign ( 'show_code', $show_code );
+		$tpl->assign ( '_XppassSignKey', $_SESSION['_XppassSignKey'] );
+		$tpl->assign("scr",'index.php');
     }
     function view_help(){
     	global $tpl;	

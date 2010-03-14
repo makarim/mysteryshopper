@@ -9,10 +9,15 @@ class chart{
 		$cs_id= !empty($_GET['cs_id'])?$_GET['cs_id']:'';
 		$a_sdate= !empty($_GET['a_sdate'])?$_GET['a_sdate']:'';
 		$a_edate= !empty($_GET['a_edate'])?$_GET['a_edate']:'';
+		$group = !empty($_GET['group'])?$_GET['group']:array();
+		$scoretype = !empty($_GET['scoretype'])?$_GET['scoretype']:'';
+		//die;
 		$con['c_id'] = $c_id;
 		$con['cs_id'] = $cs_id;
 		$con['a_sdate'] = $a_sdate;
 		$con['a_edate'] = $a_edate;
+		$con['scoretype'] = $scoretype;
+		$con['group'] = join(",",$group);
 		include_once("CorporationModel.class.php");
 		$corpmod = new CorporationModel();
 		$corps  = $corpmod->getAllCorps();
@@ -22,10 +27,13 @@ class chart{
 	}
 	function view_overalldata(){
 		$c_id = !empty($_GET['c_id'])?$_GET['c_id']:'';
+		$group = !empty($_GET['group'])?$_GET['group']:'';
+		$scoretype = !empty($_GET['scoretype'])?$_GET['scoretype']:'Summary';
+		
 		$xml = "<?xml version='1.0' encoding='UTF-8'?>
 <chart>";
 		if($c_id){
-			include_once("ChartModel.class.php");
+			include_once("ChartModel.class.php"); 
 			$ChartModel = new ChartModel();
 			
 			include_once("CorporationModel.class.php");	
@@ -36,22 +44,37 @@ class chart{
 				$xml .="<value xid='{$store['cs_id']}'>{$store['cs_name']}</value>\n";
 			}
 			$xml .="</series>\n<graphs>\n";
-			$xml .="<graph gid='0'>\n";
-			foreach ($stores as $k=>$store){
-				$score = $ChartModel->getSummaryScoreByCsId($store['cs_id'],1);
-				$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
+			if(strpos($group,'Service')!==false){	
+				$xml .="<graph gid='0'>\n";
+				foreach ($stores as $k=>$store){
+					if($scoretype=='Summary'){ 
+						$score = $ChartModel->getSummaryScoreByCsId($store['cs_id'],1);
+						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
+					}
+				}
+				$xml .="</graph>\n";
 			}
-			$xml .="</graph>\n<graph gid='1'>\n";			
-			foreach ($stores as $k=>$store){
-				$score = $ChartModel->getSummaryScoreByCsId($store['cs_id'],2);
-				$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
+			if(strpos($group,'Environment')!==false){	
+				$xml .="<graph gid='1'>\n";			
+				foreach ($stores as $k=>$store){
+					if($scoretype=='Summary'){ 
+						$score = $ChartModel->getSummaryScoreByCsId($store['cs_id'],2);
+						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
+					}
+				}
+				$xml .="</graph>\n";
 			}
-			$xml .="</graph>\n<graph gid='2'>\n";
-			foreach ($stores as $k=>$store){
-				$score = $ChartModel->getSummaryScoreByCsId($store['cs_id'],3);
-				$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
+			if(strpos($group,'Product')!==false){
+				$xml .="<graph gid='2'>\n";
+				foreach ($stores as $k=>$store){
+					if($scoretype=='Summary'){ 
+						$score = $ChartModel->getSummaryScoreByCsId($store['cs_id'],3);
+						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
+					}
+				}
+				$xml .="</graph>\n";
 			}
-			$xml .="</graph>\n</graphs>\n";
+			$xml.="</graphs>\n";
 			//echo $ChartModel->getScoreByCsId(1,2);
 		}
 

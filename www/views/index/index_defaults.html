@@ -1,20 +1,128 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><?php echo $web_title?></title>
-<LINK href="<?php echo $www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
 
-</head>
-<body>
 <?php include_once("header.html")?>
-<p>
-<?php echo $msg?>
-</p>
+<script src="<?php echo $www_site_url?>/public/js/yav2.0/yav.js"></script>
+<script src="<?php echo $www_site_url?>/public/js/yav2.0/yav-config-<?php echo $selected_lang?>.js"></script>
+<script src="<?php echo $www_site_url?>/public/js/md5.js"></script>
+<script src="<?php echo $www_site_url?>/public/js/ajax.js"></script>
+<SCRIPT>
+//only for test purposes
+var _key = "<?php echo $_XppassSignKey?>";
+function checkOnSubmit(formName, r) {
+  
+    if (yav.performCheck(formName, r, 'inline')) {
+    	document.getElementById(formName).password.value = hex_md5(document.getElementById(formName).password.value);
+    	document.getElementById(formName).s.value = hex_hmac_md5(_key,document.getElementById(formName).password.value);
+    	
+		var url = "<?php echo $www_site_url?>/index.php";
+		var params = mini.form.serialize($(formName));
+		mini.ajax.post(url, function(r){
+			var r = eval('(' + r + ')');   
+			if(r.s==200){
+				window.location.replace(r.d);
+			}
+			if(r.s==400){
+				if(r.m=='reload') window.location.reload();
+				else $('msg').innerHTML = r.m;			
+			}
+		}, params);
+    	
+    	return false;
+    } 
+    return false;
+}
+function changeCode() {
+	var num = 	new Date().getTime();
+	var rand = Math.round(Math.random() * 10000);
+	num = num + rand;
+	document.getElementById("codeimg").src = "<?php echo $www_site_url?>/index.php/identifycode/generate/" + num;
+	return false;
+}
+var rules=new Array();
+
+rules[0]='user|required|<?php echo lang('helpmsg1')?>';
+rules[1]='password|required|<?php echo lang('helpmsg2')?>';
+<?php if($show_code){?>
+rules[2]='code|required|<?php echo lang('coderule')?>';
+<?php }?>
 
 
+yav.addHelp('user', '');
+yav.addHelp('password', '');
+window.onload=yav.init('loginform', rules);
 
-<div style="clear:both"></div>
+</SCRIPT>
+<div id="wrap">
+	<div class="bigpic">
+    	<div><img src="<?php echo $www_site_url?>/public/images/tmp_01_16.jpg" width="950" height="245" /></div>
+    </div>
+    
+    <div class="left" style="width:220px;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="4" class="tl4px"></td>
+    <td class="tableCenter"><div class="tableTitle">商户</div></td>
+    <td width="4" class="tr4px"></td>
+  </tr>
+  <tr>
+    <td style="border-left:#BEBEBE solid 1px;">&nbsp;</td>
+    <td style="padding:10px;">
+    	<li class="client"><a href="#">中文呢测试房间斯拉夫</a></li>
+    	<li class="client"><a href="#">发送方 烦死了的房间</a></li>
+    </td>
+    <td style="border-right:#BEBEBE solid 1px;">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="bl4px"></td>
+    <td class="bcenter"></td>
+    <td class="br4px"></td>
+  </tr>
+</table>
+</div>
+        <div class="left" style="padding:0 10px; width:516px;">
+<div id="tabsD"> 
+  <ul> 
+    <li><a href="#" title="关于我们"><span>关于我们</span></a></li> 
+    <li><a href="#" title="什么是神秘顾客"><span>什么是神秘顾客</span></a></li> 
+  </ul> 
+</div>
+<div class="clear indexabout">“学网”（www.studyget.com），中国教育第一门户网站。由上海完美信息技术有限公司和上海解放教育传媒有限公司倾力合作，共同打造。学网将借助于先进的经营理念和创新的发展模式，并依托解放日报报业集团的媒体资源，成为中国最好的教育服务提供商。 </div>
+</div>
+        <div class="right" style="width:190px;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="4" class="tl4px"></td>
+    <td class="tableCenter"><div class="tableTitle">用户登录</div></td>
+    <td width="4" class="tr4px"></td>
+  </tr>
+  <tr>
+    <td style="border-left:#BEBEBE solid 1px;">&nbsp;</td>
+    <td style="padding:10px;">
+    <FORM name="loginform" id="loginform" method="POST" onsubmit="return checkOnSubmit('loginform', rules);" >
+<input type="hidden" name="action" value="passport">
+<input type="hidden" name="op" value="dologin">
+<input type="hidden" name="forward" value="index.php">
+<input type="hidden" name="s" id="s" value="">
+    <div class="hangju">账户名</div>
+      <div class="hangju">
+      <div id="errorsDiv_user"></div>
+      <input name="user" type="text" class="logininput" id="textfield" />
+      </div>
+      <div class="hangju">登录密码</div>
+      <div class="hangju"><div id="errorsDiv_password"></div><input name="password" type="password" class="logininput" id="textfield2" />
+      </div>
+      <div class="hangju"><input name="imageField" type="image" id="imageField" src="<?php echo $www_site_url?>/public/images/btn_login.gif" alt="登录" />
+      <a href="<?php echo $www_site_url?>/index.php/passport/forget">忘记密码？ </a></div>
+      </form>
+     </td>
+    <td style="border-right:#BEBEBE solid 1px;">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="bl4px"></td>
+    <td class="bcenter"></td>
+    <td class="br4px"></td>
+  </tr>
+</table>
+        </div>
+
+</div>
 <?php include_once("footer.html")?>
-</body>
-</html>

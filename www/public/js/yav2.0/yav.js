@@ -1,2 +1,1463 @@
-eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('q 5={2i:1h,2r:1h,1F:1h,f:1h,2h:1h,2C:H 1r(),1U:H 1r(),1w:H 1r(),1v:H 1r(),1o:H 1r(),1n:H 1r(),V:H 1r(),U:v,3M:y(a,b,c,d){5.U=(d)?d:v;E(q j=0;j<5.V.w;j++){7(5.U==5.V[j].F){q e=1E(5.V[j].24);5.V[j].1q=e;7(!e){A e}Q}}5.2r=M;q f=5.2v(b);5.1F=5.2v(b);5.f=1y.1X[a];7(!5.f){5.1b(\'1c: 3F 1g 3E 4m 4i \'+a);A v}q g=H 1r();q h=0;7(f.w){E(q i=0;i<f.w;i++){q k=f[i];7(k!=v){5.I(5.W(5.f,k.x),u.2d)}}}r{7(f!=v){5.I(5.W(5.f,f.x),u.2d)}}7(f.w){E(q i=0;i<f.w;i++){q k=f[i];q l=v;7(k==v){}r 7(k.1k==\'17-1t\'||k.1k==\'1s-1t\'||k.1k==\'1S-1R\'){}r 7(k.B==\'2B\'){17=k.x;1s=k.D;q m=5.W(5.f,f[17].x).13;7(5.U!=v){7(f[17].x==5.U||f[1s].x==5.U){5.1P(f[17].x,f[1s].x)}}7(5.1p(5.f,f[17])==v&&5.1p(5.f,f[1s])!=v){l=5.23(k.G)+\'1O\'+f[1s].x}r 7(5.1p(5.f,f[17])!=v){5.W(5.f,f[17].x).13=m}}r 7(k.B==\'2w\'||k.B==\'2y\'){7(5.U!=v){7(k.D&&k.D.15(\'$\'+5.U)==0){5.1P(k.x,5.U)}}l=5.1p(5.f,k)}r{l=5.1p(5.f,k)}7(l!=v){7(5.U&&5.U!=v){7(k.B==\'2B\'){7(f[17].x==5.U||f[1s].x==5.U){5.1P(f[17].x,f[1s].x)}k=f[k.D]}7(k.B==\'32\'){q n=k.D.1m(\'-\');E(q t=0;t<n.w;t++){5.1P(f[n[t]].x)}7(f[k.x].x==5.U){5.1P(f[k.x].x)}k=f[k.x]}7(k.x==5.U||(k.D&&k.D.15(\'$\'+5.U)==0)){E(q z=0;z<f.w;z++){7(f[z].B==\'2B\'&&f[f[z].x].x==k.x){5.1P(f[f[z].D].x)}}g[h]=l;h++;Q}}r{g[h]=l;h++}}}}r{q o=f;T=5.1p(5.f,o);7(T!=v){7(5.U&&5.U!=v){7(o.x==5.U){g[0]=T}}r{g[0]=T}}}q p=5.3J(g,c);5.U=v;A p},4n:y(a,b,c){q d=v;d=(1M(a.1D))!=\'1h\'?a.1D:22.21.20;q e=5.2v(c);q f=K;7(e.w){E(q i=0;i<e.w;i++){q g=e[i];7(g.B==\'1Z\'&&g.x==b.F){f=5.2b(d,g.D);Q}}}r{q g=e;7(g.B==\'1Z\'&&g.x==b.F){f=5.2b(d,g.D)}}7(!f){7(1M(a.1D)==\'1h\'){22.21.20=0}r{a.2q();a.2p();a.2o=M}}A f},4e:y(a,b){5.1W(\'2R\',v,v,u.3v);5.1W(\'2O\',v,v,u.3u);5.1W(\'2S\',v,v,u.3r);5.1W(\'2X\',v,v,u.3o);5.1W(\'2N\',v,v,u.3m);5.2h=a;5.1U=b;7(b.w){E(q i=0;i<b.w;i++){q c=5.1T(b[i]);q d=5.W(1y.1X[a],c.x);7(d&&c.B==\'1v\'){5.1d(d,\'1Z\',5.2Y.3j(d))}r 7(d&&!5.2Z(5.2C,c.x)){q e=M;E(q j=0;j<5.1o.w;j++){7(d.F==5.1o[j].F){5.1d(d,5.1o[j].28,y(){7(5.1N(O.F)){5.2J(O.F)}r{E(q k=0;k<5.V.w;k++){7(O.F==5.V[k].F){7(5.V[k].1q==M){5.V[k].1q=v;A}5.V[k].1q=v;Q}}5.2m(O.F)}});e=K;Q}}7(!e){E(q j=0;j<5.1n.w;j++){7(d.F==5.1n[j].F){5.1d(d,5.1n[j].28,y(){7(!5.1N(O.F)){E(q k=0;k<5.V.w;k++){7(O.F==5.V[k].F){7(5.V[k].1q==M){5.V[k].1q=v;A}5.V[k].1q=v;Q}}5.2m(O.F)}});e=K;Q}}}5.2C.25(c.x);7(!e){5.1d(d,\'2I\',y(){5.1N(O.F)})}}}}r{q f=5.1T(b);q d=5.W(1y.1X[a],f.x);7(d&&f.B==\'1v\'){5.1d(d,\'1Z\',5.2Y.3j(d))}r 7(d){q e=M;E(q j=0;i<5.1o.w;j++){7(d.F==5.1o[i].F){5.1d(d,5.1o[j].28,y(){7(5.1N(O.F)){5.2J(O.F)}});e=K;Q}}E(q j=0;j<5.1n.w;j++){7(d.F==5.1n[j].F){5.1d(d,5.1n[j].28,y(){7(!5.1N(O.F)){E(q k=0;k<5.V.w;k++){7(O.F==5.V[k].F){7(5.V[k].1q==M){5.V[k].1q=v;A}5.V[k].1q=v;Q}}5.2m(O.F)}});e=K;Q}}7(!e){5.1d(d,\'2I\',y(){5.1N(O.F)})}}}7(5.1w.w>0){E(q i=0;i<5.1w.w;i++){q d=5.W(1y.1X[a],5.1w[i].F);7(d){7(d.2k){5.1d(d,\'2k\',y(){5.2H(O.F)})}r{5.1d(d,\'45\',y(){5.2H(O.F)})}7(!5.2Z(5.2C,5.1w[i].F)){5.1d(d,\'2I\',y(){5.43(O.F)})}}}}},59:y(a,b,c){q d=5.N(u.S+\'1a\'+a);7(d){d.1e=b;d.13=c;d.1l.1j=\'\'}r{d=5.N(u.S);7(d){d.1e=b;d.13=c;d.1l.1j=\'\'}r{2A(b)}}},43:y(a){5.N(u.S+\'1a\'+a).1e=\'\';5.N(u.S+\'1a\'+a).13=\'\';5.N(u.S+\'1a\'+a).1l.1j=\'1L\'},54:y(a,b){q c=H 2f();c.F=a;c.42=b;5.1w.25(c)},1W:y(a,b,c,d){q e=H 2f();e.F=a;e.1Q=b;e.40=c;e.3V=d?d:v;5.1v.25(e)},4V:y(a,b,c){q d=H 2f();d.F=a;d.28=b;d.24=c;5.1o.25(d)},4S:y(a,b,c){q d=H 2f();d.F=a;d.28=b;d.24=c;5.1n.25(d)},4Q:y(a,b){q c=H 2f();c.F=(b&&b!=v)?b:v;c.24=a;c.1q=v;5.V.25(c)},2Z:y(a,b){q c=M;E(q i=0;i<a.w;i++){7(a[i]==b){c=K;Q}}A c},1N:y(a){q b=5.N(u.S);7(b){b.1e=\'\';b.13=\'\';b.1l.1j=\'1L\'}A 5.3M(5.2h,5.1U,\'3W\',a)},2J:y(a){E(q j=0;j<5.1o.w;j++){7(a==5.1o[j].F){1E(5.1o[j].24);Q}}},2m:y(a){E(q j=0;j<5.1n.w;j++){7(a==5.1n[j].F){1E(5.1n[j].24);Q}}},2H:y(a){E(q i=0;i<5.1w.w;i++){7(5.1w[i].F==a){5.N(u.S+\'1a\'+a).1e=5.1w[i].42;5.N(u.S+\'1a\'+a).13=u.4J;5.N(u.S+\'1a\'+a).1l.1j=\'\';Q}}},2Y:y(a){q b=v;q c=v;E(q i=0;i<5.1U.w;i++){q d=5.1T(5.1U[i]);q e=5.W(1y.1X[5.2h],d.x);7(e&&d.B==\'1v\'&&e.F==O.F){E(q j=0;j<5.1v.w;j++){7(5.1v[j].F==d.D){b=5.1v[j];Q}}c=d;Q}}q f=(1M(a.1D))!=\'1h\'?a.1D:22.21.20;q g=4G.4F(f);q h=O.C+g;q k=h.w;7(f==8||f==0){A K}q l=M;7(b==v){7(5.2b(f,c.D)){l=K}r{7(1M(a.1D)==\'1h\'){22.21.20=0}r{a.2q();a.2p();a.2o=M}}A l}r 7(b.1Q==v){R=H X(b.3V);7(R.Z(g)){l=K}r{7(1M(a.1D)==\'1h\'){22.21.20=0}r{a.2q();a.2p();a.2o=M}}A l}r 7(5.2b(f,b.40)&&k<=b.1Q.w){7(b.1Q.3U(k-1)!=\' \'){h=O.C+b.1Q.3U(k-1)+g}O.C=h;l=K}7(1M(a.1D)==\'1h\'){22.21.20=0}r{a.2q();a.2p();a.2o=M}A l},3J:y(a,b){q c=v;5.3T();7(b==\'4s\'){c=5.3R(a)}r 7(b==\'4q\'){c=5.30(a)}r 7(b==\'3W\'){c=5.3P(a)}r 7(b==\'4p\'){c=5.3O(a)}r{5.1b(\'1c: 2A Y \'+b+\' 1g 1G\')}A c},3R:y(a){q b=\'\';7(a!=v&&a.w>0){7(5.1K(u.2u).w>0){b+=u.2u+\'\\n\\n\'}E(q i=0;i<a.w;i++){b+=\' \'+5.23(a[i])+\'\\n\'}7(5.1K(u.2t).w>0){b+=\'\\n\'+u.2t}2A(b);A M}r{A K}},30:y(a){7(a!=v&&a.w>0){q b=\'\';7(5.1K(u.2u).w>0){b+=u.2u}b+=\'<3N>\';E(q i=0;i<a.w;i++){b+=\'<3L>\'+5.23(a[i])+\'</3L>\'}b+=\'</3N>\';7(5.1K(u.2t).w>0){b+=u.2t}5.N(u.S).1e=b;5.N(u.S).13=u.3K;5.N(u.S).1l.1j=\'4o\';A M}r{5.N(u.S).1e=\'\';5.N(u.S).13=\'\';5.N(u.S).1l.1j=\'1L\';A K}},3P:y(a){7(a!=v&&a.w>0){q b=H 1r();q c=0;E(q i=0;i<a.w;i++){q d=a[i].1f(a[i].15(\'1O\')+10);7(5.N(u.S+\'1a\'+d)){5.N(u.S+\'1a\'+d).1e=5.23(a[i]);5.N(u.S+\'1a\'+d).13=u.3K;5.N(u.S+\'1a\'+d).1l.1j=\'\'}r{b[c]=a[i];c++}}7(c>0){5.30(b)}A M}r{A K}},3T:y(){q a=1y.3I("3H");E(q j=0;j<a.w;j++){q b=a[j].3G;7(b.15(u.S+\'1a\')==0){7(5.U!=v){7(b==u.S+\'1a\'+5.U){5.N(b).1e=\'\';5.N(b).13=\'\';5.N(b).1l.1j=\'1L\'}}r{5.N(b).1e=\'\';5.N(b).13=\'\';5.N(b).1l.1j=\'1L\'}}}},1P:y(){q a=1y.3I("3H");E(q j=0;j<a.w;j++){q b=a[j].3G;7(b.15(u.S+\'1a\')==0){E(q k=0;k<2e.w;k++){7(b==u.S+\'1a\'+2e[k]){5.N(b).1e=\'\';5.N(b).13=\'\';5.N(b).1l.1j=\'1L\'}}}}},3O:y(a){5.N(u.S).13=\'\';5.N(u.S).1l.1j=\'1L\';7(a!=v&&a.w>0){E(q i=0;i<a.w;i++){a[i]=5.23(a[i])}q b=\'\';b+=\'<2s>q 2V;</2s>\';5.N(u.S).1e=b;2V=a;A M}r{5.N(u.S).1e=\'<2s>q 2V;</2s>\';A K}},16:y(a,b,c,d,e){q f=2e.w>=4&&2e[0]!=v&&2e[1]!=v;7(!f){A M}19=a.1m(\':\');2c=\'\';7(19.w==2){2c=19[1];a=19[0]}O.x=a;O.2c=2c;O.B=b;O.D=c;O.1k=e;7(d==5.2i||d==v){O.G=5.3D(a,2c,b,c)+\'1O\'+O.x}r{O.G=d+\'1O\'+O.x}},1p:y(f,a){14=v;7(a!=v){7(a.B==\'3C\'){q b=v;7(a.D!=v){b=\' 14 = \'+a.D}r{b=\' 14 = \'+a.x}14=1E(b);7(a.D!=v&&14!=O.2i&&14!=v){14+=\'1O\'+a.x}7(14!=v&&a.D!=v){5.I(5.W(5.f,a.x),u.L)}}r 7(a.B==\'3B\'){q c=a.x;q d=a.D;7(5.1p(f,5.1F[c])!=v){14=a.G;7(a.1k==\'17-1t\'||a.1k==\'1S-1R\'){}}r{q e=d.1m(\'-\');E(q k=0;k<e.w;k++){7(5.1p(f,5.1F[e[k]])!=v){14=a.G;7(a.1k==\'17-1t\'||a.1k==\'1S-1R\'){}Q}}}}r 7(a.B==\'32\'){q c=a.x;q d=a.D;q g=M;7(5.1p(f,5.1F[c])==v){g=K}r{7(a.1k==\'17-1t\'||a.1k==\'1S-1R\'){}q e=d.1m(\'-\');E(q k=0;k<e.w;k++){7(5.1p(f,5.1F[e[k]])==v){g=K;Q}r{7(a.1k==\'17-1t\'||a.1k==\'1S-1R\'){}}}}7(g){5.I(5.W(f,5.1F[c].x),u.2d);q e=d.1m(\'-\');E(q k=0;k<e.w;k++){5.I(5.W(f,5.1F[e[k]].x),u.2d)}}r{14=a.G}}r{x=5.W(f,a.x);7(x==v){5.1b(\'1c: 3F 1g 3E 4l \'+a.x);A v}q h=v;7(x.Y){7(x.Y==\'4k\'||x.Y==\'4j\'||x.Y==\'4h\'||x.Y==\'4g\'){h=5.3A(x,a)}r 7(x.Y==\'4f\'){h=5.3z(x,a)}r 7(x.Y==\'3y-4d\'){h=5.3x(x,a)}r 7(x.Y==\'3y-4c\'){h=5.3w(x,a)}r 7(x.Y==\'2Q\'){h=5.2P(x,a)}r{5.1b(\'1c: Y \'+x.Y+\' 1g 1G\')}}r{h=5.2P(x,a)}14=h}}A 14},2P:y(a,b){q c=v;7(b.B==\'1V\'){q d=a;q e=M;7(2a(d.w)&&d.1x){e=K}r{E(q j=0;j<d.w;j++){7(d[j].1x){e=K;Q}}}7(!e){5.I(a,u.L);c=b.G}}r 7(b.B==\'1J\'){q d=a;q e=M;7(2a(d.w)&&d.1x){7(d.C==b.D){e=K}}r{E(q j=0;j<d.w;j++){7(d[j].1x){7(d[j].C==b.D){e=K;Q}}}}7(!e){c=b.G}}r 7(b.B==\'1I\'){q d=a;q e=M;7(2a(d.w)&&d.1x){7(d.C!=b.D){e=K}}r{E(q j=0;j<d.w;j++){7(d[j].1x){7(d[j].C!=b.D){e=K;Q}}}}7(!e){c=b.G}}r{5.1b(\'1c: 16 \'+b.B+\' 1g 1G E 2Q\')}A c},3A:y(a,b){T=v;7(u.4b){a.C=5.1K(a.C)}7(b.B==\'1V\'){7(a.C==v||a.C==\'\'){5.I(a,u.L);T=b.G}}r 7(b.B==\'1J\'){T=5.3t(a,b)}r 7(b.B==\'1I\'){T=5.3s(a,b)}r 7(b.B==\'3q\'){R=H X("^[0-9]*$");7(!R.Z(a.C)){5.I(a,u.L);T=b.G}}r 7(b.B==\'2R\'){R=H X(u.3v);7(!R.Z(a.C)){5.I(a,u.L);T=b.G}}r 7(b.B==\'2O\'){R=H X(u.3u);7(!R.Z(a.C)){5.I(a,u.L);T=b.G}}r 7(b.B==\'2S\'){R=H X(u.3r);7(!R.Z(a.C)){5.I(a,u.L);T=b.G}}r 7(b.B==\'2X\'){R=H X(u.3o);7(!R.Z(a.C)){5.I(a,u.L);T=b.G}}r 7(b.B==\'2N\'){R=H X(u.3m);7(!R.Z(a.C)){5.I(a,u.L);T=b.G}}r 7(b.B==\'3p\'){R=H X(u.4a);7(!R.Z(a.C)){5.I(a,u.L);T=b.G}}r 7(b.B==\'2U\'){7(2a(b.D)){5.1b(\'1c: D E 16 \'+b.B+\' 1g a 3n\')}r 7(a.C.w>b.D){5.I(a,u.L);T=b.G}}r 7(b.B==\'2T\'){7(2a(b.D)){5.1b(\'1c: D E 16 \'+b.B+\' 1g a 3n\')}r 7(a.C.w<b.D){5.I(a,u.L);T=b.G}}r 7(b.B==\'2W\'){R=H X("^[-+]{0,1}[0-9]*[.]{0,1}[0-9]*$");7(!R.Z(5.2n(a.C))){5.I(a,u.L);T=b.G}r{3l=H X("^[0-9]+-[0-9]+$");7(!3l.Z(b.D)){5.1b(\'1c: D E 16 \'+b.B+\' 1g 49 1Q 48-47\')}r{2M=b.D.1m(\'-\');7(1E(5.2n(a.C))<1E(2M[0])||1E(5.2n(a.C))>1E(2M[1])){5.I(a,u.L);T=b.G}}}}r 7(b.B==\'2L\'){R=H X(b.D);7(!R.Z(a.C)){5.I(a,u.L);T=b.G}}r 7(b.B==\'3k\'){T=5.3i(a,b)}r 7(b.B==\'3h\'){T=5.3g(a,b)}r 7(b.B==\'3S\'){T=5.2K(a,b)}r 7(b.B==\'2w\'){T=5.33(a,b,M)}r 7(b.B==\'2y\'){T=5.33(a,b,K)}r 7(b.B==\'1Z\'){}r 7(b.B==\'3f\'){7(a.C!=v&&a.C!=\'\'){5.I(a,u.L);T=b.G}}r{5.1b(\'1c: 16 \'+b.B+\' 1g 1G E \'+a.Y)}A T},3i:y(a,b){R=H X("^[-+]{0,1}[0-9]*$");7(!R.Z(a.C)){5.I(a,u.L);A b.G}},3g:y(a,b){q c=u.3e;R=H X("^[-+]{0,1}[0-9]*["+c+"]{0,1}[0-9]*$");7(!R.Z(a.C)){5.I(a,u.L);A b.G}},2K:y(a,b){18=v;7(a.C!=\'\'){q c=u.3d;3c=H X("1u");3b=H X("1A");3a=H X("1z");7(!3c.Z(c)||!3b.Z(c)||!3a.Z(c)){5.1b(\'1c: 46 1Q \'+c+\' 1g 1G\')}r{1B=c.15(\'1u\');1H=c.15(\'1A\');1C=c.15(\'1z\')}2j=c.J(\'1u\',\'[0-9]{2}\').J(\'1A\',\'[0-9]{2}\').J(\'1z\',\'[0-9]{4}\');R=H X("^"+2j+"$");7(!R.Z(a.C)){5.I(a,u.L);18=b.G}r{1u=a.C.1f(1B,1B+2);1A=a.C.1f(1H,1H+2);1z=a.C.1f(1C,1C+4);7(!5.2l(1u,1A,1z)){5.I(a,u.L);18=b.G}}}A 18},33:y(a,b,c){18=v;q d=5.2K(a,b)==v?K:M;7(d&&a.C!=\'\'){q e=u.3d;1B=e.15(\'1u\');1H=e.15(\'1A\');1C=e.15(\'1z\');1u=a.C.1f(1B,1B+2);1A=a.C.1f(1H,1H+2);1z=a.C.1f(1C,1C+4);2G=""+1z+1A+1u;2j=e.J(\'1u\',\'[0-9]{2}\').J(\'1A\',\'[0-9]{2}\').J(\'1z\',\'[0-9]{4}\');R=H X("^"+2j+"$");q f=b.D.15(\'$\')==0?K:M;q g=\'\';7(f){27=b.D.1Y(1);19=27.1m(\':\');7(19.w==2){g=5.W(5.f,19[0]).C}r{g=5.W(5.f,b.D.1Y(1)).C}}r{g=b.D}7(!R.Z(g)){5.I(a,u.L);18=b.G}r{2F=g.1f(1B,1B+2);2E=g.1f(1H,1H+2);2D=g.1f(1C,1C+4);39=""+2D+2E+2F;7(c){7(!5.2l(2F,2E,2D)||2G>39){5.I(a,u.L);18=b.G}}r{7(!5.2l(2F,2E,2D)||2G>=39){5.I(a,u.L);18=b.G}}}}r{7(a.C!=\'\'){5.I(a,u.L);18=b.G}}A 18},3t:y(a,b){18=v;q c=b.D.15(\'$\')==0?K:M;q d=\'\';7(c){27=b.D.1Y(1);19=27.1m(\':\');7(19.w==2){d=5.W(5.f,19[0]).C}r{d=5.W(5.f,b.D.1Y(1)).C}}r{d=b.D}7(a.C!=d){5.I(a,u.L);18=b.G}A 18},3s:y(a,b){18=v;q c=b.D.15(\'$\')==0?K:M;q d=\'\';7(c){27=b.D.1Y(1);19=27.1m(\':\');7(19.w==2){d=5.W(5.f,19[0]).C}r{d=5.W(5.f,b.D.1Y(1)).C}}r{d=b.D}7(a.C==d){5.I(a,u.L);18=b.G}A 18},2l:y(a,b,c){14=K;7((a<1)||(a>31)||(b<1)||(b>12)||(a==31&&(b==2||b==4||b==6||b==9||b==11))||(a>29&&b==2)||(a==29&&(b==2)&&((c%4>0)||(c%4==0&&c%57==0&&c%56>0)))){14=M}A 14},3z:y(a,b){7(b.B==\'1V\'){7(!a.1x){5.I(a,u.L);A b.G}}r 7(b.B==\'1J\'){7(!a.1x||a.C!=b.D){5.I(a,u.L);A b.G}}r 7(b.B==\'1I\'){7(a.1x&&a.C==b.D){5.I(a,u.L);A b.G}}r{5.1b(\'1c: 16 \'+b.B+\' 1g 1G E \'+a.Y)}},3x:y(a,b){7(b.B==\'1V\'){q c=M;q d=a.38;7(d>=0&&a.26[d].C){c=K}7(!c){5.I(a,u.L);A b.G}}r 7(b.B==\'1J\'){q c=M;q d=a.38;7(d>=0&&a.26[d].C==b.D){c=K}7(!c){5.I(a,u.L);A b.G}}r 7(b.B==\'1I\'){q c=M;q d=a.38;7(d>=0&&a.26[d].C!=b.D){c=K}7(!c){5.I(a,u.L);A b.G}}r{5.1b(\'1c: 16 \'+b.B+\' 1g 1G E \'+a.Y)}},3w:y(a,b){7(b.B==\'1V\'){q c=M;1i=a.26;E(q i=0;i<1i.w;i++){7(1i[i].37&&1i[i].C){c=K;Q}}7(!c){5.I(a,u.L);A b.G}}r 7(b.B==\'1J\'){q c=M;1i=a.26;E(q i=0;i<1i.w;i++){7(1i[i].37&&1i[i].C==b.D){c=K;Q}}7(!c){5.I(a,u.L);A b.G}}r 7(b.B==\'1I\'){q c=M;1i=a.26;E(q i=0;i<1i.w;i++){7(1i[i].37&&1i[i].C!=b.D){c=K;Q}}7(!c){5.I(a,u.L);A b.G}}r{5.1b(\'1c: 16 \'+b.B+\' 1g 1G E \'+a.Y)}},1b:y(a){7(u.55){2A(a)}},1K:y(a){A a.J(/^\\s+/,\'\').J(/\\s+$/,\'\')},2v:y(a){q b=H 1r();7(a.w){E(q i=0;i<a.w;i++){b[i]=5.1T(a[i])}}r{b[0]=5.1T(a)}A b},1T:y(a){q b=v;7(a!=5.2i){P=a.1m(u.53);52(P.w){35 2:b=H 5.16(P[0],P[1],v,v,v);Q;35 3:7(5.34(P[1])){b=H 5.16(P[0],P[1],P[2],v,v)}r 7(P[2]==\'17-1t\'||P[2]==\'1s-1t\'||P[2]==\'1S-1R\'){b=H 5.16(P[0],P[1],v,\'41\',P[2])}r{b=H 5.16(P[0],P[1],v,P[2],v)}Q;35 4:7(5.34(P[1])&&(P[3]==\'17-1t\'||P[3]==\'1s-1t\'||P[3]==\'1S-1R\')){b=H 5.16(P[0],P[1],P[2],\'41\',P[3])}r{b=H 5.16(P[0],P[1],P[2],P[3],v)}Q;50:5.1b(\'1c: 4Z 4Y 4X 16\')}}A b},34:y(a){A(a==\'1J\'||a==\'1I\'||a==\'2T\'||a==\'2U\'||a==\'2w\'||a==\'2y\'||a==\'2B\'||a==\'2L\'||a==\'2W\'||a==\'1Z\'||a==\'3B\'||a==\'32\'||a==\'3C\'||a==\'1v\')?K:M},I:y(a,b){7(5.1U.w>0&&b==u.L){A}7(!5.2r&&b==u.L){7((!a.Y)&&(a.w>0)&&(a.3Z(0).Y==\'2Q\')){a.3Z(0).2k()}r{a.2k()}5.2r=K}7(a!=5.2i&&u.4W){7(u.4U){5.3Y(a,b)}r{a.13=b}}},3Y:y(a,b){3X=H X("(^|\\\\s)("+u.2d+"|"+u.L+")($|\\\\s)");a.13=5.1K(((1M a.13!="1h")?a.13.J(3X,""):"")+" "+b)},3D:y(a,b,c,d){7(b.w==0){b=a}q e=u.4R;7(c==\'1V\'){e=u.4N.J(\'{1}\',b)}r 7(c==\'2T\'){e=u.4M.J(\'{1}\',b).J(\'{2}\',d)}r 7(c==\'2U\'){e=u.4L.J(\'{1}\',b).J(\'{2}\',d)}r 7(c==\'2W\'){e=u.4K.J(\'{1}\',b).J(\'{2}\',d)}r 7(c==\'3S\'){e=u.4I.J(\'{1}\',b)}r 7(c==\'3q\'){e=u.4H.J(\'{1}\',b)}r 7(c==\'3k\'){e=u.4O.J(\'{1}\',b)}r 7(c==\'3h\'){e=u.4P.J(\'{1}\',b)}r 7(c==\'1J\'){e=u.4E.J(\'{1}\',b).J(\'{2}\',5.2g(d))}r 7(c==\'1I\'){e=u.4D.J(\'{1}\',b).J(\'{2}\',5.2g(d))}r 7(c==\'2R\'){e=u.4T.J(\'{1}\',b)}r 7(c==\'2O\'){e=u.4C.J(\'{1}\',b)}r 7(c==\'2S\'){e=u.4B.J(\'{1}\',b)}r 7(c==\'2X\'){e=u.4A.J(\'{1}\',b)}r 7(c==\'2N\'){e=u.4z.J(\'{1}\',b)}r 7(c==\'3p\'){e=u.4y.J(\'{1}\',b)}r 7(c==\'2L\'){e=u.4x.J(\'{1}\',b).J(\'{2}\',d)}r 7(c==\'2w\'){e=u.4w.J(\'{1}\',b).J(\'{2}\',5.2g(d))}r 7(c==\'2y\'){e=u.51.J(\'{1}\',b).J(\'{2}\',5.2g(d))}r 7(c==\'3f\'){e=u.4v.J(\'{1}\',b)}A e},2g:y(a){2z=a;7(a.1f(0,1)==\'$\'){a=a.1f(1,a.w);19=a.1m(\':\');7(19.w==2){2z=19[1]}r{2z=a}}A 2z},2b:y(a,b){2x=M;q c;7(a==8||a==0){2x=K}r{E(q i=0;i<b.w;i++){c=b.4u(i);7(c==a){2x=K;Q}}}A 2x},W:y(a,b){q c=v;7(a.36[b]){c=a.36[b]}r 7(5.N(b)){c=5.N(b)}A c},N:y(a){A 1y.4t(a)},2n:y(a){q b=a.J(u.58,"");b=b.J(u.3e,".");A b},23:y(a){7(a.15(\'1O\')==-1){A a}r{A a.1f(0,a.15(\'1O\'))}},1d:y(a,b,c){7(a.44){a.44(b,c,M);A K}r 7(a.4r){a[\'3Q\'+b]=c}r{a[\'3Q\'+b]=c}},5a:y(a,b,c){q d=1y.1X[5.2h].36[a];1d(d,b,c)}}',62,321,'|||||yav||if|||||||||||||||||||var|else|||yav_config|null|length|el|function||return|ruleName|value|comparisonValue|for|name|alertMsg|new|highlight|replace|true|inputclasserror|false|get|this|params|break|reg|errorsdiv|err|filterByName|preValidationEvt|getField|RegExp|type|test||||className|retVal|indexOf|rule|pre|error|tmp|_|debug|DEBUG|addEvent|innerHTML|substring|not|undefined|opts|display|ruleType|style|split|onErrorEvt|onOKEvt|checkRule|executedWithSuccess|Array|post|condition|dd|mask|helpEvt|checked|document|yyyy|MM|ddStart|yyyyStart|which|eval|internalRules|supported|MMStart|notequal|equal|strTrim|none|typeof|performEvt|__inline__|clearInlineSpans|format|operator|andor|splitRule|rulesEvt|required|addMask|forms|substr|keypress|keyCode|event|window|deleteInline|fn|push|options|toSplit|evType||isNaN|isKeyAllowed|nameDisplayed|inputclassnormal|arguments|Object|getComparisonDisplayed|formEvt|undef|strReg|focus|checkddMMyyyy|performOnErrorEvt|unformatNumber|returnValue|stopPropagation|preventDefault|isFocusSet|script|FOOTER_MSG|HEADER_MSG|makeRules|date_lt|retval|date_le|comparisonDisplayed|alert|implies|fieldsEvt|cyyyy|cMM|cdd|myDate|showHelpEvt|blur|performOnOKEvt|checkDate|regexp|rangeVal|alphaspace|alphanumeric|checkRadio|radio|alphabetic|alnumhyphen|minlength|maxlength|jsErrors|numrange|alnumhyphenat|maskEvt|inArray|displayInnerHtml||or|checkDateLessThan|threeParamRule|case|elements|selected|selectedIndex|cDate|yyyyReg|MMReg|ddReg|DATE_FORMAT|DECIMAL_SEP|empty|checkDouble|double|checkInteger|bindAsEventListener|integer|regRange|alphaspace_regex|number|alnumhyphenat_regex|email|numeric|alnumhyphen_regex|checkNotEqual|checkEqual|alphanumeric_regex|alphabetic_regex|checkSelMul|checkSelOne|select|checkCheckbox|checkText|and|custom|getDefaultMessage|find|could|id|span|getElementsByTagName|displayAlert|innererror|li|performCheck|ul|displayJsVar|displayInline|on|displayClassic|date|clearAllInlineSpans|charAt|regex|inline|re|highlightMultipleClassName|item|charsAllowed|foo|help|cleanInline|addEventListener|click|locale|number2|number1|in|email_regex|trimenabled|multiple|one|init|checkbox|textarea|password|object|text|hidden|element|form|checkKeyPress|block|jsVar|innerHtml|attachEvent|classic|getElementById|charCodeAt|EMPTY_MSG|DATE_LT_MSG|REGEXP_MSG|EMAIL_MSG|ALPHASPACE_MSG|ALNUMHYPHENAT_MSG|ALNUMHYPHEN_MSG|ALPHANUMERIC_MSG|NOTEQUAL_MSG|EQUAL_MSG|fromCharCode|String|NUMERIC_MSG|DATE_MSG|innerhelp|NUMRANGE_MSG|MAXLENGTH_MSG|MINLENGTH_MSG|REQUIRED_MSG|INTEGER_MSG|DOUBLE_MSG|preValidation|DEFAULT_MSG|postValidation_OnError|ALPHABETIC_MSG|multipleclassname|postValidation_OnOK|inputhighlight|of|definition|wrong|default|DATE_LE_MSG|switch|RULE_SEP|addHelp|debugmode|400|100|THOUSAND_SEP|displayMsg|call'.split('|'),0,{}))
-Function.prototype.bindAsEventListener = function(object) { var __method = this; return function(event) {return __method.call(object, event || window.event);}}
+/***********************************************************************
+ * YAV - Yet Another Validator  v2.0                                   *
+ * Copyright (C) 2005-2008                                             *
+ * Author: Federico Crivellaro <f.crivellaro@gmail.com>                *
+ * WWW: http://yav.sourceforge.net                                     *
+ *                                                                     *
+ * This library is free software; you can redistribute it and/or       *
+ * modify it under the terms of the GNU Lesser General Public          *
+ * License as published by the Free Software Foundation; either        *
+ * version 2.1 of the License, or (at your option) any later version.  *
+ *                                                                     *
+ * This library is distributed in the hope that it will be useful,     *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of      *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU   *
+ * Lesser General Public License for more details.                     *
+ *                                                                     *
+ * You should have received a copy of the GNU Lesser General Public    *
+ * License along with this library; if not, write to the Free Software *
+ * Foundation, Inc.,59 Temple Place,Suite 330,Boston,MA 02111-1307 USA *
+ *                                                                     *
+ * last revision:  2 MAR 2008                                          *
+ ***********************************************************************/
+
+var yav = {
+
+//------------------------------------------------------------ PUBLIC FUNCTIONS
+undef: undefined,
+isFocusSet: undefined,
+internalRules: undefined,
+f: undefined,
+formEvt: undefined,
+fieldsEvt: new Array(),
+rulesEvt: new Array(),
+helpEvt: new Array(),
+mask: new Array(),
+onOKEvt: new Array(),
+onErrorEvt: new Array(),
+preValidationEvt: new Array(),
+filterByName: null,
+
+performCheck: function (formName, strRules, alertType, filterErrorsByName) {
+	yav.filterByName = (filterErrorsByName) ? filterErrorsByName: null;
+	for(var j=0; j<yav.preValidationEvt.length; j++) {
+		if (yav.filterByName==yav.preValidationEvt[j].name) {
+			var preValidationResult = eval(yav.preValidationEvt[j].fn);
+			yav.preValidationEvt[j].executedWithSuccess = preValidationResult;
+			if (!preValidationResult) {
+				return preValidationResult;
+			}
+			break;
+		}
+	}
+	yav.isFocusSet = false;
+    var rules = yav.makeRules(strRules);
+    yav.internalRules = yav.makeRules(strRules);
+    yav.f = document.forms[formName];
+    if( !yav.f ) {
+        yav.debug('DEBUG: could not find form object ' + formName);
+        return null;
+    }
+    var errors = new Array();
+    var ix = 0;
+    if (rules.length) {
+        for(var i=0; i<rules.length; i++) {
+            var aRule = rules[i];
+            if (aRule!=null) {
+				yav.highlight(yav.getField(yav.f, aRule.el), yav_config.inputclassnormal);
+            }
+        }
+    } else {
+        if (rules!=null) {
+			yav.highlight(yav.getField(yav.f, rules.el), yav_config.inputclassnormal);
+        }
+    }
+    if (rules.length) {
+		for(var i=0; i<rules.length; i++) {
+            var aRule = rules[i];
+            var anErr = null;
+            if (aRule==null) {
+                //do nothing
+            } else if (aRule.ruleType=='pre-condition' || aRule.ruleType=='post-condition' || aRule.ruleType=='andor-operator') {
+                //do nothing
+            } else if (aRule.ruleName=='implies') {
+                pre  = aRule.el;
+                post = aRule.comparisonValue;
+                var oldClassName = yav.getField(yav.f, rules[pre].el).className;
+				if ( yav.filterByName!=null ) {
+					if (rules[pre].el==yav.filterByName || rules[post].el==yav.filterByName) {
+						yav.clearInlineSpans(rules[pre].el, rules[post].el);
+					}
+				}
+                if ( yav.checkRule(yav.f, rules[pre])==null && yav.checkRule(yav.f, rules[post])!=null ) {
+                    anErr = yav.deleteInline(aRule.alertMsg) + '__inline__'+rules[post].el;
+                } else if ( yav.checkRule(yav.f, rules[pre])!=null ) {
+                    yav.getField(yav.f, rules[pre].el).className = oldClassName;
+                }
+            } else if (aRule.ruleName=='date_lt' || aRule.ruleName=='date_le') {
+                if ( yav.filterByName!=null ) {
+					if (aRule.comparisonValue && aRule.comparisonValue.indexOf('$'+yav.filterByName)==0) {
+						yav.clearInlineSpans(aRule.el, yav.filterByName);
+					}
+				}
+                anErr = yav.checkRule(yav.f, aRule);
+            } else {
+                anErr = yav.checkRule(yav.f, aRule);
+            }
+            if ( anErr!=null ) {
+				if (yav.filterByName && yav.filterByName!=null) {
+					if (aRule.ruleName=='implies') {
+						if (rules[pre].el==yav.filterByName || rules[post].el==yav.filterByName) {
+							yav.clearInlineSpans(rules[pre].el, rules[post].el);
+						}
+						aRule = rules[aRule.comparisonValue];
+					}
+					//todo
+					if (aRule.ruleName=='or') {
+                        var tmp = aRule.comparisonValue.split('-');
+                        for(var t=0; t<tmp.length; t++) {
+                            yav.clearInlineSpans(rules[tmp[t]].el);
+                        }
+						if (rules[aRule.el].el==yav.filterByName) {
+							yav.clearInlineSpans(rules[aRule.el].el);
+						}
+						aRule = rules[aRule.el];
+					}
+					//
+					if (aRule.el==yav.filterByName || (aRule.comparisonValue && aRule.comparisonValue.indexOf('$'+yav.filterByName)==0)) {
+						for(var z=0; z<rules.length; z++) {
+							if (rules[z].ruleName=='implies' && rules[rules[z].el].el==aRule.el) {
+								yav.clearInlineSpans(rules[rules[z].comparisonValue].el);
+							}
+						}
+						errors[ix] = anErr;
+	                    ix++;
+						break;				
+					}
+				} else {
+	                errors[ix] = anErr;
+	                ix++;
+				}
+            }
+        }//for
+    } else {
+        var myRule = rules;
+        err = yav.checkRule(yav.f, myRule);
+        if ( err!=null ) {
+			if (yav.filterByName && yav.filterByName != null) {
+				if (myRule.el == yav.filterByName) {
+					errors[0] = err;
+				}
+			} else {
+				errors[0] = err;
+			}
+        }
+    }
+	var retval = yav.displayAlert(errors, alertType);
+	yav.filterByName = null;
+    return retval;
+},
+
+checkKeyPress: function (ev, obj, strRules) {
+    var keyCode = null;
+	keyCode = (typeof(ev.which))!='undefined' ? ev.which : window.event.keyCode;
+    var rules = yav.makeRules(strRules);
+    var keyAllowed = true;
+    if (rules.length) {
+        for(var i=0; i<rules.length; i++) {
+            var aRule = rules[i];
+            if (aRule.ruleName=='keypress' && aRule.el==obj.name) {
+                keyAllowed = yav.isKeyAllowed(keyCode, aRule.comparisonValue);
+                break;
+            }
+        }
+    } else {
+        var aRule = rules;
+        if (aRule.ruleName=='keypress' && aRule.el==obj.name) {
+            keyAllowed = yav.isKeyAllowed(keyCode, aRule.comparisonValue);
+        }
+    }
+    if (!keyAllowed) {
+        if ( typeof(ev.which)=='undefined' ) {
+            window.event.keyCode=0;
+        } else {
+            ev.preventDefault();
+            ev.stopPropagation();
+            ev.returnValue=false;
+        }
+    }
+    return keyAllowed;
+},
+
+init: function (formName, strRules) {
+	yav.addMask('alphabetic', null, null, yav_config.alphabetic_regex);
+	yav.addMask('alphanumeric', null, null, yav_config.alphanumeric_regex);
+	yav.addMask('alnumhyphen', null, null, yav_config.alnumhyphen_regex);
+	yav.addMask('alnumhyphenat', null, null, yav_config.alnumhyphenat_regex);
+	yav.addMask('alphaspace', null, null, yav_config.alphaspace_regex);
+	yav.formEvt = formName;
+	yav.rulesEvt = strRules;
+	if (strRules.length) {
+        for(var i=0; i<strRules.length; i++) {
+			var aRule = yav.splitRule(strRules[i]);
+			var elm = yav.getField(document.forms[formName], aRule.el);
+			if (elm && aRule.ruleName=='mask') {
+				yav.addEvent(elm, 'keypress', yav.maskEvt.bindAsEventListener(elm));
+			} else if (elm && !yav.inArray(yav.fieldsEvt, aRule.el) ) {
+				var eventAdded = false;
+				for(var j=0; j<yav.onOKEvt.length; j++) {
+					if (elm.name==yav.onOKEvt[j].name) {
+						yav.addEvent(elm, yav.onOKEvt[j].evType, 
+							function(){
+								if (yav.performEvt(this.name)) {
+									yav.performOnOKEvt(this.name);
+								} else {
+									for(var k=0; k<yav.preValidationEvt.length; k++) {
+										if (this.name==yav.preValidationEvt[k].name) {
+											if (yav.preValidationEvt[k].executedWithSuccess==false) {
+												yav.preValidationEvt[k].executedWithSuccess = null;
+												return;
+											}
+											yav.preValidationEvt[k].executedWithSuccess = null;
+											break;
+										}
+									}
+									yav.performOnErrorEvt(this.name);
+								}
+						    } );
+						eventAdded = true;
+						break;
+					}
+				}
+				if (!eventAdded) {
+					for(var j=0; j<yav.onErrorEvt.length; j++) {
+						if (elm.name==yav.onErrorEvt[j].name) {
+							yav.addEvent(elm, yav.onErrorEvt[j].evType, 
+								function(){
+									if (!yav.performEvt(this.name)) {
+										for(var k=0; k<yav.preValidationEvt.length; k++) {
+											if (this.name==yav.preValidationEvt[k].name) {
+												if (yav.preValidationEvt[k].executedWithSuccess==false) {
+													yav.preValidationEvt[k].executedWithSuccess = null;
+													return;
+												}
+												yav.preValidationEvt[k].executedWithSuccess = null;
+												break;
+											}
+										}
+										yav.performOnErrorEvt(this.name);
+									}
+							    } );
+							eventAdded = true;
+							break;
+						}
+					}
+				}
+				yav.fieldsEvt.push(aRule.el);
+				if (!eventAdded) {
+					yav.addEvent(elm, 'blur', 
+					  function(){
+						yav.performEvt(this.name);
+					  });
+				}
+			}
+        }
+    } else {
+		var rule = yav.splitRule(strRules);
+		var elm = yav.getField(document.forms[formName], rule.el);
+		if (elm && rule.ruleName=='mask') {
+			yav.addEvent(elm, 'keypress', yav.maskEvt.bindAsEventListener(elm));
+		} else if (elm) {
+			var eventAdded = false;
+			for(var j=0; i<yav.onOKEvt.length; j++) {
+				if (elm.name==yav.onOKEvt[i].name) {
+					yav.addEvent(elm, yav.onOKEvt[j].evType, 
+						function(){
+						    if (yav.performEvt(this.name)) {
+								yav.performOnOKEvt(this.name);
+							}
+					    } );
+					eventAdded = true;
+					break;
+				}
+			}
+			for(var j=0; j<yav.onErrorEvt.length; j++) {
+				if (elm.name==yav.onErrorEvt[j].name) {
+					yav.addEvent(elm, yav.onErrorEvt[j].evType, 
+						function(){
+							if (!yav.performEvt(this.name)) {
+								for(var k=0; k<yav.preValidationEvt.length; k++) {
+									if (this.name==yav.preValidationEvt[k].name) {
+										if (yav.preValidationEvt[k].executedWithSuccess==false) {
+											yav.preValidationEvt[k].executedWithSuccess = null;
+											return;
+										}
+										yav.preValidationEvt[k].executedWithSuccess = null;
+										break;
+									}
+								}
+								yav.performOnErrorEvt(this.name);
+							}
+					    } );
+					eventAdded = true;
+					break;
+				}
+			}
+			if (!eventAdded) {
+				yav.addEvent(elm, 'blur', 
+			      function(){
+				    yav.performEvt(this.name);
+			      });
+			}
+		}
+	}
+	if (yav.helpEvt.length>0) {
+        for(var i=0; i<yav.helpEvt.length; i++) {
+			var elm = yav.getField(document.forms[formName], yav.helpEvt[i].name);
+			if ( elm ) {
+			    if ( elm.focus ) {
+    				yav.addEvent(elm, 'focus', 
+    				  function(){
+    					yav.showHelpEvt(this.name);
+    				  });
+    		    } else {
+    				yav.addEvent(elm, 'click', 
+    				  function(){
+    					yav.showHelpEvt(this.name);
+    				  });
+    		    }
+				if ( !yav.inArray(yav.fieldsEvt, yav.helpEvt[i].name) ) {
+					yav.addEvent(elm, 'blur', 
+					  function(){
+						yav.cleanInline(this.name);
+					  });
+				}
+			}
+        }
+	}
+},
+
+displayMsg: function(name, msg, clazz) {
+    var elm = yav.get(yav_config.errorsdiv+'_'+name);
+	if (elm) {
+		elm.innerHTML = msg;
+	    elm.className = clazz;
+	    elm.style.display = '';
+	} else {
+		elm = yav.get(yav_config.errorsdiv);
+		if (elm) {
+			elm.innerHTML = msg;
+		    elm.className = clazz;
+		    elm.style.display = '';
+		} else {
+			alert(msg);
+		}
+	}
+},
+
+cleanInline: function(name) {
+    yav.get(yav_config.errorsdiv+'_'+name).innerHTML = '';
+    yav.get(yav_config.errorsdiv+'_'+name).className = '';
+    yav.get(yav_config.errorsdiv+'_'+name).style.display = 'none';
+},
+
+addHelp: function (name, helpMsg) {
+	var elem = new Object();
+	elem.name = name;
+	elem.help = helpMsg;
+	yav.helpEvt.push(elem);
+},
+
+addMask: function (name, format, charsAllowed, regex) {
+	var elem = new Object();
+	elem.name = name;
+	elem.format = format;
+	elem.charsAllowed = charsAllowed;
+	elem.regex = regex ? regex : null;
+	yav.mask.push(elem);
+},
+
+postValidation_OnOK: function(name, evType, fn){
+	var elem = new Object();
+	elem.name = name;
+	elem.evType = evType;
+	elem.fn = fn;
+	yav.onOKEvt.push(elem);
+},
+
+postValidation_OnError: function(name, evType, fn){
+	var elem = new Object();
+	elem.name = name;
+	elem.evType = evType;
+	elem.fn = fn;
+	yav.onErrorEvt.push(elem);
+},
+
+preValidation: function(fn, name){
+	var elem = new Object();
+	elem.name = (name && name!=null)? name : null;
+	elem.fn = fn;
+	elem.executedWithSuccess = null;
+	yav.preValidationEvt.push(elem);
+},
+
+//------------------------------------------------------------ PRIVATE FUNCTIONS
+
+inArray: function(arr, value) {
+	var found = false;
+	for (var i=0;i<arr.length;i++) {
+		if (arr[i]==value) {
+			found = true;
+			break;
+		}
+	}
+	return found;
+},
+
+performEvt: function(name) {
+	var elm = yav.get(yav_config.errorsdiv);
+    if (elm) {
+		elm.innerHTML = '';
+	    elm.className = '';
+	    elm.style.display = 'none';
+	}
+	return yav.performCheck(yav.formEvt, yav.rulesEvt, 'inline', name); 
+},
+
+performOnOKEvt: function(name) {
+    for(var j=0; j<yav.onOKEvt.length; j++) {
+		if (name==yav.onOKEvt[j].name) {
+			eval(yav.onOKEvt[j].fn);
+			break;
+		}
+	}
+},
+
+performOnErrorEvt: function(name) {
+    for(var j=0; j<yav.onErrorEvt.length; j++) {
+		if (name==yav.onErrorEvt[j].name) {
+			eval(yav.onErrorEvt[j].fn);
+			break;
+		}
+	}
+},
+
+showHelpEvt: function(name) {
+    for(var i=0; i<yav.helpEvt.length; i++) {
+		if (yav.helpEvt[i].name==name) {
+            yav.get(yav_config.errorsdiv+'_'+name).innerHTML = yav.helpEvt[i].help;
+            yav.get(yav_config.errorsdiv+'_'+name).className = yav_config.innerhelp;
+            yav.get(yav_config.errorsdiv+'_'+name).style.display = '';
+			break;
+		}
+    }
+},
+
+maskEvt: function(ev) {
+    var mask = null;
+	var myRule = null;
+    for(var i=0; i<yav.rulesEvt.length; i++) {
+		var aRule = yav.splitRule(yav.rulesEvt[i]);
+		var elm = yav.getField(document.forms[yav.formEvt], aRule.el);
+		if (elm && aRule.ruleName=='mask' && elm.name==this.name) {
+		    for(var j=0; j<yav.mask.length; j++) {
+				if ( yav.mask[j].name==aRule.comparisonValue ) {
+					mask = yav.mask[j];
+					break;
+				}
+		    }
+			myRule = aRule;
+			break;
+		}
+    }
+    var key  = (typeof(ev.which))!='undefined' ? ev.which : window.event.keyCode;
+    var ch      = String.fromCharCode(key);
+    var str     = this.value + ch;
+    var pos     = str.length;
+	if (key==8 || key==0) { 
+		return true;
+	}
+	var keyAllowed = false;
+	if (mask==null) {
+		if ( yav.isKeyAllowed(key, myRule.comparisonValue) ) {
+			keyAllowed = true;
+		} else {
+			if ( typeof(ev.which)=='undefined' ) {
+		        window.event.keyCode=0;
+		    } else {
+		        ev.preventDefault();
+		        ev.stopPropagation();
+		        ev.returnValue=false;
+		    }
+		}
+		return keyAllowed;
+	} else if ( mask.format==null ) {
+		reg = new RegExp(mask.regex);
+        if ( reg.test(ch) ) {
+			keyAllowed = true;
+		} else {
+			if ( typeof(ev.which)=='undefined' ) {
+		        window.event.keyCode=0;
+		    } else {
+		        ev.preventDefault();
+		        ev.stopPropagation();
+		        ev.returnValue=false;
+		    }
+		}
+		return keyAllowed;
+	} else if ( yav.isKeyAllowed(key, mask.charsAllowed) && pos <= mask.format.length ) {
+        if ( mask.format.charAt(pos - 1) != ' ' ) {
+            str = this.value + mask.format.charAt(pos - 1) + ch;
+        }
+		this.value = str;
+		keyAllowed = true;
+    }
+	if ( typeof(ev.which)=='undefined' ) {
+        window.event.keyCode=0;
+    } else {
+        ev.preventDefault();
+        ev.stopPropagation();
+        ev.returnValue=false;
+    }
+	return keyAllowed;
+},
+
+displayAlert: function (messages, alertType) {
+    var retval =null;
+    yav.clearAllInlineSpans();
+    if (alertType=='classic') {
+        retval = yav.displayClassic(messages);
+    } else if (alertType=='innerHtml') {
+        retval = yav.displayInnerHtml(messages);
+    }else if (alertType=='inline') {
+        retval = yav.displayInline(messages);
+    }else if (alertType=='jsVar') {
+        retval = yav.displayJsVar(messages);
+    } else {
+        yav.debug('DEBUG: alert type ' + alertType + ' not supported');
+    }
+    return retval;
+},
+
+displayClassic: function (messages) {
+    var str = '';
+    if ( messages!=null && messages.length>0 ) {
+    	if (yav.strTrim(yav_config.HEADER_MSG).length > 0) {
+            str += yav_config.HEADER_MSG + '\n\n';
+        }
+        for (var i=0; i<messages.length; i++) {
+            str += ' ' + yav.deleteInline(messages[i]) + '\n';
+        }
+    	if (yav.strTrim(yav_config.FOOTER_MSG).length > 0) {
+            str += '\n' + yav_config.FOOTER_MSG;
+        }
+        alert(str);
+        return false;
+    } else {
+    	return true;
+    }
+},
+
+displayInnerHtml: function (messages) {
+    if ( messages!=null && messages.length>0 ) {
+        var str = '';
+    	if (yav.strTrim(yav_config.HEADER_MSG).length > 0) {
+            str += yav_config.HEADER_MSG;
+        }
+        str += '<ul>';
+        for (var i=0; i<messages.length; i++) {
+            str += '<li>'+yav.deleteInline(messages[i])+'</li>';
+        }
+        str += '</ul>';
+    	if (yav.strTrim(yav_config.FOOTER_MSG).length > 0) {
+            str += yav_config.FOOTER_MSG;
+        }
+        yav.get(yav_config.errorsdiv).innerHTML = str;
+        yav.get(yav_config.errorsdiv).className = yav_config.innererror;
+        yav.get(yav_config.errorsdiv).style.display = 'block';
+        return false;
+    } else {
+        yav.get(yav_config.errorsdiv).innerHTML = '';
+        yav.get(yav_config.errorsdiv).className = '';
+        yav.get(yav_config.errorsdiv).style.display = 'none';
+        return true;
+    }
+},
+
+displayInline: function (messages) {
+    if ( messages!=null && messages.length>0 ) {
+        var genericErrors = new Array();
+        var genericErrIndex = 0;
+        for (var i=0; i<messages.length; i++) {
+            var elName = messages[i].substring(messages[i].indexOf('__inline__')+10);
+            if ( yav.get(yav_config.errorsdiv+'_'+elName) ) {
+                yav.get(yav_config.errorsdiv+'_'+elName).innerHTML = yav.deleteInline(messages[i]);
+                yav.get(yav_config.errorsdiv+'_'+elName).className = yav_config.innererror;
+                yav.get(yav_config.errorsdiv+'_'+elName).style.display = '';
+            } else {
+                genericErrors[genericErrIndex] = messages[i];
+                genericErrIndex++;
+            }
+        }
+        if (genericErrIndex>0) {
+            yav.displayInnerHtml(genericErrors);
+        }
+        return false;
+    } else {
+        return true;
+    }
+},
+
+clearAllInlineSpans: function () {
+    var allDivs = document.getElementsByTagName("span");
+    for (var j=0; j<allDivs.length; j++) {
+        var idName = allDivs[j].id;
+        if ( idName.indexOf(yav_config.errorsdiv+'_')==0 ) {
+			if (yav.filterByName!=null) {
+				if ( idName==yav_config.errorsdiv+'_'+yav.filterByName ) {
+					yav.get(idName).innerHTML = '';
+		            yav.get(idName).className = '';
+		            yav.get(idName).style.display = 'none';
+				}
+			} else {
+	            yav.get(idName).innerHTML = '';
+	            yav.get(idName).className = '';
+	            yav.get(idName).style.display = 'none';
+			}
+        }
+    }
+},
+
+clearInlineSpans: function () {
+    var allDivs = document.getElementsByTagName("span");
+    for (var j=0; j<allDivs.length; j++) {
+        var idName = allDivs[j].id;
+        if ( idName.indexOf(yav_config.errorsdiv+'_')==0 ) {
+			for (var k=0; k<arguments.length; k++) {
+				if ( idName==yav_config.errorsdiv+'_'+arguments[k] ) {
+					yav.get(idName).innerHTML = '';
+		            yav.get(idName).className = '';
+		            yav.get(idName).style.display = 'none';
+				}
+			}
+        }
+    }
+},
+
+displayJsVar: function (messages) {
+    yav.get(yav_config.errorsdiv).className = '';
+    yav.get(yav_config.errorsdiv).style.display = 'none';
+    if ( messages!=null && messages.length>0 ) {
+        for (var i=0; i<messages.length; i++) {
+            messages[i] = yav.deleteInline(messages[i]);
+        }
+        var str = '';
+        str += '<script>var jsErrors;</script>';
+        yav.get(yav_config.errorsdiv).innerHTML = str;
+        jsErrors = messages;
+        return false;
+    } else {
+        yav.get(yav_config.errorsdiv).innerHTML = '<script>var jsErrors;</script>';
+        return true;
+    }
+},
+
+rule: function (el, ruleName, comparisonValue, alertMsg, ruleType) {
+    var checkArguments = arguments.length>=4 && arguments[0]!=null && arguments[1]!=null;
+    if ( !checkArguments ) {
+        return false;
+    }
+    tmp = el.split(':');
+    nameDisplayed = '';
+    if (tmp.length == 2) {
+        nameDisplayed = tmp[1];
+        el = tmp[0];
+    }
+    this.el = el;
+    this.nameDisplayed = nameDisplayed;
+    this.ruleName = ruleName;
+    this.comparisonValue = comparisonValue;
+    this.ruleType = ruleType;
+	if (alertMsg==yav.undef || alertMsg==null) {
+        this.alertMsg = yav.getDefaultMessage(el, nameDisplayed, ruleName, comparisonValue)+'__inline__'+this.el;
+    } else {
+        this.alertMsg = alertMsg+'__inline__'+this.el;
+    }
+},
+
+checkRule: function (f, myRule) {
+    retVal = null;
+    if (myRule != null) {
+        if (myRule.ruleName=='custom') {
+			var customFunction = null;
+			if (myRule.comparisonValue!=null) {
+				customFunction = ' retVal = ' + myRule.comparisonValue;
+			} else { // deprecated, maintained for back compatibility
+	            customFunction = ' retVal = ' + myRule.el;
+			}
+			retVal = eval(customFunction);
+			if (myRule.comparisonValue!=null && retVal!=this.undef && retVal!=null) {
+				retVal += '__inline__'+myRule.el;
+			}
+			if (retVal!=null && myRule.comparisonValue!=null) {
+				yav.highlight(yav.getField(yav.f, myRule.el), yav_config.inputclasserror);
+			}
+        } else if (myRule.ruleName=='and') {
+            var op_1 = myRule.el;
+            var op_next = myRule.comparisonValue;
+            if ( yav.checkRule(f, yav.internalRules[op_1])!=null ) {
+                retVal = myRule.alertMsg;
+                if (myRule.ruleType=='pre-condition' || myRule.ruleType=='andor-operator') {
+                    //yav.highlight(yav.getField(f, yav.internalRules[op_1].el), yav_config.inputclasserror);
+                }
+            } else {
+                var op_k = op_next.split('-');
+                for(var k=0; k<op_k.length; k++) {
+                    if ( yav.checkRule(f, yav.internalRules[op_k[k]])!=null ) {
+                        retVal = myRule.alertMsg;
+                        if (myRule.ruleType=='pre-condition' || myRule.ruleType=='andor-operator') {
+                            //yav.highlight(yav.getField(f, yav.internalRules[op_k[k]].el), yav_config.inputclasserror);
+                        }
+                        break;
+                    }
+                }
+            }
+        } else if (myRule.ruleName=='or') {
+            var op_1 = myRule.el;
+            var op_next = myRule.comparisonValue;
+            var success = false;
+            if ( yav.checkRule(f, yav.internalRules[op_1])==null ) {
+                success = true;
+            } else {
+                if (myRule.ruleType=='pre-condition' || myRule.ruleType=='andor-operator') {
+                    //yav.highlight(yav.getField(f, yav.internalRules[op_1].el), yav_config.inputclasserror);
+                }
+                var op_k = op_next.split('-');
+                for(var k=0; k<op_k.length; k++) {
+                    if ( yav.checkRule(f, yav.internalRules[op_k[k]])==null ) {
+                        success = true;
+                        break;
+                    } else {
+                        if (myRule.ruleType=='pre-condition' || myRule.ruleType=='andor-operator') {
+                            //yav.highlight(yav.getField(f, yav.internalRules[op_k[k]].el), yav_config.inputclasserror);
+                        }
+                    }
+                }
+            }
+            if (success) {
+                yav.highlight(yav.getField(f, yav.internalRules[op_1].el), yav_config.inputclassnormal);
+                var op_k = op_next.split('-');
+                for(var k=0; k<op_k.length; k++) {
+                    yav.highlight(yav.getField(f, yav.internalRules[op_k[k]].el), yav_config.inputclassnormal);
+                }
+            } else {
+                retVal = myRule.alertMsg;
+            }
+        } else {
+            el = yav.getField(f, myRule.el);
+            if (el == null) {
+                yav.debug('DEBUG: could not find element ' + myRule.el);
+                return null;
+            }
+            var err = null;
+            if(el.type) {
+                if(el.type=='hidden'||el.type=='text'||el.type=='password'||el.type=='textarea') {
+					err = yav.checkText(el, myRule);
+                } else if(el.type=='checkbox') {
+                    err = yav.checkCheckbox(el, myRule);
+                } else if(el.type=='select-one') {
+                    err = yav.checkSelOne(el, myRule);
+                } else if(el.type=='select-multiple') {
+                    err = yav.checkSelMul(el, myRule);
+                } else if(el.type=='radio') {
+                    err = yav.checkRadio(el, myRule);
+                } else {
+                    yav.debug('DEBUG: type '+ el.type +' not supported');
+                }
+            } else {
+                err = yav.checkRadio(el, myRule);
+            }
+            retVal = err;
+        }
+    }
+    return retVal;
+},
+
+checkRadio: function (el, myRule) {
+    var err = null;
+    if (myRule.ruleName=='required') {
+        var radios = el;
+	    var found=false;
+	    if (isNaN(radios.length) && radios.checked) {
+	    	found=true;
+	    } else {
+		    for(var j=0; j < radios.length; j++) {
+		        if(radios[j].checked) {
+		            found=true;
+		            break;
+		        }
+		    }
+		}
+        if( !found ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            err = myRule.alertMsg;
+        }
+    } else if (myRule.ruleName=='equal') {
+        var radios = el;
+	    var found=false;
+	    if (isNaN(radios.length) && radios.checked) {
+	    	if (radios.value==myRule.comparisonValue) {
+	    	    found=true;
+	    	}
+	    } else {
+		    for(var j=0; j < radios.length; j++) {
+		        if(radios[j].checked) {
+        	    	if (radios[j].value==myRule.comparisonValue) {
+        	    	    found=true;
+                        break;
+        	    	}
+		        }
+		    }
+		}
+        if( !found ) {
+            err = myRule.alertMsg;
+        }
+    } else if (myRule.ruleName=='notequal') {
+        var radios = el;
+	    var found=false;
+	    if (isNaN(radios.length) && radios.checked) {
+	    	if (radios.value!=myRule.comparisonValue) {
+	    	    found=true;
+	    	}
+	    } else {
+		    for(var j=0; j < radios.length; j++) {
+		        if(radios[j].checked) {
+        	    	if (radios[j].value!=myRule.comparisonValue) {
+        	    	    found=true;
+                        break;
+        	    	}
+		        }
+		    }
+		}
+        if( !found ) {
+            err = myRule.alertMsg;
+        }
+    } else {
+        yav.debug('DEBUG: rule ' + myRule.ruleName + ' not supported for radio');
+    }
+    return err;
+},
+
+checkText: function (el, myRule) {
+    err = null;
+    if (yav_config.trimenabled) {
+    	el.value = yav.strTrim(el.value);
+    }
+    if (myRule.ruleName=='required') {
+        if ( el.value==null || el.value=='' ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            err = myRule.alertMsg;
+        }
+    } else if (myRule.ruleName=='equal') {
+        err = yav.checkEqual(el, myRule);
+    } else if (myRule.ruleName=='notequal') {
+        err = yav.checkNotEqual(el, myRule);
+    } else if (myRule.ruleName=='numeric') {
+        reg = new RegExp("^[0-9]*$");
+        if ( !reg.test(el.value) ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            err = myRule.alertMsg;
+        }
+    } else if (myRule.ruleName=='alphabetic') {
+        reg = new RegExp(yav_config.alphabetic_regex);
+        if ( !reg.test(el.value) ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            err = myRule.alertMsg;
+        }
+    } else if (myRule.ruleName=='alphanumeric') {
+        reg = new RegExp(yav_config.alphanumeric_regex);
+        if ( !reg.test(el.value) ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            err = myRule.alertMsg;
+        }
+    } else if (myRule.ruleName=='alnumhyphen') {
+        reg = new RegExp(yav_config.alnumhyphen_regex);
+        if ( !reg.test(el.value) ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            err = myRule.alertMsg;
+        }
+    } else if (myRule.ruleName=='alnumhyphenat') {
+        reg = new RegExp(yav_config.alnumhyphenat_regex);
+        if ( !reg.test(el.value) ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            err = myRule.alertMsg;
+        }
+    } else if (myRule.ruleName=='alphaspace') {
+        reg = new RegExp(yav_config.alphaspace_regex);
+        if ( !reg.test(el.value) ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            err = myRule.alertMsg;
+        }
+    } else if (myRule.ruleName=='email') {
+        reg = new RegExp(yav_config.email_regex);
+        if ( !reg.test(el.value) ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            err = myRule.alertMsg;
+        }
+    } else if (myRule.ruleName=='maxlength') {
+        if ( isNaN(myRule.comparisonValue) ) {
+            yav.debug('DEBUG: comparisonValue for rule ' + myRule.ruleName + ' not a number');
+        }else if ( el.value.length > myRule.comparisonValue ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            err = myRule.alertMsg;
+        }
+    } else if (myRule.ruleName=='minlength') {
+        if ( isNaN(myRule.comparisonValue) ) {
+            yav.debug('DEBUG: comparisonValue for rule ' + myRule.ruleName + ' not a number');
+        } else if ( el.value.length < myRule.comparisonValue ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            err = myRule.alertMsg;
+        }
+    } else if (myRule.ruleName=='numrange') {
+        reg = new RegExp("^[-+]{0,1}[0-9]*[.]{0,1}[0-9]*$");
+        if ( !reg.test(yav.unformatNumber(el.value)) ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            err = myRule.alertMsg;
+        } else {
+            regRange = new RegExp("^[0-9]+-[0-9]+$"); 
+            if ( !regRange.test(myRule.comparisonValue) ) {
+                yav.debug('DEBUG: comparisonValue for rule ' + myRule.ruleName + ' not in format number1-number2');
+            } else {
+                rangeVal = myRule.comparisonValue.split('-');
+                if (eval(yav.unformatNumber(el.value))<eval(rangeVal[0]) || eval(yav.unformatNumber(el.value))>eval(rangeVal[1])) {
+                    yav.highlight(el, yav_config.inputclasserror); 
+                    err = myRule.alertMsg;
+                }
+            }
+        }
+    } else if (myRule.ruleName=='regexp') {
+        reg = new RegExp(myRule.comparisonValue);
+        if ( !reg.test(el.value) ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            err = myRule.alertMsg;
+        }
+    } else if (myRule.ruleName=='integer') {
+        err = yav.checkInteger(el, myRule);
+    } else if (myRule.ruleName=='double') {
+        err = yav.checkDouble(el, myRule);
+    } else if (myRule.ruleName=='date') {
+        err = yav.checkDate(el, myRule);
+    } else if (myRule.ruleName=='date_lt') {
+        err = yav.checkDateLessThan(el, myRule, false);
+    } else if (myRule.ruleName=='date_le') {
+        err = yav.checkDateLessThan(el, myRule, true);
+    } else if (myRule.ruleName=='keypress') {
+        // do nothing
+    } else if (myRule.ruleName=='empty') {
+        if ( el.value!=null && el.value!='' ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            err = myRule.alertMsg;
+        }
+    } else {
+        yav.debug('DEBUG: rule ' + myRule.ruleName + ' not supported for ' + el.type);
+    }
+    return err;
+},
+
+checkInteger: function (el, myRule) {
+    reg = new RegExp("^[-+]{0,1}[0-9]*$");
+    if ( !reg.test(el.value) ) {
+        yav.highlight(el, yav_config.inputclasserror);
+        return myRule.alertMsg;
+    }
+},
+
+checkDouble: function (el, myRule) {
+    var sep = yav_config.DECIMAL_SEP;
+    reg = new RegExp("^[-+]{0,1}[0-9]*[" + sep + "]{0,1}[0-9]*$");
+    if ( !reg.test(el.value) ) {
+        yav.highlight(el, yav_config.inputclasserror);
+        return myRule.alertMsg;
+    }
+},
+
+checkDate: function (el, myRule) {
+    error = null;
+    if (el.value!='') {
+        var dateFormat = yav_config.DATE_FORMAT;
+        ddReg = new RegExp("dd");
+        MMReg = new RegExp("MM");
+        yyyyReg = new RegExp("yyyy");
+        if ( !ddReg.test(dateFormat) || !MMReg.test(dateFormat) || !yyyyReg.test(dateFormat)  ) {
+            yav.debug('DEBUG: locale format ' + dateFormat + ' not supported');
+        } else {
+            ddStart = dateFormat.indexOf('dd');
+            MMStart = dateFormat.indexOf('MM');
+            yyyyStart = dateFormat.indexOf('yyyy');
+        }
+        strReg = dateFormat.replace('dd','[0-9]{2}').replace('MM','[0-9]{2}').replace('yyyy','[0-9]{4}');
+        reg = new RegExp("^" + strReg + "$");
+        if ( !reg.test(el.value) ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            error = myRule.alertMsg;
+        } else {
+            dd   = el.value.substring(ddStart, ddStart+2);
+            MM   = el.value.substring(MMStart, MMStart+2);
+            yyyy = el.value.substring(yyyyStart, yyyyStart+4);
+            if ( !yav.checkddMMyyyy(dd, MM, yyyy) ) {
+                yav.highlight(el, yav_config.inputclasserror);
+                error = myRule.alertMsg;
+            }
+        }
+    }
+    return error;
+},
+
+checkDateLessThan: function (el, myRule, isEqualAllowed) {
+    error = null;
+    var isDate = yav.checkDate(el, myRule)==null ? true : false;
+    if ( isDate && el.value!='' ) {
+        var dateFormat = yav_config.DATE_FORMAT;
+        ddStart = dateFormat.indexOf('dd');
+        MMStart = dateFormat.indexOf('MM');
+        yyyyStart = dateFormat.indexOf('yyyy');
+        dd   = el.value.substring(ddStart, ddStart+2);
+        MM   = el.value.substring(MMStart, MMStart+2);
+        yyyy = el.value.substring(yyyyStart, yyyyStart+4);
+        myDate = "" + yyyy + MM + dd;
+        strReg = dateFormat.replace('dd','[0-9]{2}').replace('MM','[0-9]{2}').replace('yyyy','[0-9]{4}');
+        reg = new RegExp("^" + strReg + "$");
+        var isMeta = myRule.comparisonValue.indexOf('$')==0 
+            ? true
+            : false;
+        var comparisonDate = '';
+        if (isMeta) {
+            toSplit = myRule.comparisonValue.substr(1);
+            tmp = toSplit.split(':');
+            if (tmp.length == 2) {
+                comparisonDate = yav.getField(yav.f, tmp[0]).value;
+            } else {
+                comparisonDate = yav.getField(yav.f, myRule.comparisonValue.substr(1)).value;
+            }
+        } else {
+            comparisonDate = myRule.comparisonValue;
+        }
+        if ( !reg.test(comparisonDate) ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            error = myRule.alertMsg;
+        } else {
+            cdd   = comparisonDate.substring(ddStart, ddStart+2);
+            cMM   = comparisonDate.substring(MMStart, MMStart+2);
+            cyyyy = comparisonDate.substring(yyyyStart, yyyyStart+4);
+            cDate = "" + cyyyy + cMM + cdd;
+            if (isEqualAllowed) {
+                if ( !yav.checkddMMyyyy(cdd, cMM, cyyyy) || myDate>cDate ) {
+                    yav.highlight(el, yav_config.inputclasserror);
+                    error = myRule.alertMsg;
+                }
+            } else {
+                if ( !yav.checkddMMyyyy(cdd, cMM, cyyyy) || myDate>=cDate ) {
+                    yav.highlight(el, yav_config.inputclasserror);
+                    error = myRule.alertMsg;
+                }
+            }
+        }
+    } else {
+        if ( el.value!='' ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            error = myRule.alertMsg;
+        }
+    }
+    return error;
+},
+
+checkEqual: function (el, myRule) {
+    error = null;
+    var isMeta = myRule.comparisonValue.indexOf('$')==0 
+        ? true
+        : false;
+    var comparisonVal = '';
+    if (isMeta) {
+        toSplit = myRule.comparisonValue.substr(1);
+        tmp = toSplit.split(':');
+        if (tmp.length == 2) {
+            comparisonVal = yav.getField(yav.f, tmp[0]).value;
+        } else {
+            comparisonVal = yav.getField(yav.f, myRule.comparisonValue.substr(1)).value;
+        }
+    } else {
+        comparisonVal = myRule.comparisonValue;
+    }
+    if ( el.value!=comparisonVal ) {
+        yav.highlight(el, yav_config.inputclasserror);
+        error = myRule.alertMsg;
+    }
+    return error;
+},
+
+checkNotEqual: function (el, myRule) {
+    error = null;
+    var isMeta = myRule.comparisonValue.indexOf('$')==0 
+        ? true
+        : false;
+    var comparisonVal = '';
+    if (isMeta) {
+        toSplit = myRule.comparisonValue.substr(1);
+        tmp = toSplit.split(':');
+        if (tmp.length == 2) {
+            comparisonVal = yav.getField(yav.f, tmp[0]).value;
+        } else {
+            comparisonVal = yav.getField(yav.f, myRule.comparisonValue.substr(1)).value;
+        }
+    } else {
+        comparisonVal = myRule.comparisonValue;
+    }
+    if ( el.value==comparisonVal ) {
+        yav.highlight(el, yav_config.inputclasserror);
+        error = myRule.alertMsg;
+    }
+    return error;
+},
+
+checkddMMyyyy: function (dd, MM, yyyy) {
+    retVal = true;
+    if (    (dd<1) || (dd>31) || (MM<1) || (MM>12) ||
+            (dd==31 && (MM==2 || MM==4 || MM==6 || MM==9 || MM==11) ) ||
+            (dd >29 && MM==2) ||
+            (dd==29 && (MM==2) && ((yyyy%4 > 0) || (yyyy%4==0 && yyyy%100==0 && yyyy%400>0 )) )) {
+       retVal = false;
+    }
+    return retVal;
+},
+
+checkCheckbox: function (el, myRule) {
+    if (myRule.ruleName=='required') {
+        if ( !el.checked ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            return myRule.alertMsg;
+        }
+    } else if (myRule.ruleName=='equal') {
+        if ( !el.checked || el.value!=myRule.comparisonValue ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            return myRule.alertMsg;
+        }
+    } else if (myRule.ruleName=='notequal') {
+        if ( el.checked && el.value==myRule.comparisonValue ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            return myRule.alertMsg;
+        }
+    } else {
+        yav.debug('DEBUG: rule ' + myRule.ruleName + ' not supported for ' + el.type);
+    }
+},
+
+checkSelOne: function (el, myRule) {
+    if (myRule.ruleName=='required') {
+        var found = false;
+        var inx = el.selectedIndex;
+        if(inx>=0 && el.options[inx].value) {
+            found = true;
+        }
+        if ( !found ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            return myRule.alertMsg;
+        }
+    } else if (myRule.ruleName=='equal') {
+        var found = false;
+        var inx = el.selectedIndex;
+        if(inx>=0 && el.options[inx].value==myRule.comparisonValue) {
+            found = true;
+        }
+        if ( !found ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            return myRule.alertMsg;
+        }
+    } else if (myRule.ruleName=='notequal') {
+        var found = false;
+        var inx = el.selectedIndex;
+        if(inx>=0 && el.options[inx].value!=myRule.comparisonValue) {
+            found = true;
+        }
+        if ( !found ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            return myRule.alertMsg;
+        }
+    } else {
+        yav.debug('DEBUG: rule ' + myRule.ruleName + ' not supported for ' + el.type);
+    }
+},
+
+checkSelMul: function (el, myRule) {
+    if (myRule.ruleName=='required') {
+        var found = false;
+        opts = el.options;
+        for(var i=0; i<opts.length; i++) {
+            if(opts[i].selected && opts[i].value) {
+                found = true;
+                break;
+            }
+        }
+        if ( !found ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            return myRule.alertMsg;
+        }
+    } else if (myRule.ruleName=='equal') {
+        var found = false;
+        opts = el.options;
+        for(var i=0; i<opts.length; i++) {
+            if(opts[i].selected && opts[i].value==myRule.comparisonValue) {
+                found = true;
+                break;
+            }
+        }
+        if ( !found ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            return myRule.alertMsg;
+        }
+    } else if (myRule.ruleName=='notequal') {
+        var found = false;
+        opts = el.options;
+        for(var i=0; i<opts.length; i++) {
+            if(opts[i].selected && opts[i].value!=myRule.comparisonValue) {
+                found = true;
+                break;
+            }
+        }
+        if ( !found ) {
+            yav.highlight(el, yav_config.inputclasserror);
+            return myRule.alertMsg;
+        }
+    } else {
+        yav.debug('DEBUG: rule ' + myRule.ruleName + ' not supported for ' + el.type);
+    }
+},
+
+debug: function (msg) {
+   if (yav_config.debugmode) {
+        alert(msg);
+   }
+},
+
+strTrim: function (str) {
+    return str.replace(/^\s+/,'').replace(/\s+$/,'');
+},
+
+makeRules: function (strRules) {
+    var rules=new Array();
+    if (strRules.length) {
+        for(var i=0; i<strRules.length; i++) {
+            rules[i] = yav.splitRule(strRules[i]);
+        }
+    } else {
+        rules[0] = yav.splitRule(strRules);
+    }
+    return rules;
+},
+
+splitRule: function (strRule) {
+    var retval = null;
+    if (strRule!=yav.undef) {
+        params = strRule.split(yav_config.RULE_SEP);
+        switch (params.length) {
+            case 2:
+                retval = new yav.rule(params[0], params[1], null, null, null);
+                break;
+            case 3:
+                if (yav.threeParamRule(params[1])) {
+                    retval = new yav.rule(params[0], params[1], params[2], null, null);
+                } else if (params[2]=='pre-condition' || params[2]=='post-condition' || params[2]=='andor-operator') {
+                    retval = new yav.rule(params[0], params[1], null, 'foo', params[2]);
+                } else {
+                    retval = new yav.rule(params[0], params[1], null, params[2], null);
+                }
+                break;
+            case 4:
+                if (yav.threeParamRule(params[1]) && (params[3]=='pre-condition' || params[3]=='post-condition' || params[3]=='andor-operator')) {
+                    retval = new yav.rule(params[0], params[1], params[2], 'foo', params[3]);
+                } else {
+                    retval = new yav.rule(params[0], params[1], params[2], params[3], null);
+                }
+                break;
+            default:
+                yav.debug('DEBUG: wrong definition of rule');
+        }
+    }
+    return retval;
+},
+
+threeParamRule: function (ruleName) {
+    return (ruleName=='equal' || ruleName=='notequal' || ruleName=='minlength' || ruleName=='maxlength' || ruleName=='date_lt' || ruleName=='date_le' || ruleName=='implies' || ruleName=='regexp' || ruleName=='numrange' || ruleName=='keypress' || ruleName=='and' || ruleName=='or' || ruleName=='custom' || ruleName=='mask')
+        ? true
+        : false;
+},
+
+highlight: function (el, clazz) {
+	if (yav.rulesEvt.length>0 && clazz==yav_config.inputclasserror) {
+		return;
+	}
+    if (!yav.isFocusSet && clazz==yav_config.inputclasserror) {
+        if (  (!el.type) && (el.length>0) && (el.item(0).type=='radio') ) {
+            el.item(0).focus();
+        } else {
+            el.focus();   
+        }
+        yav.isFocusSet = true;
+    }
+    if (el!=yav.undef && yav_config.inputhighlight) {
+        if ( yav_config.multipleclassname ) {
+            yav.highlightMultipleClassName(el, clazz);
+        } else {
+            el.className = clazz;
+        }        
+    }
+},
+
+highlightMultipleClassName: function (el, clazz) {
+    re = new RegExp("(^|\\s)("+yav_config.inputclassnormal+"|"+yav_config.inputclasserror+")($|\\s)");
+    el.className = yav.strTrim (
+    ( (typeof el.className != "undefined")
+        ? el.className.replace(re, "")
+        : ""
+    ) + " " + clazz );
+},
+
+getDefaultMessage: function (el, nameDisplayed, ruleName, comparisonValue) {
+    if (nameDisplayed.length == 0) {
+        nameDisplayed = el;
+    }
+    var msg = yav_config.DEFAULT_MSG;
+    if (ruleName=='required') {
+        msg = yav_config.REQUIRED_MSG.replace('{1}', nameDisplayed);
+    } else if (ruleName=='minlength') {
+        msg = yav_config.MINLENGTH_MSG.replace('{1}', nameDisplayed).replace('{2}', comparisonValue);
+    } else if (ruleName=='maxlength') {
+        msg = yav_config.MAXLENGTH_MSG.replace('{1}', nameDisplayed).replace('{2}', comparisonValue);
+    } else if (ruleName=='numrange') {
+        msg = yav_config.NUMRANGE_MSG.replace('{1}', nameDisplayed).replace('{2}', comparisonValue);
+    } else if (ruleName=='date') {
+        msg = yav_config.DATE_MSG.replace('{1}', nameDisplayed);
+    } else if (ruleName=='numeric') {
+        msg = yav_config.NUMERIC_MSG.replace('{1}', nameDisplayed);
+    } else if (ruleName=='integer') {
+        msg = yav_config.INTEGER_MSG.replace('{1}', nameDisplayed);
+    } else if (ruleName=='double') {
+        msg = yav_config.DOUBLE_MSG.replace('{1}', nameDisplayed);
+    } else if (ruleName=='equal') {
+        msg = yav_config.EQUAL_MSG.replace('{1}', nameDisplayed).replace('{2}', yav.getComparisonDisplayed(comparisonValue));
+    } else if (ruleName=='notequal') {
+        msg = yav_config.NOTEQUAL_MSG.replace('{1}', nameDisplayed).replace('{2}', yav.getComparisonDisplayed(comparisonValue));
+    } else if (ruleName=='alphabetic') {
+        msg = yav_config.ALPHABETIC_MSG.replace('{1}', nameDisplayed);
+    } else if (ruleName=='alphanumeric') {
+        msg = yav_config.ALPHANUMERIC_MSG.replace('{1}', nameDisplayed);
+    } else if (ruleName=='alnumhyphen') {
+        msg = yav_config.ALNUMHYPHEN_MSG.replace('{1}', nameDisplayed);
+    } else if (ruleName=='alnumhyphenat') {
+        msg = yav_config.ALNUMHYPHENAT_MSG.replace('{1}', nameDisplayed);
+    } else if (ruleName=='alphaspace') {
+        msg = yav_config.ALPHASPACE_MSG.replace('{1}', nameDisplayed);
+    } else if (ruleName=='email') {
+        msg = yav_config.EMAIL_MSG.replace('{1}', nameDisplayed);
+    } else if (ruleName=='regexp') {
+        msg = yav_config.REGEXP_MSG.replace('{1}', nameDisplayed).replace('{2}', comparisonValue);
+    } else if (ruleName=='date_lt') {
+        msg = yav_config.DATE_LT_MSG.replace('{1}', nameDisplayed).replace('{2}', yav.getComparisonDisplayed(comparisonValue));
+    } else if (ruleName=='date_le') {
+        msg = yav_config.DATE_LE_MSG.replace('{1}', nameDisplayed).replace('{2}', yav.getComparisonDisplayed(comparisonValue));
+    } else if (ruleName=='empty') {
+        msg = yav_config.EMPTY_MSG.replace('{1}', nameDisplayed);
+    }
+    return msg;
+},
+
+getComparisonDisplayed: function (comparisonValue) {
+    comparisonDisplayed = comparisonValue;
+    if (comparisonValue.substring(0, 1)=='$') {
+        comparisonValue = comparisonValue.substring(1, comparisonValue.length);
+        tmp = comparisonValue.split(':');
+        if (tmp.length == 2) {
+            comparisonDisplayed = tmp[1];
+        } else {
+            comparisonDisplayed = comparisonValue;
+        }
+    }
+    return comparisonDisplayed;
+},
+
+isKeyAllowed: function (keyCode, charsAllowed) {
+    retval = false;
+    var aCharCode;
+    if (keyCode==8 || keyCode==0) {
+        retval = true;
+    } else {
+        for(var i=0; i<charsAllowed.length; i++) {
+            aCharCode = charsAllowed.charCodeAt(i);
+            if (aCharCode==keyCode) {
+                retval = true;
+                break;
+            }
+        }
+    }
+    return retval;
+},
+
+getField: function (formObj, fieldName){
+	var retval = null;
+	if (formObj.elements[fieldName]){
+		retval = formObj.elements[fieldName];
+	}else if (yav.get(fieldName)){
+		retval = yav.get(fieldName);
+	}
+	return retval;
+},
+
+get: function(id) {
+	return document.getElementById(id);
+},
+
+unformatNumber: function (viewValue){
+    var retval = viewValue.replace(yav_config.THOUSAND_SEP, ""); 
+    retval = retval.replace(yav_config.DECIMAL_SEP, ".");
+    return retval;
+},
+
+deleteInline: function (msg) {
+    if (msg.indexOf('__inline__')==-1) {
+        return msg;
+    } else {
+        return msg.substring(0, msg.indexOf('__inline__'));
+    }
+},
+
+addEvent: function(elm, evType, fn) {
+    if (elm.addEventListener) {
+        elm.addEventListener(evType, fn, false);
+        return true;
+    }
+    else if (elm.attachEvent) {
+		// The main drawback of the Microsoft event registration model is that 
+		// attachEvent() creates a reference to the function and does not copy it.
+		// so these lines (commented out) don't work in some circumstances.
+        //var r = elm.attachEvent('on'+evType, fn);
+        //return r;
+		elm['on' + evType] = fn;
+    }
+    else {
+        elm['on' + evType] = fn;
+	}
+},
+
+call: function(elmName, evType, fn) {
+	var elm = document.forms[yav.formEvt].elements[elmName];
+	addEvent(elm, evType, fn);
+}
+
+
+}//end namespace 'yav'
+
+Function.prototype.bindAsEventListener = function(object) {
+  var __method = this;
+  return function(event) {
+    return __method.call(object, event || window.event);
+  }
+}

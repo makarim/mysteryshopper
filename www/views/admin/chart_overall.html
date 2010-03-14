@@ -20,7 +20,6 @@ function getStore(c_id){
 			var obj = eval('(' + r.d + ')');   
 			var selobj = $('store_container');
 			for(var i in obj){
-				//if(i==0) selobj.options[0] = new Option(obj[i].cs_name, obj[i].cs_id) //replace 1st option with a new one
 				selobj.options[i]=new Option(obj[i].cs_abbr+' '+obj[i].cs_name, obj[i].cs_id) //add a new option to the end of SELECT
 			}
 			
@@ -47,7 +46,7 @@ function getStore(c_id){
 							<form action="<?php echo $www_site_url?>/admin.php" method="GET">
 							<input type="hidden" name="action" value="chart">				
 							<input type="hidden" name="view" value="overall">					
-							<table width="100%">
+							<table width="100%" border="0">
 								<tr>
 									<td>cs_id:</td>
 									<td align="left"><select name="c_id" onchange="getStore(this.options[this.selectedIndex].value);">
@@ -60,13 +59,25 @@ function getStore(c_id){
 									<td align="left"><select id="store_container" name="cs_id">
 							<option value="">--</option>
 							</select></td>
+									
+									<td align="left">
+									<input type="checkbox" name="group[]" value="Service" <?php if(strpos($con['group'],'Service')!==false) echo "checked";?>>服务
+									<input type="checkbox" name="group[]" value="Environment" <?php if(strpos($con['group'],'Environment')!==false) echo "checked";?>>环境
+									<input type="checkbox" name="group[]" value="Product" <?php if(strpos($con['group'],'Product')!==false) echo "checked";?>>产品
+									
+									</td>
 									<td rowspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
 								</tr>
 								<tr>
 									<td align="right"><?php echo lang('assignment_sdate')?>:</td>
 			
 									<td colspan="2" align="left"><input type="text" name="a_sdate" onclick="showcalendar();" value="<?php echo $con['a_sdate']?>" class="textfield" /> <?php echo lang('to')?> <input type="text" name="a_edate" onclick="showcalendar();" value="<?php echo $con['a_edate']?>" class="textfield" /></td>
-									
+									<td align="right"><?php echo lang('Type')?>:</td>
+									<td align="left"><select name="scoretype">
+							<option value="Summary" <?php if($con['scoretype']=='Summary') echo "selected";?>>Summary Score</option>
+							<option value="Marketing" <?php if($con['scoretype']=='Marketing') echo "selected";?>>Marketing Score</option>
+							<option value="Auditing" <?php if($con['scoretype']=='Auditing') echo "selected";?>>Auditing Score</option>
+							</select></td>
 								</tr>
 							</table>
 							</form>
@@ -88,7 +99,7 @@ function getStore(c_id){
 		var so = new SWFObject("<?php echo $www_site_url?>/public/flash/amcolumn.swf", "amcolumn", "100%", "450px", "8", "#ffffff");
 		so.addVariable("path", "<?php echo $www_site_url?>/public/flash/");
 		so.addVariable("settings_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amcolumn_settings.xml?102"));
-		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php/chart/overalldata/c_id/<?php echo $con['c_id']?>"));
+		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php/chart/overalldata/c_id/<?php echo $con['c_id']?>/scoretype/<?php echo $con['scoretype']?>/group/<?php echo $con['group']?>"));
 		so.addVariable("preloader_color", "#ffffff");
 		so.write("flashcontent");
 		// ]]>
