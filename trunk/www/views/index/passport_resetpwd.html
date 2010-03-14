@@ -1,9 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><?php echo $web_title?></title>
-<LINK href="<?php echo $www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+
+<?php include_once("header.html")?>
 <script src="<?php echo $www_site_url?>/public/js/yav2.0/yav.js"></script>
 
 <script src="<?php echo $www_site_url?>/public/js/yav2.0/yav-config-<?php echo $selected_lang?>.js"></script>
@@ -29,13 +25,21 @@ rules[2]='newpwd2|equal|$newpwd1|<?php echo lang('pwdnotsame')?>';
 yav.addHelp('new1', '<?php echo lang('insertyouranswer')?>');
 
 
-
+window.onload = yav.init('resetpwdform', rules);
 
 </SCRIPT>
 
-</head>
-<body onload="yav.init('resetpwdform', rules);">
-<?php include_once("header.html")?>
+<div id="wrap">  <br />
+  <div class="tabsA">
+    	<div class="left">
+        	<div class="right">用户登录</div>
+    </div>
+      <div class="des">还不是注册用户？请点击<a href="#">这里</a>免费注册！</div>
+  </div>
+  <div class="regInfo">
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
 <FORM name="resetpwdform" method="POST" action="<?php echo $www_site_url?>/index.php" onsubmit="return checkOnSubmit('resetpwdform', rules);" >
 <input type="hidden" name="action" value="passport">
 <input type="hidden" name="op" value="resetpwd">
@@ -49,7 +53,8 @@ yav.addHelp('new1', '<?php echo lang('insertyouranswer')?>');
 <TR><TD colspan="2"><INPUT class="button" type=submit value="<?php echo lang('submit')?>" /> <br></TD><TD></TD></TR>
 </TABLE>
 </form>
-
+<p>&nbsp;</p>
+  </div>
+</div>
+</div>
 <?php include_once("footer.html")?>
-</body>
-</html>

@@ -1,12 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><?php echo $web_title?></title>
-<LINK href="<?php echo $www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
-<script src="<?php echo $www_site_url?>/public/js/yav2.0/yav.js"></script>
 
-<script src="<?php echo $www_site_url?>/public/js/yav2.0/yav-config-<?php echo $selected_lang?>.js"></script>
+<?php include_once("header.html")?>
 
 
 <SCRIPT>
@@ -24,24 +17,35 @@ var rules=new Array();
 rules[0]='user|required|<?php echo lang('helpmsg1')?>';
 
 yav.addHelp('user', '<?php echo lang('helpmsg1')?>');
-
+window.onload = yav.init('forgetpwdform', rules);
 </SCRIPT>
-
-</head>
-<body onload="yav.init('forgetpwdform', rules);">
-<?php include_once("header.html")?>
+<div id="wrap">  <br />
+  <div class="tabsA">
+    	<div class="left">
+        	<div class="right">用户登录</div>
+    </div>
+      <div class="des">还不是注册用户？请点击<a href="<?php echo $www_site_url?>/index.php/passport/reg">这里</a>免费注册！</div>
+  </div>
+  <div class="regInfo">
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
 <FORM name="forgetpwdform" method="POST" action="<?php echo $www_site_url?>/index.php" onsubmit="return checkOnSubmit('forgetpwdform', rules);" >
 <input type="hidden" name="action" value="passport">
 <input type="hidden" name="op" value="emailpwd">
-<TABLE valign=top>
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0">
 
-<TR><TD><?php echo lang('user')?>:</TD><TD><INPUT class="textfield" type=text name="user" />&nbsp;&nbsp;<span id="errorsDiv_user"></span></TD></TR>
+<TR><TD width="40%" class="text"><?php echo lang('user')?>:</TD><TD width="60%"><INPUT class="textfield" type=text name="user" />&nbsp;&nbsp;<span id="errorsDiv_user"></span></TD></TR>
 
+<tr>
+        <td class="text">&nbsp;</td>
+        <td> <br /><input name="imageField" type="image" id="imageField" src="<?php echo $www_site_url?>/public/images/btn_getpwd.gif" alt="找回密码" />       </td>
+      </tr>
 
-<TR><TD colspan="2"><INPUT class="button" type=submit value="<?php echo lang('submit')?>" /> 
-<INPUT class="button" type="button" value="<?php echo lang('back')?>" onclick="history.go(-1)"/></TD><TD></TD></TR>
 </TABLE>
 </form>
+<p>&nbsp;</p>
+  </div>
+</div>
+</div>
 <?php include_once("footer.html")?>
-</body>
-</html>

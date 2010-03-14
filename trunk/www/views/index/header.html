@@ -1,33 +1,26 @@
-<div id="header">
-<img src="<?php echo $www_site_url;?>/public/images/logo.png">
-<div id="language"><?php echo lang('selectlanguage');?>:<select name="select_lang" onchange="window.location.href='<?php echo $www_site_url;?>/index.php/index/setlang/'+this.options[this.selectedIndex].value">
-<option value="zh-cn" <?php if($selected_lang=='zh-cn') echo "selected"; ?>><?php echo lang('zh-cn');?></option>
-<option value="zh-tw" <?php if($selected_lang=='zh-tw') echo "selected"; ?>><?php echo lang('zh-tw');?></option>
-<option value="en" <?php if($selected_lang=='en') echo "selected"; ?>><?php echo lang('en');?></option>
-</select></div>
-</div>
-<div id="menu"> 
-<ul>
-<li>
-  <a <?php if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='index' && ($_GET['view']=='defaults' or $_GET['view']=='')) echo "class='active'";?> href="<?php echo $www_site_url;?>/index.php/index"><?php echo lang('menu1');?></a>
-</li><li>
-  <a <?php if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='passport' && $_GET['view']=='login') echo "class='active'";?> href="<?php echo $www_site_url;?>/index.php/passport/login"><?php echo lang('menu2');?></a>
-</li>
-<li>
-  <a <?php if(isset($_GET['action']) && isset($_GET['view']) && $_GET['action']=='passport' && $_GET['view']=='reg') echo "class='active'";?> href="<?php echo $www_site_url;?>/index.php/passport/reg"><?php echo lang('menu3');?></a> 
-</li>
-<?php if(isset($user['user_id'])&&$user['user_id']=='1'){?>
-<li>    
-  <a href="<?php echo $www_site_url;?>/admin.php"><?php echo lang('menu4');?></a>
-</li>
-<?php }?>
-<li>    
-  <a href="<?php echo $www_site_url;?>/index.php/index/help"><?php echo lang('menu5');?></a>
-</li>
-<?php if(isset($user) && $user['user']){?>
-<li>    
-  <a href="<?php echo $www_site_url;?>/index.php/passport/logout"><?php echo lang('menu6');?></a>
-</li>
-<?php } ?>
-</ul>  
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><?php echo $web_title?></title>
+<link href="<?php echo $www_site_url?>/public/style/base.css" rel="stylesheet" type="text/css" />
+<script src="<?php echo $www_site_url?>/public/js/yav2.0/yav.js"></script>
+<script src="<?php echo $www_site_url?>/public/js/yav2.0/yav-config-<?php echo $selected_lang?>.js"></script>
+<script src="<?php echo $www_site_url?>/public/js/md5.js"></script>
+<script src="<?php echo $www_site_url?>/public/js/ajax.js"></script>
+</head>
+
+<body <?php if(isset($scr) && ($scr=='index.php')) echo 'class="indexbody"'; else echo 'class="contentbody"'; ?> >
+<div id="hearder">
+    <div id="logo"><a href="/index.php"><img border="0" src="<?php echo $www_site_url?>/public/images/<?php if(isset($scr) && ($scr=='index.php')) echo 'logo.gif'; else echo 'logo2.gif'; ?>" alt="SPOTSHOPPERS.COM" width="136" height="104" /></a></div>
+	<div id="top">
+    	<div id="language"><a href="#"><img src="<?php echo $www_site_url?>/public/images/icon_language_cn.gif" alt="中文版" width="23" height="14" border="0" /></a> <a href="#"><img src="<?php echo $www_site_url?>/public/images/icon_language_en.gif" alt="ENGLISH VERSION" width="21" height="14" border="0" /></a></div>
+        <div id="login"><a href="/index.php/passport/reg">免费注册</a> | <a href="/index.php/passport/login">登录</a></div>
+        <?php if(isset($user)&&$user){?><div id="welcome">晚上好，亲爱的 <span style="color:#000000; font-weight:bold;"><?php echo $user['user_nickname'];?></span> 用户<br />
+        您已完成 <font color="#000000">3</font> 个任务
+        <?php }?>
+		
+  		<div id="tel"></div>
+
+    </div>
 </div>
