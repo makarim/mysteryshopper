@@ -444,7 +444,13 @@ float:left;
       background-position:0% -29px;
       }
     #tabsD a:hover span {
-      background-position:100% -29px;
+     	 background-position:100% -29px;
+      }   
+     #tabsD .on span {
+      	background-position:100% -29px;
+      }    
+       #tabsD .on a {
+      	background-position:0% -29px;
       }
 
 /*注册步骤*/

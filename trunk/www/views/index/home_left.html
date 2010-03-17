@@ -1,0 +1,42 @@
+
+<div class="adminmenupanel">
+        
+    	<div class="panel">
+        		<div class="title"><span>用户控制面板</span></div>
+	      		<div class="content">
+	            	<li <?php if($view=='defaults') echo 'class="selected"';?>><a href="/index.php/home">首页</a></li>
+	
+	            	<li <?php if($view=='msgbox') echo 'class="selected"';?>><a href="/index.php/home/msgbox">收件箱</a></li>
+	            	<li <?php if($view=='history') echo 'class="selected"';?>><a href="/index.php/home/history">历史任务</a></li>
+	                <li <?php if($view=='allassignment') echo 'class="selected"';?>><a href="/index.php/home/allassignment">全部任务</a></li>
+	            	<li <?php if($view=='mydetail') echo 'class="selected"';?>><a href="/index.php/home/mydetail">我的资料</a></li>
+	            </div>
+
+        </div>
+        
+    	<div class="panel">
+        	<div class="title"><span>本月最受好评</span></div>
+            <div class="content">
+       		  	<div class="mission">
+               	  	<div class="logo"><p><a href="#"><img src="images/tmp_01.gif" width="68" height="68" border="0" /></a></p></div>
+                	<div class="des"><span style="color:#000;">任务：</span><b><a href="#">必胜客每月调查</a></b><br />
+
+		                  商户：必胜客<br />
+		                分店：徐家汇
+		             </div>
+              	</div>
+                <div class="clear"></div>
+            </div>
+      	</div>
+      
+      		<div class="panel">
+        		<div class="title"><span>本月最佳神秘顾客</span></div>
+
+	            <div class="content">
+		              <div align="center"><a href="#"><img src="images/tmp_01.gif" alt="" width="68" height="68" border="0" /></a><br />
+		                <br />
+		                <a href="#">土豆</a>
+		              </div>
+	            </div>
+    		</div>
+</div>
