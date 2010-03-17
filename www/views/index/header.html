@@ -16,12 +16,12 @@
     <div id="logo"><a href="/index.php"><img border="0" src="<?php echo $www_site_url?>/public/images/<?php if(isset($scr) && ($scr=='index.php')) echo 'logo.gif'; else echo 'logo2.gif'; ?>" alt="SPOTSHOPPERS.COM" width="136" height="104" /></a></div>
 	<div id="top">
     	<div id="language"><a href="#"><img src="<?php echo $www_site_url?>/public/images/icon_language_cn.gif" alt="中文版" width="23" height="14" border="0" /></a> <a href="#"><img src="<?php echo $www_site_url?>/public/images/icon_language_en.gif" alt="ENGLISH VERSION" width="21" height="14" border="0" /></a></div>
-        <div id="login"><a href="/index.php/passport/reg">免费注册</a> | <a href="/index.php/passport/login">登录</a></div>
-        <?php if(isset($user)&&$user){?><div id="welcome">晚上好，亲爱的 <span style="color:#000000; font-weight:bold;"><?php echo $user['user_nickname'];?></span> 用户<br />
-        您已完成 <font color="#000000">3</font> 个任务
+        <div id="login"><a href="/index.php/passport/reg">免费注册</a> | <?php if($user){?><a href="/index.php/passport/logout">登出</a><?php }else{?><a href="/index.php/passport/login">登录</a><?php }?></div>
+        <?php if($user){?>
+        <div id="welcome">晚上好，亲爱的 <span style="color:#000000; font-weight:bold;"><?php echo $user['user_nickname'];?></span> 用户</div>
         <?php }?>
 		
-  		<div id="tel"></div>
+  		<div id="<?php if(isset($scr) && ($scr=='index.php')) echo "tel";else echo "tel2";?>"></div>
 
     </div>
 </div>

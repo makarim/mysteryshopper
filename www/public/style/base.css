@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 @import "my.css";
 * {
 	padding:0;
@@ -251,10 +251,10 @@ li {
 	height:15px;
 }
 
-.client {
-	background::url(../images/icon_ear.gif) no-repeat;
-	height:37px;
-	padding-left:20px;
+.shanghu {
+	background:url(../images/icon_ear.gif) no-repeat;
+	margin:10px 0 10px 0;
+	padding-left:30px;
 }
 .hangju {
 	margin:5px 0;
@@ -289,6 +289,22 @@ li {
 .mission .des {
 	padding:10px 0;
 	color:#999;
+}
+
+.missionDetail {
+	float:left;
+	width:550px;
+	padding:20px 0;
+	color:#999;
+}
+.missionDetailTable {
+}
+.missionDetailTable td {
+	background:#FFF;
+	padding:5px;
+}
+.missionDetailTable .title {
+	color:#000;
 }
 
 /*后台推荐评论*/
@@ -416,7 +432,7 @@ float:left;
       display:block;
       background:url("../images/tabright.gif") no-repeat right top;
       padding:5px 15px 4px 6px;
-      color:#FFF;
+      color:#000;
       }
     /* Commented Backslash Hack hides rule from IE5-Mac \*/
     #tabsD a span {float:none;}
