@@ -1,6 +1,101 @@
 
 <?php include_once("header.html")?>
 
+
+<div id="wrap">  <br />
+  <div class="tabsA">
+    	<div class="left">
+
+        	<div class="right">新用户注册</div>
+        </div>
+      <div class="des">已经是注册用户？请点击<a href="#">这里</a>登录！</div>
+  </div>
+  <div class="regStep clear"></div>
+  <div class="regInfo">
+
+<FORM name="registerform" id="registerform" method="POST" onsubmit="return checkOnSubmit('registerform', rules);" >
+<input type="hidden" name="action" value="passport">
+<input type="hidden" name="op" value="saveuser">
+<input type="hidden" name="reg_type" value="<?php echo $reg_type?>">
+
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0">
+<TR>
+<TD width="40%" class="text"></TD>
+<TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
+</TR
+<?php if($reg_type=='email') {?>
+<TR>
+<TD width="40%" class="text"><?php echo lang('email')?>:</TD>
+<TD width="60%"><div id="errorsDiv_email"></div><INPUT class="textfield" type="text" name="email" value="<?php echo $email?>" id="email" /></TD>
+</TR><?php } ?>
+<?php if($reg_type=='username') {?><TR>
+<TD width="120px"><?php echo lang('username')?>:</TD>
+<TD><div id="errorsDiv_username"></div><INPUT class="textfield" type="text" name="username"  value="<?php echo $username?>" id="username"/>
+</TD>
+</TR><?php } ?>
+<TR><TD class="text"><?php echo lang('pwd')?>:</TD>
+<TD><div id="errorsDiv_password"></div><INPUT class="textfield" type="password" name="password"  /></TD>
+</TR>
+<TR>
+<TD class="text"><?php echo lang('comfirmpwd')?>:</TD>
+<TD><div id="errorsDiv_comfirmpwd"></div><INPUT class="textfield" type="password" name="comfirmpwd"  /></TD>
+</TR>
+<?php if($reg_type=='username') {?>
+<TR>
+<TD class="text"><?php echo lang('pwdquestion')?>:</TD>
+<TD><div id="errorsDiv_question"></div><select class="textfield" id="question" name="question" title="<?php echo lang('pwdquestion')?>">
+
+			<option value="" selected="selected" ><?php echo lang('selectaquestion')?></option>
+
+			<option value="<?php echo lang('q1')?>" ><?php echo lang('q1')?></option>			
+
+			<option value="<?php echo lang('q2')?>" ><?php echo lang('q2')?></option>
+
+			<option value="<?php echo lang('q3')?>" ><?php echo lang('q3')?></option>
+
+			<option value="<?php echo lang('q4')?>" ><?php echo lang('q4')?></option>
+
+			<option value="<?php echo lang('q5')?>" ><?php echo lang('q5')?></option>
+
+			<option value="<?php echo lang('q6')?>" ><?php echo lang('q6')?></option>			
+
+			<option value="<?php echo lang('q7')?>" ><?php echo lang('q7')?></option>
+
+			<option value="<?php echo lang('q8')?>" ><?php echo lang('q8')?></option>
+
+			<option value="<?php echo lang('q9')?>" ><?php echo lang('q9')?></option>
+
+			<option value="<?php echo lang('q10')?>" ><?php echo lang('q10')?></option>
+			
+		</select></TD>
+		</TR>
+<TR>
+<TD class="text"><?php echo lang('youranswer')?>:</TD>
+<TD><div id="errorsDiv_answer"></div><INPUT class="textfield" type="text" name="answer" /></TD>
+</TR>
+<?php }?>
+
+<TR>
+<TD class="text"><?php echo lang('nickname')?>:</TD>
+<TD><div id="errorsDiv_nickname"></div><INPUT class="textfield" type="text" name="nickname" value="<?php echo $nickname?>" /></TD>
+</TR>
+<TR>
+<TD class="text"><?php echo lang('sex')?>:</TD>
+<TD><div id="errorsDiv_sex"></div><INPUT type="radio" name="sex" value="1" <?php if($select_sex==1) echo 'checked';?> /><?php echo lang('boy')?> <INPUT type="radio" name="sex" value="2" <?php if($select_sex==2) echo 'checked';?>/><?php echo lang('girl')?>&nbsp;&nbsp;</TD>
+</TR>
+
+
+<TR>
+<TD class="text"><?php echo lang('validatecode')?>:</TD>
+<TD><div id="errorsDiv_code"></div><INPUT type="text" name="code" class="textfield" style="width:60px"/><img id="codeimg" src="<?php echo $www_site_url?>/index.php/identifycode/generate" align="absmiddle" title="<?php echo lang('anotherone')?>" onClick="changeCode();" style="cursor:pointer"></TD>
+</TR>
+
+<TR><TD class="text">&nbsp;</TD><TD><INPUT  type="image"  src="<?php echo $www_site_url?>/public/images/btn_next.gif" value="<?php echo lang('signup')?>" name="registerbtn"/> 
+
+</TD></TR>
+</TABLE>
+</form>
+
 <SCRIPT>
 //only for test purposes
 function checkOnSubmit(formName, r) {
@@ -88,106 +183,10 @@ function changeCode() {
 	document.getElementById("codeimg").src = "<?php echo $www_site_url?>/index.php/identifycode/generate/" + num;
 	return false;
 }
-window.onload = yav.init('registerform', rules);
+window.onload = function(){
+	yav.init('registerform', rules);
+}
 </SCRIPT>
-
-<div id="wrap">  <br />
-  <div class="tabsA">
-    	<div class="left">
-
-        	<div class="right">新用户注册</div>
-        </div>
-      <div class="des">已经是注册用户？请点击<a href="#">这里</a>登录！</div>
-  </div>
-  <div class="regStep regStep2 clear"></div>
-  <div class="regInfo">
-
-<FORM name="registerform" id="registerform" method="POST" onsubmit="return checkOnSubmit('registerform', rules);" >
-<input type="hidden" name="action" value="passport">
-<input type="hidden" name="op" value="saveuser">
-<input type="hidden" name="reg_type" value="<?php echo $reg_type?>">
-
-<TABLE valign="top" cellspacing="5" border="0" width="600px">
-<TR>
-<TD colspan="2">
-<?php if($reg_type=='email') {?><INPUT class="button" type="button" value="<?php echo lang('regbyusername')?>" onclick="window.location.href='<?php echo $www_site_url?>/index.php/passport/reg/username'"/><?php } ?>
-<?php if($reg_type=='username') {?> <INPUT class="button" type="button" value="<?php echo lang('regbyemail')?>" onclick="history.go(-1);"/><?php }?>
-</TD>
-</TR>
-<?php if($reg_type=='email') {?>
-<TR>
-<TD width="120px"><?php echo lang('email')?>:</TD>
-<TD><div id="errorsDiv_email"></div><INPUT class="textfield" type="text" name="email" value="<?php echo $email?>" id="email" /></TD>
-</TR><?php } ?>
-<?php if($reg_type=='username') {?><TR>
-<TD width="120px"><?php echo lang('username')?>:</TD>
-<TD><div id="errorsDiv_username"></div><INPUT class="textfield" type="text" name="username"  value="<?php echo $username?>" id="username"/>
-</TD>
-</TR><?php } ?>
-<TR><TD><?php echo lang('pwd')?>:</TD>
-<TD><div id="errorsDiv_password"></div><INPUT class="textfield" type="password" name="password"  /></TD>
-</TR>
-<TR>
-<TD><?php echo lang('comfirmpwd')?>:</TD>
-<TD><div id="errorsDiv_comfirmpwd"></div><INPUT class="textfield" type="password" name="comfirmpwd"  /></TD>
-</TR>
-<?php if($reg_type=='username') {?>
-<TR>
-<TD><?php echo lang('pwdquestion')?>:</TD>
-<TD><div id="errorsDiv_question"></div><select class="textfield" id="question" name="question" title="<?php echo lang('pwdquestion')?>">
-
-			<option value="" selected="selected" ><?php echo lang('selectaquestion')?></option>
-
-			<option value="<?php echo lang('q1')?>" ><?php echo lang('q1')?></option>			
-
-			<option value="<?php echo lang('q2')?>" ><?php echo lang('q2')?></option>
-
-			<option value="<?php echo lang('q3')?>" ><?php echo lang('q3')?></option>
-
-			<option value="<?php echo lang('q4')?>" ><?php echo lang('q4')?></option>
-
-			<option value="<?php echo lang('q5')?>" ><?php echo lang('q5')?></option>
-
-			<option value="<?php echo lang('q6')?>" ><?php echo lang('q6')?></option>			
-
-			<option value="<?php echo lang('q7')?>" ><?php echo lang('q7')?></option>
-
-			<option value="<?php echo lang('q8')?>" ><?php echo lang('q8')?></option>
-
-			<option value="<?php echo lang('q9')?>" ><?php echo lang('q9')?></option>
-
-			<option value="<?php echo lang('q10')?>" ><?php echo lang('q10')?></option>
-			
-		</select></TD>
-		</TR>
-<TR>
-<TD><?php echo lang('youranswer')?>:</TD>
-<TD><div id="errorsDiv_answer"></div><INPUT class="textfield" type="text" name="answer" /></TD>
-</TR>
-<?php }?>
-
-<TR>
-<TD><?php echo lang('nickname')?>:</TD>
-<TD><div id="errorsDiv_nickname"></div><INPUT class="textfield" type="text" name="nickname" value="<?php echo $nickname?>" /></TD>
-</TR>
-<TR>
-<TD><?php echo lang('sex')?>:</TD>
-<TD><div id="errorsDiv_sex"></div><INPUT type="radio" name="sex" value="1" <?php if($select_sex==1) echo 'checked';?> /><?php echo lang('boy')?> <INPUT type="radio" name="sex" value="2" <?php if($select_sex==2) echo 'checked';?>/><?php echo lang('girl')?>&nbsp;&nbsp;</TD>
-</TR>
-
-
-<TR>
-<TD><?php echo lang('validatecode')?>:</TD>
-<TD><div id="errorsDiv_code"></div><INPUT type="text" name="code" class="textfield" style="width:60px"/><img id="codeimg" src="<?php echo $www_site_url?>/index.php/identifycode/generate" align="absmiddle" title="<?php echo lang('anotherone')?>" onClick="changeCode();" style="cursor:pointer"></TD>
-</TR>
-
-<TR><TD>&nbsp;</TD><TD></TD></TR>
-<TR><TD colspan="2"><INPUT class="button" type="submit" value="<?php echo lang('signup')?>" name="registerbtn"/> 
-<INPUT class="button" type=reset value="<?php echo lang('reset')?>"/> 
-<INPUT class="button" type="button" value="<?php echo lang('back')?>" onclick="history.go(-1)"/></TD></TR>
-</TABLE>
-</form>
-
 <p>&nbsp;</p>
   </div>
 </div>

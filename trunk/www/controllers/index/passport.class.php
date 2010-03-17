@@ -1,17 +1,23 @@
 <?php
-
+include_once("PassportModel.class.php");
 /**
  * @abstract 用户通行证类
  * @author zswu at
  *
  **/
 class passport {
-	
+	public $login_user;
+	public $tpl;
+	function __construct(){
+		global $tpl;
+		$this->tpl = $tpl;
+		$this->login_user = authenticate();	
+		$this->tpl->assign('user',$this->login_user);
+	}
 	function view_defaults(){
 		//header("Location: index.php/passport/login");
 	}
 	function view_login() {
-		global $tpl;
 		$forward = isset ( $_GET ['forward'] ) ? $_GET ['forward'] : '';
 		$_SESSION['_XppassSignKey'] = uniqid();
 		$show_code = 0;
@@ -21,9 +27,9 @@ class passport {
 		if(!empty($_COOKIE['Xppass_IC_CARD'])) {
 			header("location: ".$GLOBALS ['gSiteInfo'] ['www_site_url']."/index.php/passport/autologin");
 		}
-		$tpl->assign ( 'forward', urlencode ( $forward ) );
-		$tpl->assign ( 'show_code', $show_code );
-		$tpl->assign ( '_XppassSignKey', $_SESSION['_XppassSignKey'] );
+		$this->tpl->assign ( 'forward', urlencode ( $forward ) );
+		$this->tpl->assign ( 'show_code', $show_code );
+		$this->tpl->assign ( '_XppassSignKey', $_SESSION['_XppassSignKey'] );
 	}
 	function op_dologin() {
 		$forward = ! empty ( $_POST ['forward'] ) ? urldecode($_POST ['forward']) : '';		
@@ -46,7 +52,7 @@ class passport {
 		}
 		
 		$cookie_remember = ! empty ( $_POST ['remember'] ) ? $_POST ['remember'] : '0';
-		include_once("PassportModel.class.php");
+		
 		$passmod = new PassportModel();
 		$user_arr = $passmod->getUser($user);
 		if ($user_arr) {
@@ -143,7 +149,6 @@ class passport {
 
 				if (($time >= time () - 5 && $from == 'client') || ($from == 'user')) {
 					
-					include_once("PassportModel.class.php");
 					$passmod = new PassportModel();
 					$userindex = $passmod->getUser($user);
 					if ($userindex !== false) {
@@ -206,7 +211,6 @@ class passport {
 		}
 		if(SSO_MODE=='ticket'){
 			unset($_SESSION['_XppassOnlineUser']);
-			include_once("PassportModel.class.php");
 			$passmod = new PassportModel();
 			$passmod->deleteTicketById(session_id());
 		}
@@ -266,7 +270,6 @@ class passport {
 		$arr['ticket'] = $user['ticket'];
 		$arr['user'] = $user['user'];
 		$arr['data'] = json_encode($user);
-		include_once("PassportModel.class.php");
 		$passmod = new PassportModel();
 		$passmod->addTicket($arr);
 		$passmod->deleteExpiryTicket();
@@ -293,7 +296,6 @@ class passport {
 		} else {
 			die ( 'deny!' );
 		}
-		include_once("PassportModel.class.php");
 		$pasmod = new PassportModel();
 		$row = $pasmod->checkUser($user);
 		if ($row > 0) {
@@ -307,7 +309,6 @@ class passport {
 		exit();
 	}	
 	function view_reg() {
-		global $tpl;
 		$reg_type = 'email';
 		if(isset($_GET['reg']) && $_GET['reg']=='username') $reg_type = 'username';
 		
@@ -324,21 +325,24 @@ class passport {
 			$forward = isset ( $_GET ['forward'] ) ? $_GET ['forward'] : '';
 		}
 
-		$tpl->assign ( 'username', $_SESSION ['username'] );
-		$tpl->assign ( 'email', $_SESSION ['email'] );
-		$tpl->assign ( 'nickname', $_SESSION ['nickname'] );
-		$tpl->assign ( 'select_sex', $_SESSION ['sex'] );
+		$this->tpl->assign ( 'username', $_SESSION ['username'] );
+		$this->tpl->assign ( 'email', $_SESSION ['email'] );
+		$this->tpl->assign ( 'nickname', $_SESSION ['nickname'] );
+		$this->tpl->assign ( 'select_sex', $_SESSION ['sex'] );
 
-		$tpl->assign ( 'sponsor', $sponsor );
-		$tpl->assign ( 'forward', $forward );
-		$tpl->assign ( 'reg_type', $reg_type );
+		$this->tpl->assign ( 'sponsor', $sponsor );
+		$this->tpl->assign ( 'forward', $forward );
+		$this->tpl->assign ( 'reg_type', $reg_type );
 
 
 	}
 	function view_regok() {
 		
-		show_message(lang('registered'));
-		redirect($GLOBALS ['gSiteInfo'] ['www_site_url']. '/index.php');
+		//show_message(lang('registered'));
+		//redirect($GLOBALS ['gSiteInfo'] ['www_site_url']. '/index.php');
+	}
+	function view_regext(){
+		
 	}
 	function op_saveuser() {
 		$msg = '';
@@ -388,7 +392,6 @@ class passport {
 		}
 
 
-		include_once("PassportModel.class.php");
 		$passmod = new PassportModel();
 		if($passmod->checkNickname($_POST ['nickname'])){
 			$msg = array('s'=> 400,'m'=>lang('nicknameexist'),'d'=>'');				
@@ -445,7 +448,7 @@ class passport {
 				$msg = array('s'=> 200,'m'=>'ok','d'=>$forward);				
 				exit(json_output($msg));
 			}else{
-				$msg = array('s'=> 200,'m'=>'ok','d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/index.php/passport/regok");				
+				$msg = array('s'=> 200,'m'=>'ok','d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/index.php/passport/regext");				
 				exit(json_output($msg));
 				
 			}
@@ -457,14 +460,12 @@ class passport {
 		
 	}
 	function view_question(){
-		global $tpl;
 		$user = $_GET['user'];
-		include_once("PassportModel.class.php");
 		$passmod = new PassportModel();
 		$userindex = $passmod->getUser ($user );
 		$user_arr = $passmod->getUserById($userindex['user_id'],$user);
 		
-		$tpl->assign("arr",$user_arr);
+		$this->tpl->assign("arr",$user_arr);
 	}
 	function op_answer(){
 		$user = $_POST['user'];
@@ -483,7 +484,6 @@ class passport {
 			show_message_goback(lang('pwdnotsame'));;
 		}
 		
-		include_once("PassportModel.class.php");
 		$passmod = new PassportModel();
 		$userindex = $passmod->getUser ($user );
 		$user_arr = $passmod->getUserById($userindex['user_id'],$user);
@@ -504,7 +504,6 @@ class passport {
 			show_message_goback(lang('helpmsg1'));
 		}
 		$user = trim ( $_POST ['user'] );
-		include_once("PassportModel.class.php");
 		$passmod = new PassportModel();
 		$userindex = $passmod->getUser ($user );
 		if (false==$userindex) {
@@ -531,13 +530,11 @@ class passport {
 		
 	}
 	function view_resetpwd() {
-		global $tpl;
 		if (empty ( $_GET ['code'] )) {
 			redirect ($GLOBALS ['gSiteInfo'] ['www_site_url']. '/index.php/passport/login' );
 		}
 
 		$code = $_GET ['code'];
-		include_once("PassportModel.class.php");
 		$passmod = new PassportModel();
 		$flag = "0";
 		$row = $passmod->checkForget ( $code );
@@ -546,7 +543,7 @@ class passport {
 			echo "<script> alert('".lang('invalidurl')."')</script>";	
 			redirect ($GLOBALS ['gSiteInfo'] ['www_site_url']. '/index.php/passport/login' );		
 		}
-		$tpl->assign ( "code", $code );
+		$this->tpl->assign ( "code", $code );
 
 	}
 	function op_resetpwd() {
@@ -570,7 +567,6 @@ class passport {
 
 		$code = $_POST ['code'];
 		
-		include_once("PassportModel.class.php");
 		$passmod = new PassportModel();
 		
 		$row = $passmod->checkForget ( $code );
