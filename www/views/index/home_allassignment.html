@@ -1,0 +1,52 @@
+<?php include_once("header.html")?>
+
+<div id="wrap">  <br />
+<?php include_once("home_left.html")?>
+    <div class="admincontent">
+
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td><div class="table2TitleBg">
+            <div class="table2TitleBg2">
+              <div class="table2Title">全部任务</div>
+            </div>
+           </div></td>
+        </tr>
+
+        <tr>
+          <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="table2LeftBorder"></td>
+              <td>
+				<?php if(isset($assignments['records']) && is_array($assignments['records'])){
+							foreach ($assignments['records'] as $v){?>	
+                    <div class="mission">
+	                      <div class="logo">
+	                        <p><a href="/index.php/home/assignment/<?php echo $v['a_id']?>"><img src="/public/images/tmp_01.gif" alt="<?php echo $v['cs_name']?>" width="68" height="68" border="0" /></a></p>
+	
+	                      </div>
+	                      <div class="des"><b><a href="/index.php/home/assignment/<?php echo $v['a_id']?>"><?php echo $v['a_title']?></a></b><br />
+	                        开始时间：<?php echo $v['a_sdate']?><br />
+	                      	结束时间：<?php echo $v['a_edate']?>
+	                      </div>
+                    </div>
+                  <?php }
+						}?>
+      <div class="pages"><?php echo $assignments['page_array']['pagebar']?></div>
+              </td>
+              <td class="table2RightBorder"></td>
+
+            </tr>
+            <tr>
+              <td class="table2BottomLeft"></td>
+              <td class="table2Bottom"></td>
+              <td class="table2BottomRight"></td>
+            </tr>
+          </table></td>
+        </tr>
+      </table>
+
+    </div>
+</div>
+</div>
+<?php include_once("footer.html")?>

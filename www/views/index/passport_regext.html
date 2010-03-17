@@ -15,7 +15,7 @@
 
 <FORM name="registerform" id="registerform" method="POST" onsubmit="return checkOnSubmit('registerform', rules);" >
 <input type="hidden" name="action" value="passport">
-<input type="hidden" name="op" value="saveuser">
+<input type="hidden" name="op" value="saveuserext">
 
 
 <TABLE width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -26,37 +26,37 @@
 <TR>
 <TR>
 <TD width="40%" class="text"></TD>
-<TD width="60%">一．联系方式</TD>
+<TD width="60%">一．联系方式(*为必填项)</TD>
 </TR
 <TR>
-<TD width="40%" class="text">姓名:</TD>
+<TD width="40%" class="text">*姓名:</TD>
 <TD width="60%"><div id="errorsDiv_realname"></div><INPUT class="textfield" type="text" name="realname" value="" id="realname" /></TD>
 </TR>
 
-<TR><TD class="text">手机:</TD>
-<TD><div id="errorsDiv_mobile"></div><INPUT class="textfield" type="text" name="mobile"  /></TD>
+<TR><TD class="text">*手机:</TD>
+<TD><div id="errorsDiv_mobile"></div><INPUT class="textfield" type="text" name="mobile" id="mobile" /></TD>
 </TR>
 <TR>
 <TD class="text">电话:</TD>
-<TD><div id="errorsDiv_phone"></div><INPUT class="textfield" type="password" name="phone"  /></TD>
+<TD><div id="errorsDiv_phone"></div><INPUT class="textfield" type="password" name="phone" id="phone"/></TD>
 </TR>
 
 <TR>
 <TD class="text">QQ:</TD>
-<TD><div id="errorsDiv_qq"></div><INPUT class="textfield" type="text" name="qq" value="" /></TD>
+<TD><div id="errorsDiv_qq"></div><INPUT class="textfield" type="text" name="qq" id="qq" value="" /></TD>
 </TR>
 <TR>
 <TD class="text">MSN:</TD>
-<TD><div id="errorsDiv_msn"></div><INPUT class="textfield" type="text" name="msn" value="" /></TD>
+<TD><div id="errorsDiv_msn"></div><INPUT class="textfield" type="text" name="msn" id="msn" value="" /></TD>
 </TR>
 <TR>
 <TD class="text">居住城市:</TD>
-<TD><div id="errorsDiv_city"></div><INPUT class="textfield" type="text" name="city" value="" /></TD>
+<TD><div id="errorsDiv_city"></div><INPUT class="textfield" type="text" name="city" id="city" value="" /></TD>
 </TR>
 
 <TR>
 <TD class="text">住址:</TD>
-<TD><div id="errorsDiv_address"></div><INPUT class="textfield" type="text" name="address" value="" /></TD>
+<TD><div id="errorsDiv_address"></div><INPUT class="textfield" type="text" name="address" id="address" value="" /></TD>
 </TR>
 
 <TR>
@@ -66,74 +66,8 @@
 
 <TR>
 <TD class="text">生日:</TD>
-<TD><div id="errorsDiv_birth"></div><select name="Birthdate_Day" id="Birthdate_Day"> 
-			<option value="1">1</option> 
-			<option value="2">2</option> 
-			<option value="3">3</option> 
-			<option value="4">4</option> 
-			<option value="5">5</option> 
-			<option value="6">6</option> 
-			<option value="7">7</option> 
-			<option value="8">8</option> 
-			<option value="9">9</option> 
-			<option value="10">10</option> 
-			<option value="11">11</option> 
-			<option value="12">12</option> 
-			<option value="13">13</option> 
-			<option value="14">14</option> 
-			<option value="15">15</option> 
-			<option value="16">16</option> 
-			<option value="17">17</option> 
-			<option value="18">18</option> 
-			<option value="19">19</option> 
-			<option value="20">20</option> 
-			<option value="21">21</option> 
-			<option value="22">22</option> 
-			<option value="23">23</option> 
-			<option value="24">24</option> 
-			<option value="25">25</option> 
-			<option value="26">26</option> 
-			<option value="27">27</option> 
-			<option value="28">28</option> 
-			<option value="29">29</option> 
-			<option value="30">30</option> 
-			<option value="31">31</option> 
- 
-		</select><select name="Birthdate_Month" id="Birthdate_Month"> 
-			<option value="1">January</option> 
-			<option value="2">February</option> 
-			<option value="3">March</option> 
-			<option value="4">April</option> 
-			<option value="5">May</option> 
-			<option value="6">June</option> 
-			<option value="7">July</option> 
-			<option value="8">August</option> 
-			<option value="9">September</option> 
-			<option value="10">October</option> 
-			<option value="11">November</option> 
-			<option value="12">December</option> 
- 
-		</select><select name="Birthdate_Year" id="Birthdate_Year"> 
-			<option value="1901">1901</option> 
-			<option value="1902">1902</option> 
-			<option value="1903">1903</option> 
-			<option value="1904">1904</option> 
-			<option value="1905">1905</option> 
-			<option value="1906">1906</option> 
-			<option value="1907">1907</option> 
-			<option value="1908">1908</option> 
-			<option value="1909">1909</option> 
-			<option value="1910">1910</option> 
-			<option value="1911">1911</option> 
-			<option value="1912">1912</option> 
-			<option value="1913">1913</option> 
-			<option value="1914">1914</option> 
-			<option value="1915">1915</option> 
-			<option value="1916">1916</option> 
-			<option value="1917">1917</option> 
-			<option value="1918">1918</option> 
-			<option value="1919">1919</option> 
-			<option value="1920">1920</option> 
+<TD><div id="errorsDiv_birthdateyear"></div><select name="birthdateyear" id="birthdateyear"> 
+			<option value="">--</option> 
 			<option value="1921">1921</option> 
 			<option value="1922">1922</option> 
 			<option value="1923">1923</option> 
@@ -206,30 +140,86 @@
 			<option value="1990">1990</option> 
 			<option value="1991">1991</option> 
 			<option value="1992">1992</option> 
+			<option value="1993">1993</option> 
+			<option value="1994">1994</option> 
+			<option value="1995">1995</option> 
+			<option value="1996">1996</option> 
+			<option value="1997">1997</option> 
+			<option value="1998">1998</option> 
  
-		</select></TD>
+		</select>年<select name="birthdatemonth" id="birthdatemonth"> 
+		<option value="">--</option> 
+			<option value="1">1</option> 
+			<option value="2">2</option> 
+			<option value="3">3</option> 
+			<option value="4">4</option> 
+			<option value="5">5</option> 
+			<option value="6">6</option> 
+			<option value="7">7</option> 
+			<option value="8">8</option> 
+			<option value="9">9</option> 
+			<option value="10">10</option> 
+			<option value="11">11</option> 
+			<option value="12">12</option> 
+ 
+		</select>月<select name="birthdateday" id="birthdateday"> 
+<option value="">--</option> 
+			<option value="1">1</option> 
+			<option value="2">2</option> 
+			<option value="3">3</option> 
+			<option value="4">4</option> 
+			<option value="5">5</option> 
+			<option value="6">6</option> 
+			<option value="7">7</option> 
+			<option value="8">8</option> 
+			<option value="9">9</option> 
+			<option value="10">10</option> 
+			<option value="11">11</option> 
+			<option value="12">12</option> 
+			<option value="13">13</option> 
+			<option value="14">14</option> 
+			<option value="15">15</option> 
+			<option value="16">16</option> 
+			<option value="17">17</option> 
+			<option value="18">18</option> 
+			<option value="19">19</option> 
+			<option value="20">20</option> 
+			<option value="21">21</option> 
+			<option value="22">22</option> 
+			<option value="23">23</option> 
+			<option value="24">24</option> 
+			<option value="25">25</option> 
+			<option value="26">26</option> 
+			<option value="27">27</option> 
+			<option value="28">28</option> 
+			<option value="29">29</option> 
+			<option value="30">30</option> 
+			<option value="31">31</option> 
+ 
+		</select>日</TD>
 </TR>
 <TR>
 <TD class="text">婚姻:</TD>
-<TD><div id="errorsDiv_marital"></div><select name="MaritalStatus" id="MaritalStatus"> 
+<TD><div id="errorsDiv_maritalstatus"></div><select name="maritalstatus" id="maritalstatus"> 
 <option value="0">选择...</option> 
-			<option selected="selected" value="2">已婚</option> 
+			<option value="2">已婚</option> 
 			<option value="1">单身</option> 
+			</select>
  </TD>
 </TR>
 <TR>
 <TD class="text">国籍:</TD>
-<TD><div id="errorsDiv_nationality"></div><INPUT class="textfield" type="text" name="nationality" value="" /></TD>
+<TD><div id="errorsDiv_nationality"></div><INPUT class="textfield" type="text" name="nationality" id="nationality" value="" /></TD>
 </TR>
 <TR>
 <TD class="text">职业:</TD>
-<TD><div id="errorsDiv_occupation"></div><INPUT class="textfield" type="text" name="occupation" value="" /></TD>
+<TD><div id="errorsDiv_occupation"></div><INPUT class="textfield" type="text" name="occupation" id="occupation" value="" /></TD>
 </TR>
 <TR>
 <TD class="text">年收入:</TD>
-<TD><div id="errorsDiv_annualincome"></div>
-<select name="HouseholdIncome" id="HouseholdIncome" class="MainFont"> 
-					<option selected="selected" value="0">选择...</option> 
+<TD><div id="errorsDiv_householdincome"></div>
+<select name="householdincome" id="householdincome" > 
+					<option value="0">选择...</option> 
 					<option value="1">&lt;1.8万</option> 
 					<option value="2">1.8万-2.5万</option> 
 					<option value="3">2.5万-3.5万</option> 
@@ -241,7 +231,7 @@
 </TR>
 <TR>
 <TD class="text">教育程度:</TD>
-<TD><div id="errorsDiv_education"></div><select name="Education" id="Education" class="MainFont"> 
+<TD><div id="errorsDiv_education"></div><select name="education" id="education"> 
 <option value="0">选择...</option> 
 					<option value="1">中学</option> 
 					<option value="2">高中/中专</option> 
@@ -253,10 +243,19 @@
 </TR>
 <TR>
 <TD class="text">您有私人汽车吗?:</TD>
-<TD><div id="errorsDiv_hadcar"></div><select name="hadcar" id="hadcar"> 
+<TD><div id="errorsDiv_havecar"></div><select name="havecar" id="havecar"> 
 <option value="0">选择...</option> 
 					<option value="1">是</option> 
 					<option value="0">否</option> 
+ 
+				</select></TD>
+</TR>
+<TR>
+<TD class="text">会讲英语吗?:</TD>
+<TD><div id="errorsDiv_speakenglish"></div><select name="speakenglish" id="speakenglish"> 
+<option value="0">选择...</option> 
+					<option value="1">会</option> 
+					<option value="2">不会</option> 
  
 				</select></TD>
 </TR>
@@ -267,24 +266,41 @@
 <TD>三    其他信息</TD>
 </TR>
 <TR>
-<TD class="text">每星期外出就餐次数?</TD>
-<TD><div id="errorsDiv_weekoutingeat"></div><INPUT class="textfield" type="text" name="weekoutingeat" value="" /></TD>
+<TD class="text">每星期外出就餐次数:</TD>
+<TD><div id="errorsDiv_eatingoutcount"></div><INPUT class="textfield" type="text" id="eatingoutcount" name="eatingoutcount" value="" />次</TD>
 </TR>
 <TR>
 <TD class="text">就餐平均消费：</TD>
-<TD><div id="errorsDiv_avgbill"></div><INPUT class="textfield" type="text" name="avgbill" value="" />RMB</TD>
+<TD><div id="errorsDiv_avgbill"></div><INPUT class="textfield" type="text" name="avgbill" id="avgbill" value="" />RMB</TD>
 </TR>
 <TR>
-<TD class="text">每月您在服饰方面的消费?</TD>
-<TD><div id="errorsDiv_apparel"></div><INPUT class="textfield" type="text" name="apparel" value="" />RMB</TD>
+<TD class="text">每月您在服饰方面的消费:</TD>
+<TD><div id="errorsDiv_apparelspending"></div><INPUT class="textfield" type="text" name="apparelspending" id="apparelspending" value="" />RMB</TD>
+</TR>
+<TR>
+<TD class="text">您的最大兴趣是什么？</TD>
+<TD><div id="errorsDiv_interests"></div><INPUT class="textfield" type="text" name="interests" id="interests" value="" /></TD>
 </TR>
 <TR>
 <TD class="text">您是如何知道我们的公司? </TD>
-<TD><div id="errorsDiv_hearabout"></div><INPUT class="textfield" type="text" name="hearabout" value="" /></TD>
+<TD><div id="errorsDiv_hearabout"></div>
+<select name="hearabout" id="hearabout"> 
+<option value="0">选择...</option> 
+			<option value="1">朋友介绍</option> 
+			<option value="2">网上广告</option> 
+			<option value="3">路牌广告</option> 
+			<option value="4">报纸</option> 
+			<option value="5">电视</option> 
+			<option value="6">其他</option> 
+			</select></TD>
 </TR>
 <TR>
 <TD class="text">你是否需要平时收到我们SPOT的最新动态? </TD>
-<TD><div id="errorsDiv_newletters"></div><INPUT class="textfield" type="text" name="newletters" value="" /></TD>
+<TD><div id="errorsDiv_newletters"></div><select name="newletters" id="newletters"> 
+<option value="0">选择...</option> 
+			<option value="1">要</option> 
+			<option value="2">不要</option> 
+			</select></TD>
 </TR>
 
 <TR>
@@ -309,12 +325,14 @@ function checkOnSubmit(formName, r) {
     	var url = "<?php echo $www_site_url?>/index.php";
 		var params = mini.form.serialize($(formName));
 		mini.ajax.post(url, function(r){
+		
 			var r = eval('(' + r + ')');   
 			if(r.s==200){
 				window.location.href = r.d;
 			}
 			if(r.s==400){
-				$('msg').innerHTML = r.m;			
+				//$('msg').innerHTML = r.m;
+				alert(r.m);
 			}
 		}, params);
     	
@@ -325,37 +343,14 @@ function checkOnSubmit(formName, r) {
 }
 
 var rules=new Array();
-rules[0]='username|required|<?php echo lang('usernamerule')?>';
-rules[1]='username|regexp|^[a-zA-Z][a-zA-Z0-9_]{1,13}[a-zA-Z0-9]$|<?php echo lang('usernamerule')?>';
-rules[2]='email|required|<?php echo lang('insertemail')?>';
-rules[3]='email|email|<?php echo lang('insertemail')?>';
-rules[4]='password|required|<?php echo lang('insertpwd')?>';
-rules[5]='password|minlength|6|<?php echo lang('pwdrule')?>';
-rules[6]='comfirmpwd|equal|$password|<?php echo lang('pwdnotsame')?>';
-
-rules[7]='sex|required|<?php echo lang('sexrule')?>';
-rules[8]='code|required|<?php echo lang('coderule')?>';
-rules[9]='nickname|required|<?php echo lang('nicknamerule')?>';
-
-rules[10]='nickname|minlength|2|<?php echo lang('nicknamerule')?>';
-rules[11]='nickname|maxlength|16|<?php echo lang('nicknamerule')?>';
-rules[12]='question|required|<?php echo lang('selectaquestion')?>';
-rules[13]='answer|required|<?php echo lang('youranswer')?>';
+rules[0]='realname|required|<?php echo lang('realnamerule')?>';
+rules[1]='mobile|required|请正确的手机号码';
+rules[2]='mobile|regexp|^1\\d{10}$|请正确的手机号码';
 
 
-yav.addHelp('username', '<?php echo lang('usernamerule')?>');
-yav.addHelp('password', '');
-yav.addHelp('comfirmpwd', '');
-yav.addHelp('email', '<?php echo lang('insertemail')?>');
-yav.addHelp('question', '');
-yav.addHelp('answer', '');
-yav.addHelp('nickname', '');
-yav.addHelp('sex', '');
-yav.addHelp('code', '');
-yav.postValidation_OnOK('email', 'blur', 'ajaxCall("email")');
-yav.postValidation_OnOK('username', 'blur', 'ajaxCall("username")');
 
-
+yav.addHelp('realname', '<?php echo lang('realnamerule')?>');
+yav.addHelp('mobile', '');
 
 var captchaOK = 2;  // 2 - not yet checked, 1 - correct, 0 - failed
 var account = '';

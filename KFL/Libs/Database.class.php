@@ -402,6 +402,7 @@ class Database extends PDO
 		}
 
 		$sql = "update {$table} set ".trim($tempData,',').( $condition ? " where {$condition}" : '');
+	
 		return  $this->execute($sql);
 	}
 

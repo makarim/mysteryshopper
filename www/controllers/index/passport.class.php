@@ -344,6 +344,48 @@ class passport {
 	function view_regext(){
 		
 	}
+	function op_saveuserext(){
+		$msg = '';
+		$user['realname'] = !empty($_POST['realname'])?$_POST['realname']:'';
+		$user['mobile'] = !empty($_POST['mobile'])?$_POST['mobile']:'';
+		$user['phone'] = !empty($_POST['phone'])?$_POST['phone']:'';
+		$user['qq'] = !empty($_POST['qq'])?$_POST['qq']:'';
+		$user['msn'] = !empty($_POST['msn'])?$_POST['msn']:'';
+		$user['city'] = !empty($_POST['city'])?$_POST['city']:'';
+		$user['address'] = !empty($_POST['address'])?addslashes($_POST['address']):'';
+		$birthdateyear = !empty($_POST['birthdateyear'])?$_POST['birthdateyear']:'';
+		$birthdatemonth = !empty($_POST['birthdatemonth'])?$_POST['birthdatemonth']:'';
+		$birthdateday = !empty($_POST['birthdateday'])?$_POST['birthdateday']:'';
+		$user['birthdate']  =$birthdateyear.'-'. sprintf('%02d',$birthdatemonth).'-'.sprintf('%02d',$birthdateday);
+		$user['marital'] = !empty($_POST['maritalstatus'])?$_POST['maritalstatus']:'';
+		$user['nationality'] = !empty($_POST['nationality'])?$_POST['nationality']:'';
+		$user['occupation'] = !empty($_POST['occupation'])?$_POST['occupation']:'';
+		$user['householdincome'] = !empty($_POST['householdincome'])?$_POST['householdincome']:'';
+		$user['education'] = !empty($_POST['education'])?$_POST['education']:'';
+		$user['havecar'] = !empty($_POST['havecar'])?$_POST['havecar']:'';
+		$user['eatingoutcount'] = !empty($_POST['eatingoutcount'])?intval($_POST['eatingoutcount']):'';
+		$user['avgbill'] = !empty($_POST['avgbill'])?$_POST['avgbill']:'';
+		$user['apparelspending'] = !empty($_POST['apparelspending'])?$_POST['apparelspending']:'';
+		$user['hearabout'] = !empty($_POST['hearabout'])?$_POST['hearabout']:'';
+		$user['newletters'] = !empty($_POST['newletters'])?$_POST['newletters']:'';
+		$user['speak_english'] = !empty($_POST['speak_english'])?$_POST['speak_english']:'';
+		$user['interests'] = !empty($_POST['interests'])?$_POST['interests']:'';
+		
+		if (!isset($_SESSION['validatecode']) || ($_POST['code']!='back' && strtolower($_POST['code'])!=strtolower($_SESSION['validatecode']))) {
+			$msg = array('s'=> 400,'m'=>lang('codeinvalid'),'d'=>'');				
+			exit(json_output($msg));
+		}
+		$passmod = new PassportModel();
+		$rs = $passmod->saveUserExt ( $user ,$this->login_user['user_id']);
+		if(!$rs){
+				$msg = array('s'=> 400,'m'=>'fail','d'=>"");				
+				exit(json_output($msg));
+		}else{
+				$msg = array('s'=> 200,'m'=>'ok','d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/index.php/passport/regok");				
+				exit(json_output($msg));
+				
+		}
+	}
 	function op_saveuser() {
 		$msg = '';
 		$reg_type = !empty($_POST['reg_type'])?$_POST['reg_type']:'';

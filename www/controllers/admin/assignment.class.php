@@ -129,12 +129,11 @@ class assignment{
     	goback();
     }
     function view_detail(){
-    	$assignment = $_GET['assignment'];
-    	$a_id = $_GET['a_id'];
+    	$a_id = $_GET['assignment'];
     	
     	include_once("AssignmentModel.class.php");
     	$assignment = new AssignmentModel();
-    	$assignmentinfo = $assignment->getassignmentById($a_id,$assignment);
+    	$assignmentinfo = $assignment->getAssignmentById($a_id);
     	if($assignmentinfo){
     		$assignmentinfo['assignment_lastlogin_time'] = date("y-m-d H:i:s",$assignmentinfo['assignment_lastlogin_time']);
     		if($assignmentinfo['assignment_sex']==1) $assignmentinfo['assignment_sex'] = lang('boy');

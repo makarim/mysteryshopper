@@ -17,6 +17,7 @@ class AssignmentModel extends Model {
 		if(isset($con['cs_id']) && !empty($con['cs_id'])) $select->where ( " a.cs_id = '".$con['cs_id']."'" );
 		if(isset($con['a_sdate']) && !empty($con['a_sdate'])) $select->where ( " a.a_sdate >= '".$con['a_sdate']."'" );
 		if(isset($con['a_edate']) && !empty($con['a_edate'])) $select->where ( " a.a_edate <= '".$con['a_edate']."'" );
+		if(isset($con['notselected']) && !empty($con['notselected'])) $select->where ( " a.user_id = ''" );
 
 		
 		$list = array();
@@ -56,7 +57,11 @@ class AssignmentModel extends Model {
 		return $this->db->execute("delete from assignment where a_id='{$a_id}'");
 	}
 	function getAssignmentById($a_id){
-		return $this->db->getRow("select * from assignment where a_id='$a_id'");
+		return $this->db->getRow("select a.*,c.c_name,s.cs_name from assignment a 
+		left join corporation c on c.c_id=a.c_id
+		left join store s on s.cs_id=a.cs_id
+	
+		where a.a_id='$a_id'");
 	}
     function updateAssignment($item,$a_id){
 		return $this->db->update($item,"assignment"," a_id=".$a_id);
