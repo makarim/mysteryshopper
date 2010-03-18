@@ -509,3 +509,53 @@ float:left;
 	width:100%;
 	
 }
+
+/*CLIENT*/
+.CsearchLeft {
+	background:url(../images/client_searchleft.gif) no-repeat top;
+	width:7px;
+}
+.CsearchRight {
+	background:url(../images/client_searchright.gif) no-repeat top;
+	width:7px;
+}
+.CsearchCenter {
+	background:url(../images/client_searchcenter.gif) repeat-x top;
+}
+.ClocationInput {
+	background:url(../images/bg_input1.gif) no-repeat;
+	width:214px;
+	height:22px;
+	color:#FFF;
+	border:none;
+	line-height:22px;
+	font-size:12px;
+	padding-left:10px;
+}
+.CtimeInput {
+	background:url(../images/bg_input2.gif) no-repeat;
+	width:104px;
+	height:22px;
+	color:#FFF;
+	border:none;
+	line-height:22px;
+	font-size:12px;
+	padding-left:10px;
+}
+
+.CinitData {
+	background:#999;
+}
+.CinitData td {
+	padding:10px;
+	background:#FFF;
+}
+.CinitData .title {
+	padding:0;
+	background:url(../images/bg_clientdata.gif) repeat-x;
+	color:#cc3300;
+	padding-left:15px;
+	font-size:14px;
+	height:28px;
+	line-height:28px;
+}
