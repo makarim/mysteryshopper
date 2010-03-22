@@ -91,6 +91,14 @@ li {
 	clear:both;
 }
 
+.btn {
+	background:url(../images/bg_btn.gif) #C00 no-repeat;
+	height:25px;
+	width:91px;
+	line-height:25px;
+	color:#FFF;
+	border:none;
+}
 .left {
 	float:left;
 }
@@ -337,6 +345,20 @@ li {
 	text-align:center;
 }
 
+/*任务报表*/
+.missionReport {
+	background-color:#999;
+}
+.missionReport td{
+	background-color:#FFF;
+	padding:8px;
+}
+.missionReport .title{
+	background-color:#9F0000;
+	color:#FFF;
+	text-align:center;
+}
+
 /*我的日历*/
 .calendar {
 	background-color:#999;
@@ -558,4 +580,20 @@ float:left;
 	font-size:14px;
 	height:28px;
 	line-height:28px;
+}
+
+/*调查文件*/
+.reportTitle {
+	font-size:14px;
+	font-weight:bold;
+}
+.reportDes {
+	padding:20px;
+	line-height:24px;
+}
+.reportScore {
+	float:right;
+	width:100px;
+	padding:20px;
+	text-align:right;
 }
