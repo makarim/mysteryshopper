@@ -138,6 +138,10 @@ class PassportModel extends Model {
 	public function saveUserExt($ext,$user_id){
 		return $this->db->update($ext,'user_ext',"user_id='{$user_id}'");
 	}
+
+	public function getUserInfoById($user_id){
+		return $this->db->getRow("select u.*,ext.* from user u left join user_ext ext on u.user_id=ext.user_id where u.user_id='$user_id'");
+	}
 	public function deleteUser($user){		
 		$u = $this->getUser($user);
 		if($u['user_id']==1) return false;

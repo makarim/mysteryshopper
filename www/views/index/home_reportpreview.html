@@ -1,0 +1,46 @@
+<?php include_once("header.html")?>
+
+<div id="wrap">  <br />
+<?php include_once("home_left.html")?>
+    <div class="admincontent">
+<?php include_once("home_assignmenttop.html")?>
+	<br />
+	<br />
+	<div id="tabsD" style="width:100%"> 
+	  <ul> 
+	    <li><a href="/index.php/home/assignment/a_id/<?php echo $a_id;?>"><span >说明</span></a></li> 
+	    <li class="on"><a href="/index.php/home/reportpreview/a_id/<?php echo $a_id;?>"  ><span>调查问卷预览</span></a></li> 
+	    <li><a href="/index.php/home/quiz/a_id/<?php echo $a_id;?>" ><span>测试</span></a></li> 
+	    <li><a href="/index.php/home/report/a_id/<?php echo $a_id;?>" ><span>填写调查问卷</span></a></li> 
+	    <li><a href="/index.php/home/upload/a_id/<?php echo $a_id;?>" ><span>上传附件</span></a></li> 
+	  </ul> 
+	
+	</div>
+	<br />
+    <br />
+<table cellspacing="10" >
+
+					<tr>
+						<th>ID</th>
+						<th><?php echo lang('question_title')?></th>
+				
+					</tr>
+					<?php
+					if(isset($report_questions) && is_array($report_questions)){
+							foreach ($report_questions as $k=>$v){?>	
+					<tr>
+							<td><?php echo $k+1;?></td>
+							<td><?php echo $v['rq_question']?></td>
+							
+					</tr>
+						
+						<?php }
+					}
+						?>
+					
+				</table>
+  
+  </div>
+</div>
+
+<?php include_once("footer.html")?>

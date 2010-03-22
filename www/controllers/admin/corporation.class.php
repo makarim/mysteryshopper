@@ -59,21 +59,27 @@ class corporation{
 		$_POST ['c_name'] = trim ( $_POST ['c_name'] );
 		$c_name_len = mb_strlen ( $_POST ['c_name'], "UTF-8");
 		if (empty ( $_POST ['c_name'] ) || ! preg_match ( $pattern, $_POST ['c_name'] ) || $c_name_len < 2 || $c_name_len > 16 ) {
-			$msg = array('s'=> 400,'m'=>lang('cnamerule'),'d'=>'');				
-			exit(json_output($msg));
+			//$msg = array('s'=> 400,'m'=>lang('cnamerule'),'d'=>'');				
+			//exit(json_output($msg));
+			show_message(lang('cnamerule'));
+			goback();
 		}
 		
 		if (strlen($_POST ['c_password']) <6) {
-			$msg = array('s'=> 400,'m'=>lang('pwdrule'),'d'=>'');				
-			exit(json_output($msg));
+			show_message(lang('pwdrule'));
+			goback();
+			//$msg = array('s'=> 400,'m'=>lang('pwdrule'),'d'=>'');				
+			//exit(json_output($msg));
 		}
 		
 		include_once("CorporationModel.class.php");
 		$corpmod = new CorporationModel();
 	
 		if($corpmod->checkName($_POST ['c_name'])){
-			$msg = array('s'=> 400,'m'=>lang('cnameexist'),'d'=>'');				
-			exit(json_output($msg));
+			show_message(lang('cnameexist'));
+			goback();
+//			$msg = array('s'=> 400,'m'=>lang('cnameexist'),'d'=>'');				
+//			exit(json_output($msg));
 		}	
 
 		$corporation['c_password'] = md5($_POST ['c_password']);
@@ -83,12 +89,19 @@ class corporation{
 		$corporation['c_contacter'] = empty($_POST ['c_contacter'])?"":addslashes($_POST ['c_contacter']);
 		$corporation['c_phone'] = empty($_POST ['c_phone'])?"":addslashes($_POST ['c_phone']);
 		$corporation['c_intro'] =empty($_POST ['c_intro'])?"":strip_tags($_POST ['c_intro']);
-		
+		if(isset($_FILES['c_logo']) && $_FILES['c_logo']['error']==0){
+			$img_ext = substr($_FILES['c_logo']['name'],strrpos($_FILES['c_logo']['name'],'.'));
+			$corporation['c_logo'] = "logo_".uniqid().$img_ext;
+			move_uploaded_file($_FILES['c_logo']['tmp_name'],APP_DIR."/public/upload/logo/".$corporation['c_logo']);
+    	}
+    			
 		// 1. create db corporation
 		$row = $corpmod->createNewCorporation ( $corporation );
 		if ($row !== false) {
-			$msg = array('s'=> 200,'m'=>'ok','d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/corporation/defaults");				
-			exit(json_output($msg));
+			//$msg = array('s'=> 200,'m'=>'ok','d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/corporation/defaults");				
+			//exit(json_output($msg));
+			show_message("保存成功!");
+			redirect("/admin.php/corporation/defaults");
 								
 		}
     }
@@ -139,12 +152,16 @@ class corporation{
     function op_updatecorporation(){
     	$msg = '';
 		if(!empty($_POST ['c_password']) && $_POST ['c_password']!=$_POST ['c_password2'] ){
-			$msg = array('s'=> 400,'m'=>lang('pwdnotsame'),'d'=>'');				
-			exit(json_output($msg));
+			show_message(lang('pwdnotsame'));
+			goback();
+			//$msg = array('s'=> 400,'m'=>lang('pwdnotsame'),'d'=>'');				
+			//exit(json_output($msg));
 		}else{
 			if (!empty($_POST ['c_password']) && strlen($_POST ['c_password']) <6) {
-				$msg = array('s'=> 400,'m'=>lang('pwdrule'),'d'=>'');				
-				exit(json_output($msg));
+				show_message(lang('pwdrule'));
+				goback();
+				//$msg = array('s'=> 400,'m'=>lang('pwdrule'),'d'=>'');				
+				//exit(json_output($msg));
 			}else if(!empty($_POST ['c_password'])){
 				$updates['c_password'] = md5( $_POST ['c_password']);
 			}
@@ -161,18 +178,28 @@ class corporation{
 		$updates['c_contacter'] = empty($_POST ['c_contacter'])?"":addslashes($_POST ['c_contacter']);
 		$updates['c_phone'] = empty($_POST ['c_phone'])?"":addslashes($_POST ['c_phone']);
 		$updates['c_intro'] =empty($_POST ['c_intro'])?"":strip_tags($_POST ['c_intro']);
-		
+		//print_r($_FILES);die;
+		if(isset($_FILES['c_logo']) && $_FILES['c_logo']['error']==0){
+			$img_ext = substr($_FILES['c_logo']['name'],strrpos($_FILES['c_logo']['name'],'.'));
+			$updates['c_logo'] = "logo_".uniqid().$img_ext;
+			move_uploaded_file($_FILES['c_logo']['tmp_name'],APP_DIR."/public/upload/logo/".$updates['c_logo']);
+    	}
+    			
 		
 		// 1. update db corporation
 		$row = $corpmod->updateCorporation( $updates, $c_id);
 		if ($row !== false) {
 
-			$msg = array('s'=> 200,'m'=>lang('success'),'d'=>'');				
-			exit(json_output($msg));
+//			$msg = array('s'=> 200,'m'=>lang('success'),'d'=>'');				
+//			exit(json_output($msg));
+			show_message("保存成功！");
+			goback(1000);
 								
 		}else{
-			$msg = array('s'=> 400,'m'=>lang('failed'),'d'=>'');				
-			exit(json_output($msg));
+			show_message("保存失败！");
+			goback();
+			//$msg = array('s'=> 400,'m'=>lang('failed'),'d'=>'');				
+			//exit(json_output($msg));
 		}
     }
        

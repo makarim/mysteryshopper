@@ -10,7 +10,7 @@
 
 <script>
 function checkOnSubmit(formName) {
-  	
+  	return true;
 	var url = "<?php echo $www_site_url?>/admin.php";
 	var params = mini.form.serialize($(formName));
 	
@@ -41,7 +41,7 @@ function checkOnSubmit(formName) {
 					<li id="addcorporationbtn" class="tabcurrent"><a href="#"><?php echo lang('edit_corporation')?></a></li>	
 				</ul>
 				<div id="addcorporationdiv" class="tabcontentcur" style="display:;">
-					<form id="addcorporationform" name="addcorporationform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addcorporationform');" >
+					<form id="addcorporationform" name="addcorporationform" enctype="multipart/form-data" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addcorporationform');" >
 					<input type="hidden" name="action" value="corporation">
 					<input type="hidden" name="op" value="updatecorporation">
 					<input type="hidden" name="c_id" value="<?php echo $info['c_id']?>">
@@ -82,7 +82,13 @@ function checkOnSubmit(formName) {
 						<tr>
 							<td><?php echo lang('c_intro')?>:</td>
 							<td><textarea type="text" name="c_intro" rows="10" style="width:500px" class="textfield"/><?php echo $info['c_intro']?></textarea></td>
-							</tr>					
+						</tr>
+						<tr>
+							<td><?php echo lang('c_logo')?>:</td>
+							<td><input type="file" name="c_logo" />
+							<img src="/public/upload/logo/<?php echo $info['c_logo']?>">
+							</td>
+						</tr>						
 						<tr>
 						
 							<td colspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button"/></td>

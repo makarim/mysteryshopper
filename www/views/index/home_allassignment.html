@@ -22,10 +22,10 @@
 							foreach ($assignments['records'] as $v){?>	
                     <div class="mission">
 	                      <div class="logo">
-	                        <p><a href="/index.php/home/assignment/<?php echo $v['a_id']?>"><img src="/public/images/tmp_01.gif" alt="<?php echo $v['cs_name']?>" width="68" height="68" border="0" /></a></p>
+	                        <p><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><img src="/public/upload/logo/<?php echo $v['c_logo']?>" alt="<?php echo $v['cs_name']?>" width="68" height="68" border="0" /></a></p>
 	
 	                      </div>
-	                      <div class="des"><b><a href="/index.php/home/assignment/<?php echo $v['a_id']?>"><?php echo $v['a_title']?></a></b><br />
+	                      <div class="des"><b><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><?php echo $v['a_title']?></a></b><br />
 	                        开始时间：<?php echo $v['a_sdate']?><br />
 	                      	结束时间：<?php echo $v['a_edate']?>
 	                      </div>

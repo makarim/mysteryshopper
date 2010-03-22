@@ -8,7 +8,7 @@
 
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td width="88%" class="announcement">公告（可以滚动显示）：2月份的神秘商家已更新！</td>
+          <td width="88%" class="announcement">公告：暂无！</td>
           <td width="12%" class="announcementmore"><a href="#">更多公告...</a></td>
         </tr>
       </table>
@@ -28,43 +28,21 @@
             <tr>
               <td class="table2LeftBorder"></td>
               <td>
+              <?php
+              if(isset($myassignment)&& is_array($myassignment)){
+							foreach ($myassignment as $k=>$v){?>
           		<div class="mission">
-               	  <div class="logo"><p><a href="#"><img src="images/tmp_01.gif" width="68" height="68" border="0" /></a></p></div>
-                <div class="des"><span style="color:#000;">任务：</span><b><a href="#">必胜客</a></b><br />
-                      开始时间：2010.01.22.<br />
+               	  <div class="logo"><p><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><img src="/public/upload/logo/<?php echo $v['c_logo']?>" width="68" height="68" border="0" /></a></p></div>
+                <div class="des"><span style="color:#000;">任务：</span><b><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><?php echo $v['a_title']?></a></b><br />
+                      开始时间：<?php echo $v['a_sdate']?><br />
 
-                    结束时间：2010.01.31.<br />
-                完成进度：<img src="images/finishedbar.gif" alt="完成度" width="67" height="11" /></div>
+                    结束时间：<?php echo $v['a_edate']?><br />
+                完成进度：<?php echo $v['a_finish']*100;?>%</div>
                 </div>
-          		<div class="mission">
-               	  <div class="logo">
-               	    <p><a href="#"><img src="images/tmp_01.gif" alt="" width="68" height="68" border="0" /></a></p>
-               	  </div>
-                <div class="des"><span style="color:#000;">任务：</span><b><a href="#">必胜客</a></b><br />
+          		
+          		<?php }}?>
 
-                      开始时间：2010.01.22.<br />
-                    结束时间：2010.01.31.<br />
-                完成进度：<img src="images/finishedbar.gif" alt="完成度" width="67" height="11" /></div>
-                </div>
-          		<div class="mission">
-               	  <div class="logo">
-               	    <p><a href="#"><img src="images/nopass.gif" alt="该任务还未审批" width="61" height="61" border="0" /></a></p>
-
-               	  </div>
-                <div class="des"><span style="color:#000;">任务：</span><b><a href="#">必胜客</a></b><br />
-                      开始时间：2010.01.22.<br />
-                    结束时间：2010.01.31.<br />
-                完成进度：<img src="images/finishedbar.gif" alt="完成度" width="67" height="11" /></div>
-                </div>
-
-          		<div class="mission">
-               	  <div class="logo"><p><a href="#"><img src="images/nopic.gif" alt="暂无图片" width="61" height="61" border="0" /></a></p>
-               	  </div>
-                <div class="des"><span style="color:#000;">任务：</span><b><a href="#">必胜客</a></b><br />
-                      开始时间：2010.01.22.<br />
-                    结束时间：2010.01.31.<br />
-                完成进度：<img src="images/finishedbar.gif" alt="完成度" width="67" height="11" /></div>
-
+          		
                 </div>
               </td>
               <td class="table2RightBorder"></td>
@@ -200,78 +178,23 @@
           <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td class="table2LeftBorder"></td>
-                <td><div class="mission">
-                    <div class="logo">
-                      <p><a href="#"><img src="images/tmp_01.gif" alt="必胜客" width="68" height="68" border="0" /></a></p>
-                  </div>
-                  <div class="des"><span style="color:#000;">任务：</span><b><a href="#">必胜客</a></b><br />
-
-                    开始时间：2010.01.22.<br />
-                  结束时间：2010.01.31.</div>
-                </div>
+                <td> <?php
+              if(isset($lastestassignment)&& is_array($lastestassignment)){
+							foreach ($lastestassignment as $k=>$v){?>
                     <div class="mission">
                       <div class="logo">
-                        <p><a href="#"><img src="images/tmp_01.gif" alt="必胜客" width="68" height="68" border="0" /></a></p>
+                        <p><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><img src="/public/upload/logo/<?php echo $v['c_logo']?>" width="68" height="68" border="0" /></a></p>
                       </div>
-                      <div class="des"><span style="color:#000;">任务：</span><b><a href="#">必胜客</a></b><br />
+                      <div class="des"><span style="color:#000;"></span><b><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><?php echo $v['a_title']?></a></b><br />
 
-                        开始时间：2010.01.22.<br />
-                      结束时间：2010.01.31.</div>
+                        开始时间：<?php echo $v['a_sdate']?><br />
+                      结束时间：<?php echo $v['a_edate']?></div>
                     </div>
-                  <div class="mission">
-                      <div class="logo">
-                        <p><a href="#"><img src="images/tmp_01.gif" alt="必胜客" width="68" height="68" border="0" /></a></p>
-                    </div>
-                    <div class="des"><span style="color:#000;">任务：</span><b><a href="#">必胜客</a></b><br />
-
-                      开始时间：2010.01.22.<br />
-                    结束时间：2010.01.31.</div>
-                  </div>
-                  <div class="mission">
-                      <div class="logo">
-                        <p><a href="#"><img src="images/nopic.gif" width="61" height="61" border="0" /></a></p>
-                      </div>
-                    <div class="des"><span style="color:#000;">任务：</span><b><a href="#">必胜客</a></b><br />
-
-                      开始时间：2010.01.22.<br />
-                    结束时间：2010.01.31.</div>
-                  </div>
-                  <div class="mission">
-                    <div class="logo">
-                      <p><a href="#"><img src="images/tmp_01.gif" alt="必胜客" width="68" height="68" border="0" /></a></p>
-                    </div>
-                    <div class="des"><span style="color:#000;">任务：</span><b><a href="#">必胜客</a></b><br />
-
-                      开始时间：2010.01.22.<br />
-                    结束时间：2010.01.31.</div>
-                  </div>
-                  <div class="mission">
-                    <div class="logo">
-                      <p><a href="#"><img src="images/tmp_01.gif" alt="必胜客" width="68" height="68" border="0" /></a></p>
-                    </div>
-                    <div class="des"><span style="color:#000;">任务：</span><b><a href="#">必胜客</a></b><br />
-
-                      开始时间：2010.01.22.<br />
-                    结束时间：2010.01.31.</div>
-                  </div>
-                  <div class="mission">
-                    <div class="logo">
-                      <p><a href="#"><img src="images/tmp_01.gif" alt="必胜客" width="68" height="68" border="0" /></a></p>
-                    </div>
-                    <div class="des"><span style="color:#000;">任务：</span><b><a href="#">必胜客</a></b><br />
-
-                      开始时间：2010.01.22.<br />
-                    结束时间：2010.01.31.</div>
-                  </div>
-                  <div class="mission">
-                    <div class="logo">
-                      <p><a href="#"><img src="images/tmp_01.gif" alt="必胜客" width="68" height="68" border="0" /></a></p>
-                    </div>
-                    <div class="des"><span style="color:#000;">任务：</span><b><a href="#">必胜客</a></b><br />
-
-                      开始时间：2010.01.22.<br />
-                    结束时间：2010.01.31.</div>
-                  </div></td>
+                   <?php
+							}
+              }
+              ?>
+                </td>
                 <td class="table2RightBorder"></td>
               </tr>
               <tr>
