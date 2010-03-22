@@ -75,6 +75,15 @@ li {
 	text-decoration:none;
 }
 
+.loginBtn {
+	background:url(../images/btn_login.gif) #ff3b00 no-repeat;
+	width:51px;
+	height:27px;
+	color:#FFF;
+	border:none;
+	margin-right:10px;
+}
+
 #wrap {
 	padding:12px 0 0 0;
 }
@@ -260,7 +269,7 @@ li {
 }
 
 .shanghu {
-	background:url(../images/icon_ear.gif) no-repeat;
+	background:url(../images/icon_search.gif) no-repeat;
 	margin:10px 0 10px 0;
 	padding-left:30px;
 }
@@ -427,7 +436,7 @@ float:left;
 }
     #tabsD {
       float:left;
-      width:520px;
+      width:560px;
       background:#FFF;
       font-size:14px;
       line-height:normal;
