@@ -119,8 +119,19 @@ function getStore(c_id){
 							<td><?php echo lang('a_desc')?>:</td>
 							<td><textarea type="text" name="a_desc" rows="10" style="width:500px" class="textfield"/></textarea></td>
 							</tr>					
+						<tr>					
 						<tr>
-						
+							<td><?php echo lang('a_quiz')?>:</td>
+							<td>
+							格式说明,每一行输入一个测试题目。格式为 title:问题标题|A:答案|B:答案|C:答案|D:答案|answer:D
+							<textarea type="text" name="a_quiz" rows="10" style="width:900px" class="textfield"/>
+title:去肯德基一定要点的是什么？|A:薯条|B:鸡翅|C:汉堡|D:可乐|answer:B
+title:用餐结束之后不要忘记什么？|A:买单|B:刷卡|C:要发票|D:贵重物品|answer:C
+							
+							</textarea></td>
+							</tr>					
+						<tr>
+			
 							<td colspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button"/ >  <input type="button" value="<?php echo lang('goback')?>" onclick="history.go(-1);" class="button" /></td>
 						</tr>
 					</table>

@@ -129,6 +129,12 @@ function getStore(c_id){
 							<td><?php echo lang('a_desc')?>:</td>
 							<td><textarea type="text" name="a_desc" rows="10" style="width:500px" class="textfield"/><?php echo $info['a_desc'];?></textarea></td>
 							</tr>					
+						<tr>		
+						<tr>
+							<td><?php echo lang('a_quiz')?>:</td>
+							<td>格式说明,每一行输入一个测试题目。格式为 title:问题标题|A:答案|B:答案|C:答案|D:答案|answer:D 
+							<textarea type="text" name="a_quiz" rows="10" style="width:900px" class="textfield"/><?php echo $info['a_quiz'];?></textarea></td>
+							</tr>					
 						<tr>
 						
 							<td colspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button"/>  <input type="button" value="<?php echo lang('goback')?>" onclick="history.go(-1);" class="button" /></td>

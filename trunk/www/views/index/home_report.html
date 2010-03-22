@@ -1,0 +1,126 @@
+<?php include_once("header.html")?>
+
+<div id="wrap">  <br />
+	<?php include_once("home_left.html")?>
+    <div class="admincontent">
+		<?php include_once("home_assignmenttop.html")?>
+		<br />
+		<br />
+		<div id="tabsD" style="width:100%"> 
+		  <ul> 
+		    <li><a href="/index.php/home/assignment/a_id/<?php echo $a_id;?>"><span >说明</span></a></li> 
+		    <li><a href="/index.php/home/reportpreview/a_id/<?php echo $a_id;?>"  ><span>调查问卷预览</span></a></li> 
+		    <li><a href="/index.php/home/quiz/a_id/<?php echo $a_id;?>" ><span>测试</span></a></li> 
+		    <li class="on"><a href="/index.php/home/report/a_id/<?php echo $a_id;?>" ><span>填写调查问卷</span></a></li> 
+		    <li><a href="/index.php/home/upload/a_id/<?php echo $a_id;?>" ><span>上传附件</span></a></li> 
+		  </ul> 
+		
+		</div>
+<script src="<?php echo $www_site_url?>/public/js/common.js" type="text/javascript"></script>
+<script src="<?php echo $www_site_url?>/public/js/vote.js" type="text/javascript"></script>
+<script>
+
+function checkform(form){
+	var g=function(n){
+		return form.getElementsByTagName(n);
+	};
+	var va=function(e){
+		if(e.name) return encodeURIComponent(e.value);
+	};
+	var check=function(r){
+		for(var i=0;i<r.length;i++){
+			if(r[i].checked) return true;
+		}
+		return false;
+	}
+	var result = true;
+	
+	var input = g('input');
+	for(var i=0;i<input.length;i++){
+		var v = va(input[i]);
+		if(input[i].type=='text' || input[i].type=='hidden'){
+			if( v==''){
+				input[i].parentNode.style.border='1px solid red';
+				result=false;
+			}else{
+				input[i].parentNode.style.border='';
+			}
+		} 
+		if(input[i].type=='radio'){
+			if(check(form.elements[input[i].name])){
+				input[i].parentNode.style.border='';
+			}else{
+				input[i].parentNode.style.border='1px solid red';
+			}
+		}
+	}
+	
+	var textarea = g('textarea');
+	for(var i=0;i<textarea.length;i++){
+		var v=va(textarea[i]);
+		if(v==''){
+			textarea[i].style.border='1px solid red';
+			result=false;
+		}else{
+			textarea[i].style.border='';
+		}
+	}
+
+	return result;
+
+}
+	
+	
+</script>
+	<?php if(isset($report_questions) && is_array($report_questions)){?>
+<form action="<?php echo $www_site_url?>/index.php" method="post" onsubmit="return checkform(this);">
+				<input type="hidden" name="action" value="home">
+				<input type="hidden" name="op" value="savereport">
+				<input type="hidden" name="a_id" value="<?php echo $a_id;?>">
+				<table cellspacing="10" >
+
+					<tr>
+						<th>ID</th>
+						<th><?php echo lang('question_title')?></th>
+						<th><?php echo lang('vote')?></th>
+					</tr>
+					<?php
+							foreach ($report_questions as $k=>$v){?>	
+					<tr>
+							<td><?php echo $k+1;?></td>
+							<td><?php echo $v['rq_question']?></td>
+							<td>
+								<?php if($v['rq_type']==2){?><div id="voteimg_<?php echo $v['rq_id'];?>"></div>	<span id="span_ch_<?php echo $v['rq_id'];?>"></span>
+								<input type="hidden" id="rq_ans_<?php echo $v['rq_id'];?>" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="<?php echo $v['answer'];?>">
+								<script>create_vote_img(<?php echo $v['rq_id'];?>,'<?php echo $v['answer'];?>');</script>	
+								<?php }else if($v['rq_type']==1){ ?>		
+								<label><input type="radio" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="Y" <?php if($v['answer']=='Y')echo 'checked'; ?>>yes ;</label><label><input type="radio" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="N"  <?php if($v['answer']=='N')echo 'checked'; ?>>no;</label>
+								
+								<?php }else if($v['rq_type']==3){ ?>		
+								<textarea name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>"><?php echo $v['answer']; ?></textarea>
+								<?php }else if($v['rq_type']==4){ ?>	
+								<input type="text" size="2" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="<?php echo $v['answer']; ?>">	
+								<?php }?>		
+							</td>
+					</tr>
+						<tr>
+						</tr>
+						
+						<?php }
+						?>
+					<tr class="nobg">
+						<td><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
+					</tr>
+				</table>
+
+				</form>
+  <?php }else{?>
+   <p>&nbsp;</p>
+   <p>&nbsp;</p>
+   <p>&nbsp;</p>
+   <p>先仔细阅读任务说明和调查问卷，通过一个小测试之后，才能报名参加任务！</p>
+  <?php }?>
+  
+  </div>
+</div>
+<?php include_once("footer.html")?>

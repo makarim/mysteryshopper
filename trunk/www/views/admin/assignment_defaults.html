@@ -162,7 +162,9 @@ function getStore(c_id){
 							<td><?php echo $v['a_finish']?></td>
 							<td><a href="/admin.php/assignment/edit/a_id/<?php echo $v['a_id']?>"><?php echo lang('edit')?></a>
 							
-							<a href="/admin.php/report/preview/a_id/<?php echo $v['a_id']?>/re_id/<?php echo $v['re_id']?>"><?php echo lang('view')?></a></td>
+							<a href="/admin.php/report/preview/a_id/<?php echo $v['a_id']?>/re_id/<?php echo $v['re_id']?>"><?php echo lang('view')?></a>
+							<a href="/admin.php/assignment/applicant/a_id/<?php echo $v['a_id']?>">申请者</a>
+							</td>
 						</tr>
 						<tr>
 						<td colspan="9"><div style="display:none" id="assignmentid_<?php echo $v['a_id']?>"></div></td>

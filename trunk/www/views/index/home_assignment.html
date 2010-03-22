@@ -3,72 +3,24 @@
 <div id="wrap">  <br />
 <?php include_once("home_left.html")?>
     <div class="admincontent">
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><div class="table2TitleBg">
-      <div class="table2TitleBg2">
-        <div class="table2Title">任务详情</div>
-      </div>
-    </div></td>
-  </tr>
-  <tr>
-
-    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td class="table2LeftBorder"></td>
-        <td><div class="mission">
-          <div class="logo">
-            <p><a href="#"><img src="/public/images/tmp_01.gif" width="68" height="68" border="0" /></a></p>
-          </div>
-        </div>
-        <div class="missionDetail"><span style="color:#000; font-size:14px; font-weight:bold;"><?php echo $assignmentinfo['a_title']?></span><br />
-
-          <br />
-            <table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionDetailTable">
-
-              <tr>
-                <td width="50%"><span class="title">开始时间：</span><?php echo $assignmentinfo['a_sdate']?></td>
-                <td><span class="title">结束时间：</span><?php echo $assignmentinfo['a_edate']?></td>
-                </tr>
-
-              <tr>
-                <td><span class="title">品牌：</span><?php echo $assignmentinfo['c_name']?></td>
-                <td><span class="title">分店：</span><?php echo $assignmentinfo['cs_name']?></td>
-                </tr>
-            </table>
-            <br />
-        </div>
-
-              </td>
-        <td class="table2RightBorder"></td>
-      </tr>
-      <tr>
-        <td class="table2BottomLeft"></td>
-        <td class="table2Bottom"></td>
-        <td class="table2BottomRight"></td>
-      </tr>
-
-    </table></td>
-  </tr>
-</table>
+<?php include_once("home_assignmenttop.html")?>
 <br />
 <br />
 <div id="tabsD" style="width:100%"> 
   <ul> 
-    <li class="on"><a href="#" title="关于我们"><span >说明</span></a></li> 
-    <li ><a href="#" title="什么是神秘顾客" ><span>调查问卷预览</span></a></li> 
-    <li><a href="#" title="什么是神秘顾客"><span>测试</span></a></li> 
-    <li><a href="#" title="什么是神秘顾客"><span>填写调查问卷</span></a></li> 
-    <li><a href="#" title="什么是神秘顾客"><span>上传附件</span></a></li> 
+    <li class="on"><a href="/index.php/home/assignment/a_id/<?php echo $a_id;?>"><span >说明</span></a></li> 
+    <li ><a href="/index.php/home/reportpreview/a_id/<?php echo $a_id;?>"  ><span>调查问卷预览</span></a></li> 
+    <li><a href="/index.php/home/quiz/a_id/<?php echo $a_id;?>" ><span>测试</span></a></li> 
+    <li><a href="/index.php/home/report/a_id/<?php echo $a_id;?>" ><span>填写调查问卷</span></a></li> 
+    <li><a href="/index.php/home/upload/a_id/<?php echo $a_id;?>" ><span>上传附件</span></a></li> 
   </ul> 
 
 </div>
-<p><br />
+<br />
     <br />
-  <?php echo $assignmentinfo['a_desc']?>
+  <?php echo nl2br($assignmentinfo['a_desc']);?>
   
   </div>
 </div>
-</div>
+
 <?php include_once("footer.html")?>

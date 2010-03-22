@@ -366,6 +366,7 @@ $GLOBALS['gLang']['add_question'] = '添加问题';
 $GLOBALS['gLang']['question'] = '问题';
 $GLOBALS['gLang']['question_group'] = '问题类别';
 $GLOBALS['gLang']['question_type'] = '问题形式';
+$GLOBALS['gLang']['question_title'] = '问题';
 
 
 

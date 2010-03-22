@@ -1,0 +1,61 @@
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><div class="table2TitleBg">
+      <div class="table2TitleBg2">
+        <div class="table2Title">任务详情</div>
+      </div>
+    </div></td>
+  </tr>
+  <tr>
+
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td class="table2LeftBorder"></td>
+        <td><div class="mission">
+          <div class="logo">
+            <p><a href="/index.php/home/assignment/a_id/<?php echo $a_id;?>"><img src="/public/upload/logo/<?php echo $assignmentinfo['c_logo']?>" width="68" height="68" border="0" /></a></p>
+          </div>
+        </div>
+        <div class="missionDetail">
+        <span style="color:#000; font-size:14px; font-weight:bold;"><?php echo $assignmentinfo['a_title']?></span>
+        
+        <?php if($do_quiz=='pass') {?>
+        <span style="float:right">
+        <form action="<?php echo $www_site_url?>/index.php" method="post">
+				<input type="hidden" name="action" value="home">
+				<input type="hidden" name="op" value="apply">
+				<input type="hidden" name="a_id" value="<?php echo $a_id;?>">
+        <input type="submit" class="button" name="baoming" value="我要报名">
+        </form>
+        </span>
+        <? }?>
+
+          <br />
+            <table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionDetailTable">
+
+              <tr>
+                <td width="50%"><span class="title">开始时间：</span><?php echo $assignmentinfo['a_sdate']?></td>
+                <td><span class="title">结束时间：</span><?php echo $assignmentinfo['a_edate']?></td>
+                </tr>
+
+              <tr>
+                <td><span class="title">品牌：</span><?php echo $assignmentinfo['c_name']?></td>
+                <td><span class="title">分店：</span><?php echo $assignmentinfo['cs_name']?></td>
+                </tr>
+            </table>
+            <br />
+        </div>
+
+              </td>
+        <td class="table2RightBorder"></td>
+      </tr>
+      <tr>
+        <td class="table2BottomLeft"></td>
+        <td class="table2Bottom"></td>
+        <td class="table2BottomRight"></td>
+      </tr>
+
+    </table></td>
+  </tr>
+</table>

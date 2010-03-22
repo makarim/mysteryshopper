@@ -357,18 +357,18 @@ class passport {
 		$birthdatemonth = !empty($_POST['birthdatemonth'])?$_POST['birthdatemonth']:'';
 		$birthdateday = !empty($_POST['birthdateday'])?$_POST['birthdateday']:'';
 		$user['birthdate']  =$birthdateyear.'-'. sprintf('%02d',$birthdatemonth).'-'.sprintf('%02d',$birthdateday);
-		$user['marital'] = !empty($_POST['maritalstatus'])?$_POST['maritalstatus']:'';
+		$user['marital'] = !empty($_POST['maritalstatus'])?$_POST['maritalstatus']:'0';
 		$user['nationality'] = !empty($_POST['nationality'])?$_POST['nationality']:'';
 		$user['occupation'] = !empty($_POST['occupation'])?$_POST['occupation']:'';
-		$user['householdincome'] = !empty($_POST['householdincome'])?$_POST['householdincome']:'';
-		$user['education'] = !empty($_POST['education'])?$_POST['education']:'';
-		$user['havecar'] = !empty($_POST['havecar'])?$_POST['havecar']:'';
+		$user['householdincome'] = !empty($_POST['householdincome'])?$_POST['householdincome']:'0';
+		$user['education'] = !empty($_POST['education'])?$_POST['education']:'0';
+		$user['havecar'] = !empty($_POST['havecar'])?$_POST['havecar']:'0';
 		$user['eatingoutcount'] = !empty($_POST['eatingoutcount'])?intval($_POST['eatingoutcount']):'';
 		$user['avgbill'] = !empty($_POST['avgbill'])?$_POST['avgbill']:'';
 		$user['apparelspending'] = !empty($_POST['apparelspending'])?$_POST['apparelspending']:'';
-		$user['hearabout'] = !empty($_POST['hearabout'])?$_POST['hearabout']:'';
-		$user['newletters'] = !empty($_POST['newletters'])?$_POST['newletters']:'';
-		$user['speak_english'] = !empty($_POST['speak_english'])?$_POST['speak_english']:'';
+		$user['hearabout'] = !empty($_POST['hearabout'])?$_POST['hearabout']:'0';
+		$user['newletters'] = !empty($_POST['newletters'])?$_POST['newletters']:'0';
+		$user['speak_english'] = !empty($_POST['speakenglish'])?$_POST['speakenglish']:'0';
 		$user['interests'] = !empty($_POST['interests'])?$_POST['interests']:'';
 		
 		if (!isset($_SESSION['validatecode']) || ($_POST['code']!='back' && strtolower($_POST['code'])!=strtolower($_SESSION['validatecode']))) {

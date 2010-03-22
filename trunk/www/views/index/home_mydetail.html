@@ -4,63 +4,349 @@
 <?php include_once("home_left.html")?>
     <div class="admincontent">
 
-    <div id="tabsD" style="width:100%"> 
-  <ul> 
-    <li><a href="#" title="关于我们"><span>联系方式</span></a></li> 
-    <li><a href="#" title="什么是神秘顾客"><span>个人信息</span></a></li> 
-    <li><a href="#" title="什么是神秘顾客"><span>其他信息</span></a></li> 
-    <li><a href="#" title="什么是神秘顾客"><span>基本资料</span></a></li> 
-    <li><a href="#" title="什么是神秘顾客"><span>付款方式</span></a></li> 
-    <li><a href="#" title="什么是神秘顾客"><span>头像上传</span></a></li> 
-  </ul> 
-</div>
+	    <div id="tabsD" style="width:100%"> 
+		  <ul> 
+		    <li <?php if($type=='contact') echo 'class="on"';?>><a href="/index.php/home/mydetail/contact"><span>联系方式</span></a></li> 
+		    <li <?php if($type=='extinfo') echo 'class="on"';?>><a href="/index.php/home/mydetail/extinfo" ><span>个人信息</span></a></li> 
+		    <li <?php if($type=='other') echo 'class="on"';?>><a href="/index.php/home/mydetail/other" ><span>其他信息</span></a></li> 
+		    <li <?php if($type=='payment') echo 'class="on"';?>><a href="/index.php/home/mydetail/payment" ><span>付款方式</span></a></li> 
+		    <li <?php if($type=='upload') echo 'class="on"';?>><a href="/index.php/home/mydetail/upload" ><span>头像上传</span></a></li> 
+		  </ul> 
+		</div>
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<table width="100%" border="0" cellpadding="0" cellspacing="0" class="regInfo">
-  <tr>
-    <td width="40%" class="text">用户名：</td>
-    <td width="60%"><input name="textfield" type="text" class="input" id="textfield" />
-        <img src="images/icon_right.gif" width="15" height="15" /> </td>
-  </tr>
+<div class="clear"></div>
+<FORM name="editform" id="editform" method="POST" onsubmit="return checkOnSubmit('editform', rules);" <?php if($type=='upload'){ ?> enctype="multipart/form-data"<?php }?> >
+<input type="hidden" name="action" value="home">
+<input type="hidden" name="op" value="updateuserdetail">
+<input type="hidden" name="type" id="t" value="<?php echo $type?>">
+<?php if($type=='contact'){ ?>
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
+<TR>
+<TD width="40%" class="text"></TD>
+<TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
+</TR
+<TR>
 
-  <tr>
-    <td class="text">密码：</td>
-    <td><input name="textfield2" type="password" class="input" id="textfield2" />
-        <img src="images/icon_error.gif" width="15" height="15" /></td>
-  </tr>
-  <tr>
-    <td class="text">再输入一次密码：</td>
-    <td><input name="textfield3" type="password" class="input" id="textfield3" /></td>
 
-  </tr>
-  <tr>
-    <td class="text">电子邮箱：</td>
-    <td><input name="textfield4" type="text" class="input" id="textfield4" /></td>
-  </tr>
-  <tr>
-    <td class="text">验证码：</td>
-    <td><input name="textfield5" type="text" class="input" id="textfield5" style="width:100px;" />
+<TR><TD class="text">*手机:</TD>
+<TD><div id="errorsDiv_mobile"></div><INPUT class="textfield" type="text" name="mobile" value="<?php echo $userinfo['mobile']?>" id="mobile" /></TD>
+</TR>
+<TR>
+<TD class="text">电话:</TD>
+<TD><div id="errorsDiv_phone"></div><INPUT class="textfield" type="text" name="phone" value="<?php echo $userinfo['phone']?>" id="phone"/></TD>
+</TR>
 
-      <a href="#">看不清楚？换一个！</a></td>
-  </tr>
-  <tr>
-    <td class="text">&nbsp;</td>
-    <td><img src="images/tmp_yanzhengma.gif" width="152" height="62" /></td>
-  </tr>
+<TR>
+<TD class="text">QQ:</TD>
+<TD><div id="errorsDiv_qq"></div><INPUT class="textfield" type="text" name="qq" id="qq" value="<?php echo $userinfo['qq']?>" /></TD>
+</TR>
+<TR>
+<TD class="text">MSN:</TD>
+<TD><div id="errorsDiv_msn"></div><INPUT class="textfield" type="text" name="msn" id="msn" value="<?php echo $userinfo['msn']?>" /></TD>
+</TR>
+<TR>
+<TD class="text">居住城市:</TD>
+<TD><div id="errorsDiv_city"></div><INPUT class="textfield" type="text" name="city" id="city" value="<?php echo $userinfo['city']?>" /></TD>
+</TR>
+
+<TR>
+<TD class="text">详细住址:</TD>
+<TD><div id="errorsDiv_address"></div><INPUT class="textfield" type="text" name="address" id="address" value="<?php echo $userinfo['address']?>" /></TD>
+</TR>
   <tr>
     <td class="text">&nbsp;</td>
 
     <td><label> <br />
           <br />
-          <input type="image" name="imageField" id="imageField" src="images/btn_save.gif" />
+          <input type="image" name="imageField" id="imageField" src="/public/images/btn_save.gif" />
     </label></td>
   </tr>
 </table>
+<?php }?>
+<?php if($type=='extinfo'){ ?>
+
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
+<TR>
+<TD width="40%" class="text"></TD>
+<TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
+</TR
+<TR>
+
+<TR>
+<TD width="40%" class="text">*姓名:</TD>
+<TD width="60%"><div id="errorsDiv_realname"></div><INPUT class="textfield" type="text" name="realname" value="<?php echo $userinfo['realname']?>" id="realname" /></TD>
+</TR>
+<TR>
+<TD class="text">生日:</TD>
+<TD><div id="errorsDiv_birthdateyear"></div><select name="birthdateyear" id="birthdateyear"> 
+			<option value="">--</option> 
+			<?php for ($i=1921;$i<2000;$i++){?>
+			<option value="<?php echo $i;?>" <?php if($i==$userinfo['year']) echo 'selected="selected"';?>><?php echo $i;?></option> 
+			<?php }?>
+ 	
+		</select>年<select name="birthdatemonth" id="birthdatemonth"> 
+		<option value="">--</option> 
+		<?php for ($i=1;$i<=12;$i++){?>
+			<option value="<?php echo $i;?>" <?php if($i==$userinfo['month']) echo 'selected="selected"';?>><?php echo $i;?></option> 
+			<?php }?>
+			
+ 
+		</select>月<select name="birthdateday" id="birthdateday"> 
+<option value="">--</option> 
+				<?php for ($i=1;$i<=31;$i++){?>
+			<option value="<?php echo $i;?>" <?php if($i==$userinfo['day']) echo 'selected="selected"';?>><?php echo $i;?></option> 
+			<?php }?>
+ 
+		</select>日</TD>
+</TR>
+<TR>
+<TD class="text">婚姻:</TD>
+<TD><div id="errorsDiv_maritalstatus"></div><select name="maritalstatus" id="maritalstatus"> 
+<option value="0">选择...</option> 
+			<option value="M" <?php if('M'==$userinfo['marital']) echo 'selected="selected"';?>>已婚</option> 
+			<option value="S" <?php if('S'==$userinfo['marital']) echo 'selected="selected"';?>>单身</option> 
+			</select>
+ </TD>
+</TR>
+<TR>
+<TD class="text">国籍:</TD>
+<TD><div id="errorsDiv_nationality"></div><INPUT class="textfield" type="text" name="nationality" id="nationality" value="<?php echo $userinfo['nationality']?>" /></TD>
+</TR>
+<TR>
+<TD class="text">职业:</TD>
+<TD><div id="errorsDiv_occupation"></div><INPUT class="textfield" type="text" name="occupation" id="occupation" value="<?php echo $userinfo['occupation']?>" /></TD>
+</TR>
+<TR>
+<TD class="text">年收入:</TD>
+<TD><div id="errorsDiv_householdincome"></div>
+<select name="householdincome" id="householdincome" > 
+					<option value="0" >选择...</option> 
+					<option value="1" <?php if(1==$userinfo['householdincome']) echo 'selected="selected"';?>>&lt;1.8万</option> 
+					<option value="2" <?php if(2==$userinfo['householdincome']) echo 'selected="selected"';?>>1.8万-2.5万</option> 
+					<option value="3" <?php if(3==$userinfo['householdincome']) echo 'selected="selected"';?>>2.5万-3.5万</option> 
+					<option value="4" <?php if(4==$userinfo['householdincome']) echo 'selected="selected"';?>>3.5万-4.5万</option> 
+					<option value="5" <?php if(5==$userinfo['householdincome']) echo 'selected="selected"';?>>5.5万-7.5万</option> 
+					<option value="6" <?php if(6==$userinfo['householdincome']) echo 'selected="selected"';?>>7.5万-10万</option> 
+					<option value="7" <?php if(7==$userinfo['householdincome']) echo 'selected="selected"';?>>10万以上</option> 
+ </TD>
+</TR>
+<TR>
+<TD class="text">教育程度:</TD>
+<TD><div id="errorsDiv_education"></div><select name="education" id="education"> 
+<option value="0">选择...</option> 
+					<option value="1" <?php if(1==$userinfo['education']) echo 'selected="selected"';?>>中学</option> 
+					<option value="2" <?php if(2==$userinfo['education']) echo 'selected="selected"';?>>高中/中专</option> 
+					<option value="3" <?php if(3==$userinfo['education']) echo 'selected="selected"';?>>本科/大专</option> 
+					<option value="4" <?php if(4==$userinfo['education']) echo 'selected="selected"';?>>硕士</option> 
+					<option value="5" <?php if(5==$userinfo['education']) echo 'selected="selected"';?>>博士</option> 
+ 
+				</select></TD>
+</TR>
+<TR>
+<TD class="text">您有私人汽车吗?:</TD>
+<TD><div id="errorsDiv_havecar"></div><select name="havecar" id="havecar"> 
+<option value="0">选择...</option> 
+					<option value="1" <?php if(1==$userinfo['havecar']) echo 'selected="selected"';?>>是</option> 
+					<option value="2" <?php if(2==$userinfo['havecar']) echo 'selected="selected"';?>>否</option> 
+ 
+				</select></TD>
+</TR>
+<TR>
+<TD class="text">会讲英语吗?:</TD>
+<TD><div id="errorsDiv_speakenglish"></div><select name="speakenglish" id="speakenglish"> 
+<option value="0">选择...</option> 
+					<option value="1" <?php if(1==$userinfo['speak_english']) echo 'selected="selected"';?>>会</option> 
+					<option value="2" <?php if(2==$userinfo['speak_english']) echo 'selected="selected"';?>>不会</option> 
+ 
+				</select></TD>
+</TR>
+  <tr>
+    <td class="text">&nbsp;</td>
+
+    <td><label> <br />
+          <br />
+          <input type="image" name="imageField" id="imageField" src="/public/images/btn_save.gif" />
+    </label></td>
+  </tr>
+</table>
+
+<?php }?>
+
+
+<?php if($type=='other'){ ?>
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
+<TR>
+<TD width="40%" class="text"></TD>
+<TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
+</TR
+<TR>
+<TR>
+<TD class="text">每星期外出就餐次数:</TD>
+<TD><div id="errorsDiv_eatingoutcount"></div><INPUT class="textfield" type="text" id="eatingoutcount" name="eatingoutcount" value="<?php echo $userinfo['eatingoutcount']?>" />次</TD>
+</TR>
+<TR>
+<TD class="text">就餐平均消费：</TD>
+<TD><div id="errorsDiv_avgbill"></div><INPUT class="textfield" type="text" name="avgbill" id="avgbill" value="<?php echo $userinfo['avgbill']?>" />RMB</TD>
+</TR>
+<TR>
+<TD class="text">每月您在服饰方面的消费:</TD>
+<TD><div id="errorsDiv_apparelspending"></div><INPUT class="textfield" type="text" name="apparelspending" id="apparelspending" value="<?php echo $userinfo['apparelspending']?>" />RMB</TD>
+</TR>
+<TR>
+<TD class="text">您的最大兴趣是什么？</TD>
+<TD><div id="errorsDiv_interests"></div><INPUT class="textfield" type="text" name="interests" id="interests" value="<?php echo $userinfo['interests']?>" /></TD>
+</TR>
+<TR>
+<TD class="text">您是如何知道我们的公司? </TD>
+<TD><div id="errorsDiv_hearabout"></div>
+<select name="hearabout" id="hearabout"> 
+<option value="0">选择...</option> 
+			<option value="1" <?php if(1==$userinfo['hearabout']) echo 'selected="selected"';?>>朋友介绍</option> 
+			<option value="2" <?php if(2==$userinfo['hearabout']) echo 'selected="selected"';?>>网上广告</option> 
+			<option value="3" <?php if(3==$userinfo['hearabout']) echo 'selected="selected"';?>>路牌广告</option> 
+			<option value="4" <?php if(4==$userinfo['hearabout']) echo 'selected="selected"';?>>报纸</option> 
+			<option value="5" <?php if(5==$userinfo['hearabout']) echo 'selected="selected"';?>>电视</option> 
+			<option value="6" <?php if(6==$userinfo['hearabout']) echo 'selected="selected"';?>>其他</option> 
+			</select></TD>
+</TR>
+<TR>
+<TD class="text">你是否需要平时收到我们SPOT的最新动态? </TD>
+<TD><div id="errorsDiv_newletters"></div><select name="newletters" id="newletters"> 
+<option value="0">选择...</option> 
+			<option value="1" <?php if(1==$userinfo['newletters']) echo 'selected="selected"';?>>要</option> 
+			<option value="2" <?php if(2==$userinfo['newletters']) echo 'selected="selected"';?>>不要</option> 
+			</select></TD>
+</TR>
+  <tr>
+    <td class="text">&nbsp;</td>
+
+    <td><label> <br />
+          <br />
+          <input type="image" name="imageField" id="imageField" src="/public/images/btn_save.gif" />
+    </label></td>
+  </tr>
+</table>
+<?php }?>
+<?php if($type=='payment'){ ?>
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
+<TR>
+<TD width="40%" class="text"></TD>
+<TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
+</TR>
+<TR>
+<TD class="text">支付宝帐号：</TD>
+<TD><div id="errorsDiv_alipay"></div><INPUT class="textfield" type="text" name="alipay" id="alipay" value="<?php echo $userinfo['alipay']?>" /></TD>
+</TR>
+<TR>
+<TD class="text">银行名称：</TD>
+<TD><div id="errorsDiv_alipay"></div><INPUT class="textfield" type="text" name="bank_name" id="bank_name" value="<?php echo $userinfo['bank_name']?>" /></TD>
+</TR>
+<TR>
+<TD class="text">银行帐号：</TD>
+<TD><div id="errorsDiv_alipay"></div><INPUT class="textfield" type="text" name="bank_account" id="bank_account" value="<?php echo $userinfo['bank_account']?>" /></TD>
+</TR>
+<TR>
+<TD class="text">帐号姓名：</TD>
+<TD><div id="errorsDiv_alipay"></div><INPUT class="textfield" type="text" name="bank_realname" id="bank_realname" value="<?php echo $userinfo['bank_realname']?>" /></TD>
+</TR>
+  <tr>
+    <td class="text">&nbsp;</td>
+
+    <td><label> <br />
+          <br />
+          <input type="image" name="imageField" id="imageField" src="/public/images/btn_save.gif" />
+    </label></td>
+  </tr>
+</table>
+
+<?php }?>
+<?php if($type=='upload'){ ?>
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
+<TR>
+<TD width="40%" class="text"></TD>
+<TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
+</TR>
+<TR>
+<TD class="text">头像上传：</TD>
+<TD><div id="errorsDiv_face"></div><img src="/public/upload/faceimg/<?php echo $userinfo['face_img']?>">
+<br />
+<INPUT type="file" name="face" id="face"  />
+</TD>
+</TR>
+
+  <tr>
+    <td class="text">&nbsp;</td>
+
+    <td><label> <br />
+          <br />
+          <input type="image" name="imageField" id="imageField" src="/public/images/btn_save.gif" />
+    </label></td>
+  </tr>
+</table>
+
+<?php }?>
+</form>
+
+
+<SCRIPT>
+//only for test purposes
+function checkOnSubmit(formName, r) {
+   // document.getElementById(yav_config.errorsdiv).className = '';
+   // document.getElementById(yav_config.errorsdiv).style.display = 'none';
+   // var alertType = document.getElementById('alertType').value;
+   var t = $("t").value;
+    if (yav.performCheck(formName, r, 'inline')) {
+    	
+    	if(t=='upload'){
+    		return true;
+    	}
+    	var url = "<?php echo $www_site_url?>/index.php";
+		var params = mini.form.serialize($(formName));
+		$("msg").innerHTML = "请稍等...";
+		mini.ajax.post(url, function(r){
+		
+			var r = eval('(' + r + ')');   
+			if(r.s==200){
+				$("msg").innerHTML = r.m;
+				//window.location.href = r.d;
+			}
+			if(r.s==400){
+				//$('msg').innerHTML = r.m;
+				alert(r.m);
+			}
+		}, params);
+    	
+    	return false;
+       
+    } 
+    return false;
+}
+
+var rules=new Array();
+rules[0]='realname|required|<?php echo lang('realnamerule')?>';
+rules[1]='mobile|required|请正确的手机号码';
+rules[2]='mobile|regexp|^1\\d{10}$|请正确的手机号码';
+
+
+
+yav.addHelp('realname', '<?php echo lang('realnamerule')?>');
+yav.addHelp('mobile', '');
+
+var captchaOK = 2;  // 2 - not yet checked, 1 - correct, 0 - failed
+// a simple ajax implementation
+
+function changeCode() {
+	var num = 	new Date().getTime();
+	var rand = Math.round(Math.random() * 10000);
+	num = num + rand;
+	document.getElementById("codeimg").src = "<?php echo $www_site_url?>/index.php/identifycode/generate/" + num;
+	return false;
+}
+window.onload = function(){
+	yav.init('editform', rules);
+}
+</SCRIPT>
   </div>
 </div>
-</div>
+
 <?php include_once("footer.html")?>

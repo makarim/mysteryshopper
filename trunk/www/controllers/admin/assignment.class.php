@@ -80,7 +80,8 @@ class assignment{
 		$_POST ['c_id'] = intval( $_POST ['c_id'] );
 		$_POST ['cs_id'] = intval ( $_POST ['cs_id'] );
 		$_POST ['re_id'] = intval ( $_POST ['re_id'] );
-		$_POST ['a_desc'] = strip_tags( $_POST ['a_desc'] );
+		$_POST ['a_desc'] = addslashes(strip_tags( $_POST ['a_desc'] ));
+		$_POST ['a_quiz'] = addslashes(strip_tags( $_POST ['a_quiz'] ));
 		$_POST ['a_hasphoto'] = !isset ( $_POST ['a_hasphoto'] )?0:1;
 		$_POST ['a_hasaudio'] = !isset ( $_POST ['a_hasaudio'] )?0:1;
 		
@@ -100,6 +101,7 @@ class assignment{
 		$assignment['cs_id'] =  $_POST ['cs_id'] ;
 		$assignment['re_id'] =  $_POST ['re_id'] ;
 		$assignment['a_desc'] =  $_POST ['a_desc'] ;
+		$assignment['a_quiz'] =  $_POST ['a_quiz'] ;
 		$assignment['a_hasphoto'] =  $_POST ['a_hasphoto'] ;
 		$assignment['a_hasaudio'] =  $_POST ['a_hasaudio'] ;
 		
@@ -128,24 +130,7 @@ class assignment{
     	show_message(lang('selectone'));
     	goback();
     }
-    function view_detail(){
-    	$a_id = $_GET['assignment'];
-    	
-    	include_once("AssignmentModel.class.php");
-    	$assignment = new AssignmentModel();
-    	$assignmentinfo = $assignment->getAssignmentById($a_id);
-    	if($assignmentinfo){
-    		$assignmentinfo['assignment_lastlogin_time'] = date("y-m-d H:i:s",$assignmentinfo['assignment_lastlogin_time']);
-    		if($assignmentinfo['assignment_sex']==1) $assignmentinfo['assignment_sex'] = lang('boy');
-    		if($assignmentinfo['assignment_sex']==2) $assignmentinfo['assignment_sex'] = lang('girl');
-    		$msg = array('s'=> 200,'m'=>'','d'=>$assignmentinfo);				
-			exit(json_output($msg));
-    	}else{
-    		$msg = array('s'=> 400,'m'=>lang('assignmentnotexist'),'d'=>'');				
-			exit(json_output($msg));
-    	}
-    }
-    
+ 
     function view_edit(){
   
     	$a_id = $_GET['a_id'];
@@ -185,7 +170,8 @@ class assignment{
 		$assignment = new AssignmentModel();
 	
 		$updates['a_title'] = empty($_POST ['a_title'])?"":addslashes($_POST ['a_title']);
-		$updates['a_desc'] = empty($_POST ['a_desc'])?"":strip_tags($_POST ['a_desc']);
+		$updates['a_desc'] = empty($_POST ['a_desc'])?"":$_POST ['a_desc'];
+		$updates['a_quiz'] = empty($_POST ['a_quiz'])?"":strip_tags($_POST ['a_quiz']);
 		$updates['a_sdate'] = empty($_POST ['a_sdate'])?"":trim($_POST ['a_sdate']);
 		$updates['a_edate'] =empty($_POST ['a_edate'])?"":trim($_POST ['a_edate']);
 		$updates['c_id'] =empty($_POST ['c_id'])?"":intval($_POST ['c_id']);
@@ -208,5 +194,24 @@ class assignment{
 		}
     }
     
+    function view_applicant(){
+    	$a_id = $_GET['a_id'];
+    	
+    	include_once("AssignmentModel.class.php");
+    	$assignment = new AssignmentModel();
+    	$applicant = $assignment->getAssignmentApplicantById($a_id);
+    	$this->tpl->assign('applicant',$applicant);
+    	$this->tpl->assign('a_id',$a_id);
+		
+    }
+    function op_choose(){
+    	$a_id = $_POST['a_id'];
+    	$s = $_POST['s'];
+    	include_once("AssignmentModel.class.php");
+    	$assignment = new AssignmentModel();
+    	$rs= $assignment->chooseApplicant($a_id,$s);
+    	show_message("ok");
+    	goback( );
+    }
 }
 ?>
