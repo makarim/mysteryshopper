@@ -23,27 +23,27 @@
 <TD width="40%" class="text"></TD>
 <TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
 </TR
-<?php if($reg_type=='email') {?>
+><?php if($reg_type=='email') {?>
 <TR>
 <TD width="40%" class="text"><?php echo lang('email')?>:</TD>
-<TD width="60%"><div id="errorsDiv_email"></div><INPUT class="textfield" type="text" name="email" value="<?php echo $email?>" id="email" /></TD>
+<TD width="60%"><div id="errorsDiv_email"></div><INPUT class="input" type="text" name="email" value="<?php echo $email?>" id="email" /></TD>
 </TR><?php } ?>
 <?php if($reg_type=='username') {?><TR>
 <TD width="120px"><?php echo lang('username')?>:</TD>
-<TD><div id="errorsDiv_username"></div><INPUT class="textfield" type="text" name="username"  value="<?php echo $username?>" id="username"/>
+<TD><div id="errorsDiv_username"></div><INPUT class="input" type="text" name="username"  value="<?php echo $username?>" id="username"/>
 </TD>
 </TR><?php } ?>
 <TR><TD class="text"><?php echo lang('pwd')?>:</TD>
-<TD><div id="errorsDiv_password"></div><INPUT class="textfield" type="password" name="password"  /></TD>
+<TD><div id="errorsDiv_password"></div><INPUT class="input" type="password" name="password"  /></TD>
 </TR>
 <TR>
 <TD class="text"><?php echo lang('comfirmpwd')?>:</TD>
-<TD><div id="errorsDiv_comfirmpwd"></div><INPUT class="textfield" type="password" name="comfirmpwd"  /></TD>
+<TD><div id="errorsDiv_comfirmpwd"></div><INPUT class="input" type="password" name="comfirmpwd"  /></TD>
 </TR>
 <?php if($reg_type=='username') {?>
 <TR>
 <TD class="text"><?php echo lang('pwdquestion')?>:</TD>
-<TD><div id="errorsDiv_question"></div><select class="textfield" id="question" name="question" title="<?php echo lang('pwdquestion')?>">
+<TD><div id="errorsDiv_question"></div><select class="input" id="question" name="question" title="<?php echo lang('pwdquestion')?>">
 
 			<option value="" selected="selected" ><?php echo lang('selectaquestion')?></option>
 
@@ -71,13 +71,13 @@
 		</TR>
 <TR>
 <TD class="text"><?php echo lang('youranswer')?>:</TD>
-<TD><div id="errorsDiv_answer"></div><INPUT class="textfield" type="text" name="answer" /></TD>
+<TD><div id="errorsDiv_answer"></div><INPUT class="input" type="text" name="answer" /></TD>
 </TR>
 <?php }?>
 
 <TR>
 <TD class="text"><?php echo lang('nickname')?>:</TD>
-<TD><div id="errorsDiv_nickname"></div><INPUT class="textfield" type="text" name="nickname" value="<?php echo $nickname?>" /></TD>
+<TD><div id="errorsDiv_nickname"></div><INPUT class="input" type="text" name="nickname" value="<?php echo $nickname?>" /></TD>
 </TR>
 <TR>
 <TD class="text"><?php echo lang('sex')?>:</TD>
@@ -87,10 +87,10 @@
 
 <TR>
 <TD class="text"><?php echo lang('validatecode')?>:</TD>
-<TD><div id="errorsDiv_code"></div><INPUT type="text" name="code" class="textfield" style="width:60px"/><img id="codeimg" src="<?php echo $www_site_url?>/index.php/identifycode/generate" align="absmiddle" title="<?php echo lang('anotherone')?>" onClick="changeCode();" style="cursor:pointer"></TD>
+<TD><div id="errorsDiv_code"></div><INPUT type="text" name="code" class="input" style="width:100px"/><img id="codeimg" src="<?php echo $www_site_url?>/index.php/identifycode/generate" align="absmiddle" title="<?php echo lang('anotherone')?>" onClick="changeCode();" style="cursor:pointer"></TD>
 </TR>
 
-<TR><TD class="text">&nbsp;</TD><TD><INPUT  type="image"  src="<?php echo $www_site_url?>/public/images/btn_next.gif" value="<?php echo lang('signup')?>" name="registerbtn"/> 
+<TR><TD class="text">&nbsp;</TD><TD><input name="button" type="submit" class="btn" id="button" value="<?php echo lang('signup')?>" />
 
 </TD></TR>
 </TABLE>

@@ -23,51 +23,51 @@
 <TD width="40%" class="text"></TD>
 <TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
 </TR
-<TR>
+><TR>
 <TR>
 <TD width="40%" class="text"></TD>
-<TD width="60%">一．联系方式(*为必填项)</TD>
+<TD width="60%" class="text" style="text-align:left;">一．联系方式(*为必填项)</TD>
 </TR
-<TR>
+><TR>
 <TD width="40%" class="text">*姓名:</TD>
-<TD width="60%"><div id="errorsDiv_realname"></div><INPUT class="textfield" type="text" name="realname" value="" id="realname" /></TD>
+<TD width="60%"><div id="errorsDiv_realname"></div><INPUT class="input" type="text" name="realname" value="" id="realname" /></TD>
 </TR>
 
 <TR><TD class="text">*手机:</TD>
-<TD><div id="errorsDiv_mobile"></div><INPUT class="textfield" type="text" name="mobile" id="mobile" /></TD>
+<TD><div id="errorsDiv_mobile"></div><INPUT class="input" type="text" name="mobile" id="mobile" /></TD>
 </TR>
 <TR>
 <TD class="text">电话:</TD>
-<TD><div id="errorsDiv_phone"></div><INPUT class="textfield" type="text" name="phone" id="phone"/></TD>
+<TD><div id="errorsDiv_phone"></div><INPUT class="input" type="text" name="phone" id="phone"/></TD>
 </TR>
 
 <TR>
 <TD class="text">QQ:</TD>
-<TD><div id="errorsDiv_qq"></div><INPUT class="textfield" type="text" name="qq" id="qq" value="" /></TD>
+<TD><div id="errorsDiv_qq"></div><INPUT class="input" type="text" name="qq" id="qq" value="" /></TD>
 </TR>
 <TR>
 <TD class="text">MSN:</TD>
-<TD><div id="errorsDiv_msn"></div><INPUT class="textfield" type="text" name="msn" id="msn" value="" /></TD>
+<TD><div id="errorsDiv_msn"></div><INPUT class="input" type="text" name="msn" id="msn" value="" /></TD>
 </TR>
 <TR>
 <TD class="text">居住城市:</TD>
-<TD><div id="errorsDiv_city"></div><INPUT class="textfield" type="text" name="city" id="city" value="" /></TD>
+<TD><div id="errorsDiv_city"></div><INPUT class="input" type="text" name="city" id="city" value="" /></TD>
 </TR>
 
 <TR>
 <TD class="text">住址:</TD>
-<TD><div id="errorsDiv_address"></div><INPUT class="textfield" type="text" name="address" id="address" value="" /></TD>
+<TD><div id="errorsDiv_address"></div><INPUT class="input" type="text" name="address" id="address" value="" /></TD>
 </TR>
 
 <TR>
 <TD class="text"></TD>
-<TD>二    个人信息情况</TD>
+<TD class="text"  style="text-align:left;">二    个人信息情况</TD>
 </TR>
 
 <TR>
 <TD class="text">生日:</TD>
 <TD><div id="errorsDiv_birthdateyear"></div><select name="birthdateyear" id="birthdateyear"> 
-			<option value="">--</option> 
+			<option value="" selected="selected">-------------</option> 
 			<option value="1921">1921</option> 
 			<option value="1922">1922</option> 
 			<option value="1923">1923</option> 
@@ -147,8 +147,10 @@
 			<option value="1997">1997</option> 
 			<option value="1998">1998</option> 
  
-		</select>年<select name="birthdatemonth" id="birthdatemonth"> 
-		<option value="">--</option> 
+		</select> 
+年 
+<select name="birthdatemonth" id="birthdatemonth"> 
+		<option value="">------</option> 
 			<option value="1">1</option> 
 			<option value="2">2</option> 
 			<option value="3">3</option> 
@@ -162,8 +164,10 @@
 			<option value="11">11</option> 
 			<option value="12">12</option> 
  
-		</select>月<select name="birthdateday" id="birthdateday"> 
-<option value="">--</option> 
+		</select> 
+月 
+<select name="birthdateday" id="birthdateday"> 
+<option value="">------</option> 
 			<option value="1">1</option> 
 			<option value="2">2</option> 
 			<option value="3">3</option> 
@@ -196,7 +200,8 @@
 			<option value="30">30</option> 
 			<option value="31">31</option> 
  
-		</select>日</TD>
+		</select> 
+日</TD>
 </TR>
 <TR>
 <TD class="text">婚姻:</TD>
@@ -209,11 +214,11 @@
 </TR>
 <TR>
 <TD class="text">国籍:</TD>
-<TD><div id="errorsDiv_nationality"></div><INPUT class="textfield" type="text" name="nationality" id="nationality" value="" /></TD>
+<TD><div id="errorsDiv_nationality"></div><INPUT class="input" type="text" name="nationality" id="nationality" value="" /></TD>
 </TR>
 <TR>
 <TD class="text">职业:</TD>
-<TD><div id="errorsDiv_occupation"></div><INPUT class="textfield" type="text" name="occupation" id="occupation" value="" /></TD>
+<TD><div id="errorsDiv_occupation"></div><INPUT class="input" type="text" name="occupation" id="occupation" value="" /></TD>
 </TR>
 <TR>
 <TD class="text">年收入:</TD>
@@ -263,23 +268,26 @@
 
 <TR>
 <TD class="text"></TD>
-<TD>三    其他信息</TD>
+<TD class="text" style="text-align:left;">三    其他信息</TD>
 </TR>
 <TR>
 <TD class="text">每星期外出就餐次数:</TD>
-<TD><div id="errorsDiv_eatingoutcount"></div><INPUT class="textfield" type="text" id="eatingoutcount" name="eatingoutcount" value="" />次</TD>
+<TD><div id="errorsDiv_eatingoutcount"></div><INPUT class="input" type="text" id="eatingoutcount" name="eatingoutcount" value="" /> 
+次</TD>
 </TR>
 <TR>
 <TD class="text">就餐平均消费：</TD>
-<TD><div id="errorsDiv_avgbill"></div><INPUT class="textfield" type="text" name="avgbill" id="avgbill" value="" />RMB</TD>
+<TD><div id="errorsDiv_avgbill"></div><INPUT class="input" type="text" name="avgbill" id="avgbill" value="" /> 
+RMB</TD>
 </TR>
 <TR>
 <TD class="text">每月您在服饰方面的消费:</TD>
-<TD><div id="errorsDiv_apparelspending"></div><INPUT class="textfield" type="text" name="apparelspending" id="apparelspending" value="" />RMB</TD>
+<TD><div id="errorsDiv_apparelspending"></div><INPUT class="input" type="text" name="apparelspending" id="apparelspending" value="" /> 
+RMB</TD>
 </TR>
 <TR>
 <TD class="text">您的最大兴趣是什么？</TD>
-<TD><div id="errorsDiv_interests"></div><INPUT class="textfield" type="text" name="interests" id="interests" value="" /></TD>
+<TD><div id="errorsDiv_interests"></div><INPUT class="input" type="text" name="interests" id="interests" value="" /></TD>
 </TR>
 <TR>
 <TD class="text">您是如何知道我们的公司? </TD>
@@ -305,12 +313,14 @@
 
 <TR>
 <TD class="text"><?php echo lang('validatecode')?>:</TD>
-<TD><div id="errorsDiv_code"></div><INPUT type="text" name="code" class="textfield" style="width:60px"/><img id="codeimg" src="<?php echo $www_site_url?>/index.php/identifycode/generate" align="absmiddle" title="<?php echo lang('anotherone')?>" onClick="changeCode();" style="cursor:pointer"></TD>
+<TD><div id="errorsDiv_code"></div><INPUT type="text" name="code" class="input" style="width:100px"/><img id="codeimg" src="<?php echo $www_site_url?>/index.php/identifycode/generate" align="absmiddle" title="<?php echo lang('anotherone')?>" onClick="changeCode();" style="cursor:pointer"></TD>
 </TR>
 
-<TR><TD class="text">&nbsp;</TD><TD><INPUT  type="image"  src="<?php echo $www_site_url?>/public/images/btn_submit.gif" value="<?php echo lang('signup')?>" name="registerbtn"/> 
+<TR><TD class="text">&nbsp;</TD><TD>
+  <input name="button" type="submit" class="btn" id="button" value="<?php echo lang('signup')?>" /> 
 
-</TD></TR>
+</TD>
+</TR>
 </TABLE>
 </form>
 

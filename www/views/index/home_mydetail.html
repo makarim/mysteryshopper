@@ -25,41 +25,40 @@
 <TD width="40%" class="text"></TD>
 <TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
 </TR
-<TR>
+><TR>
 
 
 <TR><TD class="text">*手机:</TD>
-<TD><div id="errorsDiv_mobile"></div><INPUT class="textfield" type="text" name="mobile" value="<?php echo $userinfo['mobile']?>" id="mobile" /></TD>
+<TD><div id="errorsDiv_mobile"></div><INPUT class="input" type="text" name="mobile" value="<?php echo $userinfo['mobile']?>" id="mobile" /></TD>
 </TR>
 <TR>
 <TD class="text">电话:</TD>
-<TD><div id="errorsDiv_phone"></div><INPUT class="textfield" type="text" name="phone" value="<?php echo $userinfo['phone']?>" id="phone"/></TD>
+<TD><div id="errorsDiv_phone"></div><INPUT class="input" type="text" name="phone" value="<?php echo $userinfo['phone']?>" id="phone"/></TD>
 </TR>
 
 <TR>
 <TD class="text">QQ:</TD>
-<TD><div id="errorsDiv_qq"></div><INPUT class="textfield" type="text" name="qq" id="qq" value="<?php echo $userinfo['qq']?>" /></TD>
+<TD><div id="errorsDiv_qq"></div><INPUT class="input" type="text" name="qq" id="qq" value="<?php echo $userinfo['qq']?>" /></TD>
 </TR>
 <TR>
 <TD class="text">MSN:</TD>
-<TD><div id="errorsDiv_msn"></div><INPUT class="textfield" type="text" name="msn" id="msn" value="<?php echo $userinfo['msn']?>" /></TD>
+<TD><div id="errorsDiv_msn"></div><INPUT class="input" type="text" name="msn" id="msn" value="<?php echo $userinfo['msn']?>" /></TD>
 </TR>
 <TR>
 <TD class="text">居住城市:</TD>
-<TD><div id="errorsDiv_city"></div><INPUT class="textfield" type="text" name="city" id="city" value="<?php echo $userinfo['city']?>" /></TD>
+<TD><div id="errorsDiv_city"></div><INPUT class="input" type="text" name="city" id="city" value="<?php echo $userinfo['city']?>" /></TD>
 </TR>
 
 <TR>
 <TD class="text">详细住址:</TD>
-<TD><div id="errorsDiv_address"></div><INPUT class="textfield" type="text" name="address" id="address" value="<?php echo $userinfo['address']?>" /></TD>
+<TD><div id="errorsDiv_address"></div><INPUT class="input" type="text" name="address" id="address" value="<?php echo $userinfo['address']?>" /></TD>
 </TR>
   <tr>
     <td class="text">&nbsp;</td>
 
-    <td><label> <br />
-          <br />
-          <input type="image" name="imageField" id="imageField" src="/public/images/btn_save.gif" />
-    </label></td>
+    <td><br /><br />
+          <input name="button" type="submit" class="btn" id="button" value="保  存" />
+    </td>
   </tr>
 </table>
 <?php }?>
@@ -70,11 +69,11 @@
 <TD width="40%" class="text"></TD>
 <TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
 </TR
-<TR>
+><TR>
 
 <TR>
 <TD width="40%" class="text">*姓名:</TD>
-<TD width="60%"><div id="errorsDiv_realname"></div><INPUT class="textfield" type="text" name="realname" value="<?php echo $userinfo['realname']?>" id="realname" /></TD>
+<TD width="60%"><div id="errorsDiv_realname"></div><INPUT class="input" type="text" name="realname" value="<?php echo $userinfo['realname']?>" id="realname" /></TD>
 </TR>
 <TR>
 <TD class="text">生日:</TD>
@@ -110,11 +109,11 @@
 </TR>
 <TR>
 <TD class="text">国籍:</TD>
-<TD><div id="errorsDiv_nationality"></div><INPUT class="textfield" type="text" name="nationality" id="nationality" value="<?php echo $userinfo['nationality']?>" /></TD>
+<TD><div id="errorsDiv_nationality"></div><INPUT class="input" type="text" name="nationality" id="nationality" value="<?php echo $userinfo['nationality']?>" /></TD>
 </TR>
 <TR>
 <TD class="text">职业:</TD>
-<TD><div id="errorsDiv_occupation"></div><INPUT class="textfield" type="text" name="occupation" id="occupation" value="<?php echo $userinfo['occupation']?>" /></TD>
+<TD><div id="errorsDiv_occupation"></div><INPUT class="input" type="text" name="occupation" id="occupation" value="<?php echo $userinfo['occupation']?>" /></TD>
 </TR>
 <TR>
 <TD class="text">年收入:</TD>
@@ -163,10 +162,10 @@
   <tr>
     <td class="text">&nbsp;</td>
 
-    <td><label> <br />
+    <td><br />
           <br />
-          <input type="image" name="imageField" id="imageField" src="/public/images/btn_save.gif" />
-    </label></td>
+          <input name="button2" type="submit" class="btn" id="button2" value="保  存" />
+   </td>
   </tr>
 </table>
 
@@ -179,22 +178,25 @@
 <TD width="40%" class="text"></TD>
 <TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
 </TR
-<TR>
+><TR>
 <TR>
 <TD class="text">每星期外出就餐次数:</TD>
-<TD><div id="errorsDiv_eatingoutcount"></div><INPUT class="textfield" type="text" id="eatingoutcount" name="eatingoutcount" value="<?php echo $userinfo['eatingoutcount']?>" />次</TD>
+<TD><div id="errorsDiv_eatingoutcount"></div><INPUT class="input" type="text" id="eatingoutcount" name="eatingoutcount" value="<?php echo $userinfo['eatingoutcount']?>" /> 
+次</TD>
 </TR>
 <TR>
 <TD class="text">就餐平均消费：</TD>
-<TD><div id="errorsDiv_avgbill"></div><INPUT class="textfield" type="text" name="avgbill" id="avgbill" value="<?php echo $userinfo['avgbill']?>" />RMB</TD>
+<TD><div id="errorsDiv_avgbill"></div><INPUT class="input" type="text" name="avgbill" id="avgbill" value="<?php echo $userinfo['avgbill']?>" /> 
+RMB</TD>
 </TR>
 <TR>
 <TD class="text">每月您在服饰方面的消费:</TD>
-<TD><div id="errorsDiv_apparelspending"></div><INPUT class="textfield" type="text" name="apparelspending" id="apparelspending" value="<?php echo $userinfo['apparelspending']?>" />RMB</TD>
+<TD><div id="errorsDiv_apparelspending"></div><INPUT class="input" type="text" name="apparelspending" id="apparelspending" value="<?php echo $userinfo['apparelspending']?>" /> 
+RMB</TD>
 </TR>
 <TR>
 <TD class="text">您的最大兴趣是什么？</TD>
-<TD><div id="errorsDiv_interests"></div><INPUT class="textfield" type="text" name="interests" id="interests" value="<?php echo $userinfo['interests']?>" /></TD>
+<TD><div id="errorsDiv_interests"></div><INPUT class="input" type="text" name="interests" id="interests" value="<?php echo $userinfo['interests']?>" /></TD>
 </TR>
 <TR>
 <TD class="text">您是如何知道我们的公司? </TD>
@@ -220,10 +222,10 @@
   <tr>
     <td class="text">&nbsp;</td>
 
-    <td><label> <br />
+    <td><br />
           <br />
-          <input type="image" name="imageField" id="imageField" src="/public/images/btn_save.gif" />
-    </label></td>
+          <input name="button3" type="submit" class="btn" id="button3" value="保  存" />
+    </td>
   </tr>
 </table>
 <?php }?>
@@ -235,27 +237,27 @@
 </TR>
 <TR>
 <TD class="text">支付宝帐号：</TD>
-<TD><div id="errorsDiv_alipay"></div><INPUT class="textfield" type="text" name="alipay" id="alipay" value="<?php echo $userinfo['alipay']?>" /></TD>
+<TD><div id="errorsDiv_alipay"></div><INPUT class="input" type="text" name="alipay" id="alipay" value="<?php echo $userinfo['alipay']?>" /></TD>
 </TR>
 <TR>
 <TD class="text">银行名称：</TD>
-<TD><div id="errorsDiv_alipay"></div><INPUT class="textfield" type="text" name="bank_name" id="bank_name" value="<?php echo $userinfo['bank_name']?>" /></TD>
+<TD><div id="errorsDiv_alipay"></div><INPUT class="input" type="text" name="bank_name" id="bank_name" value="<?php echo $userinfo['bank_name']?>" /></TD>
 </TR>
 <TR>
 <TD class="text">银行帐号：</TD>
-<TD><div id="errorsDiv_alipay"></div><INPUT class="textfield" type="text" name="bank_account" id="bank_account" value="<?php echo $userinfo['bank_account']?>" /></TD>
+<TD><div id="errorsDiv_alipay"></div><INPUT class="input" type="text" name="bank_account" id="bank_account" value="<?php echo $userinfo['bank_account']?>" /></TD>
 </TR>
 <TR>
 <TD class="text">帐号姓名：</TD>
-<TD><div id="errorsDiv_alipay"></div><INPUT class="textfield" type="text" name="bank_realname" id="bank_realname" value="<?php echo $userinfo['bank_realname']?>" /></TD>
+<TD><div id="errorsDiv_alipay"></div><INPUT class="input" type="text" name="bank_realname" id="bank_realname" value="<?php echo $userinfo['bank_realname']?>" /></TD>
 </TR>
   <tr>
     <td class="text">&nbsp;</td>
 
-    <td><label> <br />
+    <td><br />
           <br />
-          <input type="image" name="imageField" id="imageField" src="/public/images/btn_save.gif" />
-    </label></td>
+          <input name="button4" type="submit" class="btn" id="button4" value="保  存" />
+   </td>
   </tr>
 </table>
 
@@ -267,20 +269,22 @@
 <TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
 </TR>
 <TR>
-<TD class="text">头像上传：</TD>
+<TD class="text">&nbsp;</TD>
 <TD><div id="errorsDiv_face"></div><img src="/public/upload/faceimg/<?php echo $userinfo['face_img']?>">
-<br />
-<INPUT type="file" name="face" id="face"  />
+  <br />
+  <br />
+  <br />
+<INPUT type="file" name="face" id="face" class="input" />
 </TD>
 </TR>
 
   <tr>
     <td class="text">&nbsp;</td>
 
-    <td><label> <br />
+    <td><br />
           <br />
-          <input type="image" name="imageField" id="imageField" src="/public/images/btn_save.gif" />
-    </label></td>
+          <input name="button5" type="submit" class="btn" id="button5" value="保  存" />
+    </td>
   </tr>
 </table>
 
