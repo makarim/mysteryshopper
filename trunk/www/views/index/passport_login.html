@@ -22,13 +22,13 @@
 <TABLE  width="100%" border="0" cellspacing="0" cellpadding="0">
 
 <TR><TD width="40%" class="text"><?php echo lang('user')?>:</TD>
-<TD width="60%"><div id="errorsDiv_user"></div><INPUT class="textfield" type="text" name="user" value="<?php echo lang('emailorusername')?>" onfocus="this.value='';"/>&nbsp;&nbsp;</TD></TR>
+<TD width="60%"><div id="errorsDiv_user"></div><INPUT class="input" type="text" name="user" value="<?php echo lang('emailorusername')?>" onfocus="this.value='';"/>&nbsp;&nbsp;</TD></TR>
 <TR><TD class="text"><?php echo lang('pwd')?>:</TD>
-<TD><div id="errorsDiv_password"></div><INPUT class="textfield" type="password" name="password" />&nbsp;&nbsp;</TD></TR>
+<TD><div id="errorsDiv_password"></div><INPUT class="input" type="password" name="password" />&nbsp;&nbsp;</TD></TR>
 <?php if($show_code>3){?>
 <TR><TD></TD><TD></TD></TR>
 <TR><TD><?php echo lang('validatecode')?>:</TD>
-<TD><div id="errorsDiv_code"></div><INPUT class="textfield" type="text" name="code" style="width:60px" /><img id="codeimg" src="<?php echo $www_site_url?>/index.php/identifycode/generate" align="absmiddle" title="<?php echo lang('anotherone')?>" onClick="changeCode();" style="cursor:pointer"> <span onClick="changeCode();" style="cursor:pointer"><?php echo lang('notclear')?></span></TD></TR>
+<TD><div id="errorsDiv_code"></div><INPUT class="input" type="text" name="code" style="width:60px" /><img id="codeimg" src="<?php echo $www_site_url?>/index.php/identifycode/generate" align="absmiddle" title="<?php echo lang('anotherone')?>" onClick="changeCode();" style="cursor:pointer"> <span onClick="changeCode();" style="cursor:pointer"><?php echo lang('notclear')?></span></TD></TR>
 <?php }?>
 <TR><TD>&nbsp;</TD><TD><INPUT  class="checkbox" type="checkbox" name="remember" value="1"/> <?php echo lang('autologin')?>&nbsp;&nbsp;<span id="errorsDiv_remember"></span></TD></TR>
 <tr>
@@ -38,7 +38,7 @@
 </tr>
 
 <TR> <td class="text">&nbsp;</td>
-<TD ><INPUT type="image" src="<?php echo $www_site_url?>/public/images/btn_login2.gif" value="<?php echo lang('signon')?>" /> 
+<TD ><input name="button" type="submit" class="btn" id="button" value="<?php echo lang('signon')?>" />
 </TD><TD></TD></TR>
 </TABLE>
 </form>

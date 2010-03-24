@@ -46,11 +46,12 @@ window.onload = yav.init('resetpwdform', rules);
 <input type="hidden" name="code" value="<?php echo $code?>">
 <TABLE valign=top>
 
-<TR><TD><?php echo lang('newpwd')?>:</TD><TD><INPUT class="textfield" type="password" name=newpwd1 />&nbsp;&nbsp;<span id=errorsDiv_newpwd1></span></TD></TR>
-<TR><TD><?php echo lang('newpwd2')?>:</TD><TD><INPUT class="textfield" type="password" name=newpwd2 />&nbsp;&nbsp;<span id=errorsDiv_newpwd2></span></TD></TR>
+<TR><TD><?php echo lang('newpwd')?>:</TD><TD><INPUT class="input" type="password" name=newpwd1 />&nbsp;&nbsp;<span id=errorsDiv_newpwd1></span></TD></TR>
+<TR><TD><?php echo lang('newpwd2')?>:</TD><TD><INPUT class="input" type="password" name=newpwd2 />&nbsp;&nbsp;<span id=errorsDiv_newpwd2></span></TD></TR>
 
 
-<TR><TD colspan="2"><INPUT class="button" type=submit value="<?php echo lang('submit')?>" /> <br></TD><TD></TD></TR>
+<TR><TD colspan="2">
+    <input name="button" type="submit" class="btn" id="button" value="<?php echo lang('submit')?>">    <br></TD><TD></TD></TR>
 </TABLE>
 </form>
 <p>&nbsp;</p>
