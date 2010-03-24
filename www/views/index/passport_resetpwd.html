@@ -44,14 +44,16 @@ window.onload = yav.init('resetpwdform', rules);
 <input type="hidden" name="action" value="passport">
 <input type="hidden" name="op" value="resetpwd">
 <input type="hidden" name="code" value="<?php echo $code?>">
-<TABLE valign=top>
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0">
 
-<TR><TD><?php echo lang('newpwd')?>:</TD><TD><INPUT class="input" type="password" name=newpwd1 />&nbsp;&nbsp;<span id=errorsDiv_newpwd1></span></TD></TR>
-<TR><TD><?php echo lang('newpwd2')?>:</TD><TD><INPUT class="input" type="password" name=newpwd2 />&nbsp;&nbsp;<span id=errorsDiv_newpwd2></span></TD></TR>
+<TR><TD width="40%" class="text"><?php echo lang('newpwd')?>:</TD><TD width="60%"><INPUT class="input" type="password" name=newpwd1 />&nbsp;&nbsp;<span id=errorsDiv_newpwd1></span></TD></TR>
+<TR><TD class="text"><?php echo lang('newpwd2')?>:</TD><TD><INPUT class="input" type="password" name=newpwd2 />&nbsp;&nbsp;<span id=errorsDiv_newpwd2></span></TD></TR>
 
 
-<TR><TD colspan="2">
-    <input name="button" type="submit" class="btn" id="button" value="<?php echo lang('submit')?>">    <br></TD><TD></TD></TR>
+<TR><TD><br></TD>
+  <TD><br />
+      <input name="button" type="submit" class="btn" id="button" value="<?php echo lang('submit')?>" /></TD>
+  <TD></TD></TR>
 </TABLE>
 </form>
 <p>&nbsp;</p>
