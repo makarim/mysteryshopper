@@ -367,6 +367,10 @@ $GLOBALS['gLang']['question'] = '问题';
 $GLOBALS['gLang']['question_group'] = '问题类别';
 $GLOBALS['gLang']['question_type'] = '问题形式';
 $GLOBALS['gLang']['question_title'] = '问题';
+$GLOBALS['gLang']['yesorno'] = '是非题';
+$GLOBALS['gLang']['vote'] = '打分题';
+$GLOBALS['gLang']['fillblank'] = '问答题';
+$GLOBALS['gLang']['score'] = '时间题';
 
 
 
