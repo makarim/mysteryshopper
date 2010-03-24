@@ -60,6 +60,21 @@ li {
 	float:right;
 	margin:50px 38px 0 0;
 }
+
+#clientBottom {
+	background:#003366 url(../images/clientbottom.jpg) no-repeat;
+	height:149px;
+	padding:24px;
+	color:#FFF;
+}
+#clientBottom .title{
+	font-size:16px;
+	font-weight:bold;
+}
+#clientBottom a{
+	color:#FFF;
+}
+
 /*右上角登录*/
 #login {
 	float:right;
