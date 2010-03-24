@@ -82,7 +82,7 @@ class corporation{
 //			exit(json_output($msg));
 		}	
 
-		$corporation['c_password'] = md5($_POST ['c_password']);
+		$corporation['c_password'] = md5(md5($_POST ['c_password']));
 		$corporation['c_name'] =  $_POST ['c_name'] ;
 		$corporation['c_initial'] =  $_POST ['c_initial'] ;
 		$corporation['c_title'] = empty($_POST ['c_title'])?"":addslashes($_POST ['c_title']);

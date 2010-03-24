@@ -74,5 +74,9 @@ class CorporationModel extends Model {
     function getAllCorps(){
     	return $this->db->getAll("select c_title,c_id,c_initial from corporation order by c_initial");
     }
+    
+    function getCorporationByName($c_name){
+    	return $this->db->getRow("select * from corporation where c_name='$c_name'");
+    }
 }
 ?>

@@ -1,0 +1,96 @@
+<?php include_once("header.html")?>
+
+<div id="wrap">  <br />
+
+<?php include_once("home_left.html")?>
+
+<div class="admincontent">
+<div id="tabsD" style="width:100%"> 
+  <ul> 
+   	<li <?php if($type=='summary') echo 'class="on"';?>><a href="/client.php/home/service/summary"><span>综合</span></a></li> 
+    <li <?php if($type=='yesorno') echo 'class="on"';?>><a href="/client.php/home/service/yesorno"><span>是非题</span></a></li> 
+    <li <?php if($type=='score') echo 'class="on"';?>><a href="/client.php/home/service/score"><span>打分题</span></a></li> 
+    <li <?php if($type=='time') echo 'class="on"';?>><a href="/client.php/home/service/time"><span>时间题</span></a></li> 
+   
+  </ul> 
+</div>
+<br />
+<br />
+<table width="100%" height="50" border="0" cellpadding="0" cellspacing="0" class="clear">
+  <tr>
+    <td class="CsearchLeft">&nbsp;</td>
+    <td align="center" class="CsearchCenter"><input name="textfield" type="text" class="ClocationInput" id="textfield" value="请选择地点" />
+      开始时间：
+      <input name="textfield2" type="text" class="CtimeInput" id="textfield2" value="2010.01.01." />
+      结束时间：
+      <input name="textfield3" type="text" class="CtimeInput" id="textfield3" value="2010.01.01." />
+      <input name="button" type="submit" class="btn" id="button" value="查看报表" /></td>
+    <td class="CsearchRight">&nbsp;</td>
+
+  </tr>
+</table>
+<br />
+<br />
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><div class="table2TitleBg">
+      <div class="table2TitleBg2">
+        <div class="table2Title">柱状图</div>
+      </div>
+
+    </div></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td class="table2LeftBorder"></td>
+        <td><p align="center">
+        	<div id="flashcontent">
+				<strong>You need to upgrade your Flash Player</strong>
+			</div>
+
+	<script type="text/javascript">
+		// <![CDATA[		
+		var so = new SWFObject("<?php echo $www_site_url?>/public/flash/amcolumn.swf", "amcolumn", "100%", "400px", "8", "#ffffff");
+		so.addVariable("path", "<?php echo $www_site_url?>/public/flash/");
+		so.addVariable("settings_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amcolumn_settings.xml?102"));
+		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php/chart/overalldata/scoretype/<?php echo $type;?>/c_id/<?php echo $corp['c_id'];?>/group/service"));
+		so.addVariable("preloader_color", "#ffffff");
+		so.write("flashcontent");
+		// ]]>
+	</script>
+        </p>
+              <p>&nbsp;</p>
+          <p>&nbsp;</p>
+
+          <table width="100%" border="0" cellpadding="0" cellspacing="1" class="CinitData">
+                <tr>
+                  <td colspan="2" class="title">原始数据（2010.01.01 ~ 2010.01.31）</td>
+                </tr>
+                <tr>
+                  <td width="25%">日期</td>
+                  <td width="75%">任务</td>
+
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </table>
+          <p>&nbsp;</p></td>
+        <td class="table2RightBorder"></td>
+      </tr>
+
+      <tr>
+        <td class="table2BottomLeft"></td>
+        <td class="table2Bottom"></td>
+        <td class="table2BottomRight"></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+</div>
+</div>
+
+</div>
+<?php include_once("footer.html")?>

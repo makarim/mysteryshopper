@@ -44,31 +44,67 @@ class chart{
 				$xml .="<value xid='{$store['cs_id']}'>{$store['cs_name']}</value>\n";
 			}
 			$xml .="</series>\n<graphs>\n";
-			if(strpos($group,'Service')!==false){	
+			if(strpos($group,'service')!==false){	
 				$xml .="<graph gid='0'>\n";
 				foreach ($stores as $k=>$store){
-					if($scoretype=='Summary'){ 
+					if(strtolower($scoretype)=='summary'){ 
 						$score = $ChartModel->getSummaryScoreByCsId($store['cs_id'],1);
 						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
 					}
-				}
-				$xml .="</graph>\n";
-			}
-			if(strpos($group,'Environment')!==false){	
-				$xml .="<graph gid='1'>\n";			
-				foreach ($stores as $k=>$store){
-					if($scoretype=='Summary'){ 
-						$score = $ChartModel->getSummaryScoreByCsId($store['cs_id'],2);
+					if(strtolower($scoretype)=='score'){ 
+						$score = $ChartModel->getVoteScoreByCsId($store['cs_id'],1);
+						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
+					}
+					if(strtolower($scoretype)=='yesorno'){ 
+						$score = $ChartModel->getYesByCsId($store['cs_id'],1);
+						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
+					}					
+					if(strtolower($scoretype)=='time'){ 
+						$score = $ChartModel->getTimesByCsId($store['cs_id'],1);
 						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
 					}
 				}
 				$xml .="</graph>\n";
 			}
-			if(strpos($group,'Product')!==false){
+			if(strpos($group,'environment')!==false){	
+				$xml .="<graph gid='1'>\n";			
+				foreach ($stores as $k=>$store){
+					if(strtolower($scoretype)=='summary'){ 
+						$score = $ChartModel->getSummaryScoreByCsId($store['cs_id'],2);
+						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
+					}
+					if(strtolower($scoretype)=='score'){ 
+						$score = $ChartModel->getVoteScoreByCsId($store['cs_id'],2);
+						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
+					}
+					if(strtolower($scoretype)=='yesorno'){ 
+						$score = $ChartModel->getYesByCsId($store['cs_id'],2);
+						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
+					}					
+					if(strtolower($scoretype)=='time'){ 
+						$score = $ChartModel->getTimesByCsId($store['cs_id'],2);
+						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
+					}
+				}
+				$xml .="</graph>\n";
+			}
+			if(strpos($group,'product')!==false){
 				$xml .="<graph gid='2'>\n";
 				foreach ($stores as $k=>$store){
-					if($scoretype=='Summary'){ 
+					if(strtolower($scoretype)=='summary'){ 
 						$score = $ChartModel->getSummaryScoreByCsId($store['cs_id'],3);
+						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
+					}
+					if(strtolower($scoretype)=='score'){ 
+						$score = $ChartModel->getVoteScoreByCsId($store['cs_id'],3);
+						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
+					}
+					if(strtolower($scoretype)=='yesorno'){ 
+						$score = $ChartModel->getYesByCsId($store['cs_id'],3);
+						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
+					}					
+					if(strtolower($scoretype)=='time'){ 
+						$score = $ChartModel->getTimesByCsId($store['cs_id'],3);
 						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
 					}
 				}
