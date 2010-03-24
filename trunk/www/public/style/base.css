@@ -60,6 +60,21 @@ li {
 	float:right;
 	margin:50px 38px 0 0;
 }
+
+#clientBottom {
+	background:#003366 url(../images/clientbottom.jpg) no-repeat;
+	height:149px;
+	padding:24px;
+	color:#FFF;
+}
+#clientBottom .title{
+	font-size:16px;
+	font-weight:bold;
+}
+#clientBottom a{
+	color:#FFF;
+}
+
 /*右上角登录*/
 #login {
 	float:right;
@@ -75,7 +90,16 @@ li {
 	text-decoration:none;
 }
 
-.loginBtn {	background:url(../images/btn_login.gif) #ff3b00 no-repeat;	width:51px;	height:27px;	color:#FFF;	border:none;	margin-right:10px;}#wrap {
+.loginBtn {
+	background:url(../images/btn_login.gif) #ff3b00 no-repeat;
+	width:51px;
+	height:27px;
+	color:#FFF;
+	border:none;
+	margin-right:10px;
+}
+
+#wrap {
 	padding:12px 0 0 0;
 }
 
@@ -91,7 +115,15 @@ li {
 	clear:both;
 }
 
-.btn {	background:url(../images/bg_btn.gif) #C00 no-repeat;	height:25px;	width:91px;	line-height:25px;	color:#FFF;	border:none;}.left {
+.btn {
+	background:url(../images/bg_btn.gif) #C00 no-repeat;
+	height:25px;
+	width:91px;
+	line-height:25px;
+	color:#FFF;
+	border:none;
+}
+.left {
 	float:left;
 }
 .right {
@@ -337,8 +369,21 @@ li {
 	text-align:center;
 }
 
-/*任务报表*/.missionReport {	background-color:#999;}.missionReport td{	background-color:#FFF;
-	padding:8px;}.missionReport .title{	background-color:#9F0000;	color:#FFF;	text-align:center;}/*我的日历*/
+/*任务报表*/
+.missionReport {
+	background-color:#999;
+}
+.missionReport td{
+	background-color:#FFF;
+	padding:8px;
+}
+.missionReport .title{
+	background-color:#9F0000;
+	color:#FFF;
+	text-align:center;
+}
+
+/*我的日历*/
 .calendar {
 	background-color:#999;
 }
@@ -509,10 +554,77 @@ float:left;
 }
 .indexabout {
 	padding:10px 0;
-	line-height:20px;	
+	line-height:20px;
+	
 }
 .logininput {
 	border:#999999 solid 1px;
 	width:100%;
 	
-}/*CLIENT*/.CsearchLeft {	background:url(../images/client_searchleft.gif) no-repeat top;	width:7px;}.CsearchRight {	background:url(../images/client_searchright.gif) no-repeat top;	width:7px;}.CsearchCenter {	background:url(../images/client_searchcenter.gif) repeat-x top;}.ClocationInput {	background:url(../images/bg_input1.gif) no-repeat;	width:214px;	height:22px;	color:#FFF;	border:none;	line-height:22px;	font-size:12px;	padding-left:10px;}.CtimeInput {	background:url(../images/bg_input2.gif) no-repeat;	width:104px;	height:22px;	color:#FFF;	border:none;	line-height:22px;	font-size:12px;	padding-left:10px;}.CinitData {	background:#999;}.CinitData td {	padding:10px;	background:#FFF;}.CinitData .title {	padding:0;	background:url(../images/bg_clientdata.gif) repeat-x;	color:#cc3300;	padding-left:15px;	font-size:14px;	height:28px;	line-height:28px;}/*调查文件*/.reportTitle {	font-size:14px;	font-weight:bold;}.reportDes {	padding:20px;	line-height:24px;}.reportScore {	float:right;	width:100px;	padding:20px;	text-align:right;}
+}
+
+/*CLIENT*/
+.CsearchLeft {
+	background:url(../images/client_searchleft.gif) no-repeat top;
+	width:7px;
+}
+.CsearchRight {
+	background:url(../images/client_searchright.gif) no-repeat top;
+	width:7px;
+}
+.CsearchCenter {
+	background:url(../images/client_searchcenter.gif) repeat-x top;
+}
+.ClocationInput {
+	background:url(../images/bg_input1.gif) no-repeat;
+	width:214px;
+	height:22px;
+	color:#FFF;
+	border:none;
+	line-height:22px;
+	font-size:12px;
+	padding-left:10px;
+}
+.CtimeInput {
+	background:url(../images/bg_input2.gif) no-repeat;
+	width:104px;
+	height:22px;
+	color:#FFF;
+	border:none;
+	line-height:22px;
+	font-size:12px;
+	padding-left:10px;
+}
+
+.CinitData {
+	background:#999;
+}
+.CinitData td {
+	padding:10px;
+	background:#FFF;
+}
+.CinitData .title {
+	padding:0;
+	background:url(../images/bg_clientdata.gif) repeat-x;
+	color:#cc3300;
+	padding-left:15px;
+	font-size:14px;
+	height:28px;
+	line-height:28px;
+}
+
+/*调查文件*/
+.reportTitle {
+	font-size:14px;
+	font-weight:bold;
+}
+.reportDes {
+	padding:20px;
+	line-height:24px;
+}
+.reportScore {
+	float:right;
+	width:100px;
+	padding:20px;
+	text-align:right;
+}
