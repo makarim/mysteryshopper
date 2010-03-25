@@ -54,7 +54,7 @@
 		var so = new SWFObject("<?php echo $www_site_url?>/public/flash/amcolumn.swf", "amcolumn", "100%", "400px", "8", "#ffffff");
 		so.addVariable("path", "<?php echo $www_site_url?>/public/flash/");
 		so.addVariable("settings_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amcolumn_settings.xml?102"));
-		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php/chart/overalldata/scoretype/<?php echo $type;?>/c_id/<?php echo $corp['c_id'];?>/group/environment"));
+		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=overalldata&scoretype=<?php echo $type;?>&c_id=<?php echo $corp['c_id'];?>&group=environment"));
 		so.addVariable("preloader_color", "#ffffff");
 		so.write("flashcontent");
 		// ]]>
