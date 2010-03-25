@@ -7,7 +7,7 @@ class index{
 		if(isset($user['user']) && $user['user_id']==1){
 			$this->tpl->assign('user',$user);
 		}else{
-			redirect(BASE_URL);
+			redirect("/index.php/home");
 		}
 		
 	}

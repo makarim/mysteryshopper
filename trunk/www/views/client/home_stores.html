@@ -20,7 +20,7 @@
        if(isset($stores) && is_array($stores)){
          foreach ($stores as $s){	
                 ?>
-	<li style="padding:5px;"><a onclick="selectstore('<?php echo $s['cs_id']."|".$s['cs_name'];?>');return false;" href="#"><?php echo $s['cs_name'];?></li> 
+	<li style="padding:2px;"><a onclick="selectstore('<?php echo $s['cs_id']."|".$s['cs_name'];?>');return false;" href="#"><?php echo $s['cs_name'];?></li> 
 	  <?php
 			}
       }
