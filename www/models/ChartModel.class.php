@@ -128,5 +128,108 @@ class ChartModel extends Model {
 		}
 		return 0;
 	}
+	
+	function getSummaryScoreByAsId($a_id,$re_id,$group){
+		if($group=='service') $group=1;
+		if($group=='environment') $group=2;
+		if($group=='product') $group=3;
+		if($group=='summary') $group=4;
+		$average = 0;
+		//一份报告有多少个的同group的打分题目
+		$sql = "select rq_id,rq_type from report_question where rq_group='$group' and re_id='".$re_id."'";
+		$rq_arr = $this->db->getAll($sql);
+		$q_row = count($rq_arr);
+		//echo "row:".$q_row."|";
+		$sum = 0;
+		if($q_row>0){
+			foreach ($rq_arr as $rq){
+				if($rq['rq_type']==2){
+					$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=2";
+					$sum += $this->db->getOne($sql);
+				}else if($rq['rq_type']==1){
+					$sql = "select ans_answer1  from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=1";
+					$yn = $this->db->getOne($sql);
+					$sum += ($yn=='Y')?10:0;
+				}
+			}
+			// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
+			$average += $sum/$q_row;
+			return round($average,2);
+		}
+		return 0;
+	}
+	
+	function getVoteScoreByAsId($a_id,$re_id,$group){
+		if($group=='service') $group=1;
+		if($group=='environment') $group=2;
+		if($group=='product') $group=3;
+		if($group=='summary') $group=4;
+		$average = 0;
+		//一份报告有多少个的同group的打分题目
+		$sql = "select rq_id,rq_type from report_question where rq_type=2 and rq_group='$group' and re_id='".$re_id."'";
+		$rq_arr = $this->db->getAll($sql);
+		$q_row = count($rq_arr);
+		//echo "row:".$q_row."|";
+		$sum = 0;
+		if($q_row>0){
+			foreach ($rq_arr as $rq){
+				$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=2";
+				$sum += $this->db->getOne($sql);
+			}
+			// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
+			$average += $sum/$q_row;
+			return round($average,2);
+		}
+		return 0;
+	}
+	
+	function getYesByAsId($a_id,$re_id,$group){
+		if($group=='service') $group=1;
+		if($group=='environment') $group=2;
+		if($group=='product') $group=3;
+		if($group=='summary') $group=4;
+		$average = 0;
+		//一份报告有多少个的同group的打分题目
+		$sql = "select rq_id,rq_type from report_question where rq_type=1 and rq_group='$group' and re_id='".$re_id."'";
+		$rq_arr = $this->db->getAll($sql);
+		$q_row = count($rq_arr);
+		//echo "row:".$q_row."|";
+		$sum = 0;
+		if($q_row>0){
+			foreach ($rq_arr as $rq){
+				$sql = "select count(*) from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=1 and ans_answer1='Y'";
+				$sum += $this->db->getOne($sql);
+			}
+			// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
+			$average += $sum/$q_row;
+			return round($average,2);
+		}
+		return 0;
+	}
+	
+	function getTimesByAsId($a_id,$re_id,$group){
+		if($group=='service') $group=1;
+		if($group=='environment') $group=2;
+		if($group=='product') $group=3;
+		if($group=='summary') $group=4;
+		$average = 0;
+		//一份报告有多少个的同group的打分题目
+		$sql = "select rq_id,rq_type from report_question where rq_type=1 and rq_group='$group' and re_id='".$re_id."'";
+		$rq_arr = $this->db->getAll($sql);
+		$q_row = count($rq_arr);
+		//echo "row:".$q_row."|";
+		$sum = 0;
+		if($q_row>0){
+			foreach ($rq_arr as $rq){
+				$sql = "select avg(ans_answer4) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=4";
+				$sum += $this->db->getOne($sql);
+			}
+			// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
+			$average += $sum/$q_row;
+			return round($average,2);
+		}
+		return 0;
+	}
 }
 ?>
+

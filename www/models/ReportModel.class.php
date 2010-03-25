@@ -150,7 +150,7 @@ class ReportModel extends Model {
 			$rs = $this->db->execute("update answer set ans_answer$rq_type='$answer' where ans_id=$ans_id");
 		}
 		if($rs){
-			$this->db->execute("update assignment set a_finish=1 , a_fdate=NOW() where a_id=$a_id");
+			
 			return true;
 		}else{
 			return false;

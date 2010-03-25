@@ -148,5 +148,13 @@ class AssignmentModel extends Model {
 		order by a.a_order desc limit 8;
 		");
     }
+    
+    function getAssignmentsByCsId($con,$cs_id){
+    	$add = '';
+    	if(!empty($con['sdate'])) $add .= " and a_fdate >='".$con['sdate']."'";
+    	if(!empty($con['edate'])) $add .= " and a_fdate < '".$con['edate']."'";
+    	//echo "select a_id,re_id,DATE_FORMAT(a_fdate, '%m-%d') as day,a_title from assignment where cs_id='$cs_id' $add order by day";
+    	return $this->db->getAll("select a_id,re_id,DATE_FORMAT(a_fdate, '%m-%d') as day,a_title from assignment where cs_id='$cs_id' $add order by day");
+    }
 }
 ?>
