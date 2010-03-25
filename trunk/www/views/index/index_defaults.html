@@ -26,8 +26,7 @@ AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/
   <tr>
     <td style="border-left: 1px solid rgb(190, 190, 190);">&nbsp;</td>
     <td style="padding: 10px;">
-    	<li style="background-position: 0% 5px;" class="shanghu"><a href="#">开始<br>
-了解我们做什么</a></li>
+    	<li style="background-position: 0% 5px;" class="shanghu"><a href="/client.php">开始<br>了解我们做什么</a></li>
     	<li style="line-height: 23px;" class="shanghu"><a href="/client.php/index/login">商户登录</a></li>
     </td>
     <td style="border-right: 1px solid rgb(190, 190, 190);">&nbsp;</td>
@@ -39,16 +38,59 @@ AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/
   </tr>
 </tbody></table>
 </div>
+<script>
+function changeTab(s){
+	
+	if(s=='who'){
+		$('what_li').className = "";
+		$('what').style.display = "none";		
+		$('why_li').className = "";
+		$('why').style.display = "none";
+		$('who_li').className = "on";
+		$('who').style.display = "block";
+	}	
+	if(s=='what'){
+			
+		$('why_li').className = "";
+		$('why').style.display = "none";
+		$('who_li').className = "";
+		$('who').style.display = "none";
+		$('what_li').className = "on";
+		$('what').style.display = "block";	
+	}	
+	if(s=='why'){
+		$('what_li').className = "";
+		$('what').style.display = "none";		
+		
+		$('who_li').className = "";
+		$('who').style.display = "none";
+		$('why_li').className = "on";
+		$('why').style.display = "block";
+	}
+}
+</script>
         <div style="padding: 0pt 10px; width: 556px;" class="left">
 <div id="tabsD"> 
   <ul> 
-    <li><a title="关于我们" href="#"><span>神秘指什么</span></a></li> 
-    <li><a title="什么是神秘顾客" href="#"><span>神秘购物者做什么</span></a></li> 
-    <li><a title="什么是神秘顾客" href="#"><span>神秘购物者能得到什么</span></a></li> 
+    <li id="who_li" class="on"><a title="神秘指什么" href="#" onclick="changeTab('who');return false;"><span>神秘指什么</span></a></li> 
+    <li id="what_li"><a title="神秘购物者做什么" href="#" onclick="changeTab('what');return false;"><span>神秘购物者做什么</span></a></li> 
+    <li id="why_li"><a title="神秘购物者能得到什么" href="#" onclick="changeTab('why');return false;"><span>神秘购物者能得到什么</span></a></li> 
   </ul> 
+</div> 
+<div id="who" class="clear indexabout">
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;企业在没有管理者在场的时候总是很难弄明白自己的员工在做些什么。派一个部门管理人员也并不能每次都奏效，因为员工知道有人在看着。最好的信息来自于被派出作评估的匿名消费者，因为没有人知道他们是谁。这就是为什么他们被称为神秘购物者！ </p>
+  <p>&nbsp;</p>
+  <p align="right"><a href="#">了解更多内容...</a></p>
 </div>
-<div class="clear indexabout">
-  <p>企业在没有管理者在场的时候总是很难弄明白自己的员工正在做些什么。派一个部门管 理人员也并不能每次都奏效，因为员工知道有人在看着。最好的信息来自于被要求对自 己的体验进行评估的消费者，但没有人知道他们是谁。这就是为什么他们被称为神秘购 物者！</p>
+<div id="what" class="clear indexabout" style="display:none">
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一个神秘购物者是对一个品牌消费体验的审核者和评论者。不但要对品牌公司的要求和培训执行情况进行审核, 也以消费者的观点客观地提出评估。合格的神秘购物者必须是一个品牌的真实消费者或者潜在的消费者。 </p>
+  <p>&nbsp;</p>
+  <p align="right"><a href="#">了解更多内容...</a></p>
+</div>
+<div id="why" class="clear indexabout" style="display:none">
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;简单地说，神秘购物者因为作为一个消费者获得报酬。每个购物者获得多少报酬取决于任务本身的難度。购物者在完成每项任务后按规定的数额进行报销。   
+
+作为一个神秘用餐者，你和你的朋友可以免费吃一顿！餐馆可不想让你一个人吃，只要你和你的神秘餐友不要超过预算；你的这顿饭就是免费的！但是，别忘了要收据，因为我们的客户需要证据证明你曾经到过那里。</p>
   <p>&nbsp;</p>
   <p align="right"><a href="#">了解更多内容...</a></p>
 </div>
@@ -67,7 +109,7 @@ AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/
     <FORM name="loginform" id="loginform" method="POST" onsubmit="return checkOnSubmit('loginform', rules);" >
 <input type="hidden" name="action" value="passport">
 <input type="hidden" name="op" value="dologin">
-<input type="hidden" name="forward" value="index.php">
+<input type="hidden" name="forward" value="/index.php/home">
 <input type="hidden" name="s" id="s" value="">
     <div class="hangju">账户名</div>
       <div class="hangju">

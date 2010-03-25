@@ -28,7 +28,7 @@ class chart{
 	function view_overalldata(){
 		$c_id = !empty($_GET['c_id'])?$_GET['c_id']:'';
 		$group = !empty($_GET['group'])?$_GET['group']:'';
-		$scoretype = !empty($_GET['scoretype'])?$_GET['scoretype']:'Summary';
+		$scoretype = !empty($_GET['scoretype'])?$_GET['scoretype']:'summary';
 		
 		$xml = "<?xml version='1.0' encoding='UTF-8'?>
 <chart>";
@@ -119,17 +119,103 @@ $xml .="
 ";
 		echo $xml;die;
 	}
-	function view_environment(){
-		
-	}
+
+	function view_storedata(){
+		$cs_id = !empty($_GET['cs_id'])?$_GET['cs_id']:'';
+		$scoretype = !empty($_GET['scoretype'])?$_GET['scoretype']:'summary';
+		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
+		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
+		$xml = "<?xml version='1.0' encoding='UTF-8'?>
+<chart>";
+		if($cs_id){
+			include_once("ChartModel.class.php"); 
+			$ChartModel = new ChartModel();
+			$con['sdate'] = $sdate;
+			$con['edate'] = $edate;
+			include_once("AssignmentModel.class.php");	
+			$assignmentModel = new AssignmentModel();
+			$series = $assignmentModel->getAssignmentsByCsId($con,$cs_id);
+			if(count($series)>0){
+				$xml .="<series>\n";
+				foreach ($series as $k=>$v){
+					$xml .="<value xid='{$v['a_id']}'>{$v['day']}</value>\n";
+				}
+				$xml .="</series>\n<graphs>\n";
+				
+				
+				$xml .="<graph gid='1'>\n";
+					foreach ($series as $k=>$v){
+						if(strtolower($scoretype)=='summary'){ 
+							$score = $ChartModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],'service');
+							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
+						}
+						if(strtolower($scoretype)=='score'){ 
+							$score = $ChartModel->getVoteScoreByAsId($v['a_id'],$v['re_id'],'service');
+							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
+						}
+						if(strtolower($scoretype)=='yesorno'){ 
+							$score = $ChartModel->getYesByAsId($v['a_id'],$v['re_id'],'service');
+							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
+						}					
+						if(strtolower($scoretype)=='time'){ 
+							$score = $ChartModel->getTimesByAsId($v['a_id'],$v['re_id'],'service');
+							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
+						}
+					}
+					$xml .="</graph>\n";
+				
+					$xml .="<graph gid='2'>\n";			
+					foreach ($series as $k=>$v){
+						if(strtolower($scoretype)=='summary'){ 
+							$score = $ChartModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],'environment');
+							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
+						}
+						if(strtolower($scoretype)=='score'){ 
+							$score = $ChartModel->getVoteScoreByAsId($v['a_id'],$v['re_id'],'environment');
+							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
+						}
+						if(strtolower($scoretype)=='yesorno'){ 
+							$score = $ChartModel->getYesByAsId($v['a_id'],$v['re_id'],'environment');
+							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
+						}					
+						if(strtolower($scoretype)=='time'){ 
+							$score = $ChartModel->getTimesByAsId($v['a_id'],$v['re_id'],'environment');
+							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
+						}
+					}
+					$xml .="</graph>\n";
 	
-	function view_product(){
-		
+					$xml .="<graph gid='3'>\n";
+					foreach ($series as $k=>$v){
+						if(strtolower($scoretype)=='summary'){ 
+							$score = $ChartModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],'product');
+							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
+						}
+						if(strtolower($scoretype)=='score'){ 
+							$score = $ChartModel->getVoteScoreByAsId($v['a_id'],$v['re_id'],'product');
+							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
+						}
+						if(strtolower($scoretype)=='yesorno'){ 
+							$score = $ChartModel->getYesByAsId($v['a_id'],$v['re_id'],'product');
+							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
+						}					
+						if(strtolower($scoretype)=='time'){ 
+							$score = $ChartModel->getTimesByAsId($v['a_id'],$v['re_id'],'product');
+							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
+						}
+					}
+					$xml .="</graph>\n";
+				
+				$xml.="</graphs>\n";
+			}
+			//echo $ChartModel->getScoreByCsId(1,2);
+		}
+
+$xml .="
+</chart>
+";
+		echo $xml;die;
 	}
-	function view_service(){
-		
-	}
-		
 	function view_defaults(){
 		$cur_sort = !empty($_GET['sort'])?$_GET['sort']:'re_id';
 		$re_title = !empty($_GET['re_title'])?$_GET['re_title']:'';

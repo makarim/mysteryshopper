@@ -26,7 +26,9 @@ class index{
 		$this->tpl->assign ( '_XppassSignKey', $_SESSION['_XppassSignKey'] );
 		$this->tpl->assign("scr",'index.php');
     }
-
+	function view_contactus(){
+		
+	}
     function view_setlang(){
     	$select = $_GET['setlang'];
     	setcookie("_Selected_Language",$select,time()+3600*24*365,"/");

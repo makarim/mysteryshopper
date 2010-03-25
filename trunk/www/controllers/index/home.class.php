@@ -148,6 +148,8 @@ class home{
 	}
 	function op_savereport(){
 		include_once("ReportModel.class.php");
+		include_once("AssignmentModel.class.php");
+		$assignment = new AssignmentModel();
 		$reportModel = new ReportModel();
 		$u_id= $this->login_user['user_id'];
 		$a_id= $_POST['a_id'];
@@ -159,9 +161,12 @@ class home{
 					$r *=$reportModel->saveAnswer($rq_id,$u_id,$a_id,$rq_type,addslashes($v));
 				}
 			}
+			
 		}
 		
 		if($r){
+			$updates['a_fdate'] = "MY_F:NOW()";
+			$assignment->updateAssignment($updates,$a_id);
 			show_message_goback(lang('success'));
 		}else{
 			show_message_goback(lang('failed'));

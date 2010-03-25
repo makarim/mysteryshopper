@@ -1,18 +1,25 @@
 <?php
 class index{
-	public $login_user;
+	public $login_corp=false;
 	public $tpl;
 	function __construct(){
 		global $tpl;
 		$this->tpl = $tpl;
-		$this->login_user = authenticate();	
-		$this->tpl->assign('user',$this->login_user);
+		if(isset($_SESSION['_XppassOnlineCorp'])){
+			$this->login_corp = $_SESSION['_XppassOnlineCorp'];	
+		}
+		
+		//if(!$this->login_corp){
+			//show_message("您还未登录!");
+			//redirect("/client.php/index/login");
+		//}
+		$this->tpl->assign('corp',$this->login_corp);
 	}
     function view_defaults(){
 		
 		$msg = '';	
 		$_SESSION['_XppassSignKey'] = uniqid();
-		if($this->login_user){
+		if($this->login_corp){
 			$msg = "Welcome ".$this->login_user['user_nickname']."";
 		}
 		$show_code = 0;
