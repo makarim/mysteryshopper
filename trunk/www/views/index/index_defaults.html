@@ -16,28 +16,28 @@ AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/
         </div>
     </div>
     
-    <div class="left" style="width:180px;">
-<table cellspacing="0" cellpadding="0" border="0" width="100%">
-  <tbody><tr>
-    <td width="4" class="tl4px"></td>
-    <td class="tableCenter"><div class="tableTitle">商户</div></td>
-    <td width="4" class="tr4px"></td>
-  </tr>
-  <tr>
-    <td style="border-left: 1px solid rgb(190, 190, 190);">&nbsp;</td>
-    <td style="padding: 10px;">
-    	<li style="background-position: 0% 5px;" class="shanghu"><a href="/client.php">开始<br>了解我们做什么</a></li>
-    	<li style="line-height: 23px;" class="shanghu"><a href="/client.php/index/login">商户登录</a></li>
-    </td>
-    <td style="border-right: 1px solid rgb(190, 190, 190);">&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="bl4px"></td>
-    <td class="bcenter"></td>
-    <td class="br4px"></td>
-  </tr>
-</tbody></table>
-</div>
+    <div class="left" style="width:150px;">
+      <table cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tbody>
+          <tr>
+            <td width="4" class="tl4px"></td>
+            <td class="tableCenter"><div class="tableTitle">企业专区</div></td>
+            <td width="4" class="tr4px"></td>
+          </tr>
+          <tr>
+            <td style="border-left: 1px solid rgb(190, 190, 190);">&nbsp;</td>
+            <td style="padding: 10px;"><li style="line-height: 23px;" class="shanghu"><a href="#">SPOT的理念</a></li>
+                <li style="line-height: 23px;" class="shanghu"><a href="/client.php/index/login">企业登入</a></li></td>
+            <td style="border-right: 1px solid rgb(190, 190, 190);">&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="bl4px"></td>
+            <td class="bcenter"></td>
+            <td class="br4px"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 <script>
 function changeTab(s){
 	
@@ -69,7 +69,7 @@ function changeTab(s){
 	}
 }
 </script>
-        <div style="padding: 0pt 10px; width: 556px;" class="left">
+        <div style="padding: 0pt 10px; width: 586px;" class="left">
 <div id="tabsD"> 
   <ul> 
     <li id="who_li" class="on"><a title="神秘指什么" href="#" onclick="changeTab('who');return false;"><span>神秘指什么</span></a></li> 
@@ -96,41 +96,42 @@ function changeTab(s){
 </div>
 </div>
         <div class="right" style="width:190px;">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td width="4" class="tl4px"></td>
-    <td class="tableCenter"><div class="tableTitle">用户登录</div></td>
-    <td width="4" class="tr4px"></td>
-  </tr>
-  <tr>
-    <td style="border-left:#BEBEBE solid 1px;">&nbsp;</td>
-    <td style="padding:10px;">
-    <div id="msg"></div>
-    <FORM name="loginform" id="loginform" method="POST" onsubmit="return checkOnSubmit('loginform', rules);" >
-<input type="hidden" name="action" value="passport">
-<input type="hidden" name="op" value="dologin">
-<input type="hidden" name="forward" value="/index.php/home">
-<input type="hidden" name="s" id="s" value="">
-    <div class="hangju">账户名</div>
-      <div class="hangju">
-      <div id="errorsDiv_user"></div>
-      <input name="user" type="text" class="logininput" id="textfield" />
-      </div>
-      <div class="hangju">登录密码</div>
-      <div class="hangju"><div id="errorsDiv_password"></div><input name="password" type="password" class="logininput" id="textfield2" />
-      </div>
-      <div class="hangju"><input name="imageField" type="submit" id="imageField" value="登录" class="loginBtn" />
-      <a href="<?php echo $www_site_url?>/index.php/passport/forget">忘记密码？ </a></div>
-      </form>
-     </td>
-    <td style="border-right:#BEBEBE solid 1px;">&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="bl4px"></td>
-    <td class="bcenter"></td>
-    <td class="br4px"></td>
-  </tr>
-</table>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="4" class="tl4px"></td>
+              <td class="tableCenter"><div class="tableTitle">神秘顾客专区</div></td>
+              <td width="4" class="tr4px"></td>
+            </tr>
+            <tr>
+              <td style="border-left:#BEBEBE solid 1px;">&nbsp;</td>
+              <td style="padding:10px;"><div id="msg"></div>
+                  <form name="loginform" id="loginform" method="post" onsubmit="return checkOnSubmit('loginform', rules);" >
+                    <input type="hidden" name="action" value="passport" />
+                    <input type="hidden" name="op" value="dologin" />
+                    <input type="hidden" name="forward" value="index.php" />
+                    <input type="hidden" name="s" id="s" value="" />
+                    <div class="hangju">邮箱帐号：</div>
+                    <div class="hangju">
+                      <div id="errorsDiv_user"></div>
+                      <input name="user" type="text" class="logininput" id="textfield" />
+                    </div>
+                    <div class="hangju">登录密码：</div>
+                    <div class="hangju">
+                      <div id="errorsDiv_password"></div>
+                      <input name="password" type="password" class="logininput" id="textfield2" />
+                    </div>
+                    <div class="hangju">
+                      <input name="imageField" type="submit" id="imageField" value="登录" class="loginBtn" />
+                    <a href="<?php echo $www_site_url?>/index.php/passport/forget">忘记密码？ </a></div>
+                  </form></td>
+              <td style="border-right:#BEBEBE solid 1px;">&nbsp;</td>
+            </tr>
+            <tr>
+              <td class="bl4px"></td>
+              <td class="bcenter"></td>
+              <td class="br4px"></td>
+            </tr>
+          </table>
         </div>
 
 </div>
