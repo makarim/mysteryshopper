@@ -23,6 +23,8 @@
         <?php if($corp){?>
         <div id="welcome">您好，尊敬的 <span style="color:#000000; font-weight:bold;"><?php echo $corp['c_contacter'];?></span></div>
         <?php }?>
+        
+  		<div id="<?php if(isset($scr) && ($scr=='index.php')) echo "tel";else echo "tel2";?>"></div>
 		
     </div>
 </div>
