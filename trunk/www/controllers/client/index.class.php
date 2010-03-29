@@ -20,7 +20,7 @@ class index{
 		$msg = '';	
 		$_SESSION['_XppassSignKey'] = uniqid();
 		if($this->login_corp){
-			$msg = "Welcome ".$this->login_user['user_nickname']."";
+			$msg = "Welcome ".$this->login_corp['c_name']."";
 		}
 		$show_code = 0;
 		if(isset($_SESSION['pwd_error'])) {
@@ -32,6 +32,9 @@ class index{
 		$this->tpl->assign ( 'show_code', $show_code );
 		$this->tpl->assign ( '_XppassSignKey', $_SESSION['_XppassSignKey'] );
 		$this->tpl->assign("scr",'index.php');
+    }
+    function view_faq(){
+    	
     }
     function view_login(){
 		$_SESSION['_XppassSignKey'] = uniqid();

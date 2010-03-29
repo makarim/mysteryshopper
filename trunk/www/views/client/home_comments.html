@@ -55,84 +55,32 @@
       <tr>
 
         <td class="table2LeftBorder"></td>
-        <td><table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport">
+        <td>
+        <?php if(isset($assignments['records'])){
+        	foreach ($assignments['records'] as $a){ ?>
+        <table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport">
           <tr>
-            <td colspan="2" class="title">任务名：必胜客徐汇店每周调查 （ 2003.03.02 ~ 2009.03.09 ）</td>
+            <td colspan="2" class="title"><?php echo $a['a_title']?> （ <?php echo $a['a_fdate']?> ）</td>
             <td width="7%" class="title">得分</td>
           </tr>
+          <?php foreach ($a['comments'] as $k=>$v) {
+          	
+          	?>
           <tr>
-            <td width="6%" align="center">服务</td>
+            <td width="6%" align="center"><?php echo  $GLOBALS['gGroups'][$k]?></td>
 
-            <td width="87%">评论内容：上菜太慢，服务态度不好，希望能继续加强服务品质</td>
-            <td align="center">5</td>
+            <td width="87%"><?php echo $v['content']?></td>
+            <td align="center"><?php echo $v['score']?></td>
           </tr>
-          <tr>
-            <td align="center">环境</td>
-            <td>室内装饰是否怡人，切合主题氛围 </td>
-            <td align="center">4</td>
-
-          </tr>
+           <?php 
+        	}
+        ?> 
         </table>
+         <?php 
+        	}
+        }?> 
           <br />
-          <table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport">
-            <tr>
-              <td colspan="2" class="title">任务名：必胜客徐汇店每周调查 （ 2003.03.02 ~ 2009.03.09 ）</td>
-              <td width="7%" class="title">得分</td>
-            </tr>
-
-            <tr>
-              <td width="6%" align="center">服务</td>
-              <td width="87%">评论内容：上菜太慢，服务态度不好，希望能继续加强服务品质</td>
-              <td align="center">5</td>
-            </tr>
-            <tr>
-              <td align="center">环境</td>
-
-              <td>室内装饰是否怡人，切合主题氛围 </td>
-              <td align="center">4</td>
-            </tr>
-          </table>
-          <br />
-          <table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport">
-            <tr>
-              <td colspan="2" class="title">任务名：必胜客徐汇店每周调查 （ 2003.03.02 ~ 2009.03.09 ）</td>
-
-              <td width="7%" class="title">得分</td>
-            </tr>
-            <tr>
-              <td width="6%" align="center">服务</td>
-              <td width="87%">评论内容：上菜太慢，服务态度不好，希望能继续加强服务品质</td>
-              <td align="center">5</td>
-            </tr>
-
-            <tr>
-              <td align="center">环境</td>
-              <td>室内装饰是否怡人，切合主题氛围 </td>
-              <td align="center">4</td>
-            </tr>
-          </table>
-          <br />
-
-          <table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport">
-            <tr>
-              <td colspan="2" class="title">任务名：必胜客徐汇店每周调查 （ 2003.03.02 ~ 2009.03.09 ）</td>
-              <td width="7%" class="title">得分</td>
-            </tr>
-            <tr>
-              <td width="6%" align="center">服务</td>
-
-              <td width="87%">评论内容：上菜太慢，服务态度不好，希望能继续加强服务品质</td>
-              <td align="center">5</td>
-            </tr>
-            <tr>
-              <td align="center">环境</td>
-              <td>室内装饰是否怡人，切合主题氛围 </td>
-              <td align="center">4</td>
-
-            </tr>
-          </table>
-          <br />
-          <div class="pages">分页：<a href="#">1</a> <a href="#">2</a></div></td>
+          <div class="pages">分页：<?php echo $assignments['page_array']['pagebar']?></div></td>
         <td class="table2RightBorder"></td>
       </tr>
       <tr>
@@ -148,5 +96,4 @@
 </div>
 </div>
 
-</div>
 <?php include_once("footer.html")?>

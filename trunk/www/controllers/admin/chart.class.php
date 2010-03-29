@@ -28,25 +28,31 @@ class chart{
 	function view_overalldata(){
 		$c_id = !empty($_GET['c_id'])?$_GET['c_id']:'';
 		$group = !empty($_GET['group'])?$_GET['group']:'';
+		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:'';
+		$edate = !empty($_GET['edate'])?$_GET['edate']:'';
+		$selstores = !empty($_GET['selstores'])?$_GET['selstores']:'';
+		if($selstores) $selstores_arr = explode(",",$selstores);
 		$scoretype = !empty($_GET['scoretype'])?$_GET['scoretype']:'summary';
 		
 		$xml = "<?xml version='1.0' encoding='UTF-8'?>
 <chart>";
 		if($c_id){
 			include_once("ChartModel.class.php"); 
-			$ChartModel = new ChartModel();
+			$ChartModel = new ChartModel($sdate,$edate);
 			
 			include_once("CorporationModel.class.php");	
 			$corpModel = new CorporationModel();
 			$stores = $corpModel->getStoreByCid($c_id);
 			$xml .="<series>\n";
 			foreach ($stores as $k=>$store){
+				if(!in_array($store['cs_id'],$selstores_arr)) continue;
 				$xml .="<value xid='{$store['cs_id']}'>{$store['cs_name']}</value>\n";
 			}
 			$xml .="</series>\n<graphs>\n";
 			if(strpos($group,'service')!==false){	
 				$xml .="<graph gid='0'>\n";
 				foreach ($stores as $k=>$store){
+					if(!in_array($store['cs_id'],$selstores_arr)) continue;
 					if(strtolower($scoretype)=='summary'){ 
 						$score = $ChartModel->getSummaryScoreByCsId($store['cs_id'],1);
 						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
@@ -69,6 +75,7 @@ class chart{
 			if(strpos($group,'environment')!==false){	
 				$xml .="<graph gid='1'>\n";			
 				foreach ($stores as $k=>$store){
+					if(!in_array($store['cs_id'],$selstores_arr)) continue;
 					if(strtolower($scoretype)=='summary'){ 
 						$score = $ChartModel->getSummaryScoreByCsId($store['cs_id'],2);
 						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
@@ -91,6 +98,7 @@ class chart{
 			if(strpos($group,'product')!==false){
 				$xml .="<graph gid='2'>\n";
 				foreach ($stores as $k=>$store){
+					if(!in_array($store['cs_id'],$selstores_arr)) continue;
 					if(strtolower($scoretype)=='summary'){ 
 						$score = $ChartModel->getSummaryScoreByCsId($store['cs_id'],3);
 						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
@@ -215,6 +223,34 @@ $xml .="
 </chart>
 ";
 		echo $xml;die;
+	}
+	
+	function view_timedata(){
+		$rq_id = !empty($_GET['rq_id'])?$_GET['rq_id']:'';
+		$c_id = !empty($_GET['c_id'])?$_GET['c_id']:'';
+		$group = !empty($_GET['group'])?$_GET['group']:'';
+		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:'';
+		$edate = !empty($_GET['edate'])?$_GET['edate']:'';
+		$selstores = !empty($_GET['selstores'])?$_GET['selstores']:'';
+		if($selstores) $selstores_arr = explode(",",$selstores);
+		
+		
+		include_once("ChartModel.class.php"); 
+		$ChartModel = new ChartModel($sdate,$edate);
+		//$questions = $ChartModel->getTimeQuestionsByAsId($a_id,$re_id,$group);
+		
+		include_once("CorporationModel.class.php");	
+		$corpModel = new CorporationModel();
+		$stores = $corpModel->getStoreByCid($c_id);
+		$csv = '';
+
+		foreach ($stores as $k=>$store){
+			if(!in_array($store['cs_id'],$selstores_arr)) continue;
+			$avg_times = $ChartModel->getAvgTimeByRqId($rq_id,$store['cs_id']);
+			$avg_times = round($avg_times,2);
+			$csv .="{$store['cs_name']};$avg_times\n";
+		}
+		echo $csv;
 	}
 	function view_defaults(){
 		$cur_sort = !empty($_GET['sort'])?$_GET['sort']:'re_id';

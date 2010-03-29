@@ -18,8 +18,41 @@
 		</div>
 		<br />
 	    <br />
- 
+	     <?php if($is_view && $assignmentinfo['a_quiz_pass']>0){
+    	?>
+	    <FORM name="uplaodform" id="uplaodform" method="POST" enctype="multipart/form-data" >
+<input type="hidden" name="action" value="home">
+<input type="hidden" name="op" value="upload">
+ <TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
+<TR>
+<TD width="40%" class="text"></TD>
+<TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
+</TR>
+<TR>
+<TD class="text">音频或者图片</TD>
+<TD><div id="errorsDiv_face"></div>
   
+<INPUT type="file" name="file" id="file" class="input" />
+</TD>
+</TR>
+
+  <tr>
+    <td class="text"></td>
+
+    <td>
+          <input name="button5" type="submit" class="btn" id="button5" value="保  存" />
+    </td>
+  </tr>
+</table>
+  </form>
+  <?php 
+	}else{?>
+   <p>&nbsp;</p>
+   <p>&nbsp;</p>
+   <p>&nbsp;</p>
+   <p>请预先报名，通过小测试，执行完任务后才能上传文件！</p>
+
+  <?php }?>
   	</div>
 
 </div>

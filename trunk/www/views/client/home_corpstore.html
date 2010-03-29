@@ -15,20 +15,18 @@
 <br />
       <br />
       <br />
-<TABLE width="90%" border="0" cellspacing="10" cellpadding="0" class="regInfo">
+<TABLE width="90%" border="0" cellspacing="5" cellpadding="0" class="regInfo">
 <TR>
-<TD width="10%" ></TD>
-<TD width="80%"></TD>
+<TD width="20%" style="background:#efefef">名称</TD>
+<TD width="80%" style="background:#efefef">地址</TD>
 </TR><TR>
+<?php if(isset($stores)){
+	foreach ($stores as $s){?>
 
-<TR><TD align="right">公司全称:</TD>
-<TD><?php echo $corp['c_title'];?></TD>
+<TR><TD><?php echo $s['cs_name'];?></TD>
+<TD><?php echo $s['cs_address'];?></TD>
 </TR>
-<TR><TD align="right" >公司标志:</TD>
-<TD><img src="/public/upload/logo/<?php echo $corp['c_logo'];?>"></TD>
-</TR>
-<TR><TD align="right">公司简介:</TD>
-<TD><?php echo $corp['c_intro'];?></TD>
+<?php }}?>
 </TR>
 
 

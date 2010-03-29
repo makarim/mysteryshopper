@@ -150,11 +150,103 @@ class AssignmentModel extends Model {
     }
     
     function getAssignmentsByCsId($con,$cs_id){
-    	$add = '';
+    	$add =$addsql = '';
     	if(!empty($con['sdate'])) $add .= " and a_fdate >='".$con['sdate']."'";
     	if(!empty($con['edate'])) $add .= " and a_fdate < '".$con['edate']."'";
+    	if(is_array($cs_id)) $addsql = "cs_id in (".join(",",$cs_id).")";
+    	else  $addsql = "cs_id ='".$cs_id."'";
     	//echo "select a_id,re_id,DATE_FORMAT(a_fdate, '%m-%d') as day,a_title from assignment where cs_id='$cs_id' $add order by day";
-    	return $this->db->getAll("select a_id,re_id,DATE_FORMAT(a_fdate, '%m-%d') as day,a_title from assignment where cs_id='$cs_id' $add order by day");
+    	return $this->db->getAll("select a_id,cs_id,re_id,DATE_FORMAT(a_fdate, '%m-%d') as day,a_title from assignment where $addsql $add order by day");
     }
+    
+    function getAssignmentComments($con,$pageCount){
+		$select =$this->db->select();
+		$select->from ( "assignment a","a.*");
+		//
+		if(isset($con['order'])) $select->order ( 'a.'.$con['order']." desc" );
+		if(isset($con['c_id']) && !empty($con['c_id'])) $select->where ( " a.c_id = '".$con['c_id']."'" );
+		if(isset($con['sdate']) && !empty($con['sdate'])) $select->where ( " a.a_fdate >= '".$con['sdate']."'" );
+		if(isset($con['edate']) && !empty($con['edate'])) $select->where ( " a.a_fdate <= '".$con['edate']."'" );
+		if(isset($con['selstores']) && !empty($con['selstores'])){
+			if(is_array($con['selstores'])) $select->where ( "a.cs_id in (".join(",",$con['selstores']).")" );
+			else   $select->where (  "a.cs_id ='".$con['selstores']."'");
+		}
+    	
+		
+		$list = array();
+		$offset = '';
+		
+		$total = $select->count (); //获得查询到的记录数
+		include_once("Pager.class.php");
+	    $list ['page'] = new Pager ( $total, $pageCount ); //创建分页对象
+		$offset = $list ['page']->offset ();               //获得记录偏移量
+		//$pagerStyle = array ('firstPage' => '', 'prePage' => 'gray4_12b none', 'nextPage' => 'gray4_12b none', 'totalPage' => '', 'numBar' => 'yellowf3_12b none', 'numBarMain' => 'gray4_12 none' );                      //翻页条的样式
+		//$list ['page']->setLinkStyle ( $pagerStyle );
+		//$list ['page']->setLinkScript("gotopage(@PAGE@)");
+		$label = array('first_page'=>lang('first_page'),'last_page'=>lang('last_page'),'next_page'=>lang('next_page'),'pre_page'=>lang('pre_page'),'next_group'=>lang('next_group'),'pre_group'=>lang('pre_group'));	
+		$list ['page']->setLabelName($label);
+		$list ['page_array'] ['pagebar'] = $list ['page']->wholeNumBar();
+		
+		$select->limit ( $list['page']->offset(), $pageCount );
+		$rs = $select->query();
+	//echo $select->getSql();
+		if ($rs) {
+			foreach ( $rs as $key => $record ) {
+				$record['comments'] = $this->getCommentsByAsId($record['a_id'],$record['re_id']);
+				$list ['records'] [$key] = $record;
+			}
+		}
+		return (array) $list;
+	}
+	
+	
+	function getCommentsByAsId($a_id,$re_id){
+			
+		$sql = "select rq_id,rq_type,rq_group from report_question where rq_type=3 and re_id='".$re_id."'";
+		$rq_arr = $this->db->getAll($sql);
+		$q_row = count($rq_arr);
+		$sum = 0;
+		$comments = array();
+
+		if($q_row>0){
+			foreach ($rq_arr as $rq){
+				$sql = "select ans_answer3 from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."'";
+				$comments[$rq['rq_group']]['score'] = $this->getSummaryScoreByAsId($a_id,$re_id,$rq['rq_group']);
+				$comments[$rq['rq_group']]['content']= $this->db->getOne($sql);
+			}
+			// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
+			return $comments;
+		}
+	}
+	
+	function getSummaryScoreByAsId($a_id,$re_id,$group){
+//		if($group=='service') $group=1;
+//		if($group=='environment') $group=2;
+//		if($group=='product') $group=3;
+//		if($group=='summary') $group=4;
+		$average = 0;
+		//一份报告有多少个的同group的打分题目
+		$sql = "select rq_id,rq_type from report_question where rq_group='$group' and re_id='".$re_id."'";
+		$rq_arr = $this->db->getAll($sql);
+		$q_row = count($rq_arr);
+		//echo "row:".$q_row."|";
+		$sum = 0;
+		if($q_row>0){
+			foreach ($rq_arr as $rq){
+				if($rq['rq_type']==2){
+					$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=2";
+					$sum += $this->db->getOne($sql);
+				}else if($rq['rq_type']==1){
+					$sql = "select ans_answer1  from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=1";
+					$yn = $this->db->getOne($sql);
+					$sum += ($yn=='Y')?10:0;
+				}
+			}
+			// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
+			$average += $sum/$q_row;
+			return round($average,2);
+		}
+		return 0;
+	}
 }
 ?>

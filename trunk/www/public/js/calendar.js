@@ -90,6 +90,34 @@ function selectstore(str){
 	controlid.value = t[1];
 
 }
+function selectmitilstore(str){
+	$('storelist').style.display = 'none';
+	var t = str.split("|");
+	//$('cs_id').value =t[0];
+	var len = document.seachfrm.selstores.length;
+	var c=0;
+	for(var i=0;i<len;i++){
+		if(document.seachfrm.selstores[i].checked){
+			c++;
+		}
+	}
+	if(c==len) controlid.value = '所有地点';
+	if(c<len && c>0) controlid.value = '部分地点';
+	if(c==0) controlid.value = '请选择';
+
+}
+function showmitistores(){
+	e = is_ie ? event : showmitistores.caller.arguments[0];
+	
+	controlid = is_ie ? e.srcElement : e.target;
+	
+	var p = getposition(controlid);
+
+	$('storelist').style.display = 'block';
+	$('storelist').style.left = p['x']+'px';
+	$('storelist').style.top	= (p['y'] + 20)+'px';
+	_cancelBubble(e);
+}
 function showstores(){
 	e = is_ie ? event : showstores.caller.arguments[0];
 	

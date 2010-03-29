@@ -371,10 +371,10 @@ class passport {
 		$user['speak_english'] = !empty($_POST['speakenglish'])?$_POST['speakenglish']:'0';
 		$user['interests'] = !empty($_POST['interests'])?$_POST['interests']:'';
 		
-		if (!isset($_SESSION['validatecode']) || ($_POST['code']!='back' && strtolower($_POST['code'])!=strtolower($_SESSION['validatecode']))) {
-			$msg = array('s'=> 400,'m'=>lang('codeinvalid'),'d'=>'');				
-			exit(json_output($msg));
-		}
+//		if (!isset($_SESSION['validatecode']) || ($_POST['code']!='back' && strtolower($_POST['code'])!=strtolower($_SESSION['validatecode']))) {
+//			$msg = array('s'=> 400,'m'=>lang('codeinvalid'),'d'=>'');				
+//			exit(json_output($msg));
+//		}
 		$passmod = new PassportModel();
 		$rs = $passmod->saveUserExt ( $user ,$this->login_user['user_id']);
 		if(!$rs){
@@ -439,18 +439,22 @@ class passport {
 			$msg = array('s'=> 400,'m'=>lang('nicknameexist'),'d'=>'');				
 			exit(json_output($msg));
 		}
+		
+		 
 		if($reg_type=='username' ) {
+			$_POST ['username'] = strtolower($_POST ['username']) ;
 			if($passmod->checkUser ( $_POST ['username'] ) || $passmod->isBlockword($_POST ['username']) ){
 				$msg = array('s'=> 400,'m'=>lang('userexist'),'d'=>'');				
 				exit(json_output($msg));
 			}
 			
-			$user['user'] = $_POST ['username'];
+			$user['user'] = strtolower($_POST ['username']);
 			$user['user_email'] = '';
 			$user['user_question'] = isset($_POST ['question'])?$_POST ['question']:'';
 			$user['user_answer'] = isset($_POST ['answer'])?$_POST ['answer']:'';
 		}		
 		if($reg_type=='email'){
+			$_POST ['email'] = strtolower($_POST ['email']) ;
 			 if($passmod->checkUser ( $_POST ['email'] ) || $passmod->isBlockword($_POST ['email'])) {
 				$msg = lang('userexist');
 				$msg = array('s'=> 400,'m'=>lang('userexist'),'d'=>'');				

@@ -16,7 +16,7 @@
 	$GLOBALS ["gSiteInfo"] ["web_charset"] =  "UTF-8";
 	$GLOBALS ["gSiteInfo"] ["web_keyword"] =  "Xppass";
 	$GLOBALS ["gSiteInfo"] ["web_description"] =  "PHP开源 SSO系统--Xppass";
-	$GLOBALS ["gSiteInfo"] ["web_title"] =  "&quot;SPOT&quot;咨询管理系统";
+	$GLOBALS ["gSiteInfo"] ["web_title"] =  "美国斯巴特市场咨询有限公司";
 	
 //////////////////////////////////////////////////////
 //				Email   Settings	                //
@@ -95,5 +95,10 @@ $GLOBALS ["gMemcacheServer"]["192.168.1.5:11213"]);;
 	$GLOBALS ["gLog"] ["receiver"] =  "kakapowu@gmail.com";
 	$GLOBALS ["gLog"] ["maxExecTime"] =  "2";
 	$GLOBALS ["gLog"] ["maxMemUsed"] =  "1048576";
+	
+	$GLOBALS['gGroups'][1] = "Service";
+	$GLOBALS['gGroups'][2] = "Environment";
+	$GLOBALS['gGroups'][3] = "Product";
+	$GLOBALS['gGroups'][4] = "Summary";
 	
 ?>
