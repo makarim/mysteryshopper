@@ -1,10 +1,18 @@
 <?php
 class ChartModel extends Model {
-	function __construct(){
+	public $sdate;
+	public $edate;
+	private $addsql;
+	function __construct($sdate,$edate){
+		$this->sdate = $sdate;
+		$this->edate = $edate;
+		$addsql = '';
+		if($this->sdate) $this->addsql .= " and a.a_fdate >= '$this->sdate'";
+		if($this->edate) $this->addsql .= " and a.a_fdate < '$this->edate'";
 		$this->db = parent::dbConnect($GLOBALS ["gDataBase"] ["db"]);
 	}
 	function getSummaryScoreByCsId($csid,$group=1){
-		$sql="select a.re_id,a.a_id from assignment a where a.cs_id=$csid";
+		$sql="select a.re_id,a.a_id from assignment a where a.cs_id='$csid' $this->addsql";
 		$data = $this->db->getAll($sql);
 		$row =count($data);;
 		if($row>0){
@@ -43,7 +51,7 @@ class ChartModel extends Model {
 	 * 
 	 **/
 	function getVoteScoreByCsId($csid,$group=1){
-		$sql="select a.re_id,a.a_id from assignment a where a.cs_id=$csid";
+		$sql="select a.re_id,a.a_id from assignment a where a.cs_id='$csid' $this->addsql";
 		$data = $this->db->getAll($sql);
 		$row =count($data);;
 		if($row>0){
@@ -73,7 +81,7 @@ class ChartModel extends Model {
 	}
 	
 	function getYesByCsId($csid,$group=1){
-		$sql="select a.re_id,a.a_id from assignment a where a.cs_id=$csid";
+		$sql="select a.re_id,a.a_id from assignment a where a.cs_id='$csid' $this->addsql";
 		$data = $this->db->getAll($sql);
 		$row =count($data);;
 		if($row>0){
@@ -101,7 +109,7 @@ class ChartModel extends Model {
 		return 0;
 	}
 	function getTimesByCsId($csid,$group=1){
-		$sql="select a.re_id,a.a_id from assignment a where a.cs_id=$csid";
+		$sql="select a.re_id,a.a_id from assignment a where a.cs_id='$csid' $this->addsql";
 		$data = $this->db->getAll($sql);
 		$row =count($data);;
 		if($row>0){
@@ -229,6 +237,37 @@ class ChartModel extends Model {
 			return round($average,2);
 		}
 		return 0;
+	}
+	
+	function getTimeQuestionsByCId($c_id,$group){
+		if($group=='service') $group=1;
+		if($group=='environment') $group=2;
+		if($group=='product') $group=3;
+		if($group=='summary') $group=4;
+		if($group =='all') $addsql =" ";
+		$re_id_arr = $this->db->getAll("select re_id from assignment where c_id='$c_id' group by re_id");
+		foreach ($re_id_arr as $value) {
+			$re_id[] = $value['re_id'];
+		}
+		
+		$re_id_str = join(',',$re_id);
+		return $this->db->getAll("select rq_id,rq_type,rq_question from report_question where rq_type=4 and re_id in ($re_id_str) $addsql");
+	}
+	
+	function getAvgTimeByRqId($rq_id,$cs_id){
+		$assignment = $this->db->getAll("select a.a_id from assignment a where a.cs_id='$cs_id' $this->addsql");
+		$a_id = array();$a_id_str = '';
+		
+		foreach ($assignment as $v) {
+			$a_id[] = $v['a_id'];
+		}
+		$a_id_str = join(",",$a_id);
+		if(count($a_id)>0) 
+			$sql = "select avg(ans_answer4) as avg from answer where rq_id='".$rq_id."' and a_id in (".$a_id_str.") and rq_type=4";
+		else 
+			$sql = "select avg(ans_answer4) as avg from answer where rq_id='".$rq_id."' and a_id = '".$a_id_str."' and rq_type=4";
+		//echo $sql;
+		return $this->db->getOne($sql);
 	}
 }
 ?>

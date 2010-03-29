@@ -65,7 +65,8 @@ class PassportModel extends Model {
 		return $this->db->getRow("select * from user$tb_prefix where user_id='$user_id'");
 	}
 	public function getUser($user){
-		return $this->db->getRow("select * from user_index where user='$user'");
+		
+		return $this->db->getRow("select * from user_index where user='".strtolower($user)."'");
 	}
 	
 	/**

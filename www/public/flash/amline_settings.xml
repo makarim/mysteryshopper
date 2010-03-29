@@ -210,7 +210,7 @@
     <text_size></text_size>                                   <!-- [text_size] (Number) -->
     <spacing></spacing>                                       <!-- [10] (Number) vertical and horizontal gap between legend entries -->
     <margins></margins>                                       <!-- [0] (Number) legend margins (space between legend border and legend entries, recommended to use only if legend border is visible or background color is different from chart area background color) -->    
-    <graph_on_off></graph_on_off>                             <!-- [true] (true / false) if true, color box gains "checkbox" function - it is possible to make graphs visible/invisible by clicking on this checkbox -->
+    <graph_on_off>off</graph_on_off>                             <!-- [true] (true / false) if true, color box gains "checkbox" function - it is possible to make graphs visible/invisible by clicking on this checkbox -->
     <reverse_order></reverse_order>                           <!-- [false] (true / false) whether to sort legend entries in a reverse order -->
     <align></align>                                           <!-- [left] (left / center / right) alignment of legend entries -->    
     <key>                                                     <!-- KEY (the color box near every legend entry) -->

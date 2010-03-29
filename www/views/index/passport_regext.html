@@ -311,10 +311,6 @@ RMB</TD>
 			</select></TD>
 </TR>
 
-<TR>
-<TD class="text"><?php echo lang('validatecode')?>:</TD>
-<TD><div id="errorsDiv_code"></div><INPUT type="text" name="code" class="input" style="width:100px"/><img id="codeimg" src="<?php echo $www_site_url?>/index.php/identifycode/generate" align="absmiddle" title="<?php echo lang('anotherone')?>" onClick="changeCode();" style="cursor:pointer"></TD>
-</TR>
 
 <TR><TD class="text">&nbsp;</TD><TD>
   <input name="button" type="submit" class="btn" id="button" value="<?php echo lang('signup')?>" /> 
@@ -383,13 +379,6 @@ function ajaxCall(s) {
     return false;
 }
 
-function changeCode() {
-	var num = 	new Date().getTime();
-	var rand = Math.round(Math.random() * 10000);
-	num = num + rand;
-	document.getElementById("codeimg").src = "<?php echo $www_site_url?>/index.php/identifycode/generate/" + num;
-	return false;
-}
 window.onload = function(){
 	yav.init('registerform', rules);
 }

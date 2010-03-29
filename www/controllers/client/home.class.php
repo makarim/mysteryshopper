@@ -20,42 +20,186 @@ class home{
 	}
     function view_defaults(){
 		
-		
+		header( "Location: /client.php/home/corp");
     }
 	function view_corp(){
-		
+		$type = !empty($_GET['view'])?$_GET['view']:"corp";
+		include_once("CorporationModel.class.php");	
+		$corpModel = new CorporationModel();
+		$corp = $corpModel->getCorporationById($this->login_corp['c_id']);
+		$this->tpl->assign("corp",$corp);
+		$this->tpl->assign("type",$type);
 	}
 	function view_corpcontact(){
-		
+		$type = !empty($_GET['view'])?$_GET['view']:"corp";
+		include_once("CorporationModel.class.php");	
+		$corpModel = new CorporationModel();
+		$corp = $corpModel->getCorporationById($this->login_corp['c_id']);
+		$this->tpl->assign("corp",$corp);
+		$this->tpl->assign("type",$type);
 	}
 	function view_corpstore(){
-		
+		$type = !empty($_GET['view'])?$_GET['view']:"corp";
+		include_once("CorporationModel.class.php");	
+		$corpModel = new CorporationModel();
+		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
+		$this->tpl->assign("stores",$stores);
+		$this->tpl->assign("type",$type);
 	}
 	
 	function view_report(){
-		
+		$type = !empty($_GET['view'])?$_GET['view']:"corp";
+		$this->tpl->assign("type",$type);
 	}
-	function view_shopperdemand(){
-		
+	function view_shoppers(){
+		$type = !empty($_GET['view'])?$_GET['view']:"corp";
+		$this->tpl->assign("type",$type);
 	}
 	function view_quiz(){
-		
+		$type = !empty($_GET['view'])?$_GET['view']:"corp";
+		$this->tpl->assign("type",$type);
 	}
 	function view_overall(){
+		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
+		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
 		$type = !empty($_GET['overall'])?$_GET['overall']:"summary";
+		$def_stores = array();
+		
+		include_once("CorporationModel.class.php");	
+		$corpModel = new CorporationModel();
+		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
+		foreach ($stores as $s){
+			$def_stores[] = $s['cs_id']; 
+		}
+		$selstores = !empty($_GET['selstores'])?$_GET['selstores']:$def_stores;
+		
+		$con['sdate'] = $sdate;
+		$con['edate'] = $edate;
+		include_once("AssignmentModel.class.php");	
+		$assignmentModel = new AssignmentModel();
+		$assignments = $assignmentModel->getAssignmentsByCsId($con,$selstores);
+//		
+		if($type=='time'){
+			include_once("ChartModel.class.php"); 
+			$ChartModel = new ChartModel($sdate,$edate);
+			$questions = $ChartModel->getTimeQuestionsByCId($this->login_corp['c_id'],'all');
+			$this->tpl->assign("questions",$questions);
+			$this->tpl->assign("rq_id",$questions['0']['rq_id']);
+		}
+		
+		$this->tpl->assign("assignments",$assignments);
+		$this->tpl->assign("selstores",$selstores);
+		$this->tpl->assign("stores",$stores);
 		$this->tpl->assign("type",$type);
+		$this->tpl->assign("sdate",$sdate);
+		$this->tpl->assign("edate",$edate);
 	}
 	function view_environment(){
+		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
+		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
 		$type = !empty($_GET['environment'])?$_GET['environment']:"summary";
+		$def_stores = array();
+		
+		include_once("CorporationModel.class.php");	
+		$corpModel = new CorporationModel();
+		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
+		foreach ($stores as $s){
+			$def_stores[] = $s['cs_id']; 
+		}
+		$selstores = !empty($_GET['selstores'])?$_GET['selstores']:$def_stores;
+		
+		$con['sdate'] = $sdate;
+		$con['edate'] = $edate;
+		include_once("AssignmentModel.class.php");	
+		$assignmentModel = new AssignmentModel();
+		$assignments = $assignmentModel->getAssignmentsByCsId($con,$selstores);
+		
+		if($type=='time'){
+			include_once("ChartModel.class.php"); 
+			$ChartModel = new ChartModel($sdate,$edate);
+			$questions = $ChartModel->getTimeQuestionsByCId($this->login_corp['c_id'],'all');
+			$this->tpl->assign("questions",$questions);
+			$this->tpl->assign("rq_id",$questions['0']['rq_id']);
+		}
+		
+		$this->tpl->assign("assignments",$assignments);
+		$this->tpl->assign("selstores",$selstores);
+		$this->tpl->assign("stores",$stores);
 		$this->tpl->assign("type",$type);
+		$this->tpl->assign("sdate",$sdate);
+		$this->tpl->assign("edate",$edate);
 	}
 	function view_service(){
+		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
+		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
 		$type = !empty($_GET['service'])?$_GET['service']:"summary";
+		$def_stores = array();
+		
+		include_once("CorporationModel.class.php");	
+		$corpModel = new CorporationModel();
+		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
+		foreach ($stores as $s){
+			$def_stores[] = $s['cs_id']; 
+		}
+		$selstores = !empty($_GET['selstores'])?$_GET['selstores']:$def_stores;
+		
+		$con['sdate'] = $sdate;
+		$con['edate'] = $edate;
+		include_once("AssignmentModel.class.php");	
+		$assignmentModel = new AssignmentModel();
+		$assignments = $assignmentModel->getAssignmentsByCsId($con,$selstores);
+		
+		if($type=='time'){
+			include_once("ChartModel.class.php"); 
+			$ChartModel = new ChartModel($sdate,$edate);
+			$questions = $ChartModel->getTimeQuestionsByCId($this->login_corp['c_id'],'all');
+			$this->tpl->assign("questions",$questions);
+			$this->tpl->assign("rq_id",$questions['0']['rq_id']);
+		}
+		
+		
+		$this->tpl->assign("assignments",$assignments);
+		$this->tpl->assign("selstores",$selstores);
+		$this->tpl->assign("stores",$stores);
 		$this->tpl->assign("type",$type);
+		$this->tpl->assign("sdate",$sdate);
+		$this->tpl->assign("edate",$edate);
 	}
 	function view_product(){
+		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
+		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
 		$type = !empty($_GET['product'])?$_GET['product']:"summary";
+		$def_stores = array();
+		
+		include_once("CorporationModel.class.php");	
+		$corpModel = new CorporationModel();
+		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
+		foreach ($stores as $s){
+			$def_stores[] = $s['cs_id']; 
+		}
+		$selstores = !empty($_GET['selstores'])?$_GET['selstores']:$def_stores;
+		
+		$con['sdate'] = $sdate;
+		$con['edate'] = $edate;
+		include_once("AssignmentModel.class.php");	
+		$assignmentModel = new AssignmentModel();
+		$assignments = $assignmentModel->getAssignmentsByCsId($con,$selstores);
+		
+		if($type=='time'){
+			include_once("ChartModel.class.php"); 
+			$ChartModel = new ChartModel($sdate,$edate);
+			$questions = $ChartModel->getTimeQuestionsByCId($this->login_corp['c_id'],'all');
+			$this->tpl->assign("questions",$questions);
+			$this->tpl->assign("rq_id",$questions['0']['rq_id']);
+		}
+		
+		
+		$this->tpl->assign("assignments",$assignments);
+		$this->tpl->assign("selstores",$selstores);
+		$this->tpl->assign("stores",$stores);
 		$this->tpl->assign("type",$type);
+		$this->tpl->assign("sdate",$sdate);
+		$this->tpl->assign("edate",$edate);
 	}
 	
 	function view_stores(){
@@ -95,6 +239,19 @@ class home{
 		$cs_id = !empty($_GET['cs_id'])?$_GET['cs_id']:$stores[0]['cs_id'];
 		$selstore = isset($_GET['selstore'])?$_GET['selstore']:$stores[0]['cs_name'];
 		
+		
+		$con['sdate'] = $sdate;
+		$con['edate'] = $edate;
+		$con['order'] = 'a_id';
+		$con['selstores'] = $cs_id;
+		include_once("AssignmentModel.class.php");	
+		$assignmentModel = new AssignmentModel();
+
+		$assignments = $assignmentModel->getAssignmentComments($con,10);
+		//print_sql();
+
+		$this->tpl->assign("assignments",$assignments);
+		$this->tpl->assign("selstore",$selstore);
 		$this->tpl->assign("cs_id",$cs_id);
 		$this->tpl->assign("stores",$stores);
 		$this->tpl->assign("type",$type);

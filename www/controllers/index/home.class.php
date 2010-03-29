@@ -69,7 +69,11 @@ class home{
     	}
     	$this->tpl->assign('a_id',$a_id);
     	$this->tpl->assign('assignmentinfo',$assignmentinfo);
-    	$do_quiz = '';
+    	$is_view = '0';
+		if($assignmentinfo['user_id']==$this->login_user['user_id']){
+			$is_view =1;
+		}
+		$do_quiz = '';
 		if(isset($_SESSION['a_'.$a_id]['pass']) && $_SESSION['a_'.$a_id]['pass']==1){
 			$do_quiz = 'pass';
 		}
@@ -77,6 +81,7 @@ class home{
 			$do_quiz = 'fail';
 		}
 		$this->tpl->assign("do_quiz",$do_quiz);
+		$this->tpl->assign("is_view",$is_view);
     	return $assignmentinfo;
     }
     function view_assignment(){
@@ -117,8 +122,11 @@ class home{
 			}
 			if($pass==$count){
 				$_SESSION['a_'.$a_id]['pass'] = 1;
-				show_message("恭喜您，测试通过！您可以报名了！");
-				redirect("/index.php/home/assignment/a_id/$a_id");
+				$item['a_quiz_pass'] =1;
+				$item['a_quiz_passtime'] ="MY_F:NOW()";
+				$this->assignmentModel->updateAssignment($item,$a_id);
+				show_message("恭喜您！测试通过！您可以执行任务了！");
+				redirect("/index.php/home");
 			}else{
 				$_SESSION['a_'.$a_id]['pass'] = 0;
 			}
@@ -194,6 +202,10 @@ class home{
 	function view_upload(){
 		$a_id = isset($_GET['a_id'])?intval($_GET['a_id']):'0';
 		$this->get_assignment($a_id);
+	}
+	function op_upload(){
+		
+		
 	}
     
     function view_mydetail(){

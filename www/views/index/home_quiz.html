@@ -18,7 +18,9 @@
 	</div>
 	<br />
     <br />
-    	<?php if(isset($quiz) && is_array($quiz)){?>
+    	<?php if($is_view){
+    		if(isset($quiz) && is_array($quiz)){?>
+
     <form action="<?php echo $www_site_url?>/index.php" method="post">
 				<input type="hidden" name="action" value="home">
 				<input type="hidden" name="op" value="doquiz">
@@ -39,11 +41,13 @@
 					<tr>
 							
 							<td>
-<?php if(isset($v['A'])) {?><input type="radio" name="option_<?php echo $k?>" value="A">A. <?php echo $v['A']?>&nbsp;&nbsp;&nbsp;&nbsp;<?php }?>
-<?php if(isset($v['B'])) {?><input type="radio" name="option_<?php echo $k?>" value="B">B. <?php echo $v['B']?>&nbsp;&nbsp;&nbsp;&nbsp;<?php }?>
-<?php if(isset($v['C'])) {?><input type="radio" name="option_<?php echo $k?>" value="C">C. <?php echo $v['C']?>&nbsp;&nbsp;&nbsp;&nbsp;<?php }?>
-<?php if(isset($v['D'])) {?><input type="radio" name="option_<?php echo $k?>" value="D">D. <?php echo $v['D']?>&nbsp;&nbsp;&nbsp;&nbsp;<?php }?>
+							<ul class="quiz">
+<?php if(isset($v['A'])) {?><li><label><input type="radio" name="option_<?php echo $k?>" value="A">A. <?php echo $v['A']?></label></li><?php }?>
+<?php if(isset($v['B'])) {?><li><label><input type="radio" name="option_<?php echo $k?>" value="B">B. <?php echo $v['B']?></label></li><?php }?>
+<?php if(isset($v['C'])) {?><li><label><input type="radio" name="option_<?php echo $k?>" value="C">C. <?php echo $v['C']?></label></li><?php }?>
+<?php if(isset($v['D'])) {?><li><label><input type="radio" name="option_<?php echo $k?>" value="D">D. <?php echo $v['D']?></label></li><?php }?>
 <input type="hidden" name="hida_<?php echo $k?>" value="<?php echo $v['answer'];?>">
+							</ul>
 							</td>
 							
 					</tr>
@@ -56,11 +60,13 @@
 					</tr>
 				</table>
   </form>
-  <?php }else{?>
+  <?php 
+    		}
+     }else{?>
    <p>&nbsp;</p>
    <p>&nbsp;</p>
    <p>&nbsp;</p>
-   <p>先仔细阅读任务说明和调查问卷，通过一个小测试之后，才能报名参加任务！</p>
+   <p>请预先报名，被选中后才能参加测试！</p>
   <?php }?>
   </div>
 </div>

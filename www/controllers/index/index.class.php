@@ -29,6 +29,9 @@ class index{
 	function view_contactus(){
 		
 	}
+	function view_faq(){
+		
+	}
     function view_setlang(){
     	$select = $_GET['setlang'];
     	setcookie("_Selected_Language",$select,time()+3600*24*365,"/");

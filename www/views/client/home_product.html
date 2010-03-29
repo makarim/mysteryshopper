@@ -1,5 +1,6 @@
 <?php include_once("header.html")?>
-
+<script src="<?php echo $www_site_url?>/public/js/calendar.js" type="text/javascript"></script>
+<div id="append"></div>
 <div id="wrap">  <br />
 
 <?php include_once("home_left.html")?>
@@ -16,19 +17,40 @@
 </div>
 <br />
 <br />
+<form action="/client.php" method="GET" name="seachfrm">
+<input name="action" type="hidden" value="home"  />
+ <input name="view" type="hidden" value="product"  />
+ <input name="product" type="hidden" value="<?php echo $type?>"  />
+<div id="storelist" style="width: 210px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:999;"> 
+  <ul> 
+  <?php 
+       if(isset($stores) && is_array($stores)){
+         foreach ($stores as $s){	
+                ?>
+	<li style="padding:2px;"> <label><input onclick="selectmitilstore('<?php echo $s['cs_id']."|".$s['cs_name'];?>');" type="checkbox" name="selstores[]" value="<?php echo $s['cs_id']?>" <?php if(in_array($s['cs_id'],$selstores)) echo 'checked'?>> &nbsp;<?php echo $s['cs_name'];?></label></li> 
+	  <?php
+			}
+      }
+       ?>
+     </ul> 
+</div>
+
+ 
 <table width="100%" height="50" border="0" cellpadding="0" cellspacing="0" class="clear">
   <tr>
     <td class="CsearchLeft">&nbsp;</td>
-    <td align="center" class="CsearchCenter"><input name="textfield" type="text" class="ClocationInput" id="textfield" value="请选择地点" />
+    <td align="center" class="CsearchCenter">选择地点:<input name="selstore" type="text" class="ClocationInput" onclick="showmitistores();" id="selstore" value="<?php if(count($selstores)==0){ echo "请选择"; }else { if(count($selstores)==count($stores)) echo "所有地点"; else echo "部分地点"; }?>" />
+   
       开始时间：
-      <input name="textfield2" type="text" class="CtimeInput" id="textfield2" value="2010.01.01." />
+      <input name="sdate" type="text" class="CtimeInput" id="sdate" value="<?php echo $sdate;?>" onclick="showcalendar();"/>
       结束时间：
-      <input name="textfield3" type="text" class="CtimeInput" id="textfield3" value="2010.01.01." />
+      <input name="edate" type="text" class="CtimeInput" id="edate" value="<?php echo $edate;?>" onclick="showcalendar();" />
       <input name="button" type="submit" class="btn" id="button" value="查看报表" /></td>
     <td class="CsearchRight">&nbsp;</td>
 
   </tr>
 </table>
+</form>
 <br />
 <br />
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -44,38 +66,62 @@
     <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td class="table2LeftBorder"></td>
-        <td><p align="center">
+        <td><?php if(isset($questions['0']['rq_question']))echo $questions['0']['rq_question']?>
+        <p align="center">
         	<div id="flashcontent">
 				<strong>You need to upgrade your Flash Player</strong>
 			</div>
-
+<?php if($type=='time'){?>
+	<script type="text/javascript">
+		// <![CDATA[		
+		var so = new SWFObject("<?php echo $www_site_url?>/public/flash/amcolumn.swf", "amcolumn", "520px", "400px", "8", "#ffffff");
+		so.addVariable("path", "<?php echo $www_site_url?>/public/flash/");
+		so.addVariable("settings_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amcolumn_settings2.xml?342"));
+		//so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amcolumn_data2.txt"));
+		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=timedata&c_id=<?php echo $corp['c_id'];?>&rq_id=<?php echo $rq_id?>&sdate=<?php echo $sdate?>&edate=<?php echo $edate?>&selstores=<?php echo join(",",$selstores);?>&group=service,environment,product"));
+		so.addVariable("preloader_color", "#ffffff");
+		
+		so.write("flashcontent");
+		// ]]>
+	</script>
+<?php
+}else {?>
 	<script type="text/javascript">
 		// <![CDATA[		
 		var so = new SWFObject("<?php echo $www_site_url?>/public/flash/amcolumn.swf", "amcolumn", "100%", "400px", "8", "#ffffff");
 		so.addVariable("path", "<?php echo $www_site_url?>/public/flash/");
 		so.addVariable("settings_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amcolumn_settings.xml?102"));
-		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=overalldata&scoretype=<?php echo $type;?>&c_id=<?php echo $corp['c_id'];?>&group=product"));
+		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=overalldata&scoretype=<?php echo $type;?>&c_id=<?php echo $corp['c_id'];?>&sdate=<?php echo $sdate?>&edate=<?php echo $edate?>&selstores=<?php echo join(",",$selstores);?>&group=product"));
 		so.addVariable("preloader_color", "#ffffff");
 		so.write("flashcontent");
 		// ]]>
 	</script>
-        </p>
+<?php }?>
               <p>&nbsp;</p>
           <p>&nbsp;</p>
 
           <table width="100%" border="0" cellpadding="0" cellspacing="1" class="CinitData">
                 <tr>
-                  <td colspan="2" class="title">原始数据（2010.01.01 ~ 2010.01.31）</td>
+                  <td colspan="2" class="title">原始数据（<?php echo $sdate; ?> ~ <?php echo $edate; ?>）</td>
                 </tr>
+                 <tr>
+                  <td>时间</td>
+                  <td>任务</td>
+                </tr>
+                <?php
+                if(isset($assignments)){
+                	foreach ($assignments as $v){
+                		?>
                 <tr>
-                  <td width="25%">日期</td>
-                  <td width="75%">任务</td>
+                  <td width="25%"><?php echo $v['day']?></td>
+                  <td width="75%"><?php echo $v['a_title']?></td>
 
                 </tr>
-                <tr>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                </tr>
+                <?php
+                	}
+                }
+                ?>
+               
               </table>
           <p>&nbsp;</p></td>
         <td class="table2RightBorder"></td>
