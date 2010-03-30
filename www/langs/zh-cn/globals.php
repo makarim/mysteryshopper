@@ -372,6 +372,58 @@ $GLOBALS['gLang']['vote'] = '打分题';
 $GLOBALS['gLang']['fillblank'] = '问答题';
 $GLOBALS['gLang']['score'] = '时间题';
 
+$GLOBALS['gLang']['corporation_list'] = '企业列表';
+$GLOBALS['gLang']['corporation_total'] = '企业总数';
+$GLOBALS['gLang']['c_name'] = '帐号';
+$GLOBALS['gLang']['c_title'] = '企业名称';
+$GLOBALS['gLang']['c_contacter'] = '联系人';
+$GLOBALS['gLang']['c_phone'] = '联系电话';
+$GLOBALS['gLang']['c_store'] = '分店';
+$GLOBALS['gLang']['assignment'] = '任务';
+$GLOBALS['gLang']['c_intro'] = '介绍';
+$GLOBALS['gLang']['c_logo'] = '标识';
+$GLOBALS['gLang']['c_initial'] = '首字母';
+$GLOBALS['gLang']['add_corporation'] = '添加企业';
+$GLOBALS['gLang']['edit_corporation'] = '修改企业';
+$GLOBALS['gLang']['add_store'] = '添加分店';
+$GLOBALS['gLang']['cs_name'] = '分店名称';
+$GLOBALS['gLang']['cs_abbr'] = '字母缩写';
+$GLOBALS['gLang']['cs_address'] = '分店地址';
+$GLOBALS['gLang']['cs_corpration'] = '所属企业';
+$GLOBALS['gLang']['search_corporation'] = '查找企业';
+$GLOBALS['gLang']['c_id'] = 'ID';
+$GLOBALS['gLang']['store_list'] = '分店列表';
+$GLOBALS['gLang']['store_total'] = '分店总数';
+$GLOBALS['gLang']['assignment_list'] = '任务列表';
+$GLOBALS['gLang']['assignment_total'] = '任务总数';
+$GLOBALS['gLang']['a_title'] = '任务标题';
+$GLOBALS['gLang']['a_sdate'] = '开始时间';
+$GLOBALS['gLang']['a_edate'] = '结束时间';
+$GLOBALS['gLang']['finish'] = '进度';
+$GLOBALS['gLang']['assignment_title'] = '任务标题';
+$GLOBALS['gLang']['add_assignment'] = '添加任务';
+$GLOBALS['gLang']['edit_assignment'] = '修改任务';
+$GLOBALS['gLang']['report'] = '问卷';
+$GLOBALS['gLang']['a_hasphoto'] = '上传图片';
+$GLOBALS['gLang']['a_hasaudio'] = '上传音频';
+$GLOBALS['gLang']['a_desc'] = '任务说明';
+$GLOBALS['gLang']['a_quiz'] = '小测试';
+$GLOBALS['gLang']['gender'] = '性别';
+$GLOBALS['gLang']['mobile'] = '手机';
+$GLOBALS['gLang']['phone'] = '电话';
+$GLOBALS['gLang']['selected'] = '选择';
+$GLOBALS['gLang']['report_list'] = '问卷列表';
+$GLOBALS['gLang']['report_total'] = '问卷总数';
+$GLOBALS['gLang']['Service'] = '服务';
+$GLOBALS['gLang']['Product'] = '产品';
+$GLOBALS['gLang']['Environment'] = '环境';
+$GLOBALS['gLang']['Summary'] = '综合';
+$GLOBALS['gLang']['re_title'] = '问卷名称';
+$GLOBALS['gLang']['add_report'] = '创建问卷';
+$GLOBALS['gLang']['edit_report'] = '修改问卷';
+
+
+
 
 
 

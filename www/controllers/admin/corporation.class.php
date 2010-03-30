@@ -151,22 +151,16 @@ class corporation{
     }
     function op_updatecorporation(){
     	$msg = '';
-		if(!empty($_POST ['c_password']) && $_POST ['c_password']!=$_POST ['c_password2'] ){
-			show_message(lang('pwdnotsame'));
+		if (!empty($_POST ['c_password']) && strlen($_POST ['c_password']) <6) {
+			show_message(lang('pwdrule'));
 			goback();
-			//$msg = array('s'=> 400,'m'=>lang('pwdnotsame'),'d'=>'');				
+			//$msg = array('s'=> 400,'m'=>lang('pwdrule'),'d'=>'');				
 			//exit(json_output($msg));
-		}else{
-			if (!empty($_POST ['c_password']) && strlen($_POST ['c_password']) <6) {
-				show_message(lang('pwdrule'));
-				goback();
-				//$msg = array('s'=> 400,'m'=>lang('pwdrule'),'d'=>'');				
-				//exit(json_output($msg));
-			}else if(!empty($_POST ['c_password'])){
-				$updates['c_password'] = md5( $_POST ['c_password']);
-			}
-			
+		}else if(!empty($_POST ['c_password'])){
+			$updates['c_password'] = md5( $_POST ['c_password']);
 		}
+			
+		
 
 		$c_id = $_POST['c_id'];
 

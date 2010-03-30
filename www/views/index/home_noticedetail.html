@@ -1,0 +1,44 @@
+<?php include_once("header.html")?>
+
+<div id="wrap">  <br />
+<?php include_once("home_left.html")?>
+    <div class="admincontent">
+
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td><div class="table2TitleBg">
+            <div class="table2TitleBg2">
+              <div class="table2Title">公告</div>
+            </div>
+           </div></td>
+        </tr>
+
+        <tr>
+          <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="table2LeftBorder"></td>
+              <td>
+             <h3><?php echo $data['an_title']?> </h3>
+             <br />
+             <?php echo $data['an_date']?>
+             <br />
+             <br />
+              
+              <div class="pages"><?php echo $data['an_content']?></div>
+              </td>
+              <td class="table2RightBorder"></td>
+            </tr>
+            <tr>
+              <td class="table2BottomLeft"></td>
+              <td class="table2Bottom"></td>
+
+              <td class="table2BottomRight"></td>
+            </tr>
+          </table></td>
+        </tr>
+      </table><br />
+  </div>
+
+</div>
+
+<?php include_once("footer.html")?>

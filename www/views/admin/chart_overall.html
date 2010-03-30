@@ -48,14 +48,14 @@ function getStore(c_id){
 							<input type="hidden" name="view" value="overall">					
 							<table width="100%" border="0">
 								<tr>
-									<td>cs_id:</td>
+									<td><?php echo lang('c_title')?>:</td>
 									<td align="left"><select name="c_id" onchange="getStore(this.options[this.selectedIndex].value);">
 							<option value="">--</option>
 							<?php foreach ($corps as $v){?>
 							<option value="<?php echo $v['c_id'];?>"  <?php if($v['c_id']==$con['c_id']) echo 'selected';?> ><?php echo $v['c_initial']." ". $v['c_title'];?></option>
 							<?php } ?>
 							</select></td>
-									<td><?php echo lang('c_id')?>:</td>
+									<td><?php echo lang('cs_name')?>:</td>
 									<td align="left"><select id="store_container" name="cs_id">
 							<option value="">--</option>
 							</select></td>
@@ -69,7 +69,7 @@ function getStore(c_id){
 									<td rowspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
 								</tr>
 								<tr>
-									<td align="right"><?php echo lang('assignment_sdate')?>:</td>
+									<td align="right"><?php echo lang('a_sdate')?>:</td>
 			
 									<td colspan="2" align="left"><input type="text" name="a_sdate" onclick="showcalendar();" value="<?php echo $con['a_sdate']?>" class="textfield" /> <?php echo lang('to')?> <input type="text" name="a_edate" onclick="showcalendar();" value="<?php echo $con['a_edate']?>" class="textfield" /></td>
 									<td align="right"><?php echo lang('Type')?>:</td>

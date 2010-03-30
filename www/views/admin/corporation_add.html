@@ -40,7 +40,7 @@ function checkOnSubmit(formName) {
 				<ul class="tabmenu">
 					<li id="addcorporationbtn" class="tabcurrent"><a href="#"><?php echo lang('add_corporation')?></a></li>	
 				</ul>
-				<div id="addcorporationdiv" class="tabcontentcur" style="display:;">
+				<div id="addcorporationdiv" class="tabcontentcur" style="width:80%">
 					<form id="addcorporationform" name="addcorporationform" action="<?php echo $www_site_url?>/admin.php" method="post" enctype="multipart/form-data" onsubmit="return checkOnSubmit('addcorporationform');" >
 					<input type="hidden" name="action" value="corporation">
 					<input type="hidden" name="op" value="addcorporation">

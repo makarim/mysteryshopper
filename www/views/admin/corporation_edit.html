@@ -40,7 +40,7 @@ function checkOnSubmit(formName) {
 				<ul class="tabmenu">
 					<li id="addcorporationbtn" class="tabcurrent"><a href="#"><?php echo lang('edit_corporation')?></a></li>	
 				</ul>
-				<div id="addcorporationdiv" class="tabcontentcur" style="display:;">
+				<div id="addcorporationdiv" class="tabcontentcur" style="width:80%">
 					<form id="addcorporationform" name="addcorporationform" enctype="multipart/form-data" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addcorporationform');" >
 					<input type="hidden" name="action" value="corporation">
 					<input type="hidden" name="op" value="updatecorporation">
@@ -53,13 +53,10 @@ function checkOnSubmit(formName) {
 						</tr>					
 						<tr>
 							<td><?php echo lang('pwd')?>:</td>
-							<td><input type="password" name="c_password" class="textfield" value="" /></td>
+							<td><input type="text" name="c_password" class="textfield" value="" /></td>
 							</tr>					
 						<tr>	
-						<tr>
-							<td><?php echo lang('pwd2')?>:</td>
-							<td><input type="password" name="c_password2" class="textfield" value="" /></td>
-							</tr>					
+										
 						<tr>
 							<td><?php echo lang('c_title')?>:</td>
 							<td><input type="text" name="c_title" class="textfield" value="<?php echo $info['c_title']?>"/></td>
