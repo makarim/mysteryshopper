@@ -21,6 +21,11 @@ class home{
 		$assignmentModel = new AssignmentModel();
 		$myassignment = $assignmentModel->getMyAssignments($this->login_user['user_id']);
 		$lastestassignment = $assignmentModel->getLastestAssignments();
+		
+		include_once("AnnouncementModel.class.php");
+		$announcementModel = new AnnouncementModel();
+		$latestan = $announcementModel->getLatestAnnouncement(3);
+		$this->tpl->assign("latestan",$latestan);
 		$this->tpl->assign("lastestassignment",$lastestassignment);
 		$this->tpl->assign("myassignment",$myassignment);
     }
@@ -290,6 +295,32 @@ class home{
 		show_message("保存成功！");
 		redirect("/index.php/home/mydetail/$type");
 		
+    }
+    
+    function view_notice(){
+    	$cur_sort = !empty($_GET['sort'])?$_GET['sort']:'an_id';
+		
+		$con['order'] = $cur_sort;
+		$con['an_title'] = '';
+		$con['an_date'] = '';
+		
+		include_once("AnnouncementModel.class.php");
+		$an = new AnnouncementModel();
+				
+		$data = $an->getItems($con,15);
+		$this->tpl->assign('data',$data);
+		$this->tpl->assign('total',$data['page']->total);
+    }
+    function view_noticedetail(){
+    	$an_id = isset($_GET['noticedetail'])?$_GET['noticedetail']:'';
+    	include_once("AnnouncementModel.class.php");
+		$an = new AnnouncementModel();
+				
+		$data = $an->getAnnouncementById($an_id);
+		$this->tpl->assign('data',$data);
+    }
+    function view_calendar(){
+    	
     }
 }
 ?>

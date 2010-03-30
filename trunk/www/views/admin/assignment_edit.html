@@ -68,7 +68,7 @@ function getStore(c_id){
 	
 		<div class="hastabmenu">
 				<ul class="tabmenu">
-					<li id="addassignmentbtn" class="tabcurrent"><a href="#"><?php echo lang('add_assignment')?></a></li>	
+					<li id="addassignmentbtn" class="tabcurrent"><a href="#"><?php echo lang('edit_assignment')?></a></li>	
 				</ul>
 				<div id="addassignmentdiv" class="tabcontentcur" style="display:;">
 					<form id="addassignmentform" name="addassignmentform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addassignmentform');" >
@@ -101,7 +101,7 @@ function getStore(c_id){
 							</select></td>
 							</tr>	
 						<tr>
-							<td><?php echo lang('cs_store')?>:</td>
+							<td><?php echo lang('cs_name')?>:</td>
 							<td><select id="store_container" name="cs_id">
 							<option value="<?php echo $info['cs_id'];?>"><?php echo $info['cs_abbr']." ".$info['cs_name'];?></option>
 							</select></td>

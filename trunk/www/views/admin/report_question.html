@@ -98,7 +98,7 @@ function viewUser(report,report_id){
 									<td align="left"><select name="g_id">
 							<option value="">--</option>
 							<?php foreach ($quesgroup as $v){?>
-							<option value="<?php echo $v['g_id'];?>"><?php echo  $v['g_name'];?></option>
+							<option value="<?php echo $v['g_id'];?>"><?php echo  lang($v['g_name']);?></option>
 							<?php } ?>
 							</select></td>
 									
@@ -121,7 +121,7 @@ function viewUser(report,report_id){
 									<td align="left"><select name="q_group">
 							<option value="">--</option>
 							<?php foreach ($quesgroup as $v){?>
-							<option value="<?php echo $v['g_id'];?>"><?php echo  $v['g_name'];?></option>
+							<option value="<?php echo $v['g_id'];?>"><?php echo  lang($v['g_name']);?></option>
 							<?php } ?>
 							</select></td>
 									<td><?php echo lang('question_type')?>:</td>
@@ -167,7 +167,7 @@ function viewUser(report,report_id){
 							<td class="option"><input type="checkbox" name="delete[]" value="<?php echo $v['q_id']?>" class="checkbox" /></td>
 							<td><?php echo $v['q_id'];?></td>
 							<td><strong><?php echo $v['q_question'];?></strong></td>
-							<td><?php echo $v['g_name'];?></td>
+							<td><?php echo lang($v['g_name']);?></td>
 							<td><?php if($v['q_type']==1) echo lang('yesorno');
 							if($v['q_type']==2) echo lang('vote');
 							if($v['q_type']==3) echo lang('fillblank');

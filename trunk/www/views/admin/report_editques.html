@@ -39,7 +39,7 @@ function checkOnSubmit(formName) {
 				<ul class="tabmenu">
 					<li id="addquestionbtn" class="tabcurrent"><a href="#"><?php echo lang('edit_question')?></a></li>	
 				</ul>
-				<div id="addquestiondiv" class="tabcontentcur" style="display:;">
+				<div id="addquestiondiv" class="tabcontentcur" style="width:80%">
 					<form id="addquestionform" name="addquestionform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addquestionform');" >
 					<input type="hidden" name="action" value="report">
 					<input type="hidden" name="op" value="updateques">
@@ -56,7 +56,7 @@ function checkOnSubmit(formName) {
 							<td><select name="q_group">
 							<option value="">--</option>
 							<?php foreach ($quesgroup as $v){?>
-							<option value="<?php echo $v['g_id'];?>" <?php if( $v['g_id']==$question['q_group']) echo "selected"; ?>><?php echo  $v['g_name'];?></option>
+							<option value="<?php echo $v['g_id'];?>" <?php if( $v['g_id']==$question['q_group']) echo "selected"; ?>><?php echo  lang($v['g_name']);?></option>
 							<?php } ?>
 							</select> *</td>
 			
