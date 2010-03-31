@@ -3,6 +3,12 @@ class report{
 	function __construct(){
 		global $tpl;
 		$this->tpl = $tpl;
+		$this->loginuser = authenticate();	
+		if(isset($this->loginuser['user']) && $this->loginuser['user_id']==1){
+			
+		}else{
+			redirect("/index.php/passport/login");
+		}
 	}
 	function view_question(){
 		$cur_sort = !empty($_GET['sort'])?$_GET['sort']:'q_id';
@@ -164,10 +170,14 @@ class report{
 	function view_preview(){
 		$re_id = $_GET['re_id'];
 		$a_id =isset($_GET['a_id'])?$_GET['a_id']:0;
-		
+		include_once("AssignmentModel.class.php");
+    	$assignmentModel = new AssignmentModel();
+    	$assignmentinfo = $assignmentModel->getAssignmentById($a_id);
+    	
 		include_once("ReportModel.class.php");
 		$ReportModel = new ReportModel();
 		$report_questions  = $ReportModel->getQuestionsByReId($re_id);
+		
 		if($report_questions){
 			foreach ($report_questions as $k=>$v){
 				$v['answer'] = $ReportModel->getAnswerByAid($a_id,$v['rq_id'],$v['rq_type']);
@@ -177,12 +187,52 @@ class report{
 		}
 		$this->tpl->assign("a_id",$a_id);
 		$this->tpl->assign("report_questions",$report_questions);
+		$this->tpl->assign("assignmentinfo",$assignmentinfo);
 	}
+	
+	function op_audit(){
+		$a_id= $_POST['a_id'];
+		include_once("AssignmentModel.class.php");
+		$assignment = new AssignmentModel();
+		$item['a_auditor'] =$this->loginuser['user_nickname'];
+		$item['a_audit'] = $_POST['audit_result'];
+		if($item['a_audit']==1) $item['a_finish'] = 0.75;
+		if($item['a_audit']==2) $item['a_finish'] = 0.50;
+		$item['a_audit_time'] ="MY_F:NOW()";
+		$r = $assignment->updateAssignment($item,$a_id);
+		if($r){
+			show_message_goback(lang('success'));
+			//redirect($GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/assignment/defaults");
+		}else{
+			show_message_goback(lang('failed'));
+		
+		}
+	}	
+	function op_auditbill(){
+		$a_id= $_POST['a_id'];
+		include_once("AssignmentModel.class.php");
+		$assignment = new AssignmentModel();
+		$item['a_auditbill'] = $_POST['auditbill_result'];
+		$item['a_auditbill_time'] = "MY_F:NOW()";
+		$item['a_cost'] = $_POST['bill_cost'];
+		$item['a_auditbill_who'] =$this->loginuser['user_nickname'];
+		if($item['a_auditbill']==1) $item['a_finish'] = 1;
+		if($item['a_auditbill']==2) $item['a_finish'] = 0.75;
+		$r = $assignment->updateAssignment($item,$a_id);
+		if($r){
+			show_message_goback(lang('success'));
+			//redirect($GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/assignment/defaults");
+		}else{
+			show_message_goback(lang('failed'));
+		
+		}
+	}
+	
 	function op_saveanswer(){
 		include_once("ReportModel.class.php");
 		$reportModel = new ReportModel();
-		$user = authenticate();	
-		$u_id= $user['user_id'];
+		
+		$u_id= $this->loginuser['user_id'];
 		$a_id= $_POST['a_id'];
 		$r = true;
 		if($_POST){

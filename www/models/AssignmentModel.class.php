@@ -57,14 +57,17 @@ class AssignmentModel extends Model {
 		return $this->db->execute("delete from assignment where a_id='{$a_id}'");
 	}
 	function getAssignmentById($a_id){
-		return $this->db->getRow("select a.*,c.c_name,s.cs_name,c.c_logo from assignment a 
+		return $this->db->getRow("select a.*,c.c_name,s.cs_name,c.c_logo,u.user_nickname from assignment a 
 		left join corporation c on c.c_id=a.c_id
 		left join store s on s.cs_id=a.cs_id
-	
+		left join user u on a.user_id=u.user_id 
 		where a.a_id='$a_id'");
 	}
 	function getAssignmentApplyCountById($a_id){
 		return $this->db->getOne("select count(*) from assignment_rel where a_id='$a_id'");
+	}	
+	function isApplied($a_id,$u_id){
+		return $this->db->getOne("select count(*) from assignment_rel where a_id='$a_id' and user_id='$u_id'");
 	}
 	function apply($a_id,$u_id){
 		return $this->db->execute("insert into assignment_rel (a_id,user_id,selected) values ('$a_id','$u_id',0)");
@@ -77,8 +80,12 @@ class AssignmentModel extends Model {
 		where r.a_id='$a_id'");
 	}
 	function chooseApplicant($a_id,$user_id){
-		$this->db->execute("update assignment_rel set selected=0 where a_id='$a_id'");
-		return $this->db->execute("update assignment_rel set selected=1 where a_id='$a_id' and user_id='$user_id'");
+		$r = false;
+		$r *= $this->db->execute("update assignment_rel set selected=0 where a_id='$a_id'");
+		$r *= $this->db->execute("update assignment set user_id='$user_id' where a_id='$a_id'");
+		$r *= $this->db->execute("update assignment_rel set selected=1 where a_id='$a_id' and user_id='$user_id'");
+		if($r) return true;
+		else return false;
 	}
 	
     function updateAssignment($item,$a_id){
@@ -126,10 +133,13 @@ class AssignmentModel extends Model {
     	from assignment_rel r 
 		left join assignment a on a.a_id=r.a_id 
 		left join corporation c on c.c_id=a.c_id 
-		where r.user_id='$user_id'
+		where r.user_id='$user_id' and a.a_finish<1 
 		order by a.a_edate asc;
 		");
     }    
+    function getMyAssignmentCalendar($user_id){
+    	return $this->db->getAll("select a_id as id,a_title as title,a_sdate as start,a_edate as end from assignment where user_id='$user_id' and a_finish<1 order by a_sdate desc ");
+    }
     function getMyHistoryAssignments($user_id){
     	return $this->db->getAll("select r.user_id,r.selected,a.*  ,s.cs_name,c.c_title
     	from assignment_rel r 

@@ -65,13 +65,19 @@ function checkform(form){
 			textarea[i].style.border='';
 		}
 	}
-
-	return result;
+	if(!result) alert("对不起，请完成标红的题目！");
+	if(result && confirm("请注意：未执行任务而填写调查问卷，将会被工作人员审查出来！确认要提交吗？")){
+		return result;
+	}else{
+		return false;
+	}
+	
 
 }
 	
 	
 </script>
+
 	<?php if($is_view && $assignmentinfo['a_quiz_pass']>0){
 		if(isset($report_questions) && is_array($report_questions)){?>
 
@@ -79,35 +85,33 @@ function checkform(form){
 				<input type="hidden" name="action" value="home">
 				<input type="hidden" name="op" value="savereport">
 				<input type="hidden" name="a_id" value="<?php echo $a_id;?>">
-				<table cellspacing="10" >
-
-					<tr>
-						<th>ID</th>
-						<th><?php echo lang('question_title')?></th>
-						<th><?php echo lang('vote')?></th>
-					</tr>
+				
+				<table border="0" width="100%" cellspacing="10" class="clear">
+				
 					<?php
 							foreach ($report_questions as $k=>$v){?>	
 					<tr>
-							<td><?php echo $k+1;?></td>
-							<td><?php echo $v['rq_question']?></td>
+							<td bgcolor="#efefef" height="30"><?php echo $k+1;?>. <?php echo $v['rq_question']?> <span id="span_ch_<?php echo $v['rq_id'];?>"></span></td>
+					</tr>		
+					<tr>
 							<td>
-								<?php if($v['rq_type']==2){?><div id="voteimg_<?php echo $v['rq_id'];?>"></div>	<span id="span_ch_<?php echo $v['rq_id'];?>"></span>
+								<?php if($v['rq_type']==2){?><div id="voteimg_<?php echo $v['rq_id'];?>"></div>	
 								<input type="hidden" id="rq_ans_<?php echo $v['rq_id'];?>" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="<?php echo $v['answer'];?>">
 								<script>create_vote_img(<?php echo $v['rq_id'];?>,'<?php echo $v['answer'];?>');</script>	
+								
 								<?php }else if($v['rq_type']==1){ ?>		
-								<label><input type="radio" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="Y" <?php if($v['answer']=='Y')echo 'checked'; ?>>yes ;</label><label><input type="radio" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="N"  <?php if($v['answer']=='N')echo 'checked'; ?>>no;</label>
+								<label><input type="radio" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="Y" <?php if($v['answer']=='Y')echo 'checked'; ?>>Yes ;</label>&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="radio" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="N"  <?php if($v['answer']=='N')echo 'checked'; ?>>No;</label>
 								
 								<?php }else if($v['rq_type']==3){ ?>		
-								<textarea name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>"><?php echo $v['answer']; ?></textarea>
+								<textarea style="font-size:12px" rows="5" cols="110" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>"><?php echo $v['answer']; ?></textarea>
+								
 								<?php }else if($v['rq_type']==4){ ?>	
-								<input type="text" size="2" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="<?php echo $v['answer']; ?>">	
+								<input type="text" size="6" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="<?php echo $v['answer']; ?>">	分钟
 								<?php }?>		
 							</td>
+							
 					</tr>
-						<tr>
-						</tr>
-						
+					
 						<?php }
 						?>
 					<tr class="nobg">

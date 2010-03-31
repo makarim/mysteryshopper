@@ -19,6 +19,9 @@
 	<br />
     <br />
     	<?php if($is_view){
+    		if(!$assignmentinfo['a_quiz_pass']){
+    			
+    		
     		if(isset($quiz) && is_array($quiz)){?>
 
     <form action="<?php echo $www_site_url?>/index.php" method="post">
@@ -61,6 +64,9 @@
 				</table>
   </form>
   <?php 
+    		}
+    		}else{
+    			echo  "<p>&nbsp;</p><p>&nbsp;</p>你已经通过了测试！请继续完成任务。";
     		}
      }else{?>
    <p>&nbsp;</p>

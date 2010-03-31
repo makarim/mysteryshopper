@@ -53,11 +53,23 @@ function checkform(form){
 			textarea[i].style.border='';
 		}
 	}
-
+	if(!result) alert("对不起，请完成标红的题目！");
+	if(result && confirm("请注意：对神秘顾客的调查问卷进行修改，将会被记录下来！确认要提交吗？")){
+		return result;
+	}else{
+		return false;
+	}
 	return result;
 
 }
-	
+function submitFrm(r){
+	document.auditFrm.audit_result.value = r;
+	document.auditFrm.submit();
+}
+function submitBillFrm(r){
+	document.auditBillFrm.auditbill_result.value = r;
+	document.auditBillFrm.submit();
+}
 	
 </script>
 </head>
@@ -66,47 +78,66 @@ function checkform(form){
 
 
 	<div class="container">
-			
-		<h3><?php echo lang('report')?></h3>
+		
+		<h3> 本任务(<?php echo $assignmentinfo['a_sdate']?>～<?php echo $assignmentinfo['a_edate']?>)问卷由<?php echo $assignmentinfo['user_nickname']?> 在<?php echo $assignmentinfo['a_fdate']?>完成填写。</h3>
+		<br />
+		<h3> <?php if($assignmentinfo['a_audit']>0){ echo $assignmentinfo['a_auditor']?> 在<?php echo $assignmentinfo['a_audit_time']?>进行过问卷审查，结果：<?php if($assignmentinfo['a_audit']==1)echo"通过"; if($assignmentinfo['a_audit']==2) echo "不通过";?><?php }?></h3>
+		<h3> <?php if($assignmentinfo['a_auditbill']>0){ echo $assignmentinfo['a_auditbill_who']?> 在<?php echo $assignmentinfo['a_auditbill_time']?>进行过发票审查，结果：<?php if($assignmentinfo['a_auditbill']==1)echo"通过"; if($assignmentinfo['a_auditbill']==2) echo "不通过";?><?php }?></h3>
+		<br />
+		<form name="auditFrm" action="<?php echo $www_site_url?>/admin.php" method="post">
+			审查问卷：	<input type="hidden" name="action" value="report">
+				<input type="hidden" name="op" value="audit">
+				<input type="hidden" name="a_id" value="<?php echo $a_id;?>">
+				<input type="hidden" name="audit_result" value="">
+				<input type="button" value="通过" onclick="submitFrm(1)">
+				<input type="button" value="不通过" onclick="submitFrm(2)">
+		</form>
+		<br />
+		<form name="auditBillFrm" action="<?php echo $www_site_url?>/admin.php" method="post">
+			审查发票：	<input type="hidden" name="action" value="report">
+				<input type="hidden" name="op" value="auditbill">
+				<input type="hidden" name="a_id" value="<?php echo $a_id;?>">
+				<input type="hidden" name="auditbill_result" value="">
+				金额：<input type="text" name="bill_cost" value="<?php echo $assignmentinfo['a_cost']?>">
+				<input type="button" value="通过" onclick="submitBillFrm(1)">
+				<input type="button" value="不通过" onclick="submitBillFrm(2)">
+		</form>
 		
 		<div class="mainbox">
 				<form action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkform(this);">
 				<input type="hidden" name="action" value="report">
 				<input type="hidden" name="op" value="saveanswer">
 				<input type="hidden" name="a_id" value="<?php echo $a_id;?>">
-				<table class="datalist fixwidth" >
-
-					<tr>
-						<th>ID</th>
-						<th><?php echo lang('question_title')?></th>
-						<th><?php echo lang('vote')?></th>
-					</tr>
-						<?php if(isset($report_questions) && is_array($report_questions)){
+				<table border="0" width="100%" cellspacing="10" class="clear">
+				
+					<?php
 							foreach ($report_questions as $k=>$v){?>	
 					<tr>
-							<td><?php echo $k+1;?></td>
-							<td><?php echo $v['rq_question']?></td>
+							<td bgcolor="#efefef" height="30"><?php echo $k+1;?>. <?php echo $v['rq_question']?> <span id="span_ch_<?php echo $v['rq_id'];?>"></span></td>
+					</tr>		
+					<tr>
 							<td>
-								<?php if($v['rq_type']==2){?><div id="voteimg_<?php echo $v['rq_id'];?>"></div>	<span id="span_ch_<?php echo $v['rq_id'];?>"></span>
+								<?php if($v['rq_type']==2){?><div id="voteimg_<?php echo $v['rq_id'];?>"></div>	
 								<input type="hidden" id="rq_ans_<?php echo $v['rq_id'];?>" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="<?php echo $v['answer'];?>">
 								<script>create_vote_img(<?php echo $v['rq_id'];?>,'<?php echo $v['answer'];?>');</script>	
+								
 								<?php }else if($v['rq_type']==1){ ?>		
-								<label><input type="radio" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="Y" <?php if($v['answer']=='Y')echo 'checked'; ?>>yes ;</label><label><input type="radio" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="N"  <?php if($v['answer']=='N')echo 'checked'; ?>>no;</label>
+								<label><input type="radio" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="Y" <?php if($v['answer']=='Y')echo 'checked'; ?>>Yes ;</label>&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="radio" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="N"  <?php if($v['answer']=='N')echo 'checked'; ?>>No;</label>
 								
 								<?php }else if($v['rq_type']==3){ ?>		
-								<textarea name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>"><?php echo $v['answer']; ?></textarea>
+								<textarea style="font-size:12px" rows="5" cols="110" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>"><?php echo $v['answer']; ?></textarea>
+								
 								<?php }else if($v['rq_type']==4){ ?>	
-								<input type="text" size="2" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="<?php echo $v['answer']; ?>">	
+								<input type="text" size="6" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="<?php echo $v['answer']; ?>">	分钟
 								<?php }?>		
 							</td>
+							
 					</tr>
-						<tr>
-						</tr>
-						
+					
 						<?php }
-						}?>
+						?>
 					<tr class="nobg">
-						<td><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
+						<td><input type="submit" value="<?php echo lang('submit')?>" class="btn" /></td>
 					</tr>
 				</table>
 

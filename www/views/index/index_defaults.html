@@ -1,16 +1,16 @@
 
 <?php include_once("header.html")?>
-<script src="public/js/AC_RunActiveContent.js" type="text/javascript"></script>
+<script src="<?php echo $www_site_url?>/public/js/AC_RunActiveContent.js" type="text/javascript"></script>
 
 <div id="wrap">
 	<div class="bigpic">
     	<div>
 <script type="text/javascript">
-AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0','width','950','height','245','src','public/images/spotshoppers','quality','high','pluginspage','http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash','movie','public/images/spotshoppers' ); //end AC code
+AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0','width','950','height','245','src','public/images/spotshoppers','quality','high','pluginspage','http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash','movie','<?php echo $www_site_url?>/public/images/spotshoppers' ); //end AC code
 </script><noscript><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="950" height="245">
-        <param name="movie" value="public/images/spotshoppers.swf" />
+        <param name="movie" value="<?php echo $www_site_url?>/public/images/spotshoppers.swf" />
             <param name="quality" value="high" />
-            <embed src="public/images/spotshoppers.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="950" height="245"></embed>
+            <embed src="<?php echo $www_site_url?>/public/images/spotshoppers.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="950" height="245"></embed>
   	    </object>
     	</noscript>
         </div>
@@ -124,7 +124,7 @@ function changeTab(s){
                   <form name="loginform" id="loginform" method="post" onsubmit="return checkOnSubmit('loginform', rules);" >
                     <input type="hidden" name="action" value="passport" />
                     <input type="hidden" name="op" value="dologin" />
-                    <input type="hidden" name="forward" value="index.php" />
+                    <input type="hidden" name="forward" value="" />
                     <input type="hidden" name="s" id="s" value="" />
                     <div class="hangju">邮箱帐号：</div>
                     <div class="hangju">
