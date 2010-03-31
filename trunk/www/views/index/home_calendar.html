@@ -15,22 +15,23 @@
 		var d = date.getDate();
 		var m = date.getMonth();
 		var y = date.getFullYear();
-		
 		$('#calendar').fullCalendar({
-			editable: true,
-			events: [
-				
-				{
-					title: 'KFC 人民广场 A1',
-					start: new Date(y, m, 13),
-					end: new Date(y, m, 16)
-				},
-				{
-					title: 'KFC 人民广场 A2',
-					start: new Date(y, 03, 1),
-					end: new Date(y, 03, 6)
-				}
-			]
+			editable: false,
+			events: "/index.php/home/calendarjson",
+			
+			eventDrop: function(event, delta) {
+				alert(event.title + ' was moved ' + delta + ' days\n' +
+					'(should probably update your database)');
+			},
+			eventClick: function(event) {
+				// opens events in a popup window
+				window.open(event.url, 'assignment');
+				return false;
+			},
+			loading: function(bool) {
+				if (bool) $('#loading').show();
+				else $('#loading').hide();
+			}
 		});
 		
 	});
@@ -43,16 +44,21 @@
 		font-size: 14px;
 		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
 		}
+	#loading {
+		position: absolute;
+		top: 20px;
+		left: 200px;
+		}
 
 	#calendar {
 		width: 700px;
 		margin: 0 auto;
 	}
 
-
 </style>
 </head>
 <body>
+<div id='loading' style='display:none;'>loading...</div>
 <div id='calendar'></div>
 </body>
 </html>

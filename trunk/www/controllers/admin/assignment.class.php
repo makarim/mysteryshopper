@@ -210,7 +210,7 @@ class assignment{
     	include_once("AssignmentModel.class.php");
     	$assignment = new AssignmentModel();
     	$rs= $assignment->chooseApplicant($a_id,$s);
-    	show_message("ok");
+    	show_message(lang("success"));
     	goback( );
     }
 }

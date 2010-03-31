@@ -128,10 +128,11 @@ class home{
 			if($pass==$count){
 				$_SESSION['a_'.$a_id]['pass'] = 1;
 				$item['a_quiz_pass'] =1;
+				$item['a_finish'] =0.25;
 				$item['a_quiz_passtime'] ="MY_F:NOW()";
 				$this->assignmentModel->updateAssignment($item,$a_id);
 				show_message("恭喜您！测试通过！您可以执行任务了！");
-				redirect("/index.php/home");
+				redirect("/index.php/home",2);
 			}else{
 				$_SESSION['a_'.$a_id]['pass'] = 0;
 			}
@@ -179,6 +180,7 @@ class home{
 		
 		if($r){
 			$updates['a_fdate'] = "MY_F:NOW()";
+			$updates['a_finish'] =0.50;
 			$assignment->updateAssignment($updates,$a_id);
 			show_message_goback(lang('success'));
 		}else{
@@ -193,7 +195,12 @@ class home{
 		$this->get_assignment($a_id);
 		$count = $this->assignmentModel->getAssignmentApplyCountById($a_id);
 		if($count<3){
-			$rs=$this->assignmentModel->apply($a_id,$this->login_user['user_id']);
+			$r = $this->assignmentModel->isApplied($a_id,$this->login_user['user_id']);
+			if($r>0){
+				show_message_goback("你已经报过名了！");
+			}else{
+				$rs=$this->assignmentModel->apply($a_id,$this->login_user['user_id']);
+			}
 		}
 		if($rs){
 			show_message("恭喜您，报名成功！如果您从被选中，我们会联系您！");
@@ -321,6 +328,25 @@ class home{
     }
     function view_calendar(){
     	
+    }
+    function view_calendarjson(){
+    	include_once("AssignmentModel.class.php");
+		$assignmentModel = new AssignmentModel();
+		$calendar = $assignmentModel->getMyAssignmentCalendar($this->login_user['user_id']);
+		if ($calendar) {
+			foreach ($calendar as $k=>$v){
+				$v['url'] = BASE_URL."/index.php/home/assignment/a_id/".$v['id'];
+				$calendar[$k] = $v;
+			}
+			echo json_encode($calendar);
+		}else{
+			echo json_encode(array(
+				array(
+				)
+			));
+		}
+		die;
+		
     }
 }
 ?>
