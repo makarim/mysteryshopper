@@ -1,0 +1,63 @@
+<?php include_once("header.html")?>
+
+<div id="wrap">  <br />
+<?php include_once("home_left.html")?>
+    <div class="admincontent">
+<form action="/index.php" onsubmit="return confirm('该操作不可恢复，您确认要删除吗？');" method="post">
+				<input type="hidden" name="action" value="msgbox">
+				<input type="hidden" name="op" value="delete">
+
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td><div class="table2TitleBg">
+            <div class="table2TitleBg2">
+             <div style="float:right"><input name="button4" type="button" class="btn" id="button4" value="新 建" onclick="window.location='/index.php/msgbox/write'"/></div>
+              <div class="table2Title">收件箱</div>
+             
+            </div>
+           </div>
+            </td>
+          
+        </tr>
+
+        <tr>
+          <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="table2LeftBorder"></td>
+              <td><table width="100%" border="0" cellspacing="10" cellpadding="0">
+				<?php if(isset($data['records']) && is_array($data['records'])){
+							foreach ($data['records'] as $v){?>	
+                <tr>
+                  <td width="9%"><img src="/public/upload/faceimg/<?php echo $v['face_img']?>" width="50" height="50" /></td>
+                  <td width="58%"><a href="/index.php/msgbox/read/<?php echo $v['m_id']?>"><?php echo $v['m_title']?></a></td>
+
+                  <td width="19%"><?php echo $v['m_date']?></td>
+                  <td width="7%"><?php if($v['flag']==1){?><img src="/public/images/icon_new.gif" alt="新" width="30" height="15" /><?php }?></td>
+                  <td width="7%"><input type="checkbox" name="id[]" value="<?php echo $v['m_id']?>" /></td>
+                </tr>
+              <?php }
+						}?>
+					
+              </table></td>
+              <td class="table2RightBorder"></td>
+            </tr>
+            <tr>
+              <td class="table2BottomLeft"></td>
+              <td class="table2Bottom"></td>
+
+              <td class="table2BottomRight"></td>
+            </tr>
+          </table></td>
+        
+        </tr>
+      </table><br />
+      <div class="pages"> <input type="checkbox" onclick="checkall('id[]')" />
+      全选 <input name="button4" type="submit" class="btn" id="button4" value="删 除"/></div>
+      </form>
+     
+      <script src="<?php echo $www_site_url?>/public/js/common.js" type="text/javascript"></script>
+ 
+  </div>
+</div>
+
+<?php include_once("footer.html")?>

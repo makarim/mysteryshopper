@@ -201,6 +201,16 @@ class report{
 		$item['a_audit_time'] ="MY_F:NOW()";
 		$r = $assignment->updateAssignment($item,$a_id);
 		if($r){
+			$assignment = $assignment->getAssignmentById($a_id);
+			$field['m_pid'] = 0;
+			$field['m_title'] = "问卷审查通知！";
+			$field['m_content'] = '恭喜你，你提交的任务('. $assignment['a_title'].')问卷已经被审查通过。下一步，寄送发票!';
+			$field['user_id'] = $assignment['user_id'];
+			$field['user_nickname'] = $assignment['user_nickname'];
+			$field['m_date'] ="MY_F:NOW()";
+			include_once("MsgBoxModel.class.php");
+			$msgModel = new MsgBoxModel();
+			$rs = $msgModel->saveMsg($field,'msg_box');
 			show_message_goback(lang('success'));
 			//redirect($GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/assignment/defaults");
 		}else{
@@ -220,6 +230,16 @@ class report{
 		if($item['a_auditbill']==2) $item['a_finish'] = 0.75;
 		$r = $assignment->updateAssignment($item,$a_id);
 		if($r){
+			$assignment = $assignment->getAssignmentById($a_id);
+			$field['m_pid'] = 0;
+			$field['m_title'] = "发票审查通知！";
+			$field['m_content'] = '恭喜你，你提交的任务('. $assignment['a_title'].')发票(金额:'.$item['a_cost'].'元)已经被审查通过。我们将会很快打钱到你的账户上!';
+			$field['user_id'] = $assignment['user_id'];
+			$field['user_nickname'] = $assignment['user_nickname'];
+			$field['m_date'] ="MY_F:NOW()";
+			include_once("MsgBoxModel.class.php");
+			$msgModel = new MsgBoxModel();
+			$rs = $msgModel->saveMsg($field,'msg_box');
 			show_message_goback(lang('success'));
 			//redirect($GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/assignment/defaults");
 		}else{
