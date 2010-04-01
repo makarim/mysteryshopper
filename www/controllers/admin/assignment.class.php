@@ -210,6 +210,19 @@ class assignment{
     	include_once("AssignmentModel.class.php");
     	$assignment = new AssignmentModel();
     	$rs= $assignment->chooseApplicant($a_id,$s);
+    	
+    	if($rs){
+    		$assignment = $assignment->getAssignmentById($a_id);
+    		$field['m_pid'] = 0;
+			$field['m_title'] = "恭喜！任务来了！";
+			$field['m_content'] = '您申请的任务('. $assignment['a_title'].')已经指派给您。<a href="/index.php/home/assignment/a_id/'.$a_id.'">马上查看任务详情！</a>';
+			$field['user_id'] = $assignment['user_id'];
+			$field['user_nickname'] = $assignment['user_nickname'];
+			$field['m_date'] ="MY_F:NOW()";
+			include_once("MsgBoxModel.class.php");
+			$msgModel = new MsgBoxModel();
+			$rs = $msgModel->saveMsg($field,'msg_box');
+    	}
     	show_message(lang("success"));
     	goback( );
     }

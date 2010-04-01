@@ -23,7 +23,6 @@
 
 					<tr>
 						<th><input type="checkbox" name="chkall" id="chkall" onclick="checkall('delete[]')" class="checkbox" /><label for="chkall"><?php echo lang('delete')?></label></th>
-						<th>ID</th>
 						<th><?php echo lang('c_name')?></th>
 						<th><?php echo lang('c_title')?></th>
 						<th><?php echo lang('c_contacter')?></th>
@@ -37,7 +36,6 @@
 							foreach ($corporations['records'] as $v){?>	
 						<tr>
 							<td class="option"><input type="checkbox" name="delete[]" value="<?php echo $v['c_id']?>" class="checkbox" /></td>
-							<td><?php echo $v['c_id']?></td>
 							<td><strong><?php echo $v['c_name']?></strong></td>
 							<td><?php echo $v['c_title']?></td>
 							<td><?php echo $v['c_contacter']?></td>

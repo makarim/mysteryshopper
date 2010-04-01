@@ -74,13 +74,14 @@ class AssignmentModel extends Model {
 		
 	}
 	function getAssignmentApplicantById($a_id){
-		return $this->db->getAll("select r.user_id,r.selected,u.user_nickname as nickname,u.user_email as email,ext.realname,ext.mobile,ext.phone,u.user_sex as gender  from assignment_rel r 
+		return $this->db->getAll("select r.user_id,r.selected,u.user_nickname as nickname,u.user_email as email,ext.realname,ext.mobile,ext.phone,u.user_sex as gender  
+		from assignment_rel r 
 		left join user_ext ext on ext.user_id=r.user_id 
 		left join user u on u.user_id=r.user_id 
 		where r.a_id='$a_id'");
 	}
 	function chooseApplicant($a_id,$user_id){
-		$r = false;
+		$r = true;
 		$r *= $this->db->execute("update assignment_rel set selected=0 where a_id='$a_id'");
 		$r *= $this->db->execute("update assignment set user_id='$user_id' where a_id='$a_id'");
 		$r *= $this->db->execute("update assignment_rel set selected=1 where a_id='$a_id' and user_id='$user_id'");

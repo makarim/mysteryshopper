@@ -6,7 +6,7 @@
 		      		<div class="content">
 		            	<li <?php if($view=='defaults') echo 'class="selected"';?>><a href="/index.php/home">首页</a></li>
 		
-		            	<li <?php if($view=='msgbox') echo 'class="selected"';?>><a href="/index.php/home/msgbox">收件箱</a></li>
+		            	<li <?php if($view=='lists' || $view=='read'|| $view=='write') echo 'class="selected"';?>><a href="/index.php/msgbox/lists">收件箱</a></li>
 		            	<li <?php if($view=='history') echo 'class="selected"';?>><a href="/index.php/home/history">历史任务</a></li>
 		                <li <?php if($view=='allassignment') echo 'class="selected"';?>><a href="/index.php/home/allassignment">全部任务</a></li>
 		            	<li <?php if($view=='mydetail') echo 'class="selected"';?>><a href="/index.php/home/mydetail">我的资料</a></li>

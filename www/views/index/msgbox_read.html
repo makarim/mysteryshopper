@@ -1,0 +1,122 @@
+<?php include_once("header.html")?>
+
+<div id="wrap">  <br />
+<?php include_once("home_left.html")?>
+    <div class="admincontent">
+
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td><div class="table2TitleBg">
+            <div class="table2TitleBg2">
+              <div class="table2Title">阅读/回复</div>
+            </div>
+           </div></td>
+        </tr>
+
+        <tr>
+          <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="table2LeftBorder"></td>
+              <td><table width="100%" border="0" cellspacing="10" cellpadding="0">
+
+                <tr>
+                  <td width="9%"><img src="/public/upload/faceimg/<?php echo $msg['face_img']?>" width="50" height="50" /></td>
+                  <td width="69%"><strong><?php if($msg['user_id']==$user['user_id']) echo '我'; else echo $msg['user_nickname']?>：</strong><br />
+
+                    <?php echo nl2br($msg['m_content'])?></td>
+                  <td width="22%"><?php echo $msg['m_date']?></td>
+                </tr>
+               <?php if(isset($reply_data) && is_array($reply_data)){
+							foreach ($reply_data as $v){?>	
+							 <tr>
+                  <td><img src="/public/upload/faceimg/<?php echo $v['face_img']?>" width="50" height="50" /></td>
+                  <td><strong><?php echo $v['user_nickname']?>：</strong><br />
+                    <?php echo nl2br($v['m_content'])?></td>
+
+                  <td><?php echo $v['m_date']?></td>
+                  </tr>
+               
+              <?php }
+						}?> 
+               
+                  
+                  
+              </table>
+                <br />
+                <br />
+                <form name="msgform" id="msgform" method="post" onsubmit="return checkOnSubmit('msgform', rules);" >
+                    <input type="hidden" name="action" value="msgbox" />
+                    <input type="hidden" name="op" value="reply" />
+                    <input type="hidden" name="msg_id" value="<?php echo $msg['m_id']?>" />
+                <table width="100%" border="0" cellspacing="10" cellpadding="0">
+                  <tr>
+
+                    <td width="10%" valign="top" align="right">回复</td>
+                    <td width="90%">
+                      <textarea name="reply" id="reply" cols="70" rows="5" style="border:#666666 solid 1px;"></textarea>
+                      <div id="errorsDiv_reply"></div> </td>
+                  		  
+                       </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td>
+
+                      <input name="button" type="submit" class="btn" id="button" value="发  送" />
+                    </td>
+                  </tr>
+                </table>
+                
+                </form>
+                </td>
+              <td class="table2RightBorder"></td>
+            </tr>
+            <tr>
+              <td class="table2BottomLeft"></td>
+              <td class="table2Bottom"></td>
+
+              <td class="table2BottomRight"></td>
+            </tr>
+          </table></td>
+        </tr>
+      </table>
+    
+<SCRIPT>
+//only for test purposes
+function checkOnSubmit(formName, r) {
+  
+    if (yav.performCheck(formName, r, 'inline')) {
+    	
+		var url = "<?php echo $www_site_url?>/index.php";
+		var params = mini.form.serialize($(formName));
+		mini.ajax.post(url, function(r){
+			var r = eval('(' + r + ')');   
+			if(r.s==200){
+				window.location.replace(r.d);
+			}
+			if(r.s==400){
+				if(r.m=='reload') window.location.reload();
+				else $('msg').innerHTML = r.m;			
+			}
+		}, params);
+    	
+    	return false;
+    } 
+    return false;
+}
+var rules=new Array();
+
+rules[0]='reply|required|请输入内容';
+
+yav.addHelp('reply', '');
+window.onload = function()
+                {
+                	yav.init('msgform', rules);
+                          // Not coming here at all on first shot   
+                }
+
+
+</SCRIPT>   
+  </div>
+</div>
+
+<?php include_once("footer.html")?>

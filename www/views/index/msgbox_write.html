@@ -1,0 +1,102 @@
+<?php include_once("header.html")?>
+
+<div id="wrap">  <br />
+<?php include_once("home_left.html")?>
+    <div class="admincontent">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td><div class="table2TitleBg">
+            <div class="table2TitleBg2">
+              <div class="table2Title">新 建</div>
+            </div>
+           </div></td>
+        </tr>
+
+        <tr>
+          <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="table2LeftBorder"></td>
+              <td>
+             <form name="msgform" id="msgform" method="post" onsubmit="return checkOnSubmit('msgform', rules);" >
+                    <input type="hidden" name="action" value="msgbox" />
+                    <input type="hidden" name="op" value="post" />
+              <table width="100%" border="0" cellspacing="10" cellpadding="0">
+                  <tr>
+                    <td width="5%" valign="top">标题</td>
+                    <td width="95%"><input type="text" name="title" id="title" style="border:#666666 solid 1px;width:400px;height:25px;"><div id="errorsDiv_title"></div>
+
+                    </td>
+                  </tr>
+                  <tr>
+                    <td valign="top">内容</td>
+                    <td>
+                   
+                    <textarea name="content" id="content" cols="70" rows="10" style="border:#666666 solid 1px;"></textarea> 
+                     <div id="errorsDiv_content"></div>  
+                    </td>
+                 </tr>
+
+                  <tr>
+                    <td></td>
+                    <td>
+                     <input name="button" type="submit" class="btn" id="button" value="发  送" />
+                    </td>
+
+                  </tr>
+                </table>
+                 </form>
+                </td>
+              <td class="table2RightBorder"></td>
+            </tr>
+            <tr>
+              <td class="table2BottomLeft"></td>
+              <td class="table2Bottom"></td>
+              <td class="table2BottomRight"></td>
+            </tr>
+
+          </table></td>
+        </tr>
+      </table>
+
+<SCRIPT>
+//only for test purposes
+function checkOnSubmit(formName, r) {
+  
+    if (yav.performCheck(formName, r, 'inline')) {
+    	
+		var url = "<?php echo $www_site_url?>/index.php";
+		var params = mini.form.serialize($(formName));
+		mini.ajax.post(url, function(r){
+			var r = eval('(' + r + ')');   
+			if(r.s==200){
+				window.location.replace(r.d);
+			}
+			if(r.s==400){
+				if(r.m=='reload') window.location.reload();
+				else $('msg').innerHTML = r.m;			
+			}
+		}, params);
+    	
+    	return false;
+    } 
+    return false;
+}
+var rules=new Array();
+
+rules[0]='title|required|请输入标题';
+rules[1]='content|required|请输入内容';
+
+yav.addHelp('title', '');
+yav.addHelp('content', '');
+window.onload = function()
+                {
+                	yav.init('msgform', rules);
+                          // Not coming here at all on first shot   
+                }
+
+
+</SCRIPT>
+  </div>
+</div>
+
+<?php include_once("footer.html")?>
