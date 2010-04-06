@@ -93,6 +93,11 @@ class home{
     	$a_id = isset($_GET['a_id'])?intval($_GET['a_id']):'0';
     	$this->get_assignment($a_id);
 
+    }  
+    function view_demand(){
+    	$a_id = isset($_GET['a_id'])?intval($_GET['a_id']):'0';
+    	$this->get_assignment($a_id);
+
     }
 	function view_reportpreview(){
 		$a_id = isset($_GET['a_id'])?intval($_GET['a_id']):'0';
@@ -237,16 +242,19 @@ class home{
     	switch ($type){
     		
     		case "contact":
-    			
+    			$user['realname'] = !empty($_POST['realname'])?$_POST['realname']:'';
+    			$user['gender'] = !empty($_POST['gender'])?$_POST['gender']:'0';
 				$user['mobile'] = !empty($_POST['mobile'])?$_POST['mobile']:'';
 				$user['phone'] = !empty($_POST['phone'])?$_POST['phone']:'';
 				$user['qq'] = !empty($_POST['qq'])?$_POST['qq']:'';
 				$user['msn'] = !empty($_POST['msn'])?$_POST['msn']:'';
+				$user['province'] = !empty($_POST['province'])?$_POST['province']:'';
 				$user['city'] = !empty($_POST['city'])?$_POST['city']:'';
+				$user['area'] = !empty($_POST['area'])?$_POST['area']:'';
 				$user['address'] = !empty($_POST['address'])?addslashes($_POST['address']):'';
     		break;
     		case "extinfo":
-    			$user['realname'] = !empty($_POST['realname'])?$_POST['realname']:'';
+    			
     			$birthdateyear = !empty($_POST['birthdateyear'])?$_POST['birthdateyear']:'';
 				$birthdatemonth = !empty($_POST['birthdatemonth'])?$_POST['birthdatemonth']:'';
 				$birthdateday = !empty($_POST['birthdateday'])?$_POST['birthdateday']:'';
@@ -258,12 +266,13 @@ class home{
 				$user['education'] = !empty($_POST['education'])?$_POST['education']:'0';
 				$user['havecar'] = !empty($_POST['havecar'])?$_POST['havecar']:'0';
 				$user['speak_english'] = !empty($_POST['speakenglish'])?$_POST['speakenglish']:'0';
+				$user['hearabout'] = !empty($_POST['hearabout'])?$_POST['hearabout']:'0';
     		break;    		
     		case "other":
     			$user['eatingoutcount'] = !empty($_POST['eatingoutcount'])?intval($_POST['eatingoutcount']):'';
 				$user['avgbill'] = !empty($_POST['avgbill'])?$_POST['avgbill']:'';
 				$user['apparelspending'] = !empty($_POST['apparelspending'])?$_POST['apparelspending']:'';
-				$user['hearabout'] = !empty($_POST['hearabout'])?$_POST['hearabout']:'0';
+				
 				$user['newletters'] = !empty($_POST['newletters'])?$_POST['newletters']:'0';
 				$user['interests'] = !empty($_POST['interests'])?$_POST['interests']:'';
 		    		break;	

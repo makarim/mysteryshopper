@@ -6,10 +6,10 @@ class MsgBoxModel extends Model {
 	function getMsgLists($con,$pageCount){
 		$select =$this->db->select();
 		$select->from ( " msg_box m","m.*");
-		$select->leftjoin ( " user_ext u","u.user_id=m.user_id","u.face_img");
+		$select->leftjoin ( " user_ext u","u.user_id=m.to_user_id","u.face_img");
 		
-		if(!empty($con['user_id'])) $select->where ( " m.user_id='{$con['user_id']}'" );
-		if($con['m_pid']==0) $select->where ( " m.m_pid='0'" );
+		if(!empty($con['to_user_id'])) $select->where ( " m.to_user_id='{$con['to_user_id']}'" );
+		//if($con['m_pid']==0) $select->where ( " m.m_pid='0'" );
 		if(!empty($con['order'])) $select->order ( $con['order']." desc" );
 		
 		$list = array();
@@ -24,8 +24,8 @@ class MsgBoxModel extends Model {
 		//$list ['page']->setLinkScript("gotopage(@PAGE@)");
 		$label = array('first_page'=>lang('first_page'),'last_page'=>lang('last_page'),'next_page'=>lang('next_page'),'pre_page'=>lang('pre_page'),'next_group'=>lang('next_group'),'pre_group'=>lang('pre_group'));	
 		$list ['page']->setLabelName($label);
-		$list ['page_array'] ['pagebar'] = $list ['page']->wholeNumBar();
-		
+		$list ['pagebar'] = $list ['page']->wholeNumBar();
+		//print_sql();
 		$select->limit ( $list['page']->offset(), $pageCount );
 		$rs = $select->query();
 	
@@ -41,14 +41,14 @@ class MsgBoxModel extends Model {
 		return $this->db->insert($msg,$table);
 	}
 	function getMsgById($m_id){
-		return $this->db->getRow("select msg_box.*,user_ext.face_img from msg_box left join user_ext on user_ext.user_id=msg_box.user_id where m_id='$m_id'");
+		return $this->db->getRow("select msg_box.*,user_ext.face_img from msg_box left join user_ext on user_ext.user_id=msg_box.from_user_id where m_id='$m_id'");
 	}
 	
-	function updateMsg($msg_id){
-		return $this->db->execute("update msg_box set flag=0 where m_id='$msg_id'");
+	function updateMsg($con,$table,$msg_id){
+		return $this->db->update($con,$table,$msg_id);
 	}
-	function  getMsgReplies($m_id){
-		return $this->db->getAll("select m.*,u.face_img from msg_box m left join user_ext u on u.user_id=m.user_id where m.m_pid='$m_id' order by m_id desc");
+	function getMsgReplies($m_id){
+		return $this->db->getAll("select m.*,u.face_img from msg_box m left join user_ext u on u.user_id=m.from_user_id where m.m_pid='$m_id' order by m_id desc");
 	}
 	function deleteMsg($m_id){
 		$m_id = join(",",$m_id);

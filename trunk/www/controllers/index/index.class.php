@@ -31,6 +31,9 @@ class index{
 	}
 	function view_faq(){
 		
+	}	
+	function view_protocol(){
+		
 	}
     function view_setlang(){
     	$select = $_GET['setlang'];

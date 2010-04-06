@@ -19,9 +19,12 @@ function checkOnSubmit(formName) {
 		var r = eval('(' + r + ')');   
 
 		if(r.s==200){
-			$('msg').innerHTML = r.m;	
+			alert(r.m);
+			$('msg').innerHTML = r.m;
+			history.go(-1);
 		}
 		if(r.s==400){
+			alert(r.m);
 			$('msg').innerHTML = r.m;			
 		}
 	}, params);
@@ -99,13 +102,13 @@ function getStore(c_id){
 							<option value="<?php echo $v['c_id'];?>"  <?php if($v['c_id']==$info['c_id']) echo 'selected';?> ><?php echo $v['c_initial']." ". $v['c_title'];?></option>
 							<?php } ?>
 							</select></td>
-							</tr>	
+						</tr>	
 						<tr>
 							<td><?php echo lang('cs_name')?>:</td>
 							<td><select id="store_container" name="cs_id">
 							<option value="<?php echo $info['cs_id'];?>"><?php echo $info['cs_abbr']." ".$info['cs_name'];?></option>
 							</select></td>
-							</tr>	
+						</tr>	
 						<tr>
 							<td><?php echo lang('report')?>:</td>
 							<td><select id="report" name="re_id">
@@ -119,22 +122,26 @@ function getStore(c_id){
 						<tr>
 							<td><?php echo lang('a_hasphoto')?>:</td>
 							<td><input type="checkbox" name="a_hasphoto" value="1" <?php if($info['a_hasphoto']==1) echo 'checked';?>/></td>
-							</tr>				
-						<tr>						
+						</tr>				
+											
 						<tr>
 							<td><?php echo lang('a_hasaudio')?>:</td>
 							<td><input type="checkbox" name="a_hasaudio" value="1" <?php if($info['a_hasaudio']==1) echo 'checked';?>/></td>
-							</tr>				
+						</tr>				
 						<tr>
 							<td><?php echo lang('a_desc')?>:</td>
 							<td><textarea type="text" name="a_desc" rows="10" style="width:500px" class="textfield"/><?php echo $info['a_desc'];?></textarea></td>
-							</tr>					
-						<tr>		
+						</tr>							
+						<tr>
+							<td><?php echo lang('a_demand')?>:</td>
+							<td><textarea type="text" name="a_demand" rows="10" style="width:500px" class="textfield"/><?php echo $info['a_demand'];?></textarea></td>
+						</tr>					
+								
 						<tr>
 							<td><?php echo lang('a_quiz')?>:</td>
 							<td>格式说明,每一行输入一个测试题目。格式为 title:问题标题|A:答案|B:答案|C:答案|D:答案|answer:D 
 							<textarea type="text" name="a_quiz" rows="10" style="width:900px" class="textfield"/><?php echo $info['a_quiz'];?></textarea></td>
-							</tr>					
+						</tr>					
 						<tr>
 						
 							<td colspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button"/>  <input type="button" value="<?php echo lang('goback')?>" onclick="history.go(-1);" class="button" /></td>
