@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Xppass Administrator's Control Panel</title>
+<LINK href="<?php echo $www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+<script src="<?php echo $www_site_url?>/public/js/common.js" type="text/javascript"></script>
+
+</head>
+<body><div id="append"></div>
+<div id="msg" style="color:red;text-align:center"></div>
+
+
+	<div class="container">
+			
+		<h3><?php echo lang('msg_list')?> <?php echo lang('total')?>:<?php echo $total?></h3>
+		
+		<div class="mainbox">
+				<form action="<?php echo $www_site_url?>/admin.php" onsubmit="return confirm('<?php echo lang('domain_delete_comfirm')?>');" method="post">
+				<input type="hidden" name="action" value="msgbox">
+				<input type="hidden" name="op" value="delete">
+				<table class="datalist fixwidth" onmouseover="addMouseEvent(this);" >
+
+					<tr>
+						<th><input type="checkbox" name="chkall" id="chkall" onclick="checkall('id[]')" class="checkbox" /><label for="chkall"><?php echo lang('delete')?></label></th>
+						<th><?php echo lang('New')?></th>
+						<th><?php echo lang('ID')?></th>
+						<th><?php echo lang('m_title')?></th>
+						<th><?php echo lang('from_user')?></th>
+						<th><?php echo lang('m_date')?></th>
+						<th><?php echo lang('to_user')?></th>
+						<th><?php echo lang('read')?></th>
+					</tr>
+						<?php if(isset($data['records']) && is_array($data['records'])){
+							foreach ($data['records'] as $v){?>	
+						<tr>
+							<td class="option"><input type="checkbox" name="id[]" value="<?php echo $v['m_id']?>" class="checkbox" /></td>
+							<td><?php if($v['flag']==1){?><img src="/public/images/icon_new.gif" alt="新" width="30" height="15" /><?php }?></td>
+							<td><?php echo $v['m_id']?></td>
+							<td><?php echo $v['m_title']?></td>
+							<td><?php echo $v['from_user_nickname']?></td>
+							<td><?php echo $v['m_date']?></td>
+							<td><?php echo $v['to_user_nickname']?></td>
+							<td>
+							<a href="/admin.php/msgbox/read/<?php echo $v['m_id']?>"><?php echo lang('read')?></a>
+							
+							</td>
+						</tr>
+						<tr>
+						</tr>
+						
+						<?php }
+						}?>
+										<tr class="nobg">
+						<td><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
+						<td class="tdpage" colspan="7" align="right"><?php echo $data['pagebar']?></td>
+					</tr>
+				</table>
+
+				</form>
+					</div>
+
+	</div>
+
+</body>
+</html>

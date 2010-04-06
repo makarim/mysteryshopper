@@ -12,7 +12,7 @@ class assignment{
 		
 	}
     function view_defaults(){
-		$cur_sort = !empty($_GET['sort'])?$_GET['sort']:'a_order';
+		$cur_sort = !empty($_GET['sort'])?$_GET['sort']:'a_id';
 
 		$a_title = !empty($_GET['a_title'])?$_GET['a_title']:'';
 		$c_id = !empty($_GET['c_id'])?$_GET['c_id']:'';
@@ -81,6 +81,7 @@ class assignment{
 		$_POST ['cs_id'] = intval ( $_POST ['cs_id'] );
 		$_POST ['re_id'] = intval ( $_POST ['re_id'] );
 		$_POST ['a_desc'] = addslashes(strip_tags( $_POST ['a_desc'] ));
+		$_POST ['a_demand'] = addslashes(strip_tags( $_POST ['a_demand'] ));
 		$_POST ['a_quiz'] = addslashes(strip_tags( $_POST ['a_quiz'] ));
 		$_POST ['a_hasphoto'] = !isset ( $_POST ['a_hasphoto'] )?0:1;
 		$_POST ['a_hasaudio'] = !isset ( $_POST ['a_hasaudio'] )?0:1;
@@ -101,6 +102,7 @@ class assignment{
 		$assignment['cs_id'] =  $_POST ['cs_id'] ;
 		$assignment['re_id'] =  $_POST ['re_id'] ;
 		$assignment['a_desc'] =  $_POST ['a_desc'] ;
+		$assignment['a_demand'] =  $_POST ['a_demand'] ;
 		$assignment['a_quiz'] =  $_POST ['a_quiz'] ;
 		$assignment['a_hasphoto'] =  $_POST ['a_hasphoto'] ;
 		$assignment['a_hasaudio'] =  $_POST ['a_hasaudio'] ;
@@ -108,7 +110,7 @@ class assignment{
 		// 1. create db assignment
 		$row = $assignmentMod->createNewAssignment ( $assignment );
 		if ($row !== false) {
-			$msg = array('s'=> 200,'m'=>'ok','d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/assignment/defaults");				
+			$msg = array('s'=> 200,'m'=>lang('success'),'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/assignment/defaults");				
 			exit(json_output($msg));
 								
 		}
@@ -170,7 +172,8 @@ class assignment{
 		$assignment = new AssignmentModel();
 	
 		$updates['a_title'] = empty($_POST ['a_title'])?"":addslashes($_POST ['a_title']);
-		$updates['a_desc'] = empty($_POST ['a_desc'])?"":$_POST ['a_desc'];
+		$updates['a_desc'] = empty($_POST ['a_desc'])?"":strip_tags($_POST ['a_desc']);
+		$updates['a_demand'] = empty($_POST ['a_demand'])?"":strip_tags($_POST ['a_demand']);
 		$updates['a_quiz'] = empty($_POST ['a_quiz'])?"":strip_tags($_POST ['a_quiz']);
 		$updates['a_sdate'] = empty($_POST ['a_sdate'])?"":trim($_POST ['a_sdate']);
 		$updates['a_edate'] =empty($_POST ['a_edate'])?"":trim($_POST ['a_edate']);

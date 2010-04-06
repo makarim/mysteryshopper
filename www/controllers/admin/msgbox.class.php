@@ -18,18 +18,20 @@ class msgbox{
 	}
     function view_lists(){
 		$con['order'] = "m_id";
-		//$con['m_pid'] = "0";
-		//echo $this->login_user['user_id'];
+		$con['m_pid'] = "0";
 		$con['to_user_id'] = $this->login_user['user_id'];
 		$data = $this->msgModel->getMsgLists($con,10);
+	
 		$this->tpl->assign("data",$data);
+		$this->tpl->assign("total",$data['page']->total);
     }
 	function view_read(){
 		$m_id = isset($_GET['read'])?intval($_GET['read']):0;
+		//echo $m_id;die;
 		$msg = $this->msgModel->getMsgById($m_id);
 		if($msg){
 			$con['flag'] =0;
-			$this->msgModel->updateMsg($con,'msg_box'," m_id=".$m_id);
+			$this->msgModel->updateMsg($con,'msg_box',"m_id=".$m_id);
 		}
 		$reply_data = $this->msgModel->getMsgReplies($m_id);
 		$this->tpl->assign("reply_data",$reply_data);
@@ -51,7 +53,7 @@ class msgbox{
 		
 		$rs = $this->msgModel->saveMsg($field,'msg_box');
 		if($rs){
-			$msg = array('s'=> 200,'m'=>'ok','d'=>'/index.php/msgbox/lists');				
+			$msg = array('s'=> 200,'m'=>'ok','d'=>'/admin.php/msgbox/lists');				
 			exit(json_output($msg));
 		}else{
 			$msg = array('s'=> 400,'m'=>lang('failed'),'d'=>'');				
@@ -79,7 +81,7 @@ class msgbox{
 		
 		$rs = $this->msgModel->saveMsg($field,'msg_box');
 		if($rs){
-			$msg = array('s'=> 200,'m'=>'ok','d'=>'/index.php/msgbox/read/'.$msg_id);				
+			$msg = array('s'=> 200,'m'=>'ok','d'=>'/admin.php/msgbox/read/'.$msg_id);				
 			exit(json_output($msg));
 		}else{
 			$msg = array('s'=> 400,'m'=>lang('failed'),'d'=>'');				
@@ -87,9 +89,9 @@ class msgbox{
 			
 		}
 	}
-	
 	function op_delete(){
 		$t = true;
+		//print_r($_POST['id']);die;
     	if(isset($_POST['id']) && is_array($_POST['id'])){
     		$t =  $this->msgModel->deleteMsg($_POST['id']);
     		if($t) show_message_goback(lang('success'));

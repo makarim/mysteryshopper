@@ -1,5 +1,7 @@
 em, cite, th{ font-style:normal; font-weight:normal; }
-
+input:focus, textarea:focus{
+	background-color: lightyellow;
+}
 TEXTAREA.textfield, INPUT.textfield{border:1px solid #ccc; color:#777; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px; padding:.25em .2em; 
 width:200px; margin:0 0 .25em}
 INPUT.button{border:1px outset #ccc; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px; padding:.25em .2em; margin:0 0 .25em}
@@ -122,4 +124,13 @@ display: block;
 clear:both;
 padding:8px;
 text-align:center;
+}
+.report_textarea{
+	height:20px;
+	width:100%;
+	border:none;
+	overflow: auto;
+	border-bottom:1px solid #ccc;
+	font-size:14px;
+	padding: 5px;
 }

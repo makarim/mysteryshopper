@@ -26,7 +26,7 @@
 <TR><TD width="40%" class="text"><?php echo lang('user')?>:</TD>
 <TD width="60%"><div id="errorsDiv_user"></div><INPUT class="input" type="text" name="user" value="" onfocus="this.value='';"/>&nbsp;&nbsp;</TD></TR>
 <TR><TD class="text"><?php echo lang('pwd')?>:</TD>
-<TD><div id="errorsDiv_password"></div><INPUT class="input" type="password" name="password" />&nbsp;&nbsp;</TD></TR>
+<TD><div id="errorsDiv_password"></div><INPUT class="input" type="password" name="password" onclick="this.value='';"/>&nbsp;&nbsp;</TD></TR>
 <?php if($show_code>3){?>
 <TR><TD></TD><TD></TD></TR>
 <TR><TD><?php echo lang('validatecode')?>:</TD>

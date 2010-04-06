@@ -1,4 +1,5 @@
 <?php include_once("header.html")?>
+<script src="<?php echo $www_site_url?>/public/js/PCASClass.js"></script>
 
 <div id="wrap">  <br />
 <?php include_once("home_left.html")?>
@@ -24,10 +25,24 @@
 <TR>
 <TD width="40%" class="text"></TD>
 <TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
-</TR
-><TR>
+</TR><TR>
 
-
+<TR>
+<TD width="40%" class="text">*姓名:</TD>
+<TD width="60%"><div id="errorsDiv_realname"></div><INPUT class="input" type="text" name="realname" value="<?php echo $userinfo['realname']?>" id="realname" /></TD>
+</TR>
+<TR>
+<TD class="text">性别:</TD>
+<TD><div id="errorsDiv_gender"></div><select name="gender" id="gender"> 
+<option value="0">选择...</option> 
+			<option value="1" <?php if('1'==$userinfo['gender']) echo 'selected="selected"';?>>男</option> 
+			<option value="2" <?php if('2'==$userinfo['gender']) echo 'selected="selected"';?>>女</option> 
+			</select>
+ </TD>
+</TR>
+<TR><TD class="text">邮箱:</TD>
+<TD><div id="errorsDiv_email"></div><INPUT class="input" style="color:#ccc" type="text" name="email" value="<?php echo $userinfo['user_email']?>" id="email"  readonly/></TD>
+</TR>
 <TR><TD class="text">*手机:</TD>
 <TD><div id="errorsDiv_mobile"></div><INPUT class="input" type="text" name="mobile" value="<?php echo $userinfo['mobile']?>" id="mobile" /></TD>
 </TR>
@@ -46,7 +61,8 @@
 </TR>
 <TR>
 <TD class="text">居住城市:</TD>
-<TD><div id="errorsDiv_city"></div><INPUT class="input" type="text" name="city" id="city" value="<?php echo $userinfo['city']?>" /></TD>
+<TD><div id="errorsDiv_city"></div>
+<select name="province"></select><select name="city"></select><select name="area"></select></TD>
 </TR>
 
 <TR>
@@ -61,6 +77,10 @@
     </td>
   </tr>
 </table>
+<script>
+new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php echo $userinfo['city']?>","<?php echo $userinfo['area']?>");
+
+</script>
 <?php }?>
 <?php if($type=='extinfo'){ ?>
 
@@ -71,10 +91,7 @@
 </TR
 ><TR>
 
-<TR>
-<TD width="40%" class="text">*姓名:</TD>
-<TD width="60%"><div id="errorsDiv_realname"></div><INPUT class="input" type="text" name="realname" value="<?php echo $userinfo['realname']?>" id="realname" /></TD>
-</TR>
+
 <TR>
 <TD class="text">生日:</TD>
 <TD><div id="errorsDiv_birthdateyear"></div><select name="birthdateyear" id="birthdateyear"> 
@@ -159,7 +176,20 @@
  
 				</select></TD>
 </TR>
-  <tr>
+<TR>
+<TD class="text">您是如何知道我们的公司? </TD>
+<TD><div id="errorsDiv_hearabout"></div>
+<select name="hearabout" id="hearabout"> 
+<option value="0">选择...</option> 
+			<option value="1" <?php if(1==$userinfo['hearabout']) echo 'selected="selected"';?>>朋友介绍</option> 
+			<option value="2" <?php if(2==$userinfo['hearabout']) echo 'selected="selected"';?>>网上广告</option> 
+			<option value="3" <?php if(3==$userinfo['hearabout']) echo 'selected="selected"';?>>路牌广告</option> 
+			<option value="4" <?php if(4==$userinfo['hearabout']) echo 'selected="selected"';?>>报纸</option> 
+			<option value="5" <?php if(5==$userinfo['hearabout']) echo 'selected="selected"';?>>电视</option> 
+			<option value="6" <?php if(6==$userinfo['hearabout']) echo 'selected="selected"';?>>其他</option> 
+			</select></TD>
+</TR>
+<tr>
     <td class="text">&nbsp;</td>
 
     <td><br />
@@ -198,19 +228,7 @@ RMB</TD>
 <TD class="text">您的最大兴趣是什么？</TD>
 <TD><div id="errorsDiv_interests"></div><INPUT class="input" type="text" name="interests" id="interests" value="<?php echo $userinfo['interests']?>" /></TD>
 </TR>
-<TR>
-<TD class="text">您是如何知道我们的公司? </TD>
-<TD><div id="errorsDiv_hearabout"></div>
-<select name="hearabout" id="hearabout"> 
-<option value="0">选择...</option> 
-			<option value="1" <?php if(1==$userinfo['hearabout']) echo 'selected="selected"';?>>朋友介绍</option> 
-			<option value="2" <?php if(2==$userinfo['hearabout']) echo 'selected="selected"';?>>网上广告</option> 
-			<option value="3" <?php if(3==$userinfo['hearabout']) echo 'selected="selected"';?>>路牌广告</option> 
-			<option value="4" <?php if(4==$userinfo['hearabout']) echo 'selected="selected"';?>>报纸</option> 
-			<option value="5" <?php if(5==$userinfo['hearabout']) echo 'selected="selected"';?>>电视</option> 
-			<option value="6" <?php if(6==$userinfo['hearabout']) echo 'selected="selected"';?>>其他</option> 
-			</select></TD>
-</TR>
+
 <TR>
 <TD class="text">你是否需要平时收到我们SPOT的最新动态? </TD>
 <TD><div id="errorsDiv_newletters"></div><select name="newletters" id="newletters"> 
