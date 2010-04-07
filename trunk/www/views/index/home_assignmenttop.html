@@ -65,8 +65,8 @@
   <ul> 
     <li <?php  if(isset($_GET['view'])&&($_GET['view']=='assignment')) echo 'class="on"';?>><a href="/index.php/home/assignment/a_id/<?php echo $a_id;?>"><span >说明</span></a></li> 
     <li <?php if(isset($_GET['view'])&&($_GET['view']=='demand')) echo 'class="on"';?>><a href="/index.php/home/demand/a_id/<?php echo $a_id;?>"><span >要求</span></a></li> 
-    <li <?php if(isset($_GET['view'])&&($_GET['view']=='reportpreview')) echo 'class="on"';?>><a href="/index.php/home/reportpreview/a_id/<?php echo $a_id;?>"  ><span>问卷预览</span></a></li> 
-    <li <?php if(isset($_GET['view'])&&($_GET['view']=='quiz')) echo 'class="on"';?>><a href="/index.php/home/quiz/a_id/<?php echo $a_id;?>" ><span>小测试</span></a></li> 
+    <li <?php if(isset($_GET['view'])&&($_GET['view']=='reportpreview')) echo 'class="on"';?>><a href="/index.php/home/reportpreview/a_id/<?php echo $a_id;?>"  ><span>预览问卷</span></a></li> 
+    <li <?php if(isset($_GET['view'])&&($_GET['view']=='quiz')) echo 'class="on"';?>><a href="/index.php/home/quiz/a_id/<?php echo $a_id;?>" ><span>测试</span></a></li> 
     <li <?php if(isset($_GET['view'])&&($_GET['view']=='report')) echo 'class="on"';?>><a href="/index.php/home/report/a_id/<?php echo $a_id;?>" ><span>填写问卷</span></a></li> 
     <li <?php if(isset($_GET['view'])&&($_GET['view']=='upload')) echo 'class="on"';?>><a href="/index.php/home/upload/a_id/<?php echo $a_id;?>" ><span>上传附件</span></a></li> 
   </ul> 

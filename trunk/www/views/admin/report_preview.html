@@ -124,10 +124,16 @@ function submitBillFrm(r){
 								<?php }else if($v['rq_type']==1){ ?>		
 								<label><input type="radio" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="Y" <?php if($v['answer']=='Y')echo 'checked'; ?>>Yes ;</label>&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="radio" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="N"  <?php if($v['answer']=='N')echo 'checked'; ?>>No;</label>
 								
-								<?php }else if($v['rq_type']==3){ ?>		
-								<textarea class="report_textarea" rows="5" cols="110" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>"><?php echo $v['answer']; ?></textarea>
+								<?php }else if($v['rq_type']==3){ 
+									
+									if($v['rq_group']==4){
+									?>	
+									<textarea class="report_textarea" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>"><?php echo $v['answer']; ?></textarea>
 								
-								<?php }else if($v['rq_type']==4){ ?>	
+								<? }else{?>
+								<textarea style="width:100%;font-size:12px;height:60px;"  name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>"><?php echo $v['answer']; ?></textarea>
+								
+								<?php } }else if($v['rq_type']==4){ ?>	
 								<input type="text" size="6" name="rq_ans_<?php echo $v['rq_type']."_".$v['rq_id'];?>" value="<?php echo $v['answer']; ?>">	分钟
 								<?php }?>		
 							</td>

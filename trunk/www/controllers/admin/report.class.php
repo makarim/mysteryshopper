@@ -205,8 +205,10 @@ class report{
 			$field['m_pid'] = 0;
 			$field['m_title'] = "问卷审查通知！";
 			$field['m_content'] = '恭喜你，你提交的任务('. $assignment['a_title'].')问卷已经被审查通过。下一步，寄送发票!';
-			$field['user_id'] = $assignment['user_id'];
-			$field['user_nickname'] = $assignment['user_nickname'];
+			$field['to_user_id'] = $assignment['user_id'];
+			$field['to_user_nickname'] = $assignment['user_nickname'];
+			$field['from_user_id'] = $this->login_user['user_id'];
+			$field['from_user_nickname'] = $this->login_user['user_nickname'];
 			$field['m_date'] ="MY_F:NOW()";
 			include_once("MsgBoxModel.class.php");
 			$msgModel = new MsgBoxModel();
@@ -234,8 +236,10 @@ class report{
 			$field['m_pid'] = 0;
 			$field['m_title'] = "发票审查通知！";
 			$field['m_content'] = '恭喜你，你提交的任务('. $assignment['a_title'].')发票(金额:'.$item['a_cost'].'元)已经被审查通过。我们将会很快打钱到你的账户上!';
-			$field['user_id'] = $assignment['user_id'];
-			$field['user_nickname'] = $assignment['user_nickname'];
+			$field['to_user_id'] = $assignment['user_id'];
+			$field['to_user_nickname'] = $assignment['user_nickname'];
+			$field['from_user_id'] = $this->login_user['user_id'];
+			$field['from_user_nickname'] = $this->login_user['user_nickname'];
 			$field['m_date'] ="MY_F:NOW()";
 			include_once("MsgBoxModel.class.php");
 			$msgModel = new MsgBoxModel();
@@ -319,6 +323,19 @@ class report{
     		$reportModel = new ReportModel();
     		foreach ($_POST['delete'] as $u){
     			$t *= $reportModel->deleteReport($u);
+    		}
+    		if($t) show_message_goback(lang('success'));
+    	}
+    	show_message(lang('selectone'));
+    	goback();
+	}
+	function op_delques(){
+		$t = true;
+    	if(isset($_POST['delete']) && is_array($_POST['delete'])){
+    		include_once("ReportModel.class.php");
+    		$reportModel = new ReportModel();
+    		foreach ($_POST['delete'] as $u){
+    			$t *= $reportModel->deleteQuestion($u);
     		}
     		if($t) show_message_goback(lang('success'));
     	}
