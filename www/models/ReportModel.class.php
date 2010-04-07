@@ -177,6 +177,9 @@ class ReportModel extends Model {
 		}
 		return true;
 	}
+	function deleteQuestion($q_id){
+		return $this->db->execute("delete from question where q_id='$q_id'");
+	}
 	function getReportById($re_id){
 		return $this->db->getRow("select * from report where re_id='$re_id'");
 	}

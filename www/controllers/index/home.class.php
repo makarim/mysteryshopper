@@ -137,7 +137,7 @@ class home{
 				$item['a_quiz_passtime'] ="MY_F:NOW()";
 				$this->assignmentModel->updateAssignment($item,$a_id);
 				show_message("恭喜您！测试通过！您可以执行任务了！");
-				redirect("/index.php/home",2);
+				redirect("/index.php/home/report/a_id/$a_id",2);
 			}else{
 				$_SESSION['a_'.$a_id]['pass'] = 0;
 			}
@@ -221,7 +221,20 @@ class home{
 		$this->get_assignment($a_id);
 	}
 	function op_upload(){
-		
+		include_once("FileUpload.class.php");
+		$upload=new FileUpload(APP_DIR."/public/upload/",'jpg|png|gif|jpeg|mp3|wma');
+		$upload->renamed = true;
+		$re = $upload->upload();
+		if(!$re){
+			$t=$upload->get_succ_file();
+			if($t){
+				//$user['face_img'] = substr(strrchr($t[0],"/"),1);
+				$re = '上传成功';
+			}
+		}else{
+			$user['face_img'] = '';
+			
+		}
 		
 	}
     
@@ -239,6 +252,7 @@ class home{
     function op_updateuserdetail(){
     	include_once("PassportModel.class.php");
     	$type = isset($_POST['type'])?$_POST['type']:"";
+    	$msg ='';
     	switch ($type){
     		
     		case "contact":
@@ -285,12 +299,21 @@ class home{
     		break;    		
     		
     		case "upload":
-    		//	print_r($_FILES);die;
-    			if(isset($_FILES['face']) && $_FILES['face']['error']==0){
-    				$img_ext = substr($_FILES['face']['name'],strrpos($_FILES['face']['name'],'.'));
-    				$user['face_img'] = "face_".$this->login_user['user_id'].$img_ext;
-    				move_uploaded_file($_FILES['face']['tmp_name'],APP_DIR."/public/upload/faceimg/".$user['face_img']);
-    			}
+	    		$user['face_img'] = '';
+				include_once("FileUpload.class.php");
+    			$upload=new FileUpload(APP_DIR."/public/upload/faceimg/",'jpg|png|gif|jpeg');
+    			$upload->set_file_name("face_".$this->login_user['user_id']);
+				$re = $upload->upload();
+				if(!$re){
+					$t=$upload->get_succ_file();
+					if($t){
+						$user['face_img'] = substr(strrchr($t[0],"/"),1);
+						$re = '上传成功';
+					}
+				}else{
+					$user['face_img'] = '';
+					
+				}
     			
     		break;
     		
@@ -301,15 +324,15 @@ class home{
     	$passmod = new PassportModel();
 		$rs = $passmod->saveUserExt ( $user ,$this->login_user['user_id']);
 		if(!$rs){
-				$msg = array('s'=> 400,'m'=>'fail','d'=>"");				
+				$msg = array('s'=> 400,'m'=>$msg,'d'=>"");				
 				if($type!="upload") exit(json_output($msg));
 		}else{
 				$msg = array('s'=> 200,'m'=>'已经保存！','d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/index.php/home/mydetail/$type");				
 				if($type!="upload") exit(json_output($msg));
 				
 		}
-		show_message("保存成功！");
-		redirect("/index.php/home/mydetail/$type");
+		show_message($re);
+		redirect("/index.php/home/mydetail/$type",3);
 		
     }
     
