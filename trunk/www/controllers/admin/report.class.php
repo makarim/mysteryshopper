@@ -1,9 +1,11 @@
 <?php
 class report{
+	public $loginuser;
 	function __construct(){
 		global $tpl;
 		$this->tpl = $tpl;
 		$this->loginuser = authenticate();	
+		
 		if(isset($this->loginuser['user']) && $this->loginuser['user_id']==1){
 			
 		}else{
@@ -207,8 +209,8 @@ class report{
 			$field['m_content'] = '恭喜你，你提交的任务('. $assignment['a_title'].')问卷已经被审查通过。下一步，寄送发票!';
 			$field['to_user_id'] = $assignment['user_id'];
 			$field['to_user_nickname'] = $assignment['user_nickname'];
-			$field['from_user_id'] = $this->login_user['user_id'];
-			$field['from_user_nickname'] = $this->login_user['user_nickname'];
+			$field['from_user_id'] = $this->loginuser['user_id'];
+			$field['from_user_nickname'] = $this->loginuser['user_nickname'];
 			$field['m_date'] ="MY_F:NOW()";
 			include_once("MsgBoxModel.class.php");
 			$msgModel = new MsgBoxModel();
@@ -230,6 +232,7 @@ class report{
 		$item['a_auditbill_who'] =$this->loginuser['user_nickname'];
 		if($item['a_auditbill']==1) $item['a_finish'] = 1;
 		if($item['a_auditbill']==2) $item['a_finish'] = 0.75;
+		if(!empty($_POST['bill_date'])) $item['a_fdate'] = $_POST['bill_date'];
 		$r = $assignment->updateAssignment($item,$a_id);
 		if($r){
 			$assignment = $assignment->getAssignmentById($a_id);
@@ -238,8 +241,9 @@ class report{
 			$field['m_content'] = '恭喜你，你提交的任务('. $assignment['a_title'].')发票(金额:'.$item['a_cost'].'元)已经被审查通过。我们将会很快打钱到你的账户上!';
 			$field['to_user_id'] = $assignment['user_id'];
 			$field['to_user_nickname'] = $assignment['user_nickname'];
-			$field['from_user_id'] = $this->login_user['user_id'];
-			$field['from_user_nickname'] = $this->login_user['user_nickname'];
+			
+			$field['from_user_id'] = $this->loginuser['user_id'];
+			$field['from_user_nickname'] = $this->loginuser['user_nickname'];
 			$field['m_date'] ="MY_F:NOW()";
 			include_once("MsgBoxModel.class.php");
 			$msgModel = new MsgBoxModel();
