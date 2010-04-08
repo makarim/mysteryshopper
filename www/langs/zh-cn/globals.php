@@ -286,8 +286,8 @@ $GLOBALS['gLang']['domainexist'] = '此域名已经存在。';
 
 $GLOBALS['gLang']['first_page'] = '首页';
 $GLOBALS['gLang']['last_page'] = '尾页';
+$GLOBALS['gLang']['pre_page'] = '上一页';
 $GLOBALS['gLang']['next_page'] = '下一页';
-$GLOBALS['gLang']['next_page'] = '上一页';
 $GLOBALS['gLang']['next_group'] = '下一组';
 $GLOBALS['gLang']['pre_group'] = '上一组';
 $GLOBALS['gLang']['success'] = '操作成功';
