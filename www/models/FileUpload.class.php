@@ -105,13 +105,13 @@ class FileUpload{
 			$file_ext=strtolower($file_info['extension']);
 			
 			//设置默认服务端文件名
-			$this->upload_file[$i]['filename']=($this->save_filename)?$this->upload_path.$this->save_filename.'.'.$file_ext:$this->upload_path.$this->upload_file[$i]['name'];
+			$this->upload_file[$i]['filename']=(!empty($this->save_filename))?$this->upload_path.$this->save_filename.'.'.$file_ext:$this->upload_path.$this->upload_file[$i]['name'];
 			//检查文件类型
 			if(!in_array($file_ext,$this->allow_type))$this->upload_file[$i]['error']=5;
 			//需要重命名的
 			if($this->renamed){
 				list($usec, $sec) = explode(" ",microtime());
-				$this->upload_file[$i]['filename']=$sec.substr($usec,2).'.'.$file_ext;
+				$this->upload_file[$i]['filename']= $this->upload_path.$sec.substr($usec,2).'.'.$file_ext;
 				unset($usec);
 				unset($sec);
 			}
@@ -142,10 +142,12 @@ class FileUpload{
 	{
 		$upload_msg='';
 		if($this->upload_file_num==0) return '请选择上传文件';
+		
 		for($i=0;$i<$this->upload_file_num;$i++)
 		{
 			if(!empty($this->upload_file[$i]['name']))
 			{
+				
 				//检查文件
 				$this->check($i);
 				if (0==$this->upload_file[$i]['error'])

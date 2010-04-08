@@ -351,7 +351,9 @@ class passport {
 		$user['phone'] = !empty($_POST['phone'])?$_POST['phone']:'';
 		$user['qq'] = !empty($_POST['qq'])?$_POST['qq']:'';
 		$user['msn'] = !empty($_POST['msn'])?$_POST['msn']:'';
+		$user['province'] = !empty($_POST['province'])?$_POST['province']:'';
 		$user['city'] = !empty($_POST['city'])?$_POST['city']:'';
+		$user['area'] = !empty($_POST['area'])?$_POST['area']:'';
 		$user['address'] = !empty($_POST['address'])?addslashes($_POST['address']):'';
 		$birthdateyear = !empty($_POST['birthdateyear'])?$_POST['birthdateyear']:'';
 		$birthdatemonth = !empty($_POST['birthdatemonth'])?$_POST['birthdatemonth']:'';
