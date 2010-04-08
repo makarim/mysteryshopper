@@ -45,9 +45,12 @@ class Pager {
 	private $labelName = array('first_page'=>'首页','last_page'=>'尾页','next_page'=>'下一页','pre_page'=>'上一页','next_group'=>'下一组','pre_group'=>'上一组');
 	//连接脚本代码
 	private $linkScript;
+	//页数前后间隔数
+	private $PageStride;
 
-	public function __construct($total, $pageitem) {
-		
+	public function __construct($total, $pageitem=10) {
+	
+		$this->PageStride = 5;
 		$this->page = !isset ( $_GET ['page'] ) ? 1 : intval($_GET ['page']);
 		$this->total = $total;
 		$this->pageitem = $pageitem;
@@ -98,20 +101,20 @@ class Pager {
 		return $this->_returnLinkCode($this->labelName['last_page'],$this->totalPage,$this->linkStyle['totalPage'],$this->labelName['last_page']);
 	}
 
-	public function prePage() {
+	public function prePage($str='[<]') {
 		if ($this->page > 1) {
 			$prePage = $this->page - 1;
-			return $this->_returnLinkCode('[<]',$prePage,$this->linkStyle['prePage'],$this->labelName['pre_page']);
+			return $this->_returnLinkCode($str,$prePage,$this->linkStyle['prePage'],$this->labelName['pre_page']);
 		} else {
 			return '';
 		}
 	}
 
-	public function nextPage() {
+	public function nextPage($str='[>]') {
 
 		if ($this->page < $this->totalPage) {
 			$nextPage = $this->page + 1;
-			return $this->_returnLinkCode('[>]',$nextPage,$this->linkStyle['nextPage'],$this->labelName['next_page']);
+			return $this->_returnLinkCode($str,$nextPage,$this->linkStyle['nextPage'],$this->labelName['next_page']);
 
 		} else {
 			return '';
@@ -174,9 +177,48 @@ class Pager {
 		if ($this->linkScript) {
 			return "<a href='#' onclick='{$this->_getLinkScript($page)}' title='{$title}' class='{$class}'>{$char}</a>\n";
 		} else {
-			return "<a href='{$this->linkhead}page={$page}' title='{$title}'  class='{$class}'>{$char}</a>\n";
+			return "<span class='{$class}'><a href='{$this->linkhead}page={$page}' title='{$title}'>{$char}</a></span>\n";
 		}
 	
+	}
+	
+	
+	public function ocNumBar () {
+				
+		$linkbar = '';
+		if ($this->linkScript) {
+			$linkbar .= $this->page - $this->PageStride > 1 ? '<a href="##" onclick="'.$this->_getLinkScript(1).'" title="1">1</a></span>'."\n".'<span class="page">...</span>'."\n" : '';
+		}else {
+			$linkbar .= $this->page - $this->PageStride > 1 ? '<span class="'.$this->linkStyle['numBarMain'].'"><a href="'.$this->linkhead.'page=1" title="1">1</a></span>'."\n".'<span class="page">...</span>'."\n" : '';
+		}
+		for ($i = max(1, $this->page - $this->PageStride); $i < $this->page; $i++){
+			$linkbar .= $this->_returnLinkCode($i,$i,$this->linkStyle['numBarMain'],$i);
+		}
+		$linkbar .= $this->_returnLinkCode($i,$i,$this->linkStyle['numBar'],$i);
+		for ($i = $this->page+1; $i < min($this->totalPage, $this->page+$this->PageStride)+1; $i++){
+			$linkbar .= $this->_returnLinkCode($i,$i,$this->linkStyle['numBarMain'],$i);
+		}
+		if ($this->linkScript) {
+			if($i-1 == $this->totalPage || $i-1 == $this->totalPage-1) {
+				$linkbar .= $this->_returnLinkCode($this->totalPage,$this->totalPage,$this->linkStyle['numBarMain'],$this->totalPage);
+			}else if($i-1 == $this->totalPage){
+				$linkbar .= ($this->totalPage - $this->page > $this->PageStride) ?  '<span class="page">...</span>'."\n".'<a href="##" onclick="'.$this->_getLinkScript($this->totalPage).'" title="'.$this->totalPage.'">'.$this->totalPage.'</a></span>'."\n" : '';
+			}else {
+				$linkbar .= '';
+			}
+			//$linkbar .= ($this->totalPage - $this->page > $this->PageStride) ?  '<span class="page">...</span>'."\n".'<a href="##" onclick="'.$this->_getLinkScript($this->totalPage).'" title="'.$this->totalPage.'" class="'.$this->linkStyle['numBarMain'].'">'.$this->totalPage.'</a></span>'."\n" : '';
+		}else {
+			if($i-1 == $this->totalPage-1) {
+				$linkbar .= $this->_returnLinkCode($this->totalPage,$this->totalPage,$this->linkStyle['numBarMain'],$this->totalPage);
+			}else if($i-1 == $this->totalPage) {
+				$linkbar .= '';
+			}else {
+				$linkbar .= ($this->totalPage - $this->page > $this->PageStride) ?  '<span class="page">...</span>'."\n".'<span class="'.$this->linkStyle['numBarMain'].'"><a href="'.$this->linkhead.'page='.$this->totalPage.'" title="'.$this->totalPage.'">'.$this->totalPage.'</a></span>'."\n" : '';
+			}
+			//$linkbar .= ($this->totalPage - $this->page > $this->PageStride) ?  '<span class="page">...</span>'."\n".'<span class="'.$this->linkStyle['numBarMain'].'"><a href="'.$this->linkhead.'page='.$this->totalPage.'" title="'.$this->totalPage.'" class="'.$this->linkStyle['numBarMain'].'">'.$this->totalPage.'</a></span>'."\n" : '';
+		}
+		return $linkbar;
+		
 	}
 
 }
