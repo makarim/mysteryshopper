@@ -70,6 +70,7 @@
         <script type="text/javascript">
 		// <![CDATA[		
 		var so = new SWFObject("<?php echo $www_site_url?>/public/flash/amline.swf", "amline", "100%", "400px", "8", "#ffffff");
+		so.addParam("wmode", "transparent");
 		so.addVariable("path", "<?php echo $www_site_url?>/public/flash/");
 		so.addVariable("settings_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amline_settings.xml?102"));
 		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=storedata&scoretype=<?php echo $type;?>&cs_id=<?php echo $cs_id;?>&sdate=<?php echo $sdate;?>&edate=<?php echo $edate;?>"));
