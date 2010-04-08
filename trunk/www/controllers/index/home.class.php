@@ -219,21 +219,33 @@ class home{
 	function view_upload(){
 		$a_id = isset($_GET['a_id'])?intval($_GET['a_id']):'0';
 		$this->get_assignment($a_id);
+		$attachments = $this->assignmentModel->getUploadedAttachment($a_id);
+		$this->tpl->assign("attachments",$attachments);
 	}
 	function op_upload(){
 		include_once("FileUpload.class.php");
+		$a_id = isset($_POST['a_id'])?$_POST['a_id']:0;
 		$upload=new FileUpload(APP_DIR."/public/upload/",'jpg|png|gif|jpeg|mp3|wma');
 		$upload->renamed = true;
 		$re = $upload->upload();
 		if(!$re){
-			$t=$upload->get_succ_file();
-			if($t){
-				//$user['face_img'] = substr(strrchr($t[0],"/"),1);
-				$re = '上传成功';
+			$fname_arr=$upload->get_succ_file();
+			
+			
+			if($fname_arr){
+				include_once("AssignmentModel.class.php");
+    			$this->assignmentModel = new AssignmentModel();
+    			foreach ($fname_arr as $t){
+	    			$fields['f_name'] = substr(strrchr($t,'/'),1);
+	    			$fields['a_id'] = $a_id;
+	    			$fields['f_created'] = 'MY_F:NOW()';
+					$this->assignmentModel->saveAttachment($fields,"assignment_attachment");
+    			}
+				show_message_goback('上传成功!');
+				
 			}
 		}else{
-			$user['face_img'] = '';
-			
+			show_message_goback('上传失败!');		
 		}
 		
 	}
@@ -252,6 +264,7 @@ class home{
     function op_updateuserdetail(){
     	include_once("PassportModel.class.php");
     	$type = isset($_POST['type'])?$_POST['type']:"";
+    	$user = array();
     	$msg ='';
     	switch ($type){
     		
@@ -299,7 +312,7 @@ class home{
     		break;    		
     		
     		case "upload":
-	    		$user['face_img'] = '';
+	    		
 				include_once("FileUpload.class.php");
     			$upload=new FileUpload(APP_DIR."/public/upload/faceimg/",'jpg|png|gif|jpeg');
     			$upload->set_file_name("face_".$this->login_user['user_id']);
@@ -311,7 +324,7 @@ class home{
 						$re = '上传成功';
 					}
 				}else{
-					$user['face_img'] = '';
+					//$user['face_img'] = '';
 					
 				}
     			
@@ -320,9 +333,9 @@ class home{
     		default:
     			
     	}
-    	
+    	$rs = false;
     	$passmod = new PassportModel();
-		$rs = $passmod->saveUserExt ( $user ,$this->login_user['user_id']);
+		if($user) $rs = $passmod->saveUserExt ( $user ,$this->login_user['user_id']);
 		if(!$rs){
 				$msg = array('s'=> 400,'m'=>$msg,'d'=>"");				
 				if($type!="upload") exit(json_output($msg));
@@ -362,12 +375,14 @@ class home{
     	
     }
     function view_calendarjson(){
+    	$color = array("#c63","#6c3","#36c","#63c","#3c6","#c36");
     	include_once("AssignmentModel.class.php");
 		$assignmentModel = new AssignmentModel();
 		$calendar = $assignmentModel->getMyAssignmentCalendar($this->login_user['user_id']);
 		if ($calendar) {
 			foreach ($calendar as $k=>$v){
 				$v['url'] = BASE_URL."/index.php/home/assignment/a_id/".$v['id'];
+				$v['bgcolor'] = isset($color[$k])?$color[$k]:"#ccc";
 				$calendar[$k] = $v;
 			}
 			echo json_encode($calendar);

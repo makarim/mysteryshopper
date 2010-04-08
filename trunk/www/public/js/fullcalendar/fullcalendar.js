@@ -1440,8 +1440,8 @@ function _renderDaySegs(segs, rowCnt, view, minLeft, maxLeft, getRow, dayContent
 			right = seg.isEnd ? dayContentRight(seg.end.getDay()-1) : maxLeft;
 		}
 		html +=
-			"<div class='" + className + event.className.join(' ') + "' style='position:absolute;z-index:8;left:"+left+"px'>" +
-				"<a" + (event.url ? " href='" + htmlEscape(event.url) + "'" : '') + ">" +
+			"<div class='" + className + event.className.join(' ') + "' style='border-color:"+event.bgcolor+";position:absolute;z-index:8;left:"+left+"px'>" +
+				"<a style='border-color:"+event.bgcolor+";background-color:"+event.bgcolor+";' " + (event.url ? " href='" + htmlEscape(event.url) + "'" : '') + ">" +
 					(!event.allDay && seg.isStart ?
 						"<span class='fc-event-time'>" +
 							htmlEscape(formatDates(event.start, event.end, view.option('timeFormat'), options)) +

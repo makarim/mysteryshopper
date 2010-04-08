@@ -12,16 +12,30 @@
 	    <FORM name="uplaodform" id="uplaodform" method="POST" enctype="multipart/form-data" >
 <input type="hidden" name="action" value="home">
 <input type="hidden" name="op" value="upload">
+<input type="hidden" name="a_id" value="<?php echo $assignmentinfo['a_id'];?>">
  <TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
 <TR>
-<TD width="40%" class="text"></TD>
-<TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
+<TD width="20%" class="text"></TD>
+<TD width="80%"><div id="msg" style="margin:0 auto;"></div></TD>
 </TR>
+<?php 
+if(is_array($attachments)){
+	foreach ($attachments as $k=>$a){
+	?>
+
+<TR>
+<TD class="text"><?php echo $k+1;?>.</TD>
+<TD ><?php echo '<a href="/public/upload/'.$a['f_name'].'">'.$a['f_name'].'</a> 上传于'.$a['f_created'];?></TD>
+</TR>
+<?php
+	}
+}
+?>
 <TR>
 <TD class="text">音频或者图片</TD>
 <TD><div id="errorsDiv_face"></div>
   
-<INPUT type="file" name="mfile" id="mfile" class="input" />
+<INPUT type="file" name="mfile" id="mfile" class="input" /> (支持文件格式：jpg|png|gif|jpeg|mp3|wma ,小于2MB)
 </TD>
 </TR>
 

@@ -78,7 +78,7 @@ class AssignmentModel extends Model {
 		
 	}
 	function getAssignmentApplicantById($a_id){
-		return $this->db->getAll("select r.user_id,r.selected,u.user_nickname as nickname,u.user_email as email,ext.realname,ext.mobile,ext.phone,u.user_sex as gender  
+		return $this->db->getAll("select r.user_id,r.selected,u.user_nickname as nickname,u.user_email as email,ext.realname,ext.mobile,ext.phone,ext.gender as gender  
 		from assignment_rel r 
 		left join user_ext ext on ext.user_id=r.user_id 
 		left join user u on u.user_id=r.user_id 
@@ -266,6 +266,13 @@ class AssignmentModel extends Model {
 			return round($average,2);
 		}
 		return 0;
+	}
+	
+	function saveAttachment($field,$table){
+		return $this->db->insert($field,$table);
+	}
+	function getUploadedAttachment($a_id){
+		return $this->db->getAll("select * from assignment_attachment where a_id='{$a_id}'");
 	}
 }
 ?>
