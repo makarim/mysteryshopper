@@ -20,11 +20,11 @@ function create_vote_img(id,value){
 			if(is_ie){
 			 // vote_img.setAttribute("onmouseover",'put_fs(this)');	
 			  //vote_img.setAttribute("onmouseout",'out_fs(this)');
-			  vote_img.setAttribute("onclick",'is_fs(this)');	
+			  vote_img.setAttribute("onclick",function(){is_fs(this);});	
 			}else{	
 			//  vote_img.setAttribute("onmouseover",'put_fs(this)');	
 			//  vote_img.setAttribute("onmouseout",'out_fs(this)');
-			  vote_img.setAttribute("onclick",'is_fs(this)');	
+			  vote_img.setAttribute("onclick",'is_fs(this);');	
 			}  
 	    
 	}			
