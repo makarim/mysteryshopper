@@ -206,12 +206,13 @@ class home{
 		include_once("CorporationModel.class.php");	
 		$corpModel = new CorporationModel();
 		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
-		
+		$def_store_id = isset($stores[0]['cs_id'])?$stores[0]['cs_id']:0;
+		$def_store_name = isset($stores[0]['cs_name'])?$stores[0]['cs_name']:'';
 		$type = !empty($_GET['stores'])?$_GET['stores']:"summary";
 		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
 		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
-		$cs_id = !empty($_GET['cs_id'])?$_GET['cs_id']:$stores[0]['cs_id'];
-		$selstore = isset($_GET['selstore'])?$_GET['selstore']:$stores[0]['cs_name'];
+		$cs_id = !empty($_GET['cs_id'])?$_GET['cs_id']:$def_store_id;
+		$selstore = isset($_GET['selstore'])?$_GET['selstore']:$def_store_name;
 		
 		$con['sdate'] = $sdate;
 		$con['edate'] = $edate;
@@ -233,11 +234,14 @@ class home{
 		include_once("CorporationModel.class.php");	
 		$corpModel = new CorporationModel();
 		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
+		
+		$def_store_id = isset($stores[0]['cs_id'])?$stores[0]['cs_id']:0;
+		$def_store_name = isset($stores[0]['cs_name'])?$stores[0]['cs_name']:'';
 		$type = !empty($_GET['stores'])?$_GET['stores']:"summary";
 		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
 		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
-		$cs_id = !empty($_GET['cs_id'])?$_GET['cs_id']:$stores[0]['cs_id'];
-		$selstore = isset($_GET['selstore'])?$_GET['selstore']:$stores[0]['cs_name'];
+		$cs_id = !empty($_GET['cs_id'])?$_GET['cs_id']:$def_store_id;
+		$selstore = isset($_GET['selstore'])?$_GET['selstore']:$def_store_name;
 		
 		
 		$con['sdate'] = $sdate;
