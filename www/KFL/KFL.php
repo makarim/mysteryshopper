@@ -31,7 +31,9 @@ if(PHP_OS=='Linux'){
 }elseif(PHP_OS=='WINNT'){
 	ini_set('include_path', KFL_DIR. "/;". APP_DIR_M."/;". ini_get('include_path')); // FOR WINDOWS
 }
+require_once("Common/utils.php");
 require_once("Common/common.php");
+
 
 /**
 * @abstract KFL: Kindly Fast Light, a light fast MVC framework, kindly to be used.
@@ -76,7 +78,6 @@ class KFL
 	public function KFL()
 	{
 		$this->useCache();
-		include_once("Common/utils.php");
 	}
 
 	/**
@@ -227,6 +228,7 @@ class KFL
 				$db->execute("replace into eventlog (url,visit,exec_time,memuse) values ('".addslashes(WEB_URL)."','$datetime','$exec_time','$memused')");
 			}
 		}
+		
 		//exit("<!-- execute time :".$exec_time."-->");
 	}
 
@@ -352,11 +354,13 @@ class Model
 				$dsn = $options['type'].":host=".$options['host'].";port=".$options['port'].";dbname=".$options['dbname'];
 				$user = $options['user'];
 				$passwd = $options['passwd'];
-			}
-			if('sqlite'== $options['type']||'sqlite2'== $options['type']) {
+			}elseif('sqlite'== $options['type']||'sqlite2'== $options['type']) {
 				$dsn = $options['type'].":".$options['path']."/".$options['dbname'];
 				$user = '';
 				$passwd = '';
+			}else{
+				trigger_error("please use mysql or sqlite db engine!".$e->getMessage(),E_USER_ERROR);
+				die();
 			}
 			try{
 				$GLOBALS[$db_resource] = new Database($dsn,$user,$passwd,array(PDO::ATTR_PERSISTENT => false));
@@ -369,7 +373,9 @@ class Model
 				die();
 			}
 			if('mysql'== $options['type']) $GLOBALS[$db_resource] -> query("SET NAMES ".$options['charset']);
-			//echo 1;
+			//if('mysql'== $options['type']) $GLOBALS[$db_resource] -> query("set character_set_database latin1");
+            //if('mysql'== $options['type']) $GLOBALS[$db_resource] -> query("set character_set_server latin1");
+                        
 	    }
 
     	return $GLOBALS[$db_resource];
@@ -385,7 +391,6 @@ class View{
 		self::$view = $tpl;
 		self::_assignGlobalSetting();
 		// view
-		
 		if(strpos($gCurUseMeth,'view')!== false) {
 			self::$view->display(APP_TPLSTYLE.'/'.$gTplFile);
 		}
