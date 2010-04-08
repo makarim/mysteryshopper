@@ -63,7 +63,8 @@
             <td colspan="2" class="title"><?php echo $a['a_title']?> （ <?php echo $a['a_fdate']?> ）</td>
             <td width="7%" class="title">得分</td>
           </tr>
-          <?php foreach ($a['comments'] as $k=>$v) {
+          <?php if(isset($a['comments']) && is_array($a['comments'])){
+			foreach ($a['comments'] as $k=>$v) {
           	
           	?>
           <tr>
@@ -74,6 +75,7 @@
           </tr>
            <?php 
         	}
+			}
         ?> 
         </table>
          <?php 

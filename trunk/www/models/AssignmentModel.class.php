@@ -164,7 +164,7 @@ class AssignmentModel extends Model {
     	$add =$addsql = '';
     	if(!empty($con['sdate'])) $add .= " and a_fdate >='".$con['sdate']."'";
     	if(!empty($con['edate'])) $add .= " and a_fdate < '".$con['edate']."'";
-    	if(is_array($cs_id)) $addsql = "cs_id in (".join(",",$cs_id).")";
+    	if(is_array($cs_id) && count($cs_id)>0) $addsql = "cs_id in (".join(",",$cs_id).")";
     	else  $addsql = "cs_id ='".$cs_id."'";
     	//echo "select a_id,re_id,DATE_FORMAT(a_fdate, '%m-%d') as day,a_title from assignment where cs_id='$cs_id' $add order by day";
     	return $this->db->getAll("select a_id,cs_id,re_id,DATE_FORMAT(a_fdate, '%m-%d') as day,a_title from assignment where $addsql $add order by day");

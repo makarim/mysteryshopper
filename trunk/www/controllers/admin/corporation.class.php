@@ -157,7 +157,7 @@ class corporation{
 			//$msg = array('s'=> 400,'m'=>lang('pwdrule'),'d'=>'');				
 			//exit(json_output($msg));
 		}else if(!empty($_POST ['c_password'])){
-			$updates['c_password'] = md5( $_POST ['c_password']);
+			$updates['c_password'] = md5(md5( $_POST ['c_password']));
 		}
 			
 		
