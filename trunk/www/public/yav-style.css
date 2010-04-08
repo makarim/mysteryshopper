@@ -148,9 +148,9 @@ text-align:center;
 	padding: 5px;
 }
 .pages{ text-align:right; margin-right:20px; margin-top:10px; margin-bottom:15px; overflow:hidden;zoom:1;}
-.pages .go_b{background:url(../images/pages.gif) no-repeat 0 -25px; width:65px; height:25px; display:inline-block; text-align:center; line-height:23px;}
-.pages .on{background:url(../images/pages.gif) no-repeat 0 0;width:25px; height:25px;display:inline-block; text-align:center; line-height:25px; font-weight:bold;}
-.pages .page{background:url(../images/pages.gif) no-repeat 0 -50px;width:25px; height:25px;display:inline-block; text-align:center; line-height:25px;}
+.pages .go_b{background:url(images/pages.gif) no-repeat 0 -25px; width:65px; height:25px; display:inline-block; text-align:center; line-height:23px;}
+.pages .on{background:url(images/pages.gif) no-repeat 0 0;width:25px; height:25px;display:inline-block; text-align:center; line-height:25px; font-weight:bold;}
+.pages .page{background:url(images/pages.gif) no-repeat 0 -50px;width:25px; height:25px;display:inline-block; text-align:center; line-height:25px;}
 .pages a{ text-decoration:none; display:inline-block;height:23px; }
 .pages .page a,.pages .on a{ width:23px; }
 .pages .go_b a{ width:60px;}

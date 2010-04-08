@@ -26,7 +26,7 @@ class ReportModel extends Model {
 		$label = array('first_page'=>lang('first_page'),'last_page'=>lang('last_page'),'next_page'=>lang('next_page'),'pre_page'=>lang('pre_page'),'next_group'=>lang('next_group'),'pre_group'=>lang('pre_group'));
 		$list ['page']->setLabelName($label);
 		if($total>$pageCount){
-			$list ['pagebar'] = $arrList ['page']->prePage (lang('pre_page') ) .$arrList ['page']->ocNumBar().$arrList ['page']->nextPage (lang('next_page'));
+			$list ['pagebar'] = $list ['page']->prePage (lang('pre_page') ) .$list ['page']->ocNumBar().$list ['page']->nextPage (lang('next_page'));
 		}else{
 			$list ['pagebar'] = '';
 		}
@@ -84,7 +84,7 @@ class ReportModel extends Model {
 		$label = array('first_page'=>lang('first_page'),'last_page'=>lang('last_page'),'next_page'=>lang('next_page'),'pre_page'=>lang('pre_page'),'next_group'=>lang('next_group'),'pre_group'=>lang('pre_group'));
 		$list ['page']->setLabelName($label);
 		if($total>$pageCount){
-			$list ['pagebar'] = $arrList ['page']->prePage (lang('pre_page') ) .$arrList ['page']->ocNumBar().$arrList ['page']->nextPage (lang('next_page'));
+			$list ['pagebar'] = $list ['page']->prePage (lang('pre_page') ) .$list ['page']->ocNumBar().$list ['page']->nextPage (lang('next_page'));
 		}else{
 			$list ['pagebar'] = '';
 		}
