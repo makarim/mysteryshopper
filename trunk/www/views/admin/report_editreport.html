@@ -56,7 +56,7 @@ function checkOnSubmit(formName) {
       <td width="40%">
       <select multiple name="fromBox" id="fromBox"  size="8" style="width:300px;height:300px" ondblclick="moveOption(document.getElementById('fromBox'), document.getElementById('toBox[]'))"> 
 	<?php foreach ($questions as $q){?>
-    <option value="<?php echo $q['q_id']?>" title="<?php echo $q['q_question']?>">[<?php echo $groups[$q['q_group']];?>]<?php echo $q['q_question']?></option> 
+    <option value="<?php echo $q['q_id']?>" title="<?php echo $q['q_question']?>">[<?php echo lang($groups[$q['q_group']]);?>]<?php echo $q['q_question']?></option> 
  <?php }?>
 </select> 
 
@@ -69,7 +69,7 @@ function checkOnSubmit(formName) {
   <select  multiple name="toBox[]" id="toBox[]" size="8" style="width:300px;height:300px"
   ondblclick="moveOption(document.getElementById('toBox[]'), document.getElementById('fromBox'))">
 <?php foreach ($report_questions as $q){?>
-    <option value="<?php echo $q['q_id']?>" title="<?php echo $q['rq_question']?>">[<?php echo $groups[$q['rq_group']];?>]<?php echo $q['rq_question']?></option> 
+    <option value="<?php echo $q['q_id']?>" title="<?php echo $q['rq_question']?>">[<?php echo lang($groups[$q['rq_group']]);?>]<?php echo $q['rq_question']?></option> 
  <?php }?>
   </select>
    </td>

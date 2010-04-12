@@ -68,7 +68,7 @@
 //////////////////////////////////////////////////////		
 		
 	$GLOBALS ["gPageCache"] ["index"] ["rulename"]=  "index";
-	$GLOBALS ["gPageCache"] ["index"] ["cachestore"]=  "file";
+	$GLOBALS ["gPa、geCache"] ["index"] ["cachestore"]=  "file";
 	$GLOBALS ["gPageCache"] ["index"] ["cacheserver"]=  array($GLOBALS ["gMemcacheServer"]["192.168.1.5:11211"]);;
 	$GLOBALS ["gPageCache"] ["index"] ["cachedir"]=  APP_TEMP_DIR;
 	$GLOBALS ["gPageCache"] ["index"] ["cachetime"]=  60;
@@ -96,9 +96,17 @@ $GLOBALS ["gMemcacheServer"]["192.168.1.5:11213"]);;
 	$GLOBALS ["gLog"] ["maxExecTime"] =  "2";
 	$GLOBALS ["gLog"] ["maxMemUsed"] =  "1048576";
 	
+	//$GLOBALS['gGroups'][0] = "Overview";
+	$GLOBALS['gGroups'][5] = "Detail";
 	$GLOBALS['gGroups'][1] = "Service";
 	$GLOBALS['gGroups'][2] = "Environment";
 	$GLOBALS['gGroups'][3] = "Product";
 	$GLOBALS['gGroups'][4] = "Summary";
+	
+	$GLOBALS['gGroupsCap']['Service']	 = "B";
+	$GLOBALS['gGroupsCap']['Environment'] = "C";
+	$GLOBALS['gGroupsCap']['Product']	 = "D";
+	$GLOBALS['gGroupsCap']['Summary']	 = "E";
+	$GLOBALS['gGroupsCap']['Detail']	 = "A";
 	
 ?>

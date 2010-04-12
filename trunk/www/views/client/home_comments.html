@@ -12,7 +12,7 @@
        if(isset($stores) && is_array($stores)){
          foreach ($stores as $s){	
                 ?>
-	<li style="padding:2px;"><a onclick="selectstore('<?php echo $s['cs_id']."|".$s['cs_name'];?>');return false;" href="#"><?php echo $s['cs_name'];?></li> 
+	<li style="padding:2px;"><a onclick="selectstore('<?php echo $s['cs_id']."|".$s['cs_name'];?>');return false;" href="#"><?php echo $s['cs_name'];?></a></li> 
 	  <?php
 			}
       }
@@ -68,7 +68,7 @@
           	
           	?>
           <tr>
-            <td width="6%" align="center"><?php echo  $GLOBALS['gGroups'][$k]?></td>
+            <td width="6%" align="center"><?php echo  lang($GLOBALS['gGroups'][$k]);?></td>
 
             <td width="87%"><?php echo $v['content']?></td>
             <td align="center"><?php echo $v['score']?></td>

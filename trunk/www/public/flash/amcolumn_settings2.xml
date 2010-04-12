@@ -12,7 +12,7 @@
   <font></font>                                               <!-- [Arial] (font name) use device fonts, such as Arial, Times New Roman, Tahoma, Verdana... -->
   <text_size>14</text_size>                                     <!-- [11] (Number) text size of all texts. Every text size can be set individually in the settings below -->
   <text_color></text_color>                                   <!-- [#000000] (hex color code) main text color. Every text color can be set individually in the settings below-->
-  <decimals_separator></decimals_separator>                   <!-- [,] (string) decimal separator. Note, that this is for displaying data only. Decimals in data xml file must be separated with dot -->
+  <decimals_separator>.</decimals_separator>                   <!-- [,] (string) decimal separator. Note, that this is for displaying data only. Decimals in data xml file must be separated with dot -->
   <thousands_separator></thousands_separator>                 <!-- [ ] (string) thousand separator. use "none" if you don't want to separate -->
   <digits_after_decimal></digits_after_decimal>               <!-- [] (Number) if your value has less digits after decimal then is set here, zeroes will be added -->
   <scientific_min></scientific_min>                           <!-- [0.000001] If absolute value of your number is equal or less then scientific_min, this number will be formatted using scientific notation, for example: 0.0000023 -> 2.3e-6 -->
@@ -30,7 +30,7 @@
   
   <column>
     <type></type>                                             <!-- [clustered] (clustered, stacked, 100% stacked, 3d column) -->
-    <width>95</width>                                         <!-- [80] (0 - 100) width of column (in percents)  -->
+    <width>65</width>                                         <!-- [80] (0 - 100) width of column (in percents)  -->
     <spacing>0</spacing>                                      <!-- [5] (Number) space between columns of one category axis value, in pixels. Negative values can be used. -->
     <grow_time>3</grow_time>                                  <!-- [0] (Number) grow time in seconds. Leave 0 to appear instantly -->
     <grow_effect>elastic</grow_effect>                        <!-- [elastic] (elastic, regular, strong) -->    
@@ -247,11 +247,11 @@
                                                               <!-- labels can also be added in data xml file, using exactly the same structure like it is here -->
     <label lid="0">
       <x>30</x>                                               <!-- [0] (Number / Number% / !Number) -->
-      <y>80</y>                                               <!-- [0] (Number / Number% / !Number) -->
+      <y>25</y>                                               <!-- [0] (Number / Number% / !Number) -->
       <rotate></rotate>                                       <!-- [false] (true / false) -->
       <width></width>                                         <!-- [] (Number / Number%) if empty, will stretch from left to right untill label fits -->
       <align></align>                                         <!-- [left] (left / center / right) -->  
-      <text_color>#FFFFFF</text_color>                               <!-- [text_color] (hex color code) button text color -->
+      <text_color>#000</text_color>                               <!-- [text_color] (hex color code) button text color -->
       <text_size>14</text_size>                               <!-- [text_size](Number) button text size -->
       <text>                                                  <!-- [] (text) html tags may be used (supports <b>, <i>, <u>, <font>, <a href="">, <br/>. Enter text between []: <![CDATA[your <b>bold</b> and <i>italic</i> text]]>-->
         <![CDATA[<b></b>]]>

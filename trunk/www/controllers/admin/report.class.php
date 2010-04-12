@@ -178,15 +178,21 @@ class report{
     	
 		include_once("ReportModel.class.php");
 		$ReportModel = new ReportModel();
-		$report_questions  = $ReportModel->getQuestionsByReId($re_id);
-		
-		if($report_questions){
-			foreach ($report_questions as $k=>$v){
-				$v['answer'] = $ReportModel->getAnswerByAid($a_id,$v['rq_id'],$v['rq_type']);
-				$report_questions[$k] = $v;
-			}
+		$report_questions = array();
+			foreach ($GLOBALS['gGroups'] as $k=>$v){
+				$arr = $ReportModel->getQuestionsByReId($re_id,$k);
+				
+				if($arr){
+					foreach ($arr as $kk=>$vv){
+						$vv['answer'] = $ReportModel->getAnswerByAid($a_id,$vv['rq_id'],$vv['rq_type']);
+						$arr[$kk] = $vv;
+					}
+				}
 			
-		}
+				$report_questions[$v] = $arr;
+				
+			}
+		
 		$this->tpl->assign("a_id",$a_id);
 		$this->tpl->assign("report_questions",$report_questions);
 		$this->tpl->assign("assignmentinfo",$assignmentinfo);

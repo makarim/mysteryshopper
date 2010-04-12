@@ -140,7 +140,7 @@ text-align:center;
 }
 .report_textarea{
 	height:20px;
-	width:100%;
+	width:98%;
 	border:none;
 	overflow: auto;
 	border-bottom:1px solid #ccc;
@@ -154,3 +154,18 @@ text-align:center;
 .pages a{ text-decoration:none; display:inline-block;height:23px; }
 .pages .page a,.pages .on a{ width:23px; }
 .pages .go_b a{ width:60px;}
+
+
+/*任务报表*/
+.missionReport {
+	background-color:#999;
+}
+.missionReport td{
+	background-color:#FFF;
+	padding:8px;
+}
+.missionReport .title{
+	background-color:#9F0000;
+	color:#FFF;
+	text-align:center;
+}

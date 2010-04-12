@@ -9,24 +9,99 @@
     <br />
     <?php if($is_view){
     	?>
-    
-<table cellspacing="10" >
+     <table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport">
+          <tr>
+            <td  width="30%" class="title">说明</td>
+            <td  width="60%" class="title">等级</td>
+            <td width="10%" class="title" >分数</td>
+          </tr>
+          <tr>
+            <td rowspan="8">请根据下列指示在右栏内评出"1-10"的具体
+分数：</td>
+            <td>完美</td>
+            <td style="background-color:#ccc;">10</td>
+          </tr>          
+          <tr>
+      
+            <td>很好</td>
+            <td style="background-color:#ccc;">8-9</td>
+          </tr>
+          <tr>
+           
+            <td>好</td>
+            <td style="background-color:#ccc;">6-7</td>
+          </tr>  
+           <tr>
+          
+            <td>一般</td>
+            <td style="background-color:#ccc;">5</td>
+          </tr>        
+           <tr>
+          
+            <td>有待改进</td>
+            <td style="background-color:#ccc;">3-4</td>
+          </tr>  
+          
+          <tr>
+           
+            <td>不好</td>
+            <td style="background-color:#ccc;">2</td>
+          </tr> 
+           <tr>
+            
+            <td>差</td>
+            <td style="background-color:#ccc;">1</td>
+          </tr>     
+           <tr>
+            
+            <td>不适用</td>
+            <td style="background-color:#ccc;">n/a</td>
+          </tr>
+          </table>
+         <br />
+         <br />
+       <?php
+		foreach ($report_questions as $k=>$v){?>
+		<table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport">
+          <tr>
+            <td  colspan="3" class="title"><?php echo lang($k);?></td>
+            
+          </tr>
+          <?php
+			foreach ($v as $kk=>$vv){
+				if($vv['rq_type']==2 || $vv['rq_type']==4 || $vv['rq_type']==1){
+				?>
+          <tr>
+			 <td width="5%"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
+            <td width="85%"><?php echo $vv['rq_question']?></td>
+            <td  width="10%" align="center"></td>
+          </tr>
+       		 <?php 
+				}else{
+			?>
+			<tr>
+			 <td width="5%" valign="top"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
+            <td width="95%" colspan="2" style="padding:0">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr> 
+            <td width="50%" style="background-color:#ccc;"> <?php echo $vv['rq_question']?></td>
+            
+           </tr>
+           <tr>
+           <td style="height:50px"></td>
+            </tr>
+            </table>
+           </td>
+            
+          </tr>
+			<?php		
+				}
+				
+			}
+			?>
+        </table>
+ 		<?php }?>
 
-					
-					<?php
-					if(isset($report_questions) && is_array($report_questions)){
-							foreach ($report_questions as $k=>$v){?>	
-					<tr>
-							<td><?php echo $k+1;?></td>
-							<td><?php echo $v['rq_question']?></td>
-							
-					</tr>
-						
-						<?php }
-					}
-						?>
-					
-				</table>
 				<?php 
 	}else{?>
    <p>&nbsp;</p>

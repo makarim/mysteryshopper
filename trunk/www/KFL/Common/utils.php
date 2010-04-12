@@ -125,6 +125,7 @@ function selfURL() {
 }
 
 function lang($lang_key, $force = true) {
+	$lang_key  = strtolower($lang_key);
 	return isset($GLOBALS['gLang'][$lang_key]) ? $GLOBALS['gLang'][$lang_key] : ($force ? $lang_key : '');
 }
 function getip(){
