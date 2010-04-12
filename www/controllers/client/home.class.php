@@ -50,6 +50,25 @@ class home{
 	function view_report(){
 		$type = !empty($_GET['view'])?$_GET['view']:"corp";
 		$this->tpl->assign("type",$type);
+		
+		$re_id = 0;
+		include_once("ReportModel.class.php");
+    	$ReportModel = new ReportModel();
+    	$re_id_arr = $ReportModel->getReportIdByCId($this->login_corp['c_id']);
+		//print_r($re_id_arr);
+		if(isset( $re_id_arr[0]['re_id'])) $re_id = $re_id_arr[0]['re_id'];
+		if($re_id){
+			include_once("ReportModel.class.php");
+			$ReportModel = new ReportModel();
+			$report_questions = array();
+			//unset($GLOBALS['gGroups'][5]);
+			foreach ($GLOBALS['gGroups'] as $k=>$v){
+				$report_questions[$v] = $ReportModel->getQuestionsByReId($re_id,$k);
+			}
+			
+			//$report_questions  = 
+			$this->tpl->assign("report_questions",$report_questions);
+		}
 	}
 	function view_shoppers(){
 		$type = !empty($_GET['view'])?$_GET['view']:"corp";
@@ -64,7 +83,8 @@ class home{
 		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
 		$type = !empty($_GET['overall'])?$_GET['overall']:"summary";
 		$def_stores = array();
-		
+		$chart_title = '综览';
+		$chart_title.= "/".lang($type);
 		include_once("CorporationModel.class.php");	
 		$corpModel = new CorporationModel();
 		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
@@ -85,8 +105,10 @@ class home{
 			$questions = $ChartModel->getTimeQuestionsByCId($this->login_corp['c_id'],'all');
 			$this->tpl->assign("questions",$questions);
 			$this->tpl->assign("rq_id",$questions['0']['rq_id']);
+			$chart_title = $questions['0']['rq_question'];
 		}
 		
+		$this->tpl->assign("chart_title",$chart_title);
 		$this->tpl->assign("assignments",$assignments);
 		$this->tpl->assign("selstores",$selstores);
 		$this->tpl->assign("stores",$stores);
@@ -99,7 +121,8 @@ class home{
 		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
 		$type = !empty($_GET['environment'])?$_GET['environment']:"summary";
 		$def_stores = array();
-		
+		$chart_title = '环境';
+		$chart_title.= "/".lang($type);
 		include_once("CorporationModel.class.php");	
 		$corpModel = new CorporationModel();
 		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
@@ -120,8 +143,10 @@ class home{
 			$questions = $ChartModel->getTimeQuestionsByCId($this->login_corp['c_id'],'all');
 			$this->tpl->assign("questions",$questions);
 			$this->tpl->assign("rq_id",$questions['0']['rq_id']);
+			$chart_title = $questions['0']['rq_question'];
 		}
 		
+		$this->tpl->assign("chart_title",$chart_title);
 		$this->tpl->assign("assignments",$assignments);
 		$this->tpl->assign("selstores",$selstores);
 		$this->tpl->assign("stores",$stores);
@@ -134,7 +159,8 @@ class home{
 		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
 		$type = !empty($_GET['service'])?$_GET['service']:"summary";
 		$def_stores = array();
-		
+		$chart_title = '服务';
+		$chart_title.= "/".lang($type);
 		include_once("CorporationModel.class.php");	
 		$corpModel = new CorporationModel();
 		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
@@ -155,9 +181,11 @@ class home{
 			$questions = $ChartModel->getTimeQuestionsByCId($this->login_corp['c_id'],'all');
 			$this->tpl->assign("questions",$questions);
 			$this->tpl->assign("rq_id",$questions['0']['rq_id']);
+			$chart_title = $questions['0']['rq_question'];
 		}
 		
 		
+		$this->tpl->assign("chart_title",$chart_title);
 		$this->tpl->assign("assignments",$assignments);
 		$this->tpl->assign("selstores",$selstores);
 		$this->tpl->assign("stores",$stores);
@@ -170,7 +198,8 @@ class home{
 		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
 		$type = !empty($_GET['product'])?$_GET['product']:"summary";
 		$def_stores = array();
-		
+		$chart_title = '产品';
+		$chart_title.= "/".lang($type);
 		include_once("CorporationModel.class.php");	
 		$corpModel = new CorporationModel();
 		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
@@ -191,9 +220,10 @@ class home{
 			$questions = $ChartModel->getTimeQuestionsByCId($this->login_corp['c_id'],'all');
 			$this->tpl->assign("questions",$questions);
 			$this->tpl->assign("rq_id",$questions['0']['rq_id']);
+			$chart_title = $questions['0']['rq_question'];
 		}
 		
-		
+		$this->tpl->assign("chart_title",$chart_title);
 		$this->tpl->assign("assignments",$assignments);
 		$this->tpl->assign("selstores",$selstores);
 		$this->tpl->assign("stores",$stores);

@@ -85,6 +85,18 @@ class home{
 		if(isset($_SESSION['a_'.$a_id]['pass']) && $_SESSION['a_'.$a_id]['pass']==0){
 			$do_quiz = 'fail';
 		}
+		
+		if($assignmentinfo['a_fdate']=='0000-00-00 00:00:00' && $assignmentinfo['a_audit']==0){
+			$is_submitted = 0;
+		}elseif($assignmentinfo['a_audit']==2){
+			$is_submitted =2;	
+		}elseif($assignmentinfo['a_audit']==1){
+			$is_submitted =1;	
+		}elseif($assignmentinfo['a_audit']==0 && $assignmentinfo['a_fdate']!='0000-00-00 00:00:00'){
+			$is_submitted = 3;
+		}
+		
+		$this->tpl->assign("is_submitted",$is_submitted);
 		$this->tpl->assign("do_quiz",$do_quiz);
 		$this->tpl->assign("is_view",$is_view);
     	return $assignmentinfo;
@@ -105,7 +117,10 @@ class home{
 		$re_id = $assignment['re_id'];
 		include_once("ReportModel.class.php");
 		$ReportModel = new ReportModel();
-		$report_questions  = $ReportModel->getQuestionsByReId($re_id);
+		$report_questions = array();
+		foreach ($GLOBALS['gGroups'] as $k=>$v){
+			$report_questions[$v] = $ReportModel->getQuestionsByReId($re_id,$k);
+		}
 		$this->tpl->assign("report_questions",$report_questions);
 	}
 	function view_quiz(){
@@ -147,6 +162,7 @@ class home{
 	function view_report(){
 		$a_id = isset($_GET['a_id'])?intval($_GET['a_id']):'0';
 		$assignment = $this->get_assignment($a_id);
+	
 		$re_id = $assignment['re_id'];
 		$a_id =isset($_GET['a_id'])?$_GET['a_id']:0;
 		
@@ -154,16 +170,24 @@ class home{
 		
 			include_once("ReportModel.class.php");
 			$ReportModel = new ReportModel();
-			$report_questions  = $ReportModel->getQuestionsByReId($re_id);
-			if($report_questions){
-				foreach ($report_questions as $k=>$v){
-					$v['answer'] = $ReportModel->getAnswerByAid($a_id,$v['rq_id'],$v['rq_type']);
-					$report_questions[$k] = $v;
+			$report_questions = array();
+			foreach ($GLOBALS['gGroups'] as $k=>$v){
+				$arr = $ReportModel->getQuestionsByReId($re_id,$k);
+				
+				if($arr){
+					foreach ($arr as $kk=>$vv){
+						$vv['answer'] = $ReportModel->getAnswerByAid($a_id,$vv['rq_id'],$vv['rq_type']);
+						$arr[$kk] = $vv;
+					}
 				}
+			
+				$report_questions[$v] = $arr;
 				
 			}
+		
 			$this->tpl->assign("report_questions",$report_questions);
 		}
+	
 	}
 	function op_savereport(){
 		include_once("ReportModel.class.php");

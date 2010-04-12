@@ -56,8 +56,10 @@ class ReportModel extends Model {
 	function getAllQuestion(){
 		return $this->db->getAll("select q_id,q_question,q_group,q_type from question order by q_group desc");
 	}
-    function getQuestionsByReId($re_id){
-    	return $this->db->getAll("select rq_id,rq_group,rq_type,rq_question,q_id,ordernum from report_question where re_id='$re_id' order by ordernum");
+    function getQuestionsByReId($re_id,$group=''){
+    	$addsql = '';
+    	if($group) $addsql = "and rq_group='$group'";
+    	return $this->db->getAll("select rq_id,rq_group,rq_type,rq_question,q_id,ordernum from report_question where re_id='$re_id' $addsql order by ordernum,rq_type");
     }
     function getReportByReId($re_id){
     	return $this->db->getRow("select * from report where re_id='$re_id'");
@@ -194,6 +196,9 @@ class ReportModel extends Model {
 
 	function getAllReports(){
 		return $this->db->getAll("select re_id,re_title from report");
+	}
+	function getReportIdByCId($c_id){
+		return $this->db->getAll("select distinct(re_id) from assignment where c_id='{$c_id}' group by c_id");
 	}
 }
 ?>
