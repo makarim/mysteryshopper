@@ -10,7 +10,7 @@
   <ul> 
    	<li <?php if($type=='summary') echo 'class="on"';?>><a href="/client.php/home/overall/summary"><span>综合</span></a></li> 
     <li <?php if($type=='yesorno') echo 'class="on"';?>><a href="/client.php/home/overall/yesorno"><span>是非题</span></a></li> 
-    <li <?php if($type=='score') echo 'class="on"';?>><a href="/client.php/home/overall/score"><span>打分题</span></a></li> 
+    <li <?php if($type=='vote') echo 'class="on"';?>><a href="/client.php/home/overall/vote"><span>打分题</span></a></li> 
     <li <?php if($type=='time') echo 'class="on"';?>><a href="/client.php/home/overall/time"><span>时间题</span></a></li> 
    
   </ul> 
@@ -60,7 +60,6 @@
       <div style="float:right;margin-right:10px;">
       <a href="javascript:exportImage();"><img src="<?php echo $www_site_url?>/public/images/export_image-icon.gif" border="0" title="export Image"></a>
       <a href="javascript:print();"><img src="<?php echo $www_site_url?>/public/images/print_icon.jpg" border="0" title="Print"></a>
-      <a href="javascript:resetText();">ResetText</a>
       </div>
         <div class="table2Title">对比图</div>
        
@@ -118,10 +117,7 @@ function print(){
 function exportImage() {
   document.getElementById("amcolumn").exportImage('/plugins/export.php');  
 }
-function resetText(){
-	document.getElementById("amcolumn").setSettings("<settings><labels><label lid='0'><text><![CDATA[<b>Average Annual Benefits by Category</b>]]></text></label></labels></settings>", true);
-	//document.getElementById("amcolumn").setParam("labels.label[0].text", '123');
-}
+
 </script>
           <table width="100%" border="0" cellpadding="0" cellspacing="1" class="CinitData">
                 <tr>
