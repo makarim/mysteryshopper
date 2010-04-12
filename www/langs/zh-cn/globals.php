@@ -368,9 +368,10 @@ $GLOBALS['gLang']['question_group'] = '问题类别';
 $GLOBALS['gLang']['question_type'] = '问题形式';
 $GLOBALS['gLang']['question_title'] = '问题';
 $GLOBALS['gLang']['yesorno'] = '是非题';
-$GLOBALS['gLang']['score'] = '打分题';
+$GLOBALS['gLang']['vote'] = '打分题';
 $GLOBALS['gLang']['fillblank'] = '问答题';
-$GLOBALS['gLang']['time'] = '时间题';
+$GLOBALS['gLang']['score'] = '时间题';
+
 
 $GLOBALS['gLang']['corporation_list'] = '企业列表';
 $GLOBALS['gLang']['corporation_total'] = '企业总数';
@@ -420,7 +421,7 @@ $GLOBALS['gLang']['service'] = '服务';
 $GLOBALS['gLang']['product'] = '产品';
 $GLOBALS['gLang']['environment'] = '环境';
 $GLOBALS['gLang']['summary'] = '综合';
-$GLOBALS['gLang']['detail'] = '造访细节';
+$GLOBALS['gLang']['Detail'] = '造访细节';
 $GLOBALS['gLang']['re_title'] = '问卷名称';
 $GLOBALS['gLang']['add_report'] = '创建问卷';
 $GLOBALS['gLang']['edit_report'] = '修改问卷';

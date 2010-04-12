@@ -250,7 +250,7 @@ class home{
 		include_once("AssignmentModel.class.php");	
 		$assignmentModel = new AssignmentModel();
 		$assignments = $assignmentModel->getAssignmentsByCsId($con,$cs_id);
-		
+		$this->tpl->assign("chart_title",$selstore);
 		$this->tpl->assign("selstore",$selstore);
 		$this->tpl->assign("cs_id",$cs_id);
 		$this->tpl->assign("stores",$stores);

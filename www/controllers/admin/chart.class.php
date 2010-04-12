@@ -57,7 +57,7 @@ class chart{
 						$score = $ChartModel->getSummaryScoreByCsId($store['cs_id'],1);
 						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
 					}
-					if(strtolower($scoretype)=='score'){ 
+					if(strtolower($scoretype)=='vote'){ 
 						$score = $ChartModel->getVoteScoreByCsId($store['cs_id'],1);
 						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
 					}
@@ -80,7 +80,7 @@ class chart{
 						$score = $ChartModel->getSummaryScoreByCsId($store['cs_id'],2);
 						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
 					}
-					if(strtolower($scoretype)=='score'){ 
+					if(strtolower($scoretype)=='vote'){ 
 						$score = $ChartModel->getVoteScoreByCsId($store['cs_id'],2);
 						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
 					}
@@ -103,7 +103,7 @@ class chart{
 						$score = $ChartModel->getSummaryScoreByCsId($store['cs_id'],3);
 						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
 					}
-					if(strtolower($scoretype)=='score'){ 
+					if(strtolower($scoretype)=='vote'){ 
 						$score = $ChartModel->getVoteScoreByCsId($store['cs_id'],3);
 						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
 					}
@@ -157,7 +157,7 @@ $xml .="
 							$score = $ChartModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],'service');
 							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
 						}
-						if(strtolower($scoretype)=='score'){ 
+						if(strtolower($scoretype)=='vote'){ 
 							$score = $ChartModel->getVoteScoreByAsId($v['a_id'],$v['re_id'],'service');
 							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
 						}
@@ -178,7 +178,7 @@ $xml .="
 							$score = $ChartModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],'environment');
 							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
 						}
-						if(strtolower($scoretype)=='score'){ 
+						if(strtolower($scoretype)=='vote'){ 
 							$score = $ChartModel->getVoteScoreByAsId($v['a_id'],$v['re_id'],'environment');
 							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
 						}
@@ -199,7 +199,7 @@ $xml .="
 							$score = $ChartModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],'product');
 							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
 						}
-						if(strtolower($scoretype)=='score'){ 
+						if(strtolower($scoretype)=='vote'){ 
 							$score = $ChartModel->getVoteScoreByAsId($v['a_id'],$v['re_id'],'product');
 							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
 						}

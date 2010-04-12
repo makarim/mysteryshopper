@@ -10,7 +10,7 @@
   <ul> 
 	<li <?php if($type=='summary') echo 'class="on"';?>><a href="/client.php/home/stores/summary"><span>综合</span></a></li> 
     <li <?php if($type=='yesorno') echo 'class="on"';?>><a href="/client.php/home/stores/yesorno"><span>是非题</span></a></li> 
-    <li <?php if($type=='score') echo 'class="on"';?>><a href="/client.php/home/stores/score"><span>打分题</span></a></li> 
+    <li <?php if($type=='vote') echo 'class="on"';?>><a href="/client.php/home/stores/vote"><span>打分题</span></a></li> 
     <li <?php if($type=='time') echo 'class="on"';?>><a href="/client.php/home/stores/time"><span>时间题</span></a></li> 
   </ul> 
 </div>
@@ -80,6 +80,8 @@
 		so.addVariable("settings_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amline_settings.xml?102"));
 		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=storedata&scoretype=<?php echo $type;?>&cs_id=<?php echo $cs_id;?>&sdate=<?php echo $sdate;?>&edate=<?php echo $edate;?>"));
 		so.addVariable("preloader_color", "#ffffff");
+		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo $chart_title?></b>]]></text></label></labels></settings>"));
+
 		so.write("flashcontent");
 		// ]]>
 	</script>
