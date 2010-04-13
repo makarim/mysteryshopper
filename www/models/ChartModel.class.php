@@ -22,25 +22,29 @@ class ChartModel extends Model {
 				$rq_arr = $this->db->getAll($sql);
 				$q_row = count($rq_arr);
 				//echo "row:".$q_row."|";
-				$sum = 0;
+				$sum = $n= 0;
 				if($q_row>0){
 					foreach ($rq_arr as $rq){
 						if($rq['rq_type']==2){
 							$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$v['a_id']."' and rq_type=2";
 							$sum += $this->db->getOne($sql);
+							$n++;
 						}else if($rq['rq_type']==1){
 							$sql = "select ans_answer1  from answer where rq_id='".$rq['rq_id']."' and a_id='".$v['a_id']."' and rq_type=1";
 							$yn = $this->db->getOne($sql);
 							$sum += ($yn=='Y')?10:0;
+							$n++;
 						}
 						
 					}
 					//echo $sum;
-					$average += $sum/$q_row;
+					//echo $csid."=".$sum."/".$n."<br/>";
+					if($n>0) $average += $sum/$n;
 				}
 				
 			}
 			//echo $average;
+		
 			return round($average/$row,2);
 		}
 		return 0;
@@ -95,11 +99,12 @@ class ChartModel extends Model {
 				if($q_row>0){
 					foreach ($rq_arr as $rq){
 						//一个问题的有多少个人支持，选是
-						$sql = "select count(*) from answer where rq_id='".$rq['rq_id']."' and a_id='".$v['a_id']."' and rq_type=1 and ans_answer1='Y'";
-						$sum += $this->db->getOne($sql);
+						$sql = "select ans_answer1 from answer where rq_id='".$rq['rq_id']."' and a_id='".$v['a_id']."' and rq_type=1 ";
+						$yn = $this->db->getOne($sql);
+						$sum += ($yn=='Y')?10:0;
 					}
 					// 所有题目总支持人数/题目数=一份报告同group的是非题平均值
-					$average += $sum;
+					$average += $sum/$q_row;
 				}
 				
 			}
@@ -240,16 +245,17 @@ class ChartModel extends Model {
 	}
 	
 	function getTimeQuestionsByCId($c_id,$group){
+		$addsql =" ";
 		if($group=='service') $group=1;
 		if($group=='environment') $group=2;
 		if($group=='product') $group=3;
 		if($group=='summary') $group=4;
-		if($group =='all') $addsql =" ";
+		if($group =='all') $group =0;
 		$re_id_arr = $this->db->getAll("select re_id from assignment where c_id='$c_id' group by re_id");
 		foreach ($re_id_arr as $value) {
 			$re_id[] = $value['re_id'];
 		}
-		
+		if($group) $addsql= " and rq_group='$group'";
 		$re_id_str = join(',',$re_id);
 		return $this->db->getAll("select rq_id,rq_type,rq_question from report_question where rq_type=4 and re_id in ($re_id_str) $addsql");
 	}
@@ -265,7 +271,7 @@ class ChartModel extends Model {
 		if(count($a_id)>0) 
 			$sql = "select avg(ans_answer4) as avg from answer where rq_id='".$rq_id."' and a_id in (".$a_id_str.") and rq_type=4";
 		else 
-			$sql = "select avg(ans_answer4) as avg from answer where rq_id='".$rq_id."' and a_id = '".$a_id_str."' and rq_type=4";
+			$sql = "select avg(ans_answer4) as avg from answer where rq_id='".$rq_id."' and a_id = '".$a_id."' and rq_type=4";
 		//echo $sql;
 		return $this->db->getOne($sql);
 	}

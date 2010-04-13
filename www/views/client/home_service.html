@@ -57,13 +57,14 @@
   <tr>
     <td><div class="table2TitleBg">
       <div class="table2TitleBg2">
-            <div style="float:right;margin-right:10px;">
+      <div style="float:right;margin-right:10px;">
       <a href="javascript:exportImage();"><img src="<?php echo $www_site_url?>/public/images/export_image-icon.gif" border="0" title="export Image"></a>
       <a href="javascript:print();"><img src="<?php echo $www_site_url?>/public/images/print_icon.jpg" border="0" title="Print"></a>
       </div>
         <div class="table2Title">对比图</div>
+       
       </div>
-
+ 
     </div></td>
   </tr>
   <tr>
@@ -83,8 +84,7 @@
 		so.addVariable("path", "<?php echo $www_site_url?>/public/flash/");
 		 so.addVariable("chart_id", "amcolumn");
 		so.addVariable("settings_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amcolumn_settings2.xml?342"));
-		//so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amcolumn_data2.txt"));
-		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=timedata&c_id=<?php echo $corp['c_id'];?>&rq_id=<?php echo $rq_id?>&sdate=<?php echo $sdate?>&edate=<?php echo $edate?>&selstores=<?php echo join(",",$selstores);?>&group=service,environment,product"));
+		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=timedata&c_id=<?php echo $corp['c_id'];?>&rq_id=<?php echo $rq_id?>&sdate=<?php echo $sdate?>&edate=<?php echo $edate?>&selstores=<?php echo join(",",$selstores);?>&group=service"));
 		so.addVariable("preloader_color", "#ffffff");
 		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo $chart_title?></b>]]></text></label></labels></settings>"));
 		so.write("flashcontent");
@@ -101,7 +101,8 @@
 		so.addVariable("settings_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amcolumn_settings.xml?102"));
 		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=overalldata&scoretype=<?php echo $type;?>&c_id=<?php echo $corp['c_id'];?>&sdate=<?php echo $sdate?>&edate=<?php echo $edate?>&selstores=<?php echo join(",",$selstores);?>&group=service"));
 		so.addVariable("preloader_color", "#ffffff");
-		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo $chart_title?></b>]]></text></label></labels></settings>"));
+		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo $chart_title?></b>]]></text></label></labels><values><value><max>10</max></value></values></settings>"));
+
 		so.write("flashcontent");
 		// ]]>
 	</script>
@@ -118,21 +119,25 @@ function exportImage() {
 }
 
 </script>
+<?php if($type=='time'){?>
           <table width="100%" border="0" cellpadding="0" cellspacing="1" class="CinitData">
                 <tr>
-                  <td colspan="2" class="title">原始数据（<?php echo $sdate; ?> ~ <?php echo $edate; ?>）</td>
+                  <td colspan="5" class="title">原始数据</td>
                 </tr>
                  <tr>
                   <td>时间</td>
                   <td>任务</td>
+                  <td>时间/分钟</td>
+                 
                 </tr>
                 <?php
                 if(isset($assignments)){
                 	foreach ($assignments as $v){
                 		?>
                 <tr>
-                  <td width="25%"><?php echo $v['day']?></td>
-                  <td width="75%"><?php echo $v['a_title']?></td>
+                  <td width="15%"><?php echo $v['day']?></td>
+                  <td width="40%"><?php echo $v['a_title']?></td>
+                  <td width="15%"><?php echo $v['times']?></td>
 
                 </tr>
                 <?php
@@ -141,6 +146,39 @@ function exportImage() {
                 ?>
                
               </table>
+     <?php
+}else {?>         
+         <table width="100%" border="0" cellpadding="0" cellspacing="1" class="CinitData">
+                <tr>
+                  <td colspan="5" class="title">原始数据</td>
+                </tr>
+                 <tr>
+                  <td>时间</td>
+                  <td>任务</td>
+                  <?php if($type=='yesorno'||$type=='summary'){?><td>是非题</td><?php }?> 
+                  <?php if($type=='vote'||$type=='summary'){?><td>打分题</td><?php }?>
+                </tr>
+                <?php
+                if(isset($assignments)){
+                	foreach ($assignments as $v){
+                		?>
+                <tr>
+                  <td width="15%"><?php echo $v['day']?></td>
+                  <td width="40%"><?php echo $v['a_title']?></td>
+                 <?php if($type=='yesorno'||$type=='summary'){?> <td width="15%"><?php echo $v['yesorno']?></td><?php }?> 
+                 <?php if($type=='vote'||$type=='summary'){?>  <td width="15%"><?php echo $v['vote']?></td><?php }?> 
+
+                </tr>
+                <?php
+                	}
+                }
+                ?>
+               
+              </table>     
+        <?php
+               }
+                
+                ?>       
           <p>&nbsp;</p></td>
         <td class="table2RightBorder"></td>
       </tr>

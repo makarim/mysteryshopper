@@ -137,7 +137,7 @@ $xml .="
 <chart>";
 		if($cs_id){
 			include_once("ChartModel.class.php"); 
-			$ChartModel = new ChartModel();
+			$ChartModel = new ChartModel($sdate,$edate);
 			$con['sdate'] = $sdate;
 			$con['edate'] = $edate;
 			include_once("AssignmentModel.class.php");	

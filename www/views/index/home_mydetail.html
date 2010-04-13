@@ -125,6 +125,12 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
  </TD>
 </TR>
 <TR>
+<TD class="text">子女数量:</TD>
+<TD><div id="errorsDiv_children"></div>
+<INPUT class="input" type="text" name="children" id="children" value="<?php echo $userinfo['children']?>" />
+ </TD>
+</TR>
+<TR>
 <TD class="text">国籍:</TD>
 <TD><div id="errorsDiv_nationality"></div><INPUT class="input" type="text" name="nationality" id="nationality" value="<?php echo $userinfo['nationality']?>" /></TD>
 </TR>
@@ -175,6 +181,12 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 					<option value="2" <?php if(2==$userinfo['speak_english']) echo 'selected="selected"';?>>不会</option> 
  
 				</select></TD>
+</TR>
+<TR>
+<TD class="text">其他常用语言：</TD>
+<TD><div id="errorsDiv_speaklanguage"></div>
+<INPUT class="input" type="text" name="speaklanguage" id="speaklanguage" value="<?php echo $userinfo['speaklanguage']?>" />
+</TD>
 </TR>
 <TR>
 <TD class="text">您是如何知道我们的公司? </TD>
@@ -259,7 +271,11 @@ RMB</TD>
 </TR>
 <TR>
 <TD class="text">银行名称：</TD>
-<TD><div id="errorsDiv_alipay"></div><INPUT class="input" type="text" name="bank_name" id="bank_name" value="<?php echo $userinfo['bank_name']?>" /></TD>
+<TD><div id="errorsDiv_bankname"></div><INPUT class="input" type="text" name="bank_name" id="bank_name" value="<?php echo $userinfo['bank_name']?>" /></TD>
+</TR>
+<TR>
+<TD class="text">支行名称：</TD>
+<TD><div id="errorsDiv_subbank_name"></div><INPUT class="input" type="text" name="subbank_name" id="subbank_name" value="<?php echo $userinfo['subbank_name']?>" /></TD>
 </TR>
 <TR>
 <TD class="text">银行帐号：</TD>
