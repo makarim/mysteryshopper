@@ -109,4 +109,9 @@ $GLOBALS ["gMemcacheServer"]["192.168.1.5:11213"]);;
 	$GLOBALS['gGroupsCap']['Summary']	 = "E";
 	$GLOBALS['gGroupsCap']['Detail']	 = "A";
 	
+	$GLOBALS['gTypes']['yesorno']  =1;
+	$GLOBALS['gTypes']['vote']  =2;
+	$GLOBALS['gTypes']['fillblank']  =3;
+	$GLOBALS['gTypes']['time']  =4;
+	
 ?>

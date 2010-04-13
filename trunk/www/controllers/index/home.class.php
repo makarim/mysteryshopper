@@ -311,12 +311,14 @@ class home{
 				$birthdateday = !empty($_POST['birthdateday'])?$_POST['birthdateday']:'';
 				$user['birthdate']  =$birthdateyear.'-'. sprintf('%02d',$birthdatemonth).'-'.sprintf('%02d',$birthdateday);
 				$user['marital'] = !empty($_POST['maritalstatus'])?$_POST['maritalstatus']:'0';
+				$user['children'] = !empty($_POST['children'])?$_POST['children']:'0';
 				$user['nationality'] = !empty($_POST['nationality'])?$_POST['nationality']:'';
 				$user['occupation'] = !empty($_POST['occupation'])?$_POST['occupation']:'';
 				$user['householdincome'] = !empty($_POST['householdincome'])?$_POST['householdincome']:'0';
 				$user['education'] = !empty($_POST['education'])?$_POST['education']:'0';
 				$user['havecar'] = !empty($_POST['havecar'])?$_POST['havecar']:'0';
 				$user['speak_english'] = !empty($_POST['speakenglish'])?$_POST['speakenglish']:'0';
+				$user['speaklanguage'] = !empty($_POST['speaklanguage'])?$_POST['speaklanguage']:'0';
 				$user['hearabout'] = !empty($_POST['hearabout'])?$_POST['hearabout']:'0';
     		break;    		
     		case "other":
@@ -328,10 +330,11 @@ class home{
 				$user['interests'] = !empty($_POST['interests'])?$_POST['interests']:'';
 		    		break;	
     		case "payment":
-    			$user['alipay'] = !empty($_POST['alipay'])?$_POST['alipay']:"";
-    			$user['bank_name'] = !empty($_POST['bank_name'])?$_POST['bank_name']:"";
-    			$user['bank_realname'] = !empty($_POST['bank_realname'])?$_POST['bank_realname']:"";
-    			$user['bank_account'] = !empty($_POST['bank_account'])?$_POST['bank_account']:"";
+    			$user['alipay'] = !empty($_POST['alipay'])?strip_tags($_POST['alipay']):"";
+    			$user['bank_name'] = !empty($_POST['bank_name'])?strip_tags($_POST['bank_name']):"";
+    			$user['bank_realname'] = !empty($_POST['bank_realname'])?strip_tags($_POST['bank_realname']):"";
+    			$user['subbank_name'] = !empty($_POST['subbank_name'])?strip_tags($_POST['subbank_name']):"";
+    			$user['bank_account'] = !empty($_POST['bank_account'])?strip_tags($_POST['bank_account']):"";
     			
     		break;    		
     		

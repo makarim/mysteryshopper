@@ -77,7 +77,14 @@ foreach ($_POST as $k=>$v){
 	}
 }
 foreach ($_GET as $k=>$v){
-	$_GET[$k] =  isset($v)?strtok($v, " \t\r\n\0\x0B"):'';
+	if(is_array($v)){
+		foreach ($v as $kk=>$vv){
+			$v[$kk] = isset($vv)?strtok($vv, " \t\r\n\0\x0B"):'';
+		}
+		$_GET[$k] = $v;
+	}else{
+		$_GET[$k] =  isset($v)?strtok($v, " \t\r\n\0\x0B"):'';
+	}
 }
 
 

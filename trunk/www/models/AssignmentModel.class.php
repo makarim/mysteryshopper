@@ -146,12 +146,20 @@ class AssignmentModel extends Model {
     	return $this->db->getAll("select a_id as id,a_title as title,a_sdate as start,a_edate as end from assignment where user_id='$user_id' and a_finish<1 order by a_sdate desc ");
     }
     function getMyHistoryAssignments($user_id){
-    	return $this->db->getAll("select r.user_id,r.selected,a.*  ,s.cs_name,c.c_title
-    	from assignment_rel r 
-		left join assignment a on a.a_id=r.a_id 
+    	return $this->db->getAll("select a.*  ,s.cs_name,c.c_title
+    	from assignment a 
 		left join store s on s.cs_id=a.cs_id 
 		left join corporation c on c.c_id=a.c_id 
-		where r.user_id='$user_id' and a.a_finish =1
+		where a.user_id='$user_id' and a.a_finish =1
+		order by a.a_edate asc;
+		");
+    }
+    function getCorpAssignments($c_id){
+    	return $this->db->getAll("select a.*  ,s.cs_name,c.c_title
+    	from assignment a 
+		left join store s on s.cs_id=a.cs_id 
+		left join corporation c on c.c_id=a.c_id 
+		where a.c_id='$c_id' and a.a_finish =1
 		order by a.a_edate asc;
 		");
     }
@@ -171,7 +179,7 @@ class AssignmentModel extends Model {
     	if(is_array($cs_id) && count($cs_id)>0) $addsql = "cs_id in (".join(",",$cs_id).")";
     	else  $addsql = "cs_id ='".$cs_id."'";
     	//echo "select a_id,re_id,DATE_FORMAT(a_fdate, '%m-%d') as day,a_title from assignment where cs_id='$cs_id' $add order by day";
-    	return $this->db->getAll("select a_id,cs_id,re_id,DATE_FORMAT(a_fdate, '%m-%d') as day,a_title from assignment where $addsql $add order by day");
+    	return $this->db->getAll("select a_id,cs_id,re_id,DATE_FORMAT(a_fdate, '%Y-%m-%d') as day,a_title from assignment where $addsql $add order by day desc");
     }
     
     function getAssignmentComments($con,$pageCount){
@@ -238,7 +246,7 @@ class AssignmentModel extends Model {
 		}
 	}
 	
-	function getSummaryScoreByAsId($a_id,$re_id,$group){
+	function getSummaryScoreByAsId($a_id,$re_id,$group,$type=''){
 //		if($group=='service') $group=1;
 //		if($group=='environment') $group=2;
 //		if($group=='product') $group=3;
@@ -249,9 +257,13 @@ class AssignmentModel extends Model {
 		$rq_arr = $this->db->getAll($sql);
 		$q_row = count($rq_arr);
 		//echo "row:".$q_row."|";
+		
 		$sum = 0;
+		$n = 0;
 		if($q_row>0){
 			foreach ($rq_arr as $rq){
+				if($type && $type!=$rq['rq_type']) continue;
+				
 				if($rq['rq_type']==2){
 					$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=2";
 					$sum += $this->db->getOne($sql);
@@ -260,14 +272,20 @@ class AssignmentModel extends Model {
 					$yn = $this->db->getOne($sql);
 					$sum += ($yn=='Y')?10:0;
 				}
+				$n++;
 			}
+			//echo $a_id."=".$sum."/".$n."<br/>";
 			// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
-			$average += $sum/$q_row;
+			if($n>0)$average = $sum/$n;
 			return round($average,2);
 		}
 		return 0;
 	}
-	
+	function getTimeByRqId($rq_id,$a_id){
+		$sql = "select ans_answer4 from answer where rq_id='".$rq_id."' and a_id = '".$a_id."' and rq_type=4";
+		//echo $sql;
+		return $this->db->getOne($sql);
+	}
 	function saveAttachment($field,$table){
 		return $this->db->insert($field,$table);
 	}

@@ -310,9 +310,9 @@
 	   <start_value>4.877</start_value>                        <!-- (number) value at which guide should be placed -->
 	   <end_value></end_value>                                 <!-- (number) if you set value here too, another quide will be drawn. If you set fill alpha > 0, then the area between these quides will be filled with color -->
 	   <title>average</title>                             <!-- (string) text which will be displayed near the guide -->
-	   <width></width>                                         <!-- [0] (Number) width of a guide line (0 for hairline) -->
-	   <color></color>                                  <!-- [#000000] (hex color code) color of guide line -->   
-	   <alpha></alpha>                                         <!-- [100] (0 - 100) opacity of guide line -->
+	   <width>1</width>                                         <!-- [0] (Number) width of a guide line (0 for hairline) -->
+	   <color>#000000</color>                                  <!-- [#000000] (hex color code) color of guide line -->   
+	   <alpha>50</alpha>                                         <!-- [100] (0 - 100) opacity of guide line -->
 	   <fill_color></fill_color>                               <!-- [guide.color] (hex color code) fill color. If not defined, color of a guide will be used. Separate color codes with comas for gradient -->
 	   <fill_alpha></fill_alpha>                               <!-- [0] (0 - 100) opacity of a fill -->                                  
 	   <inside>true</inside>                                   <!-- [values.value.inside] whether to place title inside plot area -->
@@ -320,7 +320,7 @@
 	   <rotate></rotate>                                       <!-- [values.value.rotate] (0 - 90) angle of rotation of title. -->
 	   <text_size></text_size>                                 <!-- [values.value.text_size] (Number)  -->
 	   <text_color></text_color>                               <!-- [values.value.color] (hex color code) -->
-     <dashed></dashed>                                       <!-- [false] (true / false) -->
+     <dashed>false</dashed>                                       <!-- [false] (true / false) -->
      <dash_length></dash_length>                             <!-- [5] (Number) -->     	   
 	 </guide>  
 	</guides>    
