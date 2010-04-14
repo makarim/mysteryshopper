@@ -176,10 +176,11 @@ class AssignmentModel extends Model {
     	$add =$addsql = '';
     	if(!empty($con['sdate'])) $add .= " and a_fdate >='".$con['sdate']."'";
     	if(!empty($con['edate'])) $add .= " and a_fdate < '".$con['edate']."'";
-    	if(is_array($cs_id) && count($cs_id)>0) $addsql = "cs_id in (".join(",",$cs_id).")";
-    	else  $addsql = "cs_id ='".$cs_id."'";
+    	if(!empty($con['a_audit'])) $add .= " and a_audit = '".$con['a_audit']."'";
+    	if(is_array($cs_id) && count($cs_id)>0) $addsql = " and cs_id in (".join(",",$cs_id).")";
+    	else  $addsql = " and cs_id ='".$cs_id."'";
     	//echo "select a_id,re_id,DATE_FORMAT(a_fdate, '%m-%d') as day,a_title from assignment where cs_id='$cs_id' $add order by day";
-    	return $this->db->getAll("select a_id,cs_id,re_id,DATE_FORMAT(a_fdate, '%Y-%m-%d') as day,a_title from assignment where $addsql $add order by day desc");
+    	return $this->db->getAll("select a_id,cs_id,re_id,DATE_FORMAT(a_fdate, '%Y-%m-%d') as day,a_title from assignment where 1 $addsql $add order by cs_id,day asc");
     }
     
     function getAssignmentComments($con,$pageCount){
@@ -190,6 +191,7 @@ class AssignmentModel extends Model {
 		if(isset($con['c_id']) && !empty($con['c_id'])) $select->where ( " a.c_id = '".$con['c_id']."'" );
 		if(isset($con['sdate']) && !empty($con['sdate'])) $select->where ( " a.a_fdate >= '".$con['sdate']."'" );
 		if(isset($con['edate']) && !empty($con['edate'])) $select->where ( " a.a_fdate <= '".$con['edate']."'" );
+		if(isset($con['a_audit']) && !empty($con['a_audit'])) $select->where ( " a.a_audit = '".$con['a_audit']."'" );
 		if(isset($con['selstores']) && !empty($con['selstores'])){
 			if(is_array($con['selstores'])) $select->where ( "a.cs_id in (".join(",",$con['selstores']).")" );
 			else   $select->where (  "a.cs_id ='".$con['selstores']."'");
@@ -229,7 +231,7 @@ class AssignmentModel extends Model {
 	
 	function getCommentsByAsId($a_id,$re_id){
 			
-		$sql = "select rq_id,rq_type,rq_group from report_question where rq_type=3 and re_id='".$re_id."'";
+		$sql = "select rq_id,rq_type,rq_group from report_question where rq_type=3 and rq_group!=5 and re_id='".$re_id."'";
 		$rq_arr = $this->db->getAll($sql);
 		$q_row = count($rq_arr);
 		$sum = 0;
@@ -239,7 +241,7 @@ class AssignmentModel extends Model {
 			foreach ($rq_arr as $rq){
 				$sql = "select ans_answer3 from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."'";
 				$comments[$rq['rq_group']]['score'] = $this->getSummaryScoreByAsId($a_id,$re_id,$rq['rq_group']);
-				$comments[$rq['rq_group']]['content']= $this->db->getOne($sql);
+				$comments[$rq['rq_group']]['content'][]= $this->db->getOne($sql);
 			}
 			// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
 			return $comments;
@@ -254,6 +256,7 @@ class AssignmentModel extends Model {
 		$average = 0;
 		//一份报告有多少个的同group的打分题目
 		$sql = "select rq_id,rq_type from report_question where rq_group='$group' and re_id='".$re_id."'";
+	
 		$rq_arr = $this->db->getAll($sql);
 		$q_row = count($rq_arr);
 		//echo "row:".$q_row."|";
@@ -267,12 +270,14 @@ class AssignmentModel extends Model {
 				if($rq['rq_type']==2){
 					$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=2";
 					$sum += $this->db->getOne($sql);
+					$n++;
 				}else if($rq['rq_type']==1){
 					$sql = "select ans_answer1  from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=1";
 					$yn = $this->db->getOne($sql);
 					$sum += ($yn=='Y')?10:0;
+					$n++;
 				}
-				$n++;
+				
 			}
 			//echo $a_id."=".$sum."/".$n."<br/>";
 			// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
@@ -291,6 +296,9 @@ class AssignmentModel extends Model {
 	}
 	function getUploadedAttachment($a_id){
 		return $this->db->getAll("select * from assignment_attachment where a_id='{$a_id}'");
+	}
+	function getFirstAssignmentByCId($cid){
+		return $this->db->getOne("select a_id from assignment where c_id='$cid' order by a_id asc limit 1");
 	}
 }
 ?>

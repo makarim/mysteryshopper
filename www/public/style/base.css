@@ -299,7 +299,9 @@ li {
 /*后台任务部分*/
 .mission {
 	float:left;
-	padding:10px 20px 10px 30px;
+	width:140px;
+	padding-left:35px;
+	padding-top:10px;
 }
 .mission .logo {
 	width:96px;

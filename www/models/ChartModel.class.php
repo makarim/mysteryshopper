@@ -7,6 +7,7 @@ class ChartModel extends Model {
 		$this->sdate = $sdate;
 		$this->edate = $edate;
 		$addsql = '';
+		$this->addsql = " and a.a_audit=1 ";
 		if($this->sdate) $this->addsql .= " and a.a_fdate >= '$this->sdate'";
 		if($this->edate) $this->addsql .= " and a.a_fdate < '$this->edate'";
 		$this->db = parent::dbConnect($GLOBALS ["gDataBase"] ["db"]);

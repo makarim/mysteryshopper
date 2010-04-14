@@ -19,18 +19,21 @@
 				<input type="hidden" name="a_id" value="<?php echo $a_id;?>">
 				<input type="hidden" name="num" value="<?php echo count($quiz);?>">
 <?php if($do_quiz=='fail') echo "<font color='red'>对不起！您的测试不通过，请重新做题。</font>";?>
-		<table  cellpadding="10" cellspacing="10">
+<br />
 
-					
+		<table width="100%" cellpadding="10" cellspacing="1" class="missionReport" class="clear">
+
+					<tr>
+							<td class="title">序号</td>
+							<td class="title">题目</td>
+							<td class="title">选项</td>
+							</tr>
 					<?php
 	
 							foreach ($quiz as $k=>$v){?>	
 					<tr>
-							
-							<td><?php echo ($k+1).". "; if(isset($v['title'])) echo $v['title'];?></td>
-							
-					</tr>
-					<tr>
+							<td valign="top" width="6%"><?php echo ($k+1).". ";?></td>
+							<td valign="top" width="50%"><?php  if(isset($v['title'])) echo $v['title'];?></td>
 							
 							<td>
 							<ul class="quiz">
@@ -47,8 +50,10 @@
 						<?php }
 				
 						?>
+						</table>
+				<table width="100%" height="50px">
 					<tr class="nobg">
-						<td><input type="submit" value="<?php echo lang('submit')?>" class="btn" /></td>
+						<td align="center"><input type="submit" value="<?php echo lang('submit')?>" class="btn" /></td>
 					</tr>
 				</table>
   </form>
