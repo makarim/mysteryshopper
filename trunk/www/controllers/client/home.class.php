@@ -139,12 +139,15 @@ class home{
 			include_once("ChartModel.class.php"); 
 			$ChartModel = new ChartModel($sdate,$edate);
 			$questions = $ChartModel->getTimeQuestionsByCId($this->login_corp['c_id'],'all');
-			$rq_id = $questions['0']['rq_id'];
-			$this->tpl->assign("questions",$questions);
-			$this->tpl->assign("rq_id",$rq_id);
-			$chart_title = $questions['0']['rq_question'];
+			if($questions){
+				$rq_id = $questions['0']['rq_id'];
+				$this->tpl->assign("questions",$questions);
+				$this->tpl->assign("rq_id",$rq_id);
+				$chart_title = $questions['0']['rq_question'];
+			}
 		}
 		$count = count($assignments);
+		$print_sdate = '';
 		if(is_array($assignments)){
 			foreach ($assignments as $k=>$v){
 				if($k==$count-1 && $sdate=='') $print_sdate = $v['day'];
@@ -198,6 +201,7 @@ class home{
 		$assignmentModel = new AssignmentModel();
 		$assignments = $assignmentModel->getAssignmentsByCsId($con,$selstores);
 		$rq_id = '';
+		
 		if($type=='time'){
 			include_once("ChartModel.class.php"); 
 			$ChartModel = new ChartModel($sdate,$edate);
@@ -213,7 +217,7 @@ class home{
 			
 			
 		}
-		
+		$print_sdate = '';
 		$count = count($assignments);
 		if(is_array($assignments)){
 			foreach ($assignments as $k=>$v){
@@ -282,7 +286,7 @@ class home{
 			
 			
 		}
-		
+		$print_sdate = '';
 		$count = count($assignments);
 		if(is_array($assignments)){
 			foreach ($assignments as $k=>$v){
@@ -351,7 +355,7 @@ class home{
 			
 			
 		}
-		
+		$print_sdate = '';
 		$count = count($assignments);
 		if(is_array($assignments)){
 			foreach ($assignments as $k=>$v){
