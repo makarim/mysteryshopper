@@ -11,7 +11,7 @@
                   <td class="title">品牌</td>
 
                   <td class="title">分店</td>
-                  <td class="title">任务名称</td>
+                  <td class="title">任务/问卷</td>
                   <td class="title">报酬（单价：人民币）</td>
                 </tr>
                 <?php
@@ -22,7 +22,7 @@
                   <td><?php echo $v['c_title']?></td>
 
                   <td><?php echo $v['cs_name']?></td>
-                  <td><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><?php echo $v['a_title']?></a></td>
+                  <td><a href="/client.php?action=home&view=reportcomplete&re_id=<?php echo $v['re_id']?>&a_id=<?php echo $v['a_id']?>"><?php echo $v['a_title']?></a></td>
                   <td><?php echo $v['a_cost']?></td>
                 </tr>
              <?php }}?>

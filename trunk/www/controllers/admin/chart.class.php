@@ -140,6 +140,7 @@ $xml .="
 			$ChartModel = new ChartModel($sdate,$edate);
 			$con['sdate'] = $sdate;
 			$con['edate'] = $edate;
+			$con['a_audit'] = 1;
 			include_once("AssignmentModel.class.php");	
 			$assignmentModel = new AssignmentModel();
 			$series = $assignmentModel->getAssignmentsByCsId($con,$cs_id);

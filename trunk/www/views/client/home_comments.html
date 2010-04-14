@@ -64,14 +64,17 @@
             <td width="7%" class="title">得分</td>
           </tr>
           <?php if(isset($a['comments']) && is_array($a['comments'])){
-			foreach ($a['comments'] as $k=>$v) {
-          	
+			foreach ($a['comments'] as $k=>$v) {  	
           	?>
-          <tr>
+          <tr>	
             <td width="6%" align="center"><?php echo  lang($GLOBALS['gGroups'][$k]);?></td>
-
-            <td width="87%"><?php echo $v['content']?></td>
-            <td align="center"><?php echo $v['score']?></td>
+			<?php if($k=='4'){?>
+				<td colspan="2"><?php echo join("<br />",$v['content'])?></td>
+            
+			<?php }else {?>
+            	<td width="87%"><?php echo join("<br />",$v['content'])?></td>
+            	<td align="center"><?php echo $v['score']?></td>
+            <?php }?>
           </tr>
            <?php 
         	}
@@ -82,7 +85,8 @@
         	}
         }?> 
           <br />
-          <div class="pages"><?php echo $assignments['pagebar']?></div></td>
+          <? if(!empty( $assignments['pagebar'])){?><div class="pages"><?php echo $assignments['pagebar']?></div><?php }?>
+          </td>
         <td class="table2RightBorder"></td>
       </tr>
       <tr>

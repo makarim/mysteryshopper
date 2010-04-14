@@ -73,11 +73,45 @@ class home{
 	function view_shoppers(){
 		$type = !empty($_GET['view'])?$_GET['view']:"corp";
 		$this->tpl->assign("type",$type);
+		
+		include_once("AssignmentModel.class.php");
+    	$this->assignmentModel = new AssignmentModel();
+    	$a_id = $this->assignmentModel->getFirstAssignmentByCId($this->login_corp['c_id']);
+    	$assignmentinfo = $this->assignmentModel->getAssignmentById($a_id);
+    	if(!$assignmentinfo){
+    		
+    	}
+    	$this->tpl->assign('a_id',$a_id);
+    	$this->tpl->assign('assignmentinfo',$assignmentinfo);
 	}
 	function view_quiz(){
 		$type = !empty($_GET['view'])?$_GET['view']:"corp";
 		$this->tpl->assign("type",$type);
+		
+		include_once("AssignmentModel.class.php");
+    	$this->assignmentModel = new AssignmentModel();
+    	$a_id = $this->assignmentModel->getFirstAssignmentByCId($this->login_corp['c_id']);
+    	$assignmentinfo = $this->assignmentModel->getAssignmentById($a_id);
+    	if($assignmentinfo) $quiz = $this->assignmentModel->generateQuiz($assignmentinfo['a_quiz']);
+		$this->tpl->assign("quiz",$quiz);
+    	$this->tpl->assign('a_id',$a_id);
+    	$this->tpl->assign('assignmentinfo',$assignmentinfo);
 	}
+	function view_description(){
+		$type = !empty($_GET['view'])?$_GET['view']:"corp";
+		$this->tpl->assign("type",$type);
+		
+		include_once("AssignmentModel.class.php");
+    	$this->assignmentModel = new AssignmentModel();
+    	$a_id = $this->assignmentModel->getFirstAssignmentByCId($this->login_corp['c_id']);
+    	$assignmentinfo = $this->assignmentModel->getAssignmentById($a_id);
+    	if(!$assignmentinfo){
+    		
+    	}
+    	$this->tpl->assign('a_id',$a_id);
+    	$this->tpl->assign('assignmentinfo',$assignmentinfo);
+	}
+	
 	function view_overall(){
 		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
 		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
@@ -96,6 +130,7 @@ class home{
 		
 		$con['sdate'] = $sdate;
 		$con['edate'] = $edate;
+		$con['a_audit'] = 1;
 		include_once("AssignmentModel.class.php");	
 		$assignmentModel = new AssignmentModel();
 		$assignments = $assignmentModel->getAssignmentsByCsId($con,$selstores);
@@ -109,7 +144,6 @@ class home{
 			$this->tpl->assign("rq_id",$rq_id);
 			$chart_title = $questions['0']['rq_question'];
 		}
-		
 		$count = count($assignments);
 		if(is_array($assignments)){
 			foreach ($assignments as $k=>$v){
@@ -159,6 +193,7 @@ class home{
 		
 		$con['sdate'] = $sdate;
 		$con['edate'] = $edate;
+		$con['a_audit'] = 1;
 		include_once("AssignmentModel.class.php");	
 		$assignmentModel = new AssignmentModel();
 		$assignments = $assignmentModel->getAssignmentsByCsId($con,$selstores);
@@ -227,6 +262,7 @@ class home{
 		
 		$con['sdate'] = $sdate;
 		$con['edate'] = $edate;
+		$con['a_audit'] = 1;
 		include_once("AssignmentModel.class.php");	
 		$assignmentModel = new AssignmentModel();
 		$assignments = $assignmentModel->getAssignmentsByCsId($con,$selstores);
@@ -295,6 +331,7 @@ class home{
 		
 		$con['sdate'] = $sdate;
 		$con['edate'] = $edate;
+		$con['a_audit'] = 1;
 		include_once("AssignmentModel.class.php");	
 		$assignmentModel = new AssignmentModel();
 		$assignments = $assignmentModel->getAssignmentsByCsId($con,$selstores);
@@ -360,6 +397,7 @@ class home{
 		
 		$con['sdate'] = $sdate;
 		$con['edate'] = $edate;
+		$con['a_audit'] = 1;
 			
 		include_once("AssignmentModel.class.php");	
 		$assignmentModel = new AssignmentModel();
@@ -392,6 +430,7 @@ class home{
 		$con['edate'] = $edate;
 		$con['order'] = 'a_id';
 		$con['selstores'] = $cs_id;
+		$con['a_audit'] = 1;
 		include_once("AssignmentModel.class.php");	
 		$assignmentModel = new AssignmentModel();
 
@@ -412,6 +451,30 @@ class home{
 		$assignmentModel = new AssignmentModel();
 		$myassignment = $assignmentModel->getCorpAssignments($this->login_corp['c_id']);
 		$this->tpl->assign("myassignment",$myassignment);
+	}
+	
+	function view_reportcomplete(){
+		$re_id = $_GET['re_id'];
+		$a_id = $_GET['a_id'];
+    	
+		include_once("ReportModel.class.php");
+		$ReportModel = new ReportModel();
+		$report_questions = array();
+			foreach ($GLOBALS['gGroups'] as $k=>$v){
+				$arr = $ReportModel->getQuestionsByReId($re_id,$k);
+				
+				if($arr){
+					foreach ($arr as $kk=>$vv){
+						$vv['answer'] = $ReportModel->getAnswerByAid($a_id,$vv['rq_id'],$vv['rq_type']);
+						$arr[$kk] = $vv;
+					}
+				}
+			
+				$report_questions[$v] = $arr;
+				
+			}
+		
+		$this->tpl->assign("report_questions",$report_questions);
 	}
 }
 ?>

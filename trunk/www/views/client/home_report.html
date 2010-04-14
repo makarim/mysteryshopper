@@ -4,74 +4,48 @@
 
 <?php include_once("home_left.html")?>
 <div class="admincontent">
-<div id="tabsD" style="width:100%"> 
-  <ul> 
-    <li <?php if($type=='shoppers') echo 'class="on"';?>><a href="/client.php/home/shoppers" title="神秘顾客要求"><span>神秘顾客要求</span></a></li> 
-    <li <?php if($type=='quiz') echo 'class="on"';?>><a href="/client.php/home/quiz" title="测试题目"><span>测试题目</span></a></li> 
-    <li <?php if($type=='report') echo 'class="on"';?>><a href="/client.php/home/report" title="调查问卷"><span>调查问卷</span></a></li> 
-  </ul> 
-</div>
+	<div id="tabsD" style="width:100%"> 
+	  <ul> 
+	    <li <?php if($type=='shoppers') echo 'class="on"';?>><a href="/client.php/home/shoppers" title="要求"><span>要求</span></a></li> 
+	    <li <?php if($type=='description') echo 'class="on"';?>><a href="/client.php/home/description" title="说明"><span>说明</span></a></li> 
+	    <li <?php if($type=='quiz') echo 'class="on"';?>><a href="/client.php/home/quiz" title="测试题目"><span>测试题目</span></a></li> 
+	    <li <?php if($type=='report') echo 'class="on"';?>><a href="/client.php/home/report" title="调查问卷"><span>调查问卷</span></a></li> 
+	  </ul> 
+	</div>
 
-<br />
-      <br />
-      <br />
-      <table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport">
-          <tr>
-            <td  width="30%" class="title">说明</td>
-            <td  width="60%" class="title">等级</td>
-            <td width="10%" class="title" >分数</td>
-          </tr>
-          <tr>
-            <td rowspan="8">请根据下列指示在右栏内评出"1-10"的具体
-分数：</td>
-            <td>完美</td>
-            <td style="background-color:#ccc;">10</td>
-          </tr>          
-          <tr>
-      
-            <td>很好</td>
-            <td style="background-color:#ccc;">8-9</td>
-          </tr>
-          <tr>
-           
-            <td>好</td>
-            <td style="background-color:#ccc;">6-7</td>
-          </tr>  
-           <tr>
-          
-            <td>一般</td>
-            <td style="background-color:#ccc;">5</td>
-          </tr>        
-           <tr>
-          
-            <td>有待改进</td>
-            <td style="background-color:#ccc;">3-4</td>
-          </tr>  
-          
-          <tr>
-           
-            <td>不好</td>
-            <td style="background-color:#ccc;">2</td>
-          </tr> 
-           <tr>
-            
-            <td>差</td>
-            <td style="background-color:#ccc;">1</td>
-          </tr>     
-           <tr>
-            
-            <td>不适用</td>
-            <td style="background-color:#ccc;">n/a</td>
-          </tr>
+<br /><br />
+				 <br />
+		    <p>评分说明：</p>
+			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport" class="clear">
+	          <tr>
+	            <td class="title">不适用</td>
+	            <td class="title">差</td>
+	            <td class="title">不好</td>
+	            <td class="title">需要改进</td>
+	            <td class="title">一般</td>
+	            <td class="title">好</td>
+	            <td class="title">很好</td>
+	            <td class="title">完美</td>
+	          </tr> 
+	          <tr>
+	            <td align="center">n/a</td>
+	            <td align="center">0</td>
+	            <td align="center">1-2</td>
+	            <td align="center">3-4</td>
+	            <td align="center">5</td>
+	            <td align="center">6-7</td>
+	            <td align="center">8-9</td>
+	            <td align="center">10</td>
+	          </tr>
+       
           </table>
-         <br />
-         <br />
-       <?php
-		foreach ($report_questions as $k=>$v){?>
-		<table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport">
-          <tr>
-            <td colspan="3" class="title"><?php echo lang($k);?></td>
          
+      <?php
+		foreach ($report_questions as $k=>$v){?>
+		<table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport" style="margin-top:10px;">
+          <tr>
+            <td  colspan="3" class="title"><?php echo lang($k);?></td>
+            
           </tr>
           <?php
 			foreach ($v as $kk=>$vv){
@@ -83,31 +57,42 @@
             <td  width="10%" align="center"></td>
           </tr>
        		 <?php 
-				}else{
+				}else if($vv['rq_type']==3){ 
 			?>
+			  <?php  
+					if($vv['rq_group']==5){
+					?>	
 			<tr>
 			 <td width="5%" valign="top"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
-            <td width="95%" colspan="2" style="padding:0">
-            <table width="100%" border="0" cellpadding="0" cellspacing="0">
-            <tr> 
-            <td width="50%" style="background-color:#ccc;"> <?php echo $vv['rq_question']?></td>
+			  <td width="65%"><?php echo $vv['rq_question']?></td>
+              <td  width="30%" align="center"></td>
+          	</tr>
+          <? }else{?>
+			<tr>
+			 <td width="5%" valign="top"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
+             <td width="95%" colspan="2" style="padding:0">
             
-           </tr>
-           <tr>
-           <td style="height:50px"></td>
-            </tr>
-            </table>
-           </td>
-            
-          </tr>
-			<?php		
+		            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+			            <tr> 
+			            	<td width="50%" style="background-color:#ccc;"> <?php echo $vv['rq_question']?></td>
+			            
+			          	</tr>
+			           <tr>
+				           <td style="height:50px">
+													
+				           </td>
+			            </tr>
+		             </table>
+            </td>
+          </tr>	
+	   <?php } 
+			
 				}
 				
 			}
 			?>
         </table>
- 		<?php }
-		?>
+ 		<?php }?>
 
 </div>
 

@@ -6,7 +6,8 @@
 <div class="admincontent">
 <div id="tabsD" style="width:100%"> 
   <ul> 
-    <li <?php if($type=='shoppers') echo 'class="on"';?>><a href="/client.php/home/shoppers" title="神秘顾客要求"><span>神秘顾客要求</span></a></li> 
+    <li <?php if($type=='shoppers') echo 'class="on"';?>><a href="/client.php/home/shoppers" title="要求"><span>要求</span></a></li> 
+    <li <?php if($type=='description') echo 'class="on"';?>><a href="/client.php/home/description" title="说明"><span>说明</span></a></li> 
     <li <?php if($type=='quiz') echo 'class="on"';?>><a href="/client.php/home/quiz" title="测试题目"><span>测试题目</span></a></li> 
     <li <?php if($type=='report') echo 'class="on"';?>><a href="/client.php/home/report" title="调查问卷"><span>调查问卷</span></a></li> 
   </ul> 
@@ -14,8 +15,40 @@
 
 <br />
       <br />
-      <br />
-开发中
+<table width="100%" cellpadding="10" cellspacing="1" class="missionReport" class="clear" style="margin-top:10px">
+
+					<tr>
+							<td class="title">序号</td>
+							<td class="title">题目</td>
+							<td class="title">选项</td>
+							<td class="title">答案</td>
+							</tr>
+					<?php
+	
+							foreach ($quiz as $k=>$v){?>	
+							
+					<tr>
+							<td valign="top" width="6%"><?php echo ($k+1).". ";?></td>
+							<td valign="top" width="50%"><?php  if(isset($v['title'])) echo $v['title'];?></td>
+							
+							<td>
+							<ul class="quiz">
+<?php if(isset($v['A'])) {?><li><label>A. <?php echo $v['A']?></label></li><?php }?>
+<?php if(isset($v['B'])) {?><li><label>B. <?php echo $v['B']?></label></li><?php }?>
+<?php if(isset($v['C'])) {?><li><label>C. <?php echo $v['C']?></label></li><?php }?>
+<?php if(isset($v['D'])) {?><li><label>D. <?php echo $v['D']?></label></li><?php }?>
+							</ul>
+							</td>
+							<td  valign="top">
+							<?php echo $v['answer'];?>
+							</td>
+							
+					</tr>
+						
+						<?php }
+				
+						?>
+						</table>
    
 
 </div>
