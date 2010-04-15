@@ -131,7 +131,7 @@
       <enabled></enabled>                                     <!-- [true] (true / false) -->
       <reverse></reverse>                                     <!-- [false] (true / false) whether to reverse this axis values or not. If set to true, values will start from biggest number and will end with a smallest number -->    
       <min>0</min>                                            <!-- [] (Number) minimum value of this axis. If empty, this value will be calculated automatically. -->
-      <max></max>                                             <!-- [] (Number) maximum value of this axis. If empty, this value will be calculated automatically -->
+      <max>10</max>                                             <!-- [] (Number) maximum value of this axis. If empty, this value will be calculated automatically -->
       <strict_min_max></strict_min_max>                       <!-- [false] (true / false) by default, if your values are bigger then defined max (or smaller then defined min), max and min is changed so that all the chart would fit to chart area. If you don't want this, set this option to true. -->
       <frequency></frequency>                                 <!-- [1] (Number) how often values should be placed, 1 - near every gridline, 2 - near every second gridline... -->
       <rotate></rotate>                                       <!-- [0] (0 - 90) angle of rotation. If you want to rotate by degree from 1 to 89, you must have font.swf file in fonts folder -->      
@@ -309,9 +309,9 @@
   	 <behind>true</behind>                                       <!-- [false] (true / false) whether your guides should appear in front of columns or behind them -->
 	   <start_value>4.877</start_value>                        <!-- (number) value at which guide should be placed -->
 	   <end_value></end_value>                                 <!-- (number) if you set value here too, another quide will be drawn. If you set fill alpha > 0, then the area between these quides will be filled with color -->
-	   <title>average</title>                             <!-- (string) text which will be displayed near the guide -->
-	   <width>1</width>                                         <!-- [0] (Number) width of a guide line (0 for hairline) -->
-	   <color>#000000</color>                                  <!-- [#000000] (hex color code) color of guide line -->   
+	   <title></title>                             <!-- (string) text which will be displayed near the guide -->
+	   <width>0</width>                                         <!-- [0] (Number) width of a guide line (0 for hairline) -->
+	   <color>#0000ff</color>                                  <!-- [#000000] (hex color code) color of guide line -->   
 	   <alpha>50</alpha>                                         <!-- [100] (0 - 100) opacity of guide line -->
 	   <fill_color></fill_color>                               <!-- [guide.color] (hex color code) fill color. If not defined, color of a guide will be used. Separate color codes with comas for gradient -->
 	   <fill_alpha></fill_alpha>                               <!-- [0] (0 - 100) opacity of a fill -->                                  

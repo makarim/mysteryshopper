@@ -300,13 +300,14 @@ li {
 .mission {
 	float:left;
 	width:140px;
-	padding-left:35px;
-	padding-top:10px;
+	height:180px;
+	margin-top:15px;
+	margin-left:35px;
 }
 .mission .logo {
 	width:96px;
 	height:96px;
-	line-height:96px;
+	
 	background:url(../images/bg_clentlogo.gif) no-repeat;
 	display:table-cell;
 	text-align:center;

@@ -18,7 +18,7 @@
               if(isset($myassignment)&& is_array($myassignment)){
 							foreach ($myassignment as $k=>$v){?>
                 <tr>
-                  <td><?php echo $v['a_fdate']?></td>
+                  <td><?php echo substr( $v['a_fdate'],0,10);?></td>
                   <td><?php echo $v['c_title']?></td>
 
                   <td><?php echo $v['cs_name']?></td>
