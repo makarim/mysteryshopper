@@ -155,7 +155,7 @@ class AssignmentModel extends Model {
 		");
     }
     function getCorpAssignments($c_id){
-    	return $this->db->getAll("select a.*  ,s.cs_name,c.c_title
+    	return $this->db->getAll("select a.* ,s.cs_name,c.c_title
     	from assignment a 
 		left join store s on s.cs_id=a.cs_id 
 		left join corporation c on c.c_id=a.c_id 
@@ -171,7 +171,12 @@ class AssignmentModel extends Model {
 		order by a.a_order desc limit 8;
 		");
     }
-    
+    function getEndDateByCId($c_id){
+    	return $this->db->getOne("select DATE_FORMAT(a_fdate, '%Y-%m-%d') as day from assignment where c_id='$c_id' and a_audit=1 order by day desc limit 1");
+    }    
+    function getStartDateByCId($c_id){
+    	return $this->db->getOne("select DATE_FORMAT(a_fdate, '%Y-%m-%d') as day from assignment where c_id='$c_id' and a_audit=1 order by day asc limit 1");
+    }
     function getAssignmentsByCsId($con,$cs_id){
     	$add =$addsql = '';
     	if(!empty($con['sdate'])) $add .= " and a_fdate >='".$con['sdate']."'";
@@ -240,7 +245,17 @@ class AssignmentModel extends Model {
 		if($q_row>0){
 			foreach ($rq_arr as $rq){
 				$sql = "select ans_answer3 from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."'";
-				$comments[$rq['rq_group']]['score'] = $this->getSummaryScoreByAsId($a_id,$re_id,$rq['rq_group']);
+				if(!isset($comments[$rq['rq_group']]['score'])){
+					if($rq['rq_group']==4){
+						$score =0;
+						$score += $this->getSummaryScoreByAsId($a_id,$re_id,1);
+						$score += $this->getSummaryScoreByAsId($a_id,$re_id,2);
+						$score += $this->getSummaryScoreByAsId($a_id,$re_id,3);
+						$comments[$rq['rq_group']]['score']  = round($score/3,2);
+					}else{
+						$comments[$rq['rq_group']]['score'] = $this->getSummaryScoreByAsId($a_id,$re_id,$rq['rq_group']);
+					}
+				}
 				$comments[$rq['rq_group']]['content'][]= $this->db->getOne($sql);
 			}
 			// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值

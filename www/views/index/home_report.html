@@ -117,8 +117,8 @@ function checkform(form){
 				?>
           <tr>
 			 <td width="5%"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
-            <td width="65%"><?php echo $vv['rq_question']?> <span id="span_ch_<?php echo $vv['rq_id'];?>" style="float:right;"></span></td>
-            <td  width="30%" align="center">
+            <td width="60%"><?php echo $vv['rq_question']?> <span id="span_ch_<?php echo $vv['rq_id'];?>" style="float:right;"></span></td>
+            <td  width="35%" align="center">
             <?php if($vv['rq_type']==2){?><label style="float:left;"><input type="checkbox" id="votebox_<?php echo $vv['rq_id'];?>" name="votebox_<?php echo $vv['rq_id'];?>" onclick="out_fs('yes_<?php echo $vv['rq_id'];?>_10');">n/a</label><div id="voteimg_<?php echo $vv['rq_id'];?>"></div>	
 								<input type="hidden" id="rq_ans_<?php echo $vv['rq_id'];?>" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="<?php echo $vv['answer'];?>">
 								<script>create_vote_img(<?php echo $vv['rq_id'];?>,'<?php echo $vv['answer'];?>');</script>	
@@ -139,8 +139,8 @@ function checkform(form){
 					?>	
 			<tr>
 			 <td width="5%" valign="top"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
-			 <td width="65%"><?php echo $vv['rq_question']?></td>
-            <td  width="30%" align="center"><input class="textfield" type="text" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="<?php echo $vv['answer']; ?>"></td>
+			 <td width="60%"><?php echo $vv['rq_question']?></td>
+            <td  width="35%" align="center"><input class="textfield" type="text" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="<?php echo $vv['answer']; ?>"></td>
                         
           </tr>
           <? }else{?>

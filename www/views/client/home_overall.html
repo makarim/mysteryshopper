@@ -57,10 +57,13 @@
   <tr>
     <td><div class="table2TitleBg">
       <div class="table2TitleBg2">
+      <?php if($type!='time'){?>
       <div style="float:right;margin-right:10px;">
-      <a href="javascript:exportImage();"><img src="<?php echo $www_site_url?>/public/images/export_image-icon.gif" border="0" title="export Image"></a>
-      <a href="javascript:print();"><img src="<?php echo $www_site_url?>/public/images/print_icon.jpg" border="0" title="Print"></a>
+      
+      <a href="javascript:exportImage(0);"><img src="<?php echo $www_site_url?>/public/images/export_image-icon.gif" border="0" title="export Image"></a>
+      <a href="javascript:print(0);"><img src="<?php echo $www_site_url?>/public/images/print_icon.jpg" border="0" title="Print"></a>
       </div>
+      <?php }?>
         <div class="table2Title">对比图</div>
        
       </div>
@@ -73,35 +76,54 @@
         <td class="table2LeftBorder"></td>
         <td>
         <p align="center">
-        	<div id="flashcontent">
-				<strong>You need to upgrade your Flash Player</strong>
-			</div>
-<?php if($type=='time'){?>
+        	
+<?php if($type=='time'){
+	if(is_array($questions)){
+		foreach ($questions as $k=> $ques){
+			
+			?>
+		
+      <div style="float:right;margin-right:10px;">
+      
+      <a href="javascript:exportImage(<?php echo $ques['rq_id']?>);"><img src="<?php echo $www_site_url?>/public/images/export_image-icon.gif" border="0" title="export Image"></a>
+      <a href="javascript:print(<?php echo $ques['rq_id']?>);"><img src="<?php echo $www_site_url?>/public/images/print_icon.jpg" border="0" title="Print"></a>
+      </div>
+     
+	<div id="flashcontent<?php echo $ques['rq_id']?>">
+		<strong>You need to upgrade your Flash Player</strong>
+	</div>
 	<script type="text/javascript">
 		// <![CDATA[		
-		var so = new SWFObject("<?php echo $www_site_url?>/public/flash/amcolumn.swf", "amcolumn", "100%", "400px", "8", "#ffffff");
+		var so = new SWFObject("<?php echo $www_site_url?>/public/flash/amcolumn.swf", "amcolumn<?php echo $ques['rq_id']?>", "100%", "400px", "8", "#ffffff");
 		so.addParam("wmode", "transparent");
 		so.addVariable("path", "<?php echo $www_site_url?>/public/flash/");
-		 so.addVariable("chart_id", "amcolumn");
+		 so.addVariable("chart_id", "amcolumn<?php echo $ques['rq_id']?>");
 		so.addVariable("settings_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amcolumn_settings2.xml?342"));
-		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=timedata&c_id=<?php echo $corp['c_id'];?>&rq_id=<?php echo $rq_id?>&sdate=<?php echo $sdate?>&edate=<?php echo $edate?>&selstores=<?php echo join(",",$selstores);?>&group=service,environment,product"));
+		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=timedata&c_id=<?php echo $corp['c_id'];?>&rq_id=<?php echo $ques['rq_id']?>&sdate=<?php echo $sdate?>&edate=<?php echo $edate?>&selstores=<?php echo join(",",$selstores);?>&group=service,environment,product"));
 		so.addVariable("preloader_color", "#ffffff");
-		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo $chart_title?></b>]]></text></label></labels></settings>"));
-		so.write("flashcontent");
+		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo "Q".($k+1).'. '.$ques['rq_question'].$chart_title?></b>]]></text></label></labels></settings>"));
+		so.write("flashcontent<?php echo $ques['rq_id']?>");
 		// ]]>
 	</script>
+	<?php
+		}
+	}
+	?>
 <?php
 }else {?>
+<div id="flashcontent">
+				<strong>You need to upgrade your Flash Player</strong>
+			</div>
 	<script type="text/javascript">
 		// <![CDATA[		
-		var so = new SWFObject("<?php echo $www_site_url?>/public/flash/amcolumn.swf", "amcolumn", "100%", "400px", "8", "#ffffff");
+		var so = new SWFObject("<?php echo $www_site_url?>/public/flash/amcolumn.swf", "amcolumn0", "100%", "400px", "8", "#ffffff");
 		so.addParam("wmode", "transparent");
 		so.addVariable("path", "<?php echo $www_site_url?>/public/flash/");
-		 so.addVariable("chart_id", "amcolumn");
+		 so.addVariable("chart_id", "amcolumn0");
 		so.addVariable("settings_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amcolumn_settings.xml?102"));
 		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=overalldata&scoretype=<?php echo $type;?>&c_id=<?php echo $corp['c_id'];?>&sdate=<?php echo $sdate?>&edate=<?php echo $edate?>&selstores=<?php echo join(",",$selstores);?>&group=service,environment,product"));
 		so.addVariable("preloader_color", "#ffffff");
-		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo $chart_title?></b>]]></text></label></labels><values><value><max>10</max></value></values></settings>"));
+		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo $chart_title?></b>]]></text></label></labels><guides><guide><title>Internal Average</title><start_value>4.877</start_value><inside>true</inside><text_color>#999999</text_color><behind>true</behind><width>1</width><color>#999999</color> </guide></guides></settings>"));
 
 		so.write("flashcontent");
 		// ]]>
@@ -111,11 +133,11 @@
               <p>&nbsp;</p>
           <p>&nbsp;</p>
 <script>
-function print(){
-  document.getElementById("amcolumn").printAsBitmap();
+function print(id){
+  document.getElementById("amcolumn"+id).printAsBitmap();
 }
-function exportImage() {
-  document.getElementById("amcolumn").exportImage('/plugins/export.php');  
+function exportImage(id) {
+  document.getElementById("amcolumn"+id).exportImage('/plugins/export.php');  
 }
 
 </script>
@@ -127,8 +149,14 @@ function exportImage() {
                  <tr>
                   <td>时间</td>
                   <td>任务</td>
-                  <td>时间/分钟</td>
-                 
+                  <?php
+                  if(is_array($questions)){
+		foreach ($questions as $k=>$ques){
+			
+			?>
+                  <td><?php echo "Q".($k+1)?> 时间</td>
+                 <?php }
+                  }?>
                 </tr>
                 <?php
                 if(isset($assignments)){
@@ -137,8 +165,15 @@ function exportImage() {
                 <tr>
                   <td width="15%"><?php echo $v['day']?></td>
                   <td width="40%"><?php echo $v['a_title']?></td>
-                  <td width="15%"><?php echo $v['times']?></td>
+                  <?php if(is_array( $v['times'])){
+                  	foreach ( $v['times'] as $t){
+                  		?>
 
+                  <td width="15%"><?php echo $t?></td>
+					<?php
+                  	}
+                  }
+                  	?>
                 </tr>
                 <?php
                 	}

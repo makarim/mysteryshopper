@@ -77,7 +77,7 @@ initMarquee();
               <td>
               <?php
               if(isset($myassignment)&& is_array($myassignment)){
-							foreach ($myassignment as $k=>$v){?>
+				foreach ($myassignment as $k=>$v){?>
           		<div class="mission">
                	  <div class="logo"><p><?php if($v['selected']) {?><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><img src="/public/upload/logo/<?php echo $v['c_logo']?>" width="68" height="68" border="0" alt="<?php echo $v['a_title']?>" /></a>
                	  <?php }else {?>
@@ -88,7 +88,7 @@ initMarquee();
                       开始时间：<?php echo $v['a_sdate']?><br />
 
                     结束时间：<?php echo $v['a_edate']?><br />
-                完成进度：<?php echo ($v['a_finish']*100)."%";?></div>
+               		完成进度：<?php echo ($v['a_finish']*100)."%";?></div>
                 </div>
           		
           		<?php }}?>

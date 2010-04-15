@@ -77,19 +77,7 @@
 				<strong>You need to upgrade your Flash Player</strong>
 			</div>
 <?php if($type=='time'){?>
-	<script type="text/javascript">
-		// <![CDATA[		
-		var so = new SWFObject("<?php echo $www_site_url?>/public/flash/amcolumn.swf", "amcolumn", "520px", "400px", "8", "#ffffff");
-		so.addParam("wmode", "transparent");
-		so.addVariable("path", "<?php echo $www_site_url?>/public/flash/");
-		 so.addVariable("chart_id", "amcolumn");
-		so.addVariable("settings_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amcolumn_settings2.xml?342"));
-		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=timedata&c_id=<?php echo $corp['c_id'];?>&rq_id=<?php echo $rq_id?>&sdate=<?php echo $sdate?>&edate=<?php echo $edate?>&selstores=<?php echo join(",",$selstores);?>&group=environment"));
-		so.addVariable("preloader_color", "#ffffff");
-		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo $chart_title?></b>]]></text></label></labels></settings>"));
-		so.write("flashcontent");
-		// ]]>
-	</script>
+
 <?php
 }else {?>
 	<script type="text/javascript">
@@ -101,7 +89,7 @@
 		so.addVariable("settings_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amcolumn_settings.xml?102"));
 		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=overalldata&scoretype=<?php echo $type;?>&c_id=<?php echo $corp['c_id'];?>&sdate=<?php echo $sdate?>&edate=<?php echo $edate?>&selstores=<?php echo join(",",$selstores);?>&group=environment"));
 		so.addVariable("preloader_color", "#ffffff");
-		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo $chart_title?></b>]]></text></label></labels><values><value><max>10</max></value></values></settings>"));
+		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo $chart_title?></b>]]></text></label></labels><guides><guide><title>Internal Average</title><start_value>4.877</start_value><inside>true</inside><text_color>#999999</text_color><behind>true</behind><width>1</width><color>#999999</color> </guide></guides></settings>"));
 
 		so.write("flashcontent");
 		// ]]>
