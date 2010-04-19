@@ -8,8 +8,12 @@ class ChartModel extends Model {
 		$this->edate = $edate;
 		$addsql = '';
 		$this->addsql = " and a.a_audit=1 ";
-		if($this->sdate) $this->addsql .= " and a.a_fdate >= '$this->sdate'";
-		if($this->edate) $this->addsql .= " and a.a_fdate < '$this->edate'";
+		if($this->sdate) $this->addsql .= " and a.a_fdate >= '{$this->sdate}'";
+		if($this->edate){
+			list($y,$m,$d) = explode("-",$this->edate);
+			$this->edate = date("Y-m-d",mktime(0, 0, 0, $m  , $d+1, $y));
+			$this->addsql .= " and a.a_fdate < '{$this->edate}'";
+		}
 		$this->db = parent::dbConnect($GLOBALS ["gDataBase"] ["db"]);
 	}
 	function getSummaryScoreByCsId($csid,$group=1){
@@ -23,24 +27,30 @@ class ChartModel extends Model {
 				$rq_arr = $this->db->getAll($sql);
 				$q_row = count($rq_arr);
 				//echo "row:".$q_row."|";
-				$sum = $n= 0;
+				$sum_1 = $sum_2 = $n_1 = $n_2 = $average_1 = $average_2 = 0;
 				if($q_row>0){
 					foreach ($rq_arr as $rq){
 						if($rq['rq_type']==2){
-							$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$v['a_id']."' and rq_type=2";
-							$sum += $this->db->getOne($sql);
-							$n++;
+							$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$v['a_id']."' and rq_type=2";						
+							$score = $this->db->getOne($sql);
+							//echo "vote=".$score.";";
+							$sum_2 += is_numeric($score)?$score:0;
+							$n_2++;
 						}else if($rq['rq_type']==1){
 							$sql = "select ans_answer1  from answer where rq_id='".$rq['rq_id']."' and a_id='".$v['a_id']."' and rq_type=1";
 							$yn = $this->db->getOne($sql);
-							$sum += ($yn=='Y')?10:0;
-							$n++;
+							//echo "shifei=".$yn.";";
+							$sum_1 += ($yn=='Y')?10:0;
+							$n_1++;
 						}
 						
 					}
 					//echo $sum;
-					//echo $csid."=".$sum."/".$n."<br/>";
-					if($n>0) $average += $sum/$n;
+					
+					if($n_1>0) $average_1 = $sum_1/$n_1 ;
+					if($n_2>0) $average_2 = $sum_2/$n_2 ;
+					$average += ($average_1 + $average_2)/2;
+					//echo $csid."_".$v['a_id']."=".$average_1."/".$average_2."=".($average)."<br/>";
 				}
 				
 			}

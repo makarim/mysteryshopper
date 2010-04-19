@@ -26,6 +26,7 @@ class chart{
 		$this->tpl->assign('con',$con);
 	}
 	function view_overalldata(){
+		//http://www.spotshoppers.com/admin.php?action=chart&view=overalldata&scoretype=summary&c_id=18&sdate=2009-01-02&edate=2010-04-14&selstores=54,55,56,57,58,59,60,61,62,63&group=product
 		$c_id = !empty($_GET['c_id'])?$_GET['c_id']:'';
 		$group = !empty($_GET['group'])?$_GET['group']:'';
 		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:'';

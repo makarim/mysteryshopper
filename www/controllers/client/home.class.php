@@ -117,6 +117,7 @@ class home{
 		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
 		$type = !empty($_GET['overall'])?$_GET['overall']:"summary";
 		$type_id = isset($GLOBALS['gTypes'][$type])?$GLOBALS['gTypes'][$type]:'';
+	
 		$def_stores = array();
 		$chart_title = '综览';
 		$chart_title.= "/".lang($type);
@@ -145,6 +146,8 @@ class home{
 			}
 		}
 		$count = count($assignments);
+		
+		$a_average =$internal_average= 0;
 		if(is_array($assignments)){
 			foreach ($assignments as $k=>$v){
 	
@@ -153,19 +156,23 @@ class home{
 						$v['times'][] = $assignmentModel->getTimeByRqId($qu['rq_id'],$v['a_id']);
 					}
 				}else{
-					$v['service'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],1,$type_id);
+					$v['service'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],1,$type_id);;
 					$v['environment'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,$type_id);
 					$v['product'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,$type_id);
+					$a_average += ($v['service']+$v['environment']+$v['product']); 
 				}
 				$assignments[$k] = $v;
 			}
+			$internal_average = round($a_average/$count,2);
 		}
+		
 		$print_edate = $assignmentModel->getEndDateByCId($this->login_corp['c_id']);
 		$print_sdate = $assignmentModel->getStartDateByCId($this->login_corp['c_id']);
 		if($sdate=='') $sdate = $print_sdate;
 		if($edate=='') $edate = $print_edate;
 		$chart_title .="($print_sdate/$print_edate)";
 		
+		$this->tpl->assign("internal_average",$internal_average);
 		$this->tpl->assign("chart_title",$chart_title);
 		$this->tpl->assign("assignments",$assignments);
 		$this->tpl->assign("selstores",$selstores);
@@ -199,25 +206,28 @@ class home{
 		$rq_id = '';
 		
 		
-		
+		$a_average =$internal_average= 0;
 		$count = count($assignments);
 		if(is_array($assignments)){
 			foreach ($assignments as $k=>$v){
 				
 				$v['yesorno'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,$GLOBALS['gTypes']['yesorno']);
 				$v['vote'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,$GLOBALS['gTypes']['vote']);
-				
+				if($type=='summary') $a_average += ($v['yesorno']+$v['vote'])/2;
+				if($type=='yesorno') $a_average += $v['yesorno'];
+				if($type=='vote') $a_average += $v['vote'];
 				$assignments[$k] = $v;
 			}
+			$internal_average = round($a_average/$count,2);
 		}
-//		
-		
+
 		$print_edate = $assignmentModel->getEndDateByCId($this->login_corp['c_id']);
 		$print_sdate = $assignmentModel->getStartDateByCId($this->login_corp['c_id']);
 		if($sdate=='') $sdate = $print_sdate;
 		if($edate=='') $edate = $print_edate;
 		$chart_title .="($print_sdate/$print_edate)";
 		
+		$this->tpl->assign("internal_average",$internal_average);
 		$this->tpl->assign("chart_title",$chart_title);
 		$this->tpl->assign("assignments",$assignments);
 		$this->tpl->assign("selstores",$selstores);
@@ -256,7 +266,7 @@ class home{
 			$questions = $ChartModel->getTimeQuestionsByCId($this->login_corp['c_id'],'service');
 			$this->tpl->assign("questions",$questions);
 		}
-		
+		$a_average =$internal_average= 0;
 		$count = count($assignments);
 		if(is_array($assignments)){
 			foreach ($assignments as $k=>$v){
@@ -268,17 +278,23 @@ class home{
 				}else{
 					$v['yesorno'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],1,$GLOBALS['gTypes']['yesorno']);
 					$v['vote'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],1,$GLOBALS['gTypes']['vote']);
+					if($type=='summary') $a_average += ($v['yesorno']+$v['vote'])/2;
+					if($type=='yesorno') $a_average += $v['yesorno'];
+					if($type=='vote') $a_average += $v['vote'];
 				}
 				$assignments[$k] = $v;
 			}
+			$internal_average = round($a_average/$count,2);
 		}
 //		
+
 		$print_edate = $assignmentModel->getEndDateByCId($this->login_corp['c_id']);
 		$print_sdate = $assignmentModel->getStartDateByCId($this->login_corp['c_id']);
 		if($sdate=='') $sdate = $print_sdate;
 		if($edate=='') $edate = $print_edate;
 		$chart_title .="($print_sdate/$print_edate)";
 		
+		$this->tpl->assign("internal_average",$internal_average);
 		$this->tpl->assign("chart_title",$chart_title);
 		$this->tpl->assign("assignments",$assignments);
 		$this->tpl->assign("selstores",$selstores);
@@ -311,20 +327,26 @@ class home{
 		$assignments = $assignmentModel->getAssignmentsByCsId($con,$selstores);
 		$rq_id = '';
 		
+		$a_average =$internal_average= 0;
 		$count = count($assignments);
 		if(is_array($assignments)){
 			foreach ($assignments as $k=>$v){
 				$v['yesorno'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,$GLOBALS['gTypes']['yesorno']);
 				$v['vote'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,$GLOBALS['gTypes']['vote']);
+				if($type=='summary') $a_average += ($v['yesorno']+$v['vote'])/2;
+				if($type=='yesorno') $a_average += $v['yesorno'];
+				if($type=='vote') $a_average += $v['vote'];
 				$assignments[$k] = $v;
 			}
+			$internal_average = round($a_average/$count,2);
 		}
 		$print_edate = $assignmentModel->getEndDateByCId($this->login_corp['c_id']);
 		$print_sdate = $assignmentModel->getStartDateByCId($this->login_corp['c_id']);
 		if($sdate=='') $sdate = $print_sdate;
 		if($edate=='') $edate = $print_edate;
 		$chart_title .="($print_sdate/$print_edate)";
-		
+	
+		$this->tpl->assign("internal_average",$internal_average);
 		$this->tpl->assign("chart_title",$chart_title);
 		$this->tpl->assign("assignments",$assignments);
 		$this->tpl->assign("selstores",$selstores);

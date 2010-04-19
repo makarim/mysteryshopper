@@ -123,7 +123,7 @@
 		so.addVariable("settings_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amcolumn_settings.xml?102"));
 		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=overalldata&scoretype=<?php echo $type;?>&c_id=<?php echo $corp['c_id'];?>&sdate=<?php echo $sdate?>&edate=<?php echo $edate?>&selstores=<?php echo join(",",$selstores);?>&group=service,environment,product"));
 		so.addVariable("preloader_color", "#ffffff");
-		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo $chart_title?></b>]]></text></label></labels><guides><guide><title>Internal Average</title><start_value>4.877</start_value><inside>true</inside><text_color>#999999</text_color><behind>true</behind><width>1</width><color>#999999</color> </guide></guides></settings>"));
+		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo $chart_title?></b>]]></text></label></labels><guides><max_min>true</max_min><guide><title>Internal Average</title><start_value><?php echo $internal_average;?></start_value><inside>true</inside><text_color>#999999</text_color><behind>true</behind><text_size>14</text_size> <width>1</width><color>#999999</color> </guide></guides></settings>"));
 
 		so.write("flashcontent");
 		// ]]>
