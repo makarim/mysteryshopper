@@ -9,7 +9,7 @@
     <br />
     <?php if($is_view){
     	?>
-  <div style="margin:10px 0 0 20px;"><?php echo nl2br(htmlspecialchars(stripslashes($assignmentinfo['a_demand']),ENT_QUOTES));?></div>
+  <div style="margin:10px 0 0 20px;"><?php echo nl2br(stripslashes($assignmentinfo['a_demand']));?></div>
    <?php
     }else{?>
    <p>&nbsp;</p>
