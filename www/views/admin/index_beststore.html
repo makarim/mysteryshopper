@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Xppass Administrator's Control Panel</title>
+<LINK href="<?php echo $www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+<script src="<?php echo $www_site_url?>/public/js/common.js" type="text/javascript"></script>
+<script src="<?php echo $www_site_url?>/public/js/calendar.js" type="text/javascript"></script>
+<script src="<?php echo $www_site_url?>/public/js/ajax.js" type="text/javascript"></script>
+
+
+<script>
+function checkOnSubmit(formName) {
+  	
+	var url = "<?php echo $www_site_url?>/admin.php";
+	var params = mini.form.serialize($(formName));
+	mini.ajax.post(url, function(r){
+		var r = eval('(' + r + ')');   
+		if(r.s==200){
+			window.location.href = r.d;
+		}
+		if(r.s==400){
+			$('msg').innerHTML = r.m;			
+		}
+	}, params);
+	
+	return false;
+       
+}
+
+</script>
+</head>
+<body><div id="append"></div>
+<div id="msg" style="color:red;text-align:center"></div>
+
+
+
+	<script type="text/javascript">
+	function setTab(n){
+		document.getElementById("tabs_mainbox").style.display = 'block';
+		document.getElementById("close").style.display = 'block';
+		var tli=document.getElementById("tabs_menu").getElementsByTagName("li");
+		var mli=document.getElementById("tabs_main").getElementsByTagName("div");
+		for(i=0;i<tli.length;i++){
+		  tli[i].className=i==n?"hover":"";
+		  mli[i].style.display=i==n?"block":"none";
+		}
+	}
+	function hid(){
+		document.getElementById("tabs_mainbox").style.display = 'none';
+		document.getElementById("close").style.display = 'none';
+		var tli=document.getElementById("tabs_menu").getElementsByTagName("li");
+		for(i=0;i<tli.length;i++){
+		  tli[i].className="";
+		}
+	}
+
+		
+	</script>
+
+	<div class="container">
+	
+
+			<div id="tabs">
+				<div class="tabs_menubox">
+					<ul id="tabs_menu">
+						<li onclick="setTab(0)"><?php echo lang('add_beststore')?></li>
+						<li onclick="hid()" id="close" style="display:none;"><?php echo lang('hide')?>×</li>
+		
+					</ul>
+				</div>
+				<div id="tabs_mainbox" class="tabs_mainbox" style="display:none;">
+					<div class="main" id="tabs_main" >
+						
+						<div class="block" style="display:none;">
+							<form id="addbeststoreform" name="addbeststoreform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addbeststoreform');" >
+							<input type="hidden" name="action" value="index">
+							<input type="hidden" name="op" value="addbeststore">
+							<table width="100%">
+								<tr>
+									<td align="left"><?php echo lang('cs_name')?>:</td>
+									<td align="left"><input type="text" name="cs_name" class="textfield" /></td>
+									<td align="left"><?php echo lang('cs_img')?>:</td>
+									<td align="left"><input type="text" name="cs_img" class="textfield" /></td>
+								</tr>
+								<tr>
+									<td align="left"><?php echo lang('c_title')?>:</td>
+									<td align="left"><input type="text" name="cs_title" class="textfield" /></td>
+									<td align="left"><?php echo lang('cs_month')?>:</td>
+									<td align="left"><input type="text" name="cs_month" class="textfield" value="<?php echo date("Ym");?>" /></td>
+									
+									<td><input type="submit" value="<?php echo lang('submit')?>" class="button"/></td>
+								</tr>
+							</table>
+							</form>
+			
+						</div>
+					
+				</div>
+			</div>
+
+		</div>
+<br>
+		<h3><?php echo lang('list')?> </h3>
+		
+		<div class="mainbox">
+				<table class="datalist fixwidth" onmouseover="addMouseEvent(this);" >
+
+					<tr>
+						
+						<th>ID</th>
+						<th><?php echo lang('month')?></th>
+						<th><?php echo lang('img')?></th>
+						<th><?php echo lang('cs_name')?></th>
+						<th><?php echo lang('c_title')?></th>
+
+						<th><?php echo lang('edit')?></th>
+					</tr>
+						<?php if(isset($beststore) && is_array($beststore)){
+							foreach ($beststore as $v){
+								$content = unserialize($v['rec_content']);
+								?>	
+						<tr>
+							
+							<td><?php echo $v['rec_id']?></td>
+							<td><strong><?php echo $v['rec_month']?></strong></td>
+							<td><img src="<?php echo $content['img']?>"></td>
+							<td><strong><?php echo $content['cs_name']?></strong></td>
+							<td><strong><?php echo $content['c_title']?></strong></td>
+							
+							<td><a href="/admin.php/index/editbeststore/rec_id/<?php echo $v['rec_id']?>"><?php echo lang('edit')?></a></td>
+						</tr>
+												
+						<?php }
+						}?>
+										<tr class="nobg">
+						<td><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
+						<td class="tdpage" colspan="7" align="right"></td>
+					</tr>
+				</table>
+
+				</form>
+					</div>
+			
+	</div>
+
+</body>
+</html>

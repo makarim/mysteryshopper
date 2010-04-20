@@ -10,7 +10,7 @@ class AnnouncementModel extends Model {
 		
 		//
 		if(isset($con['order'])) $select->order ( 'a.'.$con['order']." desc" );
-		if(isset($con['an_title']) && !empty($con['a_title'])) $select->where ( " a.an_title like '%".$con['an_title']."%'" );
+		if(isset($con['an_title']) && !empty($con['an_title'])) $select->where ( " a.an_title like '%".$con['an_title']."%'" );
 		if(isset($con['an_date']) && !empty($con['an_date'])) $select->where ( " a.an_date <= '".$con['an_date']."'" );
 
 		
@@ -49,7 +49,7 @@ class AnnouncementModel extends Model {
 
 	}
 	function deleteAnnouncement($an_id){
-		return $this->db->execute("delete from announcement where anid='{$an_id}'");
+		return $this->db->execute("delete from announcement where an_id='{$an_id}'");
 	}
 	function getAnnouncementById($an_id){
 		return $this->db->getRow("select * from announcement where an_id='$an_id'");
@@ -57,6 +57,8 @@ class AnnouncementModel extends Model {
 	function getLatestAnnouncement($n=1){
 		return $this->db->getAll("select * from announcement order by an_id desc limit $n");
 	}
-	
+	function updateNotice($item,$an_id){
+		return $this->db->update($item,"announcement"," an_id=".$an_id);
+    }
 }
 ?>

@@ -13,7 +13,7 @@
 var marqueeContent=new Array();   //滚动主题
 <?php if (isset($latestan)&&is_array($latestan)) {
           	foreach ($latestan as $k=> $v) {
-          	echo "marqueeContent[$k]='<a href=\"/index.php/home/noticedetail/{$v['an_id']}\" target=\"_blank\"> {$v['an_title']} [{$v['an_date']}]</a>';";	
+          	echo "marqueeContent[$k]='<a href=\"/index.php/home/noticedetail/{$v['an_id']}\"> {$v['an_title']} [{$v['an_date']}]</a>';";	
           	}
           }?>
 
@@ -143,7 +143,7 @@ initMarquee();
         <tr>
           <td><div class="table2TitleBg">
               <div class="table2TitleBg2">
-                <div class="table2Title">近期任务</div>
+                <div class="table2Title"><a href="/index.php/home/allassignment">近期任务</a></div>
               </div>
           </div></td>
         </tr>

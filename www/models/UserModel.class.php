@@ -79,6 +79,12 @@ class UserModel extends Model {
 		}
 		return (array) $list;
 	}
+	function addBestShopper($fileds,$table){
+    	return $this->db->insert($fileds,$table);
+    }
+    function getBestShopperByMonth($m){
+    	return $this->db->getRow("select * from recommend where rec_month='{$m}' and rec_type='U'");
+    }
 }
 
 ?>

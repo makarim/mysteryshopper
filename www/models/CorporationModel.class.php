@@ -82,5 +82,20 @@ class CorporationModel extends Model {
     function getCorporationByName($c_name){
     	return $this->db->getRow("select * from corporation where c_name='$c_name'");
     }
+    function getBestStoreList(){
+    	return $this->db->getAll("select * from recommend where rec_type='S' order by rec_id desc;");
+    }    
+    function getBestStoreById($rec_id){
+    	return $this->db->getRow("select * from recommend where rec_id='{$rec_id}'");
+    }
+    function addBestStore($fileds,$table){
+    	return $this->db->insert($fileds,$table);
+    }
+    function updateBestStore($field,$rec_id){
+    	return $this->db->update($field,"recommend"," rec_id='".$rec_id."'");
+    }
+    function getBestStoreByMonth($month){
+    	return $this->db->getRow("select * from recommend where rec_month='{$month}' and rec_type='S'");
+    }
 }
 ?>
