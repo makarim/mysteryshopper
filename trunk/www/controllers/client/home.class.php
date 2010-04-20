@@ -163,7 +163,7 @@ class home{
 				}
 				$assignments[$k] = $v;
 			}
-			$internal_average = round($a_average/$count,2);
+			if($count>0)$internal_average = round($a_average/$count,2);
 		}
 		
 		$print_edate = $assignmentModel->getEndDateByCId($this->login_corp['c_id']);
@@ -218,7 +218,7 @@ class home{
 				if($type=='vote') $a_average += $v['vote'];
 				$assignments[$k] = $v;
 			}
-			$internal_average = round($a_average/$count,2);
+			if($count>0)$internal_average = round($a_average/$count,2);
 		}
 
 		$print_edate = $assignmentModel->getEndDateByCId($this->login_corp['c_id']);
@@ -284,7 +284,7 @@ class home{
 				}
 				$assignments[$k] = $v;
 			}
-			$internal_average = round($a_average/$count,2);
+			if($count>0)$internal_average = round($a_average/$count,2);
 		}
 //		
 
@@ -338,7 +338,7 @@ class home{
 				if($type=='vote') $a_average += $v['vote'];
 				$assignments[$k] = $v;
 			}
-			$internal_average = round($a_average/$count,2);
+			if($count>0)$internal_average = round($a_average/$count,2);
 		}
 		$print_edate = $assignmentModel->getEndDateByCId($this->login_corp['c_id']);
 		$print_sdate = $assignmentModel->getStartDateByCId($this->login_corp['c_id']);

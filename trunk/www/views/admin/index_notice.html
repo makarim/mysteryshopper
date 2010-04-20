@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Xppass Administrator's Control Panel</title>
+<LINK href="<?php echo $www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+<script src="<?php echo $www_site_url?>/public/js/common.js" type="text/javascript"></script>
+<script src="<?php echo $www_site_url?>/public/js/ajax.js" type="text/javascript"></script>
+<script src="<?php echo $www_site_url?>/public/js/calendar.js" type="text/javascript"></script>
+
+<script>
+</script>
+</head>
+<body><div id="append"></div>
+<div id="msg" style="color:red;text-align:center"></div>
+<script type="text/javascript">
+	function setTab(n){
+		document.getElementById("tabs_mainbox").style.display = 'block';
+		document.getElementById("close").style.display = 'block';
+		var tli=document.getElementById("tabs_menu").getElementsByTagName("li");
+		var mli=document.getElementById("tabs_main").getElementsByTagName("div");
+		for(i=0;i<tli.length;i++){
+		  tli[i].className=i==n?"hover":"";
+		  mli[i].style.display=i==n?"block":"none";
+		}
+	}
+	function hid(){
+		document.getElementById("tabs_mainbox").style.display = 'none';
+		document.getElementById("close").style.display = 'none';
+		var tli=document.getElementById("tabs_menu").getElementsByTagName("li");
+		for(i=0;i<tli.length;i++){
+		  tli[i].className="";
+		}
+	}
+function getStore(c_id){
+	if(c_id==''){
+		var selobj = $('store_container');
+		for(var i in selobj.options){
+			selobj.options[i] = null;
+		}
+		selobj.options[0] = new Option('--', '');
+		return ;
+	}
+	var url = "<?php echo $www_site_url?>/admin.php?action=corporation&view=ajaxstore&c_id="+c_id;
+	
+	mini.ajax.get(url, function(r){
+
+		var r = eval('(' + r + ')');   
+
+		if(r.s==200){
+			var obj = eval('(' + r.d + ')');   
+			var selobj = $('store_container');
+			for(var i in obj){
+				//if(i==0) selobj.options[0] = new Option(obj[i].cs_name, obj[i].cs_id) //replace 1st option with a new one
+				selobj.options[i]=new Option(obj[i].cs_abbr+' '+obj[i].cs_name, obj[i].cs_id) //add a new option to the end of SELECT
+			}
+			
+		}
+		if(r.s==400){
+			$('msg').innerHTML = r.m;			
+		}
+	});
+	
+	return false;
+}
+		
+	</script>
+
+	<div class="container">
+			
+			<div id="tabs">
+				<div class="tabs_menubox">
+					<ul id="tabs_menu">
+						<li onclick="setTab(0)"><?php echo lang('search_notice')?></li>
+						<li ><a href="<?php echo $www_site_url?>/admin.php/index/addnotice"><?php echo lang('add_notice')?></a></li>
+						<li onclick="hid()" id="close" style="display:none;"><?php echo lang('hide')?>×</li>
+		
+					</ul>
+				</div>
+				<div id="tabs_mainbox" class="tabs_mainbox" style="display:none;">
+					<div class="main" id="tabs_main" >
+						<div  style="display:none;">
+							<form action="<?php echo $www_site_url?>/admin.php" method="GET">
+							<input type="hidden" name="action" value="index">				
+							<input type="hidden" name="view" value="notice">					
+							<table width="100%">
+								<tr>
+									<td align="right"><?php echo lang('a_title')?>:</td>
+									<td align="left"><input type="text" name="an_title" value="<?php echo $con['an_title']?>" class="textfield" /></td>
+			
+									
+									<td rowspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
+								</tr>
+								<tr>
+									<td align="right"><?php echo lang('a_sdate')?>:</td>
+			
+									<td colspan="3" align="left"><input type="text" name="an_date" onclick="showcalendar();" value="<?php echo $con['an_date']?>" class="textfield" /> </td>
+									
+								</tr>
+							</table>
+							</form>
+						</div>		
+				</div>
+			</div>
+
+		</div>
+		<br>
+		<h3><?php echo lang('index_list')?> <?php echo lang('index_total')?>:<?php echo $total?></h3>
+		
+		<div class="mainbox">
+				<form action="<?php echo $www_site_url?>/admin.php" onsubmit="return confirm('<?php echo lang('domain_delete_comfirm')?>');" method="post">
+				<input type="hidden" name="action" value="index">
+				<input type="hidden" name="op" value="delnotice">
+				<table class="datalist fixwidth" onmouseover="addMouseEvent(this);" >
+
+					<tr>
+						<th><input type="checkbox" name="chkall" id="chkall" onclick="checkall('delete[]')" class="checkbox" /><label for="chkall"><?php echo lang('delete')?></label></th>
+						<th>ID</th>
+						<th><?php echo lang('a_title')?></th>
+						
+						<th><?php echo lang('a_edate')?></th>
+						
+
+						<th><?php echo lang('edit')?></th>
+					</tr>
+						<?php if(isset($data['records']) && is_array($data['records'])){
+							foreach ($data['records'] as $v){?>	
+						<tr>
+							<td class="option"><input type="checkbox" name="delete[]" value="<?php echo $v['an_id']?>" class="checkbox" /></td>
+							<td><?php echo $v['an_id']?></td>
+							<td><strong><?php echo $v['an_title']?></strong></td>
+							<td><?php echo $v['an_date']?></td>
+							
+							<td><a href="/admin.php/index/editnotice/an_id/<?php echo $v['an_id']?>"><?php echo lang('edit')?></a>
+						
+							
+							</td>
+						</tr>
+					
+						
+						<?php }
+						}?>
+										<tr class="nobg">
+						<td><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
+						<td class="tdpage" colspan="7" align="right"><div class="pages"><?php echo $data['pagebar']?></div></td>
+					</tr>
+				</table>
+
+				</form>
+					</div>
+
+	</div>
+
+</body>
+</html>

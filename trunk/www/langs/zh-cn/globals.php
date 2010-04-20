@@ -427,6 +427,12 @@ $GLOBALS['gLang']['add_report'] = '创建问卷';
 $GLOBALS['gLang']['edit_report'] = '修改问卷';
 $GLOBALS['gLang']['question_list'] = '问题列表';
 $GLOBALS['gLang']['question_total'] = '问题总数';
+$GLOBALS['gLang']['menu_beststore'] = '最佳餐厅';
+$GLOBALS['gLang']['menu_bestshopper'] = '最佳顾客';
+$GLOBALS['gLang']['menu_notice'] = '公告管理';
+$GLOBALS['gLang']['cs_img'] = '餐厅图片';
+$GLOBALS['gLang']['cs_month'] = '月份';
+$GLOBALS['gLang']['add_beststore'] = '最佳餐厅';
 
 
 

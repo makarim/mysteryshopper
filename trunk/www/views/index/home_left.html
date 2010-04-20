@@ -18,11 +18,11 @@
 	        	<div class="title"><span>本月最受好评</span></div>
 	            <div class="content">
 	       		  	<div class="mission">
-	               	  	<div class="logo"><p><a href="/index.php/home/assignment/a_id/1"><img src="/public/upload/logo/logo_4ba4ebc544cb3.gif" width="68" height="68" border="0" /></a></p></div>
-	                	<div class="des"><span style="color:#000;"></span><b><a href="/index.php/home/assignment/a_id/1">KFC正大</a></b><br />
+	               	  	<div class="logo"><p><img src="<?php if(isset($beststore['img']))echo $beststore['img']?>" width="68" height="68" border="0" /></p></div>
+	                	<div class="des"><span style="color:#000;"></span><b><?php if(isset($beststore['cs_name'])) echo $beststore['cs_name']?></b><br />
 	
-			                  商户：肯德基<br />
-			                分店：正大广场
+			                  商户：<?php if(isset($beststore['c_title']))echo $beststore['c_title']?><br />
+			              
 			             </div>
 	              	</div>
 	                <div class="clear"></div>
@@ -33,9 +33,8 @@
         		<div class="title"><span>本月最佳神秘顾客</span></div>
 
 	            <div class="content">
-		              <div align="center"><img src="/public/upload/faceimg/face_1.jpg" alt="" width="68" height="68" border="0" /><br />
-		                <br />
-		                Kakapo
+		              <div align="center">
+		                <?php if(isset($bestshopper['user_name'])) echo $bestshopper['user_name']?>
 		              </div>
 	            </div>
     		</div>
