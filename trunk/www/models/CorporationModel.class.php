@@ -97,5 +97,8 @@ class CorporationModel extends Model {
     function getBestStoreByMonth($month){
     	return $this->db->getRow("select * from recommend where rec_month='{$month}' and rec_type='S'");
     }
+    function getRecComments(){
+    	return $this->db->getAll("select * from recommend where rec_type='C' order by rec_id desc;");
+    }
 }
 ?>

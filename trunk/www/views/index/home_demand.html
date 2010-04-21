@@ -9,7 +9,20 @@
     <br />
     <?php if($is_view){
     	?>
-  <div style="margin:10px 0 0 20px;"><?php echo nl2br(stripslashes($assignmentinfo['a_demand']));?></div>
+  <div>
+  <?php if(is_array($assignmentinfo['a_demand'])){
+   	?>
+
+<table cellspacing="1"  class="missionReport" width="100%">
+<?php foreach ($assignmentinfo['a_demand'] as $k=>$v){?>
+<tr>
+<td><?php echo $v?></td>
+</tr>
+<?php }?>
+</table>
+<?php }?>
+  
+  </div>
    <?php
     }else{?>
    <p>&nbsp;</p>

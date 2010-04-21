@@ -41,32 +41,29 @@ function checkOnSubmit(formName) {
 					<li id="addcorporationbtn" class="tabcurrent"><a href="#"><?php echo lang('edit')?></a></li>	
 				</ul>
 				<div id="addcorporationdiv" class="tabcontentcur" style="width:80%">
-					<form id="editbeststore" name="editbeststore" enctype="multipart/form-data" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('editbeststore');" >
+					<form id="editreccomment" name="editreccomment" enctype="multipart/form-data" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('editreccomment');" >
 					<input type="hidden" name="action" value="index">
-					<input type="hidden" name="op" value="updatebeststore">
+					<input type="hidden" name="op" value="updatereccomment">
 					<input type="hidden" name="rec_id" value="<?php echo $info['rec_id']?>">
 				
 					<table width="100%">
+						
 						<tr>
-							<td width="10%"><?php echo lang('month')?>:</td>
-							<td><?php echo $info['rec_month']?></td>
-						</tr>	
-						<tr>
-							<td width="10%"><?php echo lang('cs_name')?>:</td>
-							<td><input type="text" name="cs_name" class="textfield" value="<?php echo $info['content']['cs_name']?>"/></td>
+							<td width="10%"><?php echo lang('user_name')?>:</td>
+							<td><input type="text" name="user_name" class="textfield" value="<?php echo $info['content']['user_name']?>"/></td>
 						</tr>					
 							
 						<tr>
-							<td><?php echo lang('c_title')?>:</td>
-							<td><input type="text" name="cs_title" class="textfield" value="<?php echo $info['content']['c_title']?>"/></td>
+							<td><?php echo lang('comment')?>:</td>
+							<td><textarea name="comment" rows="4" cols="80"><?php echo $info['content']['comment']?></textarea></td>
 						</tr>		
 						
 						<tr>
 							<td><?php echo lang('img')?>:</td>
-							<td><input type="text" name="cs_img" class="textfield" value="<?php echo $info['content']['img']?>"/>
-							<img src="<?php echo $info['content']['img']?>">
+							<td><input type="file" name="img"/><img src="/public/upload/<?php echo $info['content']['img']?>" width="41" height="41">
+							
 							</td>
-						</tr>						
+						</tr>				
 						<tr>
 						
 							<td colspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button"/></td>

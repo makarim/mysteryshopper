@@ -235,6 +235,7 @@ class report{
 		$item['a_auditbill'] = $_POST['auditbill_result'];
 		$item['a_auditbill_time'] = "MY_F:NOW()";
 		$item['a_cost'] = $_POST['bill_cost'];
+		$item['a_auditbill_number'] = $_POST['bill_number'];
 		$item['a_auditbill_who'] =$this->loginuser['user_nickname'];
 		if($item['a_auditbill']==1) $item['a_finish'] = 1;
 		if($item['a_auditbill']==2) $item['a_finish'] = 0.75;
