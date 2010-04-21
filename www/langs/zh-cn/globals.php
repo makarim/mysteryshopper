@@ -433,6 +433,18 @@ $GLOBALS['gLang']['menu_notice'] = '公告管理';
 $GLOBALS['gLang']['cs_img'] = '餐厅图片';
 $GLOBALS['gLang']['cs_month'] = '月份';
 $GLOBALS['gLang']['add_beststore'] = '最佳餐厅';
+$GLOBALS['gLang']['menu_comment'] = '推荐评论';
+$GLOBALS['gLang']['add_reccomment'] = '添加评论';
+$GLOBALS['gLang']['add_reccomment'] = '添加评论';
+$GLOBALS['gLang']['month'] = '月份';
+$GLOBALS['gLang']['img'] = '图片';
+$GLOBALS['gLang']['list'] = '列表';
+$GLOBALS['gLang']['add'] = '添加';
+$GLOBALS['gLang']['user_name'] = '帐号';
+$GLOBALS['gLang']['search_notice'] = '查找公告';
+$GLOBALS['gLang']['add_notice'] = '添加公告';
+$GLOBALS['gLang']['total'] = '总数';
+$GLOBALS['gLang']['comment'] = '评论';
 
 
 

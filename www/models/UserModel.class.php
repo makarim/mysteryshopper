@@ -6,6 +6,7 @@ class UserModel extends Model {
 	function getItems($con,$pageCount){
 		$select =$this->db->select();
 		$select->from ( " user_index ","*");
+		//$select->leftjoin ( " user_index ","*");
 		
 		//
 		if(isset($con['order'])) $select->order ( $con['order']." desc" );

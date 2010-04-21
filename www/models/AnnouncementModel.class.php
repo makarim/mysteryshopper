@@ -60,5 +60,8 @@ class AnnouncementModel extends Model {
 	function updateNotice($item,$an_id){
 		return $this->db->update($item,"announcement"," an_id=".$an_id);
     }
+    function getLastRecComments($n=10){
+    	return $this->db->getAll("select * from recommend where rec_type='C'  order by rec_id desc limit $n");
+    }
 }
 ?>

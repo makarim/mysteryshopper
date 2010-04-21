@@ -32,7 +32,7 @@ function viewUser(user,user_id){
 	mini.ajax.get(url, function(r){
 		var r = eval('(' + r + ')');   
 		if(r.s==200){
-			$('userid_'+user_id).innerHTML = "<?php echo lang('sex')?>:"+r.d.user_sex+ ", <?php echo lang('signup')?>IP:"+ r.d.user_reg_ip +", <?php echo lang('lastlogin')?>:"+r.d.user_lastlogin_time+
+			$('userid_'+user_id).innerHTML = "<?php echo lang('img')?>:<img src='/public/upload/faceimg/"+r.d.face_img+"' width='60' height='60'>;<?php echo lang('sex')?>:"+r.d.user_sex+ ", <?php echo lang('signup')?>IP:"+ r.d.user_reg_ip +", <?php echo lang('lastlogin')?>:"+r.d.user_lastlogin_time+
 		", <?php echo lang('lastlogin')?>IP:"+r.d.user_lastlogin_ip+" <?php echo lang('email')?>:"+r.d.user_email;
 			$('userid_'+user_id).style.display = 'block';
 		}
@@ -147,7 +147,7 @@ function viewUser(user,user_id){
 
 					<tr>
 						<th><input type="checkbox" name="chkall" id="chkall" onclick="checkall('delete[]')" class="checkbox" /><label for="chkall"><?php echo lang('delete')?></label></th>
-						<th>UID</th>
+						<th><?php echo lang('img')?></th>
 						<th><?php echo lang('user')?></th>
 						<th><?php echo lang('nickname')?></th>
 						<th><?php echo lang('reg_date')?></th>
@@ -159,7 +159,7 @@ function viewUser(user,user_id){
 							foreach ($users['records'] as $v){?>	
 						<tr>
 							<td class="option"><input type="checkbox" name="delete[]" value="<?php echo $v['user']?>" class="checkbox" /></td>
-							<td><?php echo $v['user_id']?></td>
+							<td><img src="/public/upload/faceimg/" width="60" height="60"></td>
 							<td><strong><?php echo $v['user']?></strong></td>
 							<td><?php echo $v['user_nickname']?></td>
 							<td><?php echo date('y-m-d H:i:s',$v['user_reg_time'])?></td>

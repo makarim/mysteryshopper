@@ -41,6 +41,7 @@ class index{
 		$this->tpl->assign('magic_quote_gpc', $magic_quote_gpc);
 		$this->tpl->assign('allow_url_fopen', $allow_url_fopen);
     }
+    
     function view_beststore(){
     	
 		include_once("CorporationModel.class.php");
@@ -189,6 +190,76 @@ class index{
 			}
 		}
 		goback();
+    }
+    
+    function view_reccomment(){
+    	include_once("CorporationModel.class.php");
+		$corpmod = new CorporationModel();
+		
+		$this->tpl->assign('reccomment',$corpmod->getRecComments());
+    }
+    function op_addreccomment(){
+    	include_once("FileUpload.class.php");
+		$upload=new FileUpload(APP_DIR."/public/upload/",'jpg|png|gif|jpeg');
+		$upload->renamed = true;
+		$re = $upload->upload();
+		if(!$re){
+			$fname_arr=$upload->get_succ_file();
+			
+			
+			if($fname_arr){
+				include_once("CorporationModel.class.php");
+				$corpmod = new CorporationModel();
+    			foreach ($fname_arr as $t){
+    				$fileds['rec_month'] = date("Ym");
+					$fileds['rec_content'] = serialize(array("img"=>substr(strrchr($t,'/'),1),"user_name"=>$_POST['user_name'],"comment"=>$_POST['comment']));
+					$fileds['rec_type'] = 'C';
+					
+					$row= $corpmod->addBestStore($fileds,"recommend");
+					
+    			}
+				show_message_goback('保存成功!');
+				
+			}
+		}else{
+			show_message_goback('保存失败!');		
+		}
+    }
+    function view_editreccomment(){
+    	$rec_id = $_GET['rec_id'];
+    	include_once("CorporationModel.class.php");
+		$corpmod = new CorporationModel();
+		$row = $corpmod->getBestStoreById($rec_id);
+		$row['content'] = unserialize($row['rec_content']);
+		$this->tpl->assign('info',$row);
+    }
+    function op_updatereccomment(){
+    	include_once("FileUpload.class.php");
+		$upload=new FileUpload(APP_DIR."/public/upload/",'jpg|png|gif|jpeg');
+		$upload->renamed = true;
+		$re = $upload->upload();
+		if(!$re){
+			$fname_arr=$upload->get_succ_file();
+			
+			
+			if($fname_arr){
+				include_once("CorporationModel.class.php");
+				$corpmod = new CorporationModel();
+    			foreach ($fname_arr as $t){
+    				$fileds['rec_content'] = serialize(array("img"=>substr(strrchr($t,'/'),1),"user_name"=>$_POST['user_name'],"comment"=>$_POST['comment']));
+		
+					$row= $corpmod->updateBestStore($fileds,$_POST['rec_id']);
+					if ($row !== false) {
+						show_message_goback("保存成功!");
+											
+					}
+    			}
+				show_message_goback('保存成功!');
+				
+			}
+		}else{
+			show_message_goback('保存失败!');		
+		}
     }
 }
 ?>

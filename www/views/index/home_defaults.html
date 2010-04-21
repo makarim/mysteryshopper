@@ -196,13 +196,20 @@ initMarquee();
 
                 <td class="table2LeftBorder"></td>
                 <td>
+                  <?php if(isset($reccomments) && is_array($reccomments)){
+							foreach ($reccomments as $k=>$v){
+								$con = unserialize($v['rec_content']);
+								?>	
                	  <div class="comments">
-               		  <div class="userFace"><a href="#"><img src="/public/images/tmp_02.gif" alt="用户名" width="41" height="41" border="0" /></a></div>
-                	  <div class="cText"><b><a href="#">必胜客：</a></b><br />
-               	      环境不错，食品不错，价格较贵，要排队···</div>
+               		  <div class="userFace"><img src="/public/upload/<?php echo $con['img'];?>" width="41" height="41" border="0" /></div>
+                	  <div class="cText"><b>  <?php echo ($con['user_name'])?>：</b><br />
+               	     <?php echo nl2br($con['comment'])?></div>
                   </div>
                   <div class="clear"></div>
-
+ 					<?php
+							}
+              }
+              ?>
                	  
                 </td>
                 <td class="table2RightBorder"></td>

@@ -39,6 +39,9 @@ class home{
 		include_once("AnnouncementModel.class.php");
 		$announcementModel = new AnnouncementModel();
 		$latestan = $announcementModel->getLatestAnnouncement(3);
+		
+		$reccomments = $announcementModel->getLastRecComments(10);
+		$this->tpl->assign("reccomments",$reccomments);
 		$this->tpl->assign("latestan",$latestan);
 		$this->tpl->assign("lastestassignment",$lastestassignment);
 		$this->tpl->assign("myassignment",$myassignment);
@@ -86,8 +89,7 @@ class home{
     		show_message("参数无效！");
     		goback(10000);
     	}
-    	$this->tpl->assign('a_id',$a_id);
-    	$this->tpl->assign('assignmentinfo',$assignmentinfo);
+    
     	$is_view = '0';
 		if($assignmentinfo['user_id']==$this->login_user['user_id']){
 			$is_view =1;
@@ -109,10 +111,36 @@ class home{
 		}elseif($assignmentinfo['a_audit']==0 && $assignmentinfo['a_fdate']!='0000-00-00 00:00:00'){
 			$is_submitted = 3;
 		}
+		$tmp = explode("\n",$assignmentinfo['a_desc']);
+		$arr = array();
+		if(is_array($tmp)){
+			foreach ($tmp as $t){
+				$t = trim($t);
+				if($t){
+					if(strpos(".",$t)!==false) $t = explode(".",$t);
+					$arr[] = $t;
+				}
+			}
+		}
+		$assignmentinfo['a_desc']= $arr;
+		$tmp = explode("\n",$assignmentinfo['a_demand']);
+		$arr2 = array();
+		if(is_array($tmp)){
+			foreach ($tmp as $t){
+				$t = trim($t);
+				if($t){
+					if(strpos(".",$t)!==false) $t = explode(".",$t);
+					$arr2[] = $t;
+				}
+			}
+		}
 		
+		$assignmentinfo['a_demand']= $arr2;
 		$this->tpl->assign("is_submitted",$is_submitted);
 		$this->tpl->assign("do_quiz",$do_quiz);
 		$this->tpl->assign("is_view",$is_view);
+		$this->tpl->assign('a_id',$a_id);
+    	$this->tpl->assign('assignmentinfo',$assignmentinfo);
     	return $assignmentinfo;
     }
     function view_assignment(){

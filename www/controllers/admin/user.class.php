@@ -137,8 +137,8 @@ class user{
     	$userinfo = $passport->getUserById($user_id,$user);
     	if($userinfo){
     		$userinfo['user_lastlogin_time'] = date("y-m-d H:i:s",$userinfo['user_lastlogin_time']);
-    		if($userinfo['user_sex']==1) $userinfo['user_sex'] = lang('boy');
-    		if($userinfo['user_sex']==2) $userinfo['user_sex'] = lang('girl');
+    		if($userinfo['gender']==1) $userinfo['user_sex'] = lang('boy');
+    		if($userinfo['gender']==2) $userinfo['user_sex'] = lang('girl');
     		$msg = array('s'=> 200,'m'=>'','d'=>$userinfo);				
 			exit(json_output($msg));
     	}else{

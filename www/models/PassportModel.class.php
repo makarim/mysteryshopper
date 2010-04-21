@@ -62,7 +62,8 @@ class PassportModel extends Model {
 	public function getUserById($user_id,$user){
 		$tb_prefix = $this->_getTblPrefix($user);
 		
-		return $this->db->getRow("select * from user$tb_prefix where user_id='$user_id'");
+		return $this->db->getRow("select u.*,e.* from user$tb_prefix u 
+		left join user_ext e on e.user_id=u.user_id  where u.user_id='$user_id'");
 	}
 	public function getUser($user){
 		
