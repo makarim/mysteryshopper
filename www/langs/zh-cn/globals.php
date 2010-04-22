@@ -445,6 +445,9 @@ $GLOBALS['gLang']['search_notice'] = '查找公告';
 $GLOBALS['gLang']['add_notice'] = '添加公告';
 $GLOBALS['gLang']['total'] = '总数';
 $GLOBALS['gLang']['comment'] = '评论';
+$GLOBALS['gLang']['an_date'] = '时间';
+$GLOBALS['gLang']['title'] = '标题';
+$GLOBALS['gLang']['content'] = '内容';
 
 
 

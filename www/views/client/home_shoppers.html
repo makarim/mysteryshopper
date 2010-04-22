@@ -17,7 +17,20 @@
       <br />
       <br />
 
-   <div style="margin:10px 0 0 20px;"><?php if(isset($assignmentinfo['a_desc'])) echo nl2br(htmlspecialchars(stripslashes($assignmentinfo['a_desc']),ENT_QUOTES));?></div>
+  <div>
+   <?php if(is_array($assignmentinfo['a_desc'])){
+   	?>
+
+<table cellspacing="1"  class="clear missionReport" width="100%">
+<?php foreach ($assignmentinfo['a_desc'] as $k=>$v){?>
+<tr>
+<td><?php echo $v?></td>
+</tr>
+<?php }?>
+</table>
+<?php }?>
+
+</div>
 
 </div>
 

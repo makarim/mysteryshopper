@@ -32,37 +32,6 @@
 		  tli[i].className="";
 		}
 	}
-function getStore(c_id){
-	if(c_id==''){
-		var selobj = $('store_container');
-		for(var i in selobj.options){
-			selobj.options[i] = null;
-		}
-		selobj.options[0] = new Option('--', '');
-		return ;
-	}
-	var url = "<?php echo $www_site_url?>/admin.php?action=corporation&view=ajaxstore&c_id="+c_id;
-	
-	mini.ajax.get(url, function(r){
-
-		var r = eval('(' + r + ')');   
-
-		if(r.s==200){
-			var obj = eval('(' + r.d + ')');   
-			var selobj = $('store_container');
-			for(var i in obj){
-				//if(i==0) selobj.options[0] = new Option(obj[i].cs_name, obj[i].cs_id) //replace 1st option with a new one
-				selobj.options[i]=new Option(obj[i].cs_abbr+' '+obj[i].cs_name, obj[i].cs_id) //add a new option to the end of SELECT
-			}
-			
-		}
-		if(r.s==400){
-			$('msg').innerHTML = r.m;			
-		}
-	});
-	
-	return false;
-}
 		
 	</script>
 
@@ -85,14 +54,14 @@ function getStore(c_id){
 							<input type="hidden" name="view" value="notice">					
 							<table width="100%">
 								<tr>
-									<td align="right"><?php echo lang('a_title')?>:</td>
+									<td align="right"><?php echo lang('title')?>:</td>
 									<td align="left"><input type="text" name="an_title" value="<?php echo $con['an_title']?>" class="textfield" /></td>
 			
 									
 									<td rowspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
 								</tr>
 								<tr>
-									<td align="right"><?php echo lang('a_sdate')?>:</td>
+									<td align="right"><?php echo lang('an_date')?>:</td>
 			
 									<td colspan="3" align="left"><input type="text" name="an_date" onclick="showcalendar();" value="<?php echo $con['an_date']?>" class="textfield" /> </td>
 									
@@ -115,10 +84,10 @@ function getStore(c_id){
 
 					<tr>
 						<th><input type="checkbox" name="chkall" id="chkall" onclick="checkall('delete[]')" class="checkbox" /><label for="chkall"><?php echo lang('delete')?></label></th>
-						<th>ID</th>
-						<th><?php echo lang('a_title')?></th>
+		
+						<th><?php echo lang('title')?></th>
 						
-						<th><?php echo lang('a_edate')?></th>
+						<th><?php echo lang('an_date')?></th>
 						
 
 						<th><?php echo lang('edit')?></th>
@@ -127,7 +96,7 @@ function getStore(c_id){
 							foreach ($data['records'] as $v){?>	
 						<tr>
 							<td class="option"><input type="checkbox" name="delete[]" value="<?php echo $v['an_id']?>" class="checkbox" /></td>
-							<td><?php echo $v['an_id']?></td>
+
 							<td><strong><?php echo $v['an_title']?></strong></td>
 							<td><?php echo $v['an_date']?></td>
 							

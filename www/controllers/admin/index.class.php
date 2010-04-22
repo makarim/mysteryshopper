@@ -169,6 +169,7 @@ class index{
 		$announcementModel = new AnnouncementModel();
 		$an['an_title'] = empty($_POST ['an_title'])?"":addslashes($_POST ['an_title']);
 		$an['an_content'] = empty($_POST ['an_content'])?"":addslashes($_POST ['an_content']);
+		$an['an_date'] = empty($_POST ['an_date'])?"":trim($_POST ['an_date']);
 		$row = $announcementModel->createNewAnnouncement($an);
 		if ($row !== false) {
 
@@ -189,6 +190,7 @@ class index{
     			$announcementModel->deleteAnnouncement($an_id);
 			}
 		}
+		show_message(lang('success'));
 		goback();
     }
     

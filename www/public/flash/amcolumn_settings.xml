@@ -29,7 +29,7 @@
   <js_enabled></js_enabled>                                   <!-- [true] (true / false) In case you don't use any flash - JavaScript communication, you shuold set this setting to false - this will save some CPU and will disable the security warning message which appears when opening the chart from hard drive. -->  
 
   <column>
-    <type>stacked</type>                                             <!-- [clustered] (clustered, stacked, 100% stacked, 3d column) -->
+    <type>clustered</type>                                             <!-- [clustered] (clustered, stacked, 100% stacked, 3d column) -->
     <width>40</width>                                         <!-- [80] (0 - 100) width of column (in percents)  -->
     <spacing>0</spacing>                                      <!-- [5] (Number) space between columns of one category axis value, in pixels. Negative values can be used. -->
     <grow_time>3</grow_time>                                   <!-- [0] (Number) grow time in seconds. Leave 0 to appear instantly -->
