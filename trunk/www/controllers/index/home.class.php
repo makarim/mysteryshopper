@@ -364,10 +364,25 @@ class home{
 				$user['hearabout'] = !empty($_POST['hearabout'])?$_POST['hearabout']:'0';
     		break;    		
     		case "other":
-    			$user['eatingoutcount'] = !empty($_POST['eatingoutcount'])?intval($_POST['eatingoutcount']):'';
-				$user['avgbill'] = !empty($_POST['avgbill'])?$_POST['avgbill']:'';
-				$user['apparelspending'] = !empty($_POST['apparelspending'])?$_POST['apparelspending']:'';
-				
+    			$user['eatwithwho'] = !empty($_POST['eatwithwho'])?intval($_POST['eatwithwho']):'0';
+    			$user['eatlunchtimes'] = !empty($_POST['eatlunchtimes'])?intval($_POST['eatlunchtimes']):'0';
+    			$user['eatdinnertimes'] = !empty($_POST['eatdinnertimes'])?intval($_POST['eatdinnertimes']):'0';
+    			$user['eatweekdaytimes'] = !empty($_POST['eatweekdaytimes'])?intval($_POST['eatweekdaytimes']):'0';
+    			$user['eatlunchavgcost'] = !empty($_POST['eatlunchtimes'])?$_POST['eatlunchavgcost']:'0';
+    			$user['eatdinneravgcost'] = !empty($_POST['eatdinneravgcost'])?$_POST['eatdinneravgcost']:'0';
+    			$user['eatweekdayavgcost'] = !empty($_POST['eatweekdayavgcost'])?$_POST['eatweekdayavgcost']:'0';
+    			$user['eatenvironment'] = !empty($_POST['eatenvironment'])?$_POST['eatenvironment']:'';
+    			$user['eatcookstyle'] = !empty($_POST['eatcookstyle'])?$_POST['eatcookstyle']:'';
+    			$user['eatbooking'] = !empty($_POST['eatbooking'])?intval($_POST['eatbooking']):'0';
+    			$user['eatvipcard'] = !empty($_POST['eatvipcard'])?intval($_POST['eatvipcard']):'0';
+    			$user['eatnewcooking'] = !empty($_POST['eatnewcooking'])?intval($_POST['eatnewcooking']):'0';
+    			$user['eatcombo'] = !empty($_POST['eatcombo'])?intval($_POST['eatcombo']):'0';
+    			$user['eatsweetcourse'] = !empty($_POST['eatsweetcourse'])?intval($_POST['eatsweetcourse']):'0';
+    			$user['eatdrink'] = !empty($_POST['eatdrink'])?intval($_POST['eatdrink']):'0';
+    			$user['dinnerhall'] = !empty($_POST['dinnerhall'])?intval($_POST['dinnerhall']):'0';
+    			$user['eattraffic'] = !empty($_POST['eattraffic'])?$_POST['eattraffic']:'';
+    			$user['eataddress'] = !empty($_POST['eataddress'])?$_POST['eataddress']:'';
+
 				$user['newletters'] = !empty($_POST['newletters'])?$_POST['newletters']:'0';
 				$user['interests'] = !empty($_POST['interests'])?$_POST['interests']:'';
 		    		break;	

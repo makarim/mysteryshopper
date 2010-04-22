@@ -81,6 +81,18 @@ class home{
     	if(!$assignmentinfo){
     		
     	}
+    	$tmp = explode("\n",$assignmentinfo['a_desc']);
+		$arr = array();
+		if(is_array($tmp)){
+			foreach ($tmp as $t){
+				$t = trim($t);
+				if($t){
+					if(strpos(".",$t)!==false) $t = explode(".",$t);
+					$arr[] = $t;
+				}
+			}
+		}
+		$assignmentinfo['a_desc']= $arr;
     	$this->tpl->assign('a_id',$a_id);
     	$this->tpl->assign('assignmentinfo',$assignmentinfo);
 	}
@@ -108,6 +120,20 @@ class home{
     	if(!$assignmentinfo){
     		
     	}
+    	
+    	$tmp = explode("\n",$assignmentinfo['a_demand']);
+		$arr = array();
+		if(is_array($tmp)){
+			foreach ($tmp as $t){
+				$t = trim($t);
+				if($t){
+					if(strpos(".",$t)!==false) $t = explode(".",$t);
+					$arr[] = $t;
+				}
+			}
+		}
+		$assignmentinfo['a_demand']= $arr;
+    	
     	$this->tpl->assign('a_id',$a_id);
     	$this->tpl->assign('assignmentinfo',$assignmentinfo);
 	}
@@ -159,7 +185,7 @@ class home{
 					$v['service'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],1,$type_id);;
 					$v['environment'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,$type_id);
 					$v['product'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,$type_id);
-					$a_average += ($v['service']+$v['environment']+$v['product']); 
+					$a_average += ($v['service']+$v['environment']+$v['product'])/3; 
 				}
 				$assignments[$k] = $v;
 			}
@@ -363,6 +389,7 @@ class home{
 		$def_store_id = isset($stores[0]['cs_id'])?$stores[0]['cs_id']:0;
 		$def_store_name = isset($stores[0]['cs_name'])?$stores[0]['cs_name']:'';
 		$type = !empty($_GET['stores'])?$_GET['stores']:"summary";
+		$type_id = isset($GLOBALS['gTypes'][$type])?$GLOBALS['gTypes'][$type]:'';
 		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
 		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
 		$cs_id = !empty($_GET['cs_id'])?$_GET['cs_id']:$def_store_id;
@@ -371,10 +398,45 @@ class home{
 		$con['sdate'] = $sdate;
 		$con['edate'] = $edate;
 		$con['a_audit'] = 1;
-			
+		
+		if($type=='time'){
+			$chart_title = '';
+			include_once("ChartModel.class.php"); 
+			$ChartModel = new ChartModel($sdate,$edate);
+			$questions = $ChartModel->getTimeQuestionsByCId($this->login_corp['c_id'],'all');
+			if($questions){
+				$this->tpl->assign("questions",$questions);
+			}
+		}	
+		
 		include_once("AssignmentModel.class.php");	
 		$assignmentModel = new AssignmentModel();
 		$assignments = $assignmentModel->getAssignmentsByCsId($con,$cs_id);
+		
+		
+	
+		if(is_array($assignments)){
+			foreach ($assignments as $k=>$v){
+	
+				if($type=='time'){
+					foreach ($questions as $qu){
+						$v['times'][] = $assignmentModel->getTimeByRqId($qu['rq_id'],$v['a_id']);
+					}
+				}else{
+					$v['service'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],1,$type_id);;
+					$v['environment'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,$type_id);
+					$v['product'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,$type_id);
+				}
+				$assignments[$k] = $v;
+			}
+			
+		}
+		
+		$print_edate = $assignmentModel->getEndDateByCsId($cs_id);
+		$print_sdate = $assignmentModel->getStartDateByCsId($cs_id);
+		if($sdate=='') $sdate = $print_sdate;
+		if($edate=='') $edate = $print_edate;
+		
 		$this->tpl->assign("chart_title",$selstore);
 		$this->tpl->assign("selstore",$selstore);
 		$this->tpl->assign("cs_id",$cs_id);
@@ -408,7 +470,11 @@ class home{
 		$assignmentModel = new AssignmentModel();
 
 		$assignments = $assignmentModel->getAssignmentComments($con,10);
-		//print_sql();
+		
+		$print_edate = $assignmentModel->getEndDateByCsId($cs_id);
+		$print_sdate = $assignmentModel->getStartDateByCsId($cs_id);
+		if($sdate=='') $sdate = $print_sdate;
+		if($edate=='') $edate = $print_edate;
 
 		$this->tpl->assign("assignments",$assignments);
 		$this->tpl->assign("selstore",$selstore);

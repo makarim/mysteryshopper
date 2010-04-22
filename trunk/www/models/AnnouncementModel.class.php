@@ -45,7 +45,7 @@ class AnnouncementModel extends Model {
 	function createNewAnnouncement($an){
 		//user table
 		return	$this->db->execute ( "insert into announcement ( an_title,  an_content,an_date)
-		values ('{$an['an_title']}','" . $an ['an_content'] . "',NOW())" );
+		values ('{$an['an_title']}','" . $an ['an_content'] . "','" . $an ['an_date'] . "')" );
 
 	}
 	function deleteAnnouncement($an_id){

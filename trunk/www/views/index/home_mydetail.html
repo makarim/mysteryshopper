@@ -219,28 +219,152 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TR>
 <TD width="40%" class="text"></TD>
 <TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
-</TR
-><TR>
+</TR>
 <TR>
-<TD class="text">每星期外出就餐次数:</TD>
-<TD><div id="errorsDiv_eatingoutcount"></div><INPUT class="input" type="text" id="eatingoutcount" name="eatingoutcount" value="<?php echo $userinfo['eatingoutcount']?>" /> 
+<TD class="text">平常就餐习惯:</TD>
+<TD><div id="errorsDiv_eatwithwho"></div>
+<select name="eatwithwho" id="eatwithwho"> 
+<option value="0">选择...</option> 
+			<option value="1" <?php if(1==$userinfo['eatwithwho']) echo 'selected="selected"';?>>个人</option> 
+			<option value="2" <?php if(2==$userinfo['eatwithwho']) echo 'selected="selected"';?>>家庭</option> 
+			<option value="3" <?php if(3==$userinfo['eatwithwho']) echo 'selected="selected"';?>>朋友</option> 
+			</select>
 次</TD>
 </TR>
 <TR>
-<TD class="text">就餐平均消费：</TD>
-<TD><div id="errorsDiv_avgbill"></div><INPUT class="input" type="text" name="avgbill" id="avgbill" value="<?php echo $userinfo['avgbill']?>" /> 
-RMB</TD>
-</TR>
-<TR>
-<TD class="text">每月您在服饰方面的消费:</TD>
-<TD><div id="errorsDiv_apparelspending"></div><INPUT class="input" type="text" name="apparelspending" id="apparelspending" value="<?php echo $userinfo['apparelspending']?>" /> 
-RMB</TD>
-</TR>
-<TR>
-<TD class="text">您的最大兴趣是什么？</TD>
-<TD><div id="errorsDiv_interests"></div><INPUT class="input" type="text" name="interests" id="interests" value="<?php echo $userinfo['interests']?>" /></TD>
+<TD class="text">一个星期的工作日中，午餐外出就餐次数:</TD>
+<TD><div id="errorsDiv_eatlunchtimes"></div>
+<select name="eatlunchtimes" id="eatlunchtimes"> 
+<option value="0">选择...</option> 
+<?php for($i=1;$i<=5;$i++){ ?>
+			<option value="<?php echo $i?>" <?php if($i==$userinfo['eatlunchtimes']) echo 'selected="selected"';?>><?php echo $i?></option> 
+	<?php }?>		
+			</select>
+次</TD>
 </TR>
 
+<TR>
+<TD class="text">午餐平均消费？</TD>
+<TD><div id="errorsDiv_eatlunchavgcost"></div><INPUT class="input" type="text" name="eatlunchavgcost" id="eatlunchavgcost" value="<?php echo $userinfo['eatlunchavgcost']?>" /></TD>
+</TR>
+<TR>
+<TD class="text">一个星期的工作日中，晚餐外出就餐次数:</TD>
+<TD><div id="errorsDiv_eatdinnertimes"></div>
+<select name="eatdinnertimes" id="eatdinnertimes"> 
+<option value="0">选择...</option> 
+<?php for($i=1;$i<=5;$i++){ ?>
+			<option value="<?php echo $i?>" <?php if($i==$userinfo['eatdinnertimes']) echo 'selected="selected"';?>><?php echo $i?></option> 
+	<?php }?>		
+			</select>
+次</TD>
+</TR>
+<TR>
+<TD class="text">晚餐平均消费？</TD>
+<TD><div id="errorsDiv_eatdinneravgcost"></div><INPUT class="input" type="text" name="eatdinneravgcost" id="eatdinneravgcost" value="<?php echo $userinfo['eatdinneravgcost']?>" /></TD>
+</TR>
+<TR>
+<TD class="text">一个星期的双休日中，外出就餐次数:</TD>
+<TD><div id="errorsDiv_eatweekdaytimes"></div>
+<select name="eatweekdaytimes" id="eatweekdaytimes"> 
+<option value="0">选择...</option> 
+<?php for($i=1;$i<=5;$i++){ ?>
+			<option value="<?php echo $i?>" <?php if($i==$userinfo['eatweekdaytimes']) echo 'selected="selected"';?>><?php echo $i?></option> 
+	<?php }?>		
+			</select>
+次</TD>
+</TR>
+<TR>
+<TD class="text">双休日中外出就餐平均消费？</TD>
+<TD><div id="errorsDiv_eatweekdayavgcost"></div><INPUT class="input" type="text" name="eatweekdayavgcost" id="eatweekdayavgcost" value="<?php echo $userinfo['eatweekdayavgcost']?>" /></TD>
+</TR>
+<TR>
+<TD class="text">喜欢怎样的就餐环境？</TD>
+<TD><div id="errorsDiv_eatenvironment"></div><INPUT class="input" type="text" name="eatenvironment" id="eatenvironment" value="<?php echo $userinfo['eatenvironment']?>" /></TD>
+</TR>
+<TR>
+<TD class="text">喜欢的怎样的菜系？</TD>
+<TD><div id="errorsDiv_eatcookstyle"></div><INPUT class="input" type="text" name="eatcookstyle" id="eatcookstyle" value="<?php echo $userinfo['eatcookstyle']?>" /></TD>
+</TR>
+<TR>
+<TD class="text">你有定位的习惯吗？</TD>
+<TD><div id="errorsDiv_eatbooking"></div>
+<select name="eatbooking" id="eatbooking"> 
+<option value="0">选择...</option> 
+			<option value="1" <?php if(1==$userinfo['eatbooking']) echo 'selected="selected"';?>>有</option> 
+			<option value="2" <?php if(2==$userinfo['eatbooking']) echo 'selected="selected"';?>>没有</option> 
+			</select>
+</TD>
+</TR><TR>
+<TD class="text">你是否喜欢使用折扣券/VIP卡？</TD>
+<TD><div id="errorsDiv_eatvipcard"></div>
+<select name="eatvipcard" id="eatvipcard"> 
+<option value="0">选择...</option> 
+			<option value="1" <?php if(1==$userinfo['eatvipcard']) echo 'selected="selected"';?>>是</option> 
+			<option value="2" <?php if(2==$userinfo['eatvipcard']) echo 'selected="selected"';?>>否</option> 
+			</select>
+</TD>
+</TR><TR>
+<TD class="text">是否喜欢尝试新的菜系？</TD>
+<TD><div id="errorsDiv_eatnewcooking"></div>
+<select name="eatnewcooking" id="eatnewcooking"> 
+<option value="0">选择...</option> 
+			<option value="1" <?php if(1==$userinfo['eatnewcooking']) echo 'selected="selected"';?>>是</option> 
+			<option value="2" <?php if(2==$userinfo['eatnewcooking']) echo 'selected="selected"';?>>否</option> 
+			</select>
+</TD>
+</TR><TR>
+<TD class="text">你是否喜欢选择套餐？</TD>
+<TD><div id="errorsDiv_eatcombo"></div>
+<select name="eatcombo" id="eatcombo"> 
+<option value="0">选择...</option> 
+			<option value="1" <?php if(1==$userinfo['eatcombo']) echo 'selected="selected"';?>>是</option> 
+			<option value="2" <?php if(2==$userinfo['eatcombo']) echo 'selected="selected"';?>>否</option> 
+			</select>
+</TD>
+</TR>
+<TR>
+<TD class="text">就餐是否经常点“甜点/点心”？</TD>
+<TD><div id="errorsDiv_eatsweetcourse"></div>
+<select name="eatsweetcourse" id="eatsweetcourse"> 
+<option value="0">选择...</option> 
+			<option value="1" <?php if(1==$userinfo['eatsweetcourse']) echo 'selected="selected"';?>>是</option> 
+			<option value="2" <?php if(2==$userinfo['eatsweetcourse']) echo 'selected="selected"';?>>否</option> 
+			</select>
+</TD>
+</TR><TR>
+<TD class="text">就餐是否经常点“饮品”？</TD>
+<TD><div id="errorsDiv_eatdrink"></div>
+<select name="eatdrink" id="eatdrink"> 
+<option value="0">选择...</option> 
+			<option value="1" <?php if(1==$userinfo['eatdrink']) echo 'selected="selected"';?>>是</option> 
+			<option value="2" <?php if(2==$userinfo['eatdrink']) echo 'selected="selected"';?>>否</option> 
+			</select>
+</TD>
+</TR><TR>
+<TD class="text">你认为以下那一点对于餐厅来说是第一重要的？</TD>
+<TD><div id="errorsDiv_dinnerhall"></div>
+<select name="dinnerhall" id="dinnerhall"> 
+<option value="0">选择...</option> 
+			<option value="1" <?php if(1==$userinfo['dinnerhall']) echo 'selected="selected"';?>>装修</option> 
+			<option value="2" <?php if(2==$userinfo['dinnerhall']) echo 'selected="selected"';?>>交通</option> 
+			<option value="3" <?php if(3==$userinfo['dinnerhall']) echo 'selected="selected"';?>>产品质量及服务</option> 
+			<option value="4" <?php if(4==$userinfo['dinnerhall']) echo 'selected="selected"';?>>价格</option> 
+			<option value="5" <?php if(5==$userinfo['dinnerhall']) echo 'selected="selected"';?>>无所谓</option> 
+			</select>
+</TD>
+</TR>
+<TR>
+<TD class="text">您的兴趣爱好？</TD>
+<TD><div id="errorsDiv_interests"></div><INPUT class="input" type="text" name="interests" id="interests" value="<?php echo $userinfo['interests']?>" /></TD>
+</TR>
+<TR>
+<TD class="text">外出就餐，通常使用什么交通工具？</TD>
+<TD><div id="errorsDiv_eattraffic"></div><INPUT class="input" type="text" name="eattraffic" id="eattraffic" value="<?php echo $userinfo['eattraffic']?>" /></TD>
+</TR>
+<TR>
+<TD class="text">最喜欢的就餐地点？</TD>
+<TD><div id="errorsDiv_eataddress"></div><INPUT class="input" type="text" name="eataddress" id="eataddress" value="<?php echo $userinfo['eataddress']?>" /></TD>
+</TR>
 <TR>
 <TD class="text">你是否需要平时收到我们SPOT的最新动态? </TD>
 <TD><div id="errorsDiv_newletters"></div><select name="newletters" id="newletters"> 

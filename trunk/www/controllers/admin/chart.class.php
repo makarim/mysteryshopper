@@ -167,10 +167,7 @@ $xml .="
 							$score = $ChartModel->getYesByAsId($v['a_id'],$v['re_id'],'service');
 							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
 						}					
-						if(strtolower($scoretype)=='time'){ 
-							$score = $ChartModel->getTimesByAsId($v['a_id'],$v['re_id'],'service');
-							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
-						}
+						
 					}
 					$xml .="</graph>\n";
 				
@@ -188,10 +185,7 @@ $xml .="
 							$score = $ChartModel->getYesByAsId($v['a_id'],$v['re_id'],'environment');
 							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
 						}					
-						if(strtolower($scoretype)=='time'){ 
-							$score = $ChartModel->getTimesByAsId($v['a_id'],$v['re_id'],'environment');
-							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
-						}
+						
 					}
 					$xml .="</graph>\n";
 	
@@ -209,10 +203,7 @@ $xml .="
 							$score = $ChartModel->getYesByAsId($v['a_id'],$v['re_id'],'product');
 							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
 						}					
-						if(strtolower($scoretype)=='time'){ 
-							$score = $ChartModel->getTimesByAsId($v['a_id'],$v['re_id'],'product');
-							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
-						}
+				
 					}
 					$xml .="</graph>\n";
 				
@@ -227,6 +218,54 @@ $xml .="
 		echo $xml;die;
 	}
 	
+	function view_storetimedata(){
+		$cs_id = !empty($_GET['cs_id'])?$_GET['cs_id']:'';
+		$scoretype = !empty($_GET['scoretype'])?$_GET['scoretype']:'summary';
+		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
+		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
+		$xml = "<?xml version='1.0' encoding='UTF-8'?>
+<chart>";
+		if($cs_id){
+			include_once("ChartModel.class.php"); 
+			$ChartModel = new ChartModel($sdate,$edate);
+			$con['sdate'] = $sdate;
+			$con['edate'] = $edate;
+			$con['a_audit'] = 1;
+			include_once("AssignmentModel.class.php");	
+			$assignmentModel = new AssignmentModel();
+			$series = $assignmentModel->getAssignmentsByCsId($con,$cs_id);
+			if(count($series)>0){
+				$xml .="<series>\n";
+				foreach ($series as $k=>$v){
+					$xml .="<value xid='{$v['a_id']}'>{$v['day']}</value>\n";
+				}
+				$xml .="</series>\n<graphs>\n";
+				$questions = $ChartModel->getTimeQuestionsByCsId($cs_id,'all');
+				foreach ($questions as $k=> $qu){
+					$k=$k+1;
+					$xml .="<graph gid='$k'>\n";
+						foreach ($series as $kk=>$vv){
+						
+							if(strtolower($scoretype)=='time'){ 
+								$score = $ChartModel->getTimeByRqId($qu['rq_id'],$vv['a_id']);
+								$xml .="<value xid='{$vv['a_id']}'>{$score}</value>\n";
+							}					
+							
+						}
+						$xml .="</graph>\n";
+					
+				}	
+					$xml.="</graphs>\n";
+				
+			}
+			//echo $ChartModel->getScoreByCsId(1,2);
+		}
+
+$xml .="
+</chart>
+";
+		echo $xml;die;
+	}
 	function view_timedata(){
 		$rq_id = !empty($_GET['rq_id'])?$_GET['rq_id']:'';
 		$c_id = !empty($_GET['c_id'])?$_GET['c_id']:'';

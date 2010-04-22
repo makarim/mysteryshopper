@@ -174,13 +174,19 @@ class AssignmentModel extends Model {
     function getEndDateByCId($c_id){
     	return $this->db->getOne("select DATE_FORMAT(a_fdate, '%Y-%m-%d') as day from assignment where c_id='$c_id' and a_audit=1 order by day desc limit 1");
     }    
+    function getEndDateByCsId($cs_id){
+    	return $this->db->getOne("select DATE_FORMAT(a_fdate, '%Y-%m-%d') as day from assignment where cs_id='$cs_id' and a_audit=1 order by day desc limit 1");
+    }    
     function getStartDateByCId($c_id){
     	return $this->db->getOne("select DATE_FORMAT(a_fdate, '%Y-%m-%d') as day from assignment where c_id='$c_id' and a_audit=1 order by day asc limit 1");
+    }    
+    function getStartDateByCsId($cs_id){
+    	return $this->db->getOne("select DATE_FORMAT(a_fdate, '%Y-%m-%d') as day from assignment where cs_id='$cs_id' and a_audit=1 order by day asc limit 1");
     }
     function getAssignmentsByCsId($con,$cs_id){
     	$add =$addsql = '';
     	if(!empty($con['sdate'])) $add .= " and a_fdate >='".$con['sdate']."'";
-    	if(!empty($con['edate'])) $add .= " and a_fdate < '".$con['edate']."'";
+    	if(!empty($con['edate'])) $add .= " and a_fdate <= '".$con['edate']."'";
     	if(!empty($con['a_audit'])) $add .= " and a_audit = '".$con['a_audit']."'";
     	if(is_array($cs_id) && count($cs_id)>0) $addsql = " and cs_id in (".join(",",$cs_id).")";
     	else  $addsql = " and cs_id ='".$cs_id."'";

@@ -12,7 +12,7 @@ class ChartModel extends Model {
 		if($this->edate){
 			list($y,$m,$d) = explode("-",$this->edate);
 			$this->edate = date("Y-m-d",mktime(0, 0, 0, $m  , $d+1, $y));
-			$this->addsql .= " and a.a_fdate < '{$this->edate}'";
+			$this->addsql .= " and a.a_fdate <'{$this->edate}'";
 		}
 		$this->db = parent::dbConnect($GLOBALS ["gDataBase"] ["db"]);
 	}
@@ -231,29 +231,12 @@ class ChartModel extends Model {
 		return 0;
 	}
 	
-	function getTimesByAsId($a_id,$re_id,$group){
-		if($group=='service') $group=1;
-		if($group=='environment') $group=2;
-		if($group=='product') $group=3;
-		if($group=='summary') $group=4;
-		$average = 0;
-		//一份报告有多少个的同group的打分题目
-		$sql = "select rq_id,rq_type from report_question where rq_type=1 and rq_group='$group' and re_id='".$re_id."'";
-		$rq_arr = $this->db->getAll($sql);
-		$q_row = count($rq_arr);
-		//echo "row:".$q_row."|";
-		$sum = 0;
-		if($q_row>0){
-			foreach ($rq_arr as $rq){
-				$sql = "select avg(ans_answer4) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=4";
-				$sum += $this->db->getOne($sql);
-			}
-			// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
-			$average += $sum/$q_row;
-			return round($average,2);
-		}
-		return 0;
+	function getTimeByRqId($rq_id,$a_id){
+		$sql = "select ans_answer4 from answer where rq_id='".$rq_id."' and a_id = '".$a_id."' and rq_type=4";
+		//echo $sql;
+		return $this->db->getOne($sql);
 	}
+	
 	
 	function getTimeQuestionsByCId($c_id,$group){
 		$addsql =" ";
@@ -270,7 +253,14 @@ class ChartModel extends Model {
 		$re_id_str = join(',',$re_id);
 		return $this->db->getAll("select rq_id,rq_type,rq_question from report_question where rq_type=4 and re_id in ($re_id_str) $addsql");
 	}
-	
+	function getTimeQuestionsByCsId($cs_id){
+		$re_id_arr = $this->db->getAll("select re_id from assignment where cs_id='$cs_id' group by re_id");
+		foreach ($re_id_arr as $value) {
+			$re_id[] = $value['re_id'];
+		}
+		$re_id_str = join(',',$re_id);
+		return $this->db->getAll("select rq_id,rq_type,rq_question from report_question where rq_type=4 and re_id in ($re_id_str)");
+	}
 	function getAvgTimeByRqId($rq_id,$cs_id){
 		$assignment = $this->db->getAll("select a.a_id from assignment a where a.cs_id='$cs_id' $this->addsql");
 		$a_id = array();$a_id_str = '';

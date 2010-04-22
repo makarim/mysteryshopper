@@ -40,7 +40,7 @@ function checkOnSubmit(formName) {
 	
 		<div class="hastabmenu">
 				<ul class="tabmenu">
-					<li id="addindexbtn" class="tabcurrent"><a href="#"><?php echo lang('edit_index')?></a></li>	
+					<li id="addindexbtn" class="tabcurrent"><a href="#"><?php echo lang('add')?></a></li>	
 				</ul>
 				<div id="addindexdiv" class="tabcontentcur" style="display:;">
 					<form id="addindexform" name="addindexform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addindexform');" >
@@ -48,13 +48,16 @@ function checkOnSubmit(formName) {
 					<input type="hidden" name="op" value="savenotice">
 					<table width="100%">
 						<tr>
-							<td width="10%"><?php echo lang('an_title')?>:</td>
+							<td width="10%"><?php echo lang('title')?>:</td>
 							<td><input type="text" name="an_title" class="textfield" value="" /> *</td>
 						</tr>					
-							
+						<tr>
+							<td><?php echo lang('an_date')?>:</td>
+							<td><input type="text" name="an_date" onclick="showcalendar();" value="" class="textfield" /></td>
+						</tr>			
 													
 						<tr>
-							<td><?php echo lang('an_content')?>:</td>
+							<td><?php echo lang('content')?>:</td>
 							<td><textarea type="text" name="an_content" rows="10" style="width:500px" class="textfield"/></textarea></td>
 						</tr>							
 										
