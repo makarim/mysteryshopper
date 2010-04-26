@@ -65,6 +65,9 @@ class home{
 		$cs_id= !empty($_GET['cs_id'])?$_GET['cs_id']:'';
 		$a_sdate= !empty($_GET['a_sdate'])?$_GET['a_sdate']:'';
 		$a_edate= !empty($_GET['a_edate'])?$_GET['a_edate']:'';
+		$province= !empty($_GET['province'])?$_GET['province']:'';
+		$city= !empty($_GET['city'])?$_GET['city']:'';
+		$area= !empty($_GET['area'])?$_GET['area']:'';
 		
 		$con['order'] = $cur_sort;
 		$con['a_title'] = $a_title;
@@ -73,12 +76,16 @@ class home{
 		$con['a_sdate'] = $a_sdate;
 		$con['a_edate'] = $a_edate;
 		$con['notselected'] = 'notselected';
+		$con['province'] = $province;
+		$con['city'] = $city;
+		$con['area'] = $area;
 		
 		include_once("AssignmentModel.class.php");
 		$assignmentModel = new AssignmentModel();
 				
 		$assignments = $assignmentModel->getItems($con,16);
 		$this->tpl->assign('assignments',$assignments);
+		$this->tpl->assign('con',$con);
 		$this->tpl->assign('total',$assignments['page']->total);
     }    
     function get_assignment($a_id){	

@@ -119,12 +119,12 @@ function checkform(form){
 			 <td width="5%"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
             <td width="60%"><?php echo $vv['rq_question']?> <span id="span_ch_<?php echo $vv['rq_id'];?>" style="float:right;"></span></td>
             <td  width="35%" align="center">
-            <?php if($vv['rq_type']==2){?><label style="float:left;"><input type="checkbox" id="votebox_<?php echo $vv['rq_id'];?>" name="votebox_<?php echo $vv['rq_id'];?>" onclick="out_fs('yes_<?php echo $vv['rq_id'];?>_10');">n/a</label><div id="voteimg_<?php echo $vv['rq_id'];?>"></div>	
+            <?php if($vv['rq_type']==2){?><label style="float:left;"><input type="checkbox" id="votebox_<?php echo $vv['rq_id'];?>" name="votebox_<?php echo $vv['rq_id'];?>" onclick="out_fs('yes_<?php echo $vv['rq_id'];?>_10');" <?php if($vv['answer']=='A') echo "checked"; ?>>N/A</label><div id="voteimg_<?php echo $vv['rq_id'];?>"></div>	
 								<input type="hidden" id="rq_ans_<?php echo $vv['rq_id'];?>" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="<?php echo $vv['answer'];?>">
 								<script>create_vote_img(<?php echo $vv['rq_id'];?>,'<?php echo $vv['answer'];?>');</script>	
 								
 								<?php }else if($vv['rq_type']==1){ ?>		
-								<label><input type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="Y" <?php if($vv['answer']=='Y')echo 'checked'; ?>>Yes ;</label>&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="N"  <?php if($vv['answer']=='N')echo 'checked'; ?>>No;</label>
+								<label><input type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="A" <?php if($vv['answer']=='A')echo 'checked'; ?>>N/A ;</label>&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="Y" <?php if($vv['answer']=='Y')echo 'checked'; ?>>Yes ;</label>&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="N"  <?php if($vv['answer']=='N')echo 'checked'; ?>>No;</label>
 								
 									<?php }else if($vv['rq_type']==4){ ?>	
 								<input type="text" size="6" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="<?php echo $vv['answer']; ?>">	分钟

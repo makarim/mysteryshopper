@@ -6,7 +6,7 @@
 <LINK href="<?php echo $www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
 <script src="<?php echo $www_site_url?>/public/js/common.js" type="text/javascript"></script>
 <script src="<?php echo $www_site_url?>/public/js/ajax.js" type="text/javascript"></script>
-
+<script src="<?php echo $www_site_url?>/public/js/PCASClass.js"></script>
 
 <script>
 function checkOnSubmit(formName) {
@@ -54,18 +54,116 @@ function checkOnSubmit(formName) {
 						<tr>
 							<td><?php echo lang('pwd')?>:</td>
 							<td><input type="text" name="c_password" class="textfield" value="" /></td>
-							</tr>					
+						</tr>					
 						<tr>	
 										
 						<tr>
 							<td><?php echo lang('c_title')?>:</td>
 							<td><input type="text" name="c_title" class="textfield" value="<?php echo $info['c_title']?>"/></td>
-							</tr>		
+						</tr>		
 						<tr>						
 				
 							<td><?php echo lang('c_initial')?>:</td>
 							<td><input type="text" name="c_initial" class="textfield" value="<?php echo $info['c_initial']?>" /></td>
-							</tr>
+						</tr>
+						
+						
+						<tr>
+							<td><?php echo lang('c_industry')?>:</td>
+							<td><select name="c_industry">
+							<option value="0">--</option>
+							<?php 
+foreach ($GLOBALS['gIndustry'] as $k=>$v){
+	?>
+							<option value="<?php echo $k;?>" <?php if($info['c_industry']==$k) echo "selected";?> ><?php echo lang($v)?></option>
+<?php
+}
+?>
+							</select></td>
+						</tr>		
+						<tr>
+							<td><?php echo lang('c_companytype')?>:</td>
+							<td><select name="c_companytype">
+							<option value="0">--</option>
+							<?php 
+foreach ($GLOBALS['gCompanytype'] as $k=>$v){
+	?>
+							<option value="<?php echo $k;?>" <?php if($info['c_companytype']==$k) echo "selected";?> ><?php echo lang($v)?></option>
+<?php
+}
+?>
+							</select>
+							</td>
+						</tr>		
+						<tr>
+							<td><?php echo lang('c_companycate')?>:</td>
+							<td><select name="c_companycate">
+							<option value="0">--</option>
+							<?php 
+foreach ($GLOBALS['gCompanycate'] as $k=>$v){
+	?>
+							<option value="<?php echo $k;?>" <?php if($info['c_companycate']==$k) echo "selected";?> ><?php echo lang($v)?></option>
+<?php
+}
+?>	</select>
+							</td>
+						</tr>
+						<tr>
+							<td><?php echo lang('c_foodcate')?>:</td>
+							<td><select name="c_foodcate">
+							<option value="0">--</option>
+							<?php 
+foreach ($GLOBALS['gFoodcate'] as $k=>$v){
+	?>
+							<option value="<?php echo $k;?>" <?php if($info['c_foodcate']==$k) echo "selected";?> ><?php echo lang($v)?></option>
+<?php
+}
+?>
+							</select>
+							</td>
+						</tr>	
+						<tr>
+							<td><?php echo lang('c_companysize')?>:</td>
+							<td><select name="c_companysize">
+							<option value="0">--</option>
+							<?php 
+foreach ($GLOBALS['gCompanysize'] as $k=>$v){
+	?>
+							<option value="<?php echo $k;?>" <?php if($info['c_companysize']==$k) echo "selected";?> ><?php echo lang($v)?></option>
+<?php
+}
+?>
+							</select>
+							</td>
+						</tr>
+						<tr>
+							<td><?php echo lang('city_district')?>:</td>
+							<td>
+							<select name="c_province"></select><select name="c_city"></select><select name="c_district"></select>
+							</td>
+						</tr>	
+						<tr>
+							<td><?php echo lang('c_companyaddress')?>:</td>
+							<td><input type="text" name="c_companyaddress"  class="textfield" value="<?php echo $info['c_companyaddress']?>"/></td>
+						</tr>
+						
+						<tr>
+							<td><?php echo lang('c_otherphone')?>:</td>
+							<td><input type="text" name="c_otherphone" value="<?php echo $info['c_otherphone']?>"  class="textfield"/></td>
+						</tr>	
+						<tr>
+							<td><?php echo lang('c_workemail')?>:</td>
+							<td><input type="text" name="c_workemail" value="<?php echo $info['c_workemail']?>"   class="textfield"/></td>
+						</tr>
+						<tr>
+							<td><?php echo lang('c_website')?>:</td>
+							<td><input type="text" name="c_website" value="<?php echo $info['c_website']?>"  class="textfield"/></td>
+						</tr>				
+						<tr>
+							<td><?php echo lang('c_department')?>:</td>
+							<td><input type="text" name="c_department" value="<?php echo $info['c_department']?>" class="textfield"/></td>
+						</tr>
+						
 						<tr>
 							<td><?php echo lang('c_contacter')?>:</td>
 							<td><input type="text" name="c_contacter"  class="textfield" value="<?php echo $info['c_contacter']?>"/></td>
@@ -74,8 +172,12 @@ function checkOnSubmit(formName) {
 						<tr>
 							<td><?php echo lang('c_phone')?>:</td>
 							<td><input type="text" name="c_phone"  class="textfield" value="<?php echo $info['c_phone']?>"/></td>
-							</tr>					
-						<tr>			
+						</tr>					
+						<tr>
+							<td><?php echo lang('c_avgbill')?>:</td>
+							<td><input type="text" name="c_avgbill" value="<?php echo $info['c_avgbill']?>"  class="textfield"/>
+							</td>
+						</tr>	
 						<tr>
 							<td><?php echo lang('c_intro')?>:</td>
 							<td><textarea type="text" name="c_intro" rows="10" style="width:500px" class="textfield"/><?php echo $info['c_intro']?></textarea></td>
@@ -96,6 +198,9 @@ function checkOnSubmit(formName) {
 				</div>
 		</div>
 </div>
+<script>
+new PCAS("c_province","c_city","c_district","<?php echo $info['c_province']?>","<?php echo $info['c_city']?>","<?php echo $info['c_district']?>");
 
+</script>
 </body>
 </html>

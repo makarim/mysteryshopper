@@ -81,12 +81,27 @@ class corporation{
 //			$msg = array('s'=> 400,'m'=>lang('cnameexist'),'d'=>'');				
 //			exit(json_output($msg));
 		}	
-
+		$corporation['c_title'] = empty($_POST ['c_title'])?"":addslashes($_POST ['c_title']);
 		$corporation['c_password'] = md5(md5($_POST ['c_password']));
 		$corporation['c_name'] =  $_POST ['c_name'] ;
 		$corporation['c_initial'] =  $_POST ['c_initial'] ;
-		$corporation['c_title'] = empty($_POST ['c_title'])?"":addslashes($_POST ['c_title']);
-		$corporation['c_contacter'] = empty($_POST ['c_contacter'])?"":addslashes($_POST ['c_contacter']);
+		
+		$corporation['c_industry'] =  $_POST ['c_industry'] ;
+		$corporation['c_department'] =  strip_tags($_POST ['c_department']);
+		$corporation['c_otherphone'] =  strip_tags($_POST ['c_otherphone']);
+		$corporation['c_companyaddress'] = strip_tags( $_POST ['c_companyaddress']);
+		$corporation['c_province'] =  $_POST ['c_province'] ;
+		$corporation['c_city'] =  $_POST ['c_city'] ;
+		$corporation['c_district'] =  $_POST ['c_district'] ;
+		$corporation['c_workemail'] =  strip_tags($_POST ['c_workemail']);
+		$corporation['c_website'] =  strip_tags($_POST ['c_website']);
+		$corporation['c_companytype'] =  $_POST ['c_companytype'] ;
+		$corporation['c_companycate'] =  $_POST ['c_companycate'] ;
+		$corporation['c_foodcate'] =  $_POST ['c_foodcate'] ;
+		$corporation['c_companysize'] =  $_POST ['c_companysize'] ;
+		$corporation['c_avgbill'] =  strip_tags($_POST ['c_avgbill']);
+		
+		$corporation['c_contacter'] = empty($_POST ['c_contacter'])?"":addslashes(strip_tags($_POST ['c_contacter']));
 		$corporation['c_phone'] = empty($_POST ['c_phone'])?"":addslashes($_POST ['c_phone']);
 		$corporation['c_intro'] =empty($_POST ['c_intro'])?"":strip_tags($_POST ['c_intro']);
 		if(isset($_FILES['c_logo']) && $_FILES['c_logo']['error']==0){
@@ -172,6 +187,22 @@ class corporation{
 		$updates['c_contacter'] = empty($_POST ['c_contacter'])?"":addslashes($_POST ['c_contacter']);
 		$updates['c_phone'] = empty($_POST ['c_phone'])?"":addslashes($_POST ['c_phone']);
 		$updates['c_intro'] =empty($_POST ['c_intro'])?"":strip_tags($_POST ['c_intro']);
+		
+		$updates['c_industry'] =  $_POST ['c_industry'] ;
+		$updates['c_department'] =  strip_tags($_POST ['c_department']);
+		$updates['c_otherphone'] =  strip_tags($_POST ['c_otherphone']);
+		$updates['c_companyaddress'] = strip_tags( $_POST ['c_companyaddress']);
+		$updates['c_province'] =  $_POST ['c_province'] ;
+		$updates['c_city'] =  $_POST ['c_city'] ;
+		$updates['c_district'] =  $_POST ['c_district'] ;
+		$updates['c_workemail'] =  strip_tags($_POST ['c_workemail']);
+		$updates['c_website'] =  strip_tags($_POST ['c_website']);
+		$updates['c_companytype'] =  $_POST ['c_companytype'] ;
+		$updates['c_companycate'] =  $_POST ['c_companycate'] ;
+		$updates['c_foodcate'] =  $_POST ['c_foodcate'] ;
+		$updates['c_companysize'] =  $_POST ['c_companysize'] ;
+		$updates['c_avgbill'] =  strip_tags($_POST ['c_avgbill']);
+		
 		//print_r($_FILES);die;
 		if(isset($_FILES['c_logo']) && $_FILES['c_logo']['error']==0){
 			$img_ext = substr($_FILES['c_logo']['name'],strrpos($_FILES['c_logo']['name'],'.'));
@@ -227,6 +258,11 @@ class corporation{
 		$store['cs_abbr'] =  addslashes($_POST ['cs_abbr']) ;
 		$store['c_id'] =  intval($_POST ['c_id']) ;
 		$store['cs_address'] = empty($_POST ['cs_address'])?"":addslashes($_POST ['cs_address']);
+		$store['cs_province'] = empty($_POST ['cs_province'])?"":addslashes($_POST ['cs_province']);
+		$store['cs_city'] = empty($_POST ['cs_city'])?"":addslashes($_POST ['cs_city']);
+		$store['cs_district'] = empty($_POST ['cs_district'])?"":addslashes($_POST ['cs_district']);
+		$store['cs_phone'] = empty($_POST ['cs_phone'])?"":addslashes($_POST ['cs_phone']);
+		$store['cs_size'] = empty($_POST ['cs_size'])?"":addslashes($_POST ['cs_size']);
 		
 		include_once("CorporationModel.class.php");
 		$corpmod = new CorporationModel();
@@ -277,7 +313,12 @@ class corporation{
 		$store['cs_name'] =  addslashes($_POST ['cs_name']) ;
 		$store['cs_abbr'] =  addslashes($_POST ['cs_abbr']) ;
 		$store['c_id'] =  intval($_POST ['c_id']) ;
-		$store['cs_address'] = empty($_POST ['cs_address'])?"":addslashes($_POST ['cs_address']);
+				$store['cs_address'] = empty($_POST ['cs_address'])?"":addslashes($_POST ['cs_address']);
+		$store['cs_province'] = empty($_POST ['cs_province'])?"":addslashes($_POST ['cs_province']);
+		$store['cs_city'] = empty($_POST ['cs_city'])?"":addslashes($_POST ['cs_city']);
+		$store['cs_district'] = empty($_POST ['cs_district'])?"":addslashes($_POST ['cs_district']);
+		$store['cs_phone'] = empty($_POST ['cs_phone'])?"":addslashes($_POST ['cs_phone']);
+		$store['cs_size'] = empty($_POST ['cs_size'])?"":addslashes($_POST ['cs_size']);
 		// 1. update db corporation
 		$row = $corpmod->updateStore( $store, $cs_id);
 		if ($row !== false) {

@@ -5,6 +5,8 @@ var vote_image='/public/images/vote_yes.gif';
 
 //加载图片
 function create_vote_img(id,value){
+	value = isNaN(value) ? -1 : value;
+	
 	var vote_div=document.getElementById("voteimg_"+id);
 	for(var i=0;i<=10;i++){	
 	    var vote_img=document.createElement('img');
@@ -47,8 +49,15 @@ function out_fs(id){
 	for(var i=0;i<=obj;i++){
 		$("yes_"+q+"_"+i).src=vote_image0;
 	}
-	document.getElementById("rq_ans_"+q).value =0;
-	document.getElementById("span_ch_"+q).innerHTML =0+"分";
+
+	if(document.getElementById("votebox_"+q).checked==true){
+		document.getElementById("rq_ans_"+q).value ="A";
+		document.getElementById("span_ch_"+q).innerHTML ="N/A";
+	}else{
+		document.getElementById("rq_ans_"+q).value ="";
+		document.getElementById("span_ch_"+q).innerHTML ="";
+	}
+	
 
 }
 function is_fs(id){

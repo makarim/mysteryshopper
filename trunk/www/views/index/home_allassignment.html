@@ -1,21 +1,29 @@
 <?php include_once("header.html")?>
-
+<script src="<?php echo $www_site_url?>/public/js/PCASClass.js"></script>
 <div id="wrap">  <br />
 <?php include_once("home_left.html")?>
     <div class="admincontent">
 
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
+      <form action="/index.php" method="GET">
+      <input type="hidden" name="action" value="home">
+      <input type="hidden" name="view" value="allassignment">
           <td><div class="table2TitleBg">
             <div class="table2TitleBg2">
+            <div style="float:right;margin:5px;">筛选：<select name="province"></select><select name="city"></select><select name="area"></select> <input type="submit" value="查询"></div>
               <div class="table2Title">全部任务</div>
+               
             </div>
+           
            </div></td>
         </tr>
+        </form>
+       
 
         <tr>
           <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
+            
+       		 <tr>
               <td class="table2LeftBorder"></td>
               <td>
 				<?php if(isset($assignments['records']) && is_array($assignments['records'])){
@@ -45,7 +53,10 @@
           </table></td>
         </tr>
       </table>
+<script>
+new PCAS("province","city","area","<?php echo $con['province']?>","<?php echo $con['city']?>","<?php echo $con['area']?>");
 
+</script>
     </div>
 </div>
 </div>
