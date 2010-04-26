@@ -47,12 +47,13 @@ class CorporationModel extends Model {
 	}
 	function createNewCorporation($corp){
 		//user table
-		return	$this->db->execute ( "insert into corporation ( c_name,c_password,c_title,c_initial,c_contacter, c_phone, c_intro)
-		values ('{$corp['c_name']}','" . $corp ['c_password'] . "','{$corp['c_title']}','{$corp['c_initial']}','{$corp['c_contacter']}','{$corp['c_phone']}','{$corp['c_intro']}')" );
+		return $this->db->insert($corp,"corporation");
+//		return	$this->db->execute ( "insert into corporation ( c_name,c_password,c_title,c_initial,c_contacter, c_phone, c_intro)
+//		values ('{$corp['c_name']}','" . $corp ['c_password'] . "','{$corp['c_title']}','{$corp['c_initial']}','{$corp['c_contacter']}','{$corp['c_phone']}','{$corp['c_intro']}')" );
 
 	}
 	function createNewStore($store){
-		return $this->db->execute("insert into store (cs_name,cs_abbr,cs_address,c_id) value ('{$store['cs_name']}','{$store['cs_abbr']}','{$store['cs_address']}','{$store['c_id']}') ");
+		return $this->db->execute("insert into store (cs_name,cs_abbr,cs_address,c_id,cs_province,cs_city,cs_district,cs_phone,cs_size) value ('{$store['cs_name']}','{$store['cs_abbr']}','{$store['cs_address']}','{$store['c_id']}','{$store['cs_province']}','{$store['cs_city']}','{$store['cs_district']}','{$store['cs_phone']}','{$store['cs_size']}') ");
 	}
 	function getStoreByCid($c_id){
 		return $this->db->getAll("select * from store where c_id='{$c_id}'");
@@ -99,6 +100,18 @@ class CorporationModel extends Model {
     }
     function getRecComments(){
     	return $this->db->getAll("select * from recommend where rec_type='C' order by rec_id desc;");
+    }
+    function getTotalCompletedAssignments($c_id){
+    	return $this->db->getOne("select count(*) from assignment where a_finish=1 and c_id='$c_id'");
+    }   
+    function getStoreCompletedAssignments($cs_id){
+    	return $this->db->getOne("select count(*) from assignment where a_finish=1 and cs_id='$cs_id'");
+    }
+    function getStoreLatestCompleted($cs_id){
+    	return $this->db->getRow("select * from assignment where cs_id='$cs_id' and a_finish=1 order by a_fdate desc limit 1");
+    }
+    function getStoreNextAssignment($cs_id){
+    	return $this->db->getRow("select * from assignment where cs_id='$cs_id' and a_finish=0 order by a_sdate asc limit 1");
     }
 }
 ?>

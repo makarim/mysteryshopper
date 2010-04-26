@@ -4,32 +4,108 @@
 
 <?php include_once("home_left.html")?>
 <div class="admincontent">
-<div id="tabsD" style="width:100%"> 
-  <ul> 
-    <li <?php if($type=='corp') echo 'class="on"';?>><a href="/client.php/home/corp" title="基本信息"><span>基本信息</span></a></li> 
-    <li <?php if($type=='corpcontact') echo 'class="on"';?>><a href="/client.php/home/corpcontact" title="联系方式"><span>联系方式</span></a></li> 
-    <li <?php if($type=='corpstore') echo 'class="on"';?>><a href="/client.php/home/corpstore" title="分店信息"><span>分店信息</span></a></li> 
-  </ul> 
-</div>
 
+<?php include_once("home_corptop.html")?>
 <br />
-      <br />
-      <br />
-<TABLE width="90%" border="0" cellspacing="10" cellpadding="0" class="regInfo">
-<TR>
-<TD width="10%" ></TD>
-<TD width="80%"></TD>
-</TR><TR>
+<br />
+<br />
 
-<TR><TD align="right">公司全称:</TD>
-<TD><?php echo $corp['c_title'];?></TD>
+<TABLE width="100%" border="0" cellspacing="1" cellpadding="0" class="clear missionReport">
+
+<TR width="15%"><TD align="right"><?php echo lang('c_title')?>:</TD>
+<TD width="85%"><?php echo $corp['c_title'];?></TD>
 </TR>
-<TR><TD align="right" >公司标志:</TD>
+<TR><TD align="right" ><?php echo lang('c_logo')?>:</TD>
 <TD><img src="/public/upload/logo/<?php echo $corp['c_logo'];?>"></TD>
 </TR>
-<TR><TD align="right">公司简介:</TD>
+
+<TR>
+<TD align="right" ><?php echo lang('c_industry')?>:</TD>
+<TD>
+<?php 
+foreach ($GLOBALS['gIndustry'] as $k=>$v){
+	if($k==$corp['c_industry']) echo lang($v);
+}
+?>
+</TD>
+</TR>
+<TR>
+<TD align="right" ><?php echo lang('c_companytype')?>:</TD>
+<TD>
+<?php 
+foreach ($GLOBALS['gCompanytype'] as $k=>$v){
+	if($k==$corp['c_companytype']) echo lang($v);
+}
+?>
+</TD>
+</TR>
+<TR>
+<TD align="right" ><?php echo lang('c_companycate')?>:</TD>
+<TD>
+<?php 
+foreach ($GLOBALS['gCompanycate'] as $k=>$v){
+	if($k==$corp['c_companycate']) echo lang($v);
+}
+?>
+</TD>
+</TR>
+<TR>
+<TD align="right" ><?php echo lang('c_foodcate')?>:</TD>
+<TD>
+<?php 
+foreach ($GLOBALS['gFoodcate'] as $k=>$v){
+	if($k==$corp['c_foodcate']) echo lang($v);
+}
+?>
+</TD>
+</TR>
+<TR>
+<TD align="right" ><?php echo lang('c_companysize')?>:</TD>
+<TD>
+<?php 
+foreach ($GLOBALS['gCompanysize'] as $k=>$v){
+	if($k==$corp['c_companysize']) echo ($v);
+}
+?>
+</TD>
+</TR>
+
+<TR>
+<TD align="right" ><?php echo lang('city_district')?>:</TD>
+<TD>
+<?php echo $corp['c_province'].$corp['c_city'].$corp['c_district']?>
+</TD>
+</TR>
+<TR>
+<TD align="right" ><?php echo lang('c_companyaddress')?>:</TD>
+<TD>
+<?php echo $corp['c_companyaddress']?>
+</TD>
+</TR>
+<TR>
+<TD align="right" ><?php echo lang('c_website')?>:</TD>
+<TD>
+<?php echo $corp['c_website']?>
+</TD>
+</TR><TR>
+<TD align="right" ><?php echo lang('c_otherphone')?>:</TD>
+<TD>
+<?php echo $corp['c_otherphone']?>
+</TD>
+</TR><TR>
+<TD align="right" ><?php echo lang('c_workemail')?>:</TD>
+<TD>
+<?php echo $corp['c_workemail']?>
+</TD>
+</TR>
+<TR><TD align="right"><?php echo lang('c_avgbill')?>:</TD>
+<TD><?php echo $corp['c_avgbill'];?></TD>
+</TR>
+<TR><TD align="right"><?php echo lang('c_intro')?>:</TD>
 <TD><?php echo $corp['c_intro'];?></TD>
 </TR>
+
+
 
 
 </table>

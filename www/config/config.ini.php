@@ -114,4 +114,31 @@ $GLOBALS ["gMemcacheServer"]["192.168.1.5:11213"]);;
 	$GLOBALS['gTypes']['fillblank']  =3;
 	$GLOBALS['gTypes']['time']  =4;
 	
+	$GLOBALS['gIndustry'][1] = 'restaurant';
+	$GLOBALS['gIndustry'][2] = 'clothing';
+	
+	$GLOBALS['gCompanytype'][1] = 'foreign';
+	$GLOBALS['gCompanytype'][2] = 'private';
+	$GLOBALS['gCompanytype'][3] = 'nation';
+	$GLOBALS['gCompanytype'][4] = 'partnership';
+	
+	$GLOBALS['gCompanycate'][1] = 'cafe';
+	$GLOBALS['gCompanycate'][2] = 'club';
+	$GLOBALS['gCompanycate'][3] = 'restaurant';
+	
+	$GLOBALS['gFoodcate'][1] = 'sichuan_food';
+	$GLOBALS['gFoodcate'][2] = 'shanghai_food';
+	$GLOBALS['gFoodcate'][3] = 'guangdong_food';
+	$GLOBALS['gFoodcate'][4] = 'xiang_food';
+	$GLOBALS['gFoodcate'][10] = 'italian_food';
+	$GLOBALS['gFoodcate'][11] = 'japanese_food';
+	
+	$GLOBALS['gCompanysize'][1] = '< 10';
+	$GLOBALS['gCompanysize'][2] = '10-20';
+	$GLOBALS['gCompanysize'][3] = '20-50';
+	$GLOBALS['gCompanysize'][4] = '50-100';
+	$GLOBALS['gCompanysize'][5] = '100-150';
+	$GLOBALS['gCompanysize'][6] = '150-500';
+	$GLOBALS['gCompanysize'][7] = '>500';
+	
 ?>

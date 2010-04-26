@@ -50,10 +50,13 @@
             <td  width="30%" align="center">
             <?php 
             	if($vv['rq_type']==2){
+            		if($vv['answer']=='A') echo 'N/A';
+            		else 
             		echo $vv['answer']; 
             	}else if($vv['rq_type']==1){ 
 					if($vv['answer']=='Y')echo 'Yes'; 
 					if($vv['answer']=='N')echo 'No';  
+					if($vv['answer']=='A')echo 'N/A';  
             	}else if($vv['rq_type']==4){ 
             		echo $vv['answer']."分钟"; 
 				 }?>

@@ -20,7 +20,7 @@ class home{
 	}
     function view_defaults(){
 		
-		header( "Location: /client.php/home/corp");
+		header( "Location: /client.php/home/corpstats");
     }
 	function view_corp(){
 		$type = !empty($_GET['view'])?$_GET['view']:"corp";
@@ -45,6 +45,25 @@ class home{
 		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
 		$this->tpl->assign("stores",$stores);
 		$this->tpl->assign("type",$type);
+	}
+	function view_corpstats(){
+		$type = !empty($_GET['view'])?$_GET['view']:"corp";
+		$totalcompleted = 0 ;
+		include_once("CorporationModel.class.php");	
+		$corpModel = new CorporationModel();
+		$totalcompleted = $corpModel->getTotalCompletedAssignments($this->login_corp['c_id']);
+		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
+		if(isset($stores) && is_array($stores)){
+			foreach ($stores as $k=>$v) {
+				$v['store_completed'] = $corpModel->getStoreCompletedAssignments($v['cs_id']);
+				$v['store_latest_completed'] = $corpModel->getStoreLatestCompleted($v['cs_id']);
+				$v['store_next_assignment'] = $corpModel->getStoreNextAssignment($v['cs_id']);
+				$stores[$k] = $v;
+			}
+		}
+		$this->tpl->assign("stores",$stores);
+		$this->tpl->assign("type",$type);
+		$this->tpl->assign("totalcompleted",$totalcompleted);
 	}
 	
 	function view_report(){

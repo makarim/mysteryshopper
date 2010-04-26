@@ -42,7 +42,11 @@
               <tr>
                 <td><span class="title">品牌：</span><?php echo $assignmentinfo['c_name']?></td>
                 <td><span class="title">分店：</span><?php echo $assignmentinfo['cs_name']?></td>
-                </tr>
+               </tr>    
+               <tr>
+                <td><span class="title">地区：</span><?php echo $assignmentinfo['cs_province']." ".$assignmentinfo['cs_city']." ".$assignmentinfo['cs_district']?></td>
+                <td><span class="title">地址：</span><?php echo $assignmentinfo['cs_address']?></td>
+               </tr>
             </table>
             <br />
         </div>

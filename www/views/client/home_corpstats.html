@@ -1,0 +1,83 @@
+<?php include_once("header.html")?>
+
+<div id="wrap">  <br />
+
+<?php include_once("home_left.html")?>
+<div class="admincontent">
+
+<?php include_once("home_corptop.html")?>
+<br />
+<br />
+<br />
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><div class="table2TitleBg">
+      <div class="table2TitleBg2">
+        <div class="table2Title">品牌</div>
+      </div>
+    </div></td>
+  </tr>
+  <tr>
+
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td class="table2LeftBorder"></td>
+        <td>
+         总共已完成的任务: <?php echo $totalcompleted;?>
+                   </td>
+        <td class="table2RightBorder"></td>
+      </tr>
+      <tr>
+        <td class="table2BottomLeft"></td>
+        <td class="table2Bottom"></td>
+        <td class="table2BottomRight"></td>
+      </tr>
+
+    </table></td>
+  </tr>
+</table>
+<br />
+<?php if(is_array($stores)){
+	foreach ($stores as $s){?>
+
+<table width="45%" border="0" cellspacing="0" cellpadding="0" style="float:left;margin:10px 20px 10px 0;">
+  <tr>
+    <td><div class="table2TitleBg">
+      <div class="table2TitleBg2">
+        <div class="table2Title"><?php echo $s['cs_name']?></div>
+      </div>
+    </div></td>
+  </tr>
+  <tr>
+
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td class="table2LeftBorder"></td>
+        <td>
+         最新完成的任务: <?php echo $s['store_latest_completed']['a_fdate'];?><br />
+         总共已完成的任务: <?php echo $s['store_completed'];?><br />
+         即将执行的任务 :<?php echo $s['store_next_assignment']['a_sdate'];?> / <?php echo $s['store_next_assignment']['a_edate'];?>
+                   </td>
+                   
+        <td class="table2RightBorder"></td>
+      </tr>
+      <tr>
+        <td class="table2BottomLeft"></td>
+        <td class="table2Bottom"></td>
+        <td class="table2BottomRight"></td>
+      </tr>
+
+    </table></td>
+  </tr>
+</table>
+
+<?php 
+	}}?>
+
+</div>
+
+</div>
+
+
+<?php include_once("footer.html")?>

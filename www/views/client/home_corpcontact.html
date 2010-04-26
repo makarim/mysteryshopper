@@ -4,30 +4,23 @@
 
 <?php include_once("home_left.html")?>
 <div class="admincontent">
-<div id="tabsD" style="width:100%"> 
-  <ul> 
-    <li <?php if($type=='corp') echo 'class="on"';?>><a href="/client.php/home/corp" title="基本信息"><span>基本信息</span></a></li> 
-    <li <?php if($type=='corpcontact') echo 'class="on"';?>><a href="/client.php/home/corpcontact" title="联系方式"><span>联系方式</span></a></li> 
-    <li <?php if($type=='corpstore') echo 'class="on"';?>><a href="/client.php/home/corpstore" title="分店信息"><span>分店信息</span></a></li> 
-  </ul> 
-</div>
+<?php include_once("home_corptop.html")?>
 
 <br />
       <br />
       <br />
-<TABLE width="90%" border="0" cellspacing="10" cellpadding="0" class="regInfo">
-<TR>
-<TD width="10%" ></TD>
-<TD width="80%"></TD>
-</TR><TR>
+<TABLE width="100%" border="0" cellspacing="1" cellpadding="0" class="clear missionReport">
 
-<TR><TD align="right">联系人:</TD>
+<TR><TD align="right" width="15%" ><?php echo lang('c_department')?>:</TD>
+<TD width="85%"><?php echo $corp['c_department'];?></TD>
+</TR>
+<TR><TD align="right"><?php echo lang('c_contacter')?>:</TD>
 <TD><?php echo $corp['c_contacter'];?></TD>
 </TR>
-<TR><TD align="right" >联系电话:</TD>
+<TR><TD align="right" ><?php echo lang('c_phone')?>:</TD>
 <TD><?php echo $corp['c_phone'];?></TD>
 </TR>
-<TR><TD align="right">登录帐号:</TD>
+<TR><TD align="right"><?php echo lang('c_name')?>:</TD>
 <TD><?php echo $corp['c_name'];?></TD>
 </TR>
 

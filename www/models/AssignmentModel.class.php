@@ -18,6 +18,9 @@ class AssignmentModel extends Model {
 		if(isset($con['a_sdate']) && !empty($con['a_sdate'])) $select->where ( " a.a_sdate >= '".$con['a_sdate']."'" );
 		if(isset($con['a_edate']) && !empty($con['a_edate'])) $select->where ( " a.a_edate <= '".$con['a_edate']."'" );
 		if(isset($con['notselected']) && !empty($con['notselected'])) $select->where ( " a.user_id = ''" );
+		if(isset($con['province']) && !empty($con['province'])) $select->where ( " s.cs_province = '{$con['province']}'" );
+		if(isset($con['city']) && !empty($con['city'])) $select->where ( " s.cs_city = '{$con['city']}'" );
+		if(isset($con['area']) && !empty($con['area'])) $select->where ( " s.cs_district = '{$con['area']}'" );
 
 		
 		$list = array();
@@ -61,7 +64,7 @@ class AssignmentModel extends Model {
 		return $this->db->execute("delete from assignment where a_id='{$a_id}'");
 	}
 	function getAssignmentById($a_id){
-		return $this->db->getRow("select a.*,c.c_name,s.cs_name,c.c_logo,u.user_nickname from assignment a 
+		return $this->db->getRow("select a.*,c.c_name,s.*,c.c_logo,u.user_nickname from assignment a 
 		left join corporation c on c.c_id=a.c_id
 		left join store s on s.cs_id=a.cs_id
 		left join user u on a.user_id=u.user_id 
@@ -289,11 +292,11 @@ class AssignmentModel extends Model {
 				if($type && $type!=$rq['rq_type']) continue;
 				
 				if($rq['rq_type']==2){
-					$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=2";
+					$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=2 and ans_answer2!='A'";
 					$sum += $this->db->getOne($sql);
 					$n++;
 				}else if($rq['rq_type']==1){
-					$sql = "select ans_answer1  from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=1";
+					$sql = "select ans_answer1  from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=1 and ans_answer1!='A'";
 					$yn = $this->db->getOne($sql);
 					$sum += ($yn=='Y')?10:0;
 					$n++;

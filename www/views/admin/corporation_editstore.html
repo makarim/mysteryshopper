@@ -6,6 +6,8 @@
 <LINK href="<?php echo $www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
 <script src="<?php echo $www_site_url?>/public/js/common.js" type="text/javascript"></script>
 <script src="<?php echo $www_site_url?>/public/js/ajax.js" type="text/javascript"></script>
+<script src="<?php echo $www_site_url?>/public/js/PCASClass.js"></script>
+
 
 
 <script>
@@ -69,7 +71,32 @@ function checkOnSubmit(formName) {
 							<option value="<?php echo $v['c_id'];?>" <?php if($v['c_id']==$store['c_id']) echo "selected";?>><?php echo $v['c_initial']." ". $v['c_title'];?></option>
 							<?php } ?>
 							</select></td>
-							</tr>					
+							</tr>		
+							<tr>
+							<td><?php echo lang('c_storesize')?>:</td>
+							<td><select name="cs_size">
+							<option value="0">--</option>
+							<?php 
+foreach ($GLOBALS['gCompanysize'] as $k=>$v){
+	?>
+							<option value="<?php echo $k;?>" <?php if($store['cs_size']==$k) echo "selected"?>><?php echo $v?></option>
+<?php
+}
+?>
+							
+							</select>
+							</td>
+						</tr>	
+						<tr>
+							<td><?php echo lang('city_district')?>:</td>
+							<td>
+							<select name="cs_province"></select><select name="cs_city"></select><select name="cs_district"></select>
+							</td>
+						</tr>			
+						<tr>
+							<td><?php echo lang('c_phone')?>:</td>
+							<td><input type="text" name="cs_phone" value="<?php echo $store['cs_phone']?>" class="textfield"/></td>
+						</tr>						
 						<tr>
 						
 							<td colspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button"/></td>
@@ -80,6 +107,9 @@ function checkOnSubmit(formName) {
 				</div>
 		</div>
 </div>
+<script>
+new PCAS("cs_province","cs_city","cs_district","<?php echo $store['cs_province']?>","<?php echo $store['cs_city']?>","<?php echo $store['cs_district']?>");
 
+</script>
 </body>
 </html>
