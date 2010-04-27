@@ -37,22 +37,22 @@
 <TD><div id="errorsDiv_mobile"></div><INPUT class="input" type="text" name="mobile" id="mobile" /></TD>
 </TR>
 <TR>
-<TD class="text">电话:</TD>
+<TD class="text">*电话:</TD>
 <TD><div id="errorsDiv_phone"></div><INPUT class="input" type="text" name="phone" id="phone"/></TD>
 </TR>
 
 <TR>
-<TD class="text">QQ:</TD>
+<TD class="text">*QQ:</TD>
 <TD><div id="errorsDiv_qq"></div><INPUT class="input" type="text" name="qq" id="qq" value="" /></TD>
 </TR>
 <TR>
-<TD class="text">MSN:</TD>
+<TD class="text">*MSN:</TD>
 <TD><div id="errorsDiv_msn"></div><INPUT class="input" type="text" name="msn" id="msn" value="" /></TD>
 </TR>
 <TR>
-<TD class="text">居住城市:</TD>
-<TD><div id="errorsDiv_city"></div>
-<select name="province"></select><select name="city"></select><select name="area"></select>
+<TD class="text">*居住城市/区:</TD>
+<TD><div id="errorsDiv_area"></div>
+<select name="province" id="province"></select><select name="city" id="city"></select><select name="area" id="area"></select>
 <script>
 new PCAS("province","city","area");
 
@@ -61,7 +61,7 @@ new PCAS("province","city","area");
 </TR>
 
 <TR>
-<TD class="text">住址:</TD>
+<TD class="text">*住址:</TD>
 <TD><div id="errorsDiv_address"></div><INPUT class="input" type="text" name="address" id="address" value="" /></TD>
 </TR>
 
@@ -71,7 +71,7 @@ new PCAS("province","city","area");
 </TR>
 
 <TR>
-<TD class="text">生日:</TD>
+<TD class="text">*生日:</TD>
 <TD><div id="errorsDiv_birthdateyear"></div><select name="birthdateyear" id="birthdateyear"> 
 			<option value="" selected="selected">-------------</option> 
 			<option value="1921">1921</option> 
@@ -210,27 +210,27 @@ new PCAS("province","city","area");
 日</TD>
 </TR>
 <TR>
-<TD class="text">婚姻:</TD>
+<TD class="text">*婚姻:</TD>
 <TD><div id="errorsDiv_maritalstatus"></div><select name="maritalstatus" id="maritalstatus"> 
-<option value="0">选择...</option> 
+<option value="">选择...</option> 
 			<option value="2">已婚</option> 
 			<option value="1">单身</option> 
 			</select>
  </TD>
 </TR>
 <TR>
-<TD class="text">国籍:</TD>
+<TD class="text">*国籍:</TD>
 <TD><div id="errorsDiv_nationality"></div><INPUT class="input" type="text" name="nationality" id="nationality" value="" /></TD>
 </TR>
 <TR>
-<TD class="text">职业:</TD>
+<TD class="text">*职业:</TD>
 <TD><div id="errorsDiv_occupation"></div><INPUT class="input" type="text" name="occupation" id="occupation" value="" /></TD>
 </TR>
 <TR>
-<TD class="text">年收入:</TD>
+<TD class="text">*年收入:</TD>
 <TD><div id="errorsDiv_householdincome"></div>
 <select name="householdincome" id="householdincome" > 
-					<option value="0">选择...</option> 
+					<option value="">选择...</option> 
 					<option value="1">&lt;1.8万</option> 
 					<option value="2">1.8万-2.5万</option> 
 					<option value="3">2.5万-3.5万</option> 
@@ -241,9 +241,9 @@ new PCAS("province","city","area");
  </TD>
 </TR>
 <TR>
-<TD class="text">教育程度:</TD>
+<TD class="text">*教育程度:</TD>
 <TD><div id="errorsDiv_education"></div><select name="education" id="education"> 
-<option value="0">选择...</option> 
+<option value="">选择...</option> 
 					<option value="1">中学</option> 
 					<option value="2">高中/中专</option> 
 					<option value="3">本科/大专</option> 
@@ -253,18 +253,18 @@ new PCAS("province","city","area");
 				</select></TD>
 </TR>
 <TR>
-<TD class="text">您有私人汽车吗?:</TD>
+<TD class="text">*您有私人汽车吗?:</TD>
 <TD><div id="errorsDiv_havecar"></div><select name="havecar" id="havecar"> 
-<option value="0">选择...</option> 
+<option value="">选择...</option> 
 					<option value="1">是</option> 
 					<option value="2">否</option> 
  
 				</select></TD>
 </TR>
 <TR>
-<TD class="text">会讲英语吗?:</TD>
+<TD class="text">*会讲英语吗?:</TD>
 <TD><div id="errorsDiv_speakenglish"></div><select name="speakenglish" id="speakenglish"> 
-<option value="0">选择...</option> 
+<option value="">选择...</option> 
 					<option value="1">会</option> 
 					<option value="2">不会</option> 
  
@@ -276,30 +276,16 @@ new PCAS("province","city","area");
 <TD class="text"></TD>
 <TD class="text" style="text-align:left;">三    其他信息</TD>
 </TR>
-<TR>
-<TD class="text">每星期外出就餐次数:</TD>
-<TD><div id="errorsDiv_eatingoutcount"></div><INPUT class="input" type="text" id="eatingoutcount" name="eatingoutcount" value="" /> 
-次</TD>
-</TR>
-<TR>
-<TD class="text">就餐平均消费：</TD>
-<TD><div id="errorsDiv_avgbill"></div><INPUT class="input" type="text" name="avgbill" id="avgbill" value="" /> 
-RMB</TD>
-</TR>
-<TR>
-<TD class="text">每月您在服饰方面的消费:</TD>
-<TD><div id="errorsDiv_apparelspending"></div><INPUT class="input" type="text" name="apparelspending" id="apparelspending" value="" /> 
-RMB</TD>
-</TR>
+
 <TR>
 <TD class="text">您的最大兴趣是什么？</TD>
 <TD><div id="errorsDiv_interests"></div><INPUT class="input" type="text" name="interests" id="interests" value="" /></TD>
 </TR>
 <TR>
-<TD class="text">您是如何知道我们的公司? </TD>
+<TD class="text">*您是如何知道SPOT? </TD>
 <TD><div id="errorsDiv_hearabout"></div>
 <select name="hearabout" id="hearabout"> 
-<option value="0">选择...</option> 
+<option value="">选择...</option> 
 			<option value="1">朋友介绍</option> 
 			<option value="2">网上广告</option> 
 			<option value="3">路牌广告</option> 
@@ -311,7 +297,7 @@ RMB</TD>
 <TR>
 <TD class="text">你是否需要平时收到我们SPOT的最新动态? </TD>
 <TD><div id="errorsDiv_newletters"></div><select name="newletters" id="newletters"> 
-<option value="0">选择...</option> 
+<option value="">选择...</option> 
 			<option value="1">要</option> 
 			<option value="2">不要</option> 
 			</select></TD>
@@ -358,11 +344,37 @@ var rules=new Array();
 rules[0]='realname|required|<?php echo lang('realnamerule')?>';
 rules[1]='mobile|required|请正确的手机号码';
 rules[2]='mobile|regexp|^1\\d{10}$|请正确的手机号码';
+rules[3]='phone|required|请输入电话';
+rules[4]='qq|required|请输入QQ';
+rules[5]='msn|required|请输入MSN';
+rules[6]='area|required|请输入居住城市/区';
+rules[7]='address|required|请输入住址';
+rules[8]='birthdateyear|required|请输入你的生日';
+rules[9]='maritalstatus|required|请选择婚姻情况';
+rules[10]='nationality|required|请输入你的国籍';
+rules[11]='occupation|required|请输入你的职业';
+rules[12]='householdincome|required|请选择你的年收入水平';
+rules[13]='education|required|请选择你的教育程度';
+rules[14]='havecar|required|请选择你的是否有私家车';
+rules[15]='hearabout|required|请选择你是如何知道SPOT';
 
 
 
 yav.addHelp('realname', '<?php echo lang('realnamerule')?>');
 yav.addHelp('mobile', '');
+yav.addHelp('phone', '');
+yav.addHelp('qq', '');
+yav.addHelp('msn', '');
+yav.addHelp('area', '');
+yav.addHelp('address', '');
+yav.addHelp('birthdateyear', '');
+yav.addHelp('maritalstatus', '');
+yav.addHelp('nationality', '');
+yav.addHelp('occupation', '');
+yav.addHelp('householdincome', '');
+yav.addHelp('education', '');
+yav.addHelp('havecar', '');
+yav.addHelp('hearabout', '');
 
 var captchaOK = 2;  // 2 - not yet checked, 1 - correct, 0 - failed
 var account = '';

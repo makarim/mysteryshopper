@@ -123,6 +123,14 @@ li {
 	color:#FFF;
 	border:none;
 }
+.btnblue {
+	background:url(../images/bg_btn_blue.gif) #C00 no-repeat;
+	height:25px;
+	width:91px;
+	line-height:25px;
+	color:#FFF;
+	border:none;
+}
 .left {
 	float:left;
 }
@@ -348,9 +356,12 @@ li {
 
 /*后台推荐评论*/
 .comments {
-	margin:10px 0;
+	width:98%;
+	margin:0;
+	padding:10px;
 	float:left;
 	display:block;
+	border-bottom:1px solid #ccc;
 }
 .comments .userFace {
 	float:left;
@@ -360,6 +371,7 @@ li {
 }
 .comments .cText {
 	color:#999;
+	margin-left:51px;
 }
 
 /*历史任务*/
@@ -456,6 +468,27 @@ float:left;
 	font-size:12px;
 	margin:7px 0 0 10px;
 }
+
+.tabsB {
+      float:left;
+      width:100%;
+      background:#FFF;
+      font-size:14px;
+      line-height:normal;
+	  border-bottom:2px solid #003367;
+}
+.tabsB .left {
+	  float:left;
+      background:url("../images/tableft_blue.gif") no-repeat left -29px;
+      padding:0 0 0 4px;
+}
+.tabsB .right {
+      background:url("../images/tabright_blue.gif") no-repeat 100% -29px;
+      padding:5px 15px 4px 6px;
+	  margin-right:8px;
+      float:left;
+	  color:#FFF;
+}
     #tabsD {
       float:left;
       width:100%;
@@ -550,6 +583,11 @@ float:left;
 	font-size:14px;
 	font-weight:bold;
 	color:#990000;
+}
+.helpTitleBlue {
+	font-size:14px;
+	font-weight:bold;
+	color:#003367;
 }
 
 #copyright {

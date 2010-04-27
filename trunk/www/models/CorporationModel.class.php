@@ -100,6 +100,9 @@ class CorporationModel extends Model {
     }
     function getRecComments(){
     	return $this->db->getAll("select * from recommend where rec_type='C' order by rec_id desc;");
+    }   
+    function getRecCommentById($rec_id){
+    	return $this->db->getRow("select * from recommend where rec_id='$rec_id'");
     }
     function getTotalCompletedAssignments($c_id){
     	return $this->db->getOne("select count(*) from assignment where a_finish=1 and c_id='$c_id'");

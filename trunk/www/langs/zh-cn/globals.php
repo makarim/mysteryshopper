@@ -474,6 +474,16 @@ $GLOBALS['gLang']['guangdong_food'] = '粤菜';
 $GLOBALS['gLang']['shanghai_food'] = '本帮菜';
 $GLOBALS['gLang']['italian_food'] = '意大利菜';
 $GLOBALS['gLang']['japanese_food'] = '日本菜';
+$GLOBALS['gLang']['guizhou_food'] = '贵州菜';
+$GLOBALS['gLang']['dongbei_food'] = '东北菜';
+$GLOBALS['gLang']['taiwan_food'] = '台湾菜';
+$GLOBALS['gLang']['xinjiang_food'] = '新疆清真';
+$GLOBALS['gLang']['sushi_food'] = '素食';
+$GLOBALS['gLang']['korea_food'] = '韩式';
+$GLOBALS['gLang']['xi_food'] = '西餐';
+$GLOBALS['gLang']['huoguo'] = '火锅';
+$GLOBALS['gLang']['bread'] = '面包西点';
+$GLOBALS['gLang']['selfhelp_food'] = '自助餐';
 
 
 

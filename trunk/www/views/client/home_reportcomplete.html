@@ -3,13 +3,31 @@
 <div id="wrap">  <br />
 
 <?php include_once("home_left.html")?>
+
+      <script>
+function printpage(oper){
+	 bdhtml=window.document.body.innerHTML;//获取当前页的html代码
+	sprnstr="<!--startprint"+oper+"-->";//设置打印开始区域
+	eprnstr="<!--endprint"+oper+"-->";//设置打印结束区域
+	prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+18); //从开始代码向后取html
+	
+	prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html
+	window.document.body.innerHTML=prnhtml;
+	window.print();
+	window.document.body.innerHTML=bdhtml;
+}
+
+</script>
 <div class="admincontent">
 
-		
+		<div style="float:right;margin-right:10px;">
+      <a href="javascript:printpage(1);"><img src="<?php echo $www_site_url?>/public/images/print_icon.jpg" border="0" title="Print"></a>
+      </div>
+      <!--startprint1-->
 		<?php if(isset($report_questions) && is_array($report_questions)){?>
 			
 		    <p>评分说明：</p>
-			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport" class="clear">
+			<table width="760" border="0" cellpadding="0" cellspacing="1" class="missionReport" class="clear">
           <tr>
             <td class="title">不适用</td>
             <td class="title">差</td>
@@ -36,7 +54,7 @@
          
 	<?php
 		foreach ($report_questions as $k=>$v){?>
-		<table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport" style="margin-top:10px;">
+		<table width="760" border="0" cellpadding="0" cellspacing="1" class="missionReport" style="margin-top:10px;">
           <tr>
             <td colspan="3" class="title"><?php echo lang($k);?></td>
           </tr>
@@ -100,7 +118,7 @@
         </table>
  		<?php }
 		}?>
- 		
+ 		<!--endprint1-->
 				
 
 </div>
