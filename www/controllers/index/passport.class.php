@@ -365,9 +365,6 @@ class passport {
 		$user['householdincome'] = !empty($_POST['householdincome'])?$_POST['householdincome']:'0';
 		$user['education'] = !empty($_POST['education'])?$_POST['education']:'0';
 		$user['havecar'] = !empty($_POST['havecar'])?$_POST['havecar']:'0';
-		$user['eatingoutcount'] = !empty($_POST['eatingoutcount'])?intval($_POST['eatingoutcount']):'';
-		$user['avgbill'] = !empty($_POST['avgbill'])?$_POST['avgbill']:'';
-		$user['apparelspending'] = !empty($_POST['apparelspending'])?$_POST['apparelspending']:'';
 		$user['hearabout'] = !empty($_POST['hearabout'])?$_POST['hearabout']:'0';
 		$user['newletters'] = !empty($_POST['newletters'])?$_POST['newletters']:'0';
 		$user['speak_english'] = !empty($_POST['speakenglish'])?$_POST['speakenglish']:'0';

@@ -202,8 +202,12 @@ initMarquee();
 								?>	
                	  <div class="comments">
                		  <div class="userFace"><img src="/public/upload/<?php echo $con['img'];?>" width="41" height="41" border="0" /></div>
-                	  <div class="cText"><b>  <?php echo ($con['user_name'])?>：</b><br />
-               	     <?php echo nl2br($con['comment'])?></div>
+                	  <div class="cText">
+                	  <?php if(isset($con['title']))echo $con['title'];?>
+                	  <br />
+                	  <b>  <?php echo ($con['user_name'])?>：</b>
+               	     <?php echo nl2br($con['comment'])?>
+               	     </div>
                   </div>
                   <div class="clear"></div>
  					<?php

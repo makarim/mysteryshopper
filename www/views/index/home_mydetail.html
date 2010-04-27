@@ -9,7 +9,7 @@
 		  <ul> 
 		    <li <?php if($type=='contact') echo 'class="on"';?>><a href="/index.php/home/mydetail/contact"><span>联系方式</span></a></li> 
 		    <li <?php if($type=='extinfo') echo 'class="on"';?>><a href="/index.php/home/mydetail/extinfo" ><span>个人信息</span></a></li> 
-		    <li <?php if($type=='other') echo 'class="on"';?>><a href="/index.php/home/mydetail/other" ><span>其他信息</span></a></li> 
+		    <li <?php if($type=='other') echo 'class="on"';?>><a href="/index.php/home/mydetail/other" ><span>平常就餐习惯</span></a></li> 
 		    <li <?php if($type=='payment') echo 'class="on"';?>><a href="/index.php/home/mydetail/payment" ><span>付款方式</span></a></li> 
 		    <li <?php if($type=='upload') echo 'class="on"';?>><a href="/index.php/home/mydetail/upload" ><span>头像上传</span></a></li> 
 		  </ul> 
@@ -32,7 +32,7 @@
 <TD width="60%"><div id="errorsDiv_realname"></div><INPUT class="input" type="text" name="realname" value="<?php echo $userinfo['realname']?>" id="realname" /></TD>
 </TR>
 <TR>
-<TD class="text">性别:</TD>
+<TD class="text">*性别:</TD>
 <TD><div id="errorsDiv_gender"></div><select name="gender" id="gender"> 
 <option value="0">选择...</option> 
 			<option value="1" <?php if('1'==$userinfo['gender']) echo 'selected="selected"';?>>男</option> 
@@ -40,33 +40,33 @@
 			</select>
  </TD>
 </TR>
-<TR><TD class="text">邮箱:</TD>
+<TR><TD class="text">*邮箱:</TD>
 <TD><div id="errorsDiv_email"></div><INPUT class="input" style="color:#ccc" type="text" name="email" value="<?php echo $userinfo['user_email']?>" id="email"  readonly/></TD>
 </TR>
 <TR><TD class="text">*手机:</TD>
 <TD><div id="errorsDiv_mobile"></div><INPUT class="input" type="text" name="mobile" value="<?php echo $userinfo['mobile']?>" id="mobile" /></TD>
 </TR>
 <TR>
-<TD class="text">电话:</TD>
+<TD class="text">*电话:</TD>
 <TD><div id="errorsDiv_phone"></div><INPUT class="input" type="text" name="phone" value="<?php echo $userinfo['phone']?>" id="phone"/></TD>
 </TR>
 
 <TR>
-<TD class="text">QQ:</TD>
+<TD class="text">*QQ:</TD>
 <TD><div id="errorsDiv_qq"></div><INPUT class="input" type="text" name="qq" id="qq" value="<?php echo $userinfo['qq']?>" /></TD>
 </TR>
 <TR>
-<TD class="text">MSN:</TD>
+<TD class="text">*MSN:</TD>
 <TD><div id="errorsDiv_msn"></div><INPUT class="input" type="text" name="msn" id="msn" value="<?php echo $userinfo['msn']?>" /></TD>
 </TR>
 <TR>
-<TD class="text">居住城市:</TD>
-<TD><div id="errorsDiv_city"></div>
+<TD class="text">*居住城市:</TD>
+<TD><div id="errorsDiv_area"></div>
 <select name="province"></select><select name="city"></select><select name="area"></select></TD>
 </TR>
 
 <TR>
-<TD class="text">详细住址:</TD>
+<TD class="text">*详细住址:</TD>
 <TD><div id="errorsDiv_address"></div><INPUT class="input" type="text" name="address" id="address" value="<?php echo $userinfo['address']?>" /></TD>
 </TR>
   <tr>
@@ -93,7 +93,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 
 
 <TR>
-<TD class="text">生日:</TD>
+<TD class="text">*生日:</TD>
 <TD><div id="errorsDiv_birthdateyear"></div><select name="birthdateyear" id="birthdateyear"> 
 			<option value="">--</option> 
 			<?php for ($i=1921;$i<2000;$i++){?>
@@ -116,33 +116,33 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 		</select>日</TD>
 </TR>
 <TR>
-<TD class="text">婚姻:</TD>
+<TD class="text">*婚姻:</TD>
 <TD><div id="errorsDiv_maritalstatus"></div><select name="maritalstatus" id="maritalstatus"> 
-<option value="0">选择...</option> 
+<option value="">选择...</option> 
 			<option value="M" <?php if('M'==$userinfo['marital']) echo 'selected="selected"';?>>已婚</option> 
 			<option value="S" <?php if('S'==$userinfo['marital']) echo 'selected="selected"';?>>单身</option> 
 			</select>
  </TD>
 </TR>
 <TR>
-<TD class="text">子女数量:</TD>
+<TD class="text">*子女数量:</TD>
 <TD><div id="errorsDiv_children"></div>
 <INPUT class="input" type="text" name="children" id="children" value="<?php echo $userinfo['children']?>" />
  </TD>
 </TR>
 <TR>
-<TD class="text">国籍:</TD>
+<TD class="text">*国籍:</TD>
 <TD><div id="errorsDiv_nationality"></div><INPUT class="input" type="text" name="nationality" id="nationality" value="<?php echo $userinfo['nationality']?>" /></TD>
 </TR>
 <TR>
-<TD class="text">职业:</TD>
+<TD class="text">*职业:</TD>
 <TD><div id="errorsDiv_occupation"></div><INPUT class="input" type="text" name="occupation" id="occupation" value="<?php echo $userinfo['occupation']?>" /></TD>
 </TR>
 <TR>
-<TD class="text">年收入:</TD>
+<TD class="text">*年收入:</TD>
 <TD><div id="errorsDiv_householdincome"></div>
 <select name="householdincome" id="householdincome" > 
-					<option value="0" >选择...</option> 
+					<option value="" >选择...</option> 
 					<option value="1" <?php if(1==$userinfo['householdincome']) echo 'selected="selected"';?>>&lt;1.8万</option> 
 					<option value="2" <?php if(2==$userinfo['householdincome']) echo 'selected="selected"';?>>1.8万-2.5万</option> 
 					<option value="3" <?php if(3==$userinfo['householdincome']) echo 'selected="selected"';?>>2.5万-3.5万</option> 
@@ -153,9 +153,9 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
  </TD>
 </TR>
 <TR>
-<TD class="text">教育程度:</TD>
+<TD class="text">*教育程度:</TD>
 <TD><div id="errorsDiv_education"></div><select name="education" id="education"> 
-<option value="0">选择...</option> 
+<option value="">选择...</option> 
 					<option value="1" <?php if(1==$userinfo['education']) echo 'selected="selected"';?>>中学</option> 
 					<option value="2" <?php if(2==$userinfo['education']) echo 'selected="selected"';?>>高中/中专</option> 
 					<option value="3" <?php if(3==$userinfo['education']) echo 'selected="selected"';?>>本科/大专</option> 
@@ -165,16 +165,16 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 				</select></TD>
 </TR>
 <TR>
-<TD class="text">您有私人汽车吗?</TD>
+<TD class="text">*您有私人汽车吗?</TD>
 <TD><div id="errorsDiv_havecar"></div><select name="havecar" id="havecar"> 
-<option value="0">选择...</option> 
+<option value="">选择...</option> 
 					<option value="1" <?php if(1==$userinfo['havecar']) echo 'selected="selected"';?>>是</option> 
 					<option value="2" <?php if(2==$userinfo['havecar']) echo 'selected="selected"';?>>否</option> 
  
 				</select></TD>
 </TR>
 <TR>
-<TD class="text">会讲英语吗?</TD>
+<TD class="text">*会讲英语吗?</TD>
 <TD><div id="errorsDiv_speakenglish"></div><select name="speakenglish" id="speakenglish"> 
 <option value="0">选择...</option> 
 					<option value="1" <?php if(1==$userinfo['speak_english']) echo 'selected="selected"';?>>会</option> 
@@ -183,13 +183,13 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 				</select></TD>
 </TR>
 <TR>
-<TD class="text">其他常用语言：</TD>
+<TD class="text">*其他常用语言：</TD>
 <TD><div id="errorsDiv_speaklanguage"></div>
 <INPUT class="input" type="text" name="speaklanguage" id="speaklanguage" value="<?php echo $userinfo['speaklanguage']?>" />
 </TD>
 </TR>
 <TR>
-<TD class="text">您是如何知道我们的公司? </TD>
+<TD class="text">*您是如何知道我们的公司? </TD>
 <TD><div id="errorsDiv_hearabout"></div>
 <select name="hearabout" id="hearabout"> 
 <option value="0">选择...</option> 
@@ -229,7 +229,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 			<option value="2" <?php if(2==$userinfo['eatwithwho']) echo 'selected="selected"';?>>家庭</option> 
 			<option value="3" <?php if(3==$userinfo['eatwithwho']) echo 'selected="selected"';?>>朋友</option> 
 			</select>
-次</TD>
+</TD>
 </TR>
 <TR>
 <TD class="text">一个星期的工作日中，午餐外出就餐次数:</TD>
@@ -488,11 +488,36 @@ var rules=new Array();
 rules[0]='realname|required|<?php echo lang('realnamerule')?>';
 rules[1]='mobile|required|请正确的手机号码';
 rules[2]='mobile|regexp|^1\\d{10}$|请正确的手机号码';
-
+rules[3]='phone|required|请输入电话';
+rules[4]='qq|required|请输入QQ';
+rules[5]='msn|required|请输入MSN';
+rules[6]='area|required|请输入居住城市/区';
+rules[7]='address|required|请输入住址';
+rules[8]='birthdateyear|required|请输入你的生日';
+rules[9]='maritalstatus|required|请选择婚姻情况';
+rules[10]='nationality|required|请输入你的国籍';
+rules[11]='occupation|required|请输入你的职业';
+rules[12]='householdincome|required|请选择你的年收入水平';
+rules[13]='education|required|请选择你的教育程度';
+rules[14]='havecar|required|请选择你的是否有私家车';
+rules[15]='hearabout|required|请选择你是如何知道SPOT';
 
 
 yav.addHelp('realname', '<?php echo lang('realnamerule')?>');
 yav.addHelp('mobile', '');
+yav.addHelp('phone', '');
+yav.addHelp('qq', '');
+yav.addHelp('msn', '');
+yav.addHelp('area', '');
+yav.addHelp('address', '');
+yav.addHelp('birthdateyear', '');
+yav.addHelp('maritalstatus', '');
+yav.addHelp('nationality', '');
+yav.addHelp('occupation', '');
+yav.addHelp('householdincome', '');
+yav.addHelp('education', '');
+yav.addHelp('havecar', '');
+yav.addHelp('hearabout', '');
 
 var captchaOK = 2;  // 2 - not yet checked, 1 - correct, 0 - failed
 // a simple ajax implementation

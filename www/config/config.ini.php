@@ -125,13 +125,23 @@ $GLOBALS ["gMemcacheServer"]["192.168.1.5:11213"]);;
 	$GLOBALS['gCompanycate'][1] = 'cafe';
 	$GLOBALS['gCompanycate'][2] = 'club';
 	$GLOBALS['gCompanycate'][3] = 'restaurant';
-	
+	//西餐 、本帮菜 、日料 、火锅 、面包西点 、自助餐 、韩式 、粤菜 、川菜、湘菜、贵州菜、东北菜、台湾菜、新疆 清真 、素食   、东南亚菜
 	$GLOBALS['gFoodcate'][1] = 'sichuan_food';
 	$GLOBALS['gFoodcate'][2] = 'shanghai_food';
 	$GLOBALS['gFoodcate'][3] = 'guangdong_food';
 	$GLOBALS['gFoodcate'][4] = 'xiang_food';
+	$GLOBALS['gFoodcate'][5] = 'guizhou_food';
+	$GLOBALS['gFoodcate'][6] = 'dongbei_food';
+	$GLOBALS['gFoodcate'][7] = 'taiwan_food';
+	$GLOBALS['gFoodcate'][8] = 'xinjiang_food';
+	$GLOBALS['gFoodcate'][9] = 'sushi_food';
 	$GLOBALS['gFoodcate'][10] = 'italian_food';
 	$GLOBALS['gFoodcate'][11] = 'japanese_food';
+	$GLOBALS['gFoodcate'][12] = 'korea_food';
+	$GLOBALS['gFoodcate'][13] = 'xi_food';
+	$GLOBALS['gFoodcate'][14] = 'huoguo';
+	$GLOBALS['gFoodcate'][15] = 'bread';
+	$GLOBALS['gFoodcate'][16] = 'selfhelp_food';
 	
 	$GLOBALS['gCompanysize'][1] = '< 10';
 	$GLOBALS['gCompanysize'][2] = '10-20';

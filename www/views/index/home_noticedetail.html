@@ -18,13 +18,13 @@
             <tr>
               <td class="table2LeftBorder"></td>
               <td>
-             <h3><?php echo $data['an_title']?> </h3>
+             <h2 align="center"><?php echo $data['an_title']?> </h2>
              <br />
-             <?php echo $data['an_date']?>
-             <br />
+            <div align="center" style="margin:5px;">发布时间： <?php echo $data['an_date']?></div>
+             <hr size="1" style="color:#ccc">
              <br />
               
-              <div class="pages"><?php echo $data['an_content']?></div>
+              <div ><?php echo nl2br(htmlspecialchars(stripslashes($data['an_content']),ENT_QUOTES))?></div>
               </td>
               <td class="table2RightBorder"></td>
             </tr>
