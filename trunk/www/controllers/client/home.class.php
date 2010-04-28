@@ -52,6 +52,7 @@ class home{
 		include_once("CorporationModel.class.php");	
 		$corpModel = new CorporationModel();
 		$totalcompleted = $corpModel->getTotalCompletedAssignments($this->login_corp['c_id']);
+		$corp = $corpModel->getCorporationById($this->login_corp['c_id']);
 		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
 		if(isset($stores) && is_array($stores)){
 			foreach ($stores as $k=>$v) {
@@ -61,6 +62,7 @@ class home{
 				$stores[$k] = $v;
 			}
 		}
+		$this->tpl->assign("corp",$corp);
 		$this->tpl->assign("stores",$stores);
 		$this->tpl->assign("type",$type);
 		$this->tpl->assign("totalcompleted",$totalcompleted);
@@ -507,8 +509,40 @@ class home{
 	function view_assignment(){
 		include_once("AssignmentModel.class.php");
 		$assignmentModel = new AssignmentModel();
-		$myassignment = $assignmentModel->getCorpAssignments($this->login_corp['c_id']);
+		
+		
+		include_once("CorporationModel.class.php");	
+		$corpModel = new CorporationModel();
+		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
+		
+		
+		$def_store_id = isset($stores[0]['cs_id'])?$stores[0]['cs_id']:0;
+		$def_store_name = isset($stores[0]['cs_name'])?$stores[0]['cs_name']:'';
+		$type = !empty($_GET['stores'])?$_GET['stores']:"summary";
+		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
+		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
+		$cs_id = !empty($_GET['cs_id'])?$_GET['cs_id']:$def_store_id;
+		$selstore = isset($_GET['selstore'])?$_GET['selstore']:$def_store_name;
+		
+		$con['sdate'] = $sdate;
+		$con['edate'] = $edate;
+		$con['order'] = 'a_edate';
+		$con['selstores'] = $cs_id;
+		$con['c_id'] = $this->login_corp['c_id'];
+		
+		$myassignment = $assignmentModel->getCorpAssignments($con);
 		$this->tpl->assign("myassignment",$myassignment);
+		
+		$print_edate = $assignmentModel->getEndDateByCsId($cs_id);
+		$print_sdate = $assignmentModel->getStartDateByCsId($cs_id);
+		if($sdate=='') $sdate = $print_sdate;
+		if($edate=='') $edate = $print_edate;
+		$this->tpl->assign("selstore",$selstore);
+		$this->tpl->assign("cs_id",$cs_id);
+		$this->tpl->assign("stores",$stores);
+		$this->tpl->assign("type",$type);
+		$this->tpl->assign("sdate",$sdate);
+		$this->tpl->assign("edate",$edate);
 	}
 	
 	function view_reportcomplete(){

@@ -42,6 +42,14 @@
 						<td><textarea class="textfield" name="banusername" rows="4" style="width:300px"><?php if(isset($banusername)) echo $banusername;?></textarea></td>
 						<td valign="top"><?php echo lang('ban_username_label')?></td>
 					</tr>
+					<tr>
+						<th colspan="2"><?php echo lang('invitation_code')?>:</th>
+
+					</tr>
+					<tr>
+						<td><input class="textfield" name="invitation_code" value="<?php if(isset($invitation_code)) echo $invitation_code;?>"></td>
+						<td valign="top"><?php echo lang('invitation_code_label')?></td>
+					</tr>
 				</table>
 				<div class="opt"><input type="submit" name="submit" value="<?php echo lang('submit')?>" class="button" tabindex="3" /></div>
 			</form>

@@ -22,8 +22,13 @@
 <TR>
 <TD width="40%" class="text"></TD>
 <TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
-</TR
-><?php if($reg_type=='email') {?>
+</TR>
+<TR>
+<TD class="text"><?php echo lang('invitation_code')?>:</TD>
+<TD><div id="errorsDiv_invitationcode"></div><INPUT type="text" name="invitationcode" id="invitationcode" class="input" style="width:100px"/></TD>
+</TR>
+<?php if($reg_type=='email') {?>
+
 <TR>
 <TD width="40%" class="text"><?php echo lang('email')?>:</TD>
 <TD width="60%"><div id="errorsDiv_email"></div><INPUT class="input" type="text" name="email" value="<?php echo $email?>" id="email" /></TD>
@@ -139,6 +144,7 @@ rules[10]='nickname|minlength|2|<?php echo lang('nicknamerule')?>';
 rules[11]='nickname|maxlength|16|<?php echo lang('nicknamerule')?>';
 rules[12]='question|required|<?php echo lang('selectaquestion')?>';
 rules[13]='answer|required|<?php echo lang('youranswer')?>';
+rules[14]='invitationcode|required|<?php echo lang('invitation_code_label')?>';
 
 
 yav.addHelp('username', '<?php echo lang('usernamerule')?>');
@@ -150,6 +156,7 @@ yav.addHelp('answer', '');
 yav.addHelp('nickname', '');
 yav.addHelp('sex', '');
 yav.addHelp('code', '');
+yav.addHelp('invitationcode', '');
 yav.postValidation_OnOK('email', 'blur', 'ajaxCall("email")');
 yav.postValidation_OnOK('username', 'blur', 'ajaxCall("username")');
 

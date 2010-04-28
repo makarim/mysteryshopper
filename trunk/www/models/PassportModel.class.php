@@ -213,6 +213,9 @@ class PassportModel extends Model {
 		$this->db->execute ( $sq1 );
 	}
 
+	public function getInvitationCode(){
+		return $this->db->getOne("select v from setting where k='invitation_code'");
+	}
 	//about ticket
 	public function addTicket($arr){		
 		return $this->db->execute("replace into onlineuser (`ticket`,`user`,`data`,`expiry`) values (?,?,?,(UNIX_TIMESTAMP()+1440))",array($arr['ticket'],$arr['user'],$arr['data']));

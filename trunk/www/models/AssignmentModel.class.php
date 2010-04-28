@@ -157,14 +157,52 @@ class AssignmentModel extends Model {
 		order by a.a_edate asc;
 		");
     }
-    function getCorpAssignments($c_id){
-    	return $this->db->getAll("select a.* ,s.cs_name,c.c_title
-    	from assignment a 
-		left join store s on s.cs_id=a.cs_id 
-		left join corporation c on c.c_id=a.c_id 
-		where a.c_id='$c_id' and a.a_finish =1
-		order by a.a_edate asc;
-		");
+    function getCorpAssignments($con){
+    	
+    	$select =$this->db->select();
+		$select->from ( "assignment a","a.*");
+		$select->leftjoin("store s","s.cs_id=a.cs_id ","s.cs_name");
+		$select->leftjoin("corporation c ","c.c_id=a.c_id ","c.c_title");
+		
+		$select->where("a.a_finish =1");
+		if(isset($con['order'])) $select->order ( 'a.'.$con['order']." desc" );
+		if(isset($con['sdate']) && !empty($con['sdate'])) $select->where ( " a.a_fdate >= '".$con['sdate']."'" );
+		if(isset($con['edate']) && !empty($con['edate'])) $select->where ( " a.a_fdate <= '".$con['edate']."'" );
+		if(isset($con['selstores']) && !empty($con['selstores'])){
+			if(is_array($con['selstores'])) $select->where ( "a.cs_id in (".join(",",$con['selstores']).")" );
+			else   $select->where (  "a.cs_id ='".$con['selstores']."'");
+		}
+    	
+		
+		$list = array();
+		$offset = '';
+		$pageCount = 20;
+		$total = $select->count (); //获得查询到的记录数
+		include_once("Pager.class.php");
+	    $list ['page'] = new Pager ( $total, $pageCount ); //创建分页对象
+		$offset = $list ['page']->offset ();               //获得记录偏移量
+		
+		$pagerStyle = array ('firstPage' => 'page', 'prePage' => 'go_b', 'nextPage' => 'go_b','preGroup'=>'page','nextGroup'=>'page', 'totalPage' => '', 'numBar' => 'on', 'numBarMain' => 'page' );                      //翻页条的样式
+		$list ['page']->setLinkStyle ( $pagerStyle );
+		$label = array('first_page'=>lang('first_page'),'last_page'=>lang('last_page'),'next_page'=>lang('next_page'),'pre_page'=>lang('pre_page'),'next_group'=>lang('next_group'),'pre_group'=>lang('pre_group'));
+		$list ['page']->setLabelName($label);
+		if($total>$pageCount){
+			$list ['pagebar'] = $list ['page']->prePage (lang('pre_page') ) .$list ['page']->ocNumBar().$list ['page']->nextPage (lang('next_page'));
+		}else{
+			$list ['pagebar'] = '';
+		}
+		
+		$select->limit ( $list['page']->offset(), $pageCount );
+		$rs = $select->query();
+	
+		if ($rs) {
+			foreach ( $rs as $key => $record ) {
+				$list ['records'] [$key] = $record;
+			}
+		}
+		return (array) $list;
+		
+
     }
     function getLastestAssignments(){
     	return $this->db->getAll("select a.* ,c.c_logo

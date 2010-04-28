@@ -1,10 +1,46 @@
 <?php include_once("header.html")?>
-
+<script src="<?php echo $www_site_url?>/public/js/calendar.js" type="text/javascript"></script>
+<div id="append"></div>
 <div id="wrap">  <br />
 
 <?php include_once("home_left.html")?>
 <div class="admincontent">
 
+<div id="storelist" style="width: 210px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:150;"> 
+  <ul> 
+  <?php 
+       if(isset($stores) && is_array($stores)){
+         foreach ($stores as $s){	
+                ?>
+	<li style="padding:2px;"><a onclick="selectstore('<?php echo $s['cs_id']."|".$s['cs_name'];?>');return false;" href="#"><?php echo $s['cs_name'];?></a></li> 
+	  <?php
+			}
+      }
+       ?>
+     </ul> 
+</div>
+<form action="/client.php" method="GET">
+ <input name="action" type="hidden" value="home"  />
+ <input name="view" type="hidden" value="assignment"  />
+ <input name="stores" type="hidden" value="<?php echo $type?>"  />
+ <input name="cs_id" type="hidden" id="cs_id" value="<?php echo $cs_id;?>" />
+<table width="100%" height="50" border="0" cellpadding="0" cellspacing="0" class="clear">
+  <tr>
+    <td class="CsearchLeft">&nbsp;</td>
+    <td align="center" class="CsearchCenter"><input name="selstore" type="text" class="ClocationInput" onclick="showstores();" id="selstore" value="<?php if(empty($selstore)) echo "请选择地点"; else echo $selstore;?>" />
+   
+      开始时间：
+      <input name="sdate" type="text" class="CtimeInput" id="sdate" value="<?php echo $sdate;?>" onclick="showcalendar();"/>
+      结束时间：
+      <input name="edate" type="text" class="CtimeInput" id="edate" value="<?php echo $edate;?>" onclick="showcalendar();" />
+      <input name="button" type="submit" class="btnblue" id="button" value="提交" /></td>
+    <td class="CsearchRight">&nbsp;</td>
+
+  </tr>
+</table>
+</form>
+<br />
+<br />
  <table width="100%" border="0" cellpadding="0" cellspacing="1" class="historyMission">
                 <tr>
                   <td class="title">完成日期</td>
@@ -15,8 +51,8 @@
                   <td class="title">报酬（单价：人民币）</td>
                 </tr>
                 <?php
-              if(isset($myassignment)&& is_array($myassignment)){
-							foreach ($myassignment as $k=>$v){?>
+              if(isset($myassignment['records'])&& is_array($myassignment['records'])){
+							foreach ($myassignment['records'] as $k=>$v){?>
                 <tr>
                   <td><?php echo substr( $v['a_fdate'],0,10);?></td>
                   <td><?php echo $v['c_title']?></td>
@@ -27,7 +63,8 @@
                 </tr>
              <?php }}?>
               </table>
-   
+         <br />
+          <? if(!empty( $myassignment['pagebar'])){?><div class="pages"><?php echo $myassignment['pagebar']?></div><?php }?>
 
 </div>
 
