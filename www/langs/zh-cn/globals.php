@@ -460,8 +460,9 @@ $GLOBALS['gLang']['c_companyaddress'] = '公司地址';
 $GLOBALS['gLang']['c_industry'] = '所属行业';
 $GLOBALS['gLang']['c_department'] = '联系部门';
 $GLOBALS['gLang']['city_district'] = '城市/区';
-$GLOBALS['gLang']['restaurant'] = '餐馆';
-$GLOBALS['gLang']['clothing'] = '服饰';
+$GLOBALS['gLang']['catering'] = '餐饮业';
+$GLOBALS['gLang']['restaurant'] = '餐厅';
+$GLOBALS['gLang']['retail'] = '零售业';
 $GLOBALS['gLang']['foreign'] = '外资企业';
 $GLOBALS['gLang']['private'] = '民营企业';
 $GLOBALS['gLang']['nation'] = '国家企业';
@@ -484,6 +485,10 @@ $GLOBALS['gLang']['xi_food'] = '西餐';
 $GLOBALS['gLang']['huoguo'] = '火锅';
 $GLOBALS['gLang']['bread'] = '面包西点';
 $GLOBALS['gLang']['selfhelp_food'] = '自助餐';
+$GLOBALS['gLang']['invitation_code'] = '邀请码';
+$GLOBALS['gLang']['invitation_code_label'] = '请输入邀请码';
+$GLOBALS['gLang']['invitationcodeinvalid'] = '对不起,邀请码无效！';
+
 
 
 

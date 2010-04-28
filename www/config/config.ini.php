@@ -114,8 +114,8 @@ $GLOBALS ["gMemcacheServer"]["192.168.1.5:11213"]);;
 	$GLOBALS['gTypes']['fillblank']  =3;
 	$GLOBALS['gTypes']['time']  =4;
 	
-	$GLOBALS['gIndustry'][1] = 'restaurant';
-	$GLOBALS['gIndustry'][2] = 'clothing';
+	$GLOBALS['gIndustry'][1] = 'catering';
+	$GLOBALS['gIndustry'][2] = 'retail';
 	
 	$GLOBALS['gCompanytype'][1] = 'foreign';
 	$GLOBALS['gCompanytype'][2] = 'private';
@@ -125,7 +125,7 @@ $GLOBALS ["gMemcacheServer"]["192.168.1.5:11213"]);;
 	$GLOBALS['gCompanycate'][1] = 'cafe';
 	$GLOBALS['gCompanycate'][2] = 'club';
 	$GLOBALS['gCompanycate'][3] = 'restaurant';
-	//西餐 、本帮菜 、日料 、火锅 、面包西点 、自助餐 、韩式 、粤菜 、川菜、湘菜、贵州菜、东北菜、台湾菜、新疆 清真 、素食   、东南亚菜
+
 	$GLOBALS['gFoodcate'][1] = 'sichuan_food';
 	$GLOBALS['gFoodcate'][2] = 'shanghai_food';
 	$GLOBALS['gFoodcate'][3] = 'guangdong_food';

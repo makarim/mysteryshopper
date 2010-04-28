@@ -390,9 +390,15 @@ class passport {
 		$reg_type = !empty($_POST['reg_type'])?$_POST['reg_type']:'';
 		$forward = ! empty ( $_POST ['forward'] ) ? $_POST ['forward'] : '';
 		$_POST ['sex'] = (isset($_POST ['sex']))?$_POST ['sex']:0;		
+		$invitationcode = (isset($_POST ['invitationcode']))?$_POST ['invitationcode']:'';		
 		$_SESSION ['nickname'] = $_POST ['nickname'];		
 		$_SESSION ['sex'] = $_POST ['sex'];
-		
+		$passmod = new PassportModel();
+		$InvitationCode = $passmod->getInvitationCode();
+		if($InvitationCode!=$invitationcode){
+			$msg = array('s'=> 400,'m'=>lang('invitationcodeinvalid'),'d'=>'');				
+			exit(json_output($msg));
+		}
 		$pattern = "/^[a-zA-Z][a-zA-Z0-9_]{1,13}[a-zA-Z0-9]$/i";
 		$pattern2 = "/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/";
 		if (!isset($_SESSION['validatecode']) || ($_POST['code']!='back' && strtolower($_POST['code'])!=strtolower($_SESSION['validatecode']))) {
@@ -433,7 +439,7 @@ class passport {
 		}
 
 
-		$passmod = new PassportModel();
+		
 		if($passmod->checkNickname($_POST ['nickname'])){
 			$msg = array('s'=> 400,'m'=>lang('nicknameexist'),'d'=>'');				
 			exit(json_output($msg));

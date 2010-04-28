@@ -221,8 +221,9 @@ class ChartModel extends Model {
 		$sum = 0;
 		if($q_row>0){
 			foreach ($rq_arr as $rq){
-				$sql = "select count(*) from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=1 and ans_answer1='Y'";
-				$sum += $this->db->getOne($sql);
+				$sql = "select ans_answer1 from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=1 and ans_answer1!='A'";
+				$yn = $this->db->getOne($sql);
+				$sum += ($yn=='Y')?10:0;
 			}
 			// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
 			$average += $sum/$q_row;
