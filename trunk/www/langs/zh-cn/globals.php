@@ -488,9 +488,35 @@ $GLOBALS['gLang']['selfhelp_food'] = '自助餐';
 $GLOBALS['gLang']['invitation_code'] = '邀请码';
 $GLOBALS['gLang']['invitation_code_label'] = '请输入邀请码';
 $GLOBALS['gLang']['invitationcodeinvalid'] = '对不起,邀请码无效！';
+$GLOBALS['gLang']['checkit_label'] = '请阅读协议条款，只有同意才能注册！';
+$GLOBALS['gLang']['index_flash'] = 'spotshoppers';
+$GLOBALS['gLang']['index_flash_file'] = 'spotshoppers.swf';
+$GLOBALS['gLang']['client_flash'] = 'client';
+$GLOBALS['gLang']['client_flash_file'] = 'client.swf';
+$GLOBALS['gLang']['clients'] = '企业专区';
+$GLOBALS['gLang']['about_spot'] = 'SPOT的理念';
+$GLOBALS['gLang']['client_login'] = '企业登录';
+$GLOBALS['gLang']['shoppers'] = '神秘顾客专区';
+$GLOBALS['gLang']['user_name'] = '邮箱帐号';
+$GLOBALS['gLang']['password'] = '登录密码';
+$GLOBALS['gLang']['login'] = '登录';
+$GLOBALS['gLang']['lostpassword'] = '忘记密码？';
+$GLOBALS['gLang']['signup'] = '加入我们';
+$GLOBALS['gLang']['contactus'] = '联系我们';
 
+$GLOBALS['gLang']['mystery_shopper'] = '什么是神秘顾客';
+$GLOBALS['gLang']['mystery_shopper_info'] = '企业在没有管理者在场的时候总是很难弄明白自己的员工在做些什么。派一个部门管理人员也并不能每次都奏效，因为员工知道有人在看着。最好的信息来自于被派出作评估的匿名消费者，因为没有人知道他们是谁。这就是为什么他们被称为神秘购物者！';
 
+$GLOBALS['gLang']['what_do_i_do'] = '神秘顾客做什么';
+$GLOBALS['gLang']['what_do_i_do_info'] = '一个神秘购物者是对一个品牌消费体验的审核者和评论者。不但要对品牌公司的要求和培训执行情况进行审核, 也以消费者的观点客观地提出评估。合格的神秘购物者必须是一个品牌的真实消费者或者潜在的消费者。';
 
+$GLOBALS['gLang']['what_can_i_get'] = '神秘顾客得到什么';
+$GLOBALS['gLang']['what_can_i_get_info'] = '简单地说，神秘购物者因为作为一个消费者获得报酬。每个购物者获得多少报酬取决于任务本身的難度。购物者在完成每项任务后按规定的数额进行报销。
+作为一个神秘用餐者，你和你的朋友可以免费吃一顿！餐馆可不想让你一个人吃，只要你和你的神秘餐友不要超过预算；你的这顿饭就是免费的！但是，别忘了要收据，因为我们的客户需要证据证明你曾经到过那里。';
+
+$GLOBALS['gLang']['how_do_i_become_one'] = '怎样成为神秘顾客';
+$GLOBALS['gLang']['how_do_i_become_one_info'] = '点击“加入我们”按钮进入后，请填写你的个人信息资料并提交申请，在得到我们任务管理部门的通知后，你就可以选一个适合你的任务开始申请。
+申请时，你将收到一份任务说明及问卷调查表，在任务之前我们会对你进行一次测试。这份简短的测试是为了确保你知道你将为评估做些什么，在你开始做这份测试题之前请确认你已经通读了那份任务说明及问卷调查表。一旦获得资格，你应在规定的时限内完成任务并且填写好报告。我们将察看你的报告并且安排接送你的收据。报销款将在我们批准你的报告后存入你的帐户。';
 
 
 

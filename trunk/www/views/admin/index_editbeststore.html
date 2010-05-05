@@ -41,7 +41,7 @@ function checkOnSubmit(formName) {
 					<li id="addcorporationbtn" class="tabcurrent"><a href="#"><?php echo lang('edit')?></a></li>	
 				</ul>
 				<div id="addcorporationdiv" class="tabcontentcur" style="width:80%">
-					<form id="editbeststore" name="editbeststore" enctype="multipart/form-data" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('editbeststore');" >
+					<form id="editbeststore" name="editbeststore" enctype="multipart/form-data" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('editbeststore');" enctype="multipart/form-data">
 					<input type="hidden" name="action" value="index">
 					<input type="hidden" name="op" value="updatebeststore">
 					<input type="hidden" name="rec_id" value="<?php echo $info['rec_id']?>">
@@ -49,7 +49,7 @@ function checkOnSubmit(formName) {
 					<table width="100%">
 						<tr>
 							<td width="10%"><?php echo lang('month')?>:</td>
-							<td><?php echo $info['rec_month']?></td>
+							<td><input type="text" name="cs_month" class="textfield" value="<?php echo $info['rec_month']?>"/></td>
 						</tr>	
 						<tr>
 							<td width="10%"><?php echo lang('cs_name')?>:</td>
@@ -63,8 +63,8 @@ function checkOnSubmit(formName) {
 						
 						<tr>
 							<td><?php echo lang('img')?>:</td>
-							<td><input type="text" name="cs_img" class="textfield" value="<?php echo $info['content']['img']?>"/>
-							<img src="<?php echo $info['content']['img']?>">
+							<td><input type="file" name="cs_img" class="textfield" />
+							<img src="<?php if(strpos($info['content']['img'],'http://')!==false) {echo $info['content']['img']; }else{ echo "/public/upload/".$info['content']['img']; }?>" width="60" height="60">
 							</td>
 						</tr>						
 						<tr>

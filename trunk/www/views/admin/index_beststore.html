@@ -11,7 +11,7 @@
 
 <script>
 function checkOnSubmit(formName) {
-  	
+  	return true;
 	var url = "<?php echo $www_site_url?>/admin.php";
 	var params = mini.form.serialize($(formName));
 	mini.ajax.post(url, function(r){
@@ -73,7 +73,7 @@ function checkOnSubmit(formName) {
 					<div class="main" id="tabs_main" >
 						
 						<div class="block" style="display:none;">
-							<form id="addbeststoreform" name="addbeststoreform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addbeststoreform');" >
+							<form id="addbeststoreform" name="addbeststoreform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addbeststoreform');" enctype="multipart/form-data">
 							<input type="hidden" name="action" value="index">
 							<input type="hidden" name="op" value="addbeststore">
 							<table width="100%">
@@ -81,7 +81,7 @@ function checkOnSubmit(formName) {
 									<td align="left"><?php echo lang('cs_name')?>:</td>
 									<td align="left"><input type="text" name="cs_name" class="textfield" /></td>
 									<td align="left"><?php echo lang('cs_img')?>:</td>
-									<td align="left"><input type="text" name="cs_img" class="textfield" /></td>
+									<td align="left"><input type="file" name="cs_img" class="textfield" /></td>
 								</tr>
 								<tr>
 									<td align="left"><?php echo lang('c_title')?>:</td>
@@ -124,7 +124,7 @@ function checkOnSubmit(formName) {
 							
 							<td><?php echo $v['rec_id']?></td>
 							<td><strong><?php echo $v['rec_month']?></strong></td>
-							<td><img src="<?php echo $content['img']?>"></td>
+							<td><img src="<?php if(strpos($content['img'],'http://')!==false) {echo $content['img']; }else{ echo "/public/upload/".$content['img']; }?>" width="60" height="60"></td>
 							<td><strong><?php echo $content['cs_name']?></strong></td>
 							<td><strong><?php echo $content['c_title']?></strong></td>
 							
