@@ -50,19 +50,29 @@ class index{
 		$this->tpl->assign('beststore',$corpmod->getBestStoreList());
     }    
     function op_addbeststore(){
-    	include_once("CorporationModel.class.php");
-		$corpmod = new CorporationModel();
-		
-		$fileds['rec_month'] = $_POST['cs_month'];
-		$fileds['rec_content'] = serialize(array("img"=>$_POST['cs_img'],"cs_name"=>$_POST['cs_name'],"c_title"=>$_POST['cs_title']));
-		$fileds['rec_type'] = 'S';
-		
-		$row= $corpmod->addBestStore($fileds,"recommend");
-		if ($row !== false) {
-			$msg = array('s'=> 200,'m'=>'ok','d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/index/beststore");				
-			exit(json_output($msg));
-								
+    	include_once("FileUpload.class.php");
+		$upload=new FileUpload(APP_DIR."/public/upload/",'jpg|png|gif|jpeg');
+		$upload->renamed = true;
+		$re = $upload->upload();
+		if(!$re){
+			$fname_arr=$upload->get_succ_file();
+
+	    	include_once("CorporationModel.class.php");
+			$corpmod = new CorporationModel();
+			
+			$fileds['rec_month'] = $_POST['cs_month'];
+			$fileds['rec_content'] = serialize(array("img"=>substr(strrchr($fname_arr[0],'/'),1),"cs_name"=>$_POST['cs_name'],"c_title"=>$_POST['cs_title']));
+			$fileds['rec_type'] = 'S';
+			
+			$row= $corpmod->addBestStore($fileds,"recommend");
+			if ($row !== false) {
+				//$msg = array('s'=> 200,'m'=>'ok','d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/index/beststore");
+				show_message_goback(lang('success'));
+				//exit(json_output($msg));
+									
+			}
 		}
+		show_message_goback(lang('failed'));
     }
     function view_editbeststore(){
     	$rec_id = $_GET['rec_id'];
@@ -73,16 +83,24 @@ class index{
 		$this->tpl->assign('info',$row);
     }
     function op_updatebeststore(){
-    	include_once("CorporationModel.class.php");
-		$corpmod = new CorporationModel();
-		
-		$fileds['rec_content'] = serialize(array("img"=>$_POST['cs_img'],"cs_name"=>$_POST['cs_name'],"c_title"=>$_POST['cs_title']));
-		
-		$row= $corpmod->updateBestStore($fileds,$_POST['rec_id']);
-		if ($row !== false) {
-			show_message_goback("保存成功!");
-								
+    	include_once("FileUpload.class.php");
+		$upload=new FileUpload(APP_DIR."/public/upload/",'jpg|png|gif|jpeg');
+		$upload->renamed = true;
+		$re = $upload->upload();
+		if(!$re){
+			$fname_arr=$upload->get_succ_file();
+	    	include_once("CorporationModel.class.php");
+			$corpmod = new CorporationModel();
+			$fileds['rec_month'] = $_POST['cs_month'];
+			$fileds['rec_content'] = serialize(array("img"=>substr(strrchr($fname_arr[0],'/'),1),"cs_name"=>$_POST['cs_name'],"c_title"=>$_POST['cs_title']));
+			
+			$row= $corpmod->updateBestStore($fileds,$_POST['rec_id']);
+			if ($row !== false) {
+				show_message_goback(lang('success'));
+									
+			}
 		}
+		show_message_goback(lang('failed'));
     }
     
     function view_bestshopper(){

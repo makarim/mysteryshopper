@@ -193,7 +193,7 @@ class user{
 		$updates['user_email'] = $_POST ['email'];
 		if($_POST ['password']!='') $updates['user_password'] = PassportModel::encryptpwd($_POST ['password'],$user);
 		$updates['user_nickname'] = htmlspecialchars ( $_POST ['nickname'] );
-		$updates['user_sex'] = $_POST ['sex'];
+		//$updates['user_sex'] = $_POST ['sex'];
 		
 		
 		// 1. update db user

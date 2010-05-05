@@ -94,6 +94,10 @@
 <TD class="text"><?php echo lang('validatecode')?>:</TD>
 <TD><div id="errorsDiv_code"></div><INPUT type="text" name="code" class="input" style="width:100px"/><img id="codeimg" src="<?php echo $www_site_url?>/index.php/identifycode/generate" align="absmiddle" title="<?php echo lang('anotherone')?>" onClick="changeCode();" style="cursor:pointer"></TD>
 </TR>
+<TR>
+<TD class="text"></TD>
+<TD><div id="errorsDiv_checkit"></div><INPUT type="checkbox" name="checkit" id="checkit" /> <a href="/index.php/index/protocol" target="_blank">协议条款</a></TD>
+</TR>
 
 <TR><TD class="text">&nbsp;</TD><TD><input name="button" type="submit" class="btn" id="button" value="<?php echo lang('signup')?>" />
 
@@ -145,6 +149,7 @@ rules[11]='nickname|maxlength|16|<?php echo lang('nicknamerule')?>';
 rules[12]='question|required|<?php echo lang('selectaquestion')?>';
 rules[13]='answer|required|<?php echo lang('youranswer')?>';
 rules[14]='invitationcode|required|<?php echo lang('invitation_code_label')?>';
+rules[15]='checkit|required|<?php echo lang('checkit_label')?>';
 
 
 yav.addHelp('username', '<?php echo lang('usernamerule')?>');
@@ -157,6 +162,7 @@ yav.addHelp('nickname', '');
 yav.addHelp('sex', '');
 yav.addHelp('code', '');
 yav.addHelp('invitationcode', '');
+yav.addHelp('checkit', '');
 yav.postValidation_OnOK('email', 'blur', 'ajaxCall("email")');
 yav.postValidation_OnOK('username', 'blur', 'ajaxCall("username")');
 

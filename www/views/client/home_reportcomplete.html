@@ -1,5 +1,5 @@
 <?php include_once("header.html")?>
-
+<script src="<?php echo $www_site_url?>/public/js/ajax.js" type="text/javascript"></script>
 <div id="wrap">  <br />
 
 <?php include_once("home_left.html")?>
@@ -13,7 +13,23 @@ function printpage(oper){
 	
 	prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html
 	window.document.body.innerHTML=prnhtml;
-	window.print();
+	//window.print();
+	var url = "<?php echo $www_site_url?>/plugins/html2pdf.php";
+	//var params = mini.form.serialize($(formName));
+
+	mini.ajax.post(url, function(r){
+		alert(r);
+		var r = eval('(' + r + ')');   
+
+		if(r.s==200){
+			alert(r.m);
+			window.location.href = r.d;
+		}
+		if(r.s==400){
+			alert(r.m);
+			$('msg').innerHTML = r.m;			
+		}
+	}, "c="+prnhtml);
 	window.document.body.innerHTML=bdhtml;
 }
 

@@ -409,7 +409,7 @@ class View{
 		if(file_exists($langfile)){
 			include_once($langfile);
 			
-			//$tpl->assign($GLOBALS['gLang']);
+			$tpl->assign($GLOBALS['gLang']);
 			$tpl->assign('selected_lang',$selected_lang);
 		}
 
