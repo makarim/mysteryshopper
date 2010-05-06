@@ -150,18 +150,18 @@ $GLOBALS['gLang'] = array(
 );
 $GLOBALS['gLang']['user'] = 'Passport';
 $GLOBALS['gLang']['pwd'] = 'Password';
-$GLOBALS['gLang']['validatecode'] = 'Validate Code';
+$GLOBALS['gLang']['validatecode'] = 'Verification Code';
 $GLOBALS['gLang']['anotherone'] = 'Change';
 $GLOBALS['gLang']['notclear'] = 'Change';
-$GLOBALS['gLang']['autologin'] = 'Auto Sign on';
-$GLOBALS['gLang']['signon'] = 'Sign on';
+$GLOBALS['gLang']['autologin'] = 'Remember me';
+$GLOBALS['gLang']['logon'] = 'Enter';
 $GLOBALS['gLang']['signup'] = 'Sign up';
 $GLOBALS['gLang']['forgetpwd'] = 'Forget your password?';
 $GLOBALS['gLang']['emailorusername'] = 'Email/UserName';
 $GLOBALS['gLang']['helpmsg1'] = 'Please insert your passport!';
 $GLOBALS['gLang']['helpmsg2'] = 'Please insert your password!';
 $GLOBALS['gLang']['usernotexist'] = 'The user not exist!';
-$GLOBALS['gLang']['codeinvalid'] = "The validate code is wrong!";
+$GLOBALS['gLang']['codeinvalid'] = "The verification code is wrong!";
 $GLOBALS['gLang']['illegalsignon'] = "Illegal sign on!";
 $GLOBALS['gLang']['pwdwrong'] = "The password is wrong!";
 $GLOBALS['gLang']['userforbidden'] = "The user is forbidden!";
@@ -170,7 +170,7 @@ $GLOBALS['gLang']['regbyusername'] = "Registered by Username";
 $GLOBALS['gLang']['regbyemail'] = "Registered by Email";
 $GLOBALS['gLang']['email'] = "Email";
 $GLOBALS['gLang']['username'] = "Username";
-$GLOBALS['gLang']['comfirmpwd'] = "Comfirm Password";
+$GLOBALS['gLang']['comfirmpwd'] = "Confirm Password";
 $GLOBALS['gLang']['pwdquestion'] = "Protected question";
 $GLOBALS['gLang']['selectaquestion'] = "Please select a question";
 $GLOBALS['gLang']['q1'] = "What's name of my first school?";
@@ -186,7 +186,7 @@ $GLOBALS['gLang']['q10'] = "When is my firt date?";
 $GLOBALS['gLang']['youranswer'] = "Your answer is";
 $GLOBALS['gLang']['realname'] = "Realname";
 $GLOBALS['gLang']['nickname'] = "Nickname";
-$GLOBALS['gLang']['sex'] = "Sex";
+$GLOBALS['gLang']['sex'] = "I am";
 $GLOBALS['gLang']['boy'] = "Male";
 $GLOBALS['gLang']['girl'] = "Female";
 $GLOBALS['gLang']['reset'] = "Reset";
@@ -207,7 +207,7 @@ $GLOBALS['gLang']['newpwd'] = "New Password";
 $GLOBALS['gLang']['newpwd2'] = "New Password Again";
 $GLOBALS['gLang']['insertyouranswer'] = "Please insert your answer!";
 $GLOBALS['gLang']['pwdrule'] = "Password must be at least 6 characters long!";
-$GLOBALS['gLang']['coderule'] = "Please insert validate code";
+$GLOBALS['gLang']['coderule'] = "Please insert verification code";
 $GLOBALS['gLang']['realnamerule'] = "Please insert real name";
 
 $GLOBALS['gLang']['pwdreset'] = "Congratulation! Your password has been reset!";
@@ -486,9 +486,9 @@ $GLOBALS['gLang']['huoguo'] = '火锅';
 $GLOBALS['gLang']['bread'] = '面包西点';
 $GLOBALS['gLang']['selfhelp_food'] = '自助餐';
 $GLOBALS['gLang']['invitation_code'] = '邀请码';
-$GLOBALS['gLang']['invitation_code_label'] = '请输入邀请码';
-$GLOBALS['gLang']['invitationcodeinvalid'] = '对不起,邀请码无效！';
-$GLOBALS['gLang']['checkit_label'] = '请阅读协议条款，只有同意才能注册！';
+$GLOBALS['gLang']['invitation_code_label'] = 'Please insert invitation code.';
+$GLOBALS['gLang']['invitationcodeinvalid'] = 'Sorry！The invitation code is invalid！';
+$GLOBALS['gLang']['checkit_label'] = 'Please read the terms & conditions and agree！';
 $GLOBALS['gLang']['index_flash'] = 'spotshoppers_en';
 $GLOBALS['gLang']['index_flash_file'] = 'spotshoppers_en.swf';
 $GLOBALS['gLang']['client_flash'] = 'client_en';
@@ -497,25 +497,62 @@ $GLOBALS['gLang']['clients'] = 'Clients';
 $GLOBALS['gLang']['about_spot'] = 'About SPOT';
 $GLOBALS['gLang']['client_login'] = 'Client Login';
 $GLOBALS['gLang']['shoppers'] = 'Shoppers';
-$GLOBALS['gLang']['user_name'] = 'Username/Email';
+$GLOBALS['gLang']['user_name'] = 'Email';
 $GLOBALS['gLang']['password'] = 'Password';
 $GLOBALS['gLang']['login'] = 'Login';
 $GLOBALS['gLang']['lostpassword'] = 'Lost Password?';
 $GLOBALS['gLang']['signup'] = 'Sign Up';
 $GLOBALS['gLang']['contactus'] = 'Contact Us';
 
-$GLOBALS['gLang']['mystery_shopper'] = 'Mystery Shopper';
+$GLOBALS['gLang']['mystery_shopper'] = 'Mystery Shopper?';
 $GLOBALS['gLang']['mystery_shopper_info'] = 'Businesses have always had a hard time figuring out what their employees are doing when management is not there.  Sending a department representative does not always indicate what is really happening since employees know somebody is watching.  The best information comes from real customers who are given the task to evaluate the experience, but nobody knows it’s them.  This is why they are called Mystery Shoppers!';
 
-$GLOBALS['gLang']['what_do_i_do'] = 'What do I have to do';
+$GLOBALS['gLang']['what_do_i_do'] = 'What do I have to do?';
 $GLOBALS['gLang']['what_do_i_do_info'] = 'A mystery shopper is an auditor and critic of a brand’s consumer experience.  Auditing requires the shopper to assess execution of brand standards and training.  Critiquing involves an evaluation of the consumer experience based on the customer’s point of view.   Qualified shoppers must be a customer or potential customer of the brand.  Assignments as a mystery shopper can occur on the phone, online, or most commonly in-store. ';
 
-$GLOBALS['gLang']['what_can_i_get'] = 'What can I get';
+$GLOBALS['gLang']['what_can_i_get'] = 'What can I get?';
 $GLOBALS['gLang']['what_can_i_get_info'] = 'Simply put, Mystery Shoppers get paid to do be a customer.  How much each shopper gets paid depends on the business itself.  Shoppers are reimbursed up to an allotted amount for completing each assignment.<br/> 
 As a Mystery Diner, you and a friend get a free meal!  Restaurants don’t want you to eat alone, so as long as you and your mystery dining apprentice stay within the budget; your meal is on the house!  But, don’t forget the receipt because our clients need proof that you really were there.
 ';
 
-$GLOBALS['gLang']['how_do_i_become_one'] = 'How do I become one';
+$GLOBALS['gLang']['how_do_i_become_one'] = 'How do I become one?';
 $GLOBALS['gLang']['how_do_i_become_one_info'] = 'After filling out your profile information, head over to our assignment board and pick an assignment.  A report form, instructions, and a short quiz will be given to you.  This short quiz is just to make sure you know what you need to do for the evaluation, just make sure you read through the instructions and skim the report form before you start the quiz.  Once qualified, perform the visit within the time frame and fill out the report.  We will look over your report and arrange for a pick-up of your receipt.  Reimbursement will then be credited to you after we approve your report.';
+$GLOBALS['gLang']['telephone'] = 'tel_en';
+$GLOBALS['gLang']['telephone2'] = 'tel2_en';
+$GLOBALS['gLang']['homepage'] = 'Home Page';
+$GLOBALS['gLang']['quit'] = 'Quit';
+$GLOBALS['gLang']['hello'] = 'Hello';
+$GLOBALS['gLang']['what_is_mystery_shopping'] = 'What is Mystery Shopping?';
+$GLOBALS['gLang']['what_is_mystery_shopping_answer'] = ' <p><br />Mystery Shopping is a method using informed shoppers to anonymously assess a brand’s core standards that involves customer service, operations, employee integrity, merchandising, and product quality.</p> <p>&nbsp;</p>
+<p> Whenever there is a deviation from these standards, it indicates inconsistency.  Auditing the execution of these standards by way of mystery shoppers gives the most genuine data.</p>';
+$GLOBALS['gLang']['more'] = 'More...';
+$GLOBALS['gLang']['faq'] = 'FAQ';
+$GLOBALS['gLang']['shoppermain'] = 'Shopper Main';
+$GLOBALS['gLang']['protocol'] = 'Terms & Conditions';
 
+$GLOBALS['gLang']['who_needs_mystery_shopping'] = 'Who needs Mystery Shopping?';
+$GLOBALS['gLang']['who_needs_mystery_shopping_answer'] = 'Any business who wants to monitor its operations, facilities, product delivery, and service performance needs Mystery Shopping.  A developing brand needs to monitor its current locations while focusing on expanding into new ones.  Likewise, an established brand needs to maintain or raise standards at all locations in order to strengthen its position in the market.  Monitoring, maintaining, and raising standards is the key to developing a long-term brand strategy.';
+
+$GLOBALS['gLang']['why_do_i_need_mystery_shopping'] = 'Why do I need Mystery Shopping?';
+$GLOBALS['gLang']['why_do_i_need_mystery_shopping_answer'] = 'Improve customer retention<br />
+Monitor service performance<br />
+Monitor facility conditions<br />
+Ensure service & product delivery quality<br />
+Support promotional programs<br />
+Audit pricing & merchandising compliance<br />
+Identify training needs<br />
+Enforce employee integrity
+';
+
+$GLOBALS['gLang']['why_is_consistency_important'] = 'Why is consistency important?';
+$GLOBALS['gLang']['why_is_consistency_important_answer'] = 'Consistency is the key to any business that wants to grow.  Before a business can grow it must establish a set of standards.  These standards are the fundamentals of a brand and can be any part of the business as long as it stays constant from one location to the next.  When a consumer sees a brand name, a quality standard comes to mind.  If an inconsistency appears during a consumer experience, that quality standard is lost.  To a customer, consistency equals trust; trust that they will receive the same quality service, trust that they will receive the same quality product, and trust that they will receive the same quality experience each and every time they visit or purchase from the brand.';
+
+$GLOBALS['gLang']['registration'] = 'Shopper Registration';
+$GLOBALS['gLang']['already_signup'] = 'Already Signed Up?';
+$GLOBALS['gLang']['notyet_signup'] = 'Not Yet Signed Up?';
+$GLOBALS['gLang']['invitation_code'] = 'Invitation Code';
+$GLOBALS['gLang']['regstepclass'] = 'regStep_en';
+$GLOBALS['gLang']['congratulation'] = 'Congratulation! You have signed up！';
+$GLOBALS['gLang']['redireting'] = 'Redirecting to home page after 5 seconds. Click here...';
+$GLOBALS['gLang']['submit'] = 'Submit';
 ?>

@@ -6,11 +6,11 @@
   <div class="tabsA">
     	<div class="left">
 
-        	<div class="right">神秘顾客注册</div>
+        	<div class="right"><?php echo lang("registration");?></div>
         </div>
-      <div class="des">已经是注册用户？请点击<a href="<?php echo $www_site_url?>/index.php/passport/reg">这里</a>登录！</div>
+      <div class="des"><?php echo lang("already_signup");?> <a href="<?php echo $www_site_url?>/index.php/passport/login"><?php echo lang("login");?>!</a></div>
   </div>
-  <div class="regStep clear"></div>
+  <div class="<?php echo lang("regstepclass");?> clear"></div>
   <div class="regInfo">
 
 <FORM name="registerform" id="registerform" method="POST" onsubmit="return checkOnSubmit('registerform', rules);" >
@@ -96,7 +96,7 @@
 </TR>
 <TR>
 <TD class="text"></TD>
-<TD><div id="errorsDiv_checkit"></div><INPUT type="checkbox" name="checkit" id="checkit" /> <a href="/index.php/index/protocol" target="_blank">协议条款</a></TD>
+<TD><div id="errorsDiv_checkit"></div><INPUT type="checkbox" name="checkit" id="checkit" /> <a href="/index.php/index/protocol" target="_blank"><?php echo lang('protocol')?></a></TD>
 </TR>
 
 <TR><TD class="text">&nbsp;</TD><TD><input name="button" type="submit" class="btn" id="button" value="<?php echo lang('signup')?>" />

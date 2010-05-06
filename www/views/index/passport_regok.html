@@ -6,19 +6,19 @@
   <div class="tabsA">
     	<div class="left">
 
-        	<div class="right">新用户注册</div>
+        	<div class="right"><?php echo lang("registration");?></div>
         </div>
-      <div class="des">已经是注册用户？请点击<a href="/index.php/passport/login">这里</a>登录！</div>
+      <div class="des"><?php echo lang("already_signup");?> <a href="<?php echo $www_site_url?>/index.php/passport/login"><?php echo lang("login");?>!</a></div>
   </div>
-  <div class="regStep regStep3 clear"></div>
+  <div class="<?php echo lang("regstepclass");?> regStep3 clear"></div>
   <div class="regInfo">
 <p>&nbsp;</p>
 
     <p>&nbsp;</p>
     <p>&nbsp;</p>
-    <p align="center">恭喜，您已注册成功！</p>
+    <p align="center"><?php echo lang("congratulation");?></p>
     <p align="center">&nbsp;</p>
-    <p align="center"><a href="/index.php/home">5秒钟后将自动跳转到用户控制面板，如果浏览器没有反应，请点击这里进入···</a></p>
+    <p align="center"><a href="/index.php/home"><?php echo lang("redireting");?>···</a></p>
     <script> setTimeout("window.location.replace(\"/index.php/home\")",5000);</script>
     <p>&nbsp;</p>
     <p>&nbsp;</p>

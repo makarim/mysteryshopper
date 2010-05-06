@@ -60,6 +60,20 @@ li {
 	float:right;
 	margin:50px 38px 0 0;
 }
+#tel_en {
+	background:url(../images/tel_en.gif) no-repeat;
+	width:402px;
+	height:48px;
+	float:right;
+	margin:50px 38px 0 0;
+}
+#tel2_en {
+	background:url(../images/tel2_en.gif) no-repeat;
+	width:402px;
+	height:48px;
+	float:right;
+	margin:50px 38px 0 0;
+}
 
 #clientBottom {
 	background:#003366 url(../images/clientbottom.jpg) no-repeat;
@@ -493,7 +507,7 @@ float:left;
       float:left;
       width:100%;
       background:#FFF;
-      font-size:14px;
+      font-size:13px;
       line-height:normal;
 	  border-bottom:2px solid #C00;
       }
@@ -543,6 +557,12 @@ float:left;
 /*注册步骤*/
 .regStep {
 	background:url(../images/regstep.gif) no-repeat left top;
+	height:24px;
+	width:377px;
+	margin:50px auto;
+}
+.regStep_en{
+	background:url(../images/regstep_en.gif) no-repeat left top;
 	height:24px;
 	width:377px;
 	margin:50px auto;

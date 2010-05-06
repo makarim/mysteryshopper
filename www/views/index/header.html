@@ -16,12 +16,12 @@
     <div id="logo"><a href="/index.php"><img border="0" src="<?php echo $www_site_url?>/public/images/<?php if(isset($scr) && ($scr=='index.php')) echo 'logo.gif'; else echo 'logo2.gif'; ?>" alt="SPOTSHOPPERS.COM" width="136" height="104" /></a></div>
 	<div id="top">
     	<div id="language"><a href="/index.php/index/setlang/zh-cn"><img src="<?php echo $www_site_url?>/public/images/icon_language_cn.gif" alt="中文版" width="23" height="14" border="0" /></a> <a href="/index.php/index/setlang/en"><img src="<?php echo $www_site_url?>/public/images/icon_language_en.gif" alt="ENGLISH VERSION" width="21" height="14" border="0" /></a></div>
-        <div id="login"><?php if($user){?><a href="/index.php/home">我的主页</a> | <a href="/index.php/passport/logout">退出</a><?php }else{?><a href="/index.php/passport/reg"><?php echo lang("signup")?></a> | <a href="/index.php/passport/login"><?php echo lang("login")?></a><?php }?></div>
+        <div id="login"><?php if($user){?><a href="/index.php/home"><?php echo lang("homepage")?></a> | <a href="/index.php/passport/logout"><?php echo lang("quit")?></a><?php }else{?><a href="/index.php/passport/reg"><?php echo lang("signup")?></a> | <a href="/index.php/passport/login"><?php echo lang("login")?></a><?php }?></div>
         <?php if($user){?>
-        <div id="welcome">您好，亲爱的 <span style="color:#000000; font-weight:bold;"><?php echo $user['user_nickname'];?></span></div>
+        <div id="welcome"><?php echo lang("hello")?>, <span style="color:#000000; font-weight:bold;"><?php echo $user['user_nickname'];?></span></div>
         <?php }?>
 		
-  		<div id="<?php if(isset($scr) && ($scr=='index.php')) echo "tel";else echo "tel2";?>"></div>
+  		<div id="<?php if(isset($scr) && ($scr=='index.php')) echo lang('telephone');else echo lang('telephone2');?>"></div>
 
     </div>
 </div>
