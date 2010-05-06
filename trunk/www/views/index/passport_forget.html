@@ -22,9 +22,9 @@ window.onload = yav.init('forgetpwdform', rules);
 <div id="wrap">  <br />
   <div class="tabsA">
     	<div class="left">
-        	<div class="right">神秘顾客</div>
+        	<div class="right"><?php echo lang('lostpassword');?></div>
     </div>
-      <div class="des">还不是注册用户？请点击<a href="<?php echo $www_site_url?>/index.php/passport/reg">这里</a>加入我们！</div>
+      <div class="des"><?php echo lang('notyet_signup')?> <a href="<?php echo $www_site_url?>/index.php/passport/reg"><?php echo lang('signup')?></a>！</div>
   </div>
   <div class="regInfo">
     <p>&nbsp;</p>
@@ -35,11 +35,11 @@ window.onload = yav.init('forgetpwdform', rules);
 <input type="hidden" name="op" value="emailpwd">
 <TABLE width="100%" border="0" cellspacing="0" cellpadding="0">
 
-<TR><TD width="40%" class="text"><?php echo lang('user')?>:</TD><TD width="60%"><INPUT class="input" type=text name="user" />&nbsp;&nbsp;<span id="errorsDiv_user"></span></TD></TR>
+<TR><TD width="40%" class="text"><?php echo lang('email')?>:</TD><TD width="60%"><INPUT class="input" type=text name="user" />&nbsp;&nbsp;<span id="errorsDiv_user"></span></TD></TR>
 
 <tr>
         <td class="text">&nbsp;</td>
-        <td> <br /><input name="button" type="submit" class="btn" id="button" value="找回密码" />       </td>
+        <td> <br /><input name="button" type="submit" class="btn" id="button" value="<?php echo lang('submit')?>" />       </td>
       </tr>
 
 </TABLE>

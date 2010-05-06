@@ -5,9 +5,9 @@
 <div id="wrap">  <br />
   <div class="tabsA">
     	<div class="left">
-        	<div class="right">神秘顾客登录</div>
+        	<div class="right"><?php echo lang('login')?></div>
     </div>
-      <div class="des">还不是注册用户？请点击<a href="<?php echo $www_site_url?>/index.php/passport/reg">这里</a>加入我们！</div>
+      <div class="des"><?php echo lang('notyet_signup')?> <a href="<?php echo $www_site_url?>/index.php/passport/reg"><?php echo lang('signup')?></a>！</div>
   </div>
   <div class="regInfo">
   
@@ -23,7 +23,7 @@
 
 <TR><TD width="40%" class="text"></TD>
 <TD width="60%"><div id="msg"></div></TD></TR>
-<TR><TD width="40%" class="text"><?php echo lang('user')?>:</TD>
+<TR><TD width="40%" class="text"><?php echo lang('email')?>:</TD>
 <TD width="60%"><div id="errorsDiv_user"></div><INPUT class="input" type="text" name="user" value="" onfocus="this.value='';"/>&nbsp;&nbsp;</TD></TR>
 <TR><TD class="text"><?php echo lang('pwd')?>:</TD>
 <TD><div id="errorsDiv_password"></div><INPUT class="input" type="password" name="password" onclick="this.value='';"/>&nbsp;&nbsp;</TD></TR>
@@ -35,12 +35,12 @@
 <TR><TD class="text">&nbsp;</TD><TD><INPUT  class="checkbox" type="checkbox" name="remember" value="1"/> <?php echo lang('autologin')?>&nbsp;&nbsp;<span id="errorsDiv_remember"></span></TD></TR>
 <tr>
         <td class="text">&nbsp;</td>
-        <td><a href="<?php echo $www_site_url?>/index.php/passport/forget">忘记密码了？</a></td>
+        <td><a href="<?php echo $www_site_url?>/index.php/passport/forget"><?php echo lang('lostpassword');?></a></td>
 
 </tr>
 
 <TR> <td class="text">&nbsp;</td>
-<TD ><input name="button" type="submit" class="btn" id="button" value="<?php echo lang('signon')?>" />
+<TD ><input name="button" type="submit" class="btn" id="button" value="<?php echo lang('logon')?>" />
 </TD><TD></TD></TR>
 </TABLE>
 </form>

@@ -162,7 +162,7 @@ $GLOBALS['gLang']['validatecode'] = '验证码';
 $GLOBALS['gLang']['anotherone'] = '换一张';
 $GLOBALS['gLang']['notclear'] = '看不清';
 $GLOBALS['gLang']['autologin'] = '记住我';
-$GLOBALS['gLang']['signon'] = '登录';
+$GLOBALS['gLang']['logon'] = '登 录';
 $GLOBALS['gLang']['signup'] = '注册';
 $GLOBALS['gLang']['forgetpwd'] = '忘记密码';
 $GLOBALS['gLang']['emailorusername'] = '用户邮箱/用户名';
@@ -485,7 +485,6 @@ $GLOBALS['gLang']['xi_food'] = '西餐';
 $GLOBALS['gLang']['huoguo'] = '火锅';
 $GLOBALS['gLang']['bread'] = '面包西点';
 $GLOBALS['gLang']['selfhelp_food'] = '自助餐';
-$GLOBALS['gLang']['invitation_code'] = '邀请码';
 $GLOBALS['gLang']['invitation_code_label'] = '请输入邀请码';
 $GLOBALS['gLang']['invitationcodeinvalid'] = '对不起,邀请码无效！';
 $GLOBALS['gLang']['checkit_label'] = '请阅读协议条款，只有同意才能注册！';
@@ -518,10 +517,54 @@ $GLOBALS['gLang']['how_do_i_become_one'] = '怎样成为神秘顾客';
 $GLOBALS['gLang']['how_do_i_become_one_info'] = '点击“加入我们”按钮进入后，请填写你的个人信息资料并提交申请，在得到我们任务管理部门的通知后，你就可以选一个适合你的任务开始申请。
 申请时，你将收到一份任务说明及问卷调查表，在任务之前我们会对你进行一次测试。这份简短的测试是为了确保你知道你将为评估做些什么，在你开始做这份测试题之前请确认你已经通读了那份任务说明及问卷调查表。一旦获得资格，你应在规定的时限内完成任务并且填写好报告。我们将察看你的报告并且安排接送你的收据。报销款将在我们批准你的报告后存入你的帐户。';
 
+$GLOBALS['gLang']['telephone'] = 'tel';
+$GLOBALS['gLang']['telephone2'] = 'tel2';
+$GLOBALS['gLang']['homepage'] = '我的主页';
+$GLOBALS['gLang']['quit'] = '退出';
+$GLOBALS['gLang']['hello'] = '您好';
+$GLOBALS['gLang']['what_is_mystery_shopping'] = '什么是神秘购物？';
+$GLOBALS['gLang']['what_is_mystery_shopping_answer'] = "  <p><br />
+      神秘购物是通过匿名购物者的方式对一个品牌包括客户服务、业务、员工诚信、销售、产品质量等方面的核心标准进行评估的方法。每当出现与这些标准相背离的情况时，就表明有不一致的情况发生。通过神秘购物者审核这些标准的执行情况可以得到最真实的资料作为企业管理者的重要参考。 </p>
+      <p>&nbsp;</p>
+      <p>任何想监控其业务活动、设施、产品递送和服务性能成效的企业都需要神秘购物服务。一个发展中的品牌在进行扩张之前都需要了解其品牌当前所处的地位。同样，一个已经获得成功的品牌更需要在所有场所中保持或提高其产品标准，以加强在市场上的品牌地位。因为监控，保持和提高标准是企业发展一个长期品牌的战略关键。</p>";
+$GLOBALS['gLang']['more'] = '更多...';
+$GLOBALS['gLang']['faq'] = '常见问题';
+$GLOBALS['gLang']['shoppermain'] = '神秘顾客首页';
+$GLOBALS['gLang']['protocol'] = '协议条款';
 
+$GLOBALS['gLang']['who_needs_mystery_shopping'] = '谁需要神秘购物服务？';
+$GLOBALS['gLang']['who_needs_mystery_shopping_answer'] = '任何想监控其业务活动、设施、产品递送和服务性能成效的企业都需要神秘购物服务。一个发展中的品牌在进行扩张之前都需要了解其品牌当前所处的地位。同样，一个已经获得成功的品牌更需要在所有场所中保持或提高其产品标准，以加强在市场上的品牌地位。因为监控，保持和提高标准是企业发展一个长期品牌的战略关键。';
 
+$GLOBALS['gLang']['why_do_i_need_mystery_shopping'] = '为什么我需要神秘购物服务？';
+$GLOBALS['gLang']['why_do_i_need_mystery_shopping_answer'] = '<br />
+      提高消费者保持力<br />	
+      监测服务表现<br /> 
+      监测设备状况<br />	
+      保证服务和产品交付质量<br /> 
+      支持奖励性计划<br />	
+      审核价格和销售的配合关系<br /> 
+      确定培训需求<br />	
+      加强员工的诚实性 
+';
 
+$GLOBALS['gLang']['why_is_consistency_important'] = '一致性的重要性要哪里？';
+$GLOBALS['gLang']['why_is_consistency_important_answer'] = '任何企业想要发展，一致性是一个关键。在一个企业发展之前，它必须树立一套（服务/产品）标准。这些标准是一个品牌的基本要素，只要企业本身不变，就算地理位置、（经营方式得到）改变，这些标准仍可以成为企业的任何组成部份，并逐渐形成“无隐”的企业文化。当消费者看到你的企业品牌，一个质量标准就会浮现在脑海。如果消费者体验到某个品牌的不一致性，那么对于消费者来说该品牌的质量标准将会失去，即等于造成了负面的品牌形象。对于一个消费者来说，一致性等于信任，他们相信会得到同等品质的服务/产品；对于一个企业来说，提供一致性的服务/产品，就等于得到了无数忠实的顾客。';
 
+$GLOBALS['gLang']['how_to_use'] = '我如何使用神秘购物服务？';
+$GLOBALS['gLang']['how_to_use_answer'] = ' 为了获得良好的神秘购物资料，您必须拥有足够数量的有关什么事情是可以改变的好问题。许多企业没有认真地考虑这一点，结果他们花了很多时间和金钱后，却得到一些无用的信息。 </p>
+    <p>&nbsp;</p>
+    <p>在使用该资料之前，您必须先充分利用该计划。向员工通报该计划，告诉他们对他们的要求是什么。如果可能的话，让他们参与到评价表中来。关键是让大家了解和接受该计划。如果他们不接受，员工会对结果产生怀疑，并对他们认为可能是神秘顾客的人产生歧视。其目的是把每一位客户都当作神秘顾客来对待。这将在开始该计划之前就大大提高服务表现。 </p>
+    <p>&nbsp;</p>
+    <p>在得到结果之后，与员工共享信息，同时和他们讨论改进的方法。始终以积极的方式使用报告，比如制定对出色报告的奖励计划。如果以消极的方式使用结果，将会导致对抗的态度，它们是非建设性的，而且会阻止更好的行为出现。神秘购物者是你的消费者，你应该对他们的意见表示感谢，而不是抵触。在服务行业，我们不问“为什么？”我们问“我们怎样才能帮助您？”';
+
+$GLOBALS['gLang']['registration'] = '神秘顾客注册';
+$GLOBALS['gLang']['already_signup'] = '已经是注册用户？';
+$GLOBALS['gLang']['notyet_signup'] = '还不是注册用户？';
+$GLOBALS['gLang']['invitation_code'] = '邀请码';
+$GLOBALS['gLang']['regstepclass'] = 'regStep';
+$GLOBALS['gLang']['congratulation'] = '恭喜，您已注册成功！';
+$GLOBALS['gLang']['redireting'] = '5秒钟后将自动跳转到用户控制面板，如果浏览器没有反应，请点击这里进入...';
+$GLOBALS['gLang']['submit'] = '提交';
 
 
 ?>
