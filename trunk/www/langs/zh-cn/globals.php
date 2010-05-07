@@ -566,5 +566,5 @@ $GLOBALS['gLang']['congratulation'] = '恭喜，您已注册成功！';
 $GLOBALS['gLang']['redireting'] = '5秒钟后将自动跳转到用户控制面板，如果浏览器没有反应，请点击这里进入...';
 $GLOBALS['gLang']['submit'] = '提交';
 
-
+$GLOBALS['gLang']['map'] = 'map_cn';
 ?>

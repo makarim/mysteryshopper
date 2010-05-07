@@ -555,4 +555,6 @@ $GLOBALS['gLang']['regstepclass'] = 'regStep_en';
 $GLOBALS['gLang']['congratulation'] = 'Congratulation! You have signed up！';
 $GLOBALS['gLang']['redireting'] = 'Redirecting to home page after 5 seconds. Click here...';
 $GLOBALS['gLang']['submit'] = 'Submit';
+
+$GLOBALS['gLang']['map'] = 'map_en';
 ?>
