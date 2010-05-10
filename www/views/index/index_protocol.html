@@ -2,13 +2,13 @@
 <div id="wrap">  <br />
   	<div class="tabsA">
     	<div class="left">
-        	<div class="right">协议条款</div>
+        	<div class="right"><?php echo lang("protocol")?></div>
     	</div>
     </div>
   <div class="regInfo">
     <p>&nbsp;</p>
     <p>&nbsp;</p>
-  
+  <?php if($selected_lang=='zh-cn'){?>
     <p>甲方（spot）：                  乙方（神秘顾客）：</p>
 
     <p>根据《中华人民共和国合同法》及其相关法律、法规，甲乙双方经平等协商，自愿签订本合同，共同遵守本合同所列条款。</p>
@@ -77,7 +77,25 @@
    1．本合同受中国法律管辖并按其进行解释。<br />
    2．本合同在履行过程中发生的争议，由双方当事人协商解决，协商不成的，任何一方有权向双方当事人所在地人民法院提起诉讼。<br />
 </p>
+<?php }?>
+<?php if($selected_lang=='en'){?>
+<p>SPOT Mystery Shopping Terms and Conditions</p><br />
+<p>By applying to SPOT as a Mystery Shopper you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern SPOT relationship with you in relation to this website.</p><br />
+<p>1.	You understand that there is no guarantee that there will be any immediate Mystery Shopping assignments available. When mystery shops do come up, you will always be completely free to accept or reject the assignments. There is no obligation on either party. </p><br />
+<p>2.	Your services are rendered as an independent contractor. You are not an employee of SPOT.  You will not be paid insurance of any kind.</p><br />
+<p>3.	Should you accept an assignment, an implied contract between you, as an Independent Contractor, and SPOT is created. In the event you are unable to perform an accepted assignment, you agree that you will promptly notify SPOT by phone or by E-mail within 48 hours of the due date. All assignments are grouped together as one contractual agreement. Should you be assigned multiple assignments, and you do not submit one of them by the agreed-upon deadline without informing your scheduler within the aforementioned delay, SPOT maintains the right to not reimburse you for any of your shops in that group of assignments and remove you as a Mystery Shopper.</p><br />
+<p>4.	You acknowledge that in the course of your relationship with SPOT, you will be exposed to valuable trade secrets and proprietary and confidential information that is owned or controlled by SPOT and SPOT's clients. (This includes, but is not limited to: reports, forms, questionnaires, surveys, client programs, methodologies, training materials, and so forth). You must treat this information as confidential and take all necessary precautions against disclosure of the information to third parties during, and after your contract with SPOT.</p><br />
+<p>5.	You must not directly or indirectly, disclose, allow access to, transmit or transfer any information that you receive to a third party without the consent of SPOT, nor may you copy or reproduce the information except as may be reasonably required to provide your services. You must not forward any of our materials or E-mails to anybody or share any confidential information (as specified in Article 4) in other forms of media (This includes, but is not limited to: internet, newspapers, magazines, television, radio, and so forth)</p><br />
+<p>6.	As soon as you have agreed to do a particular mystery shopping visit, you must personally perform the visit and complete the report. You are not allowed to give the Mystery Shopping assignment to another person such as a family member or a friend to take your place in honoring the mystery shopping assignment.</p><br />
+<p>7.	It is understood that upon accepting a mystery shopping assignment, you will behave with the utmost honesty and integrity during the entire mystery visit. Please refrain from any behavior that might disrupt other customers or be improper towards the staff. Your actions and behavior must reflect the highest standard of professionalism at all times.</p><br />
+<p>8.	SPOT strives to pay all mystery shoppers in a timely fashion. Typically, reimbursements are issued within two weeks of receiving evidence of your mystery visit (receipt, etc.). All payments will be done via bank transfer or alipay.</p><br />
+<p>9.	You will be reimbursed an amount to be agreed upon, on a per assignment basis. The agreed-upon amount is all-inclusive (i.e. travel, etc). Any special expenses that may be reimbursed will be clearly indicated prior to the shop (i.e. entry to certain venues). SPOT has a right to withhold reimbursements for reports that are late, incomplete, inaccurate, or if the guidelines are not followed. SPOT will also withhold reimbursements should any inappropriate behavior occurs during the mystery shopping visit, confidentiality agreements were breached, or if there was a failure to comply with the Terms and Conditions as listed in this document.</p><br />
+<p>10.	Any questions or uncertainties that you may have about an assignment must be brought up at least 72 hours before the assignment is due. In fairness, you will always be given a chance to remedy any problems with your reports, to avoid the abovementioned penalty.</p><br />
+<p>11.	You must never identify yourself as a mystery shopper to any client, or to any employee of any client, whether you are on-duty or off-duty of mystery shopping assignments.</p><br />
+<p>12.	Each of us acknowledges to the other that you have no authority to bind SPOT in any manner. This implies that you cannot open a bank account in our name, sign one of our checks, and enter into a contract on behalf of SPOT.</p><br />
+<p>13.	Both you and SPOT hereby acknowledge that if a dispute arises, the Chinese version of the Terms and Conditions will prevail.
 
+<?php }?>
      </div>
 </div>
 <?php include_once("footer.html")?>

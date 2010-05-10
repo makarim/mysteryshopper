@@ -10,8 +10,8 @@
       <input type="hidden" name="view" value="allassignment">
           <td><div class="table2TitleBg">
             <div class="table2TitleBg2">
-            <div style="float:right;margin:5px;">筛选：<select name="province"></select><select name="city"></select><select name="area"></select> <input type="submit" value="查询"></div>
-              <div class="table2Title">全部任务</div>
+            <div style="float:right;margin:5px;"><select name="province"></select><select name="city"></select><select name="area"></select> <input type="submit" class="btn"  value="Submit"></div>
+              <div class="table2Title"><?php echo lang('assignment_board')?></div>
                
             </div>
            
@@ -34,8 +34,8 @@
 	
 	                      </div>
 	                      <div class="des"><b><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><?php echo $v['a_title']?></a></b><br />
-	                        开始时间：<?php echo $v['a_sdate']?><br />
-	                      	结束时间：<?php echo $v['a_edate']?>
+	                        <?php echo lang('start_date')?>：<?php echo $v['a_sdate']?><br />
+	                      	<?php echo lang('end_date')?>：<?php echo $v['a_edate']?>
 	                      </div>
                     </div>
                   <?php }

@@ -8,7 +8,7 @@
         <tr>
           <td><div class="table2TitleBg">
             <div class="table2TitleBg2">
-              <div class="table2Title">阅读/回复</div>
+              <div class="table2Title"><?php echo lang('read')?></div>
             </div>
            </div></td>
         </tr>
@@ -21,7 +21,7 @@
 
                 <tr>
                   <td width="9%"><img src="/public/upload/faceimg/<?php echo $msg['face_img']?>" width="50" height="50" /></td>
-                  <td width="69%"><strong><?php if($msg['from_user_id']==$user['user_id']) echo '我'; else echo $msg['from_user_nickname']?>：</strong><br />
+                  <td width="69%"><strong><?php if($msg['from_user_id']==$user['user_id']) echo lang('iam'); else echo $msg['from_user_nickname']?>：</strong><br />
 
                     <?php echo nl2br($msg['m_content'])?></td>
                   <td width="22%"><?php echo $msg['m_date']?></td>
@@ -51,7 +51,7 @@
                 <table width="100%" border="0" cellspacing="10" cellpadding="0">
                   <tr>
 
-                    <td width="10%" valign="top" align="right">回复</td>
+                    <td width="10%" valign="top" align="right"><?php echo lang('reply')?></td>
                     <td width="90%">
                       <textarea name="reply" id="reply" cols="70" rows="5" style="border:#666666 solid 1px;"></textarea>
                       <div id="errorsDiv_reply"></div> </td>
@@ -61,7 +61,7 @@
                     <td>&nbsp;</td>
                     <td>
 
-                      <input name="button" type="submit" class="btn" id="button" value="发  送" />
+                      <input name="button" type="submit" class="btn" id="button" value="<?php echo lang('send')?>" />
                     </td>
                   </tr>
                 </table>

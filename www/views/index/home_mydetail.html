@@ -7,11 +7,11 @@
 
 	    <div id="tabsD" style="width:100%"> 
 		  <ul> 
-		    <li <?php if($type=='contact') echo 'class="on"';?>><a href="/index.php/home/mydetail/contact"><span>联系方式</span></a></li> 
-		    <li <?php if($type=='extinfo') echo 'class="on"';?>><a href="/index.php/home/mydetail/extinfo" ><span>个人信息</span></a></li> 
-		    <li <?php if($type=='other') echo 'class="on"';?>><a href="/index.php/home/mydetail/other" ><span>平常就餐习惯</span></a></li> 
-		    <li <?php if($type=='payment') echo 'class="on"';?>><a href="/index.php/home/mydetail/payment" ><span>付款方式</span></a></li> 
-		    <li <?php if($type=='upload') echo 'class="on"';?>><a href="/index.php/home/mydetail/upload" ><span>头像上传</span></a></li> 
+		    <li <?php if($type=='contact') echo 'class="on"';?>><a href="/index.php/home/mydetail/contact"><span><?php echo lang('contact')?></span></a></li> 
+		    <li <?php if($type=='extinfo') echo 'class="on"';?>><a href="/index.php/home/mydetail/extinfo" ><span><?php echo lang('profiles')?></span></a></li> 
+		    <li <?php if($type=='other') echo 'class="on"';?>><a href="/index.php/home/mydetail/other" ><span><?php echo lang('diningcustoms')?></span></a></li> 
+		    <li <?php if($type=='payment') echo 'class="on"';?>><a href="/index.php/home/mydetail/payment" ><span><?php echo lang('payments')?></span></a></li> 
+		    <li <?php if($type=='upload') echo 'class="on"';?>><a href="/index.php/home/mydetail/upload" ><span><?php echo lang('uploadface')?></span></a></li> 
 		  </ul> 
 		</div>
 
@@ -28,26 +28,26 @@
 </TR><TR>
 
 <TR>
-<TD width="40%" class="text">*姓名:</TD>
+<TD width="40%" class="text">*<?php echo lang('real_name')?>:</TD>
 <TD width="60%"><div id="errorsDiv_realname"></div><INPUT class="input" type="text" name="realname" value="<?php echo $userinfo['realname']?>" id="realname" /></TD>
 </TR>
 <TR>
-<TD class="text">*性别:</TD>
+<TD class="text">*<?php echo lang('gender')?>:</TD>
 <TD><div id="errorsDiv_gender"></div><select name="gender" id="gender"> 
-<option value="0">选择...</option> 
-			<option value="1" <?php if('1'==$userinfo['gender']) echo 'selected="selected"';?>>男</option> 
-			<option value="2" <?php if('2'==$userinfo['gender']) echo 'selected="selected"';?>>女</option> 
+<option value="0"><?php echo lang('selected')?></option> 
+			<option value="1" <?php if('1'==$userinfo['gender']) echo 'selected="selected"';?>><?php echo lang('boy')?></option> 
+			<option value="2" <?php if('2'==$userinfo['gender']) echo 'selected="selected"';?>><?php echo lang('girl')?></option> 
 			</select>
  </TD>
 </TR>
-<TR><TD class="text">*邮箱:</TD>
+<TR><TD class="text">*<?php echo lang('email')?>:</TD>
 <TD><div id="errorsDiv_email"></div><INPUT class="input" style="color:#ccc" type="text" name="email" value="<?php echo $userinfo['user_email']?>" id="email"  readonly/></TD>
 </TR>
-<TR><TD class="text">*手机:</TD>
+<TR><TD class="text">*<?php echo lang('mobile')?>:</TD>
 <TD><div id="errorsDiv_mobile"></div><INPUT class="input" type="text" name="mobile" value="<?php echo $userinfo['mobile']?>" id="mobile" /></TD>
 </TR>
 <TR>
-<TD class="text">*电话:</TD>
+<TD class="text">*<?php echo lang('phone')?>:</TD>
 <TD><div id="errorsDiv_phone"></div><INPUT class="input" type="text" name="phone" value="<?php echo $userinfo['phone']?>" id="phone"/></TD>
 </TR>
 
@@ -60,20 +60,20 @@
 <TD><div id="errorsDiv_msn"></div><INPUT class="input" type="text" name="msn" id="msn" value="<?php echo $userinfo['msn']?>" /></TD>
 </TR>
 <TR>
-<TD class="text">*居住城市:</TD>
+<TD class="text">*<?php echo lang('living_city')?>:</TD>
 <TD><div id="errorsDiv_area"></div>
 <select name="province"></select><select name="city"></select><select name="area"></select></TD>
 </TR>
 
 <TR>
-<TD class="text">详细住址:</TD>
+<TD class="text"><?php echo lang('address_detail')?>:</TD>
 <TD><div id="errorsDiv_address"></div><INPUT class="input" type="text" name="address" id="address" value="<?php echo $userinfo['address']?>" /></TD>
 </TR>
   <tr>
     <td class="text">&nbsp;</td>
 
     <td><br /><br />
-          <input name="button" type="submit" class="btn" id="button" value="保  存" />
+          <input name="button" type="submit" class="btn" id="button" value="<?php echo lang('save')?>" />
     </td>
   </tr>
 </table>
@@ -118,7 +118,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TR>
 <TD class="text">*婚姻:</TD>
 <TD><div id="errorsDiv_maritalstatus"></div><select name="maritalstatus" id="maritalstatus"> 
-<option value="">选择...</option> 
+<option value=""><?php echo lang('selected')?></option> 
 			<option value="M" <?php if('M'==$userinfo['marital']) echo 'selected="selected"';?>>已婚</option> 
 			<option value="S" <?php if('S'==$userinfo['marital']) echo 'selected="selected"';?>>单身</option> 
 			</select>
@@ -146,7 +146,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TD class="text">*年收入:</TD>
 <TD><div id="errorsDiv_householdincome"></div>
 <select name="householdincome" id="householdincome" > 
-					<option value="" >选择...</option> 
+					<option value="" ><?php echo lang('selected')?></option> 
 					<option value="1" <?php if(1==$userinfo['householdincome']) echo 'selected="selected"';?>>&lt;1.8万</option> 
 					<option value="2" <?php if(2==$userinfo['householdincome']) echo 'selected="selected"';?>>1.8万-2.5万</option> 
 					<option value="3" <?php if(3==$userinfo['householdincome']) echo 'selected="selected"';?>>2.5万-3.5万</option> 
@@ -159,7 +159,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TR>
 <TD class="text">*教育程度:</TD>
 <TD><div id="errorsDiv_education"></div><select name="education" id="education"> 
-<option value="">选择...</option> 
+<option value=""><?php echo lang('selected')?></option> 
 					<option value="1" <?php if(1==$userinfo['education']) echo 'selected="selected"';?>>中学</option> 
 					<option value="2" <?php if(2==$userinfo['education']) echo 'selected="selected"';?>>高中/中专</option> 
 					<option value="3" <?php if(3==$userinfo['education']) echo 'selected="selected"';?>>本科/大专</option> 
@@ -171,7 +171,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TR>
 <TD class="text">*您有私人汽车吗?</TD>
 <TD><div id="errorsDiv_havecar"></div><select name="havecar" id="havecar"> 
-<option value="">选择...</option> 
+<option value=""><?php echo lang('selected')?></option> 
 					<option value="1" <?php if(1==$userinfo['havecar']) echo 'selected="selected"';?>>是</option> 
 					<option value="2" <?php if(2==$userinfo['havecar']) echo 'selected="selected"';?>>否</option> 
  
@@ -180,7 +180,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TR>
 <TD class="text">*会讲英语吗?</TD>
 <TD><div id="errorsDiv_speakenglish"></div><select name="speakenglish" id="speakenglish"> 
-<option value="0">选择...</option> 
+<option value="0"><?php echo lang('selected')?></option> 
 					<option value="1" <?php if(1==$userinfo['speak_english']) echo 'selected="selected"';?>>会</option> 
 					<option value="2" <?php if(2==$userinfo['speak_english']) echo 'selected="selected"';?>>不会</option> 
  
@@ -196,7 +196,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TD class="text">*您是如何知道我们的公司? </TD>
 <TD><div id="errorsDiv_hearabout"></div>
 <select name="hearabout" id="hearabout"> 
-<option value="0">选择...</option> 
+<option value="0"><?php echo lang('selected')?></option> 
 			<option value="1" <?php if(1==$userinfo['hearabout']) echo 'selected="selected"';?>>朋友介绍</option> 
 			<option value="2" <?php if(2==$userinfo['hearabout']) echo 'selected="selected"';?>>网上广告</option> 
 			<option value="3" <?php if(3==$userinfo['hearabout']) echo 'selected="selected"';?>>路牌广告</option> 
@@ -210,7 +210,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 
     <td><br />
           <br />
-          <input name="button2" type="submit" class="btn" id="button2" value="保  存" />
+          <input name="button2" type="submit" class="btn" id="button2" value="<?php echo lang('save')?>" />
    </td>
   </tr>
 </table>
@@ -228,7 +228,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TD class="text">平常就餐习惯:</TD>
 <TD><div id="errorsDiv_eatwithwho"></div>
 <select name="eatwithwho" id="eatwithwho"> 
-<option value="0">选择...</option> 
+<option value="0"><?php echo lang('selected')?></option> 
 			<option value="1" <?php if(1==$userinfo['eatwithwho']) echo 'selected="selected"';?>>个人</option> 
 			<option value="2" <?php if(2==$userinfo['eatwithwho']) echo 'selected="selected"';?>>家庭</option> 
 			<option value="3" <?php if(3==$userinfo['eatwithwho']) echo 'selected="selected"';?>>朋友</option> 
@@ -239,7 +239,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TD class="text">一个星期的工作日中，午餐外出就餐次数:</TD>
 <TD><div id="errorsDiv_eatlunchtimes"></div>
 <select name="eatlunchtimes" id="eatlunchtimes"> 
-<option value="0">选择...</option> 
+<option value="0"><?php echo lang('selected')?></option> 
 <?php for($i=1;$i<=5;$i++){ ?>
 			<option value="<?php echo $i?>" <?php if($i==$userinfo['eatlunchtimes']) echo 'selected="selected"';?>><?php echo $i?></option> 
 	<?php }?>		
@@ -255,7 +255,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TD class="text">一个星期的工作日中，晚餐外出就餐次数:</TD>
 <TD><div id="errorsDiv_eatdinnertimes"></div>
 <select name="eatdinnertimes" id="eatdinnertimes"> 
-<option value="0">选择...</option> 
+<option value="0"><?php echo lang('selected')?></option> 
 <?php for($i=1;$i<=5;$i++){ ?>
 			<option value="<?php echo $i?>" <?php if($i==$userinfo['eatdinnertimes']) echo 'selected="selected"';?>><?php echo $i?></option> 
 	<?php }?>		
@@ -270,7 +270,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TD class="text">一个星期的双休日中，外出就餐次数:</TD>
 <TD><div id="errorsDiv_eatweekdaytimes"></div>
 <select name="eatweekdaytimes" id="eatweekdaytimes"> 
-<option value="0">选择...</option> 
+<option value="0"><?php echo lang('selected')?></option> 
 <?php for($i=1;$i<=5;$i++){ ?>
 			<option value="<?php echo $i?>" <?php if($i==$userinfo['eatweekdaytimes']) echo 'selected="selected"';?>><?php echo $i?></option> 
 	<?php }?>		
@@ -293,7 +293,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TD class="text">你有定位的习惯吗？</TD>
 <TD><div id="errorsDiv_eatbooking"></div>
 <select name="eatbooking" id="eatbooking"> 
-<option value="0">选择...</option> 
+<option value="0"><?php echo lang('selected')?></option> 
 			<option value="1" <?php if(1==$userinfo['eatbooking']) echo 'selected="selected"';?>>有</option> 
 			<option value="2" <?php if(2==$userinfo['eatbooking']) echo 'selected="selected"';?>>没有</option> 
 			</select>
@@ -302,7 +302,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TD class="text">你是否喜欢使用折扣券/VIP卡？</TD>
 <TD><div id="errorsDiv_eatvipcard"></div>
 <select name="eatvipcard" id="eatvipcard"> 
-<option value="0">选择...</option> 
+<option value="0"><?php echo lang('selected')?></option> 
 			<option value="1" <?php if(1==$userinfo['eatvipcard']) echo 'selected="selected"';?>>是</option> 
 			<option value="2" <?php if(2==$userinfo['eatvipcard']) echo 'selected="selected"';?>>否</option> 
 			</select>
@@ -311,7 +311,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TD class="text">是否喜欢尝试新的菜系？</TD>
 <TD><div id="errorsDiv_eatnewcooking"></div>
 <select name="eatnewcooking" id="eatnewcooking"> 
-<option value="0">选择...</option> 
+<option value="0"><?php echo lang('selected')?></option> 
 			<option value="1" <?php if(1==$userinfo['eatnewcooking']) echo 'selected="selected"';?>>是</option> 
 			<option value="2" <?php if(2==$userinfo['eatnewcooking']) echo 'selected="selected"';?>>否</option> 
 			</select>
@@ -320,7 +320,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TD class="text">你是否喜欢选择套餐？</TD>
 <TD><div id="errorsDiv_eatcombo"></div>
 <select name="eatcombo" id="eatcombo"> 
-<option value="0">选择...</option> 
+<option value="0"><?php echo lang('selected')?></option> 
 			<option value="1" <?php if(1==$userinfo['eatcombo']) echo 'selected="selected"';?>>是</option> 
 			<option value="2" <?php if(2==$userinfo['eatcombo']) echo 'selected="selected"';?>>否</option> 
 			</select>
@@ -330,7 +330,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TD class="text">就餐是否经常点“甜点/点心”？</TD>
 <TD><div id="errorsDiv_eatsweetcourse"></div>
 <select name="eatsweetcourse" id="eatsweetcourse"> 
-<option value="0">选择...</option> 
+<option value="0"><?php echo lang('selected')?></option> 
 			<option value="1" <?php if(1==$userinfo['eatsweetcourse']) echo 'selected="selected"';?>>是</option> 
 			<option value="2" <?php if(2==$userinfo['eatsweetcourse']) echo 'selected="selected"';?>>否</option> 
 			</select>
@@ -339,7 +339,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TD class="text">就餐是否经常点“饮品”？</TD>
 <TD><div id="errorsDiv_eatdrink"></div>
 <select name="eatdrink" id="eatdrink"> 
-<option value="0">选择...</option> 
+<option value="0"><?php echo lang('selected')?></option> 
 			<option value="1" <?php if(1==$userinfo['eatdrink']) echo 'selected="selected"';?>>是</option> 
 			<option value="2" <?php if(2==$userinfo['eatdrink']) echo 'selected="selected"';?>>否</option> 
 			</select>
@@ -348,7 +348,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TD class="text">你认为以下那一点对于餐厅来说是第一重要的？</TD>
 <TD><div id="errorsDiv_dinnerhall"></div>
 <select name="dinnerhall" id="dinnerhall"> 
-<option value="0">选择...</option> 
+<option value="0"><?php echo lang('selected')?></option> 
 			<option value="1" <?php if(1==$userinfo['dinnerhall']) echo 'selected="selected"';?>>装修</option> 
 			<option value="2" <?php if(2==$userinfo['dinnerhall']) echo 'selected="selected"';?>>交通</option> 
 			<option value="3" <?php if(3==$userinfo['dinnerhall']) echo 'selected="selected"';?>>产品质量及服务</option> 
@@ -372,7 +372,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TR>
 <TD class="text">你是否需要平时收到我们SPOT的最新动态? </TD>
 <TD><div id="errorsDiv_newletters"></div><select name="newletters" id="newletters"> 
-<option value="0">选择...</option> 
+<option value="0"><?php echo lang('selected')?></option> 
 			<option value="1" <?php if(1==$userinfo['newletters']) echo 'selected="selected"';?>>要</option> 
 			<option value="2" <?php if(2==$userinfo['newletters']) echo 'selected="selected"';?>>不要</option> 
 			</select></TD>
@@ -382,7 +382,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 
     <td><br />
           <br />
-          <input name="button3" type="submit" class="btn" id="button3" value="保  存" />
+          <input name="button3" type="submit" class="btn" id="button3" value="<?php echo lang('save')?>" />
     </td>
   </tr>
 </table>
@@ -418,7 +418,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 
     <td><br />
           <br />
-          <input name="button4" type="submit" class="btn" id="button4" value="保  存" />
+          <input name="button4" type="submit" class="btn" id="button4" value="<?php echo lang('save')?>" />
    </td>
   </tr>
 </table>
@@ -445,7 +445,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 
     <td><br />
           <br />
-          <input name="button5" type="submit" class="btn" id="button5" value="保  存" />
+          <input name="button5" type="submit" class="btn" id="button5" value="<?php echo lang('save')?>" />
     </td>
   </tr>
 </table>
