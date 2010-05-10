@@ -154,7 +154,7 @@ $GLOBALS['gLang']['validatecode'] = 'Verification Code';
 $GLOBALS['gLang']['anotherone'] = 'Change';
 $GLOBALS['gLang']['notclear'] = 'Change';
 $GLOBALS['gLang']['autologin'] = 'Remember me';
-$GLOBALS['gLang']['logon'] = 'Enter';
+$GLOBALS['gLang']['logon'] = 'Login';
 $GLOBALS['gLang']['signup'] = 'Sign up';
 $GLOBALS['gLang']['forgetpwd'] = 'Forget your password?';
 $GLOBALS['gLang']['emailorusername'] = 'Email/UserName';
@@ -511,20 +511,20 @@ $GLOBALS['gLang']['what_do_i_do'] = 'What do I have to do?';
 $GLOBALS['gLang']['what_do_i_do_info'] = 'A mystery shopper is an auditor and critic of a brand’s consumer experience.  Auditing requires the shopper to assess execution of brand standards and training.  Critiquing involves an evaluation of the consumer experience based on the customer’s point of view.   Qualified shoppers must be a customer or potential customer of the brand.  Assignments as a mystery shopper can occur on the phone, online, or most commonly in-store. ';
 
 $GLOBALS['gLang']['what_can_i_get'] = 'What can I get?';
-$GLOBALS['gLang']['what_can_i_get_info'] = 'Simply put, Mystery Shoppers get paid to do be a customer.  How much each shopper gets paid depends on the business itself.  Shoppers are reimbursed up to an allotted amount for completing each assignment.<br/> 
-As a Mystery Diner, you and a friend get a free meal!  Restaurants don’t want you to eat alone, so as long as you and your mystery dining apprentice stay within the budget; your meal is on the house!  But, don’t forget the receipt because our clients need proof that you really were there.
+$GLOBALS['gLang']['what_can_i_get_info'] = 'Simply put, Mystery Shoppers get paid to do be a customer.  How much each shopper gets paid depends on the business itself.  Shoppers are reimbursed up to an allotted amount for completing each assignment.<br /> <br /> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As a Mystery Diner, you and a friend get a free meal!  Restaurants don’t want you to eat alone, so as long as you and your mystery dining apprentice stay within the budget; your meal is on the house!  But, don’t forget the receipt because our clients need proof that you really were there.
 ';
 
 $GLOBALS['gLang']['how_do_i_become_one'] = 'How do I become one?';
 $GLOBALS['gLang']['how_do_i_become_one_info'] = 'After filling out your profile information, head over to our assignment board and pick an assignment.  A report form, instructions, and a short quiz will be given to you.  This short quiz is just to make sure you know what you need to do for the evaluation, just make sure you read through the instructions and skim the report form before you start the quiz.  Once qualified, perform the visit within the time frame and fill out the report.  We will look over your report and arrange for a pick-up of your receipt.  Reimbursement will then be credited to you after we approve your report.';
 $GLOBALS['gLang']['telephone'] = 'tel_en';
 $GLOBALS['gLang']['telephone2'] = 'tel2_en';
-$GLOBALS['gLang']['homepage'] = 'Home Page';
-$GLOBALS['gLang']['quit'] = 'Quit';
+$GLOBALS['gLang']['homepage'] = 'Main';
+$GLOBALS['gLang']['quit'] = 'Log out';
 $GLOBALS['gLang']['hello'] = 'Hello';
 $GLOBALS['gLang']['what_is_mystery_shopping'] = 'What is Mystery Shopping?';
-$GLOBALS['gLang']['what_is_mystery_shopping_answer'] = ' <p><br />Mystery Shopping is a method using informed shoppers to anonymously assess a brand’s core standards that involves customer service, operations, employee integrity, merchandising, and product quality.</p> <p>&nbsp;</p>
-<p> Whenever there is a deviation from these standards, it indicates inconsistency.  Auditing the execution of these standards by way of mystery shoppers gives the most genuine data.</p>';
+$GLOBALS['gLang']['what_is_mystery_shopping_answer'] = ' <p><br />Mystery Shopping is a method using informed shoppers to anonymously assess a brand’s core standards that involves customer service, operations, employee integrity, merchandising, and product quality.
+Whenever there is a deviation from these standards, it indicates inconsistency.  Auditing the execution of these standards by way of mystery shoppers gives the most genuine data.</p>';
 $GLOBALS['gLang']['more'] = 'More...';
 $GLOBALS['gLang']['faq'] = 'FAQ';
 $GLOBALS['gLang']['shoppermain'] = 'Shopper Main';
@@ -549,7 +549,7 @@ $GLOBALS['gLang']['why_is_consistency_important_answer'] = 'Consistency is the k
 
 $GLOBALS['gLang']['registration'] = 'Shopper Registration';
 $GLOBALS['gLang']['already_signup'] = 'Already Signed Up?';
-$GLOBALS['gLang']['notyet_signup'] = 'Not Yet Signed Up?';
+$GLOBALS['gLang']['notyet_signup'] = 'Haven\'t Registered Yet?';
 $GLOBALS['gLang']['invitation_code'] = 'Invitation Code';
 $GLOBALS['gLang']['regstepclass'] = 'regStep_en';
 $GLOBALS['gLang']['congratulation'] = 'Congratulation! You have signed up！';
@@ -557,4 +557,14 @@ $GLOBALS['gLang']['redireting'] = 'Redirecting to home page after 5 seconds. Cli
 $GLOBALS['gLang']['submit'] = 'Submit';
 
 $GLOBALS['gLang']['map'] = 'map_en';
+$GLOBALS['gLang']['shopper_login'] = 'Shopper Login';
+$GLOBALS['gLang']['client_login'] = 'Client Login';
+$GLOBALS['gLang']['how_to_use'] = 'How do I use Mystery Shopping?';
+$GLOBALS['gLang']['how_to_use_answer'] = '<p>To have good Mystery Shopping data, you must have good quantitative questions focused on things that can be changed.  Too many businesses don’t think this through and end up with useless information that they spent a lot of time and money attaining.</p>
+ <p>&nbsp;</p>
+<p>Before using the data, you must first exploit the program.  Notify employees about the program and what is required of them.  If possible, involve them with the evaluation form to get their input.  The point is to have everyone understand and accept the program.  Without acceptance, staff members become skeptical of the results and discriminate against customers who they think might be a mystery shopper.  The purpose is to treat every customer as if they were a mystery shopper.  This will drastically increase performance before even starting the program.</p>
+  <p>&nbsp;</p>
+<p>After receiving the results, share the information with staff and discuss ways to improve.  Always use reports in a positive manner like with a rewards program for excellent reports.  Using the results negatively with punishment will only create defensive attitudes that become unconstructive and inhibit better behavior.  Mystery Shoppers are your customers and their comments should be appreciated instead of meeting it with resistance.  In the service industry, we don’t ask “Why?” we ask “How can we help?”</p>';
+$GLOBALS['gLang']['is_marketing_research'] = 'Is Mystery Shopping marketing research?';
+$GLOBALS['gLang']['is_marketing_research_answer'] = 'To maximize the use of Mystery Shopping, every visit includes a portion of marketing research questions that evaluates the consumer experience; however, it is not marketing research.  Mystery Shopping is a complement to a brand’s current marketing research and operations management.  It cannot stand on its own, but is very powerful in reinforcing what you have.';
 ?>

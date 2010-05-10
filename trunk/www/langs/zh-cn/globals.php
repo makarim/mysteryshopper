@@ -162,7 +162,7 @@ $GLOBALS['gLang']['validatecode'] = '验证码';
 $GLOBALS['gLang']['anotherone'] = '换一张';
 $GLOBALS['gLang']['notclear'] = '看不清';
 $GLOBALS['gLang']['autologin'] = '记住我';
-$GLOBALS['gLang']['logon'] = '登 录';
+$GLOBALS['gLang']['logon'] = '登录';
 $GLOBALS['gLang']['signup'] = '注册';
 $GLOBALS['gLang']['forgetpwd'] = '忘记密码';
 $GLOBALS['gLang']['emailorusername'] = '用户邮箱/用户名';
@@ -567,4 +567,6 @@ $GLOBALS['gLang']['redireting'] = '5秒钟后将自动跳转到用户控制面�
 $GLOBALS['gLang']['submit'] = '提交';
 
 $GLOBALS['gLang']['map'] = 'map_cn';
+$GLOBALS['gLang']['shopper_login'] = '神秘顾客登录';
+$GLOBALS['gLang']['client_login'] = '企业登录';
 ?>

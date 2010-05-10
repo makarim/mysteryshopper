@@ -1,5 +1,5 @@
 <div class="clear"></div>
-<div id="copyright"> <a href="/index.php/index/contactus"><?php echo lang("contactus")?></a> | <a href="/index.php/passport/reg"><?php echo lang("signup")?></a> |   <?php if(isset($_GET['action'])&&($_GET['action']!='index')){?><a href="/index.php/index/protocol"><?php echo lang("protocol")?></a> | <a href="/index.php/index/faq"><?php echo lang("faq")?></a> |<?php }?><a href="/index.php/index/setlang/en">ENGLISH VERSION</a> | <a href="/index.php/index/setlang/zh-cn">中文版</a>
+<div id="copyright"> <a href="/index.php/index/contactus"><?php echo lang("contactus")?></a> | <a href="/index.php/passport/reg"><?php echo lang("signup")?></a> |   <?php if(isset($_GET['action'])&&($_GET['action']=='home')){?><a href="/index.php/index/protocol"><?php echo lang("protocol")?></a> | <a href="/index.php/index/faq"><?php echo lang("faq")?></a> |<?php }?><?php if($selected_lang=='zh-cn'){?><a href="/index.php/index/setlang/en">ENGLISH VERSION</a> <?php }?> <?php if($selected_lang=='en'){?><a href="/index.php/index/setlang/zh-cn">中文版</a><?php }?>
 <br />
 <span style="font-size:10px;color:#666;">&copy; 2010 SPOT Marketing Group Mystery Shopping Division. All Rights Reserved. <br />
 Designed by <a href="http://www.realsnow.cn" target="_blank">RealSnow.cn</a></span>
