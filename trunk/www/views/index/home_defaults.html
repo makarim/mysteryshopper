@@ -56,7 +56,7 @@ function scrollMarquee() {
 initMarquee();
 </script>
           </td>
-          <td width="12%" class="announcementmore"><a href="/index.php/home/notice">更多公告...</a></td>
+          <td width="12%" class="announcementmore"><a href="/index.php/home/notice"><?php echo lang('more')?>...</a></td>
         </tr>
       </table>
     <br />
@@ -65,7 +65,7 @@ initMarquee();
         <tr>
           <td><div class="table2TitleBg">
             <div class="table2TitleBg2">
-              <div class="table2Title">我的任务</div>
+              <div class="table2Title"><?php echo lang('my_assignments')?></div>
             </div>
            </div></td>
         </tr>
@@ -85,10 +85,10 @@ initMarquee();
                	  <?php }?>
                	  </p></div>
                 <div class="des"><span style="color:#000;"></span><b><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><?php echo $v['a_title']?></a></b><br />
-                      开始时间：<?php echo $v['a_sdate']?><br />
+                      <?php echo lang('start_date')?>：<?php echo $v['a_sdate']?><br />
 
-                    结束时间：<?php echo $v['a_edate']?><br />
-               		完成进度：<?php echo ($v['a_finish']*100)."%";?></div>
+                   <?php echo lang('end_date')?> ：<?php echo $v['a_edate']?><br />
+               		<?php echo lang('status')?>：<?php echo ($v['a_finish']*100)."%";?></div>
                 </div>
           		
           		<?php }}?>
@@ -112,7 +112,7 @@ initMarquee();
         <tr>
           <td><div class="table2TitleBg">
               <div class="table2TitleBg2">
-                <div class="table2Title">我的日历</div>
+                <div class="table2Title"><?php echo lang('my_calendar')?></div>
 
               </div>
           </div></td>
@@ -143,7 +143,7 @@ initMarquee();
         <tr>
           <td><div class="table2TitleBg">
               <div class="table2TitleBg2">
-                <div class="table2Title"><a href="/index.php/home/allassignment">近期任务</a></div>
+                <div class="table2Title"><a href="/index.php/home/allassignment"><?php echo lang('recent_assignments')?></a></div>
               </div>
           </div></td>
         </tr>
@@ -161,8 +161,8 @@ initMarquee();
                       </div>
                       <div class="des"><span style="color:#000;"></span><b><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><?php echo $v['a_title']?></a></b><br />
 
-                        开始时间：<?php echo $v['a_sdate']?><br />
-                      结束时间：<?php echo $v['a_edate']?></div>
+                        <?php echo lang('start_date')?>：<?php echo $v['a_sdate']?><br />
+                      <?php echo lang('end_date')?>：<?php echo $v['a_edate']?></div>
                     </div>
                    <?php
 							}
@@ -186,7 +186,7 @@ initMarquee();
           <td><div class="table2TitleBg">
 
               <div class="table2TitleBg2">
-                <div class="table2Title">推荐评论</div>
+                <div class="table2Title"><?php echo lang('comment_highlight')?></div>
               </div>
           </div></td>
         </tr>
