@@ -1,7 +1,11 @@
 RewriteEngine On
 RewriteBase /
 RewriteRule ^index.html$ index.php
-RewriteRule ^(.*)(index|admin|client).(php|html)/([a-z0-9]+)$ $1/$2.php?action=$4&view=defaults
-RewriteRule ^(.*)(index|admin|client).(php|html)/([a-z0-9]+)/([a-z0-9]+)$ $1/$2.php?action=$4&view=$5
-RewriteRule ^(.*)(index|admin|client).(php|html)/([a-z0-9]+)/([a-z0-9]+)/([a-z0-9\-_]+)$ $1/$2.php?action=$4&view=$5&$5=$6
-RewriteRule ^(.*)(index|admin|client).(php|html)/([a-z0-9]+)/([a-z0-9]+)/([a-z0-9\-_]+)/([a-zA-Z0-9\-@\.]+)$ $1/$2.php?action=$4&view=$5&$5=$6&$6=$7
+RewriteRule ^(.*)index.php/([a-z0-9]+)$ $1/index.php?action=$2&view=defaults
+RewriteRule ^(.*)admin.php/([a-z0-9]+)$ $1/admin.php?action=$2&view=defaults
+RewriteRule ^(.*)index.php/([a-z0-9]+)/([a-z0-9]+)$ $1/index.php?action=$2&view=$3
+RewriteRule ^(.*)admin.php/([a-z0-9]+)/([a-z0-9]+)$ $1/admin.php?action=$2&view=$3
+RewriteRule ^(.*)index.php/([a-z0-9]+)/([a-z0-9]+)/([a-z0-9\-_]+)$ $1/index.php?action=$2&view=$3&$3=$4
+RewriteRule ^(.*)admin.php/([a-z0-9]+)/([a-z0-9]+)/([a-z0-9\-_]+)$ $1/admin.php?action=$2&view=$3&$3=$4
+RewriteRule ^(.*)index.php/([a-z0-9]+)/([a-z0-9]+)/([a-z0-9\-_]+)/([a-zA-Z0-9\-@\.]+)$ $1/index.php?action=$2&view=$3&$3=$4&$4=$5
+RewriteRule ^(.*)admin.php/([a-z0-9]+)/([a-z0-9]+)/([a-z0-9\-_]+)/([a-zA-Z0-9\-@\.]+)$ $1/admin.php?action=$2&view=$3&$3=$4&$4=$5
