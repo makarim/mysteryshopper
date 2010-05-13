@@ -10,11 +10,11 @@ function printpage(oper){
 	sprnstr="<!--startprint"+oper+"-->";//设置打印开始区域
 	eprnstr="<!--endprint"+oper+"-->";//设置打印结束区域
 	prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+18); //从开始代码向后取html
-	
+	var css = '';
 	prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html
 	window.document.body.innerHTML=prnhtml;
 	//window.print();
-	var url = "<?php echo $www_site_url?>/plugins/html2pdf.php";
+	var url = "<?php echo $www_site_url?>/plugins/generatepdf.php";
 	//var params = mini.form.serialize($(formName));
 
 	mini.ajax.post(url, function(r){
@@ -29,7 +29,8 @@ function printpage(oper){
 			alert(r.m);
 			$('msg').innerHTML = r.m;			
 		}
-	}, "c="+prnhtml);
+	}, "c="+css+prnhtml);
+
 	window.document.body.innerHTML=bdhtml;
 }
 
@@ -43,16 +44,16 @@ function printpage(oper){
 		<?php if(isset($report_questions) && is_array($report_questions)){?>
 			
 		    <p>评分说明：</p>
-			<table width="760" border="0" cellpadding="0" cellspacing="1" class="missionReport" class="clear">
+			<table width="100%" border="1" cellpadding="0" cellspacing="1" class="missionReport">
           <tr>
-            <td class="title">不适用</td>
-            <td class="title">差</td>
-            <td class="title">不好</td>
-            <td class="title">需要改进</td>
-            <td class="title">一般</td>
-            <td class="title">好</td>
-            <td class="title">很好</td>
-            <td class="title">完美</td>
+            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFF">不适用</font></td>
+            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFF">差</font></td>
+            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFF">不好</font></td>
+            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFF">需要改进</font></td>
+            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFF">一般</font></td>
+            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFF">好</font></td>
+            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFF">很好</font></td>
+            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFF">完美</font></td>
           </tr> 
           <tr>
             <td align="center">n/a</td>
@@ -67,21 +68,20 @@ function printpage(oper){
        
           </table>
          
-         
 	<?php
 		foreach ($report_questions as $k=>$v){?>
-		<table width="760" border="0" cellpadding="0" cellspacing="1" class="missionReport" style="margin-top:10px;">
+		<table width="100%" border="1" cellpadding="0" cellspacing="1" class="missionReport" style="margin-top:20px;">
           <tr>
-            <td colspan="3" class="title"><?php echo lang($k);?></td>
+            <td colspan="3" class="title" bgcolor="#9F0000" align="center" height="25"><font color="#FFF"><?php echo lang($k);?></font></td>
           </tr>
           <?php
 			foreach ($v as $kk=>$vv){
 				if($vv['rq_type']==2 || $vv['rq_type']==4 || $vv['rq_type']==1){
 				?>
           <tr>
-			 <td width="5%"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
-            <td width="65%"><?php echo $vv['rq_question']?></td>
-            <td  width="30%" align="center">
+			 <td width="30"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
+            <td align="left"><?php echo multiwordbreak($vv['rq_question']);?></td>
+            <td width="100" align="left">
             <?php 
             	if($vv['rq_type']==2){
             		if($vv['answer']=='A') echo 'N/A';
@@ -102,26 +102,20 @@ function printpage(oper){
 					if($vv['rq_group']==5){
 					?>	
 			<tr>
-			 <td width="5%" valign="top"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
-			  <td width="65%"><?php echo $vv['rq_question']?></td>
-              <td  width="30%" align="center"><?php echo $vv['answer']; ?></td>
+			 <td width="30"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
+			  <td align="left" ><?php echo multiwordbreak($vv['rq_question']);?></td>
+              <td width="100" align="left"><?php echo $vv['answer']; ?></td>
           	</tr>
           <? }else{?>
 			<tr>
-			 <td width="5%" valign="top"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
-             <td width="95%" colspan="2" style="padding:0">
-            
-		            <table width="100%" border="0" cellpadding="0" cellspacing="0">
-			            <tr> 
-			            	<td width="50%" style="background-color:#ccc;"> <?php echo $vv['rq_question']?></td>
-			            
-			          	</tr>
-			           <tr>
-				           <td style="height:50px">
-								<?php echo nl2br(htmlspecialchars(stripslashes($vv['answer']),ENT_QUOTES)); ?>
-				           </td>
-			            </tr>
-		             </table>
+			 <td width="30" rowspan="2" valign="top"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
+             <td colspan="2"  bgcolor="#aaa" height="30" >
+            		<?php echo multiwordbreak($vv['rq_question']);?>
+            </td>
+          </tr>	
+          <tr>
+             <td colspan="2" height="50">
+            		<?php echo multiwordbreak($vv['answer']); ?>
             </td>
           </tr>	
 	   <?php } 
@@ -134,6 +128,7 @@ function printpage(oper){
         </table>
  		<?php }
 		}?>
+		
  		<!--endprint1-->
 				
 
@@ -142,4 +137,19 @@ function printpage(oper){
 </div>
 
 
-<?php include_once("footer.html")?>
+<?php
+function multiwordbreak($str){
+	$len = mb_strlen($str, 'UTF-8');
+	$ch = '';
+	$maxlen = 33;
+	
+	for ($i=0; $i < $len; $i++){
+		if($i%$maxlen==0){
+			  $ch .= mb_substr($str, $i, $maxlen, 'UTF-8')."<br />";
+		}
+    }
+	
+    return $ch;
+}
+
+include_once("footer.html")?>

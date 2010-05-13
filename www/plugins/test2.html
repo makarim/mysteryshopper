@@ -1,0 +1,141 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=GBK"><meta
+ name="keywords" content="html,pdf,php,html2pdf,html2fpdf">
+<meta name="author" content="Insert name here">
+<meta name="description" content="This is a test page">
+<title>My title</title>
+</head><body>In this combo-test we should see NEWPAGE/PAGE_BREAK, 
+CODE/PRE, FORMS, LINKS(internal/external), Colored text, HTML entities, 
+OUTLINE, META tags working. <br>
+TEST BEGIN. <br>
+We have set meta attributes in this page. Just go to File &gt; Doc 
+Propertires and check them out!<br>
+<a name="1st"></a>We set an anchor here - We may go to the 2nd page 
+clicking <a href="#2nd">here</a> <br>
+<a href="http://www.google.com/">Testing long long long long long long 
+long long 
+long <i>it <b>bold-italic</b></i> long long long long long long long 
+long 
+long long long long long long long long links names</a>. Text.
+
+<div>
+<a href="http://www.google.com/">Inside DIV and testing long long long 
+long long long long long 
+long <i>long <b>long</b></i> long long long long long long long long 
+long long long long long long long long links names</a>. Text.
+</div>
+
+<div>
+Inside block testing colors: <font color="red">red</font>, <font 
+color="blue">blue</font>, 
+<font color="yellow">yellow</font>, <font color="green">green</font>, 
+<font color="#000000">#0F0</font>, <font color="#002500">rgb(255,0,0)</font>.
+This is a <a href="http://www.google.com/">link</a>.
+</div>
+
+Outside block testing colors: <font color="aquamarine">aquamarine</font>,
+ <font color="brown">brown</font>, 
+<font color="gold">gold</font>, <font color="#0ff0f0">#0FF0F0</font>, <font
+ color="#002020">rgb(200,200,200)</font>.
+This is a broken <a 
+href="http://html2fpdf.sourceforge.net/debugcases/www.google.com">link</a>.
+ <br>
+
+<p>
+Paragraph with <a href="http://www.google.com/"> <b>l</b>ink </a>...
+</p>
+
+After this long 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+long long &#191;long long long long long long long long long long long long 
+long 
+long long long &amp;long long long &#187;long ??long long long long long long 
+long 
+long long long &#162;long long long long long long long long long long 
+long long long &#163;long long 'long &#317;long &#188;long long long long long long 
+long long long &#8364;long long long long long long long long long long 
+long &#165;long long &#8482;long long long long long long long long long long 
+long long &#169;long &#8364;long long long long long long long long long long 
+long long &#174;long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+long long long long long long long long long long long long long 
+text we should start a new page (&lt;NEWPAGE&gt; - custom tag)<newpage>
+
+<a name="2nd">2nd page anchor is here</a><br>
+You may return to the previous page clicking <a href="#1st">here</a><br>
+This link takes to SourceForge's front page, just click <a 
+href="http://www.sf.net/">here</a><br>
+
+Form start:<br>
+Name: <input value="insert name here" type="text"><br>
+Comments: <br>
+<textarea>点餐过程中，服务员一直朝我们微笑，同时介绍了新的活动和新的菜品。逻辑非常清楚，说话有条理，给我们感觉非常好。每道菜上菜的时候均会微笑着向我们表示\\\"请慢用\\\"、“用餐愉快”。唯一不满的是没有向我们核对账单，也没有问我们有没有优惠卡，直接就把单子打出来了。 
+</textarea>
+Text after textarea always goes below (in PDF)<br>
+<input value="Submit!" type="submit"> &lt;BR&gt;<br>
+<input value="opt1" type="radio">Radio1! 
+<input value="opt1" checked="checked" type="radio">Radio2! <br>
+<input value="opt2" checked="checked" type="radio">Radio3! 
+<input value="opt2" type="radio">Radio4! <br>
+<input value="CHK1" checked="checked" type="checkbox">Checkbox1! 
+<input value="CHK2" type="checkbox">Checkbox2! <br>
+<input value="CHK1" type="checkbox">Checkbox3! 
+<input value="CHK2" checked="checked" type="checkbox">Checkbox4! <br>
+<select>
+    <option value="something">1234567890 12345678901234567890</option> 
+    <option value="something2" selected="selected">Something too</option>
+</select> You may only see the value of the chosen option but the 
+selectbox width is equal to the biggest option width
+<br>
+<code>This is a long long long long long long long 
+long long long long long long long long long long long long long long 
+long 
+long long long long long long long long long long long long code</code>.
+ This is not.
+<pre style="background: none repeat scroll 0% 0% rgb(204, 204, 204); border: thin solid black;">This is inside a &lt;pre&gt; tag with some
+long long longlong long longlong long long
+long long long
+long long longlong long longlong long longlong long longlong long longlong long llong long longong text.
+</pre>
+<br>
+Outline custom-tag(green outline): <outline width="thin" color="#0f0">CHANGE
+ FONT <font color="blue">COLOR</font> IF NEEDED</outline> - effect can't
+ be seen on browser. Use 400% zoom in Adobe Reader to clearly see 
+outline effect
+<br>
+<br>
+END OF TEST.
+</newpage></body></html>
