@@ -1,4 +1,5 @@
-<?
+<?php
+date_default_timezone_set("Asia/Shanghai");
 
 require('html2fpdf.php');
 $pdf=new HTML2FPDF("P",'mm');
@@ -15,7 +16,7 @@ if($_POST){
 }
 //$strContent = str_replace("“",'"',$strContent);
 //$strContent = str_replace("”",'"',$strContent);
-$pdf->SetMargins( 20, 5,-1);
+$pdf->SetMargins( 20, 10,-1);
 $pdf->AddGBFont();
 //$pdf->Header("调查问卷");
 $pdf->AddPage();
@@ -27,7 +28,8 @@ $pdf->AddPage();
 
 
 //$pdf->DisplayPreferences('HideWindowUI');
+$file_name = uniqid().".pdf";
 $pdf->WriteHTML($strContent);
-$pdf->Output("../tmp/sample.pdf");
-echo "PDF file is generated successfully!";
+$pdf->Output("../tmp/".$file_name);
+echo $file_name;
 ?>
