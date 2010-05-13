@@ -10,28 +10,18 @@ function printpage(oper){
 	sprnstr="<!--startprint"+oper+"-->";//设置打印开始区域
 	eprnstr="<!--endprint"+oper+"-->";//设置打印结束区域
 	prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+18); //从开始代码向后取html
-	var css = '';
+	
 	prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html
-	window.document.body.innerHTML=prnhtml;
+	//window.document.body.innerHTML=prnhtml;
 	//window.print();
 	var url = "<?php echo $www_site_url?>/plugins/generatepdf.php";
 	//var params = mini.form.serialize($(formName));
 
 	mini.ajax.post(url, function(r){
-		alert(r);
-		var r = eval('(' + r + ')');   
+			window.location.href	 = "<?php echo $www_site_url?>/tmp/"+r;
+	}, "c="+prnhtml);
 
-		if(r.s==200){
-			alert(r.m);
-			window.location.href = r.d;
-		}
-		if(r.s==400){
-			alert(r.m);
-			$('msg').innerHTML = r.m;			
-		}
-	}, "c="+css+prnhtml);
-
-	window.document.body.innerHTML=bdhtml;
+	//window.document.body.innerHTML=bdhtml;
 }
 
 </script>
@@ -42,28 +32,29 @@ function printpage(oper){
       </div>
       <!--startprint1-->
 		<?php if(isset($report_questions) && is_array($report_questions)){?>
-			
+			<p>任务：《<?php echo $assignment['a_title']?>》 执行时间：<?php echo substr($assignment['a_fdate'],0,10)?> 分店：<?php echo $assignment['cs_name']?></p>
+			<br/>
 		    <p>评分说明：</p>
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" class="missionReport">
           <tr>
-            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFF">不适用</font></td>
-            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFF">差</font></td>
-            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFF">不好</font></td>
-            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFF">需要改进</font></td>
-            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFF">一般</font></td>
-            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFF">好</font></td>
-            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFF">很好</font></td>
-            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFF">完美</font></td>
+            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">不适用</font></td>
+            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">差</font></td>
+            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">不好</font></td>
+            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">需要改进</font></td>
+            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">一般</font></td>
+            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">好</font></td>
+            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">很好</font></td>
+            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">完美</font></td>
           </tr> 
           <tr>
-            <td align="center">n/a</td>
-            <td align="center">0</td>
-            <td align="center">1-2</td>
-            <td align="center">3-4</td>
-            <td align="center">5</td>
-            <td align="center">6-7</td>
-            <td align="center">8-9</td>
-            <td align="center">10</td>
+            <td align="left">n/a</td>
+            <td align="left">０</td>
+            <td align="left">１-２</td>
+            <td align="left">３-４</td>
+            <td align="left">５</td>
+            <td align="left">６-７</td>
+            <td align="left">８-９</td>
+            <td align="left">１０</td>
           </tr>
        
           </table>
@@ -72,7 +63,7 @@ function printpage(oper){
 		foreach ($report_questions as $k=>$v){?>
 		<table width="100%" border="1" cellpadding="0" cellspacing="1" class="missionReport" style="margin-top:20px;">
           <tr>
-            <td colspan="3" class="title" bgcolor="#9F0000" align="center" height="25"><font color="#FFF"><?php echo lang($k);?></font></td>
+            <td colspan="3" class="title" bgcolor="#9F0000" align="left" height="25"><font color="#FFFFFF"><?php echo lang($k);?></font></td>
           </tr>
           <?php
 			foreach ($v as $kk=>$vv){
@@ -86,7 +77,7 @@ function printpage(oper){
             	if($vv['rq_type']==2){
             		if($vv['answer']=='A') echo 'N/A';
             		else 
-            		echo $vv['answer']; 
+            		echo ($vv['answer']==0)?"０":$vv['answer']; 
             	}else if($vv['rq_type']==1){ 
 					if($vv['answer']=='Y')echo 'Yes'; 
 					if($vv['answer']=='N')echo 'No';  
@@ -104,7 +95,7 @@ function printpage(oper){
 			<tr>
 			 <td width="30"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
 			  <td align="left" ><?php echo multiwordbreak($vv['rq_question']);?></td>
-              <td width="100" align="left"><?php echo $vv['answer']; ?></td>
+              <td width="100" align="left"><?php echo ($vv['answer']==0)?"０":$vv['answer']; ; ?></td>
           	</tr>
           <? }else{?>
 			<tr>

@@ -548,9 +548,12 @@ class home{
 	function view_reportcomplete(){
 		$re_id = $_GET['re_id'];
 		$a_id = $_GET['a_id'];
-    	
+    	include_once("AssignmentModel.class.php");
+		$assignmentModel = new AssignmentModel();
+		$assignment = $assignmentModel->getAssignmentById($a_id);
 		include_once("ReportModel.class.php");
 		$ReportModel = new ReportModel();
+		
 		$report_questions = array();
 			foreach ($GLOBALS['gGroups'] as $k=>$v){
 				$arr = $ReportModel->getQuestionsByReId($re_id,$k);
@@ -566,6 +569,7 @@ class home{
 				
 			}
 		
+		$this->tpl->assign("assignment",$assignment);
 		$this->tpl->assign("report_questions",$report_questions);
 	}
 }

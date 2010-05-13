@@ -353,7 +353,7 @@ function WriteHTML($html)
 	{
 		$this->SetFont('GB','',10); // 追加
 		
-		$this->SetTextColor(0,0,139); // 追加
+		$this->SetTextColor(0,0,0); // 追加
 		
 		$e = mb_convert_encoding($e,'GBK','UTF-8'); // 追加
 		if($i%2==0)
