@@ -10,6 +10,21 @@ class msgbox{
 			show_message("您还未登录!");
 			redirect("/index.php/passport/login");
 		}
+		include_once("CorporationModel.class.php");
+		$corpmod = new CorporationModel();
+		include_once("UserModel.class.php");
+		$usermod = new UserModel();
+		$bestshopper = $usermod->getBestShopperByMonth(date('Ym'));
+		$beststore = $corpmod->getBestStoreByMonth(date('Ym'));
+		if($beststore){
+			$beststore = unserialize($beststore['rec_content']);
+		}		
+		if($bestshopper){
+			$bestshopper = unserialize($bestshopper['rec_content']);
+		}
+		$this->tpl->assign('bestshopper',$bestshopper);
+		$this->tpl->assign('beststore',$beststore);
+		
 		$this->tpl->assign('user',$this->login_user);
 		$view = isset($_GET['view'])?$_GET['view']:"defaults";
 		$this->tpl->assign('view',$view);
