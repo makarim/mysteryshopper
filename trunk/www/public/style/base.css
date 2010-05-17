@@ -302,7 +302,6 @@ li {
       line-height:35px;
 }
 
-
 .table2TitleBg {
 	background:url(../images/table2_topbg.gif) repeat-x bottom;
 }
@@ -345,15 +344,12 @@ li {
 /*后台任务部分*/
 .mission {
 	float:left;
-	width:140px;
-	height:180px;
-	margin-top:15px;
-	margin-left:35px;
+	padding:10px 20px 10px 30px;
 }
 .mission .logo {
 	width:96px;
 	height:96px;
-	
+	line-height:96px;
 	background:url(../images/bg_clentlogo.gif) no-repeat;
 	display:table-cell;
 	text-align:center;
