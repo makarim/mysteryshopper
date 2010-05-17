@@ -270,6 +270,7 @@ li {
 	border-right:#666666 solid 1px;
 }
 
+/*
 .table2Title {
 	background:url(../images/table2_title.gif) no-repeat;
 	width:103px;
@@ -279,6 +280,29 @@ li {
 	text-align:center;
 	padding-top:10px;
 }
+*/
+.table2Title {
+	padding:0px 0 46px 0;
+}
+.table2TitleLeft {
+	  float:left;
+      display:inline;
+	  padding-left:16px;
+      background:url("../images/table2_title_left.gif") no-repeat;
+}
+.table2Title span {
+      float:left;
+      display:block;
+      background:url("../images/table2_title_right.gif") no-repeat right top;
+	  padding-right:16px;
+	  height:46px;
+      font-size:12px;
+	  font-weight:bold;
+	  text-align:center;
+      line-height:35px;
+}
+
+
 .table2TitleBg {
 	background:url(../images/table2_topbg.gif) repeat-x bottom;
 }
