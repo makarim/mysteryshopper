@@ -362,7 +362,6 @@ class home{
 				$user['marital'] = !empty($_POST['maritalstatus'])?$_POST['maritalstatus']:'0';
 				$user['children'] = !empty($_POST['children'])?$_POST['children']:'0';
 				$user['nationality'] = !empty($_POST['nationality'])?$_POST['nationality']:'';
-				$user['workplace'] = !empty($_POST['workplace'])?$_POST['workplace']:'';
 				$user['occupation'] = !empty($_POST['occupation'])?$_POST['occupation']:'';
 				$user['householdincome'] = !empty($_POST['householdincome'])?$_POST['householdincome']:'0';
 				$user['education'] = !empty($_POST['education'])?$_POST['education']:'0';
