@@ -229,5 +229,34 @@ class assignment{
     	show_message(lang("success"));
     	//goback( );
     }
+    
+    function view_assignto(){
+    	$a_id = $_GET['a_id'];
+ 		$this->tpl->assign('a_id',$a_id);
+    }
+    function op_assignto(){
+    	$msg = array('s'=> 400,'m'=>lang('usernotexist'),'d'=>'');		
+    	$a_id = $_POST['a_id'];
+    	$user = $_POST['user'];
+    	include_once("AssignmentModel.class.php");
+    	$assignment = new AssignmentModel();
+    	$rs= $assignment->assignToUser($a_id,$user);
+    	
+    	if($rs){
+    		$assignment = $assignment->getAssignmentById($a_id);
+    		$field['m_pid'] = 0;
+			$field['m_title'] = "恭喜！任务来了！";
+			$field['m_content'] = '您申请的任务('. $assignment['a_title'].')已经指派给您。<a href="/index.php/home/assignment/a_id/'.$a_id.'">马上查看任务详情！</a>';
+			$field['to_user_id'] = $assignment['user_id'];
+			$field['to_user_nickname'] = $assignment['user_nickname'];
+			$field['m_date'] ="MY_F:NOW()";
+			include_once("MsgBoxModel.class.php");
+			$msgModel = new MsgBoxModel();
+			$rs = $msgModel->saveMsg($field,'msg_box');
+			$msg = array('s'=> 200,'m'=>lang('success'),'d'=>'');	
+    	}
+    			
+		exit(json_output($msg));
+    }
 }
 ?>

@@ -95,7 +95,16 @@ class AssignmentModel extends Model {
 		if($r) return true;
 		else return false;
 	}
-	
+	function assignToUser($a_id,$user){
+		$user_id  = $this->db->getOne("select user_id from user where user='$user'");
+		$r = false;
+		if($user_id){
+			$r |= $this->db->execute("insert into assignment_rel (a_id,user_id,selected) values ('$a_id','$user_id',1)");
+			$r |= $this->db->execute("update assignment set user_id='$user_id' where a_id='$a_id'");
+			return $r;
+		}
+		return false;
+	}
     function updateAssignment($item,$a_id){
 		return $this->db->update($item,"assignment"," a_id=".$a_id);
     }
