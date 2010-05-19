@@ -54,8 +54,8 @@ function checkform(form){
 			textarea[i].style.border='';
 		}
 	}
-	if(!result) alert("对不起，请完成标红的题目！");
-	if(result && confirm("请注意：未执行任务而填写调查问卷，将会被工作人员审查出来！确认要提交吗？")){
+	if(!result) alert("<?php echo lang("fiinish_redmark_question")?>");
+	if(result && confirm("<?php echo lang("submit_alert");?>")){
 		return result;
 	}else{
 		return false;
@@ -71,22 +71,22 @@ function checkform(form){
 		if($is_submitted==0 || $is_submitted==2){
 			
 			if($is_submitted==2){
-				echo ' <p>&nbsp;</p>您的问卷审批结果为: 不合格!';
+				echo ' <p>&nbsp;</p><div align="center">'.lang("approval_notpass")."</div>";
 			}
 		if(isset($report_questions) && is_array($report_questions)){?>
 			<br /><br />
 				 <br />
-		    <p>评分说明：</p>
+		    <p><?php echo lang("grade_info")?>：</p>
 			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport" class="clear">
           <tr>
-            <td class="title">不适用</td>
-            <td class="title">差</td>
-            <td class="title">不好</td>
-            <td class="title">需要改进</td>
-            <td class="title">一般</td>
-            <td class="title">好</td>
-            <td class="title">很好</td>
-            <td class="title">完美</td>
+            <td class="title"><?php echo lang("level_0")?></td>
+            <td class="title"><?php echo lang("level_1")?></td>
+            <td class="title"><?php echo lang("level_2")?></td>
+            <td class="title"><?php echo lang("level_3")?></td>
+            <td class="title"><?php echo lang("level_4")?></td>
+            <td class="title"><?php echo lang("level_5")?></td>
+            <td class="title"><?php echo lang("level_6")?></td>
+            <td class="title"><?php echo lang("level_7")?></td>
           </tr> 
           <tr>
             <td align="center">n/a</td>
@@ -127,7 +127,7 @@ function checkform(form){
 								<label><input type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="A" <?php if($vv['answer']=='A')echo 'checked'; ?>>N/A ;</label>&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="Y" <?php if($vv['answer']=='Y')echo 'checked'; ?>>Yes ;</label>&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="N"  <?php if($vv['answer']=='N')echo 'checked'; ?>>No;</label>
 								
 									<?php }else if($vv['rq_type']==4){ ?>	
-								<input type="text" size="6" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="<?php echo $vv['answer']; ?>">	分钟
+								<input type="text" size="6" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="<?php echo $vv['answer']; ?>">	'
 							<?php }?>
             </td>
           </tr>
@@ -183,15 +183,15 @@ function checkform(form){
   <?php 	}
   
 		}elseif($is_submitted==3){
-			echo ' <p>&nbsp;</p>您已经提交过问卷了! 请等待审批结果!';
+			echo ' <p>&nbsp;</p> <div align="center">'.lang('finish_report')."</div>";
 		}elseif($is_submitted==1){
-			echo ' <p>&nbsp;</p>恭喜! 您的问卷已经被审批通过!';
+			echo ' <p>&nbsp;</p> <div align="center">'.lang('approval_pass')."</div>";
 		}
 	}else{?>
    <p>&nbsp;</p>
    <p>&nbsp;</p>
    <p>&nbsp;</p>
-   <p>请预先报名，通过小测试，执行完任务后才能填写报告！</p>
+   <div align="center"><?php echo lang("apply_second")?></div>
   <?php }?>
   
   </div>

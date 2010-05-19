@@ -18,15 +18,15 @@
 				<input type="hidden" name="op" value="doquiz">
 				<input type="hidden" name="a_id" value="<?php echo $a_id;?>">
 				<input type="hidden" name="num" value="<?php echo count($quiz);?>">
-<?php if($do_quiz=='fail') echo "<font color='red'>对不起！您的测试不通过，请重新做题。</font>";?>
+<?php if($do_quiz=='fail') echo "<div align='center'>".lang("test_notpass")."</div>";?>
 <br />
 
 		<table width="100%" cellpadding="10" cellspacing="1" class="missionReport" class="clear">
 
 					<tr>
-							<td class="title">序号</td>
-							<td class="title">题目</td>
-							<td class="title">选项</td>
+							<td class="title"><?php echo lang("ordernum")?></td>
+							<td class="title"><?php echo lang("questions")?></td>
+							<td class="title"><?php echo lang("options")?></td>
 					</tr>
 					<?php
 	
@@ -60,13 +60,13 @@
   <?php 
     		}
     		}else{
-    			echo  "<p>&nbsp;</p><p>&nbsp;</p>你已经通过了测试！请继续完成任务。";
+    			echo  "<p>&nbsp;</p><p>&nbsp;</p><div align='center'>".lang("pass_test")."</div>";
     		}
      }else{?>
    <p>&nbsp;</p>
    <p>&nbsp;</p>
    <p>&nbsp;</p>
-   <p>请预先报名，被选中后才能参加测试！</p>
+  <div align="center"><?php echo lang("apply_first")?></div>
   <?php }?>
   </div>
 </div>

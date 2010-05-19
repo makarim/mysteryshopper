@@ -3,7 +3,7 @@
   <tr>
     <td><div class="table2TitleBg">
       <div class="table2TitleBg2">
-      	<div class="table2Title"><div class="table2TitleLeft"><span>任务详情</span></div></div>
+      	<div class="table2Title"><div class="table2TitleLeft"><span><?php echo lang("assigment_page");?></span></div></div>
       </div>
     </div></td>
   </tr>
@@ -26,7 +26,7 @@
 				<input type="hidden" name="action" value="home">
 				<input type="hidden" name="op" value="apply">
 				<input type="hidden" name="a_id" value="<?php echo $a_id;?>">
-        <input type="submit" class="button" name="baoming" value="我要报名">
+        <input type="submit" class="button" name="baoming" value="<?php echo lang("apply");?>">
         </form>
         </span>
       <?php }?>
@@ -35,17 +35,17 @@
             <table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionDetailTable">
 
               <tr>
-                <td width="50%"><span class="title">开始时间：</span><?php echo $assignmentinfo['a_sdate']?></td>
-                <td><span class="title">结束时间：</span><?php echo $assignmentinfo['a_edate']?></td>
+                <td width="50%"><span class="title"> <?php echo lang('start_date')?>：</span><?php echo $assignmentinfo['a_sdate']?></td>
+                <td><span class="title"> <?php echo lang('end_date')?>：</span><?php echo $assignmentinfo['a_edate']?></td>
                 </tr>
 
               <tr>
-                <td><span class="title">品牌：</span><?php echo $assignmentinfo['c_name']?></td>
-                <td><span class="title">分店：</span><?php echo $assignmentinfo['cs_name']?></td>
+                <td><span class="title"><?php echo lang('brands')?>：</span><?php echo $assignmentinfo['c_name']?></td>
+                <td><span class="title"><?php echo lang('stores')?>：</span><?php echo $assignmentinfo['cs_name']?></td>
                </tr>    
                <tr>
-                <td><span class="title">地区：</span><?php echo $assignmentinfo['cs_province']; if(!in_array($assignmentinfo['cs_city'],array('市辖区',"市辖县"))) echo " ".$assignmentinfo['cs_city']; echo " ".$assignmentinfo['cs_district']?></td>
-                <td><span class="title">地址：</span><?php echo $assignmentinfo['cs_address']?></td>
+                <td><span class="title"><?php echo lang("city_district");?>：</span><?php echo $assignmentinfo['cs_province']; if(!in_array($assignmentinfo['cs_city'],array('市辖区',"市辖县"))) echo " ".$assignmentinfo['cs_city']; echo " ".$assignmentinfo['cs_district']?></td>
+                <td><span class="title"><?php echo lang("address_detail");?>：</span><?php echo $assignmentinfo['cs_address']?></td>
                </tr>
             </table>
             <br />
@@ -67,12 +67,12 @@
 <br />
 <div id="tabsD" style="width:100%"> 
   <ul> 
-    <li <?php  if(isset($_GET['view'])&&($_GET['view']=='assignment')) echo 'class="on"';?>><a href="/index.php/home/assignment/a_id/<?php echo $a_id;?>"><span >要求</span></a></li> 
-    <li <?php if(isset($_GET['view'])&&($_GET['view']=='demand')) echo 'class="on"';?>><a href="/index.php/home/demand/a_id/<?php echo $a_id;?>"><span >说明</span></a></li> 
-    <li <?php if(isset($_GET['view'])&&($_GET['view']=='reportpreview')) echo 'class="on"';?>><a href="/index.php/home/reportpreview/a_id/<?php echo $a_id;?>"  ><span>预览问卷</span></a></li> 
-    <li <?php if(isset($_GET['view'])&&($_GET['view']=='quiz')) echo 'class="on"';?>><a href="/index.php/home/quiz/a_id/<?php echo $a_id;?>" ><span>测试</span></a></li> 
-    <li <?php if(isset($_GET['view'])&&($_GET['view']=='report')) echo 'class="on"';?>><a href="/index.php/home/report/a_id/<?php echo $a_id;?>" ><span>填写问卷</span></a></li> 
-    <li <?php if(isset($_GET['view'])&&($_GET['view']=='upload')) echo 'class="on"';?>><a href="/index.php/home/upload/a_id/<?php echo $a_id;?>" ><span>上传附件</span></a></li> 
+    <li <?php  if(isset($_GET['view'])&&($_GET['view']=='assignment')) echo 'class="on"';?>><a href="/index.php/home/assignment/a_id/<?php echo $a_id;?>"><span ><?php echo lang("a_demand");?></span></a></li> 
+    <li <?php if(isset($_GET['view'])&&($_GET['view']=='demand')) echo 'class="on"';?>><a href="/index.php/home/demand/a_id/<?php echo $a_id;?>"><span ><?php echo lang("a_desc");?></span></a></li> 
+    <li <?php if(isset($_GET['view'])&&($_GET['view']=='reportpreview')) echo 'class="on"';?>><a href="/index.php/home/reportpreview/a_id/<?php echo $a_id;?>"  ><span><?php echo lang("preview")?></span></a></li> 
+    <li <?php if(isset($_GET['view'])&&($_GET['view']=='quiz')) echo 'class="on"';?>><a href="/index.php/home/quiz/a_id/<?php echo $a_id;?>" ><span><?php echo lang("a_quiz")?></span></a></li> 
+    <li <?php if(isset($_GET['view'])&&($_GET['view']=='report')) echo 'class="on"';?>><a href="/index.php/home/report/a_id/<?php echo $a_id;?>" ><span><?php echo lang("fillout")?></span></a></li> 
+    <li <?php if(isset($_GET['view'])&&($_GET['view']=='upload')) echo 'class="on"';?>><a href="/index.php/home/upload/a_id/<?php echo $a_id;?>" ><span><?php echo lang("uploadattachment")?></span></a></li> 
   </ul> 
 
 </div>

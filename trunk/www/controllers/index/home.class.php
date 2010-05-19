@@ -93,7 +93,7 @@ class home{
     	$this->assignmentModel = new AssignmentModel();
     	$assignmentinfo = $this->assignmentModel->getAssignmentById($a_id);
     	if(!$assignmentinfo){
-    		show_message("参数无效！");
+    		show_message(lang('params_invalid'));
     		goback(10000);
     	}
     
@@ -200,7 +200,7 @@ class home{
 				$item['a_finish'] =0.25;
 				$item['a_quiz_passtime'] ="MY_F:NOW()";
 				$this->assignmentModel->updateAssignment($item,$a_id);
-				show_message("恭喜您！测试通过！您可以执行任务了！");
+				show_message(lang("pass_test"));
 				redirect("/index.php/home/report/a_id/$a_id",2);
 			}else{
 				$_SESSION['a_'.$a_id]['pass'] = 0;
@@ -275,17 +275,17 @@ class home{
 		if($count<3){
 			$r = $this->assignmentModel->isApplied($a_id,$this->login_user['user_id']);
 			if($r>0){
-				show_message_goback("你已经报过名了！");
+				show_message_goback(lang("have_apply_for"));
 			}else{
 				$rs=$this->assignmentModel->apply($a_id,$this->login_user['user_id']);
 			}
 		}
 		if($rs){
-			show_message("恭喜您，报名成功！如果您从被选中，我们会联系您！");
+			show_message(lang("apply_success"));
 			unset($_SESSION['a_'.$a_id]['pass']);
 			redirect("/index.php/home/allassignment/a_id/$a_id",2);
 		}else{
-			show_message("对不起，名额已满！请选择其他任务！");
+			show_message(lang("apply_failed"));
 			redirect("/index.php/home/allassignment");
 		}
 	}
@@ -314,11 +314,11 @@ class home{
 	    			$fields['f_created'] = 'MY_F:NOW()';
 					$this->assignmentModel->saveAttachment($fields,"assignment_attachment");
     			}
-				show_message_goback('上传成功!');
+				show_message_goback(lang("success"));
 				
 			}
 		}else{
-			show_message_goback('上传失败!');		
+			show_message_goback(lang('failed'));		
 		}
 		
 	}
@@ -412,7 +412,7 @@ class home{
 					$t=$upload->get_succ_file();
 					if($t){
 						$user['face_img'] = substr(strrchr($t[0],"/"),1);
-						$re = '上传成功';
+						$re = lang("success");
 					}
 				}else{
 					//$user['face_img'] = '';
@@ -431,7 +431,7 @@ class home{
 				$msg = array('s'=> 400,'m'=>$msg,'d'=>"");				
 				if($type!="upload") exit(json_output($msg));
 		}else{
-				$msg = array('s'=> 200,'m'=>'已经保存！','d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/index.php/home/mydetail/$type");				
+				$msg = array('s'=> 200,'m'=>lang("success"),'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/index.php/home/mydetail/$type");				
 				if($type!="upload") exit(json_output($msg));
 				
 		}
