@@ -79,15 +79,15 @@ initMarquee();
               if(isset($myassignment)&& is_array($myassignment)){
 				foreach ($myassignment as $k=>$v){?>
           		<div class="mission">
-               	  <div class="logo"><p><?php if($v['selected']) {?><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><img src="/public/upload/logo/<?php echo $v['c_logo']?>" width="68" height="68" border="0" alt="<?php echo $v['a_title']?>" /></a>
+               	  <div class="logo"><p><?php if($v['selected']) {?><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><img src="/public/upload/logo/<?php echo $v['c_logo']?>" width="68" height="68" border="0" /></a>
                	  <?php }else {?>
-               	  <img src="/public/images/nopass.gif" border="0" />
+               	  <img src="/public/images/<?php echo lang("nopass_img");?>" border="0" />
                	  <?php }?>
                	  </p></div>
                 <div class="des"><span style="color:#000;"></span><b><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><?php echo $v['a_title']?></a></b><br />
-                      <?php echo lang('start_date')?>：<?php echo $v['a_sdate']?><br />
+                      <?php echo lang('start_date')?>：<?php echo str_replace('-','/',$v['a_sdate']);?><br />
 
-                   <?php echo lang('end_date')?> ：<?php echo $v['a_edate']?><br />
+                   <?php echo lang('end_date')?> ：<?php echo str_replace('-','/',$v['a_edate']);?><br />
                		<?php echo lang('status')?>：<?php echo ($v['a_finish']*100)."%";?></div>
                 </div>
           		

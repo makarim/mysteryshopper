@@ -125,7 +125,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
  </TD>
 </TR>
 <TR>
-<TD class="text">*<?php echo lang("quan_of_children");?></TD>
+<TD class="text">*<?php echo lang("quan_of_children");?>:</TD>
 <TD><div id="errorsDiv_children"></div>
 <INPUT class="input" type="text" name="children" id="children" value="<?php echo $userinfo['children']?>" />
  </TD>
@@ -147,24 +147,24 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TD><div id="errorsDiv_householdincome"></div>
 <select name="householdincome" id="householdincome" > 
 					<option value="" ><?php echo lang('selected')?></option> 
-					<option value="1" <?php if(1==$userinfo['householdincome']) echo 'selected="selected"';?>>&lt;3,000</option> 
+					<option value="1" <?php if(1==$userinfo['householdincome']) echo 'selected="selected"';?>>&lt; 3,000</option> 
 					<option value="2" <?php if(2==$userinfo['householdincome']) echo 'selected="selected"';?>>3,000-6,000</option> 
 					<option value="3" <?php if(3==$userinfo['householdincome']) echo 'selected="selected"';?>>6,000-9,000</option> 
 					<option value="4" <?php if(4==$userinfo['householdincome']) echo 'selected="selected"';?>>9,000-12,000</option> 
 					<option value="5" <?php if(5==$userinfo['householdincome']) echo 'selected="selected"';?>>12,000-15000</option> 
 					<option value="6" <?php if(6==$userinfo['householdincome']) echo 'selected="selected"';?>>15,000-30,000</option> 
-					<option value="7" <?php if(7==$userinfo['householdincome']) echo 'selected="selected"';?>> >30,000</option> 
+					<option value="7" <?php if(7==$userinfo['householdincome']) echo 'selected="selected"';?>> > 30,000</option> 
  </TD>
 </TR>
 <TR>
 <TD class="text">*<?php echo lang("education");?>:</TD>
 <TD><div id="errorsDiv_education"></div><select name="education" id="education"> 
 <option value=""><?php echo lang('selected')?></option> 
-					<option value="1" <?php if(1==$userinfo['education']) echo 'selected="selected"';?>><?php echo lang("middle_school");?>Middle School/ High School</option> 
+					<option value="1" <?php if(1==$userinfo['education']) echo 'selected="selected"';?>><?php echo lang("middle_school");?></option> 
 					<option value="2" <?php if(2==$userinfo['education']) echo 'selected="selected"';?>><?php echo lang("technical_secondary");?></option> 
-					<option value="3" <?php if(3==$userinfo['education']) echo 'selected="selected"';?>><?php echo lang("junior_college");?> Junior College</option> 
-					<option value="4" <?php if(4==$userinfo['education']) echo 'selected="selected"';?>><?php echo lang("master_degree");?>Master Degree</option> 
-					<option value="5" <?php if(5==$userinfo['education']) echo 'selected="selected"';?>><?php echo lang("doctor_degree");?>Doctor Degree</option> 
+					<option value="3" <?php if(3==$userinfo['education']) echo 'selected="selected"';?>><?php echo lang("junior_college");?> </option> 
+					<option value="4" <?php if(4==$userinfo['education']) echo 'selected="selected"';?>><?php echo lang("master_degree");?></option> 
+					<option value="5" <?php if(5==$userinfo['education']) echo 'selected="selected"';?>><?php echo lang("doctor_degree");?></option> 
  
 				</select></TD>
 </TR>

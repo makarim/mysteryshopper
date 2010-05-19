@@ -25,17 +25,17 @@ if(is_array($attachments)){
 
 <TR>
 <TD class="text"><?php echo $k+1;?>.</TD>
-<TD ><?php echo '<a href="/public/upload/'.$a['f_name'].'">'.$a['f_name'].'</a> 上传于'.$a['f_created'];?></TD>
+<TD ><?php echo '<a href="/public/upload/'.$a['f_name'].'">'.$a['f_name'].'</a> '.$a['f_created'];?></TD>
 </TR>
 <?php
 	}
 }
 ?>
 <TR>
-<TD class="text">音频或者图片</TD>
+<TD class="text"><?php echo lang("mp3_image")?></TD>
 <TD><div id="errorsDiv_face"></div>
   
-<INPUT type="file" name="mfile" id="mfile" class="input" /> (支持文件格式：jpg|png|gif|jpeg|mp3|wma ,小于2MB)
+<INPUT type="file" name="mfile" id="mfile" class="input" /> (<?php echo lang("support_file_format")?>：jpg|png|gif|jpeg|mp3|wma ,<?php echo lang("less_than")?>2MB)
 </TD>
 </TR>
 
@@ -43,7 +43,7 @@ if(is_array($attachments)){
     <td class="text"></td>
 
     <td>
-          <input name="button5" type="submit" class="btn" id="button5" value="保  存" />
+          <input name="button5" type="submit" class="btn" id="button5" value="<?php echo lang("save")?>" />
     </td>
   </tr>
 </table>
@@ -53,7 +53,7 @@ if(is_array($attachments)){
    <p>&nbsp;</p>
    <p>&nbsp;</p>
    <p>&nbsp;</p>
-   <p>请预先报名，通过小测试，执行完任务后才能上传文件！</p>
+   <div align="center"><?php echo lang("apply_first")?></div>
 
   <?php }?>
   	</div>

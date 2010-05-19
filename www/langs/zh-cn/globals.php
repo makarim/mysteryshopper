@@ -511,11 +511,11 @@ $GLOBALS['gLang']['what_do_i_do_info'] = '一个神秘购物者是对一个品�
 
 $GLOBALS['gLang']['what_can_i_get'] = '神秘顾客得到什么';
 $GLOBALS['gLang']['what_can_i_get_info'] = '简单地说，神秘购物者因为作为一个消费者获得报酬。每个购物者获得多少报酬取决于任务本身的難度。购物者在完成每项任务后按规定的数额进行报销。
-作为一个神秘用餐者，你和你的朋友可以免费吃一顿！餐馆可不想让你一个人吃，只要你和你的神秘餐友不要超过预算；你的这顿饭就是免费的！但是，别忘了要收据，因为我们的客户需要证据证明你曾经到过那里。';
+作为一个神秘用餐者，您和您的朋友可以免费吃一顿！餐馆可不想让您一个人吃，只要您和您的神秘餐友不要超过预算；您的这顿饭就是免费的！但是，别忘了要收据，因为我们的客户需要证据证明您曾经到过那里。';
 
 $GLOBALS['gLang']['how_do_i_become_one'] = '怎样成为神秘顾客';
-$GLOBALS['gLang']['how_do_i_become_one_info'] = '点击“加入我们”按钮进入后，请填写你的个人信息资料并提交申请，在得到我们任务管理部门的通知后，你就可以选一个适合你的任务开始申请。
-申请时，你将收到一份任务说明及问卷调查表，在任务之前我们会对你进行一次测试。这份简短的测试是为了确保你知道你将为评估做些什么，在你开始做这份测试题之前请确认你已经通读了那份任务说明及问卷调查表。一旦获得资格，你应在规定的时限内完成任务并且填写好报告。我们将察看你的报告并且安排接送你的收据。报销款将在我们批准你的报告后存入你的帐户。';
+$GLOBALS['gLang']['how_do_i_become_one_info'] = '点击“加入我们”按钮进入后，请填写您的个人信息资料并提交申请，在得到我们任务管理部门的通知后，您就可以选一个适合您的任务开始申请。
+申请时，您将收到一份任务说明及问卷调查表，在任务之前我们会对您进行一次测试。这份简短的测试是为了确保您知道您将为评估做些什么，在您开始做这份测试题之前请确认您已经通读了那份任务说明及问卷调查表。一旦获得资格，您应在规定的时限内完成任务并且填写好报告。我们将察看您的报告并且安排接送您的收据。报销款将在我们批准您的报告后存入您的帐户。';
 
 $GLOBALS['gLang']['telephone'] = 'tel';
 $GLOBALS['gLang']['telephone2'] = 'tel2';
@@ -548,14 +548,14 @@ $GLOBALS['gLang']['why_do_i_need_mystery_shopping_answer'] = '<br />
 ';
 
 $GLOBALS['gLang']['why_is_consistency_important'] = '一致性的重要性要哪里？';
-$GLOBALS['gLang']['why_is_consistency_important_answer'] = '任何企业想要发展，一致性是一个关键。在一个企业发展之前，它必须树立一套（服务/产品）标准。这些标准是一个品牌的基本要素，只要企业本身不变，就算地理位置、（经营方式得到）改变，这些标准仍可以成为企业的任何组成部份，并逐渐形成“无隐”的企业文化。当消费者看到你的企业品牌，一个质量标准就会浮现在脑海。如果消费者体验到某个品牌的不一致性，那么对于消费者来说该品牌的质量标准将会失去，即等于造成了负面的品牌形象。对于一个消费者来说，一致性等于信任，他们相信会得到同等品质的服务/产品；对于一个企业来说，提供一致性的服务/产品，就等于得到了无数忠实的顾客。';
+$GLOBALS['gLang']['why_is_consistency_important_answer'] = '任何企业想要发展，一致性是一个关键。在一个企业发展之前，它必须树立一套（服务/产品）标准。这些标准是一个品牌的基本要素，只要企业本身不变，就算地理位置、（经营方式得到）改变，这些标准仍可以成为企业的任何组成部份，并逐渐形成“无隐”的企业文化。当消费者看到您的企业品牌，一个质量标准就会浮现在脑海。如果消费者体验到某个品牌的不一致性，那么对于消费者来说该品牌的质量标准将会失去，即等于造成了负面的品牌形象。对于一个消费者来说，一致性等于信任，他们相信会得到同等品质的服务/产品；对于一个企业来说，提供一致性的服务/产品，就等于得到了无数忠实的顾客。';
 
 $GLOBALS['gLang']['how_to_use'] = '我如何使用神秘购物服务？';
 $GLOBALS['gLang']['how_to_use_answer'] = ' 为了获得良好的神秘购物资料，您必须拥有足够数量的有关什么事情是可以改变的好问题。许多企业没有认真地考虑这一点，结果他们花了很多时间和金钱后，却得到一些无用的信息。 </p>
     <p>&nbsp;</p>
     <p>在使用该资料之前，您必须先充分利用该计划。向员工通报该计划，告诉他们对他们的要求是什么。如果可能的话，让他们参与到评价表中来。关键是让大家了解和接受该计划。如果他们不接受，员工会对结果产生怀疑，并对他们认为可能是神秘顾客的人产生歧视。其目的是把每一位客户都当作神秘顾客来对待。这将在开始该计划之前就大大提高服务表现。 </p>
     <p>&nbsp;</p>
-    <p>在得到结果之后，与员工共享信息，同时和他们讨论改进的方法。始终以积极的方式使用报告，比如制定对出色报告的奖励计划。如果以消极的方式使用结果，将会导致对抗的态度，它们是非建设性的，而且会阻止更好的行为出现。神秘购物者是你的消费者，你应该对他们的意见表示感谢，而不是抵触。在服务行业，我们不问“为什么？”我们问“我们怎样才能帮助您？”';
+    <p>在得到结果之后，与员工共享信息，同时和他们讨论改进的方法。始终以积极的方式使用报告，比如制定对出色报告的奖励计划。如果以消极的方式使用结果，将会导致对抗的态度，它们是非建设性的，而且会阻止更好的行为出现。神秘购物者是您的消费者，您应该对他们的意见表示感谢，而不是抵触。在服务行业，我们不问“为什么？”我们问“我们怎样才能帮助您？”';
 
 $GLOBALS['gLang']['registration'] = '神秘顾客注册';
 $GLOBALS['gLang']['already_signup'] = '已经是注册用户？';
@@ -610,7 +610,7 @@ $GLOBALS['gLang']['uploadface'] = '头像上传';
 $GLOBALS['gLang']['save'] = '保存';
 $GLOBALS['gLang']['real_name'] = '真名';
 $GLOBALS['gLang']['living_city'] = '居住城市';
-$GLOBALS['gLang']['address_detail'] = '详细地址';
+$GLOBALS['gLang']['address_detail'] = '地址';
 $GLOBALS['gLang']['birthday'] = '生日';
 $GLOBALS['gLang']['year'] = '年';
 $GLOBALS['gLang']['month'] = '月';
@@ -619,7 +619,7 @@ $GLOBALS['gLang']['marriage'] = '婚姻';
 $GLOBALS['gLang']['married'] = '已婚';
 $GLOBALS['gLang']['single'] = '单身';
 $GLOBALS['gLang']['quan_of_children'] = '子女数量';
-$GLOBALS['gLang']['nationality'] = '国际';
+$GLOBALS['gLang']['nationality'] = '国籍';
 $GLOBALS['gLang']['birthplace'] = '出生地点';
 $GLOBALS['gLang']['job_position'] = '职位';
 $GLOBALS['gLang']['salary'] = '月薪';
@@ -629,8 +629,8 @@ $GLOBALS['gLang']['technical_secondary'] = '中专/肆业';
 $GLOBALS['gLang']['junior_college'] = '大专/本科';
 $GLOBALS['gLang']['master_degree'] = '硕士';
 $GLOBALS['gLang']['doctor_degree'] = '博士';
-$GLOBALS['gLang']['have_own_car'] = '你有自己的车吗?';
-$GLOBALS['gLang']['speak_english'] = '能说英语吗?';
+$GLOBALS['gLang']['have_own_car'] = '您有自己的车吗?';
+$GLOBALS['gLang']['speak_english'] = '您有做过神秘顾客的经验吗?';
 $GLOBALS['gLang']['other_language'] = '其他语言';
 $GLOBALS['gLang']['how_do_you_know_spot'] = '您是如何知道我们的公司?';
 $GLOBALS['gLang']['introduced_by_friends'] = '朋友介绍';
@@ -652,13 +652,13 @@ $GLOBALS['gLang']['to_restaurant_on_weekends'] = '一个星期的双休日中，
 $GLOBALS['gLang']['average_bill_on_weekends'] = '双休日中外出就餐平均消费';
 $GLOBALS['gLang']['surrounding'] = '喜欢怎样的就餐环境?';
 $GLOBALS['gLang']['food_you_like'] = '喜欢的怎样的菜系?';
-$GLOBALS['gLang']['orderbyphone'] = '你有定位的习惯吗?';
-$GLOBALS['gLang']['enjoy_vip_card'] = '你是否喜欢使用折扣券/VIP卡d?';
+$GLOBALS['gLang']['orderbyphone'] = '您有定位的习惯吗?';
+$GLOBALS['gLang']['enjoy_vip_card'] = '您是否喜欢使用折扣券/VIP卡d?';
 $GLOBALS['gLang']['attempt_new_style_food'] = '是否喜欢尝试新的菜系?';
-$GLOBALS['gLang']['order_set'] = '你是否喜欢选择套餐?';
+$GLOBALS['gLang']['order_set'] = '您是否喜欢选择套餐?';
 $GLOBALS['gLang']['dressert_and_sweet'] = '就餐是否经常点“甜点/点心”?';
 $GLOBALS['gLang']['order_drink'] = '就餐是否经常点“饮品”?';
-$GLOBALS['gLang']['primary_to_restaurant'] = '你认为以下那一点对于餐厅来说是第一重要的?';
+$GLOBALS['gLang']['primary_to_restaurant'] = '您认为以下那一点对于餐厅来说是第一重要的?';
 $GLOBALS['gLang']['environment'] = '装修';
 $GLOBALS['gLang']['convenient_transportation'] = '交通';
 $GLOBALS['gLang']['product_and_service'] = '产品质量及服务';
@@ -667,7 +667,7 @@ $GLOBALS['gLang']['others'] = '其他';
 $GLOBALS['gLang']['your_interest'] = '您的兴趣爱好?';
 $GLOBALS['gLang']['vehicle'] = '外出就餐，通常使用什么交通工具?';
 $GLOBALS['gLang']['favorite_restaurant'] = '最喜欢的就餐地点?';
-$GLOBALS['gLang']['receive_newsletter'] = '你是否需要平时收到我们SPOT的最新动态?';
+$GLOBALS['gLang']['receive_newsletter'] = '您是否需要平时收到我们SPOT的最新动态?';
 $GLOBALS['gLang']['alipay_account'] = '支付宝账户';
 $GLOBALS['gLang']['bank_name'] = '银行名称';
 $GLOBALS['gLang']['sub_branch_name'] = '支行名称';
@@ -675,4 +675,41 @@ $GLOBALS['gLang']['bank_account'] = '银行帐号';
 $GLOBALS['gLang']['account_name'] = '帐号姓名';
 $GLOBALS['gLang']['file_attachment'] = '支持文件格式：jpg/png/gif/jpeg，小于2MB';
 $GLOBALS['gLang']['assign_to'] = '指定给';
+$GLOBALS['gLang']['nopass_img'] = 'nopass.gif';
+$GLOBALS['gLang']['assigment_page'] = '任务详情';
+$GLOBALS['gLang']['apply'] = '我要报名';
+$GLOBALS['gLang']['preview'] = '预览问卷';
+$GLOBALS['gLang']['fillout'] = '填写问卷';
+$GLOBALS['gLang']['uploadattachment'] = '上传附件';
+$GLOBALS['gLang']['params_invalid'] = '参数无效!';
+$GLOBALS['gLang']['pass_test'] = '恭喜您！测试通过！您可以执行任务了！';
+$GLOBALS['gLang']['have_apply_for'] = '您已经报过名了！';
+$GLOBALS['gLang']['apply_success'] = '恭喜您，报名成功！如果您从被选中，我们会联系您！';
+$GLOBALS['gLang']['apply_failed'] = '对不起，名额已满！请选择其他任务！';
+$GLOBALS['gLang']['apply_first'] = '请预先报名！';
+$GLOBALS['gLang']['apply_second'] = '只有测试通过才能填写报告！';
+$GLOBALS['gLang']['ordernum'] = '序号';
+$GLOBALS['gLang']['questions'] = '题目';
+$GLOBALS['gLang']['options'] = '选项';
+$GLOBALS['gLang']['finish_report'] = '您已经提交过问卷了! 请等待审批结果!';
+$GLOBALS['gLang']['approval_pass'] = '恭喜! 您的问卷已经被审批通过!';
+$GLOBALS['gLang']['approval_notpass'] = '对不起！您的问卷不合格，审核不通过。';
+$GLOBALS['gLang']['test_notpass'] = '对不起！您的测试不通过，请重新做题！';
+$GLOBALS['gLang']['fiinish_redmark_question'] = '对不起，请完成标红的题目！';
+$GLOBALS['gLang']['submit_alert'] = '请注意：未执行任务而填写调查问卷，将会被工作人员审查出来！确认要提交吗？';
+$GLOBALS['gLang']['mp3_image'] = '音频或者图片';
+$GLOBALS['gLang']['support_file_format'] = '支持文件格式';
+$GLOBALS['gLang']['less_than'] = '小于';
+$GLOBALS['gLang']['grade_info'] = '评分说明';
+$GLOBALS['gLang']['level_0'] = '不适用';
+$GLOBALS['gLang']['level_1'] = '差';
+$GLOBALS['gLang']['level_2'] = '不好';
+$GLOBALS['gLang']['level_3'] = '需要改进';
+$GLOBALS['gLang']['level_4'] = '一般';
+$GLOBALS['gLang']['level_5'] = '好';
+$GLOBALS['gLang']['level_6'] = '很好';
+$GLOBALS['gLang']['level_7'] = '完美';
+
+
+
 ?>
