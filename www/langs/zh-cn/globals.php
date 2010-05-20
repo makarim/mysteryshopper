@@ -528,7 +528,7 @@ $GLOBALS['gLang']['what_is_mystery_shopping_answer'] = "  <p><br />
       <p>&nbsp;</p>
       <p>任何想监控其业务活动、设施、产品递送和服务性能成效的企业都需要神秘购物服务。一个发展中的品牌在进行扩张之前都需要了解其品牌当前所处的地位。同样，一个已经获得成功的品牌更需要在所有场所中保持或提高其产品标准，以加强在市场上的品牌地位。因为监控，保持和提高标准是企业发展一个长期品牌的战略关键。</p>";
 $GLOBALS['gLang']['more'] = '更多...';
-$GLOBALS['gLang']['faq'] = '常见问题';
+$GLOBALS['gLang']['faq'] = '帮助';
 $GLOBALS['gLang']['shoppermain'] = '神秘顾客首页';
 $GLOBALS['gLang']['protocol'] = '协议条款';
 
