@@ -129,22 +129,29 @@ class user{
     	goback();
     }
     function view_detail(){
-    	$user = $_GET['user'];
+    	//$user = $_GET['user'];
     	$user_id = $_GET['user_id'];
     	
     	include_once("PassportModel.class.php");
     	$passport = new PassportModel();
-    	$userinfo = $passport->getUserById($user_id,$user);
-    	if($userinfo){
-    		$userinfo['user_lastlogin_time'] = date("y-m-d H:i:s",$userinfo['user_lastlogin_time']);
-    		if($userinfo['gender']==1) $userinfo['user_sex'] = lang('boy');
-    		if($userinfo['gender']==2) $userinfo['user_sex'] = lang('girl');
-    		$msg = array('s'=> 200,'m'=>'','d'=>$userinfo);				
-			exit(json_output($msg));
-    	}else{
-    		$msg = array('s'=> 400,'m'=>lang('usernotexist'),'d'=>'');				
-			exit(json_output($msg));
-    	}
+//    	$userinfo = $passport->getUserById($user_id,$user);
+//    	if($userinfo){
+//    		$userinfo['user_lastlogin_time'] = date("y-m-d H:i:s",$userinfo['user_lastlogin_time']);
+//    		if($userinfo['gender']==1) $userinfo['user_sex'] = lang('boy');
+//    		if($userinfo['gender']==2) $userinfo['user_sex'] = lang('girl');
+//    		$msg = array('s'=> 200,'m'=>'','d'=>$userinfo);				
+//			exit(json_output($msg));
+//    	}else{
+//    		$msg = array('s'=> 400,'m'=>lang('usernotexist'),'d'=>'');				
+//			exit(json_output($msg));
+//    	}
+    	$type = !empty($_GET['detail'])?$_GET['detail']:"contact";
+		$userinfo  = $passport->getUserInfoById($user_id);
+    	list($userinfo['year'],$userinfo['month'],$userinfo['day']) = explode("-",$userinfo['birthdate']);
+    	$this->tpl->assign("type",$type);
+    	$this->tpl->assign("user_id",$user_id);
+    	$this->tpl->assign("userinfo",$userinfo);
+    
     }
     
     function view_edit(){
