@@ -130,7 +130,9 @@ function checkOnSubmit(formName) {
 							<td><img src="/public/upload/<?php echo $content['img']?>" width="41" height="41"></td>
 							<td><strong><?php echo nl2br($content['comment']);?></strong></td>
 							
-							<td><a href="/admin.php/index/editreccomment/rec_id/<?php echo $v['rec_id']?>"><?php echo lang('edit')?></a></td>
+							<td><a href="/admin.php/index/editreccomment/rec_id/<?php echo $v['rec_id']?>"><?php echo lang('edit')?></a>
+							<a href="/admin.php/index/deletereccomment/rec_id/<?php echo $v['rec_id']?>"><?php echo lang('delete')?></a>
+							</td>
 						</tr>
 												
 						<?php }
