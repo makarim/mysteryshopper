@@ -104,6 +104,9 @@ class CorporationModel extends Model {
     function getRecCommentById($rec_id){
     	return $this->db->getRow("select * from recommend where rec_id='$rec_id'");
     }
+    function deleteRecCommentById($rec_id){
+    	return $this->db->execute("delete from recommend where rec_id='$rec_id'");
+    }
     function getTotalCompletedAssignments($c_id){
     	return $this->db->getOne("select count(*) from assignment where a_finish=1 and c_id='$c_id'");
     }   

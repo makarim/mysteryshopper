@@ -249,7 +249,7 @@ class index{
     	$rec_id = $_GET['rec_id'];
     	include_once("CorporationModel.class.php");
 		$corpmod = new CorporationModel();
-		$row = $corpmod->getBestStoreById($rec_id);
+		$row = $corpmod->getRecCommentById($rec_id);
 		$row['content'] = unserialize($row['rec_content']);
 		$this->tpl->assign('info',$row);
     }
@@ -286,6 +286,13 @@ class index{
 				}
 			
 		
+    }
+    function view_deletereccomment(){
+    	$rec_id = $_GET['rec_id'];
+    	include_once("CorporationModel.class.php");
+		$corpmod = new CorporationModel();
+    	$corpmod->deleteRecCommentById($rec_id);
+    	show_message_goback(lang('success'));
     }
 }
 ?>
