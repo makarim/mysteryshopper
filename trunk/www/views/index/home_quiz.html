@@ -33,7 +33,7 @@
 							foreach ($quiz as $k=>$v){?>	
 					<tr>
 							<td valign="top" width="6%"><?php echo ($k+1).". ";?></td>
-							<td valign="top" width="50%"><?php  if(isset($v['title'])) echo $v['title'];?></td>
+							<td valign="top" width="50%"><?php  if(isset($v['title'])) echo splitx($v['title']);?></td>
 							
 							<td>
 							<ul class="quiz">

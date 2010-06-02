@@ -405,7 +405,7 @@ class View{
 		global $tpl;
 		$selected_lang = !empty($_COOKIE['_Selected_Language'])?$_COOKIE['_Selected_Language']:APP_LANG; 
 		$langfile = APP_LANG_DIR."/".$selected_lang."/globals.php";
-		
+		$GLOBALS['gSelectedLanguage'] = $selected_lang;
 		if(file_exists($langfile)){
 			include_once($langfile);
 			

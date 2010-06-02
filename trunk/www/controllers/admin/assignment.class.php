@@ -82,7 +82,7 @@ class assignment{
 		$_POST ['re_id'] = intval ( $_POST ['re_id'] );
 		$_POST ['a_desc'] = addslashes( $_POST ['a_desc'] );
 		$_POST ['a_demand'] = addslashes( $_POST ['a_demand']);
-		$_POST ['a_quiz'] = addslashes(strip_tags( $_POST ['a_quiz'] ));
+		$_POST ['a_quiz'] = addslashes( $_POST ['a_quiz'] );
 		$_POST ['a_hasphoto'] = !isset ( $_POST ['a_hasphoto'] )?0:1;
 		$_POST ['a_hasaudio'] = !isset ( $_POST ['a_hasaudio'] )?0:1;
 		
@@ -174,7 +174,7 @@ class assignment{
 		$updates['a_title'] = empty($_POST ['a_title'])?"":addslashes($_POST ['a_title']);
 		$updates['a_desc'] = empty($_POST ['a_desc'])?"":addslashes($_POST ['a_desc']);
 		$updates['a_demand'] = empty($_POST ['a_demand'])?"":addslashes($_POST ['a_demand']);
-		$updates['a_quiz'] = empty($_POST ['a_quiz'])?"":strip_tags($_POST ['a_quiz']);
+		$updates['a_quiz'] = empty($_POST ['a_quiz'])?"":($_POST ['a_quiz']);
 		$updates['a_sdate'] = empty($_POST ['a_sdate'])?"":trim($_POST ['a_sdate']);
 		$updates['a_edate'] =empty($_POST ['a_edate'])?"":trim($_POST ['a_edate']);
 		$updates['c_id'] =empty($_POST ['c_id'])?"":intval($_POST ['c_id']);
@@ -217,8 +217,8 @@ class assignment{
     	if($rs){
     		$assignment = $assignment->getAssignmentById($a_id);
     		$field['m_pid'] = 0;
-			$field['m_title'] = "恭喜！任务来了！";
-			$field['m_content'] = '您申请的任务('. $assignment['a_title'].')已经指派给您。<a href="/index.php/home/assignment/a_id/'.$a_id.'">马上查看任务详情！</a>';
+			$field['m_title'] = "任务来了！<!--!-->New assignment came!";
+			$field['m_content'] = '你申请的任务('.splitx($assignment['a_title']).')已经指派给您。<a href="/index.php/home/assignment/a_id/'.$a_id.'">马上查看任务详情！</a><!--!-->The assignment that you had applied has been assigned to you. <a href="/index.php/home/assignment/a_id/'.$a_id.'">Go to see!</a>';
 			$field['to_user_id'] = $assignment['user_id'];
 			$field['to_user_nickname'] = $assignment['user_nickname'];
 			$field['m_date'] ="MY_F:NOW()";
@@ -245,8 +245,8 @@ class assignment{
     	if($rs){
     		$assignment = $assignment->getAssignmentById($a_id);
     		$field['m_pid'] = 0;
-			$field['m_title'] = "恭喜！任务来了！";
-			$field['m_content'] = '您申请的任务('. $assignment['a_title'].')已经指派给您。<a href="/index.php/home/assignment/a_id/'.$a_id.'">马上查看任务详情！</a>';
+			$field['m_title'] = "任务来了！<!--!-->New assignment came!";
+			$field['m_content'] = '你申请的任务('.splitx($assignment['a_title']).')已经指派给您。<a href="/index.php/home/assignment/a_id/'.$a_id.'">马上查看任务详情！</a><!--!-->The assignment that you had applied has been assigned to you. <a href="/index.php/home/assignment/a_id/'.$a_id.'">Go to see!</a>';
 			$field['to_user_id'] = $assignment['user_id'];
 			$field['to_user_nickname'] = $assignment['user_nickname'];
 			$field['m_date'] ="MY_F:NOW()";

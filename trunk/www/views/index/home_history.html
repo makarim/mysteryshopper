@@ -31,10 +31,10 @@
 							foreach ($myassignment as $k=>$v){?>
                 <tr>
                   <td><?php echo $v['a_fdate']?></td>
-                  <td><?php echo $v['c_title']?></td>
+                  <td><?php echo splitx($v['c_title']);?></td>
 
-                  <td><?php echo $v['cs_name']?></td>
-                  <td><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><?php echo $v['a_title']?></a></td>
+                  <td><?php echo splitx($v['cs_name']);?></td>
+                  <td><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><?php echo splitx($v['a_title']);?></a></td>
                   <td><?php echo $v['a_cost']?></td>
                 </tr>
              <?php }}?>

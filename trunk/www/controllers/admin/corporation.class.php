@@ -217,11 +217,11 @@ class corporation{
 
 //			$msg = array('s'=> 200,'m'=>lang('success'),'d'=>'');				
 //			exit(json_output($msg));
-			show_message("保存成功！");
+			show_message(lang('success'));
 			goback(1000);
 								
 		}else{
-			show_message("保存失败！");
+			show_message(lang('falied'));
 			goback();
 			//$msg = array('s'=> 400,'m'=>lang('failed'),'d'=>'');				
 			//exit(json_output($msg));
@@ -336,6 +336,12 @@ class corporation{
     	include_once("CorporationModel.class.php");
     	$corpmod = new CorporationModel();
 		$stores  = $corpmod->getStoreByCid($c_id);
+		if(is_array($stores)){
+			foreach ($stores as $k=>$v){
+				$v['cs_name'] = splitx($v['cs_name']);
+				$stores[$k] = $v;
+			}
+		}
     	$msg = array('s'=> 200,'m'=>'ok','d'=>json_encode($stores));				
 		exit(json_output($msg));
     }

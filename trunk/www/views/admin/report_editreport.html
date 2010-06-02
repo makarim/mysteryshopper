@@ -48,15 +48,15 @@ function checkOnSubmit(formName) {
 							
 						<table border="0" width="400">
  <tr>
-  <td><CENTER>所有问题</CENTER></td>
+  <td><CENTER>Left Item</CENTER></td>
   <td> </td>
-  <td><CENTER>已选择的问题</CENTER></td>
+  <td><CENTER>Selected Item</CENTER></td>
  </tr>
     <tr>
       <td width="40%">
       <select multiple name="fromBox" id="fromBox"  size="8" style="width:300px;height:300px" ondblclick="moveOption(document.getElementById('fromBox'), document.getElementById('toBox[]'))"> 
 	<?php foreach ($questions as $q){?>
-    <option value="<?php echo $q['q_id']?>" title="<?php echo $q['q_question']?>">[<?php echo lang($groups[$q['q_group']]);?>]<?php echo $q['q_question']?></option> 
+    <option value="<?php echo $q['q_id']?>" title="<?php echo splitx($q['q_question']);?>">[<?php echo lang($groups[$q['q_group']]);?>]<?php echo splitx($q['q_question'])?></option> 
  <?php }?>
 </select> 
 
@@ -69,7 +69,7 @@ function checkOnSubmit(formName) {
   <select  multiple name="toBox[]" id="toBox[]" size="8" style="width:300px;height:300px"
   ondblclick="moveOption(document.getElementById('toBox[]'), document.getElementById('fromBox'))">
 <?php foreach ($report_questions as $q){?>
-    <option value="<?php echo $q['q_id']?>" title="<?php echo $q['rq_question']?>">[<?php echo lang($groups[$q['rq_group']]);?>]<?php echo $q['rq_question']?></option> 
+    <option value="<?php echo $q['q_id']?>" title="<?php echo splitx($q['rq_question']);?>">[<?php echo lang($groups[$q['rq_group']]);?>]<?php echo splitx($q['rq_question']);?></option> 
  <?php }?>
   </select>
    </td>
@@ -77,13 +77,14 @@ function checkOnSubmit(formName) {
  <tr>
   <td colspan="3">
   <CENTER>
-  <INPUT TYPE="button" value="置顶" onclick="moveTop(document.getElementById('toBox[]'));">
-  <INPUT TYPE="button" value="上移" onclick="moveUp(document.getElementById('toBox[]'));">
-  <INPUT TYPE="button" value="下移" onclick="moveDown(document.getElementById('toBox[]'));">
-  <INPUT TYPE="button" value="置底" onclick="moveBottom(document.getElementById('toBox[]'));">
+  <INPUT TYPE="button" value="￣" onclick="moveTop(document.getElementById('toBox[]'));">
+  <INPUT TYPE="button" value="↑" onclick="moveUp(document.getElementById('toBox[]'));">
+  <INPUT TYPE="button" value="↓" onclick="moveDown(document.getElementById('toBox[]'));">
+  <INPUT TYPE="button" value="＿" onclick="moveBottom(document.getElementById('toBox[]'));">
   
   <br>
-  <font color="Red">*注意：删除掉已经选择的问题，将会连同该问题的所有调查记录一起删掉！！</font>
+  <font color="Red">*注意：删除掉已经选择的问题，将会连同该问题的所有调查记录一起删掉！！
+  <br /> Attentions! When you delete the selected items, all the survey logs of them will be deleted.</font>
   </CENTER>
   </td>
  </tr>

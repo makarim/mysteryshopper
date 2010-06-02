@@ -18,13 +18,13 @@
             <tr>
               <td class="table2LeftBorder"></td>
               <td>
-             <h2 align="center"><?php echo $data['an_title']?> </h2>
+             <h2 align="center"><?php echo splitx($data['an_title']);?> </h2>
              <br />
             <div align="center" style="margin:5px;"><?php echo lang('publish_date')?>： <?php echo $data['an_date']?></div>
              <hr size="1" style="color:#ccc">
              <br />
               
-              <div ><?php echo nl2br(htmlspecialchars(stripslashes($data['an_content']),ENT_QUOTES))?></div>
+              <div ><?php echo nl2br(htmlspecialchars(stripslashes(splitx($data['an_content'])),ENT_QUOTES))?></div>
               </td>
               <td class="table2RightBorder"></td>
             </tr>

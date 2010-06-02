@@ -128,6 +128,12 @@ function lang($lang_key, $force = true) {
 	$lang_key  = strtolower($lang_key);
 	return isset($GLOBALS['gLang'][$lang_key]) ? $GLOBALS['gLang'][$lang_key] : ($force ? $lang_key : '');
 }
+function splitx(&$str){
+	$pieces = explode("<!--!-->", $str);
+	if($GLOBALS['gSelectedLanguage']=='zh-cn') $str = htmlspecialchars(stripslashes($pieces[0]),ENT_QUOTES);
+	if($GLOBALS['gSelectedLanguage']=='en' && isset($pieces[1])) $str = htmlspecialchars(stripslashes($pieces[1]),ENT_QUOTES);
+	return $str;
+}
 function getip(){
 	if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown"))
 		$ip = getenv("HTTP_CLIENT_IP");

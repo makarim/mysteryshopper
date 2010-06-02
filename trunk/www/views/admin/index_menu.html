@@ -54,7 +54,7 @@ body, ul{ margin:0; padding:0; }
 <body>
 <div id="leftmenu">
 	<ul class="menu">
-		<li><a href="#">网站管理</a>
+		<li><a href="#"><?php echo lang('menu_site')?></a>
 		<ul>
 		<li><a href="<?php echo $www_site_url?>/admin.php/setting/basicset" target="main"><?php echo lang('menu_basicset')?></a></li>
 		<li><a href="<?php echo $www_site_url?>/admin.php/setting/regset" target="main" ><?php echo lang('menu_regset')?></a></li>
@@ -67,49 +67,49 @@ body, ul{ margin:0; padding:0; }
 		<li><a href="<?php echo $www_site_url?>/admin.php/index/reccomment" target="main" ><?php echo lang('menu_comment')?></a></li>
 		</ul>
 		</li>
-		<li><a href="<?php echo $www_site_url?>/admin.php/user/defaults">神秘顾客</a>
+		<li><a href="<?php echo $www_site_url?>/admin.php/user/defaults"><?php echo lang('menu_shopper')?></a>
 		<ul>
 
-					<li><a  href="<?php echo $www_site_url?>/admin.php/user/defaults" target="main">顾客列表</a></li>
-					<li><a  href="<?php echo $www_site_url?>/admin.php/msgbox/lists" target="main">收件箱</a></li>
+					<li><a  href="<?php echo $www_site_url?>/admin.php/user/defaults" target="main"><?php echo lang('menu_shopperlist')?></a></li>
+					<li><a  href="<?php echo $www_site_url?>/admin.php/msgbox/lists" target="main"><?php echo lang('menu_mailbox')?></a></li>
 					
 				</ul>
 
 		</li>
-		<li><a href="#"">企业管理</a>
+		<li><a href="#""><?php echo lang('menu_corperation')?></a>
 				<ul>
-					<li><a href="<?php echo $www_site_url?>/admin.php/corporation/defaults" target="main">企业列表</a></li>
+					<li><a href="<?php echo $www_site_url?>/admin.php/corporation/defaults" target="main"><?php echo lang('menu_corplist')?></a></li>
 
-					<li><a href="<?php echo $www_site_url?>/admin.php/corporation/search" target="main">查找企业</a></li>
-					<li><a href="<?php echo $www_site_url?>/admin.php/corporation/add" target="main">添加企业</a></li>
-					<li><a href="<?php echo $www_site_url?>/admin.php/corporation/addstore" target="main">添加分店</a></li>
+					<li><a href="<?php echo $www_site_url?>/admin.php/corporation/search" target="main"><?php echo lang('menu_searchcorp')?></a></li>
+					<li><a href="<?php echo $www_site_url?>/admin.php/corporation/add" target="main"><?php echo lang('menu_addcorp')?></a></li>
+					<li><a href="<?php echo $www_site_url?>/admin.php/corporation/addstore" target="main"><?php echo lang('menu_addstore')?></a></li>
 				</ul>
 
 		</li>
 		
-		<li><a href="#"">任务管理</a>
+		<li><a href="#""><?php echo lang('menu_assignment')?></a>
 			<ul>
 					
-			<li><a href="<?php echo $www_site_url?>/admin.php/assignment/defaults" target="main">任务列表</a></li>
-			<li><a href="<?php echo $www_site_url?>/admin.php/assignment/add" target="main">新增任务</a></li>   
+			<li><a href="<?php echo $www_site_url?>/admin.php/assignment/defaults" target="main"><?php echo lang('menu_assignmentlist')?></a></li>
+			<li><a href="<?php echo $www_site_url?>/admin.php/assignment/add" target="main"><?php echo lang('menu_addassignment')?></a></li>   
 
 				</ul>
 		</li>
-		<li><a href="<?php echo $www_site_url?>/admin.php/report/defaults" target="main">问卷管理</a>
+		<li><a href="<?php echo $www_site_url?>/admin.php/report/defaults" target="main"><?php echo lang('menu_report')?></a>
 		<ul>
 					
-			<li><a href="<?php echo $www_site_url?>/admin.php/report/question" target="main">问题管理</a></li>
-			<li><a href="<?php echo $www_site_url?>/admin.php/report/addreport" target="main">创建问卷</a></li>   
-			<li><a href="<?php echo $www_site_url?>/admin.php/report/defaults" target="main">问卷列表</a></li>   
+			<li><a href="<?php echo $www_site_url?>/admin.php/report/question" target="main"><?php echo lang('menu_question')?></a></li>
+			<li><a href="<?php echo $www_site_url?>/admin.php/report/addreport" target="main"><?php echo lang('menu_createreport')?></a></li>   
+			<li><a href="<?php echo $www_site_url?>/admin.php/report/defaults" target="main"><?php echo lang('menu_reportlist')?></a></li>   
 
 		</ul>
 		
 		</li>
-		<li><a href="<?php echo $www_site_url?>/admin.php/chart/defaults" target="main">报表管理</a>
+		<li><a href="<?php echo $www_site_url?>/admin.php/chart/defaults" target="main"><?php echo lang('menu_charts')?></a>
 			<ul>
 					
-			<li><a href="<?php echo $www_site_url?>/admin.php/chart/overall" target="main">图表</a></li>
-			<li><a href="<?php echo $www_site_url?>/admin.php/chart/comment" target="main">评论</a></li>   
+			<li><a href="<?php echo $www_site_url?>/admin.php/chart/overall" target="main"><?php echo lang('menu_charts')?></a></li>
+			<li><a href="<?php echo $www_site_url?>/admin.php/chart/comment" target="main"><?php echo lang('menu_comment')?></a></li>   
 
 			</ul>
 		</li>

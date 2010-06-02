@@ -49,7 +49,7 @@ function checkOnSubmit(formName) {
 					<table width="100%">
 						<tr>
 							<td width="10%"><?php echo lang('title')?>:</td>
-							<td><input type="text" name="an_title" class="textfield" value="" /> *</td>
+							<td><input type="text" name="an_title" class="textfield" value="" /> *<input type="button" value="Split" onclick="document.addindexform.an_title.value+='&lt;!--!--&gt;';"></td>
 						</tr>					
 						<tr>
 							<td><?php echo lang('an_date')?>:</td>
@@ -58,7 +58,7 @@ function checkOnSubmit(formName) {
 													
 						<tr>
 							<td><?php echo lang('content')?>:</td>
-							<td><textarea type="text" name="an_content" rows="10" style="width:500px" class="textfield"/></textarea></td>
+							<td><textarea type="text" name="an_content" rows="10" style="width:500px" class="textfield"/></textarea><input type="button" value="Split" onclick="document.addindexform.an_content.value+='&lt;!--!--&gt;';"></td>
 						</tr>							
 										
 						<tr>

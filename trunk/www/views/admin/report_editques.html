@@ -48,7 +48,7 @@ function checkOnSubmit(formName) {
 					<table width="100%">
 						<tr>
 							<td width="10%"><?php echo lang('question')?>:</td>
-							<td><input type="text" name="q_question" class="textfield" value="<?php echo $question['q_question']?>"/> *</td>
+							<td><input type="text" name="q_question" class="textfield" style="width:500px;" value="<?php echo $question['q_question']?>"/> * <input type="button" value="Split" onclick="document.addquestionform.q_question.value+='&lt;!--!--&gt;';"></td>
 			
 							</tr>						
 						<tr>

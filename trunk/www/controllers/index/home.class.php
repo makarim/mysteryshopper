@@ -8,7 +8,6 @@ class home{
 		$this->tpl = $tpl;
 		$this->login_user = authenticate();	
 		if(!$this->login_user){
-			show_message("您还未登录!");
 			redirect("/index.php/passport/login");
 		}
 		include_once("CorporationModel.class.php");
@@ -118,7 +117,7 @@ class home{
 		}elseif($assignmentinfo['a_audit']==0 && $assignmentinfo['a_fdate']!='0000-00-00 00:00:00'){
 			$is_submitted = 3;
 		}
-		$tmp = explode("\n",$assignmentinfo['a_desc']);
+		$tmp = explode("\n",splitx($assignmentinfo['a_desc']));
 		$arr = array();
 		if(is_array($tmp)){
 			foreach ($tmp as $t){
@@ -130,7 +129,7 @@ class home{
 			}
 		}
 		$assignmentinfo['a_desc']= $arr;
-		$tmp = explode("\n",$assignmentinfo['a_demand']);
+		$tmp = explode("\n",splitx($assignmentinfo['a_demand']));
 		$arr2 = array();
 		if(is_array($tmp)){
 			foreach ($tmp as $t){
@@ -177,7 +176,7 @@ class home{
 		
 		
 		$assignment = $this->get_assignment($a_id);
-		$quiz = $this->assignmentModel->generateQuiz($assignment['a_quiz']);
+		$quiz = $this->assignmentModel->generateQuiz(splitx($assignment['a_quiz']));
 		$this->tpl->assign("quiz",$quiz);
 
 		

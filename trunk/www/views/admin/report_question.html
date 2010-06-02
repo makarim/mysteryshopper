@@ -115,7 +115,7 @@ function viewUser(report,report_id){
 							<table width="100%">
 								<tr>
 									<td align="left"><?php echo lang('question')?>:</td>
-									<td align="left"><input type="text" name="q_question" class="textfield" /></td>
+									<td align="left"><input type="text" name="q_question" class="textfield" /><input type="button" value="Split" onclick="document.addreportform.q_question.value+='&lt;!--!--&gt;';"></td>
 			
 									<td><?php echo lang('question_group')?>:</td>
 									<td align="left"><select name="q_group">
@@ -166,7 +166,7 @@ function viewUser(report,report_id){
 						<tr>
 							<td class="option"><input type="checkbox" name="delete[]" value="<?php echo $v['q_id']?>" class="checkbox" /></td>
 							<td><?php echo $v['q_id'];?></td>
-							<td><strong><?php echo $v['q_question'];?></strong></td>
+							<td><strong><?php echo splitx($v['q_question']);?></strong></td>
 							<td><?php echo lang($v['g_name']);?></td>
 							<td><?php if($v['q_type']==1) echo lang('yesorno');
 							if($v['q_type']==2) echo lang('vote');

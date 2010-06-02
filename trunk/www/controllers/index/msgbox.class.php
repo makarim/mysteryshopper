@@ -7,7 +7,6 @@ class msgbox{
 		$this->tpl = $tpl;
 		$this->login_user = authenticate();	
 		if(!$this->login_user){
-			show_message("您还未登录!");
 			redirect("/index.php/passport/login");
 		}
 		include_once("CorporationModel.class.php");

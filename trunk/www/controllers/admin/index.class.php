@@ -232,17 +232,17 @@ class index{
 				$corpmod = new CorporationModel();
     			foreach ($fname_arr as $t){
     				$fileds['rec_month'] = date("Ym");
-					$fileds['rec_content'] = serialize(array("img"=>substr(strrchr($t,'/'),1),"user_name"=>$_POST['user_name'],"comment"=>strip_tags($_POST['comment']),"title"=>$_POST['title']));
+					$fileds['rec_content'] = serialize(array("img"=>substr(strrchr($t,'/'),1),"user_name"=>$_POST['user_name'],"comment"=>$_POST['comment'],"title"=>$_POST['title']));
 					$fileds['rec_type'] = 'C';
 					
 					$row= $corpmod->addBestStore($fileds,"recommend");
 					
     			}
-				show_message_goback('保存成功!');
+				show_message_goback(lang('success'));
 				
 			}
 		}else{
-			show_message_goback('保存失败!');		
+			show_message_goback(lang('failed'));		
 		}
     }
     function view_editreccomment(){
@@ -275,14 +275,14 @@ class index{
     			
 				$fileds['rec_content'] = serialize(array("img"=>substr(strrchr($uploadimg,'/'),1),"user_name"=>$_POST['user_name'],"comment"=>strip_tags($_POST['comment']),"title"=>$_POST['title']));
 			}else{
-				$fileds['rec_content'] = serialize(array("img"=>$content['img'],"user_name"=>$_POST['user_name'],"comment"=>strip_tags($_POST['comment']),"title"=>$_POST['title']));
+				$fileds['rec_content'] = serialize(array("img"=>$content['img'],"user_name"=>$_POST['user_name'],"comment"=>$_POST['comment'],"title"=>$_POST['title']));
 			}
 				$row= $corpmod->updateBestStore($fileds,$_POST['rec_id']);
 				if ($row !== false) {
-					show_message_goback("保存成功!");
+					show_message_goback(lang('success'));
 										
 				}else{
-					show_message_goback('保存失败!');
+					show_message_goback(lang('failed'));
 				}
 			
 		
