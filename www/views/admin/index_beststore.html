@@ -79,13 +79,13 @@ function checkOnSubmit(formName) {
 							<table width="100%">
 								<tr>
 									<td align="left"><?php echo lang('cs_name')?>:</td>
-									<td align="left"><input type="text" name="cs_name" class="textfield" /></td>
+									<td align="left"><input type="text" name="cs_name" class="textfield" /><input type="button" value="Split" onclick="document.addbeststoreform.cs_name.value+='&lt;!--!--&gt;';"></td>
 									<td align="left"><?php echo lang('cs_img')?>:</td>
 									<td align="left"><input type="file" name="cs_img" class="textfield" /></td>
 								</tr>
 								<tr>
 									<td align="left"><?php echo lang('c_title')?>:</td>
-									<td align="left"><input type="text" name="cs_title" class="textfield" /></td>
+									<td align="left"><input type="text" name="cs_title" class="textfield" /><input type="button" value="Split" onclick="document.addbeststoreform.cs_title.value+='&lt;!--!--&gt;';"></td>
 									<td align="left"><?php echo lang('cs_month')?>:</td>
 									<td align="left"><input type="text" name="cs_month" class="textfield" value="<?php echo date("Ym");?>" /></td>
 									
@@ -125,8 +125,8 @@ function checkOnSubmit(formName) {
 							<td><?php echo $v['rec_id']?></td>
 							<td><strong><?php echo $v['rec_month']?></strong></td>
 							<td><img src="<?php if(strpos($content['img'],'http://')!==false) {echo $content['img']; }else{ echo "/public/upload/".$content['img']; }?>" width="60" height="60"></td>
-							<td><strong><?php echo $content['cs_name']?></strong></td>
-							<td><strong><?php echo $content['c_title']?></strong></td>
+							<td><strong><?php echo splitx($content['cs_name']);?></strong></td>
+							<td><strong><?php echo splitx($content['c_title']);?></strong></td>
 							
 							<td><a href="/admin.php/index/editbeststore/rec_id/<?php echo $v['rec_id']?>"><?php echo lang('edit')?></a></td>
 						</tr>

@@ -3,7 +3,7 @@
 <div id="wrap">  <br />
 <?php include_once("home_left.html")?>
     <div class="admincontent">
-<form action="/index.php" onsubmit="return confirm('该操作不可恢复，您确认要删除吗？');" method="post">
+<form action="/index.php" onsubmit="return confirm('<?php echo lang("domain_delete_comfirm");?>');" method="post">
 				<input type="hidden" name="action" value="msgbox">
 				<input type="hidden" name="op" value="delete">
 
@@ -28,10 +28,10 @@
 							foreach ($data['records'] as $v){?>	
                 <tr>
                   <td width="9%"><img src="/public/upload/faceimg/<?php echo $v['face_img']?>" width="50" height="50" /></td>
-                  <td width="58%"><a href="/index.php/msgbox/read/<?php echo $v['m_id']?>"><?php echo $v['m_title']?></a></td>
+                  <td width="58%"><a href="/index.php/msgbox/read/<?php echo $v['m_id']?>"><?php echo splitx($v['m_title']);?></a></td>
 
                   <td width="19%"><?php echo $v['m_date']?></td>
-                  <td width="7%"><?php if($v['flag']==1){?><img src="/public/images/icon_new.gif" alt="新" width="30" height="15" /><?php }?></td>
+                  <td width="7%"><?php if($v['flag']==1){?><img src="/public/images/icon_new.gif" alt="New" width="30" height="15" /><?php }?></td>
                   <td width="7%"><input type="checkbox" name="id[]" value="<?php echo $v['m_id']?>" /></td>
                 </tr>
               <?php }

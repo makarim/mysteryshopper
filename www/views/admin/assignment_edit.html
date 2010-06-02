@@ -82,7 +82,7 @@ function getStore(c_id){
 					<table width="100%">
 						<tr>
 							<td width="10%"><?php echo lang('a_title')?>:</td>
-							<td><input type="text" name="a_title" class="textfield" value="<?php echo $info['a_title'];?>" /> *</td>
+							<td><input type="text" name="a_title" class="textfield" style="width:500px;" value="<?php echo $info['a_title'];?>" /> *<input type="button" value="Split" onclick="document.addassignmentform.a_title.value+='&lt;!--!--&gt;';"></td>
 						</tr>					
 							
 													
@@ -130,17 +130,17 @@ function getStore(c_id){
 						</tr>				
 						<tr>
 							<td><?php echo lang('a_desc')?>:</td>
-							<td><textarea type="text" name="a_desc" rows="10" style="width:500px" class="textfield"/><?php echo $info['a_desc'];?></textarea></td>
+							<td><textarea type="text" name="a_desc" rows="10" style="width:500px" class="textfield"/><?php echo $info['a_desc'];?></textarea><input type="button" value="Split" onclick="document.addassignmentform.a_desc.value+='&lt;!--!--&gt;';"></td>
 						</tr>							
 						<tr>
 							<td><?php echo lang('a_demand')?>:</td>
-							<td><textarea type="text" name="a_demand" rows="10" style="width:500px" class="textfield"/><?php echo $info['a_demand'];?></textarea></td>
+							<td><textarea type="text" name="a_demand" rows="10" style="width:500px" class="textfield"/><?php echo $info['a_demand'];?></textarea><input type="button" value="Split" onclick="document.addassignmentform.a_demand.value+='&lt;!--!--&gt;';"></td>
 						</tr>					
 								
 						<tr>
 							<td><?php echo lang('a_quiz')?>:</td>
 							<td>格式说明,每一行输入一个测试题目。格式为 title:问题标题|A:答案|B:答案|C:答案|D:答案|answer:D 
-							<textarea type="text" name="a_quiz" rows="10" style="width:900px" class="textfield"/><?php echo $info['a_quiz'];?></textarea></td>
+							<textarea type="text" name="a_quiz" rows="10" style="width:900px" class="textfield"/><?php echo $info['a_quiz'];?></textarea><input type="button" value="Split" onclick="document.addassignmentform.a_quiz.value+='&lt;!--!--&gt;';"></td>
 						</tr>					
 						<tr>
 						

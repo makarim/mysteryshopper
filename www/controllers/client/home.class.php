@@ -11,7 +11,6 @@ class home{
 		}
 		
 		if(!$this->login_corp){
-			show_message("您还未登录!");
 			redirect("/client.php/index/login");
 		}
 		$this->tpl->assign('corp',$this->login_corp);
@@ -166,7 +165,7 @@ class home{
 		$type_id = isset($GLOBALS['gTypes'][$type])?$GLOBALS['gTypes'][$type]:'';
 	
 		$def_stores = array();
-		$chart_title = '综览';
+		$chart_title = lang("summary");
 		$chart_title.= "/".lang($type);
 		include_once("CorporationModel.class.php");	
 		$corpModel = new CorporationModel();
@@ -234,7 +233,7 @@ class home{
 		$type = !empty($_GET['environment'])?$_GET['environment']:"summary";
 		$type_id = isset($GLOBALS['gTypes'][$type])?$GLOBALS['gTypes'][$type]:'';
 		$def_stores = array();
-		$chart_title = '环境';
+		$chart_title = lang("environment");
 		$chart_title.= "/".lang($type);
 		include_once("CorporationModel.class.php");	
 		$corpModel = new CorporationModel();
@@ -289,7 +288,7 @@ class home{
 		$type = !empty($_GET['service'])?$_GET['service']:"summary";
 		$type_id = isset($GLOBALS['gTypes'][$type])?$GLOBALS['gTypes'][$type]:'';
 		$def_stores = array();
-		$chart_title = '服务';
+		$chart_title = lang("service");
 		$chart_title.= "/".lang($type);
 		include_once("CorporationModel.class.php");	
 		$corpModel = new CorporationModel();
@@ -356,7 +355,7 @@ class home{
 		$type = !empty($_GET['product'])?$_GET['product']:"summary";
 		$type_id = isset($GLOBALS['gTypes'][$type])?$GLOBALS['gTypes'][$type]:'';
 		$def_stores = array();
-		$chart_title = '产品';
+		$chart_title = lang("product");
 		$chart_title.= "/".lang($type);
 		include_once("CorporationModel.class.php");	
 		$corpModel = new CorporationModel();

@@ -85,14 +85,14 @@ function checkOnSubmit(formName) {
 								</tr>
 								<tr>
 									<td align="left"><?php echo lang('title')?>:</td>
-									<td align="left" colspan="4"><input type="text" style="width:400px" name="title"  class="textfield" /></td>
+									<td align="left" colspan="4"><input type="text" style="width:400px" name="title"  class="textfield" /><input type="button" value="Split" onclick="document.addreccommentform.title.value+='&lt;!--!--&gt;';"></td>
 									
 									
 									
 								</tr>
 								<tr>
 									<td align="left"><?php echo lang('comment')?>:</td>
-									<td align="left" colspan="3"><textarea name="comment" rows="3" cols="80"/></textarea></td>
+									<td align="left" colspan="3"><textarea name="comment" rows="3" cols="80"/></textarea><input type="button" value="Split" onclick="document.addreccommentform.comment.value+='&lt;!--!--&gt;';"></td>
 									
 									
 									<td><input type="submit" value="<?php echo lang('submit')?>" class="button"/></td>
@@ -128,7 +128,7 @@ function checkOnSubmit(formName) {
 							
 							<td><strong><?php echo $content['user_name']?></strong></td>
 							<td><img src="/public/upload/<?php echo $content['img']?>" width="41" height="41"></td>
-							<td><strong><?php echo nl2br($content['comment']);?></strong></td>
+							<td><strong><?php echo nl2br(splitx($content['comment']));?></strong></td>
 							
 							<td><a href="/admin.php/index/editreccomment/rec_id/<?php echo $v['rec_id']?>"><?php echo lang('edit')?></a>
 							<a href="/admin.php/index/deletereccomment/rec_id/<?php echo $v['rec_id']?>"><?php echo lang('delete')?></a>

@@ -9,10 +9,7 @@ class index{
 			$this->login_corp = $_SESSION['_XppassOnlineCorp'];	
 		}
 		
-		//if(!$this->login_corp){
-			//show_message("您还未登录!");
-			//redirect("/client.php/index/login");
-		//}
+		
 		$this->tpl->assign('corp',$this->login_corp);
 	}
     function view_defaults(){

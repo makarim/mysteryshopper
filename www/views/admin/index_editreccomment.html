@@ -54,12 +54,12 @@ function checkOnSubmit(formName) {
 						</tr>					
 						<tr>
 							<td width="10%"><?php echo lang('title')?>:</td>
-							<td><input type="text" name="title" class="textfield" value="<?php if(isset($info['content']['title']))echo $info['content']['title']?>"/></td>
+							<td><input type="text" name="title" class="textfield" value="<?php if(isset($info['content']['title']))echo $info['content']['title']?>"/><input type="button" value="Split" onclick="document.editreccomment.title.value+='&lt;!--!--&gt;';"></td>
 						</tr>					
 							
 						<tr>
 							<td><?php echo lang('comment')?>:</td>
-							<td><textarea name="comment" rows="4" cols="80"><?php echo $info['content']['comment']?></textarea></td>
+							<td><textarea name="comment" rows="4" cols="80"><?php echo $info['content']['comment']?></textarea><input type="button" value="Split" onclick="document.editreccomment.comment.value+='&lt;!--!--&gt;';"></td>
 						</tr>		
 						
 						<tr>

@@ -211,8 +211,8 @@ class report{
 		if($r){
 			$assignment = $assignment->getAssignmentById($a_id);
 			$field['m_pid'] = 0;
-			$field['m_title'] = "问卷审查通知！";
-			$field['m_content'] = '恭喜你，你提交的任务('. $assignment['a_title'].')问卷已经被审查通过。下一步，寄送发票!';
+			$field['m_title'] = "问卷审查通知！<!--!-->Notice of Report examination!";
+			$field['m_content'] = '恭喜你，你提交的任务('.splitx($assignment['a_title']).')问卷已经被审查通过。请尽快寄送发票!<!--!-->Congratulation! The report about the assignment ('.splitx($assignment['a_title']).') is ok.';
 			$field['to_user_id'] = $assignment['user_id'];
 			$field['to_user_nickname'] = $assignment['user_nickname'];
 			$field['from_user_id'] = $this->loginuser['user_id'];
@@ -244,8 +244,8 @@ class report{
 		if($r){
 			$assignment = $assignment->getAssignmentById($a_id);
 			$field['m_pid'] = 0;
-			$field['m_title'] = "发票审查通知！";
-			$field['m_content'] = '恭喜你，你提交的任务('. $assignment['a_title'].')发票(金额:'.$item['a_cost'].'元)已经被审查通过。我们将会很快打钱到你的账户上!';
+			$field['m_title'] = "发票审查通知！<!--!-->Notice of receipt examination!";
+			$field['m_content'] = '恭喜你，你提交的任务('.splitx($assignment['a_title']).')发票(金额:'.$item['a_cost'].'元)已经被审查通过。我们将会很快打钱到你的账户上!<!--!-->Congratulation! Your receipt about the assignment '.splitx($assignment['a_title']).' is ok. '; 
 			$field['to_user_id'] = $assignment['user_id'];
 			$field['to_user_nickname'] = $assignment['user_nickname'];
 			

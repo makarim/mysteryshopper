@@ -709,7 +709,31 @@ $GLOBALS['gLang']['level_4'] = '一般';
 $GLOBALS['gLang']['level_5'] = '好';
 $GLOBALS['gLang']['level_6'] = '很好';
 $GLOBALS['gLang']['level_7'] = '完美';
+$GLOBALS['gLang']['applicant'] = '申请人';
 
-
+$GLOBALS['gLang']['menu_site'] = '网站管理';
+$GLOBALS['gLang']['menu_shopper'] = '顾客管理';
+$GLOBALS['gLang']['menu_shopperlist'] = '顾客列表';
+$GLOBALS['gLang']['menu_mailbox'] = '收件箱';
+$GLOBALS['gLang']['menu_corperation'] = '企业管理';
+$GLOBALS['gLang']['menu_corplist'] = '企业列表';
+$GLOBALS['gLang']['menu_searchcorp'] = '查询企业';
+$GLOBALS['gLang']['menu_addcorp'] = '添加企业';
+$GLOBALS['gLang']['menu_addstore'] = '添加分店';
+$GLOBALS['gLang']['menu_assignment'] = '任务管理';
+$GLOBALS['gLang']['menu_assignmentlist'] = '任务列表';
+$GLOBALS['gLang']['menu_addassignment'] = '添加任务';
+$GLOBALS['gLang']['menu_report'] = '问卷管理';
+$GLOBALS['gLang']['menu_question'] = '问题列表';
+$GLOBALS['gLang']['menu_createreport'] = '创建问卷';
+$GLOBALS['gLang']['menu_reportlist'] = '问卷列表';
+$GLOBALS['gLang']['menu_charts'] = '图表管理';
+$GLOBALS['gLang']['menu_comment'] = '评论列表';
+$GLOBALS['gLang']['msg_list'] = '消息列表';
+$GLOBALS['gLang']['new'] = '最新';
+$GLOBALS['gLang']['m_title'] = '标题';
+$GLOBALS['gLang']['from_user'] = '来自';
+$GLOBALS['gLang']['to_user'] = '给';
+$GLOBALS['gLang']['m_date'] = '日期';
 
 ?>

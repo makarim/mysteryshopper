@@ -97,7 +97,7 @@
 						<tr>
 							<td class="option"><input type="checkbox" name="delete[]" value="<?php echo $v['an_id']?>" class="checkbox" /></td>
 
-							<td><strong><?php echo $v['an_title']?></strong></td>
+							<td><strong><?php echo splitx($v['an_title']);?></strong></td>
 							<td><?php echo $v['an_date']?></td>
 							
 							<td><a href="/admin.php/index/editnotice/an_id/<?php echo $v['an_id']?>"><?php echo lang('edit')?></a>

@@ -53,12 +53,12 @@ function checkOnSubmit(formName) {
 						</tr>	
 						<tr>
 							<td width="10%"><?php echo lang('cs_name')?>:</td>
-							<td><input type="text" name="cs_name" class="textfield" value="<?php echo $info['content']['cs_name']?>"/></td>
+							<td><input type="text" name="cs_name" class="textfield" value="<?php echo $info['content']['cs_name']?>"/><input type="button" value="Split" onclick="document.editbeststore.cs_name.value+='&lt;!--!--&gt;';"></td>
 						</tr>					
 							
 						<tr>
 							<td><?php echo lang('c_title')?>:</td>
-							<td><input type="text" name="cs_title" class="textfield" value="<?php echo $info['content']['c_title']?>"/></td>
+							<td><input type="text" name="cs_title" class="textfield" value="<?php echo $info['content']['c_title']?>"/><input type="button" value="Split" onclick="document.editbeststore.cs_title.value+='&lt;!--!--&gt;';"></td>
 						</tr>		
 						
 						<tr>

@@ -20,7 +20,7 @@
               <td>
               <?php if(isset($data['records']) && is_array($data['records'])){
 							foreach ($data['records'] as $k=>$v){?>	
-              	<div style="font-size:14px; padding:10px 0;"><a href="/index.php/home/noticedetail/<?php echo $v['an_id']?>"><?php echo $k+1;?>. <?php echo $v['an_title']?> [<?php echo $v['an_date']?>]</a></div>
+              	<div style="font-size:14px; padding:10px 0;"><a href="/index.php/home/noticedetail/<?php echo $v['an_id']?>"><?php echo $k+1;?>. <?php echo splitx($v['an_title'])?> [<?php echo $v['an_date']?>]</a></div>
               	 <?php }
 						}?>
               <div class="pages"><?php echo $data['pagebar']?></div>
