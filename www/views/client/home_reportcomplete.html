@@ -32,7 +32,7 @@ function printpage(oper){
       </div>
       <!--startprint1-->
 		<?php if(isset($report_questions) && is_array($report_questions)){?>
-			<p>任务：《<?php echo $assignment['a_title']?>》 执行时间：<?php echo substr($assignment['a_fdate'],0,10)?> 分店：<?php echo $assignment['cs_name']?></p>
+			<p>任务：《<?php echo splitx($assignment['a_title'])?>》 执行时间：<?php echo substr($assignment['a_fdate'],0,10)?> 分店：<?php echo splitx(stripslashes($assignment['cs_name']));?></p>
 			<br/>
 		    <p>评分说明：</p>
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" class="missionReport">
@@ -71,7 +71,7 @@ function printpage(oper){
 				?>
           <tr>
 			 <td width="30"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
-            <td align="left"><?php echo multiwordbreak($vv['rq_question']);?></td>
+            <td align="left"><?php echo multiwordbreak(splitx($vv['rq_question']));?></td>
             <td width="100" align="left">
             <?php 
             	if($vv['rq_type']==2){
@@ -94,7 +94,7 @@ function printpage(oper){
 					?>	
 			<tr>
 			 <td width="30"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
-			  <td align="left" ><?php echo multiwordbreak($vv['rq_question']);?></td>
+			  <td align="left" ><?php echo multiwordbreak(splitx($vv['rq_question']));?></td>
               <td width="100" align="left"><?php echo ($vv['answer']==0)?"０":$vv['answer']; ; ?></td>
           	</tr>
           <? }else{?>
