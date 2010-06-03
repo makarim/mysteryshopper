@@ -98,8 +98,8 @@ $GLOBALS ["gMemcacheServer"]["192.168.1.5:11213"]);;
 	
 	//$GLOBALS['gGroups'][0] = "Overview";
 	$GLOBALS['gGroups'][5] = "Detail";
-	$GLOBALS['gGroups'][1] = "Environment";
-	$GLOBALS['gGroups'][2] = "Service";
+	$GLOBALS['gGroups'][2] = "Environment";
+	$GLOBALS['gGroups'][1] = "Service";
 	$GLOBALS['gGroups'][3] = "Product";
 	$GLOBALS['gGroups'][4] = "Summary";
 	
