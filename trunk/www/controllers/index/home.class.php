@@ -344,13 +344,14 @@ class home{
     			$user['realname'] = !empty($_POST['realname'])?$_POST['realname']:'';
     			$user['gender'] = !empty($_POST['gender'])?$_POST['gender']:'0';
 				$user['mobile'] = !empty($_POST['mobile'])?$_POST['mobile']:'';
-				$user['phone'] = !empty($_POST['phone'])?$_POST['phone']:'';
+				$user['workphone'] = !empty($_POST['workphone'])?$_POST['workphone']:'';
+				$user['homephone'] = !empty($_POST['homephone'])?addslashes($_POST['homephone']):'';
 				$user['qq'] = !empty($_POST['qq'])?$_POST['qq']:'';
 				$user['msn'] = !empty($_POST['msn'])?$_POST['msn']:'';
 				$user['province'] = !empty($_POST['province'])?$_POST['province']:'';
 				$user['city'] = !empty($_POST['city'])?$_POST['city']:'';
 				$user['area'] = !empty($_POST['area'])?$_POST['area']:'';
-				$user['address'] = !empty($_POST['address'])?addslashes($_POST['address']):'';
+
     		break;
     		case "extinfo":
     			
@@ -365,35 +366,40 @@ class home{
 				$user['householdincome'] = !empty($_POST['householdincome'])?$_POST['householdincome']:'0';
 				$user['education'] = !empty($_POST['education'])?$_POST['education']:'0';
 				$user['havecar'] = !empty($_POST['havecar'])?$_POST['havecar']:'0';
-				$user['speak_english'] = !empty($_POST['speakenglish'])?$_POST['speakenglish']:'0';
-				$user['speaklanguage'] = !empty($_POST['speaklanguage'])?$_POST['speaklanguage']:'0';
+				$user['been_mysteryshopper'] = !empty($_POST['been_mysteryshopper'])?$_POST['been_mysteryshopper']:'0';
+				$user['otherlanguage'] = !empty($_POST['otherlanguage'])?$_POST['otherlanguage']:'';
 				$user['hearabout'] = !empty($_POST['hearabout'])?$_POST['hearabout']:'0';
+				$user['company_name'] = !empty($_POST['companyname'])?$_POST['companyname']:'';
+				$user['newletters'] = !empty($_POST['newletters'])?$_POST['newletters']:'0';
     		break;    		
     		case "other":
     			$user['eatwithwho'] = !empty($_POST['eatwithwho'])?intval($_POST['eatwithwho']):'0';
     			$user['eatlunchtimes'] = !empty($_POST['eatlunchtimes'])?intval($_POST['eatlunchtimes']):'0';
     			$user['eatdinnertimes'] = !empty($_POST['eatdinnertimes'])?intval($_POST['eatdinnertimes']):'0';
     			$user['eatweekdaytimes'] = !empty($_POST['eatweekdaytimes'])?intval($_POST['eatweekdaytimes']):'0';
-    			$user['eatlunchavgcost'] = !empty($_POST['eatlunchtimes'])?$_POST['eatlunchavgcost']:'0';
+    			$user['eatlunchavgcost'] = !empty($_POST['eatlunchavgcost'])?$_POST['eatlunchavgcost']:'0';
     			$user['eatdinneravgcost'] = !empty($_POST['eatdinneravgcost'])?$_POST['eatdinneravgcost']:'0';
-    			$user['eatweekdayavgcost'] = !empty($_POST['eatweekdayavgcost'])?$_POST['eatweekdayavgcost']:'0';
-    			$user['eatenvironment'] = !empty($_POST['eatenvironment'])?$_POST['eatenvironment']:'';
-    			$user['eatcookstyle'] = !empty($_POST['eatcookstyle'])?$_POST['eatcookstyle']:'';
+    			$user['eatweekdaylunch_avgcost'] = !empty($_POST['eatweekdaylunchavgcost'])?$_POST['eatweekdaylunchavgcost']:'0';
+    			$user['eatweekdaydinner_avgcost'] = !empty($_POST['eatweekdaydinneravgcost'])?$_POST['eatweekdaydinneravgcost']:'0';
+    			
+    			
     			$user['eatbooking'] = !empty($_POST['eatbooking'])?intval($_POST['eatbooking']):'0';
     			$user['eatvipcard'] = !empty($_POST['eatvipcard'])?intval($_POST['eatvipcard']):'0';
-    			$user['eatnewcooking'] = !empty($_POST['eatnewcooking'])?intval($_POST['eatnewcooking']):'0';
+    			
     			$user['eatcombo'] = !empty($_POST['eatcombo'])?intval($_POST['eatcombo']):'0';
-    			$user['eatsweetcourse'] = !empty($_POST['eatsweetcourse'])?intval($_POST['eatsweetcourse']):'0';
-    			$user['eatdrink'] = !empty($_POST['eatdrink'])?intval($_POST['eatdrink']):'0';
+    			$user['lunch_delivered'] = !empty($_POST['lunchdelivered'])?intval($_POST['lunchdelivered']):'0';
+    			$user['meal_delivered'] = !empty($_POST['mealdelivered'])?intval($_POST['mealdelivered']):'0';
+    			
     			$user['dinnerhall'] = !empty($_POST['dinnerhall'])?intval($_POST['dinnerhall']):'0';
     			$user['eattraffic'] = !empty($_POST['eattraffic'])?$_POST['eattraffic']:'';
-    			$user['eataddress'] = !empty($_POST['eataddress'])?$_POST['eataddress']:'';
 
-				$user['newletters'] = !empty($_POST['newletters'])?$_POST['newletters']:'0';
+
+				
 				$user['interests'] = !empty($_POST['interests'])?$_POST['interests']:'';
 		    		break;	
     		case "payment":
     			$user['alipay'] = !empty($_POST['alipay'])?strip_tags($_POST['alipay']):"";
+    			$user['alipayrealname'] = !empty($_POST['alipayrealname'])?strip_tags($_POST['alipayrealname']):"";
     			$user['bank_name'] = !empty($_POST['bank_name'])?strip_tags($_POST['bank_name']):"";
     			$user['bank_realname'] = !empty($_POST['bank_realname'])?strip_tags($_POST['bank_realname']):"";
     			$user['subbank_name'] = !empty($_POST['subbank_name'])?strip_tags($_POST['subbank_name']):"";

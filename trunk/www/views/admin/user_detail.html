@@ -33,7 +33,7 @@
 <input type="hidden" name="op" value="updateuserdetail">
 <input type="hidden" name="type" id="t" value="<?php echo $type?>">
 <?php if($type=='contact'){ ?>
-<TABLE width="98%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
 <TR>
 <TD width="40%" class="text"></TD>
 <TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
@@ -59,29 +59,40 @@
 <TD><div id="errorsDiv_mobile"></div><INPUT class="input" disabled type="text" name="mobile" value="<?php echo $userinfo['mobile']?>" id="mobile" /></TD>
 </TR>
 <TR>
-<TD class="text">*<?php echo lang('phone')?>:</TD>
-<TD><div id="errorsDiv_phone"></div><INPUT class="input" disabled type="text" name="phone" value="<?php echo $userinfo['phone']?>" id="phone"/></TD>
+<TD class="text"><?php echo lang('workphone')?>:</TD>
+<TD><div id="errorsDiv_workphone"></div><INPUT class="input" disabled type="text" name="workphone" value="<?php echo $userinfo['workphone']?>" id="workphone"/></TD>
+</TR>
+<TR>
+<TD class="text"><?php echo lang('homephone')?>:</TD>
+<TD><div id="errorsDiv_homephone"></div><INPUT class="input" disabled type="text" name="homephone" id="homephone" value="<?php echo $userinfo['homephone']?>" /></TD>
 </TR>
 
 <TR>
-<TD class="text">*QQ:</TD>
+<TD class="text">QQ:</TD>
 <TD><div id="errorsDiv_qq"></div><INPUT class="input" disabled type="text" name="qq" id="qq" value="<?php echo $userinfo['qq']?>" /></TD>
 </TR>
 <TR>
-<TD class="text">*MSN:</TD>
+<TD class="text">MSN:</TD>
 <TD><div id="errorsDiv_msn"></div><INPUT class="input" disabled type="text" name="msn" id="msn" value="<?php echo $userinfo['msn']?>" /></TD>
 </TR>
 <TR>
 <TD class="text">*<?php echo lang('living_city')?>:</TD>
+<TD><div id="errorsDiv_city"></div>
+<select disabled name="province"></select><select disabled name="city"></select></TD>
+</TR>
+<TR>
+<TD class="text">*<?php echo lang('district')?>:</TD>
 <TD><div id="errorsDiv_area"></div>
-<select disabled name="province"></select><select disabled name="city"></select><select disabled name="area"></select></TD>
+<select disabled name="area"></select></TD>
 </TR>
 
-<TR>
-<TD class="text"><?php echo lang('address_detail')?>:</TD>
-<TD><div id="errorsDiv_address"></div><INPUT class="input" disabled type="text" name="address" id="address" value="<?php echo $userinfo['address']?>" /></TD>
-</TR>
- 
+  <tr>
+    <td class="text">&nbsp;</td>
+
+    <td><br /><br />
+       
+    </td>
+  </tr>
 </table>
 <script>
 new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php echo $userinfo['city']?>","<?php echo $userinfo['area']?>");
@@ -90,7 +101,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <?php }?>
 <?php if($type=='extinfo'){ ?>
 
-<TABLE width="98%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
 <TR>
 <TD width="40%" class="text"></TD>
 <TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
@@ -126,14 +137,18 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TD><div id="errorsDiv_maritalstatus"></div><select disabled name="maritalstatus" id="maritalstatus"> 
 <option value=""><?php echo lang('selected')?></option> 
 			<option value="M" <?php if('M'==$userinfo['marital']) echo 'selected="selected"';?>><?php echo lang('married')?></option> 
-			<option value="S" <?php if('S'==$userinfo['marital']) echo 'selected="selected"';?>><?php echo lang('single')?></option> 
+			<option value="S" <?php if('S'==$userinfo['marital']) echo 'selected="selected"';?>><?php echo lang('single')?></option>			<option value="D" <?php if('D'==$userinfo['marital']) echo 'selected="selected"';?>><?php echo lang('divorced')?></option> 
 			</select>
  </TD>
 </TR>
 <TR>
 <TD class="text">*<?php echo lang("quan_of_children");?>:</TD>
 <TD><div id="errorsDiv_children"></div>
-<INPUT class="input" disabled type="text" name="children" id="children" value="<?php echo $userinfo['children']?>" />
+<select disabled name="children" id="children"> 
+<?php for ($i=0;$i<=5;$i++){?>
+			<option value="<?php echo $i;?>" <?php if($i==$userinfo['children']) echo 'selected="selected"';?>><?php echo $i;?></option> 
+			<?php }?>
+</select>
  </TD>
 </TR>
 <TR>
@@ -142,11 +157,15 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 </TR>
 <TR>
 <TD class="text"><?php echo lang("birthplace");?>:</TD>
-<TD><div id="errorsDiv_workplace"></div><INPUT class="input" disabled type="text" name="workplace" id="workplace" value="<?php echo $userinfo['workplace']?>" /></TD>
+<TD><div id="errorsDiv_birthplace"></div><INPUT class="input" disabled type="text" name="birthplace" id="birthplace" value="<?php echo $userinfo['birthplace']?>" /></TD>
 </TR>
 <TR>
 <TD class="text">*<?php echo lang("job_position");?>:</TD>
 <TD><div id="errorsDiv_occupation"></div><INPUT class="input" disabled type="text" name="occupation" id="occupation" value="<?php echo $userinfo['occupation']?>" /></TD>
+</TR>
+<TR>
+<TD class="text"><?php echo lang("company_name");?></TD>
+<TD><div id="errorsDiv_companyname"></div><INPUT class="input" disabled type="text" name="companyname" id="companyname" value="<?php echo $userinfo['company_name']?>" /></TD>
 </TR>
 <TR>
 <TD class="text">*<?php echo lang("salary");?>:</TD>
@@ -160,6 +179,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 					<option value="5" <?php if(5==$userinfo['householdincome']) echo 'selected="selected"';?>>12,000-15000</option> 
 					<option value="6" <?php if(6==$userinfo['householdincome']) echo 'selected="selected"';?>>15,000-30,000</option> 
 					<option value="7" <?php if(7==$userinfo['householdincome']) echo 'selected="selected"';?>> > 30,000</option> 
+</select>
  </TD>
 </TR>
 <TR>
@@ -184,20 +204,21 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 				</select></TD>
 </TR>
 <TR>
-<TD class="text">*<?php echo lang("speak_english")?></TD>
-<TD><div id="errorsDiv_speakenglish"></div><select disabled name="speakenglish" id="speakenglish"> 
+<TD class="text">*<?php echo lang("other_language");?></TD>
+<TD><div id="errorsDiv_otherlanguage"></div>
+<INPUT class="input" disabled type="text" name="otherlanguage" id="otherlanguage" value="<?php echo $userinfo['otherlanguage']?>" />
+</TD>
+</TR>
+<TR>
+<TD class="text">*<?php echo lang("have_been_mystery_shopper")?></TD>
+<TD><div id="errorsDiv_been_mysteryshopper"></div><select disabled name="been_mysteryshopper" id="been_mysteryshopper"> 
 <option value="0"><?php echo lang('selected')?></option> 
-					<option value="1" <?php if(1==$userinfo['speak_english']) echo 'selected="selected"';?>>Yes</option> 
-					<option value="2" <?php if(2==$userinfo['speak_english']) echo 'selected="selected"';?>>No</option> 
+					<option value="1" <?php if(1==$userinfo['been_mysteryshopper']) echo 'selected="selected"';?>>Yes</option> 
+					<option value="2" <?php if(2==$userinfo['been_mysteryshopper']) echo 'selected="selected"';?>>No</option> 
  
 				</select></TD>
 </TR>
-<TR>
-<TD class="text">*<?php echo lang("other_language");?></TD>
-<TD><div id="errorsDiv_speaklanguage"></div>
-<INPUT class="input" disabled type="text" name="speaklanguage" id="speaklanguage" value="<?php echo $userinfo['speaklanguage']?>" />
-</TD>
-</TR>
+
 <TR>
 <TD class="text">*<?php echo lang("how_do_you_know_spot");?> </TD>
 <TD><div id="errorsDiv_hearabout"></div>
@@ -208,20 +229,39 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 			<option value="3" <?php if(3==$userinfo['hearabout']) echo 'selected="selected"';?>><?php echo lang('outdoor_advertising')?>  </option> 
 			<option value="4" <?php if(4==$userinfo['hearabout']) echo 'selected="selected"';?>><?php echo lang('newspaper')?></option> 
 			<option value="5" <?php if(5==$userinfo['hearabout']) echo 'selected="selected"';?>><?php echo lang('television')?></option> 
-			<option value="6" <?php if(6==$userinfo['hearabout']) echo 'selected="selected"';?>><?php echo lang('others')?></option> 
+			
 			</select></TD>
 </TR>
+<TR>
+<TD class="text"><?php echo lang("receive_newsletter");?> </TD>
+<TD><div id="errorsDiv_newletters"></div><select disabled name="newletters" id="newletters"> 
+<option value="0"><?php echo lang('selected')?></option> 
+			<option value="1" <?php if(1==$userinfo['newletters']) echo 'selected="selected"';?>>Yes</option> 
+			<option value="2" <?php if(2==$userinfo['newletters']) echo 'selected="selected"';?>>No</option> 
+			</select></TD>
+</TR>
+<tr>
+    <td class="text">&nbsp;</td>
 
+    <td><br />
+          <br />
+
+   </td>
+  </tr>
 </table>
 
 <?php }?>
 
 
 <?php if($type=='other'){ ?>
-<TABLE width="98%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
 <TR>
-<TD width="40%" class="text"></TD>
-<TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
+<TD width="50%" class="text"></TD>
+<TD width="50%"><div id="msg" style="margin:0 auto;"></div></TD>
+</TR>
+<TR>
+<TD class="text"><b><?php echo lang("general_dining");?></b></TD>
+<TD></TD>
 </TR>
 <TR>
 <TD class="text"><?php echo lang("usual_dining_custom");?></TD>
@@ -231,62 +271,10 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 			<option value="1" <?php if(1==$userinfo['eatwithwho']) echo 'selected="selected"';?>><?php echo lang("individual");?></option> 
 			<option value="2" <?php if(2==$userinfo['eatwithwho']) echo 'selected="selected"';?>><?php echo lang("with_family");?></option> 
 			<option value="3" <?php if(3==$userinfo['eatwithwho']) echo 'selected="selected"';?>> <?php echo lang("with_friends");?></option> 
+			<option value="4" <?php if(4==$userinfo['eatwithwho']) echo 'selected="selected"';?>> <?php echo lang("with_colleagues");?></option> 
+			<option value="5" <?php if(5==$userinfo['eatwithwho']) echo 'selected="selected"';?>> <?php echo lang("with_clients");?></option> 
 			</select>
 </TD>
-</TR>
-<TR>
-<TD class="text"><?php echo lang("lunchtimes");?></TD>
-<TD><div id="errorsDiv_eatlunchtimes"></div>
-<select disabled name="eatlunchtimes" id="eatlunchtimes"> 
-<option value="0"><?php echo lang('selected')?></option> 
-<?php for($i=1;$i<=5;$i++){ ?>
-			<option value="<?php echo $i?>" <?php if($i==$userinfo['eatlunchtimes']) echo 'selected="selected"';?>><?php echo $i?></option> 
-	<?php }?>		
-			</select>
-</TD>
-</TR>
-
-<TR>
-<TD class="text"><?php echo lang("lunch_average_bill");?></TD>
-<TD><div id="errorsDiv_eatlunchavgcost"></div><INPUT class="input" disabled type="text" name="eatlunchavgcost" id="eatlunchavgcost" value="<?php echo $userinfo['eatlunchavgcost']?>" /></TD>
-</TR>
-<TR>
-<TD class="text"><?php echo lang("dinnertimes");?></TD>
-<TD><div id="errorsDiv_eatdinnertimes"></div>
-<select disabled name="eatdinnertimes" id="eatdinnertimes"> 
-<option value="0"><?php echo lang('selected')?></option> 
-<?php for($i=1;$i<=5;$i++){ ?>
-			<option value="<?php echo $i?>" <?php if($i==$userinfo['eatdinnertimes']) echo 'selected="selected"';?>><?php echo $i?></option> 
-	<?php }?>		
-			</select>
-</TD>
-</TR>
-<TR>
-<TD class="text"><?php echo lang("dinner_average_bill");?></TD>
-<TD><div id="errorsDiv_eatdinneravgcost"></div><INPUT class="input" disabled type="text" name="eatdinneravgcost" id="eatdinneravgcost" value="<?php echo $userinfo['eatdinneravgcost']?>" /></TD>
-</TR>
-<TR>
-<TD class="text"><?php echo lang("to_restaurant_on_weekends");?></TD>
-<TD><div id="errorsDiv_eatweekdaytimes"></div>
-<select disabled name="eatweekdaytimes" id="eatweekdaytimes"> 
-<option value="0"><?php echo lang('selected')?></option> 
-<?php for($i=1;$i<=5;$i++){ ?>
-			<option value="<?php echo $i?>" <?php if($i==$userinfo['eatweekdaytimes']) echo 'selected="selected"';?>><?php echo $i?></option> 
-	<?php }?>		
-			</select>
-</TD>
-</TR>
-<TR>
-<TD class="text"><?php echo lang("average_bill_on_weekends") ;?></TD>
-<TD><div id="errorsDiv_eatweekdayavgcost"></div><INPUT class="input" disabled type="text" name="eatweekdayavgcost" id="eatweekdayavgcost" value="<?php echo $userinfo['eatweekdayavgcost']?>" /></TD>
-</TR>
-<TR>
-<TD class="text"><?php echo lang("surrounding");?></TD>
-<TD><div id="errorsDiv_eatenvironment"></div><INPUT class="input" disabled type="text" name="eatenvironment" id="eatenvironment" value="<?php echo $userinfo['eatenvironment']?>" /></TD>
-</TR>
-<TR>
-<TD class="text"><?php echo lang("food_you_like");?></TD>
-<TD><div id="errorsDiv_eatcookstyle"></div><INPUT class="input" disabled type="text" name="eatcookstyle" id="eatcookstyle" value="<?php echo $userinfo['eatcookstyle']?>" /></TD>
 </TR>
 <TR>
 <TD class="text"><?php echo lang("orderbyphone");?></TD>
@@ -297,7 +285,8 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 			<option value="2" <?php if(2==$userinfo['eatbooking']) echo 'selected="selected"';?>>No</option> 
 			</select>
 </TD>
-</TR><TR>
+</TR>
+<TR>
 <TD class="text"><?php echo lang("enjoy_vip_card");?></TD>
 <TD><div id="errorsDiv_eatvipcard"></div>
 <select disabled name="eatvipcard" id="eatvipcard"> 
@@ -306,44 +295,8 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 			<option value="2" <?php if(2==$userinfo['eatvipcard']) echo 'selected="selected"';?>>No</option> 
 			</select>
 </TD>
-</TR><TR>
-<TD class="text"><?php echo lang("attempt_new_style_food");?></TD>
-<TD><div id="errorsDiv_eatnewcooking"></div>
-<select disabled name="eatnewcooking" id="eatnewcooking"> 
-<option value="0"><?php echo lang('selected')?></option> 
-			<option value="1" <?php if(1==$userinfo['eatnewcooking']) echo 'selected="selected"';?>>Yes</option> 
-			<option value="2" <?php if(2==$userinfo['eatnewcooking']) echo 'selected="selected"';?>>No</option> 
-			</select>
-</TD>
-</TR><TR>
-<TD class="text"><?php echo lang("order_set");?></TD>
-<TD><div id="errorsDiv_eatcombo"></div>
-<select disabled name="eatcombo" id="eatcombo"> 
-<option value="0"><?php echo lang('selected')?></option> 
-			<option value="1" <?php if(1==$userinfo['eatcombo']) echo 'selected="selected"';?>>Yes</option> 
-			<option value="2" <?php if(2==$userinfo['eatcombo']) echo 'selected="selected"';?>>No</option> 
-			</select>
-</TD>
 </TR>
 <TR>
-<TD class="text"><?php echo lang("dressert_and_sweet");?></TD>
-<TD><div id="errorsDiv_eatsweetcourse"></div>
-<select disabled name="eatsweetcourse" id="eatsweetcourse"> 
-<option value="0"><?php echo lang('selected')?></option> 
-			<option value="1" <?php if(1==$userinfo['eatsweetcourse']) echo 'selected="selected"';?>>Yes</option> 
-			<option value="2" <?php if(2==$userinfo['eatsweetcourse']) echo 'selected="selected"';?>>No</option> 
-			</select>
-</TD>
-</TR><TR>
-<TD class="text"><?php echo lang("order_drink");?></TD>
-<TD><div id="errorsDiv_eatdrink"></div>
-<select disabled name="eatdrink" id="eatdrink"> 
-<option value="0"><?php echo lang('selected')?></option> 
-			<option value="1" <?php if(1==$userinfo['eatdrink']) echo 'selected="selected"';?>>Yes</option> 
-			<option value="2" <?php if(2==$userinfo['eatdrink']) echo 'selected="selected"';?>>NO</option> 
-			</select>
-</TD>
-</TR><TR>
 <TD class="text"><?php echo lang("primary_to_restaurant");?></TD>
 <TD><div id="errorsDiv_dinnerhall"></div>
 <select disabled name="dinnerhall" id="dinnerhall"> 
@@ -357,30 +310,171 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 </TD>
 </TR>
 <TR>
+<TD class="text"><?php echo lang("vehicle");?></TD>
+<TD><div id="errorsDiv_eattraffic"></div>
+<select disabled name="eattraffic" id="eattraffic"> 
+<option value="0"><?php echo lang('selected')?></option>  Metro/Bus/Taxi/Personal Auto/Company Car
+			<option value="1" <?php if(1==$userinfo['eattraffic']) echo 'selected="selected"';?>><?php echo lang("metro");?></option> 
+			<option value="2" <?php if(2==$userinfo['eattraffic']) echo 'selected="selected"';?>><?php echo lang("bus");?></option> 
+			<option value="3" <?php if(3==$userinfo['eattraffic']) echo 'selected="selected"';?>><?php echo lang("taxi");?></option> 
+			<option value="4" <?php if(4==$userinfo['eattraffic']) echo 'selected="selected"';?>><?php echo lang("personal_auto");?></option> 
+			<option value="5" <?php if(5==$userinfo['eattraffic']) echo 'selected="selected"';?>><?php echo lang("company_car");?></option> 
+</TD>
+</TR>
+<TR>
+<TD class="text"><b><?php echo lang("work_week");?></b></TD>
+<TD></TD>
+</TR>
+
+<TR>
+<TD class="text"><?php echo lang("lunchtimes");?></TD>
+<TD><div id="errorsDiv_eatlunchtimes"></div>
+<select disabled name="eatlunchtimes" id="eatlunchtimes"> 
+<option value="0"><?php echo lang('selected')?></option> 
+<?php for($i=0;$i<=5;$i++){ ?>
+			<option value="<?php echo $i?>" <?php if($i==$userinfo['eatlunchtimes']) echo 'selected="selected"';?>><?php echo $i?></option> 
+	<?php }?>		
+			</select>
+</TD>
+</TR>
+
+<TR>
+<TD class="text"><?php echo lang("lunch_average_bill");?></TD>
+<TD><div id="errorsDiv_eatlunchavgcost"></div>
+
+<select disabled name="eatlunchavgcost" id="eatlunchavgcost" > 
+					<option value="" ><?php echo lang('selected')?></option> 
+					<option value="1" <?php if(1==$userinfo['eatlunchavgcost']) echo 'selected="selected"';?>> &lt; 20</option> 
+					<option value="2" <?php if(2==$userinfo['eatlunchavgcost']) echo 'selected="selected"';?>>20-30</option> 
+					<option value="3" <?php if(3==$userinfo['eatlunchavgcost']) echo 'selected="selected"';?>>30-40</option> 
+					<option value="4" <?php if(4==$userinfo['eatlunchavgcost']) echo 'selected="selected"';?>>40-50</option> 
+					<option value="5" <?php if(5==$userinfo['eatlunchavgcost']) echo 'selected="selected"';?>> >50</option> 
+				
+</select>
+</TD>
+</TR>
+<TR>
+<TD class="text"><?php echo lang("order_set");?></TD>
+<TD><div id="errorsDiv_eatcombo"></div>
+<select disabled name="eatcombo" id="eatcombo"> 
+<option value="0"><?php echo lang('selected')?></option> 
+			<option value="1" <?php if(1==$userinfo['eatcombo']) echo 'selected="selected"';?>>Yes</option> 
+			<option value="2" <?php if(2==$userinfo['eatcombo']) echo 'selected="selected"';?>>No</option> 
+			</select>
+</TD>
+</TR>
+<TR>
+<TD class="text"><?php echo lang("lunch_delivered");?></TD>
+<TD><div id="errorsDiv_lunchdelivered"></div>
+<select disabled name="lunchdelivered" id="lunchdelivered"> 
+<option value="0"><?php echo lang('selected')?></option> 
+<?php for($i=0;$i<=5;$i++){ ?>
+			<option value="<?php echo $i?>" <?php if($i==$userinfo['lunch_delivered']) echo 'selected="selected"';?>><?php echo $i?></option> 
+	<?php }?>	</select>
+</TD>
+</TR>
+<TR>
+<TD class="text"><?php echo lang("dinnertimes");?></TD>
+<TD><div id="errorsDiv_eatdinnertimes"></div>
+<select disabled name="eatdinnertimes" id="eatdinnertimes"> 
+<option value="0"><?php echo lang('selected')?></option> 
+<?php for($i=0;$i<=5;$i++){ ?>
+			<option value="<?php echo $i?>" <?php if($i==$userinfo['eatdinnertimes']) echo 'selected="selected"';?>><?php echo $i?></option> 
+	<?php }?>		
+			</select>
+</TD>
+</TR>
+<TR>
+<TD class="text"><?php echo lang("dinner_average_bill");?></TD>
+<TD><div id="errorsDiv_eatdinneravgcost"></div>
+<select disabled name="eatdinneravgcost" id="eatdinneravgcost" > 
+					<option value="" ><?php echo lang('selected')?></option> 
+					<option value="1" <?php if(1==$userinfo['eatdinneravgcost']) echo 'selected="selected"';?>> &lt; 30</option> 
+					<option value="2" <?php if(2==$userinfo['eatdinneravgcost']) echo 'selected="selected"';?>>30-60</option> 
+					<option value="3" <?php if(3==$userinfo['eatdinneravgcost']) echo 'selected="selected"';?>>60-100</option> 
+					<option value="4" <?php if(4==$userinfo['eatdinneravgcost']) echo 'selected="selected"';?>>100-150</option> 
+					<option value="5" <?php if(5==$userinfo['eatdinneravgcost']) echo 'selected="selected"';?>> >150</option> 
+				
+</select>
+</TD>
+</TR>
+
+<TR>
+<TD class="text"><b><?php echo lang("weekends");?></b></TD>
+<TD></TD>
+</TR>
+
+<TR>
+<TD class="text"><?php echo lang("to_restaurant_on_weekends");?></TD>
+<TD><div id="errorsDiv_eatweekdaytimes"></div>
+<select disabled name="eatweekdaytimes" id="eatweekdaytimes"> 
+<option value="0"><?php echo lang('selected')?></option> 
+<?php for($i=0;$i<=5;$i++){ ?>
+			<option value="<?php echo $i?>" <?php if($i==$userinfo['eatweekdaytimes']) echo 'selected="selected"';?>><?php echo $i?></option> 
+	<?php }?>		
+			</select>
+</TD>
+</TR>
+<TR>
+<TD class="text"><?php echo lang("average_lunch_bill_on_weekends") ;?></TD>
+<TD><div id="errorsDiv_eatweekdaylunchavgcost"></div>
+<select disabled name="eatweekdaylunchavgcost" id="eatweekdaylunchavgcost" > 
+					<option value="" ><?php echo lang('selected')?></option> 
+					<option value="1" <?php if(1==$userinfo['eatweekdaylunch_avgcost']) echo 'selected="selected"';?>> &lt; 30</option> 
+					<option value="2" <?php if(2==$userinfo['eatweekdaylunch_avgcost']) echo 'selected="selected"';?>>30-60</option> 
+					<option value="3" <?php if(3==$userinfo['eatweekdaylunch_avgcost']) echo 'selected="selected"';?>>60-100</option> 
+					<option value="4" <?php if(4==$userinfo['eatweekdaylunch_avgcost']) echo 'selected="selected"';?>>100-150</option> 
+					<option value="5" <?php if(5==$userinfo['eatweekdaylunch_avgcost']) echo 'selected="selected"';?>> >150</option> 
+				
+</select>
+</TD>
+</TR>
+<TR>
+<TD class="text"><?php echo lang("average_dinner_bill_on_weekends") ;?></TD>
+<TD><div id="errorsDiv_eatweekdaydinneravgcost"></div>
+<select disabled name="eatweekdaydinneravgcost" id="eatweekdaydinneravgcost" > 
+					<option value="" ><?php echo lang('selected')?></option> 
+					<option value="1" <?php if(1==$userinfo['eatweekdaydinner_avgcost']) echo 'selected="selected"';?>> &lt; 30</option> 
+					<option value="2" <?php if(2==$userinfo['eatweekdaydinner_avgcost']) echo 'selected="selected"';?>>30-60</option> 
+					<option value="3" <?php if(3==$userinfo['eatweekdaydinner_avgcost']) echo 'selected="selected"';?>>60-100</option> 
+					<option value="4" <?php if(4==$userinfo['eatweekdaydinner_avgcost']) echo 'selected="selected"';?>>100-150</option> 
+					<option value="5" <?php if(5==$userinfo['eatweekdaydinner_avgcost']) echo 'selected="selected"';?>> >150</option> 
+				
+</select>
+</TD>
+</TR>
+<TR>
+<TD class="text"><?php echo lang("meals_delivered");?></TD>
+<TD><div id="errorsDiv_mealdelivered"></div>
+<select disabled disabled name="mealdelivered" id="mealdelivered"> 
+<option value="0"><?php echo lang('selected')?></option> 
+<?php for($i=0;$i<=4;$i++){ ?>
+			<option value="<?php echo $i?>" <?php if($i==$userinfo['meal_delivered']) echo 'selected="selected"';?>><?php echo $i?></option> 
+	<?php }?>			</select>
+</TD>
+</TR>
+<!--
+
+
+<TR>
 <TD class="text"><?php echo lang("your_interest");?></TD>
 <TD><div id="errorsDiv_interests"></div><INPUT class="input" disabled type="text" name="interests" id="interests" value="<?php echo $userinfo['interests']?>" /></TD>
 </TR>
-<TR>
-<TD class="text"><?php echo lang("vehicle");?></TD>
-<TD><div id="errorsDiv_eattraffic"></div><INPUT class="input" disabled type="text" name="eattraffic" id="eattraffic" value="<?php echo $userinfo['eattraffic']?>" /></TD>
-</TR>
-<TR>
-<TD class="text"><?php echo lang("favorite_restaurant");?></TD>
-<TD><div id="errorsDiv_eataddress"></div><INPUT class="input" disabled type="text" name="eataddress" id="eataddress" value="<?php echo $userinfo['eataddress']?>" /></TD>
-</TR>
-<TR>
-<TD class="text"><?php echo lang("receive_newsletter");?> </TD>
-<TD><div id="errorsDiv_newletters"></div><select disabled name="newletters" id="newletters"> 
-<option value="0"><?php echo lang('selected')?></option> 
-			<option value="1" <?php if(1==$userinfo['newletters']) echo 'selected="selected"';?>>Yes</option> 
-			<option value="2" <?php if(2==$userinfo['newletters']) echo 'selected="selected"';?>>No</option> 
-			</select></TD>
-</TR>
-  
+
+
+-->
+
+  <tr>
+    <td class="text">&nbsp;</td>
+
+    <td><br />
+          <br />
+    </td>
+  </tr>
 </table>
 <?php }?>
 <?php if($type=='payment'){ ?>
-<TABLE width="98%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
 <TR>
 <TD width="40%" class="text"></TD>
 <TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
@@ -388,6 +482,10 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TR>
 <TD class="text"><?php echo lang('alipay_account');?>：</TD>
 <TD><div id="errorsDiv_alipay"></div><INPUT class="input" disabled type="text" name="alipay" id="alipay" value="<?php echo $userinfo['alipay']?>" /></TD>
+</TR>
+<TR>
+<TD class="text"><?php echo lang('alipay_realname');?>：</TD>
+<TD><div id="errorsDiv_alipayrealname"></div><INPUT class="input" disabled disabled type="text" name="alipayrealname" id="alipayrealname" value="<?php echo $userinfo['alipayrealname']?>" /></TD>
 </TR>
 <TR>
 <TD class="text"><?php echo lang('bank_name');?>：</TD>
@@ -405,12 +503,19 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TD class="text"><?php echo lang('account_name');?>：</TD>
 <TD><div id="errorsDiv_alipay"></div><INPUT class="input" disabled type="text" name="bank_realname" id="bank_realname" value="<?php echo $userinfo['bank_realname']?>" /></TD>
 </TR>
- 
+  <tr>
+    <td class="text">&nbsp;</td>
+
+    <td><br />
+          <br />
+          
+   </td>
+  </tr>
 </table>
 
 <?php }?>
 <?php if($type=='upload'){ ?>
-<TABLE width="98%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
 <TR>
 <TD width="30%" class="text"></TD>
 <TD width="70%"><div id="msg" style="margin:0 auto;"></div></TD>
@@ -421,12 +526,19 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
   <br />
   <br />
   <br />
-
+<INPUT type="file" name="face" id="face" class="input" disabled />(<?php echo lang('file_attachment')?>
 </TD>
 </TR>
 
-</table>
+  <tr>
+    <td class="text">&nbsp;</td>
 
+    <td><br />
+          <br />
+         
+    </td>
+  </tr>
+</table>
 <?php }?>
 </form>
 
@@ -469,19 +581,18 @@ var rules=new Array();
 rules[0]='realname|required|<?php echo lang('realnamerule')?>';
 rules[1]='mobile|required|请正确的手机号码';
 rules[2]='mobile|regexp|^1\\d{10}$|请正确的手机号码';
-rules[3]='phone|required|请输入电话';
-rules[4]='qq|required|请输入QQ';
-rules[5]='msn|required|请输入MSN';
-rules[6]='area|required|请输入居住城市/区';
 
-rules[7]='birthdateyear|required|请输入你的生日';
-rules[8]='maritalstatus|required|请选择婚姻情况';
-rules[9]='nationality|required|请输入你的国籍';
-rules[10]='occupation|required|请输入你的职业';
-rules[11]='householdincome|required|请选择你的年收入水平';
-rules[12]='education|required|请选择你的教育程度';
-rules[13]='havecar|required|请选择你的是否有私家车';
-rules[14]='hearabout|required|请选择你是如何知道SPOT';
+rules[3]='area|required|请输入居住城市/区';
+rules[4]='area|required|请输入居住区';
+
+rules[5]='birthdateyear|required|请输入你的生日';
+rules[6]='maritalstatus|required|请选择婚姻情况';
+rules[7]='nationality|required|请输入你的国籍';
+rules[8]='occupation|required|请输入你的职业';
+rules[9]='householdincome|required|请选择你的年收入水平';
+rules[10]='education|required|请选择你的教育程度';
+rules[11]='havecar|required|请选择你的是否有私家车';
+rules[12]='hearabout|required|请选择你是如何知道SPOT';
 
 
 yav.addHelp('realname', '<?php echo lang('realnamerule')?>');
