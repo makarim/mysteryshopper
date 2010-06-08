@@ -551,23 +551,27 @@ class home{
 		$assignmentModel = new AssignmentModel();
 		$assignment = $assignmentModel->getAssignmentById($a_id);
 		include_once("ReportModel.class.php");
-		$ReportModel = new ReportModel();
+		$ReportModel = new ReportModel();		
+		include_once("UserModel.class.php");
+		$UserModel = new UserModel();
 		
 		$report_questions = array();
-			foreach ($GLOBALS['gGroups'] as $k=>$v){
-				$arr = $ReportModel->getQuestionsByReId($re_id,$k);
-				
-				if($arr){
-					foreach ($arr as $kk=>$vv){
-						$vv['answer'] = $ReportModel->getAnswerByAid($a_id,$vv['rq_id'],$vv['rq_type']);
-						$arr[$kk] = $vv;
-					}
-				}
+		foreach ($GLOBALS['gGroups'] as $k=>$v){
+			$arr = $ReportModel->getQuestionsByReId($re_id,$k);
 			
-				$report_questions[$v] = $arr;
-				
+			if($arr){
+				foreach ($arr as $kk=>$vv){
+					$vv['answer'] = $ReportModel->getAnswerByAid($a_id,$vv['rq_id'],$vv['rq_type']);
+					$arr[$kk] = $vv;
+				}
 			}
 		
+			$report_questions[$v] = $arr;
+			
+		}
+	
+		$mystery_shopper_info = $UserModel->getUserInfoById($assignment['user_id'],'gender,birthdate,marital,nationality,householdincome');
+		$this->tpl->assign("ms_info",$mystery_shopper_info);
 		$this->tpl->assign("assignment",$assignment);
 		$this->tpl->assign("report_questions",$report_questions);
 	}

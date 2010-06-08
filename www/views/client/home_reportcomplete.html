@@ -58,7 +58,40 @@ function printpage(oper){
           </tr>
        
           </table>
-         
+         <table width="100%" border="1" cellpadding="0" cellspacing="1" class="missionReport" style="margin-top:20px;">
+          <tr>
+            <td colspan="3" class="title" bgcolor="#9F0000" align="left" height="25"><font color="#FFFFFF"><?php echo lang('spot_mystery');?></font></td>
+          </tr>
+          <tr>
+            <td width="250" align="left"><?php echo lang('gender')?>:</td>
+            <td  align="left"><?php if($ms_info['gender']==1) echo lang('boy');if($ms_info['gender']==2) echo lang('girl'); ?></td>
+           </tr>          
+          <tr>
+            <td align="left"><?php echo lang('age')?>:</td>
+            <td  align="left">     <?php $year = substr($ms_info['birthdate'],0,4); if($year!='0000') echo date("Y")-$year;?>       </td>
+           </tr>         
+           <tr>
+            <td align="left"><?php echo lang('marriage')?>:</td>
+            <td  align="left"> <?php if($ms_info['marital']=="S") echo lang('single');
+            if($ms_info['marital']=="M") echo lang('married');
+            if($ms_info['marital']=="D") echo lang('divorced'); ?>           </td>
+           </tr>          
+            <tr>
+            <td  align="left"><?php echo lang('nationality')?>:</td>
+            <td  align="left"> <?php echo $ms_info['nationality'];?></td>
+           </tr>            
+           <tr>
+            <td align="left"><?php echo lang('salary')?>:</td>
+            <td  align="left"> <?php if($ms_info['householdincome']==1) echo "&lt; 3,000";
+            if($ms_info['householdincome']==2) echo "3,000-6,000";
+            if($ms_info['householdincome']==3) echo "6,000-9,000"; 
+            if($ms_info['householdincome']==4) echo "9,000-12,000"; 
+            if($ms_info['householdincome']==5) echo "12,000-15000";
+            if($ms_info['householdincome']==6) echo "15,000-30,000";
+            if($ms_info['householdincome']==7) echo "> 30,000";
+              ?>RMB</td>
+           </tr>
+          </table>
 	<?php
 		foreach ($report_questions as $k=>$v){?>
 		<table width="100%" border="1" cellpadding="0" cellspacing="1" class="missionReport" style="margin-top:20px;">
@@ -95,7 +128,7 @@ function printpage(oper){
 			<tr>
 			 <td width="30"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
 			  <td align="left" ><?php echo multiwordbreak(splitx($vv['rq_question']));?></td>
-              <td width="100" align="left"><?php echo ($vv['answer']==0)?"０":$vv['answer']; ; ?></td>
+              <td width="100" align="left"><?php echo ($vv['answer']==0)?"０":$vv['answer'];?></td>
           	</tr>
           <? }else{?>
 			<tr>

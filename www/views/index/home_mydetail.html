@@ -125,7 +125,8 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TD><div id="errorsDiv_maritalstatus"></div><select name="maritalstatus" id="maritalstatus"> 
 <option value=""><?php echo lang('selected')?></option> 
 			<option value="M" <?php if('M'==$userinfo['marital']) echo 'selected="selected"';?>><?php echo lang('married')?></option> 
-			<option value="S" <?php if('S'==$userinfo['marital']) echo 'selected="selected"';?>><?php echo lang('single')?></option>			<option value="D" <?php if('D'==$userinfo['marital']) echo 'selected="selected"';?>><?php echo lang('divorced')?></option> 
+			<option value="S" <?php if('S'==$userinfo['marital']) echo 'selected="selected"';?>><?php echo lang('single')?></option>			
+			<option value="D" <?php if('D'==$userinfo['marital']) echo 'selected="selected"';?>><?php echo lang('divorced')?></option> 
 			</select>
  </TD>
 </TR>
@@ -289,7 +290,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TD><div id="errorsDiv_dinnerhall"></div>
 <select name="dinnerhall" id="dinnerhall"> 
 <option value="0"><?php echo lang('selected')?></option> 
-			<option value="1" <?php if(1==$userinfo['dinnerhall']) echo 'selected="selected"';?>><?php echo lang("environment");?></option> 
+			<option value="1" <?php if(1==$userinfo['dinnerhall']) echo 'selected="selected"';?>><?php echo lang("environment_");?></option> 
 			<option value="2" <?php if(2==$userinfo['dinnerhall']) echo 'selected="selected"';?>><?php echo lang("convenient_transportation");?></option> 
 			<option value="3" <?php if(3==$userinfo['dinnerhall']) echo 'selected="selected"';?>><?php echo lang("product_and_service");?></option> 
 			<option value="4" <?php if(4==$userinfo['dinnerhall']) echo 'selected="selected"';?>><?php echo lang("price");?></option> 
@@ -569,18 +570,18 @@ function checkOnSubmit(formName, r) {
 
 var rules=new Array();
 rules[0]='realname|required|<?php echo lang('realnamerule')?>';
-rules[1]='mobile|required|请正确的手机号码';
+rules[1]='mobile|required|<?php echo lang('required');?>';
 rules[2]='mobile|regexp|^1\\d{10}$|请正确的手机号码';
-rules[3]='area|required|请输入居住城市';
-rules[4]='area|required|请输入居住区';
-rules[5]='birthdateyear|required|请输入你的生日';
-rules[6]='maritalstatus|required|请选择婚姻情况';
-rules[7]='nationality|required|请输入你的国籍';
-rules[8]='occupation|required|请输入你的职业';
-rules[9]='householdincome|required|请选择你的年收入水平';
-rules[10]='education|required|请选择你的教育程度';
-rules[11]='havecar|required|请选择你的是否有私家车';
-rules[12]='hearabout|required|请选择你是如何知道SPOT';
+rules[3]='area|required|<?php echo lang('required');?>';
+rules[4]='area|required|<?php echo lang('required');?>';
+rules[5]='birthdateyear|required|<?php echo lang('required');?>';
+rules[6]='maritalstatus|required|<?php echo lang('required');?>';
+rules[7]='nationality|required|<?php echo lang('required');?>';
+rules[8]='occupation|required|<?php echo lang('required');?>';
+rules[9]='householdincome|required|<?php echo lang('required');?>';
+rules[10]='education|required|<?php echo lang('required');?>';
+rules[11]='havecar|required|<?php echo lang('required');?>';
+rules[12]='hearabout|required|<?php echo lang('required');?>';
 
 
 yav.addHelp('realname', '<?php echo lang('realnamerule')?>');

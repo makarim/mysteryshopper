@@ -86,6 +86,9 @@ class UserModel extends Model {
     function getBestShopperByMonth($m){
     	return $this->db->getRow("select * from recommend where rec_month='{$m}' and rec_type='U'");
     }
+    function getUserInfoById($id,$filed='*'){
+    	return $this->db->getRow("select $filed from user_ext where user_id='$id'");
+    }
 }
 
 ?>

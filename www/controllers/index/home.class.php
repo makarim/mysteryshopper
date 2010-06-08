@@ -371,6 +371,7 @@ class home{
 				$user['hearabout'] = !empty($_POST['hearabout'])?$_POST['hearabout']:'0';
 				$user['company_name'] = !empty($_POST['companyname'])?$_POST['companyname']:'';
 				$user['newletters'] = !empty($_POST['newletters'])?$_POST['newletters']:'0';
+				$user['birthplace'] = !empty($_POST['birthplace'])?$_POST['birthplace']:'';
     		break;    		
     		case "other":
     			$user['eatwithwho'] = !empty($_POST['eatwithwho'])?intval($_POST['eatwithwho']):'0';
