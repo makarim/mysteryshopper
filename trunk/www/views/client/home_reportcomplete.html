@@ -128,7 +128,7 @@ function printpage(oper){
 			<tr>
 			 <td width="30"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
 			  <td align="left" ><?php echo multiwordbreak(splitx($vv['rq_question']));?></td>
-              <td width="100" align="left"><?php echo ($vv['answer']==0)?"０":$vv['answer'];?></td>
+              <td width="100" align="left"><?php echo $vv['answer'];?></td>
           	</tr>
           <? }else{?>
 			<tr>
