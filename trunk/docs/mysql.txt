@@ -1,0 +1,1 @@
+ALTER TABLE  `answer` CHANGE  `ans_answer2`  `ans_answer2` CHAR( 2 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
