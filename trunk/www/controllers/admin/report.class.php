@@ -239,7 +239,10 @@ class report{
 		$item['a_auditbill_who'] =$this->loginuser['user_nickname'];
 		if($item['a_auditbill']==1) $item['a_finish'] = 1;
 		if($item['a_auditbill']==2) $item['a_finish'] = 0.75;
-		if(!empty($_POST['bill_date'])) $item['a_fdate'] = $_POST['bill_date'];
+		if(!empty($_POST['bill_date'])) {
+			$item['a_fdate'] = $_POST['bill_date'];
+			$item['a_auditbill_time'] = $_POST['bill_date'];
+		}
 		$r = $assignment->updateAssignment($item,$a_id);
 		if($r){
 			$assignment = $assignment->getAssignmentById($a_id);
