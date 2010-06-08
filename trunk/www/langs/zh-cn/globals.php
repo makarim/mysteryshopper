@@ -628,7 +628,7 @@ $GLOBALS['gLang']['quan_of_children'] = '子女数量';
 $GLOBALS['gLang']['nationality'] = '国籍';
 $GLOBALS['gLang']['birthplace'] = '出生城市';
 $GLOBALS['gLang']['job_position'] = '职业';
-$GLOBALS['gLang']['salary'] = '平均月薪（包括提成/奖金/福利）';
+$GLOBALS['gLang']['salary'] = '平均月薪(包括提成/奖金/福利)';
 $GLOBALS['gLang']['education'] = '教育程度';
 $GLOBALS['gLang']['middle_school'] = '中学';
 $GLOBALS['gLang']['technical_secondary'] = '高中/中专';
@@ -750,5 +750,9 @@ $GLOBALS['gLang']['m_title'] = '标题';
 $GLOBALS['gLang']['from_user'] = '来自';
 $GLOBALS['gLang']['to_user'] = '给';
 $GLOBALS['gLang']['m_date'] = '日期';
+$GLOBALS['gLang']['required'] = '必填项';
+$GLOBALS['gLang']['mobilerule'] = '手机为11位数字';
+$GLOBALS['gLang']['spot_mystery'] = 'SPOT神秘顾客信息';
+$GLOBALS['gLang']['age'] = '年龄';
 
 ?>

@@ -192,7 +192,7 @@ $GLOBALS['gLang']['girl'] = "Female";
 $GLOBALS['gLang']['reset'] = "Reset";
 $GLOBALS['gLang']['back'] = "Back";
 $GLOBALS['gLang']['userexist'] = "The username exist! Please change another one";
-$GLOBALS['gLang']['userisok'] = "It is available!";
+$GLOBALS['gLang']['userisok'] = "Valid spelling!";
 $GLOBALS['gLang']['insertpwd'] = "Please enter a password!";
 $GLOBALS['gLang']['insertemail'] = "Please enter a available email!";
 $GLOBALS['gLang']['usernamerule'] = "The username consist of 3-15 characters(a-z), numbers(0-9) or (_). Begin with only characters!";
@@ -745,4 +745,8 @@ $GLOBALS['gLang']['m_title'] = 'Title';
 $GLOBALS['gLang']['from_user'] = 'From';
 $GLOBALS['gLang']['to_user'] = 'To';
 $GLOBALS['gLang']['m_date'] = 'Date';
+$GLOBALS['gLang']['required'] = 'Required';
+$GLOBALS['gLang']['mobilerule'] = '11 numbers required';
+$GLOBALS['gLang']['spot_mystery'] = 'SPOT Mystery Shopper Info.';
+$GLOBALS['gLang']['age'] = 'Age';
 ?>

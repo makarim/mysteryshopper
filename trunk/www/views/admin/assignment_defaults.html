@@ -157,9 +157,9 @@ function getStore(c_id){
 							<td><strong><?php echo splitx($v['a_title']);?></strong></td>
 							<td><?php echo $v['a_sdate']?></td>
 							<td><?php echo $v['a_edate']?></td>
-							<td><?php echo $v['c_title']?></td>
+							<td><?php echo splitx($v['c_title'])?></td>
 
-							<td><?php echo $v['cs_name']?></td>
+							<td><?php echo splitx($v['cs_name'])?></td>
 							<td><?php echo $v['a_finish']?></td>
 							<td><a href="/admin.php/assignment/edit/a_id/<?php echo $v['a_id']?>"><?php echo lang('edit')?></a>
 							<a href="/admin.php?action=assignment&view=applicant&a_id=<?php echo $v['a_id']?>"><?php echo lang("applicant")?></a>

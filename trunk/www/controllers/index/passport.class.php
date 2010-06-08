@@ -348,27 +348,32 @@ class passport {
 		$msg = '';
 		$user['realname'] = !empty($_POST['realname'])?$_POST['realname']:'';
 		$user['mobile'] = !empty($_POST['mobile'])?$_POST['mobile']:'';
-		$user['phone'] = !empty($_POST['phone'])?$_POST['phone']:'';
+		$user['workphone'] = !empty($_POST['workphone'])?$_POST['workphone']:'';
+		$user['homephone'] = !empty($_POST['homephone'])?$_POST['homephone']:'';
 		$user['qq'] = !empty($_POST['qq'])?$_POST['qq']:'';
 		$user['msn'] = !empty($_POST['msn'])?$_POST['msn']:'';
 		$user['province'] = !empty($_POST['province'])?$_POST['province']:'';
 		$user['city'] = !empty($_POST['city'])?$_POST['city']:'';
 		$user['area'] = !empty($_POST['area'])?$_POST['area']:'';
-		$user['address'] = !empty($_POST['address'])?addslashes($_POST['address']):'';
+		
 		$birthdateyear = !empty($_POST['birthdateyear'])?$_POST['birthdateyear']:'';
 		$birthdatemonth = !empty($_POST['birthdatemonth'])?$_POST['birthdatemonth']:'';
 		$birthdateday = !empty($_POST['birthdateday'])?$_POST['birthdateday']:'';
 		$user['birthdate']  =$birthdateyear.'-'. sprintf('%02d',$birthdatemonth).'-'.sprintf('%02d',$birthdateday);
-		$user['marital'] = !empty($_POST['maritalstatus'])?$_POST['maritalstatus']:'0';
+		$user['marital'] = !empty($_POST['maritalstatus'])?$_POST['maritalstatus']:'';
 		$user['nationality'] = !empty($_POST['nationality'])?$_POST['nationality']:'';
+		$user['children'] = !empty($_POST['children'])?$_POST['children']:'0';
+		$user['birthplace'] = !empty($_POST['birthplace'])?$_POST['birthplace']:'';
 		$user['occupation'] = !empty($_POST['occupation'])?$_POST['occupation']:'';
+		$user['company_name'] = !empty($_POST['companyname'])?$_POST['companyname']:'';
 		$user['householdincome'] = !empty($_POST['householdincome'])?$_POST['householdincome']:'0';
 		$user['education'] = !empty($_POST['education'])?$_POST['education']:'0';
 		$user['havecar'] = !empty($_POST['havecar'])?$_POST['havecar']:'0';
 		$user['hearabout'] = !empty($_POST['hearabout'])?$_POST['hearabout']:'0';
+		$user['otherlanguage'] = !empty($_POST['otherlanguage'])?$_POST['otherlanguage']:'0';
+		$user['been_mysteryshopper'] = !empty($_POST['been_mysteryshopper'])?$_POST['been_mysteryshopper']:'0';
 		$user['newletters'] = !empty($_POST['newletters'])?$_POST['newletters']:'0';
-		$user['speak_english'] = !empty($_POST['speakenglish'])?$_POST['speakenglish']:'0';
-		$user['interests'] = !empty($_POST['interests'])?$_POST['interests']:'';
+
 		
 //		if (!isset($_SESSION['validatecode']) || ($_POST['code']!='back' && strtolower($_POST['code'])!=strtolower($_SESSION['validatecode']))) {
 //			$msg = array('s'=> 400,'m'=>lang('codeinvalid'),'d'=>'');				
@@ -479,12 +484,13 @@ class passport {
 		
 
 		// 1. create db user
-		$row = $passmod->createNewUser ( $user );
-		if ($row !== false) {
+		$user_id = $passmod->createNewUser ( $user );
+		if ($user_id !== false) {
 
 			// 6.auto login
-			$user ['user_id'] = $row['user_id'];
+			$user ['user_id'] = $user_id;
 			$user ['autologin'] = 0;
+			
 			$this->save_online_user ( $user );
 			
 			$_SESSION ['sex'] = '';
