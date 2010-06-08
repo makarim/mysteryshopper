@@ -19,11 +19,11 @@
 
 	    <div id="tabsD" style="width:98%;margin-left:10px;"> 
 		  <ul> 
-		    <li <?php if($type=='contact') echo 'class="on"';?>><a href="/admin.php/user/detail/contact/user_id/<?php echo $user_id;?>"><span><?php echo lang('contact')?></span></a></li> 
-		    <li <?php if($type=='extinfo') echo 'class="on"';?>><a href="/admin.php/user/detail/extinfo/user_id/<?php echo $user_id;?>" ><span><?php echo lang('profiles')?></span></a></li> 
-		    <li <?php if($type=='other') echo 'class="on"';?>><a href="/admin.php/user/detail/other/user_id/<?php echo $user_id;?>" ><span><?php echo lang('diningcustoms')?></span></a></li> 
-		    <li <?php if($type=='payment') echo 'class="on"';?>><a href="/admin.php/user/detail/payment/user_id/<?php echo $user_id;?>" ><span><?php echo lang('payments')?></span></a></li> 
-		    <li <?php if($type=='upload') echo 'class="on"';?>><a href="/admin.php/user/detail/upload/user_id/<?php echo $user_id;?>" ><span><?php echo lang('uploadface')?></span></a></li> 
+		    <li <?php if($type=='contact') echo 'class="on"';?>><a href="/admin.php?action=user&view=detail&detail=contact&user_id=<?php echo $user_id;?>"><span><?php echo lang('contact')?></span></a></li> 
+		    <li <?php if($type=='extinfo') echo 'class="on"';?>><a href="/admin.php?action=user&view=detail&detail=extinfo&user_id=<?php echo $user_id;?>" ><span><?php echo lang('profiles')?></span></a></li> 
+		    <li <?php if($type=='other') echo 'class="on"';?>><a href="/admin.php?action=user&view=detail&detail=other&user_id=<?php echo $user_id;?>" ><span><?php echo lang('diningcustoms')?></span></a></li> 
+		    <li <?php if($type=='payment') echo 'class="on"';?>><a href="/admin.php?action=user&view=detail&detail=payment&user_id=<?php echo $user_id;?>" ><span><?php echo lang('payments')?></span></a></li> 
+		    <li <?php if($type=='upload') echo 'class="on"';?>><a href="/admin.php?action=user&view=detail&detail=upload&user_id=<?php echo $user_id;?>" ><span><?php echo lang('uploadface')?></span></a></li> 
 		  </ul> 
 		</div>
 

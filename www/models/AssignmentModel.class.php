@@ -81,7 +81,7 @@ class AssignmentModel extends Model {
 		
 	}
 	function getAssignmentApplicantById($a_id){
-		return $this->db->getAll("select r.user_id,r.selected,u.user_nickname as nickname,u.user_email as email,ext.realname,ext.mobile,ext.phone,ext.gender as gender  
+		return $this->db->getAll("select r.user_id,r.selected,u.user_nickname as nickname,u.user_email as email,ext.realname,ext.mobile,ext.workphone as phone,ext.gender as gender  
 		from assignment_rel r 
 		left join user_ext ext on ext.user_id=r.user_id 
 		left join user u on u.user_id=r.user_id 

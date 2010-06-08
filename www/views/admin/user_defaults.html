@@ -28,7 +28,7 @@ function checkOnSubmit(formName) {
        
 }
 function viewUser(user,user_id){
-	var url = "<?php echo $www_site_url?>/admin.php/user/detail/contact/user_id/"+user_id+'/user/'+user;
+	var url = "<?php echo $www_site_url?>/admin.php?action=user&view=detail&detail=contact&user_id="+user_id+'&user='+user;
 	window.location = url;
 //	mini.ajax.get(url, function(r){
 //		var r = eval('(' + r + ')');   
