@@ -571,6 +571,10 @@ class home{
 		}
 	
 		$mystery_shopper_info = $UserModel->getUserInfoById($assignment['user_id'],'gender,birthdate,marital,nationality,householdincome');
+		
+		$attachments = $assignmentModel->getUploadedAttachment($a_id);
+		$this->tpl->assign("attachments",$attachments);
+		
 		$this->tpl->assign("ms_info",$mystery_shopper_info);
 		$this->tpl->assign("assignment",$assignment);
 		$this->tpl->assign("report_questions",$report_questions);

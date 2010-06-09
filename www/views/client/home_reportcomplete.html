@@ -37,14 +37,14 @@ function printpage(oper){
 		    <p>评分说明：</p>
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" class="missionReport">
           <tr>
-            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">不适用</font></td>
-            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">差</font></td>
-            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">不好</font></td>
-            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">需要改进</font></td>
-            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">一般</font></td>
-            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">好</font></td>
-            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">很好</font></td>
-            <td  height="30" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">完美</font></td>
+            <td  height="20" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">不适用</font></td>
+            <td  height="20" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">差</font></td>
+            <td  height="20" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">不好</font></td>
+            <td  height="20" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">需要改进</font></td>
+            <td  height="20" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">一般</font></td>
+            <td  height="20" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">好</font></td>
+            <td  height="20" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">很好</font></td>
+            <td  height="20" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF">完美</font></td>
           </tr> 
           <tr>
             <td align="left">n/a</td>
@@ -60,7 +60,7 @@ function printpage(oper){
           </table>
          <table width="100%" border="1" cellpadding="0" cellspacing="1" class="missionReport" style="margin-top:20px;">
           <tr>
-            <td colspan="3" class="title" bgcolor="#9F0000" align="left" height="25"><font color="#FFFFFF"><?php echo lang('spot_mystery');?></font></td>
+            <td colspan="3" class="title" bgcolor="#9F0000" align="left" height="20"><font color="#FFFFFF"><?php echo lang('spot_mystery');?></font></td>
           </tr>
           <tr>
             <td width="250" align="left"><?php echo lang('gender')?>:</td>
@@ -96,7 +96,7 @@ function printpage(oper){
 		foreach ($report_questions as $k=>$v){?>
 		<table width="100%" border="1" cellpadding="0" cellspacing="1" class="missionReport" style="margin-top:20px;">
           <tr>
-            <td colspan="3" class="title" bgcolor="#9F0000" align="left" height="25"><font color="#FFFFFF"><?php echo lang($k);?></font></td>
+            <td colspan="3" class="title" bgcolor="#9F0000" align="left" height="20"><font color="#FFFFFF"><?php echo lang($k);?></font></td>
           </tr>
           <?php
 			foreach ($v as $kk=>$vv){
@@ -133,7 +133,7 @@ function printpage(oper){
           <? }else{?>
 			<tr>
 			 <td width="30" rowspan="2" valign="top"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
-             <td colspan="2"  bgcolor="#aaa" height="30" >
+             <td colspan="2"  bgcolor="#aaa" height="20" >
             		<?php echo multiwordbreak($vv['rq_question']);?>
             </td>
           </tr>	
@@ -154,7 +154,28 @@ function printpage(oper){
 		}?>
 		
  		<!--endprint1-->
-				
+		 <TABLE width="100%" border="0" cellspacing="1" cellpadding="0" class="missionReport" style="margin-top:20px;">
+<TR>
+<TD width="20%" colspan="3" class="title"><?php echo lang("uploadattachment")?></TD>
+
+
+</TR>
+<?php 
+if(is_array($attachments)){
+	foreach ($attachments as $k=>$a){
+	?>
+
+<TR>
+<TD width="20%"><?php echo $k+1;?>.</TD>
+<TD ><?php echo '<a href="/public/upload/'.$a['f_name'].'">'.$a['f_name'].'</a> '?></TD>
+<TD ><?php echo $a['f_created'];?></TD>
+</TR>
+<?php
+	}
+}
+?>
+<TR>
+</table>		
 
 </div>
 

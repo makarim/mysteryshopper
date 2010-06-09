@@ -70,7 +70,7 @@
     <li <?php  if(isset($_GET['view'])&&($_GET['view']=='assignment')) echo 'class="on"';?>><a href="/index.php/home/assignment/a_id/<?php echo $a_id;?>"><span ><?php echo lang("a_demand");?></span></a></li> 
     <li <?php if(isset($_GET['view'])&&($_GET['view']=='demand')) echo 'class="on"';?>><a href="/index.php/home/demand/a_id/<?php echo $a_id;?>"><span ><?php echo lang("a_desc");?></span></a></li> 
     <li <?php if(isset($_GET['view'])&&($_GET['view']=='reportpreview')) echo 'class="on"';?>><a href="/index.php/home/reportpreview/a_id/<?php echo $a_id;?>"  ><span><?php echo lang("preview")?></span></a></li> 
-    <li <?php if(isset($_GET['view'])&&($_GET['view']=='quiz')) echo 'class="on"';?>><a href="/index.php/home/quiz/a_id/<?php echo $a_id;?>" ><span><?php echo lang("a_quiz")?></span></a></li> 
+    <?php if($assignmentinfo['a_istest']==1){?><li <?php if(isset($_GET['view'])&&($_GET['view']=='quiz')) echo 'class="on"';?>><a href="/index.php/home/quiz/a_id/<?php echo $a_id;?>" ><span><?php echo lang("a_quiz")?></span></a></li> <?php }?>
     <li <?php if(isset($_GET['view'])&&($_GET['view']=='report')) echo 'class="on"';?>><a href="/index.php/home/report/a_id/<?php echo $a_id;?>" ><span><?php echo lang("fillout")?></span></a></li> 
     <li <?php if(isset($_GET['view'])&&($_GET['view']=='upload')) echo 'class="on"';?>><a href="/index.php/home/upload/a_id/<?php echo $a_id;?>" ><span><?php echo lang("uploadattachment")?></span></a></li> 
   </ul> 

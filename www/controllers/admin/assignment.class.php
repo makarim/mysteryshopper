@@ -82,6 +82,7 @@ class assignment{
 		$_POST ['re_id'] = intval ( $_POST ['re_id'] );
 		$_POST ['a_desc'] = addslashes( $_POST ['a_desc'] );
 		$_POST ['a_demand'] = addslashes( $_POST ['a_demand']);
+		$_POST ['a_istest'] =  isset($_POST ['a_istest'])?1:0 ;
 		$_POST ['a_quiz'] = addslashes( $_POST ['a_quiz'] );
 		$_POST ['a_hasphoto'] = !isset ( $_POST ['a_hasphoto'] )?0:1;
 		$_POST ['a_hasaudio'] = !isset ( $_POST ['a_hasaudio'] )?0:1;
@@ -103,6 +104,8 @@ class assignment{
 		$assignment['re_id'] =  $_POST ['re_id'] ;
 		$assignment['a_desc'] =  $_POST ['a_desc'] ;
 		$assignment['a_demand'] =  $_POST ['a_demand'] ;
+		$assignment['a_istest'] =  $_POST ['a_istest'] ;
+		if($assignment['a_istest']==0) $assignment['a_quiz_pass'] = 1 ;
 		$assignment['a_quiz'] =  $_POST ['a_quiz'] ;
 		$assignment['a_hasphoto'] =  $_POST ['a_hasphoto'] ;
 		$assignment['a_hasaudio'] =  $_POST ['a_hasaudio'] ;
@@ -174,6 +177,9 @@ class assignment{
 		$updates['a_title'] = empty($_POST ['a_title'])?"":addslashes($_POST ['a_title']);
 		$updates['a_desc'] = empty($_POST ['a_desc'])?"":addslashes($_POST ['a_desc']);
 		$updates['a_demand'] = empty($_POST ['a_demand'])?"":addslashes($_POST ['a_demand']);
+		$updates['a_istest'] = isset($_POST ['a_istest'])?1:0; 
+		if($updates['a_istest']==0) $updates['a_quiz_pass'] =1;
+		if($updates['a_istest']==1) $updates['a_quiz_pass'] =0;
 		$updates['a_quiz'] = empty($_POST ['a_quiz'])?"":($_POST ['a_quiz']);
 		$updates['a_sdate'] = empty($_POST ['a_sdate'])?"":trim($_POST ['a_sdate']);
 		$updates['a_edate'] =empty($_POST ['a_edate'])?"":trim($_POST ['a_edate']);

@@ -192,12 +192,25 @@ class report{
 				$report_questions[$v] = $arr;
 				
 			}
-		
+		$attachments = $assignmentModel->getUploadedAttachment($a_id);
+		$this->tpl->assign("attachments",$attachments);
 		$this->tpl->assign("a_id",$a_id);
 		$this->tpl->assign("report_questions",$report_questions);
 		$this->tpl->assign("assignmentinfo",$assignmentinfo);
 	}
-	
+	function view_delattachment(){
+		$f_id = $_GET['f_id'];
+		include_once("AssignmentModel.class.php");
+    	$assignmentModel = new AssignmentModel();
+		$rs =  $assignmentModel->delUploadAttachment($f_id);
+		if($rs){
+			show_message_goback(lang('success'));
+			//redirect($GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/assignment/defaults");
+		}else{
+			show_message_goback(lang('failed'));
+		
+		}
+	}
 	function op_audit(){
 		$a_id= $_POST['a_id'];
 		include_once("AssignmentModel.class.php");

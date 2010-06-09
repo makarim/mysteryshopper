@@ -100,7 +100,11 @@ function checkOnSubmit(formName) {
 						<tr>
 							<td><?php echo lang('a_demand')?>:</td>
 							<td><textarea type="text" name="a_demand" rows="10" style="width:500px" class="textfield"/></textarea><input type="button" value="Split" onclick="document.addassignmentform.a_demand.value+='&lt;!--!--&gt;';"></td>
-						</tr>					
+						</tr>	
+						<tr>
+							<td><?php echo lang('istest')?>:</td>
+							<td><input type="checkbox" name="a_istest" value="1" checked/></td>
+						</tr>						
 						<tr>
 							<td><?php echo lang('a_quiz')?>:</td>
 							<td>

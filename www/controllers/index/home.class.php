@@ -101,11 +101,15 @@ class home{
 			$is_view =1;
 		}
 		$do_quiz = '';
-		if(isset($_SESSION['a_'.$a_id]['pass']) && $_SESSION['a_'.$a_id]['pass']==1){
+		if($assignmentinfo['a_istest']==1){
+			if(isset($_SESSION['a_'.$a_id]['pass']) && $_SESSION['a_'.$a_id]['pass']==1){
+				$do_quiz = 'pass';
+			}
+			if(isset($_SESSION['a_'.$a_id]['pass']) && $_SESSION['a_'.$a_id]['pass']==0){
+				$do_quiz = 'fail';
+			}
+		}else{
 			$do_quiz = 'pass';
-		}
-		if(isset($_SESSION['a_'.$a_id]['pass']) && $_SESSION['a_'.$a_id]['pass']==0){
-			$do_quiz = 'fail';
 		}
 		
 		if($assignmentinfo['a_fdate']=='0000-00-00 00:00:00' && $assignmentinfo['a_audit']==0){
