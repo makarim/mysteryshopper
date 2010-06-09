@@ -368,6 +368,9 @@ class AssignmentModel extends Model {
 	function getUploadedAttachment($a_id){
 		return $this->db->getAll("select * from assignment_attachment where a_id='{$a_id}'");
 	}
+	function delUploadAttachment($f_id){
+		return $this->db->execute("delete from assignment_attachment where f_id='{$f_id}'");
+	}
 	function getFirstAssignmentByCId($cid){
 		return $this->db->getOne("select a_id from assignment where c_id='$cid' order by a_id asc limit 1");
 	}

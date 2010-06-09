@@ -174,7 +174,7 @@ var account = '';
 
 function ajaxCall(s) {
 	account = s;
-	mini.ajax.get("<?php echo $www_site_url?>/index.php/passport/checkuser/user/" + escape(document.getElementById(s).value), function(r){
+	mini.ajax.get("<?php echo $www_site_url?>/index.php?action=passport&view=checkuser&user=" + escape(document.getElementById(s).value), function(r){
 	    captchaOK = r;  
 	    if(captchaOK != 1) {              
 	      	yav.displayMsg(account, '<?php echo lang('userexist')?>', yav_config.innererror);

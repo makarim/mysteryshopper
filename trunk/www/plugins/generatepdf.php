@@ -12,7 +12,7 @@ if($_POST){
 	$strContent =  '<style>.missionReport {background-color:#999;}
 	.missionReport td{background-color:#FFF;}
 	.missionReport .title{background-color:#9F0000;color:#FFF;text-align:center;}
-	</style>'.stripslashes($_POST['c']);
+	</style>'.stripslashes(str_replace(array("（","）"),array("(",")"),$_POST['c']));
 }
 //$strContent = str_replace("“",'"',$strContent);
 //$strContent = str_replace("”",'"',$strContent);
