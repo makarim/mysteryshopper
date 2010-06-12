@@ -160,7 +160,7 @@ class home{
 	
 	function view_overall(){
 		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
-		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
+		$edate = !empty($_GET['edate'])?$_GET['edate']:date("Y-m-d");
 		$type = !empty($_GET['overall'])?$_GET['overall']:"summary";
 		$type_id = isset($GLOBALS['gTypes'][$type])?$GLOBALS['gTypes'][$type]:'';
 	
@@ -229,7 +229,7 @@ class home{
 	}
 	function view_environment(){
 		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
-		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
+		$edate = !empty($_GET['edate'])?$_GET['edate']:date("Y-m-d");
 		$type = !empty($_GET['environment'])?$_GET['environment']:"summary";
 		$type_id = isset($GLOBALS['gTypes'][$type])?$GLOBALS['gTypes'][$type]:'';
 		$def_stores = array();
@@ -284,7 +284,7 @@ class home{
 	}
 	function view_service(){
 		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
-		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
+		$edate = !empty($_GET['edate'])?$_GET['edate']:date("Y-m-d");
 		$type = !empty($_GET['service'])?$_GET['service']:"summary";
 		$type_id = isset($GLOBALS['gTypes'][$type])?$GLOBALS['gTypes'][$type]:'';
 		$def_stores = array();
@@ -351,7 +351,7 @@ class home{
 	}
 	function view_product(){
 		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
-		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
+		$edate = !empty($_GET['edate'])?$_GET['edate']:date("Y-m-d");
 		$type = !empty($_GET['product'])?$_GET['product']:"summary";
 		$type_id = isset($GLOBALS['gTypes'][$type])?$GLOBALS['gTypes'][$type]:'';
 		$def_stores = array();
@@ -379,7 +379,11 @@ class home{
 			foreach ($assignments as $k=>$v){
 				$v['yesorno'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,$GLOBALS['gTypes']['yesorno']);
 				$v['vote'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,$GLOBALS['gTypes']['vote']);
-				if($type=='summary') $a_average += ($v['yesorno']+$v['vote'])/2;
+				//echo $v['yesorno'];
+				if($type=='summary') {
+					if($v['yesorno']!='-'&& $v['vote']!='-') $a_average += ($v['yesorno']+$v['vote'])/2;
+					elseif ($v['yesorno']=='-' || $v['vote']=='-') $a_average += ($v['yesorno']+$v['vote']);
+				}
 				if($type=='yesorno') $a_average += $v['yesorno'];
 				if($type=='vote') $a_average += $v['vote'];
 				$assignments[$k] = $v;
@@ -411,7 +415,7 @@ class home{
 		$type = !empty($_GET['stores'])?$_GET['stores']:"summary";
 		$type_id = isset($GLOBALS['gTypes'][$type])?$GLOBALS['gTypes'][$type]:'';
 		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
-		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
+		$edate = !empty($_GET['edate'])?$_GET['edate']:date("Y-m-d");
 		$cs_id = !empty($_GET['cs_id'])?$_GET['cs_id']:$def_store_id;
 		$selstore = isset($_GET['selstore'])?$_GET['selstore']:$def_store_name;
 		
@@ -476,7 +480,7 @@ class home{
 		$def_store_name = isset($stores[0]['cs_name'])?$stores[0]['cs_name']:'';
 		$type = !empty($_GET['stores'])?$_GET['stores']:"summary";
 		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
-		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
+		$edate = !empty($_GET['edate'])?$_GET['edate']:date("Y-m-d");
 		$cs_id = !empty($_GET['cs_id'])?$_GET['cs_id']:$def_store_id;
 		$selstore = isset($_GET['selstore'])?$_GET['selstore']:$def_store_name;
 		
@@ -519,7 +523,7 @@ class home{
 		$def_store_name = isset($stores[0]['cs_name'])?$stores[0]['cs_name']:'';
 		$type = !empty($_GET['stores'])?$_GET['stores']:"summary";
 		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
-		$edate = !empty($_GET['edate'])?$_GET['edate']:"";
+		$edate = !empty($_GET['edate'])?$_GET['edate']:date("Y-m-d");
 		$cs_id = !empty($_GET['cs_id'])?$_GET['cs_id']:$def_store_id;
 		$selstore = isset($_GET['selstore'])?$_GET['selstore']:$def_store_name;
 		

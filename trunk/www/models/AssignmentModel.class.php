@@ -352,10 +352,15 @@ class AssignmentModel extends Model {
 			}
 			//echo $a_id."=".$sum."/".$n."<br/>";
 			// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
-			if($n>0)$average = $sum/$n;
-			return round($average,2);
+			if($n>0){
+				$average = $sum/$n;
+				return round($average,2);
+			}else{
+				return '-';
+			}
+			
 		}
-		return 0;
+		return '0';
 	}
 	function getTimeByRqId($rq_id,$a_id){
 		$sql = "select ans_answer4 from answer where rq_id='".$rq_id."' and a_id = '".$a_id."' and rq_type=4";

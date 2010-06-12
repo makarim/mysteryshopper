@@ -49,7 +49,8 @@ class ChartModel extends Model {
 					
 					if($n_1>0) $average_1 = $sum_1/$n_1 ;
 					if($n_2>0) $average_2 = $sum_2/$n_2 ;
-					$average += ($average_1 + $average_2)/2;
+					if($n_1>0 && $n_2>0) $average += ($average_1 + $average_2)/2;
+					else if($n_1==0 || $n_2==0) $average += ($average_1 + $average_2);
 					//echo $csid."_".$v['a_id']."=".$average_1."/".$average_2."=".($average)."<br/>";
 				}
 				
