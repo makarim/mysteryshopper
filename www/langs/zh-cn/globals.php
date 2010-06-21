@@ -529,7 +529,7 @@ $GLOBALS['gLang']['what_is_mystery_shopping_answer'] = "  <p><br />
       <p>&nbsp;</p>
       <p>任何想监控其业务活动、设施、产品递送和服务性能成效的企业都需要神秘购物服务。一个发展中的品牌在进行扩张之前都需要了解其品牌当前所处的地位。同样，一个已经获得成功的品牌更需要在所有场所中保持或提高其产品标准，以加强在市场上的品牌地位。因为监控，保持和提高标准是企业发展一个长期品牌的战略关键。</p>";
 $GLOBALS['gLang']['more'] = '更多...';
-$GLOBALS['gLang']['faq'] = '帮助';
+$GLOBALS['gLang']['faq'] = '常见问题';
 $GLOBALS['gLang']['shoppermain'] = '神秘顾客首页';
 $GLOBALS['gLang']['protocol'] = '协议条款';
 
@@ -580,8 +580,8 @@ $GLOBALS['gLang']['my_profile'] = '我的资料';
 $GLOBALS['gLang']['top_spot_of_month'] = '上月最受好评';
 $GLOBALS['gLang']['top_shopper_of_month'] = '上月最佳神秘顾客';
 $GLOBALS['gLang']['my_assignments'] = '我的任务';
-$GLOBALS['gLang']['start_date'] = '开始时间';
-$GLOBALS['gLang']['end_date'] = '结束时间';
+$GLOBALS['gLang']['start_date'] = '开始';
+$GLOBALS['gLang']['end_date'] = '结束';
 $GLOBALS['gLang']['status'] = '完成进度';
 $GLOBALS['gLang']['comment_highlight'] = '推荐评论';
 $GLOBALS['gLang']['recent_assignments'] = '最近任务';

@@ -525,7 +525,7 @@ $GLOBALS['gLang']['what_is_mystery_shopping'] = 'What is Mystery Shopping?';
 $GLOBALS['gLang']['what_is_mystery_shopping_answer'] = ' <p><br />Mystery Shopping is a method using informed shoppers to anonymously assess a brand’s core standards that involves customer service, operations, employee integrity, merchandising, and product quality.
 Whenever there is a deviation from these standards, it indicates inconsistency.  Auditing the execution of these standards by way of mystery shoppers gives the most genuine data.</p>';
 $GLOBALS['gLang']['more'] = 'More...';
-$GLOBALS['gLang']['faq'] = 'Help';
+$GLOBALS['gLang']['faq'] = 'FAQ';
 $GLOBALS['gLang']['shoppermain'] = 'Shopper Main';
 $GLOBALS['gLang']['protocol'] = 'Terms & Conditions';
 
@@ -576,8 +576,8 @@ $GLOBALS['gLang']['my_profile'] = 'My Profile';
 $GLOBALS['gLang']['top_spot_of_month'] = 'Spot of the Month';
 $GLOBALS['gLang']['top_shopper_of_month'] = 'Shopper of the Month';
 $GLOBALS['gLang']['my_assignments'] = 'My Assignments';
-$GLOBALS['gLang']['start_date'] = 'Start Date';
-$GLOBALS['gLang']['end_date'] = 'End Date';
+$GLOBALS['gLang']['start_date'] = 'From';
+$GLOBALS['gLang']['end_date'] = 'To';
 $GLOBALS['gLang']['status'] = 'Status';
 $GLOBALS['gLang']['comment_highlight'] = 'Comment Highlights';
 $GLOBALS['gLang']['recent_assignments'] = 'Recent Assignments';
