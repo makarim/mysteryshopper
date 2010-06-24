@@ -35,19 +35,6 @@
 						</td>
 						<td><?php echo lang('ssomode_label')?></td>
 					</tr>					
-					<tr>
-						<th colspan="2"><?php echo lang('timezone')?>:</th>
-					</tr>
-					<tr>
-						<td>
-							<select  name="timezone">
-  <?php foreach($timezonelist as $v){?>
-  <option value="<?php echo $v?>" <?php if($v==$timezoneset) echo 'selected';?> ><?php echo $v?></option>
-<?php }?>
-</select>
-						</td>
-						<td><?php echo lang('timezone_label')?></td>
-					</tr>
 					
 				</table>
 				<div class="opt"><input type="submit" name="submit" value="<?php echo lang('submit')?>" class="button" tabindex="3" /></div>

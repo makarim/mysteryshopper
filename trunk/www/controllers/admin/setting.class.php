@@ -25,7 +25,8 @@ class setting{
     	$this->tpl->assign('timezoneset',$timezoneset);
     	$this->tpl->assign('ssomode',SSO_MODE);
     	$this->tpl->assign('app_status',APP_STATUS);
-    	$this->tpl->assign('timezonelist',timezone_identifiers_list());
+    	//$this->tpl->assign('timezonelist',timezone_identifiers_list());
+    	
     }
     function op_basicset(){
     	
@@ -53,7 +54,7 @@ class setting{
 		
 		$config_content = file_get_contents(APP_DIR."/config/config.ini.php");
 		$config_content= preg_replace('/("APP_STATUS"\s*,\s*)(.*?)(\);)/ism','\\1"'.$_POST['app_status'].'"\\3',$config_content);
-		$config_content= preg_replace('/(date_default_timezone_set\()(.*?)(\);)/ism','\\1"'.$_POST['timezone'].'"\\3',$config_content);
+		//$config_content= preg_replace('/(date_default_timezone_set\()(.*?)(\);)/ism','\\1"'.$_POST['timezone'].'"\\3',$config_content);
 		$r3 = write_file($config_content,APP_DIR."/config/config.ini.php");
 	
 		
