@@ -214,7 +214,8 @@ if(is_array($attachments)){
 			          	</tr>
 			           <tr>
 				           <td style="height:50px">
-													<textarea  style="width:100%;font-size:12px;height:60px;" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>"><?php echo $vv['answer']; ?></textarea>
+													<textarea  style="width:100%;font-size:12px;height:60px;" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" id="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>"><?php echo $vv['answer']; ?></textarea>
+													<input type="button" value="Split" onclick="document.getElementById('rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>').value+='&lt;!--!--&gt;';">
 				           </td>
 			            </tr>
 		             </table>
