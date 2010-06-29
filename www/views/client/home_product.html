@@ -8,9 +8,9 @@
 <div class="admincontent">
 <div id="tabsD" style="width:100%"> 
   <ul> 
-   	<li <?php if($type=='summary') echo 'class="on"';?>><a href="/client.php/home/product/summary"><span>综合</span></a></li> 
-    <li <?php if($type=='yesorno') echo 'class="on"';?>><a href="/client.php/home/product/yesorno"><span>是非题</span></a></li> 
-    <li <?php if($type=='vote') echo 'class="on"';?>><a href="/client.php/home/product/vote"><span>打分题</span></a></li> 
+   	<li <?php if($type=='summary') echo 'class="on"';?>><a href="/client.php/home/product/summary"><span><?php echo lang("overview")?></span></a></li> 
+    <li <?php if($type=='yesorno') echo 'class="on"';?>><a href="/client.php/home/product/yesorno"><span><?php echo lang("yesorno")?></span></a></li> 
+    <li <?php if($type=='vote') echo 'class="on"';?>><a href="/client.php/home/product/vote"><span><?php echo lang("vote")?></span></a></li> 
    
   </ul> 
 </div>
@@ -38,13 +38,13 @@
 <table width="100%" height="50" border="0" cellpadding="0" cellspacing="0" class="clear">
   <tr>
     <td class="CsearchLeft">&nbsp;</td>
-    <td align="center" class="CsearchCenter">选择地点:<input name="selstore" type="text" class="ClocationInput" onclick="showmitistores();" id="selstore" value="<?php if(count($selstores)==0){ echo "请选择"; }else { if(count($selstores)==count($stores)) echo "所有地点"; else echo "部分地点"; }?>" />
+    <td align="center" class="CsearchCenter"><?php echo lang("select_location")?>:<input name="selstore" type="text" class="ClocationInput" onclick="showmitistores();" id="selstore" value="<?php if(count($selstores)==0){ echo "--"; }else { if(count($selstores)==count($stores)) echo  lang("all_locations"); else echo ""; }?>" />
    
-      开始时间：
+      <?php echo lang("a_sdate")?>：
       <input name="sdate" type="text" class="CtimeInput" id="sdate" value="<?php echo $sdate;?>" onclick="showcalendar();"/>
-      结束时间：
+      <?php echo lang("a_edate")?>：
       <input name="edate" type="text" class="CtimeInput" id="edate" value="<?php echo $edate;?>" onclick="showcalendar();" />
-      <input name="button" type="submit" class="btnblue" id="button" value="查看报表" /></td>
+      <input name="button" type="submit" class="btnblue" id="button" value="<?php echo lang("search_report")?>" /></td>
     <td class="CsearchRight">&nbsp;</td>
 
   </tr>
@@ -60,7 +60,7 @@
       <a href="javascript:exportImage();"><img src="<?php echo $www_site_url?>/public/images/export_image-icon.gif" border="0" title="export Image"></a>
       <a href="javascript:print();"><img src="<?php echo $www_site_url?>/public/images/print_icon.jpg" border="0" title="Print"></a>
       </div>
-      	<div class="table2Title"><div class="table2TitleLeft"><span>对比图</span></div></div>
+      	<div class="table2Title"><div class="table2TitleLeft"><span><?php echo lang("bar_graph")?></span></div></div>
       </div>
  
     </div></td>
@@ -107,12 +107,12 @@ function exportImage() {
 <?php if($type=='time'){?>
           <table width="100%" border="0" cellpadding="0" cellspacing="1" class="CinitData">
                 <tr>
-                  <td colspan="5" class="title">原始数据</td>
+                  <td colspan="5" class="title"><?php echo lang("original_figures")?></td>
                 </tr>
                  <tr>
-                  <td>时间</td>
-                  <td>任务</td>
-                  <td>时间/分钟</td>
+                  <td><?php echo lang("an_date")?></td>
+                  <td><?php echo lang("assignment")?></td>
+                  <td><?php echo lang("an_date")?>/<?php echo lang("minute")?></td>
                  
                 </tr>
                 <?php
@@ -135,13 +135,13 @@ function exportImage() {
 }else {?>         
          <table width="100%" border="0" cellpadding="0" cellspacing="1" class="CinitData">
                 <tr>
-                  <td colspan="5" class="title">原始数据</td>
+                  <td colspan="5" class="title"><?php echo lang("original_figures")?></td>
                 </tr>
                  <tr>
-                  <td>时间</td>
-                  <td>任务</td>
-                  <?php if($type=='yesorno'||$type=='summary'){?><td>是非题</td><?php }?> 
-                  <?php if($type=='vote'||$type=='summary'){?><td>打分题</td><?php }?>
+                  <td><?php echo lang("an_date")?></td>
+                  <td><?php echo lang("assignment")?></td>
+                  <?php if($type=='yesorno'||$type=='summary'){?><td><?php echo lang("yesorno")?></td><?php }?> 
+                  <?php if($type=='vote'||$type=='summary'){?><td><?php echo lang("vote")?></td><?php }?>
                 </tr>
                 <?php
                 if(isset($assignments)){

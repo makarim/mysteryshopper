@@ -27,13 +27,13 @@
 <table width="100%" height="50" border="0" cellpadding="0" cellspacing="0" class="clear">
   <tr>
     <td class="CsearchLeft">&nbsp;</td>
-    <td align="center" class="CsearchCenter"><input name="selstore" type="text" class="ClocationInput" onclick="showstores();" id="selstore" value="<?php if(empty($selstore)) echo "请选择地点"; else echo splitx($selstore);?>" />
+    <td align="center" class="CsearchCenter"><input name="selstore" type="text" class="ClocationInput" onclick="showstores();" id="selstore" value="<?php if(empty($selstore)) echo "--"; else echo splitx($selstore);?>" />
    
-      开始时间：
+      <?php echo lang("a_sdate")?>：
       <input name="sdate" type="text" class="CtimeInput" id="sdate" value="<?php echo $sdate;?>" onclick="showcalendar();"/>
-      结束时间：
+      <?php echo lang("a_edate")?>：
       <input name="edate" type="text" class="CtimeInput" id="edate" value="<?php echo $edate;?>" onclick="showcalendar();" />
-      <input name="button" type="submit" class="btnblue" id="button" value="提交" /></td>
+      <input name="button" type="submit" class="btnblue" id="button" value="<?php echo lang("submit")?>" /></td>
     <td class="CsearchRight">&nbsp;</td>
 
   </tr>
@@ -43,12 +43,12 @@
 <br />
  <table width="100%" border="0" cellpadding="0" cellspacing="1" class="historyMission">
                 <tr>
-                  <td class="title">完成日期</td>
-                  <td class="title">品牌</td>
+                  <td class="title"><?php echo lang("finish_date")?></td>
+                  <td class="title"><?php echo lang("brands")?></td>
 
-                  <td class="title">分店</td>
-                  <td class="title">任务/问卷</td>
-                  <td class="title">报酬（单价：人民币）</td>
+                  <td class="title"><?php echo lang("stores")?></td>
+                  <td class="title"><?php echo lang("assignment")?>/<?php echo lang("report")?></td>
+                  <td class="title"><?php echo lang("income")?>（<?php echo lang("income_unit")?>）</td>
                 </tr>
                 <?php
               if(isset($myassignment['records'])&& is_array($myassignment['records'])){

@@ -83,27 +83,28 @@ class corporation{
 		}	
 		$corporation['c_title'] = empty($_POST ['c_title'])?"":addslashes($_POST ['c_title']);
 		$corporation['c_password'] = md5(md5($_POST ['c_password']));
-		$corporation['c_name'] =  $_POST ['c_name'] ;
-		$corporation['c_initial'] =  $_POST ['c_initial'] ;
+		$corporation['c_name'] =  empty($_POST ['c_name'])?"":$_POST ['c_name'] ;
+		$corporation['c_initial'] =  empty($_POST ['c_initial'])?"":$_POST ['c_initial'] ;
 		
-		$corporation['c_industry'] =  $_POST ['c_industry'] ;
-		$corporation['c_department'] =  strip_tags($_POST ['c_department']);
-		$corporation['c_otherphone'] =  strip_tags($_POST ['c_otherphone']);
-		$corporation['c_companyaddress'] = strip_tags( $_POST ['c_companyaddress']);
-		$corporation['c_province'] =  $_POST ['c_province'] ;
-		$corporation['c_city'] =  $_POST ['c_city'] ;
-		$corporation['c_district'] =  $_POST ['c_district'] ;
-		$corporation['c_workemail'] =  strip_tags($_POST ['c_workemail']);
-		$corporation['c_website'] =  strip_tags($_POST ['c_website']);
-		$corporation['c_companytype'] =  $_POST ['c_companytype'] ;
-		$corporation['c_companycate'] =  $_POST ['c_companycate'] ;
-		$corporation['c_foodcate'] =  $_POST ['c_foodcate'] ;
-		$corporation['c_companysize'] =  $_POST ['c_companysize'] ;
-		$corporation['c_avgbill'] =  strip_tags($_POST ['c_avgbill']);
+		$corporation['c_industry'] =  isset($_POST ['c_industry'])?$_POST ['c_industry']:"";
+		$corporation['c_department'] = isset($_POST ['c_department'])?strip_tags($_POST ['c_department']):"";
+		$corporation['c_otherphone'] =  isset($_POST ['c_otherphone'])?strip_tags($_POST ['c_otherphone']):"";
+		$corporation['c_companyaddress'] = isset( $_POST ['c_companyaddress'])?strip_tags( $_POST ['c_companyaddress']):"";
+		$corporation['c_province'] =  isset($_POST ['c_province'])?$_POST ['c_province']:"";
+		$corporation['c_city'] =  isset($_POST ['c_city'])?$_POST ['c_city']:"" ;
+		$corporation['c_district'] =  isset($_POST ['c_district'] )?$_POST ['c_district']:"";
+		$corporation['c_workemail'] =  isset($_POST ['c_workemail'])?strip_tags($_POST ['c_workemail']):"";
+		$corporation['c_website'] =  isset($_POST ['c_website'])?strip_tags($_POST ['c_website']):"";
+		$corporation['c_companytype'] =  isset($_POST ['c_companytype'])?$_POST ['c_companytype']:"" ;
+		$corporation['c_companycate'] =  isset($_POST ['c_companycate'])?$_POST ['c_companycate']:"" ;
+		$corporation['c_foodcate'] =  isset($_POST ['c_foodcate'])?$_POST ['c_foodcate']:"";
+		$corporation['c_companysize'] =  isset($_POST ['c_companysize'])?$_POST ['c_companysize']:"";
+		$corporation['c_avgbill'] =  isset($_POST ['c_avgbill'])?intval($_POST ['c_avgbill']):"0";
 		
 		$corporation['c_contacter'] = empty($_POST ['c_contacter'])?"":addslashes(strip_tags($_POST ['c_contacter']));
 		$corporation['c_phone'] = empty($_POST ['c_phone'])?"":addslashes($_POST ['c_phone']);
 		$corporation['c_intro'] =empty($_POST ['c_intro'])?"":strip_tags($_POST ['c_intro']);
+		$corporation['c_logo'] = '';
 		if(isset($_FILES['c_logo']) && $_FILES['c_logo']['error']==0){
 			$img_ext = substr($_FILES['c_logo']['name'],strrpos($_FILES['c_logo']['name'],'.'));
 			$corporation['c_logo'] = "logo_".uniqid().$img_ext;

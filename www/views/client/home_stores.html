@@ -8,10 +8,10 @@
 <div class="admincontent">
 <div id="tabsD" style="width:100%"> 
   <ul> 
-	<li <?php if($type=='summary') echo 'class="on"';?>><a href="/client.php/home/stores/summary"><span>综合</span></a></li> 
-    <li <?php if($type=='yesorno') echo 'class="on"';?>><a href="/client.php/home/stores/yesorno"><span>是非题</span></a></li> 
-    <li <?php if($type=='vote') echo 'class="on"';?>><a href="/client.php/home/stores/vote"><span>打分题</span></a></li> 
-    <li <?php if($type=='time') echo 'class="on"';?>><a href="/client.php/home/stores/time"><span>时间题</span></a></li> 
+	<li <?php if($type=='summary') echo 'class="on"';?>><a href="/client.php/home/stores/summary"><span><?php echo lang("overview")?></span></a></li> 
+    <li <?php if($type=='yesorno') echo 'class="on"';?>><a href="/client.php/home/stores/yesorno"><span><?php echo lang("yesorno")?></span></a></li> 
+    <li <?php if($type=='vote') echo 'class="on"';?>><a href="/client.php/home/stores/vote"><span><?php echo lang("vote")?></span></a></li> 
+    <li <?php if($type=='time') echo 'class="on"';?>><a href="/client.php/home/stores/time"><span><?php echo lang("score")?></span></a></li> 
   </ul> 
 </div>
 <div id="storelist" style="width: 210px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:150;"> 
@@ -35,13 +35,13 @@
 <table width="100%" height="50" border="0" cellpadding="0" cellspacing="0" class="clear">
   <tr>
     <td class="CsearchLeft">&nbsp;</td>
-    <td align="center" class="CsearchCenter"><input name="selstore" type="text" class="ClocationInput" onclick="showstores();" id="selstore" value="<?php if(empty($selstore)) echo "请选择地点"; else echo $selstore;?>" />
+    <td align="center" class="CsearchCenter"><input name="selstore" type="text" class="ClocationInput" onclick="showstores();" id="selstore" value="<?php if(empty($selstore)) echo "--"; else echo $selstore;?>" />
    
-      开始时间：
+     <?php echo lang("a_sdate")?>：
       <input name="sdate" type="text" class="CtimeInput" id="sdate" value="<?php echo $sdate;?>" onclick="showcalendar();"/>
-      结束时间：
+      <?php echo lang("a_edate")?>：
       <input name="edate" type="text" class="CtimeInput" id="edate" value="<?php echo $edate;?>" onclick="showcalendar();" />
-      <input name="button" type="submit" class="btnblue" id="button" value="查看报表" /></td>
+      <input name="button" type="submit" class="btnblue" id="button" value="<?php echo lang("search_report")?>" /></td>
     <td class="CsearchRight">&nbsp;</td>
 
   </tr>
@@ -57,7 +57,7 @@
       <a href="javascript:exportImage();"><img src="<?php echo $www_site_url?>/public/images/export_image-icon.gif" border="0" title="export Image"></a>
       <a href="javascript:print();"><img src="<?php echo $www_site_url?>/public/images/print_icon.jpg" border="0" title="Print"></a>
       </div>
-      	<div class="table2Title"><div class="table2TitleLeft"><span>趋势图</span></div></div>
+      	<div class="table2Title"><div class="table2TitleLeft"><span><?php echo lang("graphical_chart")?></span></div></div>
       </div>
 
     </div></td>
@@ -118,17 +118,17 @@ function exportImage() {
 <?php if($type=='time'){?>
           <table width="100%" border="0" cellpadding="0" cellspacing="1" class="CinitData">
                 <tr>
-                  <td colspan="5" class="title">原始数据</td>
+                  <td colspan="5" class="title"><?php echo lang("original_figures")?></td>
                 </tr>
                  <tr>
-                  <td>时间</td>
-                  <td>任务</td>
+                  <td><?php echo lang("an_date")?></td>
+                  <td><?php echo lang("assignment")?></td>
                   <?php
                   if(is_array($questions)){
 		foreach ($questions as $k=>$ques){
 			
 			?>
-                  <td><?php echo "Q".($k+1)?> 时间</td>
+                  <td><?php echo "Q".($k+1)?> <?php echo lang("an_date")?></td>
                  <?php }
                   }?>
                 </tr>
@@ -159,14 +159,14 @@ function exportImage() {
 }else {?>   
           <table width="100%" border="0" cellpadding="0" cellspacing="1" class="CinitData">
                 <tr>
-                  <td colspan="5" class="title">原始数据</td>
+                  <td colspan="5" class="title"><?php echo lang("original_figures")?></td>
                 </tr>
                 <tr>
-                 <td>时间</td>
-                  <td>任务</td>
-                  <td>服务</td>
-                  <td>环境</td>
-                  <td>产品</td>
+                 <td><?php echo lang("an_date")?></td>
+                  <td><?php echo lang("assignment")?></td>
+                  <td><?php echo lang("service")?></td>
+                  <td><?php echo lang("evironment")?></td>
+                  <td><?php echo lang("product")?></td>
                 </tr>
                 <?php 
                 if(isset($assignments) && is_array($assignments)){

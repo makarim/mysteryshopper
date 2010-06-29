@@ -1,8 +1,7 @@
 <div id="tabsD" style="width:100%"> 
   <ul> 
-    <li <?php if($type=='corpstats') echo 'class="on"';?>><a href="/client.php/home/corpstats" title="统计"><span>统计</span></a></li> 
-    <li <?php if($type=='corp') echo 'class="on"';?>><a href="/client.php/home/corp" title="基本信息"><span>基本信息</span></a></li> 
-    <li <?php if($type=='corpcontact') echo 'class="on"';?>><a href="/client.php/home/corpcontact" title="联系方式"><span>联系方式</span></a></li> 
-    <li <?php if($type=='corpstore') echo 'class="on"';?>><a href="/client.php/home/corpstore" title="分店信息"><span>分店信息</span></a></li> 
+    <li <?php if($type=='corp') echo 'class="on"';?>><a href="/client.php/home/corp" title="<?php echo lang("profile");?>"><span><?php echo lang("profile");?></span></a></li> 
+    <li <?php if($type=='corpcontact') echo 'class="on"';?>><a href="/client.php/home/corpcontact" title="<?php echo lang("contact");?>"><span><?php echo lang("contact");?></span></a></li> 
+    <li <?php if($type=='corpstore') echo 'class="on"';?>><a href="/client.php/home/corpstore" title="<?php echo lang("locations");?>"><span><?php echo lang("locations");?></span></a></li> 
   </ul> 
 </div>
