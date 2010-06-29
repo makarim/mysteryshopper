@@ -1,18 +1,18 @@
 <div class="adminmenupanel">
     	<div class="panel">
-        	<div class="title"><span>控制面板</span></div>
+        	<div class="title"><span><?php echo lang("control_pannel");?></span></div>
       		<div class="content">
             	<!--<li <?php if($view=='defaults') echo 'class="selected"';?>><a href="/client.php/home">首页</a></li>-->
-            	<li <?php if($view=='corpstats') echo 'class="selected"';?>><a href="/client.php/home/corpstats">公司资料</a></li>
-            	<li <?php if($view=='shoppers') echo 'class="selected"';?>><a href="/client.php/home/shoppers">神秘顾客</a></li>
+            	<li <?php if($view=='corpstats') echo 'class="selected"';?>><a href="/client.php/home/corpstats"><?php echo lang("company_info");?></a></li>
+            	<li <?php if($view=='shoppers') echo 'class="selected"';?>><a href="/client.php/home/shoppers"><?php echo lang("mystery_shopper");?></a></li>
 
-            	<li <?php if($view=='overall') echo 'class="selected"';?>><a href="/client.php/home/overall">综览</a></li>
-                <li <?php if($view=='environment') echo 'class="selected"';?>><a href="/client.php/home/environment">环境</a></li>
-            	<li <?php if($view=='service') echo 'class="selected"';?>><a href="/client.php/home/service">服务</a></li>
-                <li <?php if($view=='product') echo 'class="selected"';?>><a href="/client.php/home/product">产品</a></li>
-                <li <?php if($view=='stores') echo 'class="selected"';?>><a href="/client.php/home/stores">分店</a></li>
-        		<li <?php if($view=='comments') echo 'class="selected"';?>><a href="/client.php/home/comments">评论分析</a></li>
-        		<li <?php if($view=='assignment') echo 'class="selected"';?>><a href="/client.php/home/assignment">已完成的任务</a></li>
+            	<li <?php if($view=='overall') echo 'class="selected"';?>><a href="/client.php/home/overall"><?php echo lang("overview");?></a></li>
+                <li <?php if($view=='environment') echo 'class="selected"';?>><a href="/client.php/home/environment"><?php echo lang("environment");?></a></li>
+            	<li <?php if($view=='service') echo 'class="selected"';?>><a href="/client.php/home/service"><?php echo lang("service");?></a></li>
+                <li <?php if($view=='product') echo 'class="selected"';?>><a href="/client.php/home/product"><?php echo lang("product");?></a></li>
+                <li <?php if($view=='stores') echo 'class="selected"';?>><a href="/client.php/home/stores"><?php echo lang("by_location");?></a></li>
+        		<li <?php if($view=='comments') echo 'class="selected"';?>><a href="/client.php/home/comments"><?php echo lang("comment_analysis");?></a></li>
+        		<li <?php if($view=='assignment') echo 'class="selected"';?>><a href="/client.php/home/assignment"><?php echo lang("completed_visits");?></a></li>
 
             </div>
         </div>

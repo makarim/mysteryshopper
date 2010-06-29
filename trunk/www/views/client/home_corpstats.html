@@ -24,7 +24,7 @@
       <tr>
         <td class="table2LeftBorder"></td>
         <td>
-         总共已完成的任务: <?php echo $totalcompleted;?>
+         <?php echo lang("completed_visits");?>: <?php echo $totalcompleted;?>
                    </td>
         <td class="table2RightBorder"></td>
       </tr>
@@ -45,7 +45,7 @@
   <tr>
     <td><div class="table2TitleBg">
       <div class="table2TitleBg2">
-      	<div class="table2Title"><div class="table2TitleLeft"><span><?php echo $s['cs_name']?></span></div></div>
+      	<div class="table2Title"><div class="table2TitleLeft"><span><?php echo splitx($s['cs_name'])?></span></div></div>
       </div>
     </div></td>
   </tr>
@@ -55,9 +55,9 @@
       <tr>
         <td class="table2LeftBorder"></td>
         <td>
-         最新完成的任务: <?php echo $s['store_latest_completed']['a_fdate'];?><br />
-         总共已完成的任务: <?php echo $s['store_completed'];?><br />
-         即将执行的任务 :<?php echo $s['store_next_assignment']['a_sdate'];?> / <?php echo $s['store_next_assignment']['a_edate'];?>
+         <?php echo lang("latest_visits");?>: <?php echo $s['store_latest_completed']['a_fdate'];?><br />
+         <?php echo lang("completed_visits");?>: <?php echo $s['store_completed'];?><br />
+         <?php echo lang("to_visit");?> :<?php echo $s['store_next_assignment']['a_sdate'];?> / <?php echo $s['store_next_assignment']['a_edate'];?>
                    </td>
                    
         <td class="table2RightBorder"></td>

@@ -755,4 +755,28 @@ $GLOBALS['gLang']['mobilerule'] = '手机为11位数字';
 $GLOBALS['gLang']['spot_mystery'] = 'SPOT神秘顾客信息';
 $GLOBALS['gLang']['age'] = '年龄';
 
+
+$GLOBALS['gLang']['control_pannel'] = '控制面板';
+$GLOBALS['gLang']['company_info'] = '公司资料';
+$GLOBALS['gLang']['mystery_shopper'] = '神秘顾客';
+$GLOBALS['gLang']['by_location'] = '分店';
+$GLOBALS['gLang']['comment_analysis'] = '评论分析';
+$GLOBALS['gLang']['completed_visits'] = '已完成的任务';
+$GLOBALS['gLang']['overview'] = '综览';
+$GLOBALS['gLang']['profile'] = '基本信息';
+$GLOBALS['gLang']['contact'] = '联系方式';
+$GLOBALS['gLang']['locations'] = '分店信息';
+$GLOBALS['gLang']['all_locations'] = '所有地点';
+$GLOBALS['gLang']['bar_graph'] = '对比图';
+$GLOBALS['gLang']['original_figures'] = '原始数据';
+$GLOBALS['gLang']['graphical_chart'] = '趋势图';
+$GLOBALS['gLang']['scorenum'] = '得分';
+$GLOBALS['gLang']['finish_date'] = '完成日期';
+$GLOBALS['gLang']['completed_visits'] = '已完成的任务';
+$GLOBALS['gLang']['to_visit'] = '即将执行的任务';
+$GLOBALS['gLang']['latest_visits'] = '最新完成的任务';
+$GLOBALS['gLang']['answer'] = '答案';
+$GLOBALS['gLang']['search_report'] = '提交';
+$GLOBALS['gLang']['select_location'] = '选择地点';
+
 ?>

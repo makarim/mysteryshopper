@@ -6,26 +6,26 @@
 <div class="admincontent">
 	<div id="tabsD" style="width:100%"> 
 	  <ul> 
-	    <li <?php if($type=='shoppers') echo 'class="on"';?>><a href="/client.php/home/shoppers" title="要求"><span>要求</span></a></li> 
-	    <li <?php if($type=='description') echo 'class="on"';?>><a href="/client.php/home/description" title="说明"><span>说明</span></a></li> 
-	    <li <?php if($type=='quiz') echo 'class="on"';?>><a href="/client.php/home/quiz" title="测试题目"><span>测试题目</span></a></li> 
-	    <li <?php if($type=='report') echo 'class="on"';?>><a href="/client.php/home/report" title="调查问卷"><span>调查问卷</span></a></li> 
+	    <li <?php if($type=='shoppers') echo 'class="on"';?>><a href="/client.php/home/shoppers" title="<?php echo lang("a_demand");?>"><span><?php echo lang("a_demand");?></span></a></li> 
+	    <li <?php if($type=='description') echo 'class="on"';?>><a href="/client.php/home/description" title="<?php echo lang("a_desc");?>"><span><?php echo lang("a_desc");?></span></a></li> 
+	    <li <?php if($type=='quiz') echo 'class="on"';?>><a href="/client.php/home/quiz" title="<?php echo lang("a_quiz")?>"><span><?php echo lang("a_quiz")?></span></a></li> 
+	    <li <?php if($type=='report') echo 'class="on"';?>><a href="/client.php/home/report" title="<?php echo lang("report")?>"><span><?php echo lang("report")?></span></a></li> 
 	  </ul> 
 	</div>
 
 <br /><br />
 				 <br />
-		    <p>评分说明：</p>
+		    <p><?php echo lang("grade_info");?>：</p>
 			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport" class="clear">
 	          <tr>
-	            <td class="title">不适用</td>
-	            <td class="title">差</td>
-	            <td class="title">不好</td>
-	            <td class="title">需要改进</td>
-	            <td class="title">一般</td>
-	            <td class="title">好</td>
-	            <td class="title">很好</td>
-	            <td class="title">完美</td>
+	            <td class="title"><?php echo lang("level_0");?></td>
+	            <td class="title"><?php echo lang("level_1");?></td>
+	            <td class="title"><?php echo lang("level_2");?></td>
+	            <td class="title"><?php echo lang("level_3");?></td>
+	            <td class="title"><?php echo lang("level_4");?></td>
+	            <td class="title"><?php echo lang("level_5");?></td>
+	            <td class="title"><?php echo lang("level_6");?></td>
+	            <td class="title"><?php echo lang("level_7");?></td>
 	          </tr> 
 	          <tr>
 	            <td align="center">n/a</td>
