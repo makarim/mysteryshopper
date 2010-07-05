@@ -398,8 +398,8 @@ $GLOBALS['gLang']['store_total'] = '分店总数';
 $GLOBALS['gLang']['assignment_list'] = '任务列表';
 $GLOBALS['gLang']['assignment_total'] = '任务总数';
 $GLOBALS['gLang']['a_title'] = '任务标题';
-$GLOBALS['gLang']['a_sdate'] = '开始时间';
-$GLOBALS['gLang']['a_edate'] = '结束时间';
+$GLOBALS['gLang']['a_sdate'] = '开始';
+$GLOBALS['gLang']['a_edate'] = '结束';
 $GLOBALS['gLang']['a_demand'] = '任务要求';
 $GLOBALS['gLang']['finish'] = '进度';
 $GLOBALS['gLang']['assignment_title'] = '任务标题';
@@ -778,5 +778,7 @@ $GLOBALS['gLang']['latest_visits'] = '最新完成的任务';
 $GLOBALS['gLang']['answer'] = '答案';
 $GLOBALS['gLang']['search_report'] = '提交';
 $GLOBALS['gLang']['select_location'] = '选择地点';
+$GLOBALS['gLang']['or'] = '或者';
+$GLOBALS['gLang']['paynote'] = '*注明 为了更快的获得报销费用，SPOT建议使用建设银行';
 
 ?>

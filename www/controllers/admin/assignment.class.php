@@ -187,7 +187,7 @@ class assignment{
 		$updates['cs_id'] =empty($_POST ['cs_id'])?"":intval($_POST ['cs_id']);
 		$updates['re_id'] =empty($_POST ['re_id'])?"":intval($_POST ['re_id']);
 		$updates['a_hasphoto'] =!isset($_POST ['a_hasphoto'])?"0":intval($_POST ['a_hasphoto']);
-		$updates['a_hasaudio'] =!isset($_POST ['a_hasaudio'])?"":intval($_POST ['a_hasaudio']);
+		$updates['a_hasaudio'] =!isset($_POST ['a_hasaudio'])?"0":intval($_POST ['a_hasaudio']);
 		
 		
 		// 1. update db assignment

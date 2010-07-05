@@ -283,6 +283,7 @@ class AssignmentModel extends Model {
 		if ($rs) {
 			foreach ( $rs as $key => $record ) {
 				$record['comments'] = $this->getCommentsByAsId($record['a_id'],$record['re_id']);
+				//if($record['comments']) $record['comments'] = splitx($record['comments']);
 				$list ['records'] [$key] = $record;
 			}
 		}
@@ -312,7 +313,9 @@ class AssignmentModel extends Model {
 						$comments[$rq['rq_group']]['score'] = $this->getSummaryScoreByAsId($a_id,$re_id,$rq['rq_group']);
 					}
 				}
-				$comments[$rq['rq_group']]['content'][]= $this->db->getOne($sql);
+				$r = $this->db->getOne($sql);
+				if($r) $r= splitx($r);
+				$comments[$rq['rq_group']]['content'][]= $r;
 			}
 			// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
 			return $comments;
