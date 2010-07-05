@@ -398,8 +398,8 @@ $GLOBALS['gLang']['store_total'] = 'Total';
 $GLOBALS['gLang']['assignment_list'] = 'Lists';
 $GLOBALS['gLang']['assignment_total'] = 'Total';
 $GLOBALS['gLang']['a_title'] = 'Title';
-$GLOBALS['gLang']['a_sdate'] = 'Start';
-$GLOBALS['gLang']['a_edate'] = 'End';
+$GLOBALS['gLang']['a_sdate'] = 'From';
+$GLOBALS['gLang']['a_edate'] = 'To';
 $GLOBALS['gLang']['a_demand'] = 'Requirements';
 $GLOBALS['gLang']['finish'] = 'Progress';
 $GLOBALS['gLang']['assignment_title'] = 'Title';
@@ -772,4 +772,6 @@ $GLOBALS['gLang']['latest_visits'] = 'Latest Completed Visits';
 $GLOBALS['gLang']['answer'] = 'Answer';
 $GLOBALS['gLang']['search_report'] = 'Search';
 $GLOBALS['gLang']['select_location'] = 'Select Location';
+$GLOBALS['gLang']['or'] = 'Or';
+$GLOBALS['gLang']['paynote'] = '*Note: If possible, please use China Construction Bank for the most efficient transaction）';
 ?>
