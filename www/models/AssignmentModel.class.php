@@ -99,6 +99,8 @@ class AssignmentModel extends Model {
 		$user_id  = $this->db->getOne("select user_id from user where user='$user'");
 		$r = false;
 		if($user_id){
+			$r |= $this->db->execute("update assignment_rel set selected=0 where a_id='$a_id'");
+			$r |=$this->db->execute("delete from assignment_rel where a_id='$a_id' and user_id='$user_id'");
 			$r |= $this->db->execute("insert into assignment_rel (a_id,user_id,selected) values ('$a_id','$user_id',1)");
 			$r |= $this->db->execute("update assignment set user_id='$user_id' where a_id='$a_id'");
 			return $r;
