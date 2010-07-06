@@ -40,12 +40,12 @@
                 </tr>
 
               <tr>
-                <td><span class="title"><?php echo lang('brands')?>：</span><?php echo $assignmentinfo['c_name']?></td>
-                <td><span class="title"><?php echo lang('stores')?>：</span><?php echo $assignmentinfo['cs_name']?></td>
+                <td><span class="title"><?php echo lang('brands')?>：</span><?php echo splitx($assignmentinfo['c_name']);?></td>
+                <td><span class="title"><?php echo lang('stores')?>：</span><?php echo splitx($assignmentinfo['cs_name']);?></td>
                </tr>    
                <tr>
                 <td><span class="title"><?php echo lang("city_district");?>：</span><?php echo $assignmentinfo['cs_province']; if(!in_array($assignmentinfo['cs_city'],array('市辖区',"市辖县"))) echo " ".$assignmentinfo['cs_city']; echo " ".$assignmentinfo['cs_district']?></td>
-                <td><span class="title"><?php echo lang("address_detail");?>：</span><?php echo $assignmentinfo['cs_address']?></td>
+                <td><span class="title"><?php echo lang("address_detail");?>：</span><?php echo splitx($assignmentinfo['cs_address']);?></td>
                </tr>
             </table>
             <br />
