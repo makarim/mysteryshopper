@@ -147,7 +147,8 @@ class user{
 //    	}
     	$type = !empty($_GET['detail'])?$_GET['detail']:"contact";
 		$userinfo  = $passport->getUserInfoById($user_id);
-    	list($userinfo['year'],$userinfo['month'],$userinfo['day']) = explode("-",$userinfo['birthdate']);
+		$userinfo['year'] = $userinfo['month']= $userinfo['day'] = '';
+    	if($userinfo['birthdate'])list($userinfo['year'],$userinfo['month'],$userinfo['day']) = explode("-",$userinfo['birthdate']);
     	$this->tpl->assign("type",$type);
     	$this->tpl->assign("user_id",$user_id);
     	$this->tpl->assign("userinfo",$userinfo);
