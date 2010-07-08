@@ -131,7 +131,9 @@ class PassportModel extends Model {
 		$this->db->execute ( "insert into user$tb_prefix (user_id,user,user_password,user_email,user_nickname,user_state,user_reg_time,user_reg_ip,user_lastlogin_time,user_lastlogin_ip,user_question,user_answer)
 		values ('{$user_id}','{$user['user']}','" . $user ['user_password'] . "','{$user['user_email']}','{$user['user_nickname']}',1,UNIX_TIMESTAMP(),'{$user['user_reg_ip']}',UNIX_TIMESTAMP(),'{$user['user_reg_ip']}','{$user['user_question']}','{$user['user_answer']}')" );
 			
-		$this->db->execute ("insert into user_ext (user_id,gender) value ('{$user_id}','{$user['user_sex']}')" );
+		$this->db->execute ("INSERT INTO  `user_ext` (  `user_id` ,  `realname` ,  `initial` ,  `homephone` ,  `city` ,  `area` ,  `country` ,  `province` ,  `zipcode` ,  `mobile` ,  `workphone` ,  `birthdate` , `marital` ,  `interests` ,  `gender` ,  `occupation` ,  `education` ,  `own_camera` ,  `own_recorder` ,  `been_mysteryshopper` ,  `alipay` ,  `a_num` ,  `qq` ,  `msn` ,  `nationality` , `householdincome` ,  `havecar` ,  `eatingoutcount` ,  `avgbill` ,  `apparelspending` ,  `hearabout` ,  `newletters` ,  `bank_name` ,  `bank_realname` ,  `bank_account` ,  `face_img` , `children` ,  `otherlanguage` ,  `subbank_name` ,  `eatwithwho` ,  `eatlunchtimes` ,  `eatlunchavgcost` ,  `eatdinnertimes` ,  `eatdinneravgcost` ,  `eatweekdaytimes` , `eatweekdaylunch_avgcost` ,  `eatweekdaydinner_avgcost` ,  `company_name` ,  `eatbooking` ,  `eatvipcard` ,  `meal_delivered` ,  `eatcombo` ,  `lunch_delivered` ,  `dinnerhall` , `eattraffic` ,  `birthplace` ,  `alipayrealname` ) 
+VALUES ('{$user_id}',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '0000-00-00',  'S',  '',  '{$user['user_sex']}',  '',  '',  '0',  '0',  '0',  '',  '0',  '',  '',  '',  '',  '0',  '0',  '0',  '0',  '',  '0',  '',  '',  '',  '',  '0',  '0',  '',  '0',  '0',  '0',  '0',  '0',  '0',  '0',  '0',  '',  '0',  '0',  '0',  '0',  '0',  '0',  '',  '',  '')");
+		//$this->db->execute ("insert into user_ext (user_id,gender) value ('{$user_id}','{$user['user_sex']}')" );
 		return $user_id;
 		
 
