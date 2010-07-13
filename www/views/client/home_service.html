@@ -163,7 +163,7 @@ function exportImage(id) {
                 <tr>
                   <td width="15%"><?php echo $v['day']?></td>
                   <td width="40%"><?php echo $v['a_title']?></td>
-                   <?php if(is_array( $v['times'])){
+                   <?php if(isset($v['times']) && is_array( $v['times'])){
                   	foreach ( $v['times'] as $t){
                   		?>
 
