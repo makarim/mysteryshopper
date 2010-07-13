@@ -345,13 +345,20 @@ class AssignmentModel extends Model {
 				
 				if($rq['rq_type']==2){
 					$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=2 and ans_answer2!='A'";
-					$sum += $this->db->getOne($sql);
-					$n++;
+					$res = $this->db->getOne($sql);
+					if($res>0){
+						$sum +=$res;
+						$n++;
+					}
+					
 				}else if($rq['rq_type']==1){
 					$sql = "select ans_answer1  from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=1 and ans_answer1!='A'";
 					$yn = $this->db->getOne($sql);
-					$sum += ($yn=='Y')?10:0;
-					$n++;
+					if($yn=='Y' or $yn=='N'){
+						$sum += ($yn=='Y')?10:0;
+						$n++;
+					}
+					
 				}
 				
 			}
