@@ -27,31 +27,28 @@ class ChartModel extends Model {
 				$rq_arr = $this->db->getAll($sql);
 				$q_row = count($rq_arr);
 				//echo "row:".$q_row."|";
-				$sum_1 = $sum_2 = $n_1 = $n_2 = $average_1 = $average_2 = 0;
+				$sum = $n = 0;
 				if($q_row>0){
 					foreach ($rq_arr as $rq){
 						if($rq['rq_type']==2){
 							$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$v['a_id']."' and rq_type=2 and ans_answer2!='A'";						
 							$score = $this->db->getOne($sql);
-							//echo "vote=".$score.";";
-							$sum_2 += is_numeric($score)?$score:0;
-							$n_2++;
+							if($score>0){
+								$sum += is_numeric($score)?$score:0;
+								$n++;
+							}
 						}else if($rq['rq_type']==1){
 							$sql = "select ans_answer1  from answer where rq_id='".$rq['rq_id']."' and a_id='".$v['a_id']."' and rq_type=1 and ans_answer1!='A'";
 							$yn = $this->db->getOne($sql);
-							//echo "shifei=".$yn.";";
-							$sum_1 += ($yn=='Y')?10:0;
-							$n_1++;
+							if($yn=='Y' or $yn=='N'){
+								$sum += ($yn=='Y')?10:0;
+								$n++;
+							}
 						}
 						
 					}
 					//echo $sum;
-					
-					if($n_1>0) $average_1 = $sum_1/$n_1 ;
-					if($n_2>0) $average_2 = $sum_2/$n_2 ;
-					if($n_1>0 && $n_2>0) $average += ($average_1 + $average_2)/2;
-					else if($n_1==0 || $n_2==0) $average += ($average_1 + $average_2);
-					//echo $csid."_".$v['a_id']."=".$average_1."/".$average_2."=".($average)."<br/>";
+					if($n>0) $average += ($sum)/$n;
 				}
 				
 			}
@@ -78,15 +75,19 @@ class ChartModel extends Model {
 				$rq_arr = $this->db->getAll($sql);
 				$q_row = count($rq_arr);
 				//echo "row:".$q_row."|";
-				$sum = 0;
+				$sum = $n = 0;
 				if($q_row>0){
 					foreach ($rq_arr as $rq){
 						//一个问题的所有打分的平均值之和
 						$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$v['a_id']."' and rq_type=2 and ans_answer2!='A'";
-						$sum += $this->db->getOne($sql);
+						$score = $this->db->getOne($sql);
+						if($score>0){
+							$sum += $score;
+							$n++;
+						}
 					}
 					// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
-					$average += $sum/$q_row;
+					if($n>0) $average += $sum/$n;
 				}
 				
 			}
@@ -107,16 +108,19 @@ class ChartModel extends Model {
 				$sql = "select rq_id,rq_type from report_question where rq_type=1 and rq_group='$group' and re_id=".$v['re_id'];
 				$rq_arr = $this->db->getAll($sql);
 				$q_row = count($rq_arr);
-				$sum = 0;
+				$sum =$n = 0;
 				if($q_row>0){
 					foreach ($rq_arr as $rq){
 						//一个问题的有多少个人支持，选是
 						$sql = "select ans_answer1 from answer where rq_id='".$rq['rq_id']."' and a_id='".$v['a_id']."' and rq_type=1 and ans_answer1!='A'";
 						$yn = $this->db->getOne($sql);
-						$sum += ($yn=='Y')?10:0;
+						if($yn=='Y' or $yn=='N'){
+							$sum += ($yn=='Y')?10:0;
+							$n++;
+						}
 					}
 					// 所有题目总支持人数/题目数=一份报告同group的是非题平均值
-					$average += $sum/$q_row;
+					if($n>0) $average += $sum/$n;
 				}
 				
 			}
@@ -166,20 +170,33 @@ class ChartModel extends Model {
 		$q_row = count($rq_arr);
 		//echo "row:".$q_row."|";
 		$sum = 0;
+		$n = 0;
 		if($q_row>0){
 			foreach ($rq_arr as $rq){
 				if($rq['rq_type']==2){
 					$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=2 and ans_answer2!='A'";
-					$sum += $this->db->getOne($sql);
+					$res = $this->db->getOne($sql);
+					if($res>0){
+						$sum +=$res;
+						$n++;
+					}
 				}else if($rq['rq_type']==1){
 					$sql = "select ans_answer1  from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=1 and ans_answer1!='A'";
 					$yn = $this->db->getOne($sql);
-					$sum += ($yn=='Y')?10:0;
+					if($yn=='Y' or $yn=='N'){
+						$sum += ($yn=='Y')?10:0;
+						$n++;
+					}
+					
 				}
 			}
 			// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
-			$average += $sum/$q_row;
-			return round($average,2);
+			if($n>0){
+				$average = $sum/$n;
+				return round($average,2);
+			}else{
+				return '-';
+			}
 		}
 		return 0;
 	}
@@ -195,14 +212,18 @@ class ChartModel extends Model {
 		$rq_arr = $this->db->getAll($sql);
 		$q_row = count($rq_arr);
 		//echo "row:".$q_row."|";
-		$sum = 0;
+		$sum =$n= 0;
 		if($q_row>0){
 			foreach ($rq_arr as $rq){
 				$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=2 and ans_answer2!='A'";
-				$sum += $this->db->getOne($sql);
+				$res = $this->db->getOne($sql);
+				if($res>0){
+					$sum+=$res;
+					$n++;
+				}
 			}
 			// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
-			$average += $sum/$q_row;
+			if($n>0) $average += $sum/$n;
 			return round($average,2);
 		}
 		return 0;
@@ -219,15 +240,18 @@ class ChartModel extends Model {
 		$rq_arr = $this->db->getAll($sql);
 		$q_row = count($rq_arr);
 		//echo "row:".$q_row."|";
-		$sum = 0;
+		$sum =$n = 0;
 		if($q_row>0){
 			foreach ($rq_arr as $rq){
 				$sql = "select ans_answer1 from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=1 and ans_answer1!='A'";
 				$yn = $this->db->getOne($sql);
-				$sum += ($yn=='Y')?10:0;
+				if($yn=='Y' or $yn=='N'){
+					$sum += ($yn=='Y')?10:0;
+					$n++;
+				}
 			}
 			// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
-			$average += $sum/$q_row;
+			if($n>0) $average += $sum/$n;
 			return round($average,2);
 		}
 		return 0;
