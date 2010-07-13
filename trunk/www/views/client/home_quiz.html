@@ -25,6 +25,7 @@
 							</tr>
 					<?php
 	
+						if(isset($quiz) && is_array($quiz)){
 							foreach ($quiz as $k=>$v){?>	
 							
 					<tr>
@@ -46,6 +47,7 @@
 					</tr>
 						
 						<?php }
+						}
 				
 						?>
 						</table>
