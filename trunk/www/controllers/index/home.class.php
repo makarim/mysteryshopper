@@ -496,5 +496,41 @@ class home{
 		die;
 		
     }
+    
+    function view_resetpwd(){
+    	
+    }
+    function op_resetpwd(){
+    	
+    	if (empty ( $_POST ['oldpwd'] ) or empty ( $_POST ['newpwd1'] ) or empty ( $_POST ['newpwd2'] )) {
+			show_message_goback(lang('insertpwd'));
+		}
+
+		$new1 = $_POST ['newpwd1'];
+		$new2 = $_POST ['newpwd2'];
+		if (strlen ( $new1 ) < 6 or strlen ( $new2 ) < 6) {
+			show_message_goback(lang('pwdrule'));
+		}
+
+		if (trim ( $new1 ) != trim ( $new2 )) {
+			show_message_goback(lang('pwdnotsame'));;
+		}
+
+		include_once("PassportModel.class.php");
+		$passmod = new PassportModel();
+		$user_info = $passmod->getUserById($this->login_user['user_id'],$this->login_user['user']);	
+		
+		//print_r($user_info);
+		if ($user_info ['user_password'] == PassportModel::encryptpwd ($_POST ['oldpwd'],$this->login_user['user'],0)) {
+		
+			if (false!=$passmod->updatePassByUser ( $this->login_user['user'], PassportModel::encryptpwd( $new1,$this->login_user['user']) )) {
+				show_message_goback(lang('pwdreset'));
+			} else {
+				show_message_goback(lang('failture'));
+			}
+		} else { 
+			show_message_goback(lang('pwdwrong'));
+		}
+    }
 }
 ?>

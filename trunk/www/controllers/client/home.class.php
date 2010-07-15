@@ -455,9 +455,8 @@ class home{
 			}
 			
 		}
-		
-		$print_edate = $assignmentModel->getEndDateByCsId($cs_id);
-		$print_sdate = $assignmentModel->getStartDateByCsId($cs_id);
+		$print_edate = $assignmentModel->getEndDateByCId($this->login_corp['c_id']);
+		$print_sdate = $assignmentModel->getStartDateByCId($this->login_corp['c_id']);
 		if($sdate=='') $sdate = $print_sdate;
 		if($edate=='') $edate = $print_edate;
 		
@@ -495,8 +494,8 @@ class home{
 
 		$assignments = $assignmentModel->getAssignmentComments($con,10);
 		
-		$print_edate = $assignmentModel->getEndDateByCsId($cs_id);
-		$print_sdate = $assignmentModel->getStartDateByCsId($cs_id);
+		$print_edate = $assignmentModel->getEndDateByCId($this->login_corp['c_id']);
+		$print_sdate = $assignmentModel->getStartDateByCId($this->login_corp['c_id']);
 		if($sdate=='') $sdate = $print_sdate;
 		if($edate=='') $edate = $print_edate;
 
@@ -536,8 +535,8 @@ class home{
 		$myassignment = $assignmentModel->getCorpAssignments($con);
 		$this->tpl->assign("myassignment",$myassignment);
 		
-		$print_edate = $assignmentModel->getEndDateByCsId($cs_id);
-		$print_sdate = $assignmentModel->getStartDateByCsId($cs_id);
+		$print_edate = $assignmentModel->getEndDateByCId($this->login_corp['c_id']);
+		$print_sdate = $assignmentModel->getStartDateByCId($this->login_corp['c_id']);
 		if($sdate=='') $sdate = $print_sdate;
 		if($edate=='') $edate = $print_edate;
 		$this->tpl->assign("selstore",$selstore);

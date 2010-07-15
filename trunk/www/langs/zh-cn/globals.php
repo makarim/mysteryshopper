@@ -780,5 +780,7 @@ $GLOBALS['gLang']['search_report'] = '提交';
 $GLOBALS['gLang']['select_location'] = '选择地点';
 $GLOBALS['gLang']['or'] = '或者';
 $GLOBALS['gLang']['paynote'] = '*注明 为了更快的获得报销费用，SPOT建议使用建设银行';
+$GLOBALS['gLang']['resetpwd'] = '重置密码';
+$GLOBALS['gLang']['oldpwd'] = '输入旧密码';
 
 ?>
