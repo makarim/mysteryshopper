@@ -52,11 +52,13 @@ function loadcalendar() {
 	var div = document.createElement('div');
 	div.innerHTML = s;
 	$('append').appendChild(div);
-	_attachEvent(document, 'click', function() {
+	_attachEvent(document.body, 'click', function() {
+		setTimeout(function(){
 		$('calendar').style.display = 'none';
 		$('calendar_year').style.display = 'none';
 		$('calendar_month').style.display = 'none';
 		if($('storelist')) $('storelist').style.display = 'none';
+		}, 3000);
 	});
 	$('calendar').onclick = function(e) {
 		e = is_ie ? event : e;
@@ -91,13 +93,13 @@ function selectstore(str){
 
 }
 function selectmitilstore(str){
-	$('storelist').style.display = 'none';
+	//$('storelist').style.display = 'none';
 	var t = str.split("|");
 	//$('cs_id').value =t[0];
-	var len = document.seachfrm.selstores.length;
+	var len = document.forms['seachfrm'].elements['selstores[]'].length;
 	var c=0;
 	for(var i=0;i<len;i++){
-		if(document.seachfrm.selstores[i].checked){
+		if(document.forms['seachfrm'].elements['selstores[]'][i].checked){
 			c++;
 		}
 	}

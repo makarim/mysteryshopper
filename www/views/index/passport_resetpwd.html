@@ -22,10 +22,9 @@ rules[1]='newpwd1|minlength|6|<?php echo lang('pwdrule')?>';
 rules[2]='newpwd2|equal|$newpwd1|<?php echo lang('pwdnotsame')?>';
 
 
-yav.addHelp('new1', '<?php echo lang('insertyouranswer')?>');
-
-
-window.onload = yav.init('resetpwdform', rules);
+window.onload = function(){
+	yav.init('resetpwdform', rules);
+}
 
 </SCRIPT>
 
