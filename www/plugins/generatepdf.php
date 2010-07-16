@@ -1,6 +1,20 @@
 <?php
 date_default_timezone_set("Asia/Shanghai");
-
+function multiwordbreak($str,$maxlen = 33){
+	$len = mb_strlen($str, 'UTF-8');
+	$ch = '';
+	if($len<=$maxlen) return $str;
+	for ($i=0; $i < $len; $i++){
+		if($i%$maxlen==0){
+			  $ch .= mb_substr($str, $i, $maxlen, 'UTF-8')."<br />";
+		}
+    }
+    return $ch;
+}
+function break_word($matches){
+	
+	return $matches[1].multiwordbreak($matches[3],$matches[2]);
+}
 require('html2fpdf.php');
 $pdf=new HTML2FPDF("P",'mm');
 //$pdf->Open();
@@ -8,9 +22,13 @@ $pdf=new HTML2FPDF("P",'mm');
 //$pdf->SetDisplayMode("fullwidth");
 //$pdf->UseCSS();
 //$pdf->SetFontSize(9);
+$strContent = '';
 if($_POST){
-	$strContent = stripslashes($_POST['c']);
+	$c = preg_replace_callback('/(.*?)<span\s*id="br_(\d+)">(.*?)<\/span>(.*?)/ism',"break_word",$_POST['c']);
+	if(strpos($c,'border="0"')!==false) $c = str_replace('border="0"','border="1"',$c);
+	$strContent = stripslashes($c);
 }
+
 //$strContent = str_replace("“",'"',$strContent);
 //$strContent = str_replace("”",'"',$strContent);
 $pdf->SetMargins( 20, 10,-1);
