@@ -80,6 +80,7 @@ class setting{
     	if(isset($_POST['doublenick'])) $upate['doublenick'] = $_POST['doublenick'];
     	if(isset($_POST['banemail'])) $upate['banemail'] = $_POST['banemail'];
     	if(isset($_POST['banusername'])) $upate['banusername'] = $_POST['banusername'];
+    	if(isset($_POST['invitation_code'])) $upate['invitation_code'] = $_POST['invitation_code'];
     	include_once("SettingModel.class.php");
 		$settingModel = new SettingModel();
 		$r = $settingModel->updateSettings($upate);
