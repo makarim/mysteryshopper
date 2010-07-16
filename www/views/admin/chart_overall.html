@@ -58,12 +58,18 @@ function getStore(c_id){
 									<td><?php echo lang('cs_name')?>:</td>
 									<td align="left"><select id="store_container" name="cs_id">
 							<option value="">--</option>
+							<?php if(isset($stores) && is_array($stores)){
+								foreach ($stores as $v){?>
+}
+							<option value="<?php echo $v['cs_id'];?>"  <?php if($v['cs_id']==$con['cs_id']) echo 'selected';?> ><?php echo $v['cs_name'];?></option>
+							<?php } 
+							}?>
 							</select></td>
 									
 									<td align="left">
-									<input type="checkbox" name="group[]" value="Service" <?php if(strpos($con['group'],'Service')!==false) echo "checked";?>>服务
-									<input type="checkbox" name="group[]" value="Environment" <?php if(strpos($con['group'],'Environment')!==false) echo "checked";?>>环境
-									<input type="checkbox" name="group[]" value="Product" <?php if(strpos($con['group'],'Product')!==false) echo "checked";?>>产品
+									<input type="checkbox" name="group[]" value="service" <?php if(strpos($con['group'],'service')!==false) echo "checked";?>>服务
+									<input type="checkbox" name="group[]" value="environment" <?php if(strpos($con['group'],'environment')!==false) echo "checked";?>>环境
+									<input type="checkbox" name="group[]" value="product" <?php if(strpos($con['group'],'product')!==false) echo "checked";?>>产品
 									
 									</td>
 									<td rowspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
@@ -71,12 +77,13 @@ function getStore(c_id){
 								<tr>
 									<td align="right"><?php echo lang('a_sdate')?>:</td>
 			
-									<td colspan="2" align="left"><input type="text" name="a_sdate" onclick="showcalendar();" value="<?php echo $con['a_sdate']?>" class="textfield" /> <?php echo lang('to')?> <input type="text" name="a_edate" onclick="showcalendar();" value="<?php echo $con['a_edate']?>" class="textfield" /></td>
-									<td align="right"><?php echo lang('Type')?>:</td>
+									<td colspan="2" align="left"><input type="text" name="a_sdate" onclick="showcalendar();" value="<?php echo $con['sdate']?>" class="textfield" /> <?php echo lang('to')?> <input type="text" name="a_edate" onclick="showcalendar();" value="<?php echo $con['edate']?>" class="textfield" /></td>
+									<td align="right"><?php echo lang('question_type')?>:</td>
 									<td align="left"><select name="scoretype">
-							<option value="Summary" <?php if($con['scoretype']=='Summary') echo "selected";?>>Summary Score</option>
-							<option value="Marketing" <?php if($con['scoretype']=='Marketing') echo "selected";?>>Marketing Score</option>
-							<option value="Auditing" <?php if($con['scoretype']=='Auditing') echo "selected";?>>Auditing Score</option>
+							<option value="summary" <?php if($con['scoretype']=='summary') echo "selected";?>><?php echo lang("summary")?></option>
+							<option value="yesorno" <?php if($con['scoretype']=='yesorno') echo "selected";?>><?php echo lang("yesorno")?></option>
+							<option value="vote" <?php if($con['scoretype']=='vote') echo "selected";?>><?php echo lang("vote")?></option>
+							<option value="time" <?php if($con['scoretype']=='time') echo "selected";?>><?php echo lang("score")?></option>
 							</select></td>
 								</tr>
 							</table>
@@ -89,7 +96,40 @@ function getStore(c_id){
 		
 		
 		<div class="mainbox">
-				
+<?php if($type=='time'){
+	if(is_array($questions)){
+		foreach ($questions as $k=> $ques){
+			
+			?>
+		
+      <div style="float:right;margin-right:10px;">
+      
+      <a href="javascript:exportImage(<?php echo $ques['rq_id']?>);"><img src="<?php echo $www_site_url?>/public/images/export_image-icon.gif" border="0" title="export Image"></a>
+      <a href="javascript:print(<?php echo $ques['rq_id']?>);"><img src="<?php echo $www_site_url?>/public/images/print_icon.jpg" border="0" title="Print"></a>
+      </div>
+     
+	<div id="flashcontent<?php echo $ques['rq_id']?>">
+		<strong>You need to upgrade your Flash Player</strong>
+	</div>
+	<script type="text/javascript">
+		// <![CDATA[		
+		var so = new SWFObject("<?php echo $www_site_url?>/public/flash/amcolumn.swf", "amcolumn<?php echo $ques['rq_id']?>", "100%", "400px", "8", "#ffffff");
+		so.addParam("wmode", "transparent");
+		so.addVariable("path", "<?php echo $www_site_url?>/public/flash/");
+		 so.addVariable("chart_id", "amcolumn<?php echo $ques['rq_id']?>");
+		so.addVariable("settings_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amcolumn_settings2.xml?342"));
+		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=timedata&c_id=<?php echo $con['c_id'];?>&rq_id=<?php echo $ques['rq_id']?>&sdate=<?php echo $sdate?>&edate=<?php echo $edate?>&selstores=<?php echo join(",",$selstores);?>&group=<?php echo $con['group']?>"));
+		so.addVariable("preloader_color", "#ffffff");
+		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo "Q".($k+1).'. '.$ques['rq_question'].$chart_title?></b>]]></text></label></labels></settings>"));
+		so.write("flashcontent<?php echo $ques['rq_id']?>");
+		// ]]>
+	</script>
+	<?php
+		}
+	}
+	?>
+<?php
+}else {?>				
 	<div id="flashcontent">
 		<strong>You need to upgrade your Flash Player</strong>
 	</div>
@@ -97,13 +137,109 @@ function getStore(c_id){
 	<script type="text/javascript">
 		// <![CDATA[		
 		var so = new SWFObject("<?php echo $www_site_url?>/public/flash/amcolumn.swf", "amcolumn", "100%", "450px", "8", "#ffffff");
+		so.addParam("wmode", "transparent");
 		so.addVariable("path", "<?php echo $www_site_url?>/public/flash/");
 		so.addVariable("settings_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amcolumn_settings.xml?102"));
-		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php/chart/overalldata/c_id/<?php echo $con['c_id']?>/scoretype/<?php echo $con['scoretype']?>/group/<?php echo $con['group']?>"));
+		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=overalldata&scoretype=<?php echo $con['scoretype']?>&c_id=<?php echo $con['c_id'];?>&sdate=<?php echo $sdate?>&edate=<?php echo $edate?>&selstores=<?php echo join(",",$selstores);?>&group=<?php echo $con['group']?>"));
 		so.addVariable("preloader_color", "#ffffff");
+		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo $chart_title?></b>]]></text></label></labels><guides><max_min>true</max_min><guide><title>Internal Average</title><start_value><?php echo $internal_average;?></start_value><inside>true</inside><text_color>#999999</text_color><behind>true</behind><text_size>14</text_size> <width>1</width><color>#999999</color> </guide></guides></settings>"));
+
 		so.write("flashcontent");
 		// ]]>
 	</script>
+<?php }?>
+        </p>
+              <p>&nbsp;</p>
+          <p>&nbsp;</p>
+<script>
+function print(id){
+  document.getElementById("amcolumn"+id).printAsBitmap();
+}
+function exportImage(id) {
+  document.getElementById("amcolumn"+id).exportImage('/plugins/export.php');  
+}
+
+</script>	
+	<div style="float:right;margin-right:10px;">
+      <a href="javascript:printpage(1);"><img src="<?php echo $www_site_url?>/public/images/print_icon.jpg" border="0" title="Print"></a>
+      </div>
+<!--startprint1-->
+<?php if($type=='time'){?>
+          <table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport">
+                <tr>
+                  <td colspan="5" class="title"><?php echo lang("original_figures")?></td>
+                </tr>
+                 <tr>
+                  <td><?php echo lang("an_date")?></td>
+                  <td><?php echo lang("assignment")?></td>
+                  <?php
+                  if(is_array($questions)){
+		foreach ($questions as $k=>$ques){
+			
+			?>
+                  <td><?php echo "Q".($k+1)?> <?php echo lang("an_date")?></td>
+                 <?php }
+                  }?>
+                </tr>
+                <?php
+                if(isset($assignments)){
+                	foreach ($assignments as $v){
+                		?>
+                <tr>
+                  <td width="15%"><?php echo $v['day']?></td>
+                  <td width="40%"><?php echo $v['a_title']?></td>
+                  <?php if(isset($v['times']) && is_array( $v['times'])){
+                  	foreach ( $v['times'] as $t){
+                  		?>
+
+                  <td width="15%"><?php echo $t?></td>
+					<?php
+                  	}
+                  }
+                  	?>
+                </tr>
+                <?php
+                	}
+                }
+                ?>
+               
+              </table>
+     <?php
+}else {?>         
+         <table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport">
+                <tr>
+                  <td colspan="5" class="title"><?php echo lang("original_figures")?></td>
+                </tr>
+                 <tr>
+                  <td><?php echo lang("an_date")?></td>
+                  <td><?php echo lang("assignment")?></td>
+                  <td><?php echo lang("service")?></td>
+                  <td><?php echo lang("environment")?></td>
+                  <td><?php echo lang("product")?></td>
+                </tr>
+                <?php
+                if(isset($assignments)){
+                	foreach ($assignments as $v){
+                		?>
+                <tr>
+                  <td width="15%"><?php echo $v['day']?></td>
+                  <td width="40%"><?php echo $v['a_title']?></td>
+                  <td width="15%"><?php echo $v['service']?></td>
+                  <td width="15%"><?php echo $v['environment']?></td>
+                  <td width="15%"><?php echo $v['product']?></td>
+
+                </tr>
+                <?php
+                	}
+                }
+                ?>
+               
+              </table>     
+        <?php
+               }
+                
+                ?>  
+<!--endprint1-->    
 		</div>
 
 	</div>

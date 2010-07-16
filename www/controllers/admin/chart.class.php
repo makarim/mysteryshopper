@@ -8,21 +8,82 @@ class chart{
 		$c_id = !empty($_GET['c_id'])?$_GET['c_id']:'';
 		$cs_id= !empty($_GET['cs_id'])?$_GET['cs_id']:'';
 		$a_sdate= !empty($_GET['a_sdate'])?$_GET['a_sdate']:'';
-		$a_edate= !empty($_GET['a_edate'])?$_GET['a_edate']:'';
+		$a_edate= !empty($_GET['a_edate'])?$_GET['a_edate']:date("Y-m-d");
+		
 		$group = !empty($_GET['group'])?$_GET['group']:array();
 		$scoretype = !empty($_GET['scoretype'])?$_GET['scoretype']:'';
+		$type_id = isset($GLOBALS['gTypes'][$scoretype])?$GLOBALS['gTypes'][$scoretype]:'';
 		//die;
+		$chart_title = lang("summary");
+		$chart_title.= "/".lang($scoretype);
 		$con['c_id'] = $c_id;
 		$con['cs_id'] = $cs_id;
-		$con['a_sdate'] = $a_sdate;
-		$con['a_edate'] = $a_edate;
+		$con['sdate'] = $a_sdate;
+		$con['edate'] = $a_edate;
 		$con['scoretype'] = $scoretype;
 		$con['group'] = join(",",$group);
 		include_once("CorporationModel.class.php");
 		$corpmod = new CorporationModel();
 		$corps  = $corpmod->getAllCorps();
-		$this->tpl->assign('corps',$corps);
+		$stores = array();
+		if( $c_id ) $stores = $corpmod->getStoreByCid($c_id);
+		$def_stores =array();
+		foreach ($stores as $s){
+			$def_stores[] = $s['cs_id']; 
+		}
+		$selstores = !empty($cs_id)?array($cs_id):$def_stores;
 		
+		include_once("AssignmentModel.class.php");	
+		$assignmentModel = new AssignmentModel();
+		$assignments = array();
+		if($c_id) $assignments = $assignmentModel->getAssignmentsByCsId($con,$selstores);
+		
+		if($scoretype=='time'){
+			$chart_title = '';
+			include_once("ChartModel.class.php"); 
+			$ChartModel = new ChartModel($a_sdate,$a_edate);
+			$questions = $ChartModel->getTimeQuestionsByCId($c_id,'all');
+			if($questions){
+				$this->tpl->assign("questions",$questions);
+			}
+		}
+		$count = count($assignments);
+		
+		$a_average =$internal_average= 0;
+		
+		if(is_array($assignments)){
+			foreach ($assignments as $k=>$v){
+	
+				if($scoretype=='time'){
+					foreach ($questions as $qu){
+						$v['times'][] = $assignmentModel->getTimeByRqId($qu['rq_id'],$v['a_id']);
+					}
+				}else{
+					$v['service'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],1,$type_id);;
+					$v['environment'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,$type_id);
+					$v['product'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,$type_id);
+					$a_average += ($v['service']+$v['environment']+$v['product'])/3; 
+				}
+				$assignments[$k] = $v;
+			}
+			if($count>0)$internal_average = round($a_average/$count,2);
+		}
+		
+		$print_edate = $assignmentModel->getEndDateByCId($c_id);
+		$print_sdate = $assignmentModel->getStartDateByCId($c_id);
+		if($a_sdate=='') $a_sdate = $print_sdate;
+		if($a_edate=='') $a_edate = $print_edate;
+		$chart_title .="($print_sdate/$print_edate)";
+		
+		$this->tpl->assign("assignments",$assignments);
+		$this->tpl->assign("selstores",$selstores);
+		$this->tpl->assign("stores",$stores);
+		$this->tpl->assign('corps',$corps);
+		$this->tpl->assign("internal_average",$internal_average);
+		$this->tpl->assign("chart_title",$chart_title);
+		$this->tpl->assign("type",$scoretype);
+		$this->tpl->assign("sdate",$a_sdate);
+		$this->tpl->assign("edate",$a_edate);
 		$this->tpl->assign('con',$con);
 	}
 	function view_overalldata(){
@@ -309,6 +370,48 @@ $xml .="
 		$this->tpl->assign('charts',$items);
 		$this->tpl->assign('total',$items['page']->total);
 		$this->tpl->assign('con',$con);
+	}
+	
+	function view_comment(){
+		$c_id = !empty($_GET['c_id'])?$_GET['c_id']:'';
+		$cs_id= !empty($_GET['cs_id'])?$_GET['cs_id']:'';
+		$a_sdate= !empty($_GET['a_sdate'])?$_GET['a_sdate']:'';
+		$a_edate= !empty($_GET['a_edate'])?$_GET['a_edate']:date("Y-m-d");
+		
+		include_once("CorporationModel.class.php");	
+		$corpModel = new CorporationModel();
+		$corps  = $corpModel->getAllCorps();
+		$stores = $corpModel->getStoreByCid($c_id);
+			
+		$def_stores =array();
+		foreach ($stores as $s){
+			$def_stores[] = $s['cs_id']; 
+		}
+		$selstores = !empty($cs_id)?array($cs_id):$def_stores;
+		
+		$con['c_id'] = $c_id;
+		$con['cs_id'] = $cs_id;
+		$con['sdate'] = $a_sdate;
+		$con['edate'] = $a_edate;
+		$con['order'] = 'a_id';
+		$con['selstores'] = $selstores;
+		$con['a_audit'] = 1;
+		include_once("AssignmentModel.class.php");	
+		$assignmentModel = new AssignmentModel();
+
+		$assignments = $assignmentModel->getAssignmentComments($con,10);
+		
+		$print_edate = $assignmentModel->getEndDateByCId($c_id);
+		$print_sdate = $assignmentModel->getStartDateByCId($c_id);
+		if($a_sdate=='') $a_sdate = $print_sdate;
+		if($a_edate=='') $a_edate = $print_edate;
+
+		$this->tpl->assign("assignments",$assignments);
+		$this->tpl->assign("con",$con);
+		$this->tpl->assign("corps",$corps);
+		$this->tpl->assign("stores",$stores);
+		$this->tpl->assign("sdate",$a_sdate);
+		$this->tpl->assign("edate",$a_edate);
 	}
 }
 ?>

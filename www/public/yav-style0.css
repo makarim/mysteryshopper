@@ -43,7 +43,7 @@ a{text-decoration:underline;color:black}
 .mainbox{ margin:10px 0; }
 .nomargin{ margin:0; }
 
-.container{ padding:20px; text-align:left; background:url(bg_repx_hb.gif) repeat-x; }
+.container{ padding:20px; text-align:left;}
 .note{ margin:5px 0; padding:5px; width:680px; border:1px solid #CCC; background:#efefef; }
 .i{ padding-left:22px; line-height:19px; background:url(bg_repno.gif) no-repeat -275px -100px; }
 .i a{ text-decoration:underline; }
