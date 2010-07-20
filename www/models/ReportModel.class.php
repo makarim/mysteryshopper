@@ -154,6 +154,7 @@ class ReportModel extends Model {
 	
 	function saveAnswer($rq_id,$u_id,$a_id,$rq_type,$answer){
 		$ans_id = $this->db->getOne("select ans_id from answer where rq_id='$rq_id' and a_id='$a_id'");
+		if($rq_type==4) $answer = floatval($answer);
 		if(!$ans_id){
 			$rs =$this->db->execute("insert into answer (rq_id, u_id,a_id, rq_type, ans_answer$rq_type) values ('$rq_id','$u_id','$a_id','$rq_type','{$answer}')");
 		}else{
