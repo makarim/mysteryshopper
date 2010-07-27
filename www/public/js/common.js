@@ -1,7 +1,9 @@
 var userAgent = navigator.userAgent.toLowerCase();
+var mode = document.documentMode || 0;
 var is_opera = userAgent.indexOf('opera') != -1 && opera.version();
 var is_moz = (navigator.product == 'Gecko') && userAgent.substr(userAgent.indexOf('firefox') + 8, 3);
 var is_ie = (userAgent.indexOf('msie') != -1 && !is_opera) && userAgent.substr(userAgent.indexOf('msie') + 5, 3);
+var is_ie6 = (userAgent.indexOf('msie') != -1) && /MSIE 6.0/.test(navigator.userAgent) && !mode;
 
 function $(id) {
 	return document.getElementById(id);

@@ -291,6 +291,10 @@ class report{
 				if(substr($k,0,7)=='rq_ans_'){
 					list(,,$rq_type,$rq_id) = split("_",$k);
 					$r *=$reportModel->saveAnswer($rq_id,$u_id,$a_id,$rq_type,addslashes($v));
+				}				
+				if(substr($k,0,10)=='rq_comment_'){
+					list(,,$rq_type,$rq_id) = split("_",$k);
+					$r *=$reportModel->saveComment($rq_id,$u_id,$a_id,$rq_type,addslashes($v));
 				}
 			}
 		}
@@ -367,6 +371,50 @@ class report{
     		if($t) show_message_goback(lang('success'));
     	}
     	show_message(lang('selectone'));
+    	goback();
+	}
+	
+	function view_appendreport(){
+		$re_id = $_GET['re_id'];
+		include_once("ReportModel.class.php");
+		$ReportModel = new ReportModel();
+		$report = $ReportModel->getReportByReId($re_id);
+		if(!$report){
+			show_message_goback(lang("failed"));
+		}
+		$report_questions = array();
+		foreach ($GLOBALS['gGroups'] as $k=>$v){
+			$arr = $ReportModel->getQuestionsByReId($re_id,$k);
+			$report_questions[$v] = $arr;
+			
+		}
+		$this->tpl->assign("report",$report);
+		$this->tpl->assign("report_questions",$report_questions);
+	}
+	function op_modifyreport(){
+		$re_id = $_POST['re_id'];
+		include_once("ReportModel.class.php");
+		$ReportModel = new ReportModel();
+		$report_questions  = $ReportModel->getQuestionsByReId($re_id);
+		$data = array();
+		foreach ($report_questions as $v){
+			$data['rq_id'] = $v['rq_id'];
+			if(isset($_POST['nabox_'.$v['rq_id']])){
+				$data['is_na'] =1;
+			}else{
+				$data['is_na'] =0;
+			}
+			if(isset($_POST['commentbox_'.$v['rq_id']])){
+				$data['is_comment'] =1;
+			}else{
+				$data['is_comment'] =0;
+			}
+			
+			if($ReportModel->modifyReport($data)){
+				$data = array();
+			}
+		}
+		show_message(lang('success'));
     	goback();
 	}
 }
