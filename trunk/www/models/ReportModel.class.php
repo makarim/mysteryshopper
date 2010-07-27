@@ -59,7 +59,7 @@ class ReportModel extends Model {
     function getQuestionsByReId($re_id,$group=''){
     	$addsql = '';
     	if($group) $addsql = "and rq_group='$group'";
-    	return $this->db->getAll("select rq_id,rq_group,rq_type,rq_question,q_id,ordernum from report_question where re_id='$re_id' $addsql order by ordernum,rq_type");
+    	return $this->db->getAll("select rq_id,rq_group,rq_type,rq_question,q_id,ordernum,is_na,is_comment from report_question where re_id='$re_id' $addsql order by ordernum,rq_type");
     }
     function getReportByReId($re_id){
     	return $this->db->getRow("select * from report where re_id='$re_id'");
@@ -152,6 +152,10 @@ class ReportModel extends Model {
 		return false;
 	}
 	
+	function modifyReport($data){
+		return $this->db->execute("update report_question set is_na=?,is_comment=? where rq_id=?",array($data['is_na'],$data['is_comment'],$data['rq_id']));
+	}
+	
 	function saveAnswer($rq_id,$u_id,$a_id,$rq_type,$answer){
 		$ans_id = $this->db->getOne("select ans_id from answer where rq_id='$rq_id' and a_id='$a_id'");
 		if($rq_type==4) $answer = floatval($answer);
@@ -167,6 +171,19 @@ class ReportModel extends Model {
 			return false;
 		}
 		
+	}
+	function saveComment($rq_id,$u_id,$a_id,$rq_type,$comment){
+		$c_id = $this->db->getOne("select c_id from comment where rq_id='$rq_id' and a_id='$a_id'");
+		if(!$c_id){
+			$rs =$this->db->execute("insert into comment (rq_id, u_id,a_id, rq_type, comment) values ('$rq_id','$u_id','$a_id','$rq_type','{$comment}')");
+		}else{
+			$rs = $this->db->execute("update comment set comment='$comment' where c_id=$c_id");
+		}
+		if($rs){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	function getAnswerByAid($a_id,$rq_id,$rq_type){
 		return $this->db->getOne("select ans_answer$rq_type from answer where a_id='$a_id' and rq_id='$rq_id'");

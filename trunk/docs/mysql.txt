@@ -1,1 +1,17 @@
 ALTER TABLE  `answer` CHANGE  `ans_answer2`  `ans_answer2` CHAR( 2 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+
+====2010.07.27
+ALTER TABLE  `report_question` ADD  `is_na` TINYINT( 1 ) DEFAULT  '1' NOT NULL ,
+ADD  `is_comment` TINYINT( 1 ) DEFAULT  '1' NOT NULL ;
+
+CREATE TABLE `comment` (
+  `c_id` int(10) unsigned NOT NULL auto_increment,
+  `rq_id` int(11) NOT NULL,
+  `u_id` int(11) NOT NULL,
+  `a_id` int(11) NOT NULL COMMENT '任务ID',
+  `rq_type` tinyint(1) NOT NULL,
+  `comment` text,
+  PRIMARY KEY  (`c_id`),
+  KEY `rq_id` (`rq_id`),
+  KEY `rq_id_2` (`rq_id`,`a_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8

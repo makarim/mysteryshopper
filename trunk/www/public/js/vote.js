@@ -18,8 +18,9 @@ function create_vote_img(id,value){
 		vote_img.setAttribute("id","yes_"+id+'_'+i);	
 		vote_img.setAttribute("title",i+"分");
 	    vote_img.style.cursor="pointer";
-	   
-			if(is_ie){
+	  
+		if(is_ie6){
+				
 			 // vote_img.setAttribute("onmouseover",'put_fs(this.id)');	
 			  //vote_img.setAttribute("onmouseout",'out_fs(this.id)');
 			  vote_img.setAttribute("onclick",function(){is_fs(this);});	
@@ -57,9 +58,9 @@ function out_fs(id){
 		document.getElementById("rq_ans_"+q).value ="";
 		document.getElementById("span_ch_"+q).innerHTML ="";
 	}
-	
-
+	display_comment(q);
 }
+
 function is_fs(id){
 	var str=id.id;
 	var q=str.split("_")[1];
@@ -79,4 +80,24 @@ function is_fs(id){
 	document.getElementById("span_ch_"+q).innerHTML =vote_span_text;
 	document.getElementById("votebox_"+q).checked = 0;
 	//is_fs=function(){return false;};
+	display_comment(q);
+}
+
+function display_comment(id){
+	var obj = $("icon_updown_"+id);
+	if($("td_comment_"+id)) $("td_comment_"+id).style.display = '';
+	if(is_ie6){
+		obj.setAttribute("onclick",function(){hide_comment(id);});
+	}else{
+		obj.setAttribute("onclick",'hide_comment('+id+');');
+	}
+}
+function hide_comment(id){
+	var obj = $("icon_updown_"+id);
+	if($("td_comment_"+id)) $("td_comment_"+id).style.display = 'none';
+	if(is_ie6){
+		obj.setAttribute("onclick",function(){display_comment(id);});
+	}else{
+		obj.setAttribute("onclick",'display_comment('+id+');');
+	}
 }

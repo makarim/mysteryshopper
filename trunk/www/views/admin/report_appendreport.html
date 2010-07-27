@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Xppass Administrator's Control Panel</title>
+<link href="<?php echo $www_site_url;?>/public/yav-style.css" type=text/css rel=stylesheet>
+<script src="<?php echo $www_site_url;?>/public/js/common.js" type="text/javascript"></script>
+<script src="<?php echo $www_site_url;?>/public/js/vote.js" type="text/javascript"></script>
+<script>
+
+function checkform(form){
+	return true;
+}
+</script>
+</head>
+<body>
+<div id="append"></div>
+<div id="msg" style="color:red;text-align:center"></div>
+<div class="container"> 
+	
+	<div class="mainbox">
+	<?php if(isset($report_questions) && is_array($report_questions)){
+		?>
+<form action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkform(this);">
+				<input type="hidden" name="action" value="report">
+				<input type="hidden" name="op" value="modifyreport">
+				<input type="hidden" name="re_id" value="<?php echo $report['re_id']?>">
+	<?php
+		foreach ($report_questions as $k=>$v){?>
+		<table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport" style="margin-top:10px;">
+          <tr>
+            <td colspan="4" class="title"><?php echo lang($k);?></td>
+          </tr>
+          <?php
+			foreach ($v as $kk=>$vv){
+				if($vv['rq_type']==2 || $vv['rq_type']==4 || $vv['rq_type']==1){
+				?>
+          <tr>
+			 <td width="5%"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
+            <td width="65%"><?php echo splitx($vv['rq_question']);?> <span id="span_ch_<?php echo $vv['rq_id'];?>" style="float:right;"></span></td>
+            <td  width="15%" align="center">      	
+           		N/A <input type="checkbox" id="votebox_<?php echo $vv['rq_id'];?>" name="nabox_<?php echo $vv['rq_id'];?>" <?php if($vv['is_na']==1) echo "checked"; ?> value="1">			
+            </td>
+            <td  width="15%" align="center">      	
+           		Comment <input type="checkbox" id="votebox_<?php echo $vv['rq_id'];?>" name="commentbox_<?php echo $vv['rq_id'];?>"  <?php if($vv['is_comment']==1) echo "checked"; ?> value="1">			
+            </td>
+          </tr>
+       		 <?php 
+				}
+			}
+			?>
+				
+        </table>
+ 		<?php 
+			
+		}
+}
+		?>
+ 		<table width="100%" height="50">
+	 		<tr>
+				<td align="center"><input type="submit" value="<?php echo lang('submit')?>" class="btn" /></td>
+			</tr>
+		</table>
+		</form>
+			
+
+	</div>
+	
+	</div>
+
+</body>
+</html>	
