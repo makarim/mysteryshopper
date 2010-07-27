@@ -47,6 +47,7 @@ function checkform(form){
 	var textarea = g('textarea');
 	for(var i=0;i<textarea.length;i++){
 		var v=va(textarea[i]);
+		if(textarea[i].name.indexOf("rq_comment_")!=-1) continue;
 		if(v==''){
 			textarea[i].style.border='1px solid red';
 			result=false;
@@ -130,8 +131,32 @@ if(is_array($attachments)){
 }
 ?>
 <TR>
-</table>	
-		
+</table>
+<br />	
+<FORM name="uplaodform" id="uplaodform" method="POST" enctype="multipart/form-data" action="index.php">
+<input type="hidden" name="action" value="home">
+<input type="hidden" name="op" value="upload">
+<input type="hidden" name="a_id" value="<?php echo $a_id;?>">
+ <TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
+<TR>
+<TD class="text"><?php echo lang("mp3_image")?></TD>
+<TD><div id="errorsDiv_face"></div>
+  
+<INPUT type="file" name="mfile" id="mfile" class="input" /> (<?php echo lang("support_file_format")?>：jpg|png|gif|jpeg|mp3|wma ,<?php echo lang("less_than")?>2MB)
+</TD>
+</TR>
+
+  <tr>
+    <td class="text"></td>
+
+    <td>
+          <input name="button5" type="submit" class="btn" id="button5" value="<?php echo lang("save")?>" />
+    </td>
+  </tr>
+</table>
+  </form>
+  
+  
 		<?php if(isset($report_questions) && is_array($report_questions)){?>
 			<br /><br />
 				 <br />
@@ -198,8 +223,8 @@ if(is_array($attachments)){
           </tr>
           
           <?php if($vv['is_comment']==1){?>
-          <tr style="display:none;" id="td_comment_<?php echo $vv['rq_id'];?>">
-          <td colspan="3" ><textarea style="width:100%;font-size:12px;height:32px;" rows="2" name="rq_comment_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" id="rq_comment_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>"></textarea></td>
+          <tr <?php if(!$vv['comment']) echo 'style="display:none;"'?> id="td_comment_<?php echo $vv['rq_id'];?>">
+          <td colspan="3" ><textarea style="width:100%;font-size:12px;height:32px;" rows="2" name="rq_comment_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" id="rq_comment_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>"><?php echo $vv['comment'];?></textarea></td>
           </tr>
           <?php }?>
           

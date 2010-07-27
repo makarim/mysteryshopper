@@ -565,6 +565,7 @@ class home{
 			if($arr){
 				foreach ($arr as $kk=>$vv){
 					$vv['answer'] = $ReportModel->getAnswerByAid($a_id,$vv['rq_id'],$vv['rq_type']);
+					$vv['comment'] = $ReportModel->getCommentByRqid($a_id,$vv['rq_id']);
 					$arr[$kk] = $vv;
 				}
 			}

@@ -185,6 +185,7 @@ class report{
 				if($arr){
 					foreach ($arr as $kk=>$vv){
 						$vv['answer'] = $ReportModel->getAnswerByAid($a_id,$vv['rq_id'],$vv['rq_type']);
+						$vv['comment'] = $ReportModel->getCommentByRqid($a_id,$vv['rq_id']);
 						$arr[$kk] = $vv;
 					}
 				}
@@ -285,16 +286,16 @@ class report{
 		
 		$u_id= $this->loginuser['user_id'];
 		$a_id= $_POST['a_id'];
-		$r = true;
+		$r = $rs =true;
 		if($_POST){
 			foreach ($_POST as $k=>$v){
 				if(substr($k,0,7)=='rq_ans_'){
 					list(,,$rq_type,$rq_id) = split("_",$k);
 					$r *=$reportModel->saveAnswer($rq_id,$u_id,$a_id,$rq_type,addslashes($v));
 				}				
-				if(substr($k,0,10)=='rq_comment_'){
+				if(substr($k,0,11)=='rq_comment_'){
 					list(,,$rq_type,$rq_id) = split("_",$k);
-					$r *=$reportModel->saveComment($rq_id,$u_id,$a_id,$rq_type,addslashes($v));
+					if($v) $rs *=$reportModel->saveComment($rq_id,$u_id,$a_id,$rq_type,addslashes($v));
 				}
 			}
 		}
