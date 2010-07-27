@@ -85,7 +85,10 @@ function is_fs(id){
 
 function display_comment(id){
 	var obj = $("icon_updown_"+id);
-	if($("td_comment_"+id)) $("td_comment_"+id).style.display = '';
+	if($("td_comment_"+id)){
+		$("td_comment_"+id).style.display = '';
+		$("td_comment_"+id).focus();
+	}
 	if(is_ie6){
 		obj.setAttribute("onclick",function(){hide_comment(id);});
 	}else{

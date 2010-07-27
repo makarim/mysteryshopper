@@ -21,6 +21,8 @@
 <input type="hidden" name="action" value="home">
 <input type="hidden" name="op" value="updateuserdetail">
 <input type="hidden" name="type" id="t" value="<?php echo $type?>">
+<input type="hidden" name="user_id" value="<?php echo $userinfo['user_id'];?>">
+<input type="hidden" name="f" value="user">
 <?php if($type=='contact'){ ?>
 <TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
 <TR>
@@ -94,8 +96,7 @@ new PCAS("province","city","area","<?php echo $userinfo['province']?>","<?php ec
 <TR>
 <TD width="40%" class="text"></TD>
 <TD width="60%"><div id="msg" style="margin:0 auto;"></div></TD>
-</TR
-><TR>
+</TR><TR>
 
 
 <TR>

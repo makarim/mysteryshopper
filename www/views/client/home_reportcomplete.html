@@ -99,6 +99,12 @@
 				 }?>
             </td>
           </tr>
+           <?php if($vv['is_comment']==1){?>
+          <tr <?php if(!$vv['comment']) echo 'style="display:none;"'?> id="td_comment_<?php echo $vv['rq_id'];?>">
+           <td></td>
+           <td colspan="2" ><span id="br_32"><?php echo $vv['comment'];?></span></td>
+          </tr>
+          <?php }?>
        		 <?php 
 				}else if($vv['rq_type']==3){ 
 			

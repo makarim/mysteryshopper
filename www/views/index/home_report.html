@@ -47,6 +47,7 @@ function checkform(form){
 	var textarea = g('textarea');
 	for(var i=0;i<textarea.length;i++){
 		var v=va(textarea[i]);
+		if(textarea[i].name.indexOf("rq_comment_")!=-1) continue;
 		if(v==''){
 			textarea[i].style.border='1px solid red';
 			result=false;
@@ -119,18 +120,27 @@ function checkform(form){
 			 <td width="5%"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
             <td width="60%"><?php echo splitx($vv['rq_question']);?> <span id="span_ch_<?php echo $vv['rq_id'];?>" style="float:right;"></span></td>
             <td  width="35%" align="center">
-            <?php if($vv['rq_type']==2){?><label style="float:left;"><input type="checkbox" id="votebox_<?php echo $vv['rq_id'];?>" name="votebox_<?php echo $vv['rq_id'];?>" onclick="out_fs('yes_<?php echo $vv['rq_id'];?>_10');" <?php if($vv['answer']=='A') echo "checked"; ?>>N/A</label><div id="voteimg_<?php echo $vv['rq_id'];?>"></div>	
+             <?php if($vv['rq_type']==2){?>
+            	<?php if($vv['is_na']==1){?> <span style="float:left;"> <img id="icon_updown_<?php echo $vv['rq_id'];?>" style="cursor:pointer;" src="<?php echo $www_site_url?>/public/images/up_down.jpg" onclick="display_comment(<?php echo $vv['rq_id'];?>);"><input type="checkbox" id="votebox_<?php echo $vv['rq_id'];?>" name="votebox_<?php echo $vv['rq_id'];?>" onclick="out_fs('yes_<?php echo $vv['rq_id'];?>_10');"  <?php if($vv['answer']=='A') echo "checked"; ?>>N/A</span><?php }?>
+            					<div id="voteimg_<?php echo $vv['rq_id'];?>"></div>	
 								<input type="hidden" id="rq_ans_<?php echo $vv['rq_id'];?>" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="<?php echo $vv['answer'];?>">
 								<script>create_vote_img(<?php echo $vv['rq_id'];?>,'<?php echo $vv['answer'];?>');</script>	
 								
-								<?php }else if($vv['rq_type']==1){ ?>		
-								<label><input type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="A" <?php if($vv['answer']=='A')echo 'checked'; ?>>N/A ;</label>&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="Y" <?php if($vv['answer']=='Y')echo 'checked'; ?>>Yes ;</label>&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="N"  <?php if($vv['answer']=='N')echo 'checked'; ?>>No;</label>
+			<?php }else if($vv['rq_type']==1){ ?>		
+								 <?php if($vv['is_na']==1){?><span> <img id="icon_updown_<?php echo $vv['rq_id'];?>" style="cursor:pointer;" src="<?php echo $www_site_url?>/public/images/up_down.jpg" onclick="display_comment(<?php echo $vv['rq_id'];?>);"><input type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="A" <?php if($vv['answer']=='A')echo 'checked'; ?> onclick="display_comment(<?php echo $vv['rq_id'];?>);">N/A ;<span><?php }?>
+								 <input type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="Y" <?php if($vv['answer']=='Y')echo 'checked'; ?> onclick="display_comment(<?php echo $vv['rq_id'];?>);">Yes ;</label>&nbsp;&nbsp;&nbsp;&nbsp;<label><input onclick="display_comment(<?php echo $vv['rq_id'];?>);" type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="N"  <?php if($vv['answer']=='N')echo 'checked'; ?>>No;</label>
 								
-									<?php }else if($vv['rq_type']==4){ ?>	
-								<input type="text" size="6" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="<?php echo $vv['answer']; ?>">	'
+			<?php }else if($vv['rq_type']==4){ ?>	
+								<input type="text" size="6" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="<?php echo $vv['answer']; ?>">	分钟
 							<?php }?>
             </td>
           </tr>
+           
+          <?php if($vv['is_comment']==1){?>
+          <tr <?php if(!$vv['comment']) echo 'style="display:none;"'?> id="td_comment_<?php echo $vv['rq_id'];?>">
+          <td colspan="3" ><textarea style="width:100%;font-size:12px;height:32px;" rows="2" name="rq_comment_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" id="rq_comment_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>"><?php echo $vv['comment'];?></textarea></td>
+          </tr>
+          <?php }?>
        		 <?php 
 				}else if($vv['rq_type']==3){ 
 			?>

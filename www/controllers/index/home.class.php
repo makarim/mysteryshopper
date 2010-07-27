@@ -229,6 +229,7 @@ class home{
 				if($arr){
 					foreach ($arr as $kk=>$vv){
 						$vv['answer'] = $ReportModel->getAnswerByAid($a_id,$vv['rq_id'],$vv['rq_type']);
+						$vv['comment'] = $ReportModel->getCommentByRqid($a_id,$vv['rq_id']);
 						$arr[$kk] = $vv;
 					}
 				}
@@ -248,12 +249,16 @@ class home{
 		$reportModel = new ReportModel();
 		$u_id= $this->login_user['user_id'];
 		$a_id= $_POST['a_id'];
-		$r = true;
+		$r = $rs  = true;
 		if($_POST){
 			foreach ($_POST as $k=>$v){
 				if(substr($k,0,7)=='rq_ans_'){
 					list(,,$rq_type,$rq_id) = split("_",$k);
 					$r *=$reportModel->saveAnswer($rq_id,$u_id,$a_id,$rq_type,addslashes($v));
+				}
+				if(substr($k,0,11)=='rq_comment_'){
+					list(,,$rq_type,$rq_id) = split("_",$k);
+					if($v) $rs *=$reportModel->saveComment($rq_id,$u_id,$a_id,$rq_type,addslashes($v));
 				}
 			}
 			
@@ -339,6 +344,8 @@ class home{
     }
     function op_updateuserdetail(){
     	include_once("PassportModel.class.php");
+    	$user_id = $_POST['user_id'];
+    	$from = $_POST['f'];
     	$type = isset($_POST['type'])?$_POST['type']:"";
     	$user = array();
     	$msg ='';
@@ -416,7 +423,7 @@ class home{
 	    		
 				include_once("FileUpload.class.php");
     			$upload=new FileUpload(APP_DIR."/public/upload/faceimg/",'jpg|png|gif|jpeg');
-    			$upload->set_file_name("face_".$this->login_user['user_id']);
+    			$upload->set_file_name("face_".$user_id);
 				$re = $upload->upload();
 				if(!$re){
 					$t=$upload->get_succ_file();
@@ -436,17 +443,25 @@ class home{
     	}
     	$rs = false;
     	$passmod = new PassportModel();
-		if($user) $rs = $passmod->saveUserExt ( $user ,$this->login_user['user_id']);
+		if($user) $rs = $passmod->saveUserExt ( $user ,$user_id);
 		if(!$rs){
 				$msg = array('s'=> 400,'m'=>$msg,'d'=>"");				
 				if($type!="upload") exit(json_output($msg));
 		}else{
-				$msg = array('s'=> 200,'m'=>lang("success"),'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/index.php/home/mydetail/$type");				
+				if($from=='user') {
+					$msg = array('s'=> 200,'m'=>lang("success"),'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/index.php/home/mydetail/$type");				
+				}else{
+					$msg = array('s'=> 200,'m'=>lang("success"),'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/?action=user&view=detail&detail=$type&user_id=$user_id");				
+				}
 				if($type!="upload") exit(json_output($msg));
 				
 		}
 		show_message($re);
-		redirect("/index.php/home/mydetail/$type",3);
+		if($from=='user') {
+			redirect("/index.php/home/mydetail/$type",3);
+		}else{
+			goback();
+		}
 		
     }
     

@@ -176,6 +176,7 @@ class ReportModel extends Model {
 		$c_id = $this->db->getOne("select c_id from comment where rq_id='$rq_id' and a_id='$a_id'");
 		if(!$c_id){
 			$rs =$this->db->execute("insert into comment (rq_id, u_id,a_id, rq_type, comment) values ('$rq_id','$u_id','$a_id','$rq_type','{$comment}')");
+			
 		}else{
 			$rs = $this->db->execute("update comment set comment='$comment' where c_id=$c_id");
 		}
@@ -188,7 +189,9 @@ class ReportModel extends Model {
 	function getAnswerByAid($a_id,$rq_id,$rq_type){
 		return $this->db->getOne("select ans_answer$rq_type from answer where a_id='$a_id' and rq_id='$rq_id'");
 	}
-	
+	function getCommentByRqid($a_id,$rq_id){
+		return $this->db->getOne("select comment from comment where a_id='$a_id' and rq_id='$rq_id'");
+	}
 	
 	function deleteReport($re_id){
 		$rs = $this->db->execute("delete from report where re_id='{$re_id}'");

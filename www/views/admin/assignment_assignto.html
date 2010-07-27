@@ -15,7 +15,6 @@ function checkOnSubmit(formName) {
 	var params = mini.form.serialize($(formName));
 
 	mini.ajax.post(url, function(r){
-alert(r);
 
 		var r = eval('(' + r + ')');   
 
