@@ -176,7 +176,7 @@ class AssignmentModel extends Model {
 		$select->leftjoin("corporation c ","c.c_id=a.c_id ","c.c_title");
 		
 		$select->where("a.a_finish =1");
-		if(isset($con['order'])) $select->order ( 'a.'.$con['order']." desc" );
+		if(isset($con['order'])) $select->order ( 'a.'.$con['order']." asc" );
 		if(isset($con['sdate']) && !empty($con['sdate'])) $select->where ( " a.a_fdate >= '".$con['sdate']."'" );
 		if(isset($con['edate']) && !empty($con['edate'])) $select->where ( " a.a_fdate <= '".$con['edate']."'" );
 		if(isset($con['selstores']) && !empty($con['selstores'])){
@@ -205,7 +205,6 @@ class AssignmentModel extends Model {
 		
 		$select->limit ( $list['page']->offset(), $pageCount );
 		$rs = $select->query();
-	
 		if ($rs) {
 			foreach ( $rs as $key => $record ) {
 				$list ['records'] [$key] = $record;

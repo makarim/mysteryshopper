@@ -123,7 +123,8 @@ class index{
 		$fileds['rec_month'] = $_POST['month'];
 		$fileds['rec_content'] = serialize(array("user_name"=>$_POST['user_name']));
 		$fileds['rec_type'] = 'U';
-		$usermod->addBestShopper($fileds,"recommend");
+		$rs = $usermod->addBestShopper($fileds,"recommend");
+		show_message_goback(lang('success'));
     }
     function view_notice(){
 		$cur_sort = !empty($_GET['sort'])?$_GET['sort']:'an_id';

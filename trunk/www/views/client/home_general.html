@@ -1,0 +1,115 @@
+<?php include_once("header.html")?>
+<script src="<?php echo $www_site_url?>/public/js/calendar.js" type="text/javascript"></script>
+<div id="append"></div>
+<div id="wrap">  <br />
+
+<?php include_once("home_left.html")?>
+
+<div class="admincontent">
+
+<form action="/client.php" method="GET" name="seachfrm">
+<input name="action" type="hidden" value="home"  />
+ <input name="view" type="hidden" value="overall"  />
+ <input name="overall" type="hidden" value="<?php echo $type?>"  />
+<div id="storelist" style="width: 210px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:999;"> 
+  <ul> 
+  <?php 
+       if(isset($stores) && is_array($stores)){
+         foreach ($stores as $s){	
+                ?>
+	<li style="padding:2px;"> <label><input onclick="selectmitilstore('<?php echo $s['cs_id']."|".$s['cs_name'];?>');" type="checkbox" name="selstores[]" value="<?php echo $s['cs_id']?>" <?php if(in_array($s['cs_id'],$selstores)) echo 'checked'?>> &nbsp;<?php echo $s['cs_name'];?></label></li> 
+	  <?php
+			}
+      }
+       ?>
+     </ul> 
+</div>
+
+ 
+<table width="100%" height="50" border="0" cellpadding="0" cellspacing="0" class="clear">
+  <tr>
+    <td class="CsearchLeft">&nbsp;</td>
+    <td align="center" class="CsearchCenter"><?php echo lang("select_location")?>:<input name="selstore" type="text" class="ClocationInput" onclick="showmitistores();" id="selstore" value="<?php if(count($selstores)==0){ echo "--"; }else { if(count($selstores)==count($stores)) echo lang("all_locations"); else echo ""; }?>" />
+   
+     <?php echo lang("a_sdate")?>：
+      <input name="sdate" type="text" class="CtimeInput" id="sdate" value="<?php echo $sdate;?>" onclick="showcalendar();"/>
+      <?php echo lang("a_edate")?>：
+      <input name="edate" type="text" class="CtimeInput" id="edate" value="<?php echo $edate;?>" onclick="showcalendar();" />
+      <input name="button" type="submit" class="btnblue" id="button" value="<?php echo lang("search_report")?>" /></td>
+    <td class="CsearchRight">&nbsp;</td>
+
+  </tr>
+</table>
+</form>
+<br />
+<br />
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><div class="table2TitleBg">
+      <div class="table2TitleBg2">
+      <?php if($type!='time'){?>
+      <div style="float:right;margin-right:10px;">
+      
+      <a href="javascript:exportImage(0);"><img src="<?php echo $www_site_url?>/public/images/export_image-icon.gif" border="0" title="export Image"></a>
+      <a href="javascript:print(0);"><img src="<?php echo $www_site_url?>/public/images/print_icon.jpg" border="0" title="Print"></a>
+      </div>
+      <?php }?>
+      	<div class="table2Title"><div class="table2TitleLeft"><span> <?php echo lang("general")?></span></div></div>
+      </div>
+ 
+    </div></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td class="table2LeftBorder"></td>
+        <td>
+        <p align="center">
+ 
+<div id="flashcontent">
+				<strong>You need to upgrade your Flash Player</strong>
+			</div>
+	<script type="text/javascript">
+		// <![CDATA[		
+		var so = new SWFObject("<?php echo $www_site_url?>/public/flash/amcolumn.swf", "amcolumn0", "100%", "400px", "8", "#ffffff");
+		so.addParam("wmode", "transparent");
+		so.addVariable("path", "<?php echo $www_site_url?>/public/flash/");
+		 so.addVariable("chart_id", "amcolumn0");
+		so.addVariable("settings_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amcolumn_settings.xml?102"));
+		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=generaldata&scoretype=<?php echo $type;?>&c_id=<?php echo $corp['c_id'];?>&sdate=<?php echo $sdate?>&edate=<?php echo $edate?>&selstores=<?php echo join(",",$selstores);?>&group=service,environment,product"));
+		so.addVariable("preloader_color", "#ffffff");
+		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo $chart_title?></b>]]></text></label></labels></settings>"));
+
+		so.write("flashcontent");
+		// ]]>
+	</script>
+
+        </p>
+              <p>&nbsp;</p>
+          <p>&nbsp;</p>
+<script>
+function print(id){
+  document.getElementById("amcolumn"+id).printAsBitmap();
+}
+function exportImage(id) {
+  document.getElementById("amcolumn"+id).exportImage('/plugins/export.php');  
+}
+
+</script>  
+          <p>&nbsp;</p></td>
+        <td class="table2RightBorder"></td>
+      </tr>
+
+      <tr>
+        <td class="table2BottomLeft"></td>
+        <td class="table2Bottom"></td>
+        <td class="table2BottomRight"></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+</div>
+</div>
+
+</div>
+<?php include_once("footer.html")?>

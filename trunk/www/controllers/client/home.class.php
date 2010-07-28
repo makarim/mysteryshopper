@@ -157,7 +157,63 @@ class home{
     	$this->tpl->assign('a_id',$a_id);
     	$this->tpl->assign('assignmentinfo',$assignmentinfo);
 	}
+	function view_general(){
+		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
+		$edate = !empty($_GET['edate'])?$_GET['edate']:date("Y-m-d");
+		$type = !empty($_GET['overall'])?$_GET['overall']:"general";
+		$type_id = isset($GLOBALS['gTypes'][$type])?$GLOBALS['gTypes'][$type]:'';
 	
+		$def_stores = array();
+		$chart_title = lang("general");
+		//$chart_title.= "/".lang($type);
+		include_once("CorporationModel.class.php");	
+		$corpModel = new CorporationModel();
+		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
+		foreach ($stores as $s){
+			$def_stores[] = $s['cs_id']; 
+		}
+		$selstores = !empty($_GET['selstores'])?$_GET['selstores']:$def_stores;
+		
+		$con['sdate'] = $sdate;
+		$con['edate'] = $edate;
+		$con['a_audit'] = 1;
+		include_once("AssignmentModel.class.php");	
+		$assignmentModel = new AssignmentModel();
+		$assignments = $assignmentModel->getAssignmentsByCsId($con,$selstores);
+		
+
+		$count = count($assignments);
+		
+		$a_average =$internal_average= 0;
+		if(is_array($assignments)){
+			foreach ($assignments as $k=>$v){
+	
+		
+					$v['service'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],1,$type_id);;
+					$v['environment'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,$type_id);
+					$v['product'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,$type_id);
+					$a_average += ($v['service']+$v['environment']+$v['product'])/3; 
+				
+				$assignments[$k] = $v;
+			}
+			if($count>0)$internal_average = round($a_average/$count,2);
+		}
+		
+		$print_edate = $assignmentModel->getEndDateByCId($this->login_corp['c_id']);
+		$print_sdate = $assignmentModel->getStartDateByCId($this->login_corp['c_id']);
+		if($sdate=='') $sdate = $print_sdate;
+		if($edate=='') $edate = $print_edate;
+		$chart_title .="($print_sdate/$print_edate)";
+		
+		$this->tpl->assign("internal_average",$internal_average);
+		$this->tpl->assign("chart_title",$chart_title);
+		$this->tpl->assign("assignments",$assignments);
+		$this->tpl->assign("selstores",$selstores);
+		$this->tpl->assign("stores",$stores);
+		$this->tpl->assign("type",$type);
+		$this->tpl->assign("sdate",$sdate);
+		$this->tpl->assign("edate",$edate);
+	}
 	function view_overall(){
 		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
 		$edate = !empty($_GET['edate'])?$_GET['edate']:date("Y-m-d");
@@ -166,7 +222,7 @@ class home{
 	
 		$def_stores = array();
 		$chart_title = lang("summary");
-		$chart_title.= "/".lang($type);
+		//$chart_title.= "/".lang($type);
 		include_once("CorporationModel.class.php");	
 		$corpModel = new CorporationModel();
 		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
@@ -528,7 +584,7 @@ class home{
 		
 		$con['sdate'] = $sdate;
 		$con['edate'] = $edate;
-		$con['order'] = 'a_edate';
+		$con['order'] = 'a_fdate';
 		$con['selstores'] = $cs_id;
 		$con['c_id'] = $this->login_corp['c_id'];
 		

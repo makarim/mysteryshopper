@@ -5,7 +5,13 @@
 <?php include_once("home_left.html")?>
 <div class="admincontent">
 
-<?php include_once("home_corptop.html")?>
+<div id="tabsD" style="width:100%"> 
+  <ul> 
+    <li <?php if($type=='corpstats') echo 'class="on"';?>><a href="/client.php/home/corpstats" title="<?php echo lang("assignmentprogress");?>"><span><?php echo lang("assignmentprogress");?></span></a></li> 
+   
+   
+  </ul> 
+</div>
 <br />
 <br />
 <br />

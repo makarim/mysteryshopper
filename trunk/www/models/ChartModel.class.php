@@ -58,6 +58,48 @@ class ChartModel extends Model {
 		}
 		return 0;
 	}
+	function getGeneralScoreByCsId($csid){
+		$sql="select a.re_id,a.a_id from assignment a where a.cs_id='$csid' $this->addsql";
+		$data = $this->db->getAll($sql);
+		$row =count($data);;
+		if($row>0){
+			$average = 0;
+			foreach ($data as $v){
+				$sql = "select rq_id,rq_type from report_question where re_id=".$v['re_id'];
+				$rq_arr = $this->db->getAll($sql);
+				$q_row = count($rq_arr);
+				//echo "row:".$q_row."|";
+				$sum = $n = 0;
+				if($q_row>0){
+					foreach ($rq_arr as $rq){
+						if($rq['rq_type']==2){
+							$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$v['a_id']."' and rq_type=2 and ans_answer2!='A'";						
+							$score = $this->db->getOne($sql);
+							if($score>0){
+								$sum += is_numeric($score)?$score:0;
+								$n++;
+							}
+						}else if($rq['rq_type']==1){
+							$sql = "select ans_answer1  from answer where rq_id='".$rq['rq_id']."' and a_id='".$v['a_id']."' and rq_type=1 and ans_answer1!='A'";
+							$yn = $this->db->getOne($sql);
+							if($yn=='Y' or $yn=='N'){
+								$sum += ($yn=='Y')?10:0;
+								$n++;
+							}
+						}
+						
+					}
+					//echo $sum;
+					if($n>0) $average += ($sum)/$n;
+				}
+				
+			}
+			//echo $average;
+		
+			return round($average/$row,2);
+		}
+		return 0;
+	}
 	/**
 	 * @param  $csid 公司ID
 	 * @param $group 问题归属,环境类，服务类，产品类
