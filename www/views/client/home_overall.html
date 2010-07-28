@@ -193,8 +193,9 @@ function exportImage(id) {
                  <tr>
                   <td><?php echo lang("an_date")?></td>
                   <td><?php echo lang("assignment")?></td>
-                  <td><?php echo lang("service")?></td>
+                  
                   <td><?php echo lang("environment")?></td>
+                  <td><?php echo lang("service")?></td>
                   <td><?php echo lang("product")?></td>
                 </tr>
                 <?php
@@ -204,8 +205,9 @@ function exportImage(id) {
                 <tr>
                   <td width="15%"><?php echo $v['day']?></td>
                   <td width="40%"><a href="/client.php?action=home&view=reportcomplete&re_id=<?php echo $v['re_id']?>&a_id=<?php echo $v['a_id']?>" target="_blank"><?php echo $v['a_title']?></a></td>
-                  <td width="15%"><?php echo $v['service']?></td>
+                 
                   <td width="15%"><?php echo $v['environment']?></td>
+                   <td width="15%"><?php echo $v['service']?></td>
                   <td width="15%"><?php echo $v['product']?></td>
 
                 </tr>
