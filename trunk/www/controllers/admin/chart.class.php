@@ -218,7 +218,7 @@ $xml .="
 				foreach ($stores as $k=>$store){
 					if(!in_array($store['cs_id'],$selstores_arr)) continue;
 					if(strtolower($scoretype)=='general'){ 
-						$score = $ChartModel->getGeneralScoreByCsId($store['cs_id'],1);
+						$score = $ChartModel->getGeneralScoreByCsId($store['cs_id']);
 						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
 					}
 					

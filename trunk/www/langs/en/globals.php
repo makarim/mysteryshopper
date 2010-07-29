@@ -778,4 +778,5 @@ $GLOBALS['gLang']['retsetpwd'] = 'Reset Password';
 $GLOBALS['gLang']['oldpwd'] = 'Old Password';
 $GLOBALS['gLang']['paynote'] = '*Note: If possible, please use China Construction Bank for the most efficient transaction）';
 $GLOBALS['gLang']['assignmentprogress'] = 'Assignment Progress';
+$GLOBALS['gLang']['ranking'] = 'Rankings';
 ?>

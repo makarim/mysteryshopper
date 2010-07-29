@@ -20,14 +20,14 @@
 <?php if(isset($stores)){
 	foreach ($stores as $s){?>
 
-<TR><TD><?php echo $s['cs_name'];?></TD>
+<TR><TD><?php echo splitx($s['cs_name']);?></TD>
 <TD><?php 
 foreach ($GLOBALS['gCompanysize'] as $k=>$v){
 	if($k==$s['cs_size']) echo ($v);
 }
 ?></TD>
 <TD><?php echo $s['cs_phone'];?></TD>
-<TD><?php echo $s['cs_address'];?></TD>
+<TD><?php echo splitx($s['cs_address']);?></TD>
 </TR>
 <?php }}?>
 </TR>

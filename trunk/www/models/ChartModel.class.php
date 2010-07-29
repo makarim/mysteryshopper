@@ -3,7 +3,7 @@ class ChartModel extends Model {
 	public $sdate;
 	public $edate;
 	private $addsql;
-	function __construct($sdate,$edate){
+	function __construct($sdate='',$edate=''){
 		$this->sdate = $sdate;
 		$this->edate = $edate;
 		$addsql = '';
