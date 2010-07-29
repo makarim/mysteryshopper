@@ -41,7 +41,9 @@
           </table>
          
       <?php
-		foreach ($report_questions as $k=>$v){?>
+		if(isset($report_questions)&& is_array($report_questions)){
+			foreach ($report_questions as $k=>$v){?>
+
 		<table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport" style="margin-top:10px;">
           <tr>
             <td  colspan="3" class="title"><?php echo lang($k);?></td>
@@ -92,7 +94,9 @@
 			}
 			?>
         </table>
- 		<?php }?>
+ 		<?php }
+ 		}
+ 		?>
 
 </div>
 
