@@ -639,5 +639,33 @@ class home{
 		$this->tpl->assign("assignment",$assignment);
 		$this->tpl->assign("report_questions",$report_questions);
 	}
+	
+	function view_corprank(){
+		$type = !empty($_GET['view'])?$_GET['view']:"corp";
+		$this->tpl->assign("type",$type);
+		include_once("ChartModel.class.php"); 
+		$ChartModel = new ChartModel();
+		include_once("CorporationModel.class.php");	
+		$corpModel = new CorporationModel();
+		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
+		$general = $environment = $service = $product = $store_name= array();
+		foreach ($stores as $k=>$store){
+			$general[$store['cs_id']]	=  $ChartModel->getGeneralScoreByCsId($store['cs_id']);	
+			
+			$service[$store['cs_id']]	=  $ChartModel->getSummaryScoreByCsId($store['cs_id'],1);
+			$environment[$store['cs_id']]	=  $ChartModel->getSummaryScoreByCsId($store['cs_id'],2);
+			$product[$store['cs_id']]	=  $ChartModel->getSummaryScoreByCsId($store['cs_id'],3);
+			$store_name[$store['cs_id']] = $store['cs_name'];
+		}
+		arsort($general);
+		arsort($service);
+		arsort($environment);
+		arsort($product);
+		$this->tpl->assign("store_name",$store_name);
+		$this->tpl->assign("product",$product);
+		$this->tpl->assign("service",$service);
+		$this->tpl->assign("environment",$environment);
+		$this->tpl->assign("general",$general);
+	}
 }
 ?>

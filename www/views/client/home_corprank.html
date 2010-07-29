@@ -1,0 +1,85 @@
+<?php include_once("header.html")?>
+
+<div id="wrap">  <br />
+
+<?php include_once("home_left.html")?>
+<div class="admincontent">
+
+<div id="tabsD" style="width:100%"> 
+  <ul> 
+    <li <?php if($type=='corpstats') echo 'class="on"';?>><a href="/client.php/home/corpstats" title="<?php echo lang("assignmentprogress");?>"><span><?php echo lang("assignmentprogress");?></span></a></li> 
+    <li <?php if($type=='corprank') echo 'class="on"';?>><a href="/client.php/home/corprank" title="<?php echo lang("ranking");?>"><span><?php echo lang("ranking");?></span></a></li> 
+   
+   
+  </ul> 
+</div>
+<br />
+<br />
+<br />
+
+
+ <table width="45%" border="0" style="float:left;margin-bottom:20px" cellpadding="0" cellspacing="1" class="missionReport">
+    <tr>
+      <td colspan="2" class="title"><?php echo lang("general")." ".lang("ranking");?></td>
+    </tr>
+    <?php
+  if(isset($general)&& is_array($general)){
+				foreach ($general as $k=>$v){?>
+    <tr>
+      <td><?php echo splitx($store_name[$k]);?></td>
+      <td><?php echo $v;?></td>
+
+    </tr>
+ <?php }}?>
+  </table> 
+
+  <table style="float:right;margin-bottom:20px" width="45%" border="0" cellpadding="0" cellspacing="1" class="missionReport">
+       <tr>
+      <td colspan="2" class="title"><?php echo lang("environment")." ".lang("ranking");?></td>
+    </tr>
+    <?php
+  if(isset($environment)&& is_array($environment)){
+				foreach ($environment as $k=>$v){?>
+    <tr>
+      <td><?php echo splitx($store_name[$k]);?></td>
+      <td><?php echo $v;?></td>
+
+    </tr>
+ <?php }}?>
+  </table>  
+ 
+  <table width="45%" style="float:left;margin-bottom:20px" border="0" cellpadding="0" cellspacing="1" class="missionReport">
+       <tr>
+      <td colspan="2" class="title"><?php echo lang("service")." ".lang("ranking");?></td>
+    </tr>
+    <?php
+  if(isset($service)&& is_array($service)){
+				foreach ($service as $k=>$v){?>
+    <tr>
+      <td><?php echo splitx($store_name[$k]);?></td>
+      <td><?php echo $v;?></td>
+
+    </tr>
+ <?php }}?>
+  </table>
+ 
+  <table width="45%" style="float:right;margin-bottom:20px"  border="0" cellpadding="0" cellspacing="1" class="missionReport">
+       <tr>
+      <td colspan="2" class="title"><?php echo lang("product")." ".lang("ranking");?></td>
+    </tr>
+    <?php
+  if(isset($product)&& is_array($product)){
+				foreach ($product as $k=>$v){?>
+    <tr>
+      <td><?php echo splitx($store_name[$k]);?></td>
+      <td><?php echo $v;?></td>
+
+    </tr>
+ <?php }}?>
+  </table>
+</div>
+
+</div>
+
+
+<?php include_once("footer.html")?>

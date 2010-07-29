@@ -763,7 +763,7 @@ $GLOBALS['gLang']['by_location'] = '分店';
 $GLOBALS['gLang']['comment_analysis'] = '评论分析';
 $GLOBALS['gLang']['completed_visits'] = '已完成的任务';
 $GLOBALS['gLang']['overall'] = '综合对比';
-$GLOBALS['gLang']['general'] = '概况';
+$GLOBALS['gLang']['general'] = '总体';
 $GLOBALS['gLang']['profile'] = '基本信息';
 $GLOBALS['gLang']['contact'] = '联系方式';
 $GLOBALS['gLang']['locations'] = '分店信息';
@@ -783,6 +783,7 @@ $GLOBALS['gLang']['or'] = '或者';
 $GLOBALS['gLang']['paynote'] = '*注明 为了更快的获得报销费用，SPOT建议使用建设银行';
 $GLOBALS['gLang']['resetpwd'] = '重置密码';
 $GLOBALS['gLang']['oldpwd'] = '输入旧密码';
-$GLOBALS['gLang']['assignmentprogress'] = '任务执行进度';
+$GLOBALS['gLang']['assignmentprogress'] = '任务进度';
+$GLOBALS['gLang']['ranking'] = '排行榜';
 
 ?>
