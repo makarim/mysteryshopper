@@ -314,12 +314,14 @@ class ChartModel extends Model {
 		if($group=='summary') $group=4;
 		if($group =='all') $group =0;
 		$re_id_arr = $this->db->getAll("select re_id from assignment where c_id='$c_id' group by re_id");
+		$re_id = array();
 		foreach ($re_id_arr as $value) {
 			$re_id[] = $value['re_id'];
 		}
 		if($group) $addsql= " and rq_group='$group'";
 		$re_id_str = join(',',$re_id);
-		return $this->db->getAll("select rq_id,rq_type,rq_question from report_question where rq_type=4 and re_id in ($re_id_str) $addsql");
+		if($re_id_str) return $this->db->getAll("select rq_id,rq_type,rq_question from report_question where rq_type=4 and re_id in ($re_id_str) $addsql");
+		else return ''; 
 	}
 	function getTimeQuestionsByCsId($cs_id){
 		$re_id_arr = $this->db->getAll("select re_id from assignment where cs_id='$cs_id' group by re_id");

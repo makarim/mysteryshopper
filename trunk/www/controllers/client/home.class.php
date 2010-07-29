@@ -119,7 +119,7 @@ class home{
 	function view_quiz(){
 		$type = !empty($_GET['view'])?$_GET['view']:"corp";
 		$this->tpl->assign("type",$type);
-		
+		$quiz = array();
 		include_once("AssignmentModel.class.php");
     	$this->assignmentModel = new AssignmentModel();
     	$a_id = $this->assignmentModel->getFirstAssignmentByCId($this->login_corp['c_id']);
