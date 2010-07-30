@@ -219,7 +219,7 @@ class ChartModel extends Model {
 					$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=2 and ans_answer2!='A'";
 					$res = $this->db->getOne($sql);
 					if($res>0){
-						$sum +=$res;
+						$sum += is_numeric($res)?$res:0;
 						$n++;
 					}
 				}else if($rq['rq_type']==1){

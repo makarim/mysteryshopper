@@ -315,7 +315,7 @@ class home{
 				
 				$v['yesorno'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,$GLOBALS['gTypes']['yesorno']);
 				$v['vote'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,$GLOBALS['gTypes']['vote']);
-				if($type=='summary') $a_average += ($v['yesorno']+$v['vote'])/2;
+				if($type=='summary') $a_average += $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,'');
 				if($type=='yesorno') $a_average += $v['yesorno'];
 				if($type=='vote') $a_average += $v['vote'];
 				$assignments[$k] = $v;
@@ -380,7 +380,7 @@ class home{
 				}else{
 					$v['yesorno'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],1,$GLOBALS['gTypes']['yesorno']);
 					$v['vote'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],1,$GLOBALS['gTypes']['vote']);
-					if($type=='summary') $a_average += ($v['yesorno']+$v['vote'])/2;
+					if($type=='summary') $a_average +=  $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],1,'');
 					if($type=='yesorno') $a_average += $v['yesorno'];
 					if($type=='vote') $a_average += $v['vote'];
 				}
@@ -437,8 +437,9 @@ class home{
 				$v['vote'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,$GLOBALS['gTypes']['vote']);
 				//echo $v['yesorno'];
 				if($type=='summary') {
-					if($v['yesorno']!='-'&& $v['vote']!='-') $a_average += ($v['yesorno']+$v['vote'])/2;
-					elseif ($v['yesorno']=='-' || $v['vote']=='-') $a_average += ($v['yesorno']+$v['vote']);
+					$a_average += $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,'');
+					//if($v['yesorno']!='-'&& $v['vote']!='-') $a_average += ($v['yesorno']+$v['vote'])/2;
+					//elseif ($v['yesorno']=='-' || $v['vote']=='-') $a_average += ($v['yesorno']+$v['vote']);
 				}
 				if($type=='yesorno') $a_average += $v['yesorno'];
 				if($type=='vote') $a_average += $v['vote'];
