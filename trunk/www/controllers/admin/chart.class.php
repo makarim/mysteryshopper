@@ -112,7 +112,7 @@ class chart{
 			}
 			$xml .="</series>\n<graphs>\n";
 			if(strpos($group,'service')!==false){	
-				$xml .="<graph gid='0'>\n";
+				$xml .="<graph gid='1'>\n";
 				foreach ($stores as $k=>$store){
 					if(!in_array($store['cs_id'],$selstores_arr)) continue;
 					if(strtolower($scoretype)=='summary'){ 
@@ -135,7 +135,7 @@ class chart{
 				$xml .="</graph>\n";
 			}
 			if(strpos($group,'environment')!==false){	
-				$xml .="<graph gid='1'>\n";			
+				$xml .="<graph gid='0'>\n";			
 				foreach ($stores as $k=>$store){
 					if(!in_array($store['cs_id'],$selstores_arr)) continue;
 					if(strtolower($scoretype)=='summary'){ 
