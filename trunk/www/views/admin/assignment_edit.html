@@ -32,7 +32,7 @@ function checkOnSubmit(formName) {
 	return false;
        
 }
-function getStore(c_id){
+function getBrand(c_id){
 	if(c_id==''){
 		var selobj = $('store_container');
 		for(var i in selobj.options){
@@ -41,7 +41,38 @@ function getStore(c_id){
 		selobj.options[0] = new Option('--', '');
 		return ;
 	}
-	var url = "<?php echo $www_site_url?>/admin.php?action=corporation&view=ajaxstore&c_id="+c_id;
+	var url = "<?php echo $www_site_url?>/admin.php?action=corporation&view=ajaxbrand&c_id="+c_id;
+	
+	mini.ajax.get(url, function(r){
+
+		var r = eval('(' + r + ')');   
+
+		if(r.s==200){
+			var obj = eval('(' + r.d + ')');   
+			var selobj = $('brand_container');
+			for(var i in obj){
+				//if(i==0) selobj.options[0] = new Option(obj[i].cs_name, obj[i].cs_id) //replace 1st option with a new one
+				selobj.options[i]=new Option(obj[i].b_name,obj[i].b_id) //add a new option to the end of SELECT
+			}
+			
+		}
+		if(r.s==400){
+			$('msg').innerHTML = r.m;			
+		}
+	});
+	
+	return false;
+}
+function getStore(b_id){
+	if(b_id==''){
+		var selobj = $('store_container');
+		for(var i in selobj.options){
+			selobj.options[i] = null;
+		}
+		selobj.options[0] = new Option('--', '');
+		return ;
+	}
+	var url = "<?php echo $www_site_url?>/admin.php?action=corporation&view=ajaxstore&b_id="+b_id;
 	
 	mini.ajax.get(url, function(r){
 
@@ -63,6 +94,7 @@ function getStore(c_id){
 	
 	return false;
 }
+
 </script>
 </head>
 <body><div id="append"></div>
@@ -96,7 +128,7 @@ function getStore(c_id){
 						</tr>					
 						<tr>
 							<td><?php echo lang('cs_corpration')?>:</td>
-							<td><select name="c_id" onchange="getStore(this.options[this.selectedIndex].value);">
+							<td><select name="c_id" onchange="getBrand(this.options[this.selectedIndex].value);">
 							<option value="">--</option>
 							<?php foreach ($corps as $v){?>
 							<option value="<?php echo $v['c_id'];?>"  <?php if($v['c_id']==$info['c_id']) echo 'selected';?> ><?php echo $v['c_initial']." ". $v['c_title'];?></option>
@@ -104,7 +136,16 @@ function getStore(c_id){
 							</select></td>
 						</tr>	
 						<tr>
-							<td><?php echo lang('cs_name')?>:</td>
+							<td><?php echo lang('b_name')?>:</td>
+							<td><select id="brand_container" name="b_id" onchange="getStore(this.options[this.selectedIndex].value);">
+							<option value="">--</option>
+							<?php foreach ($brands as $v){?>
+							<option value="<?php echo $v['b_id'];?>"  <?php if($v['b_id']==$info['b_id']) echo 'selected';?> ><?php echo splitx($v['b_name']);?></option>
+							<?php } ?>
+							</select></td>
+						</tr>	
+						<tr>
+								<td><?php echo lang('cs_name')?>:</td>
 							<td><select id="store_container" name="cs_id">
 							<option value="<?php echo $info['cs_id'];?>"><?php echo $info['cs_abbr']." ".$info['cs_name'];?></option>
 							</select></td>
