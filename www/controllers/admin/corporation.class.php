@@ -229,13 +229,23 @@ class corporation{
        
      
     function view_store(){
-    	$c_id = $_GET['c_id'];
+    	$b_id = isset($_GET['b_id'])?$_GET['b_id']:'';
+    	$c_id = isset($_GET['c_id'])?$_GET['c_id']:'';
     	include_once("CorporationModel.class.php");
     	$corpmod = new CorporationModel();
-		$stores  = $corpmod->getStoreByCid($c_id);
-		$corp  = $corpmod->getCorporationById($c_id);
+    	if($b_id){
+			$stores  = $corpmod->getStoreByBid($b_id);
+			$brand  = $corpmod->getBrandById($b_id);
+			$corp  = $corpmod->getCorporationById($brand['c_id']);
+			$this->tpl->assign('brand',$brand);
+    	}    	
+    	if($c_id){
+			$stores  = $corpmod->getStoreByCid($c_id);
+			$corp  = $corpmod->getCorporationById($c_id);
+    	}
 		$total = count($stores);
 		$this->tpl->assign('stores',$stores);
+		
 		$this->tpl->assign('corp',$corp);
 		$this->tpl->assign('total',$total);
     }
@@ -296,8 +306,10 @@ class corporation{
 		$corpmod = new CorporationModel();
 		$corps  = $corpmod->getAllCorps();
 		$store  = $corpmod->getStoreById($cs_id);
+		$brands  = $corpmod->getBrandByCid($store['c_id']);
 		$this->tpl->assign('cs_id',$cs_id);
 		$this->tpl->assign('store',$store);
+		$this->tpl->assign('brands',$brands);
 		$this->tpl->assign('corps',$corps);
     }
     function op_updatestore(){
@@ -312,7 +324,8 @@ class corporation{
 		$store['cs_name'] =  addslashes($_POST ['cs_name']) ;
 		$store['cs_abbr'] =  addslashes($_POST ['cs_abbr']) ;
 		$store['c_id'] =  intval($_POST ['c_id']) ;
-				$store['cs_address'] = empty($_POST ['cs_address'])?"":addslashes($_POST ['cs_address']);
+		$store['b_id'] =  intval($_POST ['b_id']) ;
+		$store['cs_address'] = empty($_POST ['cs_address'])?"":addslashes($_POST ['cs_address']);
 		$store['cs_province'] = empty($_POST ['cs_province'])?"":addslashes($_POST ['cs_province']);
 		$store['cs_city'] = empty($_POST ['cs_city'])?"":addslashes($_POST ['cs_city']);
 		$store['cs_district'] = empty($_POST ['cs_district'])?"":addslashes($_POST ['cs_district']);
@@ -331,10 +344,12 @@ class corporation{
 		}
     }
     function view_ajaxstore(){
-    	$c_id = $_GET['c_id'];
+    	$c_id = isset($_GET['c_id'])?$_GET['c_id']:'';
+    	$b_id = isset($_GET['b_id'])?$_GET['b_id']:'';
+    	
     	include_once("CorporationModel.class.php");
     	$corpmod = new CorporationModel();
-		$stores  = $corpmod->getStoreByCid($c_id);
+		$stores  = $corpmod->getStoreByBid($b_id);
 		if(is_array($stores)){
 			foreach ($stores as $k=>$v){
 				$v['cs_name'] = splitx($v['cs_name']);
@@ -345,6 +360,95 @@ class corporation{
 		exit(json_output($msg));
     }
     
+    function view_brand(){
+    	$c_id = $_GET['c_id'];
+    	include_once("CorporationModel.class.php");
+    	$corpmod = new CorporationModel();
+		$brands  = $corpmod->getBrandByCid($c_id);
+		$corp  = $corpmod->getCorporationById($c_id);
+		$total = count($brands);
+		$this->tpl->assign('brands',$brands);
+		$this->tpl->assign('corp',$corp);
+		$this->tpl->assign('total',$total);
+    }
+    function view_addbrand(){
+    	$corps = array();
+    	include_once("CorporationModel.class.php");
+		$corpmod = new CorporationModel();
+		$corps  = $corpmod->getAllCorps();
+		$this->tpl->assign('corps',$corps);
+    }
+    function op_savebrand(){
+    	$msg = '';
+    	if (empty ( $_POST ['b_name'] ) ) {
+			$msg = array('s'=> 400,'m'=>lang('cs_name_rule'),'d'=>'');				
+			exit(json_output($msg));
+		}
+		
+		$brand['b_name'] =  addslashes($_POST ['b_name']) ;
+		$brand['c_id'] =  intval($_POST ['c_id']) ;
+		include_once("CorporationModel.class.php");
+		$corpmod = new CorporationModel();
+		// 1. create db corporation
+		$row = $corpmod->createNewBrand ( $brand );
+		if ($row !== false) {
+			$msg = array('s'=> 200,'m'=>'ok','d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/corporation/brand/c_id/".$brand['c_id']);				
+			exit(json_output($msg));
+								
+		}
+    }
+    function op_delbrand(){
+    	$t = true;
+    	if(isset($_POST['delete']) && is_array($_POST['delete'])){
+    		include_once("CorporationModel.class.php");
+    		$corporation = new CorporationModel();
+    		foreach ($_POST['delete'] as $u){
+    			
+    			$t *= $corporation->deleteBrand($u);
+    			
+    		}
+    		
+    		if($t) show_message_goback(lang('success'));
+    	}
+    	show_message(lang('selectone'));
+    	goback();
+    }
+    function view_editbrand(){
+    	$b_id = $_GET['b_id'];
+    	$corps = array();
+    	include_once("CorporationModel.class.php");
+		$corpmod = new CorporationModel();
+		$corps  = $corpmod->getAllCorps();
+		$brand  = $corpmod->getBrandById($b_id);
+		$this->tpl->assign('b_id',$b_id);
+		$this->tpl->assign('brand',$brand);
+		$this->tpl->assign('corps',$corps);
+    }
+    function op_updatebrand(){
+    	include_once("CorporationModel.class.php");
+		$corpmod = new CorporationModel();
+		$msg = '';
+    	if (empty ( $_POST ['b_name'] ) ) {
+			$msg = array('s'=> 400,'m'=>lang('cs_name_rule'),'d'=>'');				
+			exit(json_output($msg));
+		}
+		$b_id = $_POST['b_id'];
+		$brand['b_name'] =  addslashes($_POST ['b_name']) ;
+		
+		$brand['c_id'] =  intval($_POST ['c_id']) ;
+		
+		// 1. update db corporation
+		$row = $corpmod->updateBrand( $brand, $b_id);
+		if ($row !== false) {
+
+			$msg = array('s'=> 200,'m'=>lang('success'),'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/corporation/brand/c_id/".$brand['c_id']);				
+			exit(json_output($msg));
+								
+		}else{
+			$msg = array('s'=> 400,'m'=>lang('failed'),'d'=>'');				
+			exit(json_output($msg));
+		}
+    }
     function view_ajaxbrand(){
     	$c_id = $_GET['c_id'];
     	include_once("CorporationModel.class.php");

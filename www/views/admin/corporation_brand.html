@@ -13,33 +13,34 @@
 
 	<div class="container">
 			
-		<h3><?php echo $corp['c_title']?> <?php if(isset($brand['b_name']))echo splitx($brand['b_name']);?> <?php echo lang('store_list')?>:<?php echo lang('store_total')?>:<?php echo $total?></h3>
+		<h3><?php echo lang('brand_list')?>:<?php echo $corp['c_name']?> <?php echo lang('brand_total')?>:<?php echo $total?></h3>
 		
 		<div class="mainbox">
 				<form action="<?php echo $www_site_url?>/admin.php" onsubmit="return confirm('<?php echo lang('domain_delete_comfirm')?>');" method="post">
 				<input type="hidden" name="action" value="corporation">
-				<input type="hidden" name="op" value="delstore">
+				<input type="hidden" name="op" value="delbrand">
 				<table class="datalist fixwidth" onmouseover="addMouseEvent(this);" >
 
 					<tr>
 						<th><input type="checkbox" name="chkall" id="chkall" onclick="checkall('delete[]')" class="checkbox" /><label for="chkall"><?php echo lang('delete')?></label></th>
 						<th>ID</th>
-						<th><?php echo lang('cs_abbr')?></th>
-						<th><?php echo lang('cs_name')?></th>
-						<th><?php echo lang('cs_address')?></th>
-						<th><?php echo lang('assignment')?></th>
+						
+						<th><?php echo lang('b_name')?></th>
+						<th><?php echo lang('c_store')?></th>
+
+						
 						<th><?php echo lang('edit')?></th>
 					</tr>
-						<?php if(isset($stores) && is_array($stores)){
-							foreach ($stores as $v){?>	
+						<?php if(isset($brands) && is_array($brands)){
+							foreach ($brands as $v){?>	
 						<tr>
-							<td class="option"><input type="checkbox" name="delete[]" value="<?php echo $v['cs_id']?>" class="checkbox" /></td>
-							<td><?php echo $v['cs_id']?></td>
-							<td><?php echo $v['cs_abbr']?></td>
-							<td><strong><?php echo splitx($v['cs_name']);?></strong></td>
-							<td><?php echo splitx($v['cs_address']);?></td>
-							<td><a href="/admin.php/assignment/defaults/cs_id/<?php echo $v['cs_id']?>"><?php echo lang('assignment')?></a></td>
-							<td><a href="/admin.php/corporation/editstore/cs_id/<?php echo $v['cs_id']?>"><?php echo lang('edit')?></a></td>
+							<td class="option"><input type="checkbox" name="delete[]" value="<?php echo $v['b_id']?>" class="checkbox" /></td>
+							<td><?php echo $v['b_id']?></td>
+						
+							<td><strong><?php echo splitx($v['b_name']);?></strong></td>
+			<td><a href="/admin.php/corporation/store/b_id/<?php echo $v['b_id']?>"><?php echo lang('c_store')?></a></td>
+							
+							<td><a href="/admin.php/corporation/editbrand/b_id/<?php echo $v['b_id']?>"><?php echo lang('edit')?></a></td>
 						</tr>
 												
 						<?php }

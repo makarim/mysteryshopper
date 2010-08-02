@@ -54,24 +54,39 @@ class CorporationModel extends Model {
 	}
 	function createNewStore($store){
 		return $this->db->execute("insert into store (cs_name,cs_abbr,cs_address,c_id,cs_province,cs_city,cs_district,cs_phone,cs_size) value ('{$store['cs_name']}','{$store['cs_abbr']}','{$store['cs_address']}','{$store['c_id']}','{$store['cs_province']}','{$store['cs_city']}','{$store['cs_district']}','{$store['cs_phone']}','{$store['cs_size']}') ");
+	}	
+	function createNewBrand($brand){
+		return $this->db->execute("insert into brand (b_name,c_id,b_created,b_updated) value ('{$brand['b_name']}','{$brand['c_id']}',NOW(),NOW()) ");
 	}
 	function getStoreByCid($c_id){
 		return $this->db->getAll("select * from store where c_id='{$c_id}'");
+	}	
+	function getStoreByBid($b_id){
+		return $this->db->getAll("select * from store where b_id='{$b_id}'");
 	}	
 	function getBrandByCid($c_id){
 		return $this->db->getAll("select * from brand where c_id='{$c_id}'");
 	}
 	function getStoreById($cs_id){
 		return $this->db->getRow("select * from store where cs_id='{$cs_id}'");
+	}	
+	function getBrandById($b_id){
+		return $this->db->getRow("select * from brand where b_id='{$b_id}'");
 	}
 	function updateStore($item,$cs_id){
 		return $this->db->update($item,"store"," cs_id=".$cs_id);
+	}	
+	function updateBrand($item,$b_id){
+		return $this->db->update($item,"brand"," b_id=".$b_id);
 	}
 	function deleteCorporation($cid){
 		return $this->db->execute("delete from corporation where c_id='{$cid}'");
 	}	
 	function deleteStore($cs_id){
 		return $this->db->execute("delete from store where cs_id='{$cs_id}'");
+	}	
+	function deleteBrand($b_id){
+		return $this->db->execute("delete from brand where b_id='{$b_id}'");
 	}
 	function getCorporationById($c_id){
 		return $this->db->getRow("select * from corporation where c_id='$c_id'");

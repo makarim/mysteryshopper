@@ -27,6 +27,7 @@
 						<th><?php echo lang('c_title')?></th>
 						<th><?php echo lang('c_contacter')?></th>
 						<th><?php echo lang('c_phone')?></th>
+						<th><?php echo lang('brand')?></th>
 						<th><?php echo lang('c_store')?></th>
 						<th><?php echo lang('assignment')?></th>
 
@@ -41,6 +42,7 @@
 							<td><?php echo $v['c_contacter']?></td>
 
 							<td><?php echo $v['c_phone']?></td>
+							<td><a href="/admin.php/corporation/brand/c_id/<?php echo $v['c_id']?>"><?php echo lang('brand')?></a></td>
 							<td><a href="/admin.php/corporation/store/c_id/<?php echo $v['c_id']?>"><?php echo lang('c_store')?></a></td>
 							<td><a href="/admin.php/assignment/defaults/c_id/<?php echo $v['c_id']?>"><?php echo lang('assignment')?></a></td>
 							<td>

@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Xppass Administrator's Control Panel</title>
+<LINK href="<?php echo $www_site_url?>/public/yav-style.css" type=text/css rel=stylesheet>
+<script src="<?php echo $www_site_url?>/public/js/common.js" type="text/javascript"></script>
+<script src="<?php echo $www_site_url?>/public/js/ajax.js" type="text/javascript"></script>
+
+
+
+<script>
+function checkOnSubmit(formName) {
+  	
+	var url = "<?php echo $www_site_url?>/admin.php";
+	var params = mini.form.serialize($(formName));
+	
+	mini.ajax.post(url, function(r){
+		var r = eval('(' + r + ')');   
+
+		if(r.s==200){
+			window.location.href = r.d;
+		}
+		if(r.s==400){
+			$('msg').innerHTML = r.m;			
+		}
+	}, params);
+	
+	return false;
+       
+}
+
+</script>
+</head>
+<body><div id="append"></div>
+<div id="msg" style="color:red;text-align:center"></div>
+	<div class="container">
+	
+		<div class="hastabmenu">
+				<ul class="tabmenu">
+					<li id="addcorporationbtn" class="tabcurrent"><a href="#"><?php echo lang('menu_addbrand')?></a></li>	
+				</ul>
+				<div id="addcorporationdiv" class="tabcontentcur" style="width:80%">
+					<form id="addcorporationform" name="addcorporationform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addcorporationform');" >
+					<input type="hidden" name="action" value="corporation">
+					<input type="hidden" name="op" value="updatebrand">
+					<input type="hidden" name="b_id" value="<?php echo $b_id?>">
+				
+					<table width="100%">
+						<tr>
+							<td width="10%"><?php echo lang('b_name')?>:</td>
+							<td><input type="text" name="b_name" class="textfield" style="width:500px;" value="<?php echo $brand['b_name']?>"/> *<input type="button" value="Split" onclick="document.addcorporationform.b_name.value+='&lt;!--!--&gt;';"></td>
+			
+							</tr>						
+										
+									
+						<tr>
+							<td><?php echo lang('cs_corpration')?>:</td>
+							<td><select name="c_id">
+							<?php foreach ($corps as $v){?>
+							<option value="<?php echo $v['c_id'];?>" <?php if($v['c_id']==$brand['c_id']) echo "selected";?>><?php echo $v['c_initial']." ". splitx($v['c_title']);?></option>
+							<?php } ?>
+							</select></td>
+							</tr>		
+												
+						<tr>
+						
+							<td colspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button"/></td>
+						</tr>
+					</table>
+					</form>
+	
+				</div>
+		</div>
+</div>
+
+</body>
+</html>

@@ -139,10 +139,11 @@ class assignment{
     function view_edit(){
   
     	$a_id = $_GET['a_id'];
- 
+ 		$brands = $corp = array();
     	include_once("CorporationModel.class.php");
     	$corp = new CorporationModel();
     	$corps  = $corp->getAllCorps();
+    
     	
     	
     	include_once("AssignmentModel.class.php");
@@ -150,15 +151,18 @@ class assignment{
     	$info = $assignment->getAssignmentById($a_id);
 		
     	$store = $corp->getStoreById($info['cs_id']);
+    
     	$info['cs_abbr'] = $store['cs_abbr'];
     	$info['cs_name'] = $store['cs_name'];
+    	$info['b_id'] = $store['b_id'];
     	
-    	
+    	$brands  = $corp->getBrandByCid($store['c_id']);
     	include_once("ReportModel.class.php");
     	$reportModel = new ReportModel();
     	$reports = $reportModel->getAllReports();
 
 		$this->tpl->assign('corps',$corps);
+		$this->tpl->assign('brands',$brands);
 		$this->tpl->assign('reports',$reports);
     	$this->tpl->assign('info',$info);
     }
