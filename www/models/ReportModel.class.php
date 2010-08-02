@@ -140,7 +140,7 @@ class ReportModel extends Model {
 				if($rss==0){
 					$question = $this->getQuestionById($q_id);
 					if($question) $this->db->execute("insert into report_question (re_id,rq_group,rq_type,rq_question,q_id,ordernum)
-				 values ('{$report['re_id']}','{$question['q_group']}','{$question['q_type']}','{$question['q_question']}','{$q_id}','$k')");
+				 values ('{$report['re_id']}','{$question['q_group']}','{$question['q_type']}','".addslashes($question['q_question'])."','{$q_id}','$k')");
 				}else{
 					$this->db->execute("update report_question set ordernum='$k' where re_id='{$report['re_id']}' and q_id='$q_id'");
 				}
