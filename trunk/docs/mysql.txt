@@ -15,3 +15,16 @@ CREATE TABLE `comment` (
   KEY `rq_id` (`rq_id`),
   KEY `rq_id_2` (`rq_id`,`a_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8
+
+====2010.08.02
+CREATE TABLE  `brand` (
+ `b_id` SMALLINT NOT NULL AUTO_INCREMENT ,
+ `b_name` VARCHAR( 60 ) NOT NULL ,
+ `c_id` INT NOT NULL ,
+ `c_created` DATETIME NOT NULL ,
+ `c_updated` DATETIME NOT NULL ,
+PRIMARY KEY (  `b_id` ) ,
+INDEX (  `c_id` )
+) TYPE = MyISAM;
+
+ALTER TABLE  `store` ADD  `b_id` smallint(6) DEFAULT  '0' NOT NULL ;

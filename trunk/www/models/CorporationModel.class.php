@@ -57,6 +57,9 @@ class CorporationModel extends Model {
 	}
 	function getStoreByCid($c_id){
 		return $this->db->getAll("select * from store where c_id='{$c_id}'");
+	}	
+	function getBrandByCid($c_id){
+		return $this->db->getAll("select * from brand where c_id='{$c_id}'");
 	}
 	function getStoreById($cs_id){
 		return $this->db->getRow("select * from store where cs_id='{$cs_id}'");

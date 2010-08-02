@@ -121,7 +121,6 @@ class corporation{
 								
 		}
     }
- 
     function op_delcorporation(){
     	$t = true;
     	if(isset($_POST['delete']) && is_array($_POST['delete'])){
@@ -155,8 +154,7 @@ class corporation{
     		$msg = array('s'=> 400,'m'=>lang('corporationnotexist'),'d'=>'');				
 			exit(json_output($msg));
     	}
-    }
-    
+    }  
     function view_edit(){
   
     	$c_id = $_GET['c_id'];
@@ -344,6 +342,21 @@ class corporation{
 			}
 		}
     	$msg = array('s'=> 200,'m'=>'ok','d'=>json_encode($stores));				
+		exit(json_output($msg));
+    }
+    
+    function view_ajaxbrand(){
+    	$c_id = $_GET['c_id'];
+    	include_once("CorporationModel.class.php");
+    	$corpmod = new CorporationModel();
+		$brands  = $corpmod->getBrandByCid($c_id);
+		if(is_array($brands)){
+			foreach ($brands as $k=>$v){
+				$v['b_name'] = splitx($v['b_name']);
+				$brands[$k] = $v;
+			}
+		}
+    	$msg = array('s'=> 200,'m'=>'ok','d'=>json_encode($brands));				
 		exit(json_output($msg));
     }
 }
