@@ -779,4 +779,9 @@ $GLOBALS['gLang']['oldpwd'] = 'Old Password';
 $GLOBALS['gLang']['paynote'] = '*Note: If possible, please use China Construction Bank for the most efficient transaction）';
 $GLOBALS['gLang']['assignmentprogress'] = 'Assignment Progress';
 $GLOBALS['gLang']['ranking'] = 'Rankings';
+$GLOBALS['gLang']['menu_addbrand'] = 'Add Brand';
+$GLOBALS['gLang']['b_name'] = 'Brand Name';
+$GLOBALS['gLang']['brand'] = 'Brands';
+$GLOBALS['gLang']['brand_list'] = 'Brand List';
+$GLOBALS['gLang']['brand_total'] = 'Brand Total';
 ?>
