@@ -86,101 +86,135 @@ class chart{
 		$this->tpl->assign("edate",$a_edate);
 		$this->tpl->assign('con',$con);
 	}
+	
+	function segment_brand($brands,$group_id,$type){
+		$brand_stores = array();
+		$xml = '';
+		foreach ($brands as $k=>$brand){
+			if(!in_array($brand['b_id'],$this->selbrands_arr)) continue;
+			$brand_stores = $this->corpModel->getStoreByBid($brand['b_id']); 
+			$brand_stores_count = $score = 0;
+			if($brand_stores){
+				$brand_stores_count =  count($brand_stores);
+				foreach ($brand_stores as $k=>$store){
+					if(strtolower($type)=='summary'){ 
+						$score += $this->ChartModel->getSummaryScoreByCsId($store['cs_id'],$group_id);
+					}
+					if(strtolower($type)=='vote'){ 
+						$score += $this->ChartModel->getVoteScoreByCsId($store['cs_id'],$group_id);
+					}
+					if(strtolower($type)=='yesorno'){ 
+						$score += $this->ChartModel->getYesByCsId($store['cs_id'],$group_id);
+					}					
+					if(strtolower($type)=='time'){ 
+						$score += $this->ChartModel->getTimesByCsId($store['cs_id'],$group_id);
+						
+					}
+				}
+				$score = round($score/$brand_stores_count,2);
+			}
+			$xml .="<value xid='{$brand['b_id']}'>{$score}</value>\n";
+		}
+		return $xml;
+	}
+	
+	function segment_store($stores,$group_id,$type){
+		foreach ($stores as $k=>$store){
+			if(!in_array($store['cs_id'],$this->selstores_arr)) continue;
+			if(strtolower($type)=='summary'){ 
+				$score = $this->ChartModel->getSummaryScoreByCsId($store['cs_id'],$group_id);
+				$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
+			}
+			if(strtolower($type)=='vote'){ 
+				$score = $this->ChartModel->getVoteScoreByCsId($store['cs_id'],$group_id);
+				$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
+			}
+			if(strtolower($type)=='yesorno'){ 
+				$score = $this->ChartModel->getYesByCsId($store['cs_id'],$group_id);
+				$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
+			}					
+			if(strtolower($type)=='time'){ 
+				$score = $this->ChartModel->getTimesByCsId($store['cs_id'],$group_id);
+				$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
+			}
+		}
+		return $xml;
+	}
 	function view_overalldata(){
 		//http://www.spotshoppers.com/admin.php?action=chart&view=overalldata&scoretype=summary&c_id=18&sdate=2009-01-02&edate=2010-04-14&selstores=54,55,56,57,58,59,60,61,62,63&group=product
 		$c_id = !empty($_GET['c_id'])?$_GET['c_id']:'';
+		$b_id = !empty($_GET['b_id'])?$_GET['b_id']:'';
 		$group = !empty($_GET['group'])?$_GET['group']:'';
 		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:'';
 		$edate = !empty($_GET['edate'])?$_GET['edate']:'';
+		$this->selbrands_arr =  $this->selstores_arr = array();
 		$selstores = !empty($_GET['selstores'])?$_GET['selstores']:'';
-		if($selstores) $selstores_arr = explode(",",$selstores);
+		if($selstores) $this->selstores_arr = explode(",",$selstores);
+		$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:'';
+		if($selbrands) $this->selbrands_arr = explode(",",$selbrands);
 		$scoretype = !empty($_GET['scoretype'])?$_GET['scoretype']:'summary';
 		
 		$xml = "<?xml version='1.0' encoding='UTF-8'?>
 <chart>";
 		if($c_id){
 			include_once("ChartModel.class.php"); 
-			$ChartModel = new ChartModel($sdate,$edate);
+			$this->ChartModel = new ChartModel($sdate,$edate);
 			
 			include_once("CorporationModel.class.php");	
-			$corpModel = new CorporationModel();
-			$stores = $corpModel->getStoreByCid($c_id);
-			$xml .="<series>\n";
-			foreach ($stores as $k=>$store){
-				if(!in_array($store['cs_id'],$selstores_arr)) continue;
-				$xml .="<value xid='{$store['cs_id']}'>{$store['cs_name']}</value>\n";
-			}
-			$xml .="</series>\n<graphs>\n";
-			if(strpos($group,'service')!==false){	
-				$xml .="<graph gid='1'>\n";
-				foreach ($stores as $k=>$store){
-					if(!in_array($store['cs_id'],$selstores_arr)) continue;
-					if(strtolower($scoretype)=='summary'){ 
-						$score = $ChartModel->getSummaryScoreByCsId($store['cs_id'],1);
-						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
-					}
-					if(strtolower($scoretype)=='vote'){ 
-						$score = $ChartModel->getVoteScoreByCsId($store['cs_id'],1);
-						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
-					}
-					if(strtolower($scoretype)=='yesorno'){ 
-						$score = $ChartModel->getYesByCsId($store['cs_id'],1);
-						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
-					}					
-					if(strtolower($scoretype)=='time'){ 
-						$score = $ChartModel->getTimesByCsId($store['cs_id'],1);
-						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
-					}
+			$this->corpModel = new CorporationModel();
+			
+			if(count($this->selbrands_arr)>1){
+				$brands = $this->corpModel->getBrandByCid($c_id);
+				$xml .="<series>\n";
+				foreach ($brands as $k=>$brand){
+					if(!in_array($brand['b_id'],$this->selbrands_arr)) continue;
+					$xml .="<value xid='{$brand['b_id']}'>{$brand['b_name']}</value>\n";
 				}
-				$xml .="</graph>\n";
-			}
-			if(strpos($group,'environment')!==false){	
-				$xml .="<graph gid='0'>\n";			
-				foreach ($stores as $k=>$store){
-					if(!in_array($store['cs_id'],$selstores_arr)) continue;
-					if(strtolower($scoretype)=='summary'){ 
-						$score = $ChartModel->getSummaryScoreByCsId($store['cs_id'],2);
-						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
-					}
-					if(strtolower($scoretype)=='vote'){ 
-						$score = $ChartModel->getVoteScoreByCsId($store['cs_id'],2);
-						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
-					}
-					if(strtolower($scoretype)=='yesorno'){ 
-						$score = $ChartModel->getYesByCsId($store['cs_id'],2);
-						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
-					}					
-					if(strtolower($scoretype)=='time'){ 
-						$score = $ChartModel->getTimesByCsId($store['cs_id'],2);
-						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
-					}
+				$xml .="</series>\n<graphs>\n";
+				
+				if(strpos($group,'environment')!==false){	
+						$xml .="<graph gid='0'>\n";			
+						$xml .= $this->segment_brand($brands,2,$scoretype);
+						$xml .="</graph>\n";
 				}
-				$xml .="</graph>\n";
-			}
-			if(strpos($group,'product')!==false){
-				$xml .="<graph gid='2'>\n";
-				foreach ($stores as $k=>$store){
-					if(!in_array($store['cs_id'],$selstores_arr)) continue;
-					if(strtolower($scoretype)=='summary'){ 
-						$score = $ChartModel->getSummaryScoreByCsId($store['cs_id'],3);
-						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
-					}
-					if(strtolower($scoretype)=='vote'){ 
-						$score = $ChartModel->getVoteScoreByCsId($store['cs_id'],3);
-						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
-					}
-					if(strtolower($scoretype)=='yesorno'){ 
-						$score = $ChartModel->getYesByCsId($store['cs_id'],3);
-						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
-					}					
-					if(strtolower($scoretype)=='time'){ 
-						$score = $ChartModel->getTimesByCsId($store['cs_id'],3);
-						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
-					}
+				if(strpos($group,'service')!==false){	
+						$xml .="<graph gid='1'>\n";			
+						$xml .= $this->segment_brand($brands,1,$scoretype);
+						$xml .="</graph>\n";
+				}				
+				if(strpos($group,'product')!==false){	
+						$xml .="<graph gid='2'>\n";			
+						$xml .= $this->segment_brand($brands,3,$scoretype);
+						$xml .="</graph>\n";
 				}
-				$xml .="</graph>\n";
+				
+			}else{
+					$stores = $this->corpModel->getStoreByBid($b_id);
+					$xml .="<series>\n";
+					foreach ($stores as $k=>$store){
+						if(!in_array($store['cs_id'],$this->selstores_arr)) continue;
+						$xml .="<value xid='{$store['cs_id']}'>{$store['cs_name']}</value>\n";
+					}
+					$xml .="</series>\n<graphs>\n";
+					
+					if(strpos($group,'environment')!==false){	
+						$xml .="<graph gid='0'>\n";			
+						$xml .= $this->segment_store($stores,2,$scoretype);
+						$xml .="</graph>\n";
+					}
+					if(strpos($group,'service')!==false){	
+						$xml .="<graph gid='1'>\n";
+						$xml .= $this->segment_store($stores,1,$scoretype);
+						$xml .="</graph>\n";
+					}
+					
+					if(strpos($group,'product')!==false){
+						$xml .="<graph gid='2'>\n";
+						$xml .= $this->segment_store($stores,3,$scoretype);
+						$xml .="</graph>\n";
+					}
+					$xml.="</graphs>\n";
 			}
-			$xml.="</graphs>\n";
 			//echo $ChartModel->getScoreByCsId(1,2);
 		}
 
@@ -413,13 +447,15 @@ $xml .="
 	}
 	function view_timedata(){
 		$rq_id = !empty($_GET['rq_id'])?$_GET['rq_id']:'';
+		$b_id = !empty($_GET['b_id'])?$_GET['b_id']:'';
 		$c_id = !empty($_GET['c_id'])?$_GET['c_id']:'';
 		$group = !empty($_GET['group'])?$_GET['group']:'';
 		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:'';
 		$edate = !empty($_GET['edate'])?$_GET['edate']:'';
 		$selstores = !empty($_GET['selstores'])?$_GET['selstores']:'';
 		if($selstores) $selstores_arr = explode(",",$selstores);
-		
+		$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:'';
+		if($selbrands) $this->selbrands_arr = explode(",",$selbrands);
 		
 		include_once("ChartModel.class.php"); 
 		$ChartModel = new ChartModel($sdate,$edate);

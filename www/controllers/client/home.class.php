@@ -157,6 +157,45 @@ class home{
     	$this->tpl->assign('a_id',$a_id);
     	$this->tpl->assign('assignmentinfo',$assignmentinfo);
 	}
+			
+	function prepare_con($group,$type){
+		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
+		$edate = !empty($_GET['edate'])?$_GET['edate']:date("Y-m-d");
+		$type_id = isset($GLOBALS['gTypes'][$type])?$GLOBALS['gTypes'][$type]:'';
+		
+		$chart_title = lang($group);
+		if($type!='general' || $type!='summary') $chart_title.= "/".lang($type);
+		$con['sdate'] = $sdate;
+		$con['edate'] = $edate;
+		$con['type'] = $type;
+		$con['type_id'] = $type_id;
+		$con['a_audit'] = 1;
+		$this->assignments = $this->selstores= $this->stores = array();
+		$internal_average = 0;
+		
+		include_once("AssignmentModel.class.php");	
+		$this->assignmentModel = new AssignmentModel();
+		
+		include_once("CorporationModel.class.php");	
+		$this->corpModel = new CorporationModel();
+		
+		include_once("ChartModel.class.php"); 
+		$this->ChartModel = new ChartModel($sdate,$edate);
+			
+		$print_edate = $this->assignmentModel->getEndDateByCId($this->login_corp['c_id']);
+		$print_sdate = $this->assignmentModel->getStartDateByCId($this->login_corp['c_id']);
+		if($sdate=='') $sdate = $print_sdate;
+		if($edate=='') $edate = $print_edate;
+		
+		$chart_title .="($print_sdate/$print_edate)";
+		
+		$this->tpl->assign("chart_title",$chart_title);
+		$this->tpl->assign("type",$type);
+		$this->tpl->assign("sdate",$sdate);
+		$this->tpl->assign("edate",$edate);
+		return $con;
+	}
+	
 	function get_assignment_avg($con,$brand_id){
 		$this->stores = $this->corpModel->getStoreByBid($brand_id);
 		$def_stores = array();
@@ -180,84 +219,10 @@ class home{
 		}
 		return $internal_average;
 	}
-	function get_assignment_avg2($con,$brand_id){
-		$this->stores = $corpModel->getStoreByBid($brand_id);
-		foreach ($this->stores as $s){
-			$def_stores[] = $s['cs_id']; 
-		}
-		$this->selstores = !empty($_GET['selstores'])?$_GET['selstores']:$def_stores;
-		
-		$assignments = $this->assignmentModel->getAssignmentsByCsId($con,$this->selstores);
-		
-		if($con['type']=='time'){
-			$chart_title = '';
-			
-			$questions = $this->ChartModel->getTimeQuestionsByCId($this->login_corp['c_id'],'all');
-			if($questions){
-				$this->tpl->assign("questions",$questions);
-			}
-		}
-		$count = count($assignments);
-		
-		$a_average =$internal_average= 0;
-		if(is_array($assignments)){
-			foreach ($assignments as $k=>$v){
-	
-				if($con['type']=='time'){
-					foreach ($questions as $qu){
-						$v['times'][] = $this->assignmentModel->getTimeByRqId($qu['rq_id'],$v['a_id']);
-					}
-				}else{
-					$v['service'] = $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],1,$con['type_id']);;
-					$v['environment'] = $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,$con['type_id']);
-					$v['product'] = $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,$con['type_id']);
-					$a_average += ($v['service']+$v['environment']+$v['product'])/3; 
-				}
-				$this->assignments[$k] = $v;
-			}
-			if($count>0)$internal_average = round($a_average/$count,2);
-		}
-		return $internal_average;
-	}
-	function prepare_con($type){
-		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
-		$edate = !empty($_GET['edate'])?$_GET['edate']:date("Y-m-d");
-		$type = !empty($_GET['overall'])?$_GET['overall']:$type;
-		$type_id = isset($GLOBALS['gTypes'][$type])?$GLOBALS['gTypes'][$type]:'';
-		
-		$chart_title = lang($type);
-		$con['sdate'] = $sdate;
-		$con['edate'] = $edate;
-		$con['type'] = $type;
-		$con['type_id'] = $type_id;
-		$con['a_audit'] = 1;
-		$this->assignments = $this->selstores= $this->stores = array();
-		$internal_average = 0;
-		
-		include_once("AssignmentModel.class.php");	
-		$this->assignmentModel = new AssignmentModel();
-		
-		include_once("CorporationModel.class.php");	
-		$this->corpModel = new CorporationModel();
-		
-		include_once("ChartModel.class.php"); 
-		$ChartModel = new ChartModel($sdate,$edate);
-			
-		$print_edate = $this->assignmentModel->getEndDateByCId($this->login_corp['c_id']);
-		$print_sdate = $this->assignmentModel->getStartDateByCId($this->login_corp['c_id']);
-		if($sdate=='') $sdate = $print_sdate;
-		if($edate=='') $edate = $print_edate;
-		
-		$chart_title .="($print_sdate/$print_edate)";
-		
-		$this->tpl->assign("chart_title",$chart_title);
-		$this->tpl->assign("type",$type);
-		$this->tpl->assign("sdate",$sdate);
-		$this->tpl->assign("edate",$edate);
-		return $con;
-	}
+
 	function view_general(){
-		$con = $this->prepare_con("general");
+		$type = !empty($_GET['overall'])?$_GET['overall']:"general";
+		$con = $this->prepare_con("general",$type);
 		
 		$brands = $this->corpModel->getBrandByCid($this->login_corp['c_id']);
 		foreach ($brands as $b){
@@ -289,8 +254,51 @@ class home{
 		$this->tpl->assign("brands",$brands);
 	}
 	
+	function get_assignment_avg_overall($con,$brand_id){
+		$this->stores = $this->corpModel->getStoreByBid($brand_id);
+		$def_stores = array();
+		foreach ($this->stores as $s){
+			$def_stores[] = $s['cs_id']; 
+		}
+		
+		$this->selstores = !empty($_GET['selstores'])?$_GET['selstores']:$def_stores;
+		
+		$assignments = $this->assignmentModel->getAssignmentsByCsId($con,$this->selstores);
+		
+		if($con['type']=='time'){
+			$chart_title = '';
+			
+			$questions = $this->ChartModel->getTimeQuestionsByCId($this->login_corp['c_id'],'all');
+			if($questions){
+				$this->tpl->assign("questions",$questions);
+			}
+			$this->tpl->assign("chart_title",$chart_title);
+		}
+		$count = count($assignments);
+		
+		$a_average =$internal_average= 0;
+		if(is_array($assignments)){
+			foreach ($assignments as $k=>$v){
+	
+				if($con['type']=='time'){
+					foreach ($questions as $qu){
+						$v['times'][] = $this->assignmentModel->getTimeByRqId($qu['rq_id'],$v['a_id']);
+					}
+				}else{
+					$v['service'] = $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],1,$con['type_id']);;
+					$v['environment'] = $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,$con['type_id']);
+					$v['product'] = $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,$con['type_id']);
+					$a_average += ($v['service']+$v['environment']+$v['product'])/3; 
+				}
+				$this->assignments[$k] = $v;
+			}
+			if($count>0)$internal_average = round($a_average/$count,2);
+		}
+		return $internal_average;
+	}
 	function view_overall(){
-		$con = $this->prepare_con("summary");
+		$type = !empty($_GET['overall'])?$_GET['overall']:"summary";
+		$con = $this->prepare_con("overall",$type);
 		
 		$brands = $this->corpModel->getBrandByCid($this->login_corp['c_id']);
 		foreach ($brands as $b){
@@ -302,14 +310,14 @@ class home{
 			$brand_id = $selbrands[0]['b_id'];
 			$brand = $this->corpModel->getBrandById($brand_id);
 			
-			$internal_average = $this->get_assignment_avg($con,$brand_id);
+			$internal_average = $this->get_assignment_avg_overall($con,$brand_id);
 			$this->tpl->assign("brand",$brand);
 			$this->tpl->assign("brand_id",$brand_id);
 			
 		}else{
 			$internal_average = 0;
 			foreach ($selbrands as $b_id){
-				$internal_average +=$this->get_assignment_avg($con,$b_id);
+				$internal_average +=$this->get_assignment_avg_overall($con,$b_id);
 			}
 			$internal_average = round($internal_average/count($selbrands),2);
 			$this->stores = array();
@@ -324,190 +332,226 @@ class home{
 		$this->tpl->assign("brands",$brands);
 
 	}
-	function view_environment(){
-		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
-		$edate = !empty($_GET['edate'])?$_GET['edate']:date("Y-m-d");
-		$type = !empty($_GET['environment'])?$_GET['environment']:"summary";
-		$type_id = isset($GLOBALS['gTypes'][$type])?$GLOBALS['gTypes'][$type]:'';
+	
+	function get_assignment_avg_environment($con,$brand_id){
+		$this->stores = $this->corpModel->getStoreByBid($brand_id);
 		$def_stores = array();
-		$chart_title = lang("environment");
-		$chart_title.= "/".lang($type);
-		include_once("CorporationModel.class.php");	
-		$corpModel = new CorporationModel();
-		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
-		foreach ($stores as $s){
+		foreach ($this->stores as $s){
 			$def_stores[] = $s['cs_id']; 
 		}
-		$selstores = !empty($_GET['selstores'])?$_GET['selstores']:$def_stores;
+		$this->selstores = !empty($_GET['selstores'])?$_GET['selstores']:$def_stores;
 		
-		$con['sdate'] = $sdate;
-		$con['edate'] = $edate;
-		$con['a_audit'] = 1;
-		include_once("AssignmentModel.class.php");	
-		$assignmentModel = new AssignmentModel();
-		$assignments = $assignmentModel->getAssignmentsByCsId($con,$selstores);
-		$rq_id = '';
-		
-		
-		$a_average =$internal_average= 0;
+		$assignments = $this->assignmentModel->getAssignmentsByCsId($con,$this->selstores);
+		$a_average = $internal_average= 0;
 		$count = count($assignments);
 		if(is_array($assignments)){
 			foreach ($assignments as $k=>$v){
 				
-				$v['yesorno'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,$GLOBALS['gTypes']['yesorno']);
-				$v['vote'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,$GLOBALS['gTypes']['vote']);
-				if($type=='summary') $a_average += $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,'');
-				if($type=='yesorno') $a_average += $v['yesorno'];
-				if($type=='vote') $a_average += $v['vote'];
-				$assignments[$k] = $v;
+				$v['yesorno'] = $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,$GLOBALS['gTypes']['yesorno']);
+				$v['vote'] = $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,$GLOBALS['gTypes']['vote']);
+				if($con['type']=='summary') $a_average += $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,'');
+				if($con['type']=='yesorno') $a_average += $v['yesorno'];
+				if($con['type']=='vote') $a_average += $v['vote'];
+				$this->assignments[$k] = $v;
 			}
 			if($count>0)$internal_average = round($a_average/$count,2);
 		}
-
-		$print_edate = $assignmentModel->getEndDateByCId($this->login_corp['c_id']);
-		$print_sdate = $assignmentModel->getStartDateByCId($this->login_corp['c_id']);
-		if($sdate=='') $sdate = $print_sdate;
-		if($edate=='') $edate = $print_edate;
-		$chart_title .="($print_sdate/$print_edate)";
-		
-		$this->tpl->assign("internal_average",$internal_average);
-		$this->tpl->assign("chart_title",$chart_title);
-		$this->tpl->assign("assignments",$assignments);
-		$this->tpl->assign("selstores",$selstores);
-		$this->tpl->assign("stores",$stores);
-		$this->tpl->assign("type",$type);
-		$this->tpl->assign("sdate",$sdate);
-		$this->tpl->assign("edate",$edate);
+		return $internal_average;
 	}
-	function view_service(){
-		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
-		$edate = !empty($_GET['edate'])?$_GET['edate']:date("Y-m-d");
-		$type = !empty($_GET['service'])?$_GET['service']:"summary";
-		$type_id = isset($GLOBALS['gTypes'][$type])?$GLOBALS['gTypes'][$type]:'';
+	function view_environment(){
+		$type = !empty($_GET['environment'])?$_GET['environment']:"summary";
+		$con = $this->prepare_con("environment",$type);
+		
+		$brands = $this->corpModel->getBrandByCid($this->login_corp['c_id']);
+		foreach ($brands as $b){
+			$def_brands[] = $b['b_id']; 
+		}
+		$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
+		if(count($selbrands)==1){
+			$brand_id = $selbrands[0]['b_id'];
+			$brand = $this->corpModel->getBrandById($brand_id);
+			
+			$internal_average = $this->get_assignment_avg_environment($con,$brand_id);
+			$this->tpl->assign("brand",$brand);
+			$this->tpl->assign("brand_id",$brand_id);
+			
+		}else{
+			$internal_average = 0;
+			foreach ($selbrands as $b_id){
+				$internal_average +=$this->get_assignment_avg_environment($con,$b_id);
+			}
+			$internal_average = round($internal_average/count($selbrands),2);
+			$this->stores = array();
+			$this->selstores = array();
+		}
+
+		$this->tpl->assign("internal_average",$internal_average);
+		$this->tpl->assign("assignments",$this->assignments);
+		$this->tpl->assign("selstores",$this->selstores);
+		$this->tpl->assign("stores",$this->stores);	
+		$this->tpl->assign("selbrands",$selbrands);
+		$this->tpl->assign("brands",$brands);
+
+	}
+	
+	function get_assignment_avg_service($con,$brand_id){
+		$this->stores = $this->corpModel->getStoreByBid($brand_id);
 		$def_stores = array();
-		$chart_title = lang("service");
-		$chart_title.= "/".lang($type);
-		include_once("CorporationModel.class.php");	
-		$corpModel = new CorporationModel();
-		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
-		foreach ($stores as $s){
+		foreach ($this->stores as $s){
 			$def_stores[] = $s['cs_id']; 
 		}
-		$selstores = !empty($_GET['selstores'])?$_GET['selstores']:$def_stores;
+		$this->selstores = !empty($_GET['selstores'])?$_GET['selstores']:$def_stores;
 		
-		$con['sdate'] = $sdate;
-		$con['edate'] = $edate;
-		$con['a_audit'] = 1;
-		include_once("AssignmentModel.class.php");	
-		$assignmentModel = new AssignmentModel();
-		$assignments = $assignmentModel->getAssignmentsByCsId($con,$selstores);
+		$assignments = $this->assignmentModel->getAssignmentsByCsId($con,$this->selstores);
 		$rq_id = '';
-		if($type=='time'){
+		if($con['type']=='time'){
 			$chart_title = '';
-			include_once("ChartModel.class.php"); 
-			$ChartModel = new ChartModel($sdate,$edate);
-			$questions = $ChartModel->getTimeQuestionsByCId($this->login_corp['c_id'],'service');
+			
+			$questions = $this->ChartModel->getTimeQuestionsByCId($this->login_corp['c_id'],'service');
 			$this->tpl->assign("questions",$questions);
+			$this->tpl->assign("chart_title",$chart_title);
 		}
 		$a_average =$internal_average= 0;
 		$count = count($assignments);
 		if(is_array($assignments)){
 			foreach ($assignments as $k=>$v){
 				
-				if($type=='time'){
+				if($con['type']=='time'){
 					foreach ($questions as $qu){
-						$v['times'][] = $assignmentModel->getTimeByRqId($qu['rq_id'],$v['a_id']);
+						$v['times'][] = $this->assignmentModel->getTimeByRqId($qu['rq_id'],$v['a_id']);
 					}
 				}else{
-					$v['yesorno'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],1,$GLOBALS['gTypes']['yesorno']);
-					$v['vote'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],1,$GLOBALS['gTypes']['vote']);
-					if($type=='summary') $a_average +=  $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],1,'');
-					if($type=='yesorno') $a_average += $v['yesorno'];
-					if($type=='vote') $a_average += $v['vote'];
+					$v['yesorno'] = $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],1,$GLOBALS['gTypes']['yesorno']);
+					$v['vote'] =  $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],1,$GLOBALS['gTypes']['vote']);
+					if($con['type']=='summary') $a_average +=   $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],1,'');
+					if($con['type']=='yesorno') $a_average += $v['yesorno'];
+					if($con['type']=='vote') $a_average += $v['vote'];
 				}
-				$assignments[$k] = $v;
+				$this->assignments[$k] = $v;
 			}
 			if($count>0)$internal_average = round($a_average/$count,2);
 		}
-//		
-
-		$print_edate = $assignmentModel->getEndDateByCId($this->login_corp['c_id']);
-		$print_sdate = $assignmentModel->getStartDateByCId($this->login_corp['c_id']);
-		if($sdate=='') $sdate = $print_sdate;
-		if($edate=='') $edate = $print_edate;
-		$chart_title .="($print_sdate/$print_edate)";
+		return $internal_average;
+	}
+	function view_service(){
+		$type = !empty($_GET['service'])?$_GET['service']:"summary";
+		$con = $this->prepare_con("service",$type);
+		
+		$brands = $this->corpModel->getBrandByCid($this->login_corp['c_id']);
+		foreach ($brands as $b){
+			$def_brands[] = $b['b_id']; 
+		}
+		$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
+		if(count($selbrands)==1){
+			$brand_id = $selbrands[0]['b_id'];
+			$brand = $this->corpModel->getBrandById($brand_id);
+			
+			$internal_average = $this->get_assignment_avg_service($con,$brand_id);
+			$this->tpl->assign("brand",$brand);
+			$this->tpl->assign("brand_id",$brand_id);
+			
+		}else{
+			$internal_average = 0;
+			foreach ($selbrands as $b_id){
+				$internal_average +=$this->get_assignment_avg_service($con,$b_id);
+			}
+			$internal_average = round($internal_average/count($selbrands),2);
+			$this->stores = array();
+			$this->selstores = array();
+		}
 		
 		$this->tpl->assign("internal_average",$internal_average);
-		$this->tpl->assign("chart_title",$chart_title);
-		$this->tpl->assign("assignments",$assignments);
-		$this->tpl->assign("selstores",$selstores);
-		$this->tpl->assign("stores",$stores);
-		$this->tpl->assign("type",$type);
-		$this->tpl->assign("sdate",$sdate);
-		$this->tpl->assign("edate",$edate);
+		$this->tpl->assign("assignments",$this->assignments);
+		$this->tpl->assign("selstores",$this->selstores);
+		$this->tpl->assign("stores",$this->stores);	
+		$this->tpl->assign("selbrands",$selbrands);
+		$this->tpl->assign("brands",$brands);
+
 	}
-	function view_product(){
-		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
-		$edate = !empty($_GET['edate'])?$_GET['edate']:date("Y-m-d");
-		$type = !empty($_GET['product'])?$_GET['product']:"summary";
-		$type_id = isset($GLOBALS['gTypes'][$type])?$GLOBALS['gTypes'][$type]:'';
+	
+	
+	function get_assignment_avg_product($con,$brand_id){
+		$this->stores = $this->corpModel->getStoreByBid($brand_id);
 		$def_stores = array();
-		$chart_title = lang("product");
-		$chart_title.= "/".lang($type);
-		include_once("CorporationModel.class.php");	
-		$corpModel = new CorporationModel();
-		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
-		foreach ($stores as $s){
+		foreach ($this->stores as $s){
 			$def_stores[] = $s['cs_id']; 
 		}
-		$selstores = !empty($_GET['selstores'])?$_GET['selstores']:$def_stores;
+		$this->selstores = !empty($_GET['selstores'])?$_GET['selstores']:$def_stores;
 		
-		$con['sdate'] = $sdate;
-		$con['edate'] = $edate;
-		$con['a_audit'] = 1;
-		include_once("AssignmentModel.class.php");	
-		$assignmentModel = new AssignmentModel();
-		$assignments = $assignmentModel->getAssignmentsByCsId($con,$selstores);
-		$rq_id = '';
-		
-		$a_average =$internal_average= 0;
+		$assignments = $this->assignmentModel->getAssignmentsByCsId($con,$this->selstores);
+		$a_average = $internal_average= 0;
 		$count = count($assignments);
 		if(is_array($assignments)){
 			foreach ($assignments as $k=>$v){
-				$v['yesorno'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,$GLOBALS['gTypes']['yesorno']);
-				$v['vote'] = $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,$GLOBALS['gTypes']['vote']);
-				//echo $v['yesorno'];
-				if($type=='summary') {
-					$a_average += $assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,'');
-					//if($v['yesorno']!='-'&& $v['vote']!='-') $a_average += ($v['yesorno']+$v['vote'])/2;
-					//elseif ($v['yesorno']=='-' || $v['vote']=='-') $a_average += ($v['yesorno']+$v['vote']);
-				}
-				if($type=='yesorno') $a_average += $v['yesorno'];
-				if($type=='vote') $a_average += $v['vote'];
-				$assignments[$k] = $v;
+				
+				$v['yesorno'] = $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,$GLOBALS['gTypes']['yesorno']);
+				$v['vote'] = $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,$GLOBALS['gTypes']['vote']);
+				if($con['type']=='summary') $a_average += $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,'');
+				if($con['type']=='yesorno') $a_average += $v['yesorno'];
+				if($con['type']=='vote') $a_average += $v['vote'];
+				$this->assignments[$k] = $v;
 			}
 			if($count>0)$internal_average = round($a_average/$count,2);
 		}
-		$print_edate = $assignmentModel->getEndDateByCId($this->login_corp['c_id']);
-		$print_sdate = $assignmentModel->getStartDateByCId($this->login_corp['c_id']);
-		if($sdate=='') $sdate = $print_sdate;
-		if($edate=='') $edate = $print_edate;
-		$chart_title .="($print_sdate/$print_edate)";
-	
+		return $internal_average;
+	}
+	function view_product(){
+		$type = !empty($_GET['product'])?$_GET['product']:"summary";
+		$con = $this->prepare_con("product",$type);
+		
+		$brands = $this->corpModel->getBrandByCid($this->login_corp['c_id']);
+		foreach ($brands as $b){
+			$def_brands[] = $b['b_id']; 
+		}
+		$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
+		if(count($selbrands)==1){
+			$brand_id = $selbrands[0]['b_id'];
+			$brand = $this->corpModel->getBrandById($brand_id);
+			
+			$internal_average = $this->get_assignment_avg_product($con,$brand_id);
+			$this->tpl->assign("brand",$brand);
+			$this->tpl->assign("brand_id",$brand_id);
+			
+		}else{
+			$internal_average = 0;
+			foreach ($selbrands as $b_id){
+				$internal_average +=$this->get_assignment_avg_product($con,$b_id);
+			}
+			$internal_average = round($internal_average/count($selbrands),2);
+			$this->stores = array();
+			$this->selstores = array();
+		}
+			
 		$this->tpl->assign("internal_average",$internal_average);
-		$this->tpl->assign("chart_title",$chart_title);
-		$this->tpl->assign("assignments",$assignments);
-		$this->tpl->assign("selstores",$selstores);
-		$this->tpl->assign("stores",$stores);
-		$this->tpl->assign("type",$type);
-		$this->tpl->assign("sdate",$sdate);
-		$this->tpl->assign("edate",$edate);
+		$this->tpl->assign("assignments",$this->assignments);
+		$this->tpl->assign("selstores",$this->selstores);
+		$this->tpl->assign("stores",$this->stores);	
+		$this->tpl->assign("selbrands",$selbrands);
+		$this->tpl->assign("brands",$brands);
 	}
 	
 	function view_stores(){
 		include_once("CorporationModel.class.php");	
 		$corpModel = new CorporationModel();
-		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
+		
+		$brands = $corpModel->getBrandByCid($this->login_corp['c_id']);
+		foreach ($brands as $b){
+			$def_brands[] = $b['b_id']; 
+		}
+		$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
+	
+		$brand_id =  isset($selbrands[0])?$selbrands[0]:0;
+		
+		$brand = $corpModel->getBrandById($brand_id);
+			
+		$this->tpl->assign("brand",$brand);
+		$stores = $corpModel->getStoreByBid($brand_id);
+		$store_id_arr =  array();
+		foreach ($stores as $s){
+			$store_id_arr[] = $s['cs_id']; 
+		}
+		
+		
 		$def_store_id = isset($stores[0]['cs_id'])?$stores[0]['cs_id']:0;
 		$def_store_name = isset($stores[0]['cs_name'])?$stores[0]['cs_name']:'';
 		$type = !empty($_GET['stores'])?$_GET['stores']:"summary";
@@ -516,6 +560,11 @@ class home{
 		$edate = !empty($_GET['edate'])?$_GET['edate']:date("Y-m-d");
 		$cs_id = !empty($_GET['cs_id'])?$_GET['cs_id']:$def_store_id;
 		$selstore = isset($_GET['selstore'])?$_GET['selstore']:$def_store_name;
+		
+		if( !in_array($cs_id,$store_id_arr)) {
+			$cs_id = 0;
+			$selstore= '';
+		}
 		
 		$con['sdate'] = $sdate;
 		$con['edate'] = $edate;
@@ -535,8 +584,6 @@ class home{
 		$assignmentModel = new AssignmentModel();
 		$assignments = $assignmentModel->getAssignmentsByCsId($con,$cs_id);
 		
-		
-	
 		if(is_array($assignments)){
 			foreach ($assignments as $k=>$v){
 	
@@ -566,6 +613,8 @@ class home{
 		$this->tpl->assign("type",$type);
 		$this->tpl->assign("sdate",$sdate);
 		$this->tpl->assign("edate",$edate);
+		$this->tpl->assign("selbrands",$selbrands);
+		$this->tpl->assign("brands",$brands);
 	}
 	
 	function view_comments(){
