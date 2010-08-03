@@ -25,7 +25,11 @@ $pdf=new HTML2FPDF("P",'mm');
 $strContent = '';
 if($_POST){
 	$c = preg_replace_callback('/(.*?)<span\s*id="br_(\d+)">(.*?)<\/span>(.*?)/ism',"break_word",$_POST['c']);
+
+	
 	if(strpos($c,'border="0"')!==false) $c = str_replace('border="0"','border="1"',$c);
+	
+	
 	$strContent = stripslashes($c);
 }
 
