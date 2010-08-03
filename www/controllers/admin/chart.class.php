@@ -191,11 +191,15 @@ $xml .="
 	}
 	function view_generaldata(){
 		$c_id = !empty($_GET['c_id'])?$_GET['c_id']:'';
+		$b_id = !empty($_GET['b_id'])?$_GET['b_id']:'';
 		$group = !empty($_GET['group'])?$_GET['group']:'';
 		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:'';
 		$edate = !empty($_GET['edate'])?$_GET['edate']:'';
+		$selbrands_arr =  $selstores_arr = array();
 		$selstores = !empty($_GET['selstores'])?$_GET['selstores']:'';
 		if($selstores) $selstores_arr = explode(",",$selstores);
+		$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:'';
+		if($selbrands) $selbrands_arr = explode(",",$selbrands);
 		$scoretype = !empty($_GET['scoretype'])?$_GET['scoretype']:'general';
 		
 		$xml = "<?xml version='1.0' encoding='UTF-8'?>
@@ -206,27 +210,62 @@ $xml .="
 			
 			include_once("CorporationModel.class.php");	
 			$corpModel = new CorporationModel();
-			$stores = $corpModel->getStoreByCid($c_id);
-			$xml .="<series>\n";
-			foreach ($stores as $k=>$store){
-				if(!in_array($store['cs_id'],$selstores_arr)) continue;
-				$xml .="<value xid='{$store['cs_id']}'>{$store['cs_name']}</value>\n";
-			}
-			$xml .="</series>\n<graphs>\n";
-				
+			
+			if(count($selbrands_arr)>1){
+				$brands = $corpModel->getBrandByCid($c_id);
+				$xml .="<series>\n";
+				foreach ($brands as $k=>$brand){
+					if(!in_array($brand['b_id'],$selbrands_arr)) continue;
+					$xml .="<value xid='{$brand['b_id']}'>{$brand['b_name']}</value>\n";
+				}
+				$xml .="</series>\n<graphs>\n";
 				$xml .="<graph gid='3'>\n";
+					foreach ($brands as $k=>$brand){
+						if(!in_array($brand['b_id'],$selbrands_arr)) continue;
+						if(strtolower($scoretype)=='general'){ 
+							$brand_stores = $corpModel->getStoreByBid($brand['b_id']); 
+							$brand_stores_count = $score = 0;
+							if($brand_stores){
+								$brand_stores_count =  count($brand_stores);
+								foreach ($brand_stores as $store){
+									$score += $ChartModel->getGeneralScoreByCsId($store['cs_id']);
+								}
+								$score = round($score/$brand_stores_count,2);
+							}
+							
+							$xml .="<value xid='{$brand['b_id']}'>{$score}</value>\n";
+						}
+						
+					}
+					$xml .="</graph>\n";
+				
+			
+				$xml.="</graphs>\n";
+				
+				
+			}else{
+				$stores = $corpModel->getStoreByBid($b_id);
+				$xml .="<series>\n";
 				foreach ($stores as $k=>$store){
 					if(!in_array($store['cs_id'],$selstores_arr)) continue;
-					if(strtolower($scoretype)=='general'){ 
-						$score = $ChartModel->getGeneralScoreByCsId($store['cs_id']);
-						$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
-					}
-					
+					$xml .="<value xid='{$store['cs_id']}'>{$store['cs_name']}</value>\n";
 				}
-				$xml .="</graph>\n";
+				$xml .="</series>\n<graphs>\n";
+					
+					$xml .="<graph gid='3'>\n";
+					foreach ($stores as $k=>$store){
+						if(!in_array($store['cs_id'],$selstores_arr)) continue;
+						if(strtolower($scoretype)=='general'){ 
+							$score = $ChartModel->getGeneralScoreByCsId($store['cs_id']);
+							$xml .="<value xid='{$store['cs_id']}'>{$score}</value>\n";
+						}
+						
+					}
+					$xml .="</graph>\n";
+				
 			
-		
-			$xml.="</graphs>\n";
+				$xml.="</graphs>\n";
+			}
 			//echo $ChartModel->getScoreByCsId(1,2);
 		}
 

@@ -665,14 +665,14 @@ float:left;
 	background:url(../images/client_searchcenter.gif) repeat-x top;
 }
 .ClocationInput {
-	background:url(../images/bg_input1.gif) no-repeat;
-	width:214px;
+	background:url(../images/bg_input2.gif) no-repeat;
+	width:104px;
 	height:22px;
 	color:#FFF;
 	border:none;
 	line-height:22px;
 	font-size:12px;
-	padding-left:10px;
+	padding-left:5px;
 }
 .CtimeInput {
 	background:url(../images/bg_input2.gif) no-repeat;
@@ -682,7 +682,7 @@ float:left;
 	border:none;
 	line-height:22px;
 	font-size:12px;
-	padding-left:10px;
+	padding-left:5px;
 }
 
 .CinitData {

@@ -58,6 +58,7 @@ function loadcalendar() {
 		$('calendar_year').style.display = 'none';
 		$('calendar_month').style.display = 'none';
 		if($('storelist')) $('storelist').style.display = 'none';
+		if($('brandlist')) $('brandlist').style.display = 'none';
 		}, 3000);
 	});
 	$('calendar').onclick = function(e) {
@@ -108,6 +109,22 @@ function selectmitilstore(str){
 	if(c==0) controlid.value = '请选择';
 
 }
+function selectmitilbrand(str){
+	//$('storelist').style.display = 'none';
+	var t = str.split("|");
+	//$('cs_id').value =t[0];
+	var len = document.forms['seachfrm'].elements['selbrands[]'].length;
+	var c=0;
+	for(var i=0;i<len;i++){
+		if(document.forms['seachfrm'].elements['selbrands[]'][i].checked){
+			c++;
+		}
+	}
+	if(c==len) controlid.value = '所有品牌';
+	if(c<len && c>0) controlid.value = '部分品牌';
+	if(c==0) controlid.value = '请选择';
+
+}
 function showmitistores(){
 	e = is_ie ? event : showmitistores.caller.arguments[0];
 	
@@ -118,6 +135,18 @@ function showmitistores(){
 	$('storelist').style.display = 'block';
 	$('storelist').style.left = p['x']+'px';
 	$('storelist').style.top	= (p['y'] + 20)+'px';
+	_cancelBubble(e);
+}
+function showmitibrands(){
+	e = is_ie ? event : showmitibrands.caller.arguments[0];
+	
+	controlid = is_ie ? e.srcElement : e.target;
+	
+	var p = getposition(controlid);
+
+	$('brandlist').style.display = 'block';
+	$('brandlist').style.left = p['x']+'px';
+	$('brandlist').style.top	= (p['y'] + 20)+'px';
 	_cancelBubble(e);
 }
 function showstores(){
