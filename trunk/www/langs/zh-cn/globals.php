@@ -785,10 +785,12 @@ $GLOBALS['gLang']['resetpwd'] = '重置密码';
 $GLOBALS['gLang']['oldpwd'] = '输入旧密码';
 $GLOBALS['gLang']['assignmentprogress'] = '任务进度';
 $GLOBALS['gLang']['ranking'] = '排行榜';
-$GLOBALS['gLang']['menu_addbrand'] = '新增品牌';
+$GLOBALS['gLang']['menu_addbrand'] = '添加品牌';
 $GLOBALS['gLang']['b_name'] = '品牌名';
-$GLOBALS['gLang']['brand'] = '品牌';
+$GLOBALS['gLang']['c_brand'] = '品牌';
 $GLOBALS['gLang']['brand_list'] = '品牌列表';
 $GLOBALS['gLang']['brand_total'] = '品牌总数';
+$GLOBALS['gLang']['select_brand'] = '选择品牌';
+$GLOBALS['gLang']['all_brands'] = '所有品牌';
 
 ?>

@@ -236,6 +236,7 @@ class corporation{
     	if($b_id){
 			$stores  = $corpmod->getStoreByBid($b_id);
 			$brand  = $corpmod->getBrandById($b_id);
+			
 			$corp  = $corpmod->getCorporationById($brand['c_id']);
 			$this->tpl->assign('brand',$brand);
     	}    	
@@ -243,6 +244,7 @@ class corporation{
 			$stores  = $corpmod->getStoreByCid($c_id);
 			$corp  = $corpmod->getCorporationById($c_id);
     	}
+
 		$total = count($stores);
 		$this->tpl->assign('stores',$stores);
 		
