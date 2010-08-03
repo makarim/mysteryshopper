@@ -14,6 +14,27 @@
     <li <?php if($type=='time') echo 'class="on"';?>><a href="/client.php/home/stores/time"><span><?php echo lang("score")?></span></a></li> 
   </ul> 
 </div>
+
+<form action="/client.php" method="GET"  name="seachfrm">
+ <input name="action" type="hidden" value="home"  />
+ <input name="view" type="hidden" value="stores"  />
+ <input name="stores" type="hidden" value="<?php echo $type?>"  />
+ <input name="cs_id" type="hidden" id="cs_id" value="<?php echo $cs_id;?>" />
+ 
+ 
+<div id="brandlist" style="width: 170px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:999;"> 
+  <ul> 
+  <?php 
+       if(isset($brands) && is_array($brands)){
+         foreach ($brands as $b){	
+                ?>
+	<li style="padding:2px;"> <label><input onclick="selectmitilbrand('<?php echo $b['b_id']."|".$b['b_name'];?>');" type="radio" name="selbrands[]" value="<?php echo $b['b_id']?>" <?php if(in_array($b['b_id'],$selbrands)) echo 'checked'?>> &nbsp;<?php echo splitx($b['b_name']);?></label></li> 
+	  <?php
+			}
+      }
+       ?>
+     </ul> 
+</div>
 <div id="storelist" style="width: 210px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:150;"> 
   <ul> 
   <?php 
@@ -27,15 +48,12 @@
        ?>
      </ul> 
 </div>
-<form action="/client.php" method="GET">
- <input name="action" type="hidden" value="home"  />
- <input name="view" type="hidden" value="stores"  />
- <input name="stores" type="hidden" value="<?php echo $type?>"  />
- <input name="cs_id" type="hidden" id="cs_id" value="<?php echo $cs_id;?>" />
 <table width="100%" height="50" border="0" cellpadding="0" cellspacing="0" class="clear">
   <tr>
     <td class="CsearchLeft">&nbsp;</td>
-    <td align="center" class="CsearchCenter"><input name="selstore" type="text" class="ClocationInput" onclick="showstores();" id="selstore" value="<?php if(empty($selstore)) echo "--"; else echo $selstore;?>" />
+    <td align="center" class="CsearchCenter">
+    <?php echo lang("select_brand")?>:<input name="selbrand" type="text" class="ClocationInput" onclick="showmitibrands();" id="selbrand" value="<?php if(count($selbrands)==0){ echo "--"; }else { if(count($selbrands)==count($brands)) echo lang("all_brands"); else echo splitx($brand['b_name']); }?>" />
+     <?php echo lang("select_location")?>:<input name="selstore" type="text" class="ClocationInput" onclick="showstores();" id="selstore" value="<?php if(empty($selstore)) echo "--"; else echo $selstore;?>" />
    
      <?php echo lang("a_sdate")?>：
       <input name="sdate" type="text" class="CtimeInput" id="sdate" value="<?php echo $sdate;?>" onclick="showcalendar();"/>

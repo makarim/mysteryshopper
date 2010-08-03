@@ -21,6 +21,19 @@
 <input name="action" type="hidden" value="home"  />
  <input name="view" type="hidden" value="service"  />
  <input name="service" type="hidden" value="<?php echo $type?>"  />
+ <div id="brandlist" style="width: 170px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:999;"> 
+  <ul> 
+  <?php 
+       if(isset($brands) && is_array($brands)){
+         foreach ($brands as $b){	
+                ?>
+	<li style="padding:2px;"> <label><input onclick="selectmitilbrand('<?php echo $b['b_id']."|".$b['b_name'];?>');" type="checkbox" name="selbrands[]" value="<?php echo $b['b_id']?>" <?php if(in_array($b['b_id'],$selbrands)) echo 'checked'?>> &nbsp;<?php echo $b['b_name'];?></label></li> 
+	  <?php
+			}
+      }
+       ?>
+     </ul> 
+</div>
 <div id="storelist" style="width: 210px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:999;"> 
   <ul> 
   <?php 
@@ -39,7 +52,9 @@
 <table width="100%" height="50" border="0" cellpadding="0" cellspacing="0" class="clear">
   <tr>
     <td class="CsearchLeft">&nbsp;</td>
-    <td align="center" class="CsearchCenter"><?php echo lang("select_location")?>:<input name="selstore" type="text" class="ClocationInput" onclick="showmitistores();" id="selstore" value="<?php if(count($selstores)==0){ echo "--"; }else { if(count($selstores)==count($stores)) echo lang("all_locations"); else echo ""; }?>" />
+    <td align="center" class="CsearchCenter">
+     <?php echo lang("select_brand")?>:<input name="selbrand" type="text" class="ClocationInput" onclick="showmitibrands();" id="selbrand" value="<?php if(count($selbrands)==0){ echo "--"; }else { if(count($selbrands)==count($brands)) echo lang("all_brands"); else echo splitx($brand['b_name']); }?>" />
+    <?php echo lang("select_location")?>:<input name="selstore" type="text" class="ClocationInput" onclick="showmitistores();" id="selstore" value="<?php if(count($selstores)==0){ echo "--"; }else { if(count($selstores)==count($stores)) echo lang("all_locations"); else echo ""; }?>" />
    
       <?php echo lang("a_sdate")?>：
       <input name="sdate" type="text" class="CtimeInput" id="sdate" value="<?php echo $sdate;?>" onclick="showcalendar();"/>
@@ -76,8 +91,8 @@
         <td>
         <p align="center">
          	
-<?php if($type=='time'){
-	if(is_array($questions)){
+<?php if( $type=='time'){
+	if(count($selstores)>0 && is_array($questions)){
 		foreach ($questions as $k=> $ques){
 			
 			?>
@@ -106,6 +121,8 @@
 	</script>
 	<?php
 		}
+	}else{
+		echo lang("selectone").lang("brands");
 	}
 	?>
 <?php
@@ -120,7 +137,7 @@
 		so.addVariable("path", "<?php echo $www_site_url?>/public/flash/");
 		 so.addVariable("chart_id", "amcolumn0");
 		so.addVariable("settings_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amcolumn_settings.xml?102"));
-		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=overalldata&scoretype=<?php echo $type;?>&c_id=<?php echo $corp['c_id'];?>&sdate=<?php echo $sdate?>&edate=<?php echo $edate?>&selstores=<?php echo join(",",$selstores);?>&group=service"));
+		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=overalldata&scoretype=<?php echo $type;?>&c_id=<?php echo $corp['c_id'];?>&b_id=<?php if(isset($brand_id))echo $brand_id;?>&sdate=<?php echo $sdate?>&edate=<?php echo $edate?>&selstores=<?php echo join(",",$selstores);?>&selbrands=<?php echo join(",",$selbrands);?>&group=service"));
 		so.addVariable("preloader_color", "#ffffff");
 		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo $chart_title?></b>]]></text></label></labels><guides><max_min>true</max_min><guide><title>Internal Average</title><start_value><?php echo $internal_average;?></start_value><inside>true</inside><text_color>#999999</text_color><behind>true</behind><text_size>14</text_size> <width>1</width><color>#999999</color> </guide></guides></settings>"));
 		so.write("flashcontent");

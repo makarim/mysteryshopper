@@ -264,6 +264,14 @@
                                                               <!-- It is recommended to have graph settings here if you don't want to mix data with other params -->
                                                               <!-- copy <graph>...</graph> (including) as many times as many graphs you have and edit settings individually -->
                                                               <!-- if graph settings are defined both here and in data file, the ones from data file are used -->
+    <graph gid="0">    
+      <type>column</type>                                 
+      <title>环境</title>                               
+      <color></color>                                   
+      <alpha></alpha>                                   
+    </graph>
+                                                              
+                                                              
     <graph gid="1">                                           <!-- if you are using XML data file, graph "gid" must match graph "gid" in data file -->
       <type>column</type>                                     <!-- [column] (column/line) -->                 
       <title>服务</title>                                     <!-- [] (graph title) -->
@@ -289,12 +297,7 @@
       <pattern_color></pattern_color>                          <!-- [] (hex color code) the color of the pattern -->              
     </graph>
 
-    <graph gid="0">    
-      <type>column</type>                                 
-      <title>环境</title>                               
-      <color></color>                                   
-      <alpha></alpha>                                   
-    </graph>    
+        
     <graph gid="2">    
       <type>column</type>                                 
       <title>产品</title>                               
@@ -303,7 +306,7 @@
     </graph>    
      <graph gid="3">    
       <type>column</type>                                 
-      <title>概况</title>                               
+      <title>Overall</title>                               
       <color></color>                                   
       <alpha></alpha>                                   
     </graph>    
