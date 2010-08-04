@@ -792,5 +792,5 @@ $GLOBALS['gLang']['brand_list'] = '品牌列表';
 $GLOBALS['gLang']['brand_total'] = '品牌总数';
 $GLOBALS['gLang']['select_brand'] = '选择品牌';
 $GLOBALS['gLang']['all_brands'] = '所有品牌';
-
+$GLOBALS['gLang']['interal_avg'] = '内部平均值';
 ?>

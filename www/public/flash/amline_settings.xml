@@ -372,7 +372,7 @@
       <visible_in_legend></visible_in_legend>                 <!-- [true] (true / false) whether to show legend entry for this graph or not -->
     </graph>
     
-    <graph gid="2">                                                            
+    <graph gid="0">                                                            
       <axis>left</axis>
       <title>环境</title>              
       <color>#00CCCC</color>
@@ -381,7 +381,7 @@
         <![CDATA[{value}]]>
       </balloon_text>
     </graph>
-    <graph gid="3">                                                            
+    <graph gid="2">                                                            
       <axis>left</axis>
       <title>产品</title>              
       <color>#00FF00</color>

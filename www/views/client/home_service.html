@@ -27,7 +27,7 @@
        if(isset($brands) && is_array($brands)){
          foreach ($brands as $b){	
                 ?>
-	<li style="padding:2px;"> <label><input onclick="selectmitilbrand('<?php echo $b['b_id']."|".$b['b_name'];?>');" type="checkbox" name="selbrands[]" value="<?php echo $b['b_id']?>" <?php if(in_array($b['b_id'],$selbrands)) echo 'checked'?>> &nbsp;<?php echo $b['b_name'];?></label></li> 
+	<li style="padding:2px;"> <label><input onclick="selectmitilbrand('<?php echo $b['b_id']."|".splitx($b['b_name']);?>');" type="checkbox" name="selbrands[]" value="<?php echo $b['b_id']?>" <?php if(in_array($b['b_id'],$selbrands)) echo 'checked'?>> &nbsp;<?php echo splitx($b['b_name']);?></label></li> 
 	  <?php
 			}
       }
@@ -40,7 +40,7 @@
        if(isset($stores) && is_array($stores)){
          foreach ($stores as $s){	
                 ?>
-	<li style="padding:2px;"> <label><input onclick="selectmitilstore('<?php echo $s['cs_id']."|".$s['cs_name'];?>');" type="checkbox" name="selstores[]" value="<?php echo $s['cs_id']?>" <?php if(in_array($s['cs_id'],$selstores)) echo 'checked'?>> &nbsp;<?php echo $s['cs_name'];?></label></li> 
+	<li style="padding:2px;"> <label><input onclick="selectmitilstore('<?php echo $s['cs_id']."|".splitx($s['cs_name']);?>');" type="checkbox" name="selstores[]" value="<?php echo $s['cs_id']?>" <?php if(in_array($s['cs_id'],$selstores)) echo 'checked'?>> &nbsp;<?php echo splitx($s['cs_name']);?></label></li> 
 	  <?php
 			}
       }
@@ -139,7 +139,7 @@
 		so.addVariable("settings_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amcolumn_settings.xml?102"));
 		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=overalldata&scoretype=<?php echo $type;?>&c_id=<?php echo $corp['c_id'];?>&b_id=<?php if(isset($brand_id))echo $brand_id;?>&sdate=<?php echo $sdate?>&edate=<?php echo $edate?>&selstores=<?php echo join(",",$selstores);?>&selbrands=<?php echo join(",",$selbrands);?>&group=service"));
 		so.addVariable("preloader_color", "#ffffff");
-		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo $chart_title?></b>]]></text></label></labels><guides><max_min>true</max_min><guide><title>Internal Average</title><start_value><?php echo $internal_average;?></start_value><inside>true</inside><text_color>#999999</text_color><behind>true</behind><text_size>14</text_size> <width>1</width><color>#999999</color> </guide></guides></settings>"));
+		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo $chart_title?></b>]]></text></label></labels><guides><max_min>true</max_min><guide><title><?php echo lang("interal_avg");?></title><start_value><?php echo $internal_average;?></start_value><inside>true</inside><text_color>#999999</text_color><behind>true</behind><text_size>12</text_size> <width>1</width><color>#999999</color> </guide></guides><graphs><graph gid='1'><title><?php echo lang("service")?></title></graph></graphs></settings>"));
 		so.write("flashcontent");
 		// ]]>
 	</script>

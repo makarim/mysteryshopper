@@ -28,7 +28,7 @@
        if(isset($brands) && is_array($brands)){
          foreach ($brands as $b){	
                 ?>
-	<li style="padding:2px;"> <label><input onclick="selectmitilbrand('<?php echo $b['b_id']."|".$b['b_name'];?>');" type="radio" name="selbrands[]" value="<?php echo $b['b_id']?>" <?php if(in_array($b['b_id'],$selbrands)) echo 'checked'?>> &nbsp;<?php echo splitx($b['b_name']);?></label></li> 
+	<li style="padding:2px;"> <label><input onclick="selectmitilbrand('<?php echo $b['b_id']."|".splitx($b['b_name']);?>');" type="radio" name="selbrands[]" value="<?php echo $b['b_id']?>" <?php if(in_array($b['b_id'],$selbrands)) echo 'checked'?>> &nbsp;<?php echo splitx($b['b_name']);?></label></li> 
 	  <?php
 			}
       }
@@ -41,7 +41,7 @@
        if(isset($stores) && is_array($stores)){
          foreach ($stores as $s){	
                 ?>
-	<li style="padding:2px;"><a onclick="selectstore('<?php echo $s['cs_id']."|".$s['cs_name'];?>');return false;" href="#"><?php echo $s['cs_name'];?></a></li> 
+	<li style="padding:2px;"><a onclick="selectstore('<?php echo $s['cs_id']."|".splitx($s['cs_name']);?>');return false;" href="#"><?php echo splitx($s['cs_name']);?></a></li> 
 	  <?php
 			}
       }
@@ -114,7 +114,7 @@
 		so.addVariable("settings_file", encodeURIComponent("<?php echo $www_site_url?>/public/flash/amline_settings.xml?102"));
 		so.addVariable("data_file", encodeURIComponent("<?php echo $www_site_url?>/admin.php?action=chart&view=storedata&scoretype=<?php echo $type;?>&cs_id=<?php echo $cs_id;?>&sdate=<?php echo $sdate;?>&edate=<?php echo $edate;?>"));
 		so.addVariable("preloader_color", "#ffffff");
-		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo $chart_title?></b>]]></text></label></labels></settings>"));
+		so.addVariable("additional_chart_settings", encodeURIComponent("<settings><labels><label lid='0'><text><![CDATA[<b><?php echo $chart_title?></b>]]></text></label></labels><graphs><graph gid='0'><title><?php echo lang("environment")?></title></graph><graph gid='1'><title><?php echo lang("service")?></title></graph><graph gid='2'><title><?php echo lang("product")?></title></graph></graphs></settings>"));
 
 		so.write("flashcontent");
 		// ]]>

@@ -786,4 +786,5 @@ $GLOBALS['gLang']['brand_list'] = 'Brand List';
 $GLOBALS['gLang']['brand_total'] = 'Brand Total';
 $GLOBALS['gLang']['select_brand'] = 'Brands';
 $GLOBALS['gLang']['all_brands'] = 'All Brand';
+$GLOBALS['gLang']['interal_avg'] = 'Internal Average';
 ?>
