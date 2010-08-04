@@ -119,6 +119,7 @@ class chart{
 	}
 	
 	function segment_store($stores,$group_id,$type){
+		$xml = '';
 		foreach ($stores as $k=>$store){
 			if(!in_array($store['cs_id'],$this->selstores_arr)) continue;
 			if(strtolower($type)=='summary'){ 
@@ -168,7 +169,7 @@ class chart{
 				$xml .="<series>\n";
 				foreach ($brands as $k=>$brand){
 					if(!in_array($brand['b_id'],$this->selbrands_arr)) continue;
-					$xml .="<value xid='{$brand['b_id']}'>{$brand['b_name']}</value>\n";
+					$xml .="<value xid='{$brand['b_id']}'>".splitx($brand['b_name'])."</value>\n";
 				}
 				$xml .="</series>\n<graphs>\n";
 				
@@ -193,7 +194,7 @@ class chart{
 					$xml .="<series>\n";
 					foreach ($stores as $k=>$store){
 						if(!in_array($store['cs_id'],$this->selstores_arr)) continue;
-						$xml .="<value xid='{$store['cs_id']}'>{$store['cs_name']}</value>\n";
+						$xml .="<value xid='{$store['cs_id']}'>".splitx($store['cs_name'])."</value>\n";
 					}
 					$xml .="</series>\n<graphs>\n";
 					
@@ -250,7 +251,7 @@ $xml .="
 				$xml .="<series>\n";
 				foreach ($brands as $k=>$brand){
 					if(!in_array($brand['b_id'],$selbrands_arr)) continue;
-					$xml .="<value xid='{$brand['b_id']}'>{$brand['b_name']}</value>\n";
+					$xml .="<value xid='{$brand['b_id']}'>".splitx($brand['b_name'])."</value>\n";
 				}
 				$xml .="</series>\n<graphs>\n";
 				$xml .="<graph gid='3'>\n";
@@ -282,7 +283,7 @@ $xml .="
 				$xml .="<series>\n";
 				foreach ($stores as $k=>$store){
 					if(!in_array($store['cs_id'],$selstores_arr)) continue;
-					$xml .="<value xid='{$store['cs_id']}'>{$store['cs_name']}</value>\n";
+					$xml .="<value xid='{$store['cs_id']}'>".splitx($store['cs_name'])."</value>\n";
 				}
 				$xml .="</series>\n<graphs>\n";
 					
@@ -330,7 +331,24 @@ $xml .="
 					$xml .="<value xid='{$v['a_id']}'>{$v['day']}</value>\n";
 				}
 				$xml .="</series>\n<graphs>\n";
-				
+
+				$xml .="<graph gid='0'>\n";			
+					foreach ($series as $k=>$v){
+						if(strtolower($scoretype)=='summary'){ 
+							$score = $ChartModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],'environment');
+							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
+						}
+						if(strtolower($scoretype)=='vote'){ 
+							$score = $ChartModel->getVoteScoreByAsId($v['a_id'],$v['re_id'],'environment');
+							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
+						}
+						if(strtolower($scoretype)=='yesorno'){ 
+							$score = $ChartModel->getYesByAsId($v['a_id'],$v['re_id'],'environment');
+							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
+						}					
+						
+					}
+					$xml .="</graph>\n";
 				
 				$xml .="<graph gid='1'>\n";
 					foreach ($series as $k=>$v){
@@ -350,25 +368,9 @@ $xml .="
 					}
 					$xml .="</graph>\n";
 				
-					$xml .="<graph gid='2'>\n";			
-					foreach ($series as $k=>$v){
-						if(strtolower($scoretype)=='summary'){ 
-							$score = $ChartModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],'environment');
-							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
-						}
-						if(strtolower($scoretype)=='vote'){ 
-							$score = $ChartModel->getVoteScoreByAsId($v['a_id'],$v['re_id'],'environment');
-							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
-						}
-						if(strtolower($scoretype)=='yesorno'){ 
-							$score = $ChartModel->getYesByAsId($v['a_id'],$v['re_id'],'environment');
-							$xml .="<value xid='{$v['a_id']}'>{$score}</value>\n";
-						}					
-						
-					}
-					$xml .="</graph>\n";
+
 	
-					$xml .="<graph gid='3'>\n";
+					$xml .="<graph gid='2'>\n";
 					foreach ($series as $k=>$v){
 						if(strtolower($scoretype)=='summary'){ 
 							$score = $ChartModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],'product');

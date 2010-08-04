@@ -164,7 +164,7 @@ class home{
 		$type_id = isset($GLOBALS['gTypes'][$type])?$GLOBALS['gTypes'][$type]:'';
 		
 		$chart_title = lang($group);
-		if($type!='general' || $type!='summary') $chart_title.= "/".lang($type);
+		if($type!='general') $chart_title.= "/".lang($type);
 		$con['sdate'] = $sdate;
 		$con['edate'] = $edate;
 		$con['type'] = $type;
@@ -197,7 +197,11 @@ class home{
 	}
 	
 	function get_assignment_avg($con,$brand_id){
-		$this->stores = $this->corpModel->getStoreByBid($brand_id);
+		if($brand_id){
+			$this->stores = $this->corpModel->getStoreByBid($brand_id);
+		}else{
+			$this->stores = $this->corpModel->getStoreByCid($this->login_corp['c_id']);
+		}
 		$def_stores = array();
 		foreach ($this->stores as $s){
 			$def_stores[] = $s['cs_id']; 
@@ -225,13 +229,14 @@ class home{
 		$con = $this->prepare_con("general",$type);
 		
 		$brands = $this->corpModel->getBrandByCid($this->login_corp['c_id']);
+		$def_brands = array();
 		foreach ($brands as $b){
 			$def_brands[] = $b['b_id']; 
 		}
 		$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
 		
-		if(count($selbrands)==1){
-			$brand_id = $selbrands[0];
+		if(count($selbrands)<=1){
+			$brand_id = isset($selbrands[0])?$selbrands[0]:0;
 			$brand = $this->corpModel->getBrandById($brand_id);
 			$internal_average = $this->get_assignment_avg($con,$brand_id);
 			$this->tpl->assign("brand",$brand);
@@ -255,7 +260,11 @@ class home{
 	}
 	
 	function get_assignment_avg_overall($con,$brand_id){
-		$this->stores = $this->corpModel->getStoreByBid($brand_id);
+		if($brand_id){
+			$this->stores = $this->corpModel->getStoreByBid($brand_id);
+		}else{
+			$this->stores = $this->corpModel->getStoreByCid($this->login_corp['c_id']);
+		}
 		$def_stores = array();
 		foreach ($this->stores as $s){
 			$def_stores[] = $s['cs_id']; 
@@ -301,13 +310,14 @@ class home{
 		$con = $this->prepare_con("overall",$type);
 		
 		$brands = $this->corpModel->getBrandByCid($this->login_corp['c_id']);
+		$def_brands = array();
 		foreach ($brands as $b){
 			$def_brands[] = $b['b_id']; 
 		}
 		$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
 		
-		if(count($selbrands)==1){
-			$brand_id = $selbrands[0]['b_id'];
+		if(count($selbrands)<=1){
+			$brand_id = isset($selbrands[0])?$selbrands[0]:0;
 			$brand = $this->corpModel->getBrandById($brand_id);
 			
 			$internal_average = $this->get_assignment_avg_overall($con,$brand_id);
@@ -334,7 +344,11 @@ class home{
 	}
 	
 	function get_assignment_avg_environment($con,$brand_id){
-		$this->stores = $this->corpModel->getStoreByBid($brand_id);
+		if($brand_id){
+			$this->stores = $this->corpModel->getStoreByBid($brand_id);
+		}else{
+			$this->stores = $this->corpModel->getStoreByCid($this->login_corp['c_id']);
+		}
 		$def_stores = array();
 		foreach ($this->stores as $s){
 			$def_stores[] = $s['cs_id']; 
@@ -363,12 +377,13 @@ class home{
 		$con = $this->prepare_con("environment",$type);
 		
 		$brands = $this->corpModel->getBrandByCid($this->login_corp['c_id']);
+		$def_brands = array();
 		foreach ($brands as $b){
 			$def_brands[] = $b['b_id']; 
 		}
 		$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
-		if(count($selbrands)==1){
-			$brand_id = $selbrands[0]['b_id'];
+		if(count($selbrands)<=1){
+			$brand_id = isset($selbrands[0])?$selbrands[0]:0;
 			$brand = $this->corpModel->getBrandById($brand_id);
 			
 			$internal_average = $this->get_assignment_avg_environment($con,$brand_id);
@@ -395,7 +410,11 @@ class home{
 	}
 	
 	function get_assignment_avg_service($con,$brand_id){
-		$this->stores = $this->corpModel->getStoreByBid($brand_id);
+		if($brand_id){
+			$this->stores = $this->corpModel->getStoreByBid($brand_id);
+		}else{
+			$this->stores = $this->corpModel->getStoreByCid($this->login_corp['c_id']);
+		}
 		$def_stores = array();
 		foreach ($this->stores as $s){
 			$def_stores[] = $s['cs_id']; 
@@ -438,12 +457,13 @@ class home{
 		$con = $this->prepare_con("service",$type);
 		
 		$brands = $this->corpModel->getBrandByCid($this->login_corp['c_id']);
+		$def_brands = array();
 		foreach ($brands as $b){
 			$def_brands[] = $b['b_id']; 
 		}
 		$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
-		if(count($selbrands)==1){
-			$brand_id = $selbrands[0]['b_id'];
+		if(count($selbrands)<=1){
+			$brand_id = isset($selbrands[0])?$selbrands[0]:0;
 			$brand = $this->corpModel->getBrandById($brand_id);
 			
 			$internal_average = $this->get_assignment_avg_service($con,$brand_id);
@@ -471,7 +491,11 @@ class home{
 	
 	
 	function get_assignment_avg_product($con,$brand_id){
-		$this->stores = $this->corpModel->getStoreByBid($brand_id);
+		if($brand_id){
+			$this->stores = $this->corpModel->getStoreByBid($brand_id);
+		}else{
+			$this->stores = $this->corpModel->getStoreByCid($this->login_corp['c_id']);
+		}
 		$def_stores = array();
 		foreach ($this->stores as $s){
 			$def_stores[] = $s['cs_id']; 
@@ -500,12 +524,13 @@ class home{
 		$con = $this->prepare_con("product",$type);
 		
 		$brands = $this->corpModel->getBrandByCid($this->login_corp['c_id']);
+		$def_brands = array();
 		foreach ($brands as $b){
 			$def_brands[] = $b['b_id']; 
 		}
 		$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
-		if(count($selbrands)==1){
-			$brand_id = $selbrands[0]['b_id'];
+		if(count($selbrands)<=1){
+			$brand_id = isset($selbrands[0])?$selbrands[0]:0;
 			$brand = $this->corpModel->getBrandById($brand_id);
 			
 			$internal_average = $this->get_assignment_avg_product($con,$brand_id);
@@ -535,6 +560,7 @@ class home{
 		$corpModel = new CorporationModel();
 		
 		$brands = $corpModel->getBrandByCid($this->login_corp['c_id']);
+		$def_brands = array();
 		foreach ($brands as $b){
 			$def_brands[] = $b['b_id']; 
 		}
@@ -711,8 +737,8 @@ class home{
 			
 			if($arr){
 				foreach ($arr as $kk=>$vv){
-					$vv['answer'] = $ReportModel->getAnswerByAid($a_id,$vv['rq_id'],$vv['rq_type']);
-					$vv['comment'] = $ReportModel->getCommentByRqid($a_id,$vv['rq_id']);
+					$vv['answer'] = nl2br($ReportModel->getAnswerByAid($a_id,$vv['rq_id'],$vv['rq_type']));
+					$vv['comment'] = nl2br($ReportModel->getCommentByRqid($a_id,$vv['rq_id']));
 					$arr[$kk] = $vv;
 				}
 			}
