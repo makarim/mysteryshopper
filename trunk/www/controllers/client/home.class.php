@@ -571,7 +571,12 @@ class home{
 		$brand = $corpModel->getBrandById($brand_id);
 			
 		$this->tpl->assign("brand",$brand);
-		$stores = $corpModel->getStoreByBid($brand_id);
+		
+		if($brand_id) {
+			$stores = $corpModel->getStoreByBid($brand_id);
+		}else{
+			$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
+		}
 		$store_id_arr =  array();
 		foreach ($stores as $s){
 			$store_id_arr[] = $s['cs_id']; 
