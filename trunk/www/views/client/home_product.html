@@ -142,7 +142,7 @@ function exportImage() {
                 		?>
                 <tr>
                   <td width="15%"><?php echo $v['day']?></td>
-                  <td width="40%"><a href="<?php echo $www_site_url?>/client.php/home/reportcomplete/re_id/<?php echo $v['re_id']?>/a_id/<?php echo $v['a_id']?>" target="_blank"><?php echo $v['a_title']?></a></td>
+                  <td width="40%"><a href="<?php echo $www_site_url?>/client.php/home/reportcomplete/re_id/<?php echo $v['re_id']?>/a_id/<?php echo $v['a_id']?>" target="_blank"><?php echo stripslashes($v['a_title'])?></a></td>
                   <td width="15%"><?php echo $v['times']?></td>
 
                 </tr>
@@ -170,7 +170,7 @@ function exportImage() {
                 		?>
                 <tr>
                   <td width="15%"><?php echo $v['day']?></td>
-                  <td width="40%"><a href="<?php echo $www_site_url?>/client.php/home/reportcomplete/re_id/<?php echo $v['re_id']?>/a_id/<?php echo $v['a_id']?>" target="_blank"><?php echo $v['a_title']?></a></td>
+                  <td width="40%"><a href="<?php echo $www_site_url?>/client.php/home/reportcomplete/re_id/<?php echo $v['re_id']?>/a_id/<?php echo $v['a_id']?>" target="_blank"><?php echo stripslashes($v['a_title'])?></a></td>
                  <?php if($type=='yesorno'||$type=='summary'){?> <td width="15%"><?php echo $v['yesorno']?></td><?php }?> 
                  <?php if($type=='vote'||$type=='summary'){?>  <td width="15%"><?php echo $v['vote']?></td><?php }?> 
 

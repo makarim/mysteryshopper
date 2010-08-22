@@ -58,7 +58,7 @@
                   <td><?php echo $v['c_title']?></td>
 
                   <td><?php echo splitx($v['cs_name'])?></td>
-                  <td><a href="/client.php?action=home&view=reportcomplete&re_id=<?php echo $v['re_id']?>&a_id=<?php echo $v['a_id']?>"><?php echo splitx($v['a_title']);?></a></td>
+                  <td><a href="/client.php?action=home&view=reportcomplete&re_id=<?php echo $v['re_id']?>&a_id=<?php echo $v['a_id']?>"><?php echo splitx(stripslashes($v['a_title']));?></a></td>
                   <td><?php echo $v['a_cost']?></td>
                 </tr>
              <?php }}?>
