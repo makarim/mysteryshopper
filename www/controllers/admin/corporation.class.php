@@ -351,7 +351,12 @@ class corporation{
     	
     	include_once("CorporationModel.class.php");
     	$corpmod = new CorporationModel();
-		$stores  = $corpmod->getStoreByBid($b_id);
+    	if($b_id) {
+			$stores = $corpmod->getStoreByBid($b_id);
+		}else{
+			$stores = $corpmod->getStoreByCid($c_id);
+		}
+		
 		if(is_array($stores)){
 			foreach ($stores as $k=>$v){
 				$v['cs_name'] = splitx($v['cs_name']);

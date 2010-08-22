@@ -222,7 +222,7 @@ function splitx(&$str){
 	$pieces = explode("<!--!-->", $str);
 	if($GLOBALS['gSelectedLanguage']=='zh-cn') $str = htmlspecialchars(stripslashes($pieces[0]),ENT_QUOTES);
 	if($GLOBALS['gSelectedLanguage']=='en' && isset($pieces[1])) $str = htmlspecialchars(stripslashes($pieces[1]),ENT_QUOTES);
-	return $str;
+	return stripslashes($str);
 }
 function getip(){
 	if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown"))

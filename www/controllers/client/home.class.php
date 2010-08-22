@@ -50,9 +50,23 @@ class home{
 		$totalcompleted = 0 ;
 		include_once("CorporationModel.class.php");	
 		$corpModel = new CorporationModel();
-		$totalcompleted = $corpModel->getTotalCompletedAssignments($this->login_corp['c_id']);
+		$brand = array();
+		$brands = $corpModel->getBrandByCid($this->login_corp['c_id']);
+		
+		$brand_id = !empty($_GET['selbrands'])?$_GET['selbrands']:'';
+	
+		$totalcompleted = $corpModel->getTotalCompletedAssignments($brand_id);
 		$corp = $corpModel->getCorporationById($this->login_corp['c_id']);
-		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
+		
+		if($brand_id) {
+			$brand = $corpModel->getBrandById($brand_id);
+			$stores = $corpModel->getStoreByBid($brand_id);
+			$totalcompleted = $corpModel->getTotalCompletedAssignments($brand_id);
+		}else{
+			$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
+			$totalcompleted = $corpModel->getTotalCompletedAssignments($this->login_corp['c_id']);
+		}
+		//$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
 		if(isset($stores) && is_array($stores)){
 			foreach ($stores as $k=>$v) {
 				$v['store_completed'] = $corpModel->getStoreCompletedAssignments($v['cs_id']);
@@ -61,6 +75,10 @@ class home{
 				$stores[$k] = $v;
 			}
 		}
+		
+		$this->tpl->assign("brands",$brands);
+		$this->tpl->assign("brand",$brand);
+		
 		$this->tpl->assign("corp",$corp);
 		$this->tpl->assign("stores",$stores);
 		$this->tpl->assign("type",$type);

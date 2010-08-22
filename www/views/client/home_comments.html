@@ -12,7 +12,7 @@
        if(isset($stores) && is_array($stores)){
          foreach ($stores as $s){	
                 ?>
-	<li style="padding:2px;"><a onclick="selectstore('<?php echo $s['cs_id']."|".$s['cs_name'];?>');return false;" href="#"><?php echo $s['cs_name'];?></a></li> 
+	<li style="padding:2px;"><a onclick="selectstore('<?php echo $s['cs_id']."|".splitx($s['cs_name']);?>');return false;" href="#"><?php echo splitx($s['cs_name']);?></a></li> 
 	  <?php
 			}
       }
@@ -66,7 +66,7 @@
         	foreach ($assignments['records'] as $a){ ?>
         <table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport">
           <tr>
-            <td colspan="2" bgcolor="#9F0000" class="title"><font color="#FFFFFF"><?php echo $a['a_title']?> （ <?php echo substr($a['a_fdate'],0,10);?> ）</font></td>
+            <td colspan="2" bgcolor="#9F0000" class="title"><font color="#FFFFFF"><?php echo stripslashes($a['a_title'])?> （ <?php echo substr($a['a_fdate'],0,10);?> ）</font></td>
             <td width="7%" bgcolor="#9F0000" class="title"><font color="#FFFFFF"><?php echo lang("scorenum")?></font></td>
           </tr>
           <?php if(isset($a['comments']) && is_array($a['comments'])){
@@ -74,7 +74,7 @@
           	?>
           <tr>	
             <td width="6%" align="left"><?php echo  lang($GLOBALS['gGroups'][$k]);?></td>
-            <td width="87%"><span id="br_36"><?php echo join("<br />",$v['content'])?></span></td>
+            <td width="87%"><span id="br_36"><?php echo nl2br(stripslashes(join("<br />",$v['content'])));?></span></td>
             <td align="center"><?php echo $v['score']?></td>
           </tr>
            <?php 
