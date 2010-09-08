@@ -14,7 +14,7 @@
         <td class="table2LeftBorder"></td>
         <td><div class="mission">
           <div class="logo">
-            <p><a href="/index.php/home/assignment/a_id/<?php echo $a_id;?>"><img src="/public/upload/logo/<?php echo $assignmentinfo['c_logo']?>" width="68" height="68" border="0" /></a></p>
+            <p><a href="/index.php/home/assignment/a_id/<?php echo $a_id;?>"><img src="/public/upload/logo/<?php if(!empty($assignmentinfo['b_logo'])) echo $assignmentinfo['b_logo'] ;else echo $assignmentinfo['c_logo']?>" width="68" height="68" border="0" /></a></p>
           </div>
         </div>
         <div class="missionDetail">

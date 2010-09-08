@@ -7,6 +7,7 @@ class AssignmentModel extends Model {
 		$select =$this->db->select();
 		$select->from ( "assignment a","a.*");
 		$select->leftJoin('corporation c','c.c_id=a.c_id','c.c_title,c.c_logo');
+		$select->leftJoin('brand b','b.b_id=a.b_id','b.b_logo');
 		$select->leftJoin('store s','s.cs_id=a.cs_id','s.cs_name');
 		
 		
@@ -56,16 +57,17 @@ class AssignmentModel extends Model {
 	}
 	function createNewAssignment($as){
 		//user table
-		return	$this->db->execute ( "insert into assignment ( a_title,  a_desc,a_demand,a_sdate,a_edate, c_id, cs_id,a_hasphoto,a_hasaudio,re_id,a_quiz)
-		values ('{$as['a_title']}','" . $as ['a_desc'] . "','{$as['a_demand']}','{$as['a_sdate']}','{$as['a_edate']}','{$as['c_id']}','{$as['cs_id']}','{$as['a_hasphoto']}','{$as['a_hasaudio']}','{$as['re_id']}','{$as['a_quiz']}')" );
+		return	$this->db->execute ( "insert into assignment ( a_title,  a_desc,a_demand,a_sdate,a_edate, c_id, cs_id,a_hasphoto,a_hasaudio,re_id,a_quiz,b_id)
+		values ('{$as['a_title']}','" . $as ['a_desc'] . "','{$as['a_demand']}','{$as['a_sdate']}','{$as['a_edate']}','{$as['c_id']}','{$as['cs_id']}','{$as['a_hasphoto']}','{$as['a_hasaudio']}','{$as['re_id']}','{$as['a_quiz']}','{$as['b_id']}')" );
 
 	}
 	function deleteAssignment($a_id){
 		return $this->db->execute("delete from assignment where a_id='{$a_id}'");
 	}
 	function getAssignmentById($a_id){
-		return $this->db->getRow("select a.*,c.c_name,s.*,c.c_logo,u.user_nickname from assignment a 
+		return $this->db->getRow("select a.*,c.c_name,s.*,c.c_logo,b.b_logo,u.user_nickname from assignment a 
 		left join corporation c on c.c_id=a.c_id
+		left join brand b on b.b_id=a.b_id 
 		left join store s on s.cs_id=a.cs_id
 		left join user u on a.user_id=u.user_id 
 		where a.a_id='$a_id'");
@@ -148,10 +150,11 @@ class AssignmentModel extends Model {
     }
     
     function getMyAssignments($user_id){
-    	return $this->db->getAll("select r.user_id,r.selected,a.* ,c.c_logo
+    	return $this->db->getAll("select r.user_id,r.selected,a.* ,c.c_logo,b.b_logo 
     	from assignment_rel r 
 		left join assignment a on a.a_id=r.a_id 
 		left join corporation c on c.c_id=a.c_id 
+		left join brand b on b.b_id=a.b_id 
 		where r.user_id='$user_id' and a.a_finish<1 
 		order by a.a_edate asc;
 		");
@@ -215,9 +218,10 @@ class AssignmentModel extends Model {
 
     }
     function getLastestAssignments(){
-    	return $this->db->getAll("select a.* ,c.c_logo
+    	return $this->db->getAll("select a.* ,c.c_logo,b.b_logo  
     	from assignment a
 		left join corporation c on c.c_id=a.c_id 
+		left join brand b on b.b_id=a.b_id 
 		where a.user_id='' 
 		order by a.a_order desc limit 8;
 		");

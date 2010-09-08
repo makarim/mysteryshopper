@@ -80,6 +80,7 @@ class assignment{
 		$_POST ['c_id'] = intval( $_POST ['c_id'] );
 		$_POST ['cs_id'] = intval ( $_POST ['cs_id'] );
 		$_POST ['re_id'] = intval ( $_POST ['re_id'] );
+		$_POST ['b_id'] = intval ( $_POST ['b_id'] );
 		$_POST ['a_desc'] = addslashes( $_POST ['a_desc'] );
 		$_POST ['a_demand'] = addslashes( $_POST ['a_demand']);
 		$_POST ['a_istest'] =  isset($_POST ['a_istest'])?1:0 ;
@@ -102,6 +103,7 @@ class assignment{
 		$assignment['c_id'] =  $_POST ['c_id'] ;
 		$assignment['cs_id'] =  $_POST ['cs_id'] ;
 		$assignment['re_id'] =  $_POST ['re_id'] ;
+		$assignment['b_id'] =  $_POST ['b_id'] ;
 		$assignment['a_desc'] =  $_POST ['a_desc'] ;
 		$assignment['a_demand'] =  $_POST ['a_demand'] ;
 		$assignment['a_istest'] =  $_POST ['a_istest'] ;
@@ -187,9 +189,10 @@ class assignment{
 		$updates['a_quiz'] = empty($_POST ['a_quiz'])?"":($_POST ['a_quiz']);
 		$updates['a_sdate'] = empty($_POST ['a_sdate'])?"":trim($_POST ['a_sdate']);
 		$updates['a_edate'] =empty($_POST ['a_edate'])?"":trim($_POST ['a_edate']);
-		$updates['c_id'] =empty($_POST ['c_id'])?"":intval($_POST ['c_id']);
-		$updates['cs_id'] =empty($_POST ['cs_id'])?"":intval($_POST ['cs_id']);
-		$updates['re_id'] =empty($_POST ['re_id'])?"":intval($_POST ['re_id']);
+		$updates['c_id'] =empty($_POST ['c_id'])?"0":intval($_POST ['c_id']);
+		$updates['cs_id'] =empty($_POST ['cs_id'])?"0":intval($_POST ['cs_id']);
+		$updates['re_id'] =empty($_POST ['re_id'])?"0":intval($_POST ['re_id']);
+		$updates['b_id'] =empty($_POST ['b_id'])?"0":intval($_POST ['b_id']);
 		$updates['a_hasphoto'] =!isset($_POST ['a_hasphoto'])?"0":intval($_POST ['a_hasphoto']);
 		$updates['a_hasaudio'] =!isset($_POST ['a_hasaudio'])?"0":intval($_POST ['a_hasaudio']);
 		

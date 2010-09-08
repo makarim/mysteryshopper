@@ -79,7 +79,7 @@ initMarquee();
               if(isset($myassignment)&& is_array($myassignment)){
 				foreach ($myassignment as $k=>$v){?>
           		<div class="mission">
-               	  <div class="logo"><p><?php if($v['selected']) {?><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><img src="/public/upload/logo/<?php echo $v['c_logo']?>" width="68" height="68" border="0" /></a>
+               	  <div class="logo"><p><?php if($v['selected']) {?><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><img src="/public/upload/logo/<?php if(!empty($v['b_logo'])) echo $v['b_logo'] ;else echo $v['c_logo']?>" width="68" height="68" border="0" /></a>
                	  <?php }else {?>
                	  <img src="/public/images/<?php echo lang("nopass_img");?>" border="0" />
                	  <?php }?>
@@ -156,7 +156,7 @@ initMarquee();
 							foreach ($lastestassignment as $k=>$v){?>
                     <div class="mission">
                       <div class="logo">
-                        <p><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><img src="/public/upload/logo/<?php echo $v['c_logo']?>" width="68" height="68" border="0" /></a></p>
+                        <p><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><img src="/public/upload/logo/<?php if(!empty($v['b_logo'])) echo $v['b_logo'] ;else echo $v['c_logo']?>" width="68" height="68" border="0" /></a></p>
                       </div>
                       <div class="des"><span style="color:#000;"></span><b><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><?php echo splitx($v['a_title'])?></a></b><br />
 

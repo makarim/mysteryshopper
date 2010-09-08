@@ -388,21 +388,34 @@ class corporation{
     function op_savebrand(){
     	$msg = '';
     	if (empty ( $_POST ['b_name'] ) ) {
-			$msg = array('s'=> 400,'m'=>lang('cs_name_rule'),'d'=>'');				
-			exit(json_output($msg));
+			//$msg = array('s'=> 400,'m'=>lang('cs_name_rule'),'d'=>'');	
+			show_message(lang('cs_name_rule'));
+			goback(3000);			
+			//exit(json_output($msg));
 		}
 		
 		$brand['b_name'] =  addslashes($_POST ['b_name']) ;
 		$brand['c_id'] =  intval($_POST ['c_id']) ;
 		include_once("CorporationModel.class.php");
 		$corpmod = new CorporationModel();
+		
+		$brand['b_logo'] = '';
+		if(isset($_FILES['b_logo']) && $_FILES['b_logo']['error']==0){
+			$img_ext = substr($_FILES['b_logo']['name'],strrpos($_FILES['b_logo']['name'],'.'));
+			$brand['b_logo'] = "logo_".uniqid().$img_ext;
+			move_uploaded_file($_FILES['b_logo']['tmp_name'],APP_DIR."/public/upload/logo/".$brand['b_logo']);
+    	}
 		// 1. create db corporation
 		$row = $corpmod->createNewBrand ( $brand );
 		if ($row !== false) {
 			$msg = array('s'=> 200,'m'=>'ok','d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/corporation/brand/c_id/".$brand['c_id']);				
-			exit(json_output($msg));
-								
+			//exit(json_output($msg));
+			show_message(lang('success'));
+							
+		}else{
+			show_message(lang('falied'));
 		}
+		goback(3000);
     }
     function op_delbrand(){
     	$t = true;
@@ -436,25 +449,34 @@ class corporation{
 		$corpmod = new CorporationModel();
 		$msg = '';
     	if (empty ( $_POST ['b_name'] ) ) {
-			$msg = array('s'=> 400,'m'=>lang('cs_name_rule'),'d'=>'');				
-			exit(json_output($msg));
+			//$msg = array('s'=> 400,'m'=>lang('cs_name_rule'),'d'=>'');				
+			//exit(json_output($msg));
+			show_message(lang('cs_name_rule'));
+			goback(3000);	
 		}
 		$b_id = $_POST['b_id'];
 		$brand['b_name'] =  addslashes($_POST ['b_name']) ;
 		
 		$brand['c_id'] =  intval($_POST ['c_id']) ;
-		
+		if(isset($_FILES['b_logo']) && $_FILES['b_logo']['error']==0){
+			$img_ext = substr($_FILES['b_logo']['name'],strrpos($_FILES['b_logo']['name'],'.'));
+			$brand['b_logo'] = "logo_".uniqid().$img_ext;
+			move_uploaded_file($_FILES['b_logo']['tmp_name'],APP_DIR."/public/upload/logo/".$brand['b_logo']);
+    	}
 		// 1. update db corporation
 		$row = $corpmod->updateBrand( $brand, $b_id);
 		if ($row !== false) {
 
-			$msg = array('s'=> 200,'m'=>lang('success'),'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/corporation/brand/c_id/".$brand['c_id']);				
-			exit(json_output($msg));
+			//$msg = array('s'=> 200,'m'=>lang('success'),'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/corporation/brand/c_id/".$brand['c_id']);				
+			//exit(json_output($msg));
+			show_message(lang('success'));
 								
 		}else{
-			$msg = array('s'=> 400,'m'=>lang('failed'),'d'=>'');				
-			exit(json_output($msg));
+			//$msg = array('s'=> 400,'m'=>lang('failed'),'d'=>'');				
+			//exit(json_output($msg));
+			show_message(lang('falied'));
 		}
+		goback(3000);
     }
     function view_ajaxbrand(){
     	$c_id = $_GET['c_id'];

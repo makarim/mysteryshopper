@@ -11,7 +11,7 @@
 
 <script>
 function checkOnSubmit(formName) {
-  	
+  	return true;
 	var url = "<?php echo $www_site_url?>/admin.php";
 	var params = mini.form.serialize($(formName));
 	
@@ -41,7 +41,7 @@ function checkOnSubmit(formName) {
 					<li id="addcorporationbtn" class="tabcurrent"><a href="#"><?php echo lang('menu_addbrand')?></a></li>	
 				</ul>
 				<div id="addcorporationdiv" class="tabcontentcur" style="width:80%">
-					<form id="addcorporationform" name="addcorporationform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addcorporationform');" >
+					<form id="addcorporationform" name="addcorporationform" enctype="multipart/form-data"  action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addcorporationform');" >
 					<input type="hidden" name="action" value="corporation">
 					<input type="hidden" name="op" value="updatebrand">
 					<input type="hidden" name="b_id" value="<?php echo $b_id?>">
@@ -62,7 +62,12 @@ function checkOnSubmit(formName) {
 							<?php } ?>
 							</select></td>
 							</tr>		
-												
+						<tr>
+							<td><?php echo lang('c_logo')?>:</td>
+							<td><input type="file" name="b_logo" />
+							<img src="/public/upload/logo/<?php echo $brand['b_logo']?>">
+							</td>
+						</tr>							
 						<tr>
 						
 							<td colspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button"/></td>

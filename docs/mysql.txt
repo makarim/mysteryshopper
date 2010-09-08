@@ -28,3 +28,7 @@ INDEX (  `c_id` )
 ) TYPE = MyISAM;
 
 ALTER TABLE  `store` ADD  `b_id` smallint(6) DEFAULT  '0' NOT NULL ;
+
+======2010.09.08
+ALTER TABLE  `brand` ADD  `b_logo` VARCHAR( 255 ) ;
+ALTER TABLE  `assignment` ADD  `b_id` INT( 11 ) DEFAULT  '0' NOT NULL ;

@@ -56,7 +56,7 @@ class CorporationModel extends Model {
 		return $this->db->execute("insert into store (cs_name,cs_abbr,cs_address,c_id,cs_province,cs_city,cs_district,cs_phone,cs_size) value ('{$store['cs_name']}','{$store['cs_abbr']}','{$store['cs_address']}','{$store['c_id']}','{$store['cs_province']}','{$store['cs_city']}','{$store['cs_district']}','{$store['cs_phone']}','{$store['cs_size']}') ");
 	}	
 	function createNewBrand($brand){
-		return $this->db->execute("insert into brand (b_name,c_id,b_created,b_updated) value ('{$brand['b_name']}','{$brand['c_id']}',NOW(),NOW()) ");
+		return $this->db->execute("insert into brand (b_name,c_id,b_created,b_updated,b_logo) value ('{$brand['b_name']}','{$brand['c_id']}',NOW(),NOW(),'{$brand['b_logo']}') ");
 	}
 	function getStoreByCid($c_id){
 		return $this->db->getAll("select * from store where c_id='{$c_id}'");
