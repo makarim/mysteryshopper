@@ -279,15 +279,15 @@ class home{
 		$rs = false;
 		$a_id = isset($_POST['a_id'])?intval($_POST['a_id']):'0';
 		$this->get_assignment($a_id);
-		$count = $this->assignmentModel->getAssignmentApplyCountById($a_id);
-		if($count<3){
-			$r = $this->assignmentModel->isApplied($a_id,$this->login_user['user_id']);
-			if($r>0){
-				show_message_goback(lang("have_apply_for"));
-			}else{
-				$rs=$this->assignmentModel->apply($a_id,$this->login_user['user_id']);
-			}
+		//$count = $this->assignmentModel->getAssignmentApplyCountById($a_id);
+		//if($count<3){
+		$r = $this->assignmentModel->isApplied($a_id,$this->login_user['user_id']);
+		if($r>0){
+			show_message_goback(lang("have_apply_for"));
+		}else{
+			$rs=$this->assignmentModel->apply($a_id,$this->login_user['user_id']);
 		}
+		//}
 		if($rs){
 			show_message(lang("apply_success"));
 			unset($_SESSION['a_'.$a_id]['pass']);
