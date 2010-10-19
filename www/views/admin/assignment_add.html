@@ -10,13 +10,13 @@
 
 <script>
 function checkOnSubmit(formName) {
-  	
+
 	var url = "<?php echo $www_site_url?>/admin.php";
 	var params = mini.form.serialize($(formName));
 
 	mini.ajax.post(url, function(r){
 
-		var r = eval('(' + r + ')');   
+		var r = eval('(' + r + ')');
 
 		if(r.s==200){
 			alert(r.m);
@@ -24,77 +24,109 @@ function checkOnSubmit(formName) {
 		}
 		if(r.s==400){
 			alert(r.m);
-			$('msg').innerHTML = r.m;			
+			$('msg').innerHTML = r.m;
 		}
 	}, params);
-	
+
 	return false;
-       
+
 }
 function getBrand(c_id){
-	if(c_id==''){
-		var selobj = $('store_container');
-		for(var i in selobj.options){
-			selobj.options[i] = null;
-		}
+
+/**** 清除所有的选择项 start ****/
+/* Added by Wendy 2010.10.14 */
+//清除品牌选项
+var selobj = $('brand_container');
+for(var i in selobj.options){
+	selobj.options[i] = null;
+	}
+
+//清除分店选项
+var selobj1 = $('store_container');
+for(var i in selobj1.options){
+	selobj1.options[i] = null;
+	}
+/**** 清除所有的选择项 end ****/
+
+	if(c_id == ''){
 		selobj.options[0] = new Option('--', '');
+		selobj1.options[0] = new Option('--', '');
+		//alert("ok");
 		return ;
 	}
+
 	var url = "<?php echo $www_site_url?>/admin.php?action=corporation&view=ajaxbrand&c_id="+c_id;
-	
+
 	mini.ajax.get(url, function(r){
 
-		var r = eval('(' + r + ')');   
+		var r = eval('(' + r + ')');
 		var selobj = $('store_container');
 		selobj.options[0] = new Option('--', '');
 		if(r.s==200){
-			var obj = eval('(' + r.d + ')');   
+			var obj = eval('(' + r.d + ')');
 			var selobj = $('brand_container');
 			j=1;
-			for(var i in obj){
-				
-				//if(i==0) selobj.options[0] = new Option(obj[i].cs_name, obj[i].cs_id) //replace 1st option with a new one
-				selobj.options[j]=new Option(obj[i].b_name,obj[i].b_id) //add a new option to the end of SELECT
-				j++;
+			if(obj != ''){
+				for(var i in obj){
+
+					//if(i==0) selobj.options[0] = new Option(obj[i].cs_name, obj[i].cs_id) //replace 1st option with a new one
+					selobj.options[j]=new Option(obj[i].b_name,obj[i].b_id) //add a new option to the end of SELECT
+					j++;
+				}
 			}
-			
+			else{
+				selobj.options[0] = new Option('--', '');
+			}
+
 		}
 		if(r.s==400){
-			$('msg').innerHTML = r.m;			
+			$('msg').innerHTML = r.m;
 		}
 	});
-	
+
 	return false;
 }
 function getStore(b_id){
-	if(b_id==''){
-		var selobj = $('store_container');
-		for(var i in selobj.options){
-			selobj.options[i] = null;
-		}
+
+/**** 清除所有的选择项 start ****/
+/* Added by Wendy 2010.10.14 */
+var selobj = $('store_container');
+for(var i in selobj.options){
+	selobj.options[i] = null;
+	}
+/**** 清除所有的选择项 end ****/
+
+	if(b_id == ''){
 		selobj.options[0] = new Option('--', '');
+		//alert("ok");
 		return ;
 	}
+
 	var url = "<?php echo $www_site_url?>/admin.php?action=corporation&view=ajaxstore&b_id="+b_id;
-	
+
 	mini.ajax.get(url, function(r){
 
-		var r = eval('(' + r + ')');   
+		var r = eval('(' + r + ')');
 
 		if(r.s==200){
-			var obj = eval('(' + r.d + ')');   
+			var obj = eval('(' + r.d + ')');
 			var selobj = $('store_container');
-			for(var i in obj){
-				//if(i==0) selobj.options[0] = new Option(obj[i].cs_name, obj[i].cs_id) //replace 1st option with a new one
-				selobj.options[i]=new Option(obj[i].cs_abbr+' '+obj[i].cs_name, obj[i].cs_id) //add a new option to the end of SELECT
+			if(obj != ''){
+				for(var i in obj){
+					//if(i==0) selobj.options[0] = new Option(obj[i].cs_name, obj[i].cs_id) //replace 1st option with a new one
+					selobj.options[i]=new Option(obj[i].cs_abbr+' '+obj[i].cs_name, obj[i].cs_id) //add a new option to the end of SELECT
+				}
 			}
-			
+			else{
+				selobj.options[0] = new Option('--', '');
+			}
+
 		}
 		if(r.s==400){
-			$('msg').innerHTML = r.m;			
+			$('msg').innerHTML = r.m;
 		}
 	});
-	
+
 	return false;
 }
 
@@ -104,31 +136,31 @@ function getStore(b_id){
 <body><div id="append"></div>
 <div id="msg" style="color:red;text-align:center"></div>
 	<div class="container">
-	
+
 		<div class="hastabmenu">
 				<ul class="tabmenu">
-					<li id="addassignmentbtn" class="tabcurrent"><a href="#"><?php echo lang('add_assignment')?></a></li>	
+					<li id="addassignmentbtn" class="tabcurrent"><a href="#"><?php echo lang('add_assignment')?></a></li>
 				</ul>
 				<div id="addassignmentdiv" class="tabcontentcur" style="display:;">
 					<form id="addassignmentform" name="addassignmentform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addassignmentform');" >
 					<input type="hidden" name="action" value="assignment">
 					<input type="hidden" name="op" value="save">
-				
+
 					<table width="100%">
 						<tr>
 							<td width="10%"><?php echo lang('a_title')?>:</td>
 							<td><input type="text" name="a_title" class="textfield" style="width:500px"/> *<input type="button" value="Split" onclick="document.addassignmentform.a_title.value+='&lt;!--!--&gt;';"></td>
-						</tr>					
-							
-													
+						</tr>
+
+
 						<tr>
 							<td><?php echo lang('a_sdate')?>:</td>
 							<td><input type="text" name="a_sdate" onclick="showcalendar();" value="" class="textfield" /></td>
-						</tr>								
+						</tr>
 						<tr>
 							<td><?php echo lang('a_edate')?>:</td>
 							<td><input type="text" name="a_edate" onclick="showcalendar();" value="" class="textfield" /></td>
-						</tr>					
+						</tr>
 						<tr>
 							<td><?php echo lang('cs_corpration')?>:</td>
 							<td><select name="c_id" onchange="getBrand(this.options[this.selectedIndex].value);">
@@ -137,14 +169,14 @@ function getStore(b_id){
 							<option value="<?php echo $v['c_id'];?>"><?php echo $v['c_initial']." ". $v['c_title'];?></option>
 							<?php } ?>
 							</select></td>
-						</tr>	
+						</tr>
 						<tr>
 							<td><?php echo lang('b_name')?>:</td>
 							<td><select id="brand_container" name="b_id" onchange="getStore(this.options[this.selectedIndex].value);">
 							<option value="">--</option>
 							</select></td>
 						</tr>
-							
+
 						<tr>
 							<td><?php echo lang('cs_name')?>:</td>
 							<td><select id="store_container" name="cs_id">
@@ -159,27 +191,27 @@ function getStore(b_id){
 							<option value="<?php echo $v['re_id'];?>"><?php echo $v['re_title'];?></option>
 							<?php } ?>
 							</select></td>
-						</tr>	
+						</tr>
 						<tr>
 							<td><?php echo lang('a_hasphoto')?>:</td>
 							<td><input type="checkbox" name="a_hasphoto" value="1" /></td>
-						</tr>				
+						</tr>
 						<tr>
 							<td><?php echo lang('a_hasaudio')?>:</td>
 							<td><input type="checkbox" name="a_hasaudio" value="1" /></td>
-						</tr>				
+						</tr>
 						<tr>
 							<td><?php echo lang('a_desc')?>:</td>
 							<td><textarea type="text" name="a_desc" rows="10" style="width:500px" class="textfield"/></textarea><input type="button" value="Split" onclick="document.addassignmentform.a_desc.value+='&lt;!--!--&gt;';"></td>
-						</tr>							
+						</tr>
 						<tr>
 							<td><?php echo lang('a_demand')?>:</td>
 							<td><textarea type="text" name="a_demand" rows="10" style="width:500px" class="textfield"/></textarea><input type="button" value="Split" onclick="document.addassignmentform.a_demand.value+='&lt;!--!--&gt;';"></td>
-						</tr>	
+						</tr>
 						<tr>
 							<td><?php echo lang('istest')?>:</td>
 							<td><input type="checkbox" name="a_istest" value="1" checked/></td>
-						</tr>						
+						</tr>
 						<tr>
 							<td><?php echo lang('a_quiz')?>:</td>
 							<td>
@@ -188,14 +220,14 @@ function getStore(b_id){
 title:去肯德基一定要点的是什么？|A:薯条|B:鸡翅|C:汉堡|D:可乐|answer:B
 title:用餐结束之后不要忘记什么？|A:买单|B:刷卡|C:要发票|D:贵重物品|answer:C
 </textarea><input type="button" value="Split" onclick="document.addassignmentform.a_quiz.value+='&lt;!--!--&gt;';"></td>
-						</tr>					
+						</tr>
 						<tr>
-			
+
 							<td colspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button"/ >  <input type="button" value="<?php echo lang('goback')?>" onclick="history.go(-1);" class="button" /></td>
 						</tr>
 					</table>
 					</form>
-	
+
 				</div>
 		</div>
 </div>
