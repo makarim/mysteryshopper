@@ -11,55 +11,69 @@
 
 <script>
 function getBrand(c_id){
-	if(c_id==''){
-		var selobj = $('store_container');
-		for(var i in selobj.options){
-			selobj.options[i] = null;
-		}
+//alert(c_id);
+
+/**** 清除所有的选择项 start ****/
+/* Added by Wendy 2010.10.14 */
+var selobj = $('brand_container');
+for(var i in selobj.options){
+	selobj.options[i] = null;
+	}
+/**** 清除所有的选择项 end ****/
+
+	if(c_id == ''){
 		selobj.options[0] = new Option('--', '');
+		//alert("ok");
 		return ;
 	}
 	var url = "<?php echo $www_site_url?>/admin.php?action=corporation&view=ajaxbrand&c_id="+c_id;
-	alert(url);
+	//alert(url);
 	mini.ajax.get(url, function(r){
 
-		var r = eval('(' + r + ')');   
+		var r = eval('(' + r + ')');
 
 		if(r.s==200){
-			var obj = eval('(' + r.d + ')');   
+			var obj = eval('(' + r.d + ')');
 			var selobj = $('brand_container');
-			for(var i in obj){
-				//if(i==0) selobj.options[0] = new Option(obj[i].cs_name, obj[i].cs_id) //replace 1st option with a new one
-				selobj.options[i]=new Option(obj[i].b_name,obj[i].b_id) //add a new option to the end of SELECT
+
+			//若有返回的数据，则生成选择项；若没有数据，则生成唯一的选择项“--”
+			if(obj != ''){
+				for(var i in obj){
+					//if(i==0) selobj.options[0] = new Option(obj[i].cs_name, obj[i].cs_id) //replace 1st option with a new one
+					selobj.options[i]=new Option(obj[i].b_name,obj[i].b_id) //add a new option to the end of SELECT
+				}
 			}
-			
+			else{
+				selobj.options[0] = new Option('--', '');
+			}
+
 		}
 		if(r.s==400){
-			$('msg').innerHTML = r.m;			
+			$('msg').innerHTML = r.m;
 		}
 	});
-	
+
 	return false;
 }
 function checkOnSubmit(formName) {
-  	
+
 	var url = "<?php echo $www_site_url?>/admin.php";
 	var params = mini.form.serialize($(formName));
-	
+
 	mini.ajax.post(url, function(r){
 
-		var r = eval('(' + r + ')');   
+		var r = eval('(' + r + ')');
 
 		if(r.s==200){
 			window.location.href = r.d;
 		}
 		if(r.s==400){
-			$('msg').innerHTML = r.m;			
+			$('msg').innerHTML = r.m;
 		}
 	}, params);
-	
+
 	return false;
-       
+
 }
 
 </script>
@@ -67,33 +81,34 @@ function checkOnSubmit(formName) {
 <body><div id="append"></div>
 <div id="msg" style="color:red;text-align:center"></div>
 	<div class="container">
-	
+
 		<div class="hastabmenu">
 				<ul class="tabmenu">
-					<li id="addcorporationbtn" class="tabcurrent"><a href="#"><?php echo lang('add_store')?></a></li>	
+					<li id="addcorporationbtn" class="tabcurrent"><a href="#"><?php echo lang('add_store')?></a></li>
 				</ul>
 				<div id="addcorporationdiv" class="tabcontentcur" style="width:80%">
 					<form id="addcorporationform" name="addcorporationform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addcorporationform');" >
 					<input type="hidden" name="action" value="corporation">
 					<input type="hidden" name="op" value="savestore">
-				
+
 					<table width="100%">
 						<tr>
 							<td width="10%"><?php echo lang('cs_name')?>:</td>
 							<td><input type="text" name="cs_name"  style="width:500px;"  class="textfield" /> <input type="button" value="Split" onclick="document.addcorporationform.cs_name.value+='&lt;!--!--&gt;';"></td>
-						</tr>	
+						</tr>
 						<tr>
 							<td width="10%"><?php echo lang('cs_abbr')?>:</td>
 							<td><input type="text" name="cs_abbr" class="textfield" /> *</td>
-						</tr>					
+						</tr>
 						<tr>
 							<td><?php echo lang('cs_address')?>:</td>
 							<td><input type="text" name="cs_address"   style="width:500px;"  class="textfield"/> <input type="button" value="Split" onclick="document.addcorporationform.cs_address.value+='&lt;!--!--&gt;';"></td>
-							</tr>					
-									
+							</tr>
+
 						<tr>
 							<td><?php echo lang('cs_corpration')?>:</td>
 							<td><select name="c_id"  onchange="getBrand(this.options[this.selectedIndex].value);">
+							<option value="">--</option><!-- added by Wendy -->
 							<?php foreach ($corps as $v){?>
 							<option value="<?php echo $v['c_id'];?>"><?php echo $v['c_initial']." ". splitx($v['c_title']);?></option>
 							<?php } ?>
@@ -103,41 +118,41 @@ function checkOnSubmit(formName) {
 							<td><?php echo lang('b_name')?>:</td>
 							<td><select id="brand_container" name="b_id" onchange="getStore(this.options[this.selectedIndex].value);">
 							<option value="">--</option>
-							
+
 							</select></td>
-						</tr>	
+						</tr>
 						<tr>
 							<td><?php echo lang('c_storesize')?>:</td>
 							<td><select name="cs_size">
 							<option value="0">--</option>
-							<?php 
+							<?php
 foreach ($GLOBALS['gCompanysize'] as $k=>$v){
 	?>
 							<option value="<?php echo $k;?>"><?php echo $v?></option>
 <?php
 }
 ?>
-							
+
 							</select>
 							</td>
-						</tr>	
+						</tr>
 						<tr>
 							<td><?php echo lang('city_district')?>:</td>
 							<td>
 							<select name="cs_province"></select><select name="cs_city"></select><select name="cs_district"></select>
 							</td>
-						</tr>			
+						</tr>
 						<tr>
 							<td><?php echo lang('c_phone')?>:</td>
 							<td><input type="text" name="cs_phone"  class="textfield"/></td>
-						</tr>			
+						</tr>
 						<tr>
-						
+
 							<td colspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button"/></td>
 						</tr>
 					</table>
 					</form>
-	
+
 				</div>
 		</div>
 </div>
