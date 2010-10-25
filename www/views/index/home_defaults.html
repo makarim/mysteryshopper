@@ -13,7 +13,7 @@
 var marqueeContent=new Array();   //滚动主题
 <?php if (isset($latestan)&&is_array($latestan)) {
           	foreach ($latestan as $k=> $v) {
-          	echo "marqueeContent[$k]='<a href=\"/index.php/home/noticedetail/{$v['an_id']}\"> ".splitx($v['an_title'])." [{$v['an_date']}]</a>';";	
+          	echo "marqueeContent[$k]='<a href=\"/index.php/home/noticedetail/{$v['an_id']}\"> ".splitx($v['an_title'])." [{$v['an_date']}]</a>';";
           	}
           }?>
 
@@ -32,7 +32,7 @@ function startMarquee() {
  var marqueeBox = document.getElementById("marqueeBox");
   marqueeId++;
  if(marqueeId>=marqueeContent.length) marqueeId=0;
-  
+
  if(marqueeBox.childNodes.length==1) {
  	var nextLine=document.createElement('DIV');
   	nextLine.innerHTML=str;
@@ -77,9 +77,14 @@ initMarquee();
               <td>
               <?php
               if(isset($myassignment)&& is_array($myassignment)){
-				foreach ($myassignment as $k=>$v){?>
+				foreach ($myassignment as $k=>$v){
+				if($v['user_id']==0 || $v['user_id']==$user['user_id']){ //add by wendy at 2010.10.25
+				?>
           		<div class="mission">
-               	  <div class="logo"><p><?php if($v['selected']) {?><a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><img src="/public/upload/logo/<?php if(!empty($v['b_logo'])) echo $v['b_logo'] ;else echo $v['c_logo']?>" width="68" height="68" border="0" /></a>
+               	  <div class="logo"><p>
+               	  <?php
+               	   if($v['selected']) {?>
+               	   <a href="/index.php/home/assignment/a_id/<?php echo $v['a_id']?>"><img src="/public/upload/logo/<?php if(!empty($v['b_logo'])) echo $v['b_logo'] ;else echo $v['c_logo']?>" width="68" height="68" border="0" /></a>
                	  <?php }else {?>
                	  <img src="/public/images/<?php echo lang("nopass_img");?>" border="0" />
                	  <?php }?>
@@ -90,10 +95,13 @@ initMarquee();
                    <?php echo lang('end_date')?> ：<?php echo str_replace('-','/',$v['a_edate']);?><br />
                		<?php echo lang('status')?>：<?php echo ($v['a_finish']*100)."%";?></div>
                 </div>
-          		
-          		<?php }}?>
 
-          		
+          		<?php }
+          		}
+          		}
+          		?>
+
+
                 </div>
               </td>
               <td class="table2RightBorder"></td>
@@ -121,9 +129,9 @@ initMarquee();
               <tr>
                 <td class="table2LeftBorder"></td>
                 <td>
-                
+
                 <iframe src="/index.php/home/calendar" frameborder="0" width="100%" height="600px"></iframe>
-                
+
                 </td>
                 <td class="table2RightBorder"></td>
               </tr>
@@ -198,7 +206,7 @@ initMarquee();
                   <?php if(isset($reccomments) && is_array($reccomments)){
 							foreach ($reccomments as $k=>$v){
 								$con = unserialize($v['rec_content']);
-								?>	
+								?>
                	  <div class="comments">
                		  <div class="userFace"><img src="/public/upload/<?php echo $con['img'];?>" width="41" height="41" border="0" /></div>
                 	  <div class="cText">
@@ -213,7 +221,7 @@ initMarquee();
 							}
               }
               ?>
-               	  
+
                 </td>
                 <td class="table2RightBorder"></td>
               </tr>
