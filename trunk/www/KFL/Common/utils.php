@@ -113,6 +113,7 @@ function goback($delay='1000') {
 	die;
 }
 
+/* 定义了三种页面重定向的方式，默认情况下为第三种 */
 function redirect( $URL, $redirectType = 3)
 {
 	switch($redirectType)
@@ -168,8 +169,8 @@ function authenticate(){
 			$state_txt = urldecode($_COOKIE['XPPASS_STATE']);
 			$enc_info = $_COOKIE['XPPASS_INFO'];
 			list($login_time,$user,$key,,$rand_str) = explode('|',$state_txt);
-			
-			if($key==md5($user.$token.$login_time.$rand_str)){	
+
+			if($key==md5($user.$token.$login_time.$rand_str)){
 				$userinfo = decrypt($enc_info,$key);
 				return json_decode($userinfo,true);
 			}else{
@@ -180,9 +181,9 @@ function authenticate(){
 		}
 	}
 	if(SSO_MODE=='session' || SSO_MODE=='ticket'){
-		if(isset($_SESSION['_XppassOnlineUser'])) 
+		if(isset($_SESSION['_XppassOnlineUser']))
 			return $_SESSION['_XppassOnlineUser'];
-		else 
+		else
 			return false;
 	}
 }
@@ -220,8 +221,14 @@ function lang($lang_key, $force = true) {
 }
 function splitx(&$str){
 	$pieces = explode("<!--!-->", $str);
+
 	if($GLOBALS['gSelectedLanguage']=='zh-cn') $str = htmlspecialchars(stripslashes($pieces[0]),ENT_QUOTES);
 	if($GLOBALS['gSelectedLanguage']=='en' && isset($pieces[1])) $str = htmlspecialchars(stripslashes($pieces[1]),ENT_QUOTES);
+
+	/* 因为<br/>在此之前已被编码成&lt;br/&gt;了，为了在HTML页面能正常显示换行<br/>，需在这里将转换的字符还原 add by wendy 20101029 */
+	$str = str_replace("&lt;br/&gt;","<br/>",$str);
+	$str = str_replace("&lt;br /&gt;","<br/>",$str);
+
 	return stripslashes($str);
 }
 function getip(){
@@ -315,9 +322,10 @@ function curl_get_content($url){
 function json_output($arr){
 	echo json_encode($arr);
 	//echo preg_replace("#\\\u([0-9a-f]+)#ie", "iconv('UCS-2', 'UTF-8', pack('H4', '\\1'))", $code);
-	
+
 }
 
+/* 一种加密算法 */
 function hmac($key, $data, $hash="md5") {
     // RFC 2104 HMAC implementation for php. Hacked by Lance Rushing
     $b = 64;
@@ -328,7 +336,7 @@ function hmac($key, $data, $hash="md5") {
      $opad = str_pad("", $b, chr(0x5c));
      $k_ipad = $key ^ $ipad ;
      $k_opad = $key ^ $opad;
-    
+
      return call_user_func($hash, $k_opad . pack("H*", call_user_func($hash, $k_ipad . $data)));
 }
 /*-------------------------------文件扩展函数-----------------------------------*/
@@ -444,7 +452,7 @@ function create_dir($path,$mode = 0777)
 //返回:true|false
 function del($path, $self = false, $private_level = 0,$types='')
 {
-	
+
 	$list_dir = list_dir($path);//注此处使用了自定义扩展函数
 
 	if(is_array($list_dir))
@@ -536,39 +544,39 @@ function list_all_dir($path,&$tree){
 		return false;
 	}
 	$i = 0;
-	
+
 	while (false !== ($filename = $dir->read()))
 	{
 		$t = array();
 		if (preg_match("/^(\.{1,2}|\.svn)$/ism",$filename)) {	continue; }
 		$filetype = filetype($dir->path.'/'.$filename);
-		
+
 		if($filetype == 'dir'){
 			list_all_dir($dir->path.'/'.$filename,$t['folders']);
 		}
 		$fileinfo = stat($dir->path.'/'.$filename);
 		$pathinfo = pathinfo($filename);
-		
+
 		$t['path'] = urlencode(encrypt(path_clean($dir->path.'/'.$filename)));
-		
+
 		$filename = mb_convert_encoding($filename, "UTF-8", "GBK");
 		$t['id'] = $filename.uniqid("_");
 		$t['filetype'] = $filetype;
 		$t['name'] = $filename;
-		
+
 		$t['basename'] = $pathinfo['basename'];
 		$t['extension'] = isset($pathinfo['extension'])?$pathinfo['extension']:'';
 		$t['time'] = date ("Y-m-d H:i:s", $fileinfo['mtime']);
-		$t['size'] = $fileinfo['size'];	
+		$t['size'] = $fileinfo['size'];
 		$t['dir'] = urlencode(path_clean($dir->path));
-		
+
 		$tree[$i] = $t;
 		$i++;
 		@array_multisort($tree, SORT_REGULAR,SORT_DESC   );//排序 如果搜索全部类型则先列数组
 	}
-	
+
 	$dir->close();
-	
+
 }
 
 //作用:检测指定目录大小
@@ -643,7 +651,7 @@ function write_file($content,$path,$mode='wb')
 		fclose($fp);
 	    return false;
 	}
-	
+
 	fclose($fp);
 	//file_put_contents($path,$content,LOCK_EX);
 	return true;
