@@ -10,7 +10,11 @@
       <a href="javascript:printpage(1);"><img src="<?php echo $www_site_url?>/public/images/print_icon.jpg" border="0" title="Print"></a>
       </div>
       <!--startprint1-->
-		<?php if(isset($report_questions) && is_array($report_questions)){?>
+		<?php
+		 // header("Content-type:application/vnd.ms-excel");
+	    //  header("Content-Disposition:attachment;filename=test_data.xlsx");
+
+		if(isset($report_questions) && is_array($report_questions)){?>
 			<?php echo lang("assignment");?>：《<?php echo splitx($assignment['a_title'])?>》 <?php echo substr($assignment['a_fdate'],0,10)?> <?php echo lang("stores");?>：<?php echo splitx(stripslashes($assignment['cs_name']));?>
 			<br />
 		   <?php echo lang("grade_info");?>：
@@ -24,7 +28,7 @@
             <td  height="20" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF"><?php echo lang("level_5");?></font></td>
             <td  height="20" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF"><?php echo lang("level_6");?></font></td>
             <td  height="20" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF"><?php echo lang("level_7");?></font></td>
-          </tr> 
+          </tr>
           <tr>
             <td align="left">n/a</td>
             <td align="left">０</td>
@@ -35,7 +39,7 @@
             <td align="left">８-９</td>
             <td align="left">１０</td>
           </tr>
-       
+
           </table>
          <table width="100%" border="1" cellpadding="0" cellspacing="1" class="missionReport" style="margin-top:20px;">
           <tr>
@@ -44,35 +48,37 @@
           <tr>
             <td width="250" align="left"><?php echo lang('gender')?>:</td>
             <td  align="left"><?php if($ms_info['gender']==1) echo lang('boy');if($ms_info['gender']==2) echo lang('girl'); ?></td>
-           </tr>          
+           </tr>
           <tr>
             <td align="left"><?php echo lang('age')?>:</td>
             <td  align="left">     <?php $year = substr($ms_info['birthdate'],0,4); if($year!='0000') echo date("Y")-$year;?>       </td>
-           </tr>         
+           </tr>
            <tr>
             <td align="left"><?php echo lang('marriage')?>:</td>
             <td  align="left"> <?php if($ms_info['marital']=="S") echo lang('single');
             if($ms_info['marital']=="M") echo lang('married');
             if($ms_info['marital']=="D") echo lang('divorced'); ?>           </td>
-           </tr>          
+           </tr>
             <tr>
             <td  align="left"><?php echo lang('nationality')?>:</td>
             <td  align="left"> <?php echo $ms_info['nationality'];?></td>
-           </tr>            
+           </tr>
            <tr>
             <td align="left"><?php echo lang('salary')?>:</td>
-            <td  align="left"> <?php if($ms_info['householdincome']==1) echo "&lt; 3,000";
+            <td  align="left"> <?php if($ms_info['householdincome']==1) echo "＜ 3,000";
             if($ms_info['householdincome']==2) echo "3,000-6,000";
-            if($ms_info['householdincome']==3) echo "6,000-9,000"; 
-            if($ms_info['householdincome']==4) echo "9,000-12,000"; 
-            if($ms_info['householdincome']==5) echo "12,000-15000";
+            if($ms_info['householdincome']==3) echo "6,000-9,000";
+            if($ms_info['householdincome']==4) echo "9,000-12,000";
+            if($ms_info['householdincome']==5) echo "12,000-15,000";
             if($ms_info['householdincome']==6) echo "15,000-30,000";
-            if($ms_info['householdincome']==7) echo "> 30,000";
+            if($ms_info['householdincome']==7) echo "＞ 30,000";
               ?>RMB</td>
            </tr>
           </table>
 	<?php
-		foreach ($report_questions as $k=>$v){?>
+	//echo "<pre/>";
+	//print_r($report_questions);
+		foreach ($report_questions as $k=>$v){if(!empty($v)){?>
 		<table width="100%" border="1" cellpadding="0" cellspacing="1" class="missionReport" style="margin-top:20px;">
           <tr>
             <td colspan="3" class="title" bgcolor="#9F0000" align="left" height="20"><font color="#FFFFFF"><?php echo lang($k);?></font></td>
@@ -83,20 +89,21 @@
 				?>
           <tr>
 			 <td width="25"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
-            <td align="left"><span id="br_30"><?php echo splitx($vv['rq_question']);?></span></td>
-            <td width="80" align="left">
-            <?php 
+            <td align="left"><span id="br_30"><?php echo splitx($vv['rq_question']);/*echo "haha";*/?></span></td>
+           <td width="80" align="left">
+            <?php
             	if($vv['rq_type']==2){
             		if($vv['answer']=='A') echo 'N/A';
-            		else 
-            		echo ($vv['answer']==0)?"０":$vv['answer']; 
-            	}else if($vv['rq_type']==1){ 
-					if($vv['answer']=='Y')echo 'Yes'; 
-					if($vv['answer']=='N')echo 'No';  
-					if($vv['answer']=='A')echo 'N/A';  
-            	}else if($vv['rq_type']==4){ 
-            		echo $vv['answer']."分钟"; 
-				 }?>
+            		else
+            		echo ($vv['answer']==0)?"０":$vv['answer'];
+            	}else if($vv['rq_type']==1){
+					if($vv['answer']=='Y')echo 'Yes';
+					if($vv['answer']=='N')echo 'No';
+					if($vv['answer']=='A')echo 'N/A';
+            	}else if($vv['rq_type']==4){
+            		echo $vv['answer']."分钟";
+				 }
+				 ?>
             </td>
           </tr>
            <?php if($vv['is_comment']==1){?>
@@ -105,39 +112,40 @@
            <td colspan="2" ><span id="br_32"><?php echo $vv['comment'];?></span></td>
           </tr>
           <?php }?>
-       		 <?php 
-				}else if($vv['rq_type']==3){ 
-			
+       		 <?php
+				}else if($vv['rq_type']==3){
+
 					if($vv['rq_group']==5){
-					?>	
+					?>
 			<tr>
-			 <td width="25"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
-			  <td align="left" ><span id="br_26"><?php echo splitx($vv['rq_question']);?></span></td>
+			 <td width="5"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
+			  <td align="left" width="300"><span id="br_26"><?php echo splitx($vv['rq_question']);?></span></td>
               <td width="200" align="left"><span id="br_13"><?php echo splitx($vv['answer']);?></span></td>
           	</tr>
-          <? }else{?>
+          <?php }else{?>
 			<tr>
-			 <td width="25" rowspan="2" valign="top"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
+			 <td width="25" rowspan="2" valign="top"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1);?></td>
              <td colspan="2"  bgcolor="#aaa" height="20" >
             		<span id="br_32"><?php echo splitx($vv['rq_question']);?></span>
             </td>
-          </tr>	
+          </tr>
           <tr>
              <td colspan="2" height="50">
             		<span id="br_32"><?php echo splitx($vv['answer']); ?></span>
             </td>
-          </tr>	
-	   <?php } 
-			
+          </tr>
+	   <?php }
+
 				}
-				
+
 			}
 			?>
-			
+
         </table>
  		<?php }
+ 		}
 		}?>
-		
+
  		<!--endprint1-->
 		 <TABLE width="100%" border="0" cellspacing="1" cellpadding="0" class="missionReport" style="margin-top:20px;">
 <TR>
@@ -145,7 +153,7 @@
 
 
 </TR>
-<?php 
+<?php
 if(is_array($attachments)){
 	foreach ($attachments as $k=>$a){
 	?>
@@ -160,7 +168,7 @@ if(is_array($attachments)){
 }
 ?>
 <TR>
-</table>		
+</table>
 
 </div>
 
