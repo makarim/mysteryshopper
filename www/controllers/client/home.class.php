@@ -694,8 +694,8 @@ class home{
 			$store_id_arr[] = $s['cs_id'];
 		}
 
-		echo"<pre/>";
-		print_r($stores);
+		//echo"<pre/>";
+		//print_r($stores);
 
 		$def_store_id = isset($stores[0]['cs_id'])?$stores[0]['cs_id']:0;
 		$def_store_name = isset($stores[0]['cs_name'])?$stores[0]['cs_name']:'';
@@ -711,7 +711,7 @@ class home{
 			$cs_id = 0;//这里的值设置的有点问题，当设成-1时，可保证不将其他公司的评论列出。by wendy 20101021.此问题还有待深究
 			$selstore= '';
 		}
-		echo "cs_id=".$cs_id;
+		//echo "cs_id=".$cs_id;
 		$con['sdate'] = $sdate;
 		$con['edate'] = $edate;
 		$con['order'] = 'a_id';
@@ -721,8 +721,8 @@ class home{
 		include_once("AssignmentModel.class.php");
 		$assignmentModel = new AssignmentModel();
 
-		echo "<pre/>";
-		print_r($con);
+		//echo "<pre/>";
+		//print_r($con);
 
 		$assignments = $assignmentModel->getAssignmentComments($con,10);
 
