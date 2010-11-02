@@ -385,6 +385,82 @@ class AssignmentModel extends Model {
 		}
 		return '0';
 	}
+
+	/****************/
+	/* 获得单个任务的综览得分 add by wendy 2010.11.2 */
+	function getSingleSummaryScoreByAsId($a_id,$re_id,$type=''){
+		$average = 0;
+		//一份报告有多少个的同group的打分题目
+		$sql = "select rq_id,rq_type from report_question where re_id='".$re_id."'";
+
+		$rq_arr = $this->db->getAll($sql);
+		$q_row = count($rq_arr);
+		//echo "row:".$q_row."|";
+
+		$sum = 0;
+		$n = 0;
+		if($q_row>0){
+			foreach ($rq_arr as $rq){
+				//if($type && $type!=$rq['rq_type']) continue;
+
+				if($type == 'summary')
+				{
+					if($rq['rq_type']==2){
+						$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=2 and ans_answer2!='A'";
+						$res = $this->db->getOne($sql);
+
+						if($res>=0 && $res !== null){//判断条件由$res>0改为现在这样，by wendy 20101102
+							$sum +=$res;
+							$n++;
+						}
+
+					}else if($rq['rq_type']==1){
+						$sql = "select ans_answer1  from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=1 and ans_answer1!='A'";
+						$yn = $this->db->getOne($sql);
+						if($yn=='Y' or $yn=='N'){
+							$sum += ($yn=='Y')?10:0;
+							$n++;
+						}
+
+					}
+				}else if($type == 'yesorno'){
+					if($rq['rq_type']==1){
+						$sql = "select ans_answer1  from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=1 and ans_answer1!='A'";
+						$yn = $this->db->getOne($sql);
+						if($yn=='Y' or $yn=='N'){
+							$sum += ($yn=='Y')?10:0;
+							$n++;
+						}
+					}
+				}else if($type == 'vote'){
+					if($rq['rq_type']==2){
+						$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=2 and ans_answer2!='A'";
+						$res = $this->db->getOne($sql);
+
+						if($res>=0 && $res !== null){//判断条件由$res>0改为现在这样，by wendy 20101102
+							$sum +=$res;
+							$n++;
+						}
+				}
+
+			}
+			}
+			//echo $a_id."=".$sum."/".$n."<br/>";
+			// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
+			if($n>0){
+				$average = $sum/$n;
+
+				return round($average,2);
+			}else{
+				return '-';
+			}
+
+		}
+		return '0';
+
+	}
+	/****************/
+
 	function getTimeByRqId($rq_id,$a_id){
 		$sql = "select ans_answer4 from answer where rq_id='".$rq_id."' and a_id = '".$a_id."' and rq_type=4";
 		//echo $sql;
