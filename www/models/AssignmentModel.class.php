@@ -352,7 +352,8 @@ class AssignmentModel extends Model {
 				if($rq['rq_type']==2){
 					$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=2 and ans_answer2!='A'";
 					$res = $this->db->getOne($sql);
-					if($res>0){
+
+					if($res>=0 && $res !== null){//判断条件由$res>0改为现在这样，by wendy 20101102
 						$sum +=$res;
 						$n++;
 					}
@@ -372,6 +373,10 @@ class AssignmentModel extends Model {
 			// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
 			if($n>0){
 				$average = $sum/$n;
+				/****/
+//				echo "average1=".$average."<br/>";
+//				echo "rount_average=".round($average,2)."<br/>";
+				/****/
 				return round($average,2);
 			}else{
 				return '-';
