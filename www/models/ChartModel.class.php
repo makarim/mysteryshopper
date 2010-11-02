@@ -31,9 +31,9 @@ class ChartModel extends Model {
 				if($q_row>0){
 					foreach ($rq_arr as $rq){
 						if($rq['rq_type']==2){
-							$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$v['a_id']."' and rq_type=2 and ans_answer2!='A'";						
+							$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$v['a_id']."' and rq_type=2 and ans_answer2!='A'";
 							$score = $this->db->getOne($sql);
-							if($score>0){
+							if($score>=0 && $score !== null){
 								$sum += is_numeric($score)?$score:0;
 								$n++;
 							}
@@ -45,15 +45,15 @@ class ChartModel extends Model {
 								$n++;
 							}
 						}
-						
+
 					}
 					//echo $sum;
 					if($n>0) $average += ($sum)/$n;
 				}
-				
+
 			}
 			//echo $average;
-		
+
 			return round($average/$row,2);
 		}
 		return 0;
@@ -73,9 +73,9 @@ class ChartModel extends Model {
 				if($q_row>0){
 					foreach ($rq_arr as $rq){
 						if($rq['rq_type']==2){
-							$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$v['a_id']."' and rq_type=2 and ans_answer2!='A'";						
+							$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$v['a_id']."' and rq_type=2 and ans_answer2!='A'";
 							$score = $this->db->getOne($sql);
-							if($score>0){
+							if($score>=0 && $score !== null){
 								$sum += is_numeric($score)?$score:0;
 								$n++;
 							}
@@ -87,15 +87,15 @@ class ChartModel extends Model {
 								$n++;
 							}
 						}
-						
+
 					}
-					//echo $sum;
+					//echo "sum=".$sum."<br/>";
 					if($n>0) $average += ($sum)/$n;
 				}
-				
+
 			}
-			//echo $average;
-		
+			//echo "@@".$average;
+
 			return round($average/$row,2);
 		}
 		return 0;
@@ -103,7 +103,7 @@ class ChartModel extends Model {
 	/**
 	 * @param  $csid 公司ID
 	 * @param $group 问题归属,环境类，服务类，产品类
-	 * 
+	 *
 	 **/
 	function getVoteScoreByCsId($csid,$group=1){
 		$sql="select a.re_id,a.a_id from assignment a where a.cs_id='$csid' $this->addsql";
@@ -123,7 +123,7 @@ class ChartModel extends Model {
 						//一个问题的所有打分的平均值之和
 						$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$v['a_id']."' and rq_type=2 and ans_answer2!='A'";
 						$score = $this->db->getOne($sql);
-						if($score>0){
+						if($score>=0 && $score !== null){
 							$sum += $score;
 							$n++;
 						}
@@ -131,14 +131,14 @@ class ChartModel extends Model {
 					// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
 					if($n>0) $average += $sum/$n;
 				}
-				
+
 			}
 			//几个报告的平均值
 			return round($average/$row,2);
 		}
 		return 0;
 	}
-	
+
 	function getYesByCsId($csid,$group=1){
 		$sql="select a.re_id,a.a_id from assignment a where a.cs_id='$csid' $this->addsql";
 		$data = $this->db->getAll($sql);
@@ -164,7 +164,7 @@ class ChartModel extends Model {
 					// 所有题目总支持人数/题目数=一份报告同group的是非题平均值
 					if($n>0) $average += $sum/$n;
 				}
-				
+
 			}
 			//几个报告的平均值
 			return round($average/$row,2);
@@ -192,14 +192,14 @@ class ChartModel extends Model {
 					// 所有题目时间平均值/题目数=一份报告同group的时间平均值
 					$average += $sum/$q_row;
 				}
-				
+
 			}
 			//几个报告的平均值
 			return round($average/$row,2);
 		}
 		return 0;
 	}
-	
+
 	function getSummaryScoreByAsId($a_id,$re_id,$group){
 		if($group=='service') $group=1;
 		if($group=='environment') $group=2;
@@ -218,7 +218,7 @@ class ChartModel extends Model {
 				if($rq['rq_type']==2){
 					$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=2 and ans_answer2!='A'";
 					$res = $this->db->getOne($sql);
-					if($res>0){
+					if($res>=0 && $res !== null){
 						$sum += is_numeric($res)?$res:0;
 						$n++;
 					}
@@ -229,7 +229,7 @@ class ChartModel extends Model {
 						$sum += ($yn=='Y')?10:0;
 						$n++;
 					}
-					
+
 				}
 			}
 			// 所有题目打分平均值之和/问题个数=一份报告同group的打分题平均值
@@ -242,7 +242,7 @@ class ChartModel extends Model {
 		}
 		return 0;
 	}
-	
+
 	function getVoteScoreByAsId($a_id,$re_id,$group){
 		if($group=='service') $group=1;
 		if($group=='environment') $group=2;
@@ -259,7 +259,7 @@ class ChartModel extends Model {
 			foreach ($rq_arr as $rq){
 				$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=2 and ans_answer2!='A'";
 				$res = $this->db->getOne($sql);
-				if($res>0){
+				if($res>=0 && $res !== null){
 					$sum+=$res;
 					$n++;
 				}
@@ -270,7 +270,7 @@ class ChartModel extends Model {
 		}
 		return 0;
 	}
-	
+
 	function getYesByAsId($a_id,$re_id,$group){
 		if($group=='service') $group=1;
 		if($group=='environment') $group=2;
@@ -298,14 +298,14 @@ class ChartModel extends Model {
 		}
 		return 0;
 	}
-	
+
 	function getTimeByRqId($rq_id,$a_id){
 		$sql = "select ans_answer4 from answer where rq_id='".$rq_id."' and a_id = '".$a_id."' and rq_type=4";
 		//echo $sql;
 		return $this->db->getOne($sql);
 	}
-	
-	
+
+
 	function getTimeQuestionsByCId($c_id,$group){
 		$addsql =" ";
 		if($group=='service') $group=1;
@@ -321,7 +321,7 @@ class ChartModel extends Model {
 		if($group) $addsql= " and rq_group='$group'";
 		$re_id_str = join(',',$re_id);
 		if($re_id_str) return $this->db->getAll("select rq_id,rq_type,rq_question from report_question where rq_type=4 and re_id in ($re_id_str) $addsql");
-		else return ''; 
+		else return '';
 	}
 	function getTimeQuestionsByCsId($cs_id){
 		$re_id_arr = $this->db->getAll("select re_id from assignment where cs_id='$cs_id' group by re_id");
@@ -334,14 +334,14 @@ class ChartModel extends Model {
 	function getAvgTimeByRqId($rq_id,$cs_id){
 		$assignment = $this->db->getAll("select a.a_id from assignment a where a.cs_id='$cs_id' $this->addsql");
 		$a_id = array();$a_id_str = '';
-		
+
 		foreach ($assignment as $v) {
 			$a_id[] = $v['a_id'];
 		}
 		$a_id_str = join(",",$a_id);
-		if(count($a_id)>0) 
+		if(count($a_id)>0)
 			$sql = "select avg(ans_answer4) as avg from answer where rq_id='".$rq_id."' and a_id in (".$a_id_str.") and rq_type=4";
-		else 
+		else
 			$sql = "select avg(ans_answer4) as avg from answer where rq_id='".$rq_id."' and a_id = '".$a_id."' and rq_type=4";
 		//echo $sql;
 		return $this->db->getOne($sql);
