@@ -240,6 +240,9 @@ class home{
 			}
 			if($count>0)$internal_average = round($a_average/$count,2);
 		}
+		/****/
+		//echo "int=".$internal_average."<br/>";
+		/****/
 		return $internal_average;
 	}
 
@@ -266,9 +269,15 @@ class home{
 				$internal_average +=$this->get_assignment_avg($con,$b_id);
 			}
 			$internal_average = round($internal_average/count($selbrands),2);
+
 			$this->stores = array();
 			$this->selstores = array();
 		}
+
+		/*******/
+//			echo "count selbrands=".count($selbrands)."<br/>";
+//			echo "internal_average=".$internal_average;
+			/*******/
 
 		$this->tpl->assign("internal_average",$internal_average);
 		$this->tpl->assign("assignments",$this->assignments);
@@ -316,6 +325,9 @@ class home{
 					$v['service'] = $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],1,$con['type_id']);;
 					$v['environment'] = $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,$con['type_id']);
 					$v['product'] = $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,$con['type_id']);
+					/* 为了在“综合对比”页面的原始数据后增加一列“综览” add by wendy 2010.11.2 */
+					$v['general'] = $this->assignmentModel->getSingleSummaryScoreByAsId($v['a_id'],$v['re_id'],$con['type']);
+
 					$a_average += ($v['service']+$v['environment']+$v['product'])/3;
 				}
 				$this->assignments[$k] = $v;
@@ -352,6 +364,9 @@ class home{
 			$this->stores = array();
 			$this->selstores = array();
 		}
+
+//		echo "<pre/>";
+//		print_r($this->assignments);
 
 		$this->tpl->assign("internal_average",$internal_average);
 		$this->tpl->assign("assignments",$this->assignments);
@@ -717,7 +732,7 @@ class home{
 		$con['order'] = 'a_id';
 		$con['selstores'] = $cs_id;
 		$con['a_audit'] = 1;
-		$con['brand_id'] = $brand_id;//Add by Wendy 2010.10.22
+		$con['brand_id'] = $brand_id;//Add by Wendy 2010.10.22 保证只显示本品牌下的评论
 		include_once("AssignmentModel.class.php");
 		$assignmentModel = new AssignmentModel();
 
