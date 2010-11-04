@@ -6,13 +6,13 @@
 <?php include_once("home_left.html")?>
 
 <div class="admincontent">
-<div id="tabsD" style="width:100%"> 
-  <ul> 
-   	<li <?php if($type=='summary') echo 'class="on"';?>><a href="/client.php/home/product/summary"><span><?php echo lang("summary")?></span></a></li> 
-    <li <?php if($type=='yesorno') echo 'class="on"';?>><a href="/client.php/home/product/yesorno"><span><?php echo lang("yesorno")?></span></a></li> 
-    <li <?php if($type=='vote') echo 'class="on"';?>><a href="/client.php/home/product/vote"><span><?php echo lang("vote")?></span></a></li> 
-   
-  </ul> 
+<div id="tabsD" style="width:100%">
+  <ul>
+   	<li <?php if($type=='summary') echo 'class="on"';?>><a href="/client.php/home/product/summary"><span><?php echo lang("summary")?></span></a></li>
+    <li <?php if($type=='yesorno') echo 'class="on"';?>><a href="/client.php/home/product/yesorno"><span><?php echo lang("yesorno")?></span></a></li>
+    <li <?php if($type=='vote') echo 'class="on"';?>><a href="/client.php/home/product/vote"><span><?php echo lang("vote")?></span></a></li>
+
+  </ul>
 </div>
 <br />
 <br />
@@ -20,43 +20,43 @@
 <input name="action" type="hidden" value="home"  />
  <input name="view" type="hidden" value="product"  />
  <input name="product" type="hidden" value="<?php echo $type?>"  />
- 
-  <div id="brandlist" style="width: 170px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:999;"> 
-  <ul> 
-  <?php 
+
+  <div id="brandlist" style="width: 170px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:999;">
+  <ul>
+  <?php
        if(isset($brands) && is_array($brands)){
-         foreach ($brands as $b){	
+         foreach ($brands as $b){
                 ?>
-	<li style="padding:2px;"> <label><input onclick="selectmitilbrand('<?php echo $b['b_id']."|".splitx($b['b_name']);?>');" type="checkbox" name="selbrands[]" value="<?php echo $b['b_id']?>" <?php if(in_array($b['b_id'],$selbrands)) echo 'checked'?>> &nbsp;<?php echo splitx($b['b_name']);?></label></li> 
+	<li style="padding:2px;"> <label><input onclick="selectmitilbrand('<?php echo $b['b_id']."|".splitx($b['b_name']);?>');" type="checkbox" name="selbrands[]" value="<?php echo $b['b_id']?>" <?php if(in_array($b['b_id'],$selbrands)) echo 'checked'?>> &nbsp;<?php echo splitx($b['b_name']);?></label></li>
 	  <?php
 			}
       }
        ?>
-     </ul> 
+     </ul>
 </div>
 
-<div id="storelist" style="width: 210px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:999;"> 
-  <ul> 
-  <?php 
+<div id="storelist" style="width: 210px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:999;">
+  <ul>
+  <?php
        if(isset($stores) && is_array($stores)){
-         foreach ($stores as $s){	
+         foreach ($stores as $s){
                 ?>
-	<li style="padding:2px;"> <label><input onclick="selectmitilstore('<?php echo $s['cs_id']."|".splitx($s['cs_name']);?>');" type="checkbox" name="selstores[]" value="<?php echo $s['cs_id']?>" <?php if(in_array($s['cs_id'],$selstores)) echo 'checked'?>> &nbsp;<?php echo splitx($s['cs_name']);?></label></li> 
+	<li style="padding:2px;"> <label><input onclick="selectmitilstore('<?php echo $s['cs_id']."|".splitx($s['cs_name']);?>');" type="checkbox" name="selstores[]" value="<?php echo $s['cs_id']?>" <?php if(in_array($s['cs_id'],$selstores)) echo 'checked'?>> &nbsp;<?php echo splitx($s['cs_name']);?></label></li>
 	  <?php
 			}
       }
        ?>
-     </ul> 
+     </ul>
 </div>
 
- 
+
 <table width="100%" height="50" border="0" cellpadding="0" cellspacing="0" class="clear">
   <tr>
     <td class="CsearchLeft">&nbsp;</td>
     <td align="center" class="CsearchCenter">
     <?php echo lang("select_brand")?>:<input name="selbrand" type="text" class="ClocationInput" onclick="showmitibrands();" id="selbrand" value="<?php if(count($selbrands)==0){ echo "--"; }else { if(count($selbrands)==count($brands)) echo lang("all_brands"); else echo splitx($brand['b_name']); }?>" />
     <?php echo lang("select_location")?>:<input name="selstore" type="text" class="ClocationInput" onclick="showmitistores();" id="selstore" value="<?php if(count($selstores)==0){ echo "--"; }else { if(count($selstores)==count($stores)) echo  lang("all_locations"); else echo ""; }?>" />
-   
+
       <?php echo lang("a_sdate")?>：
       <input name="sdate" type="text" class="CtimeInput" id="sdate" value="<?php echo $sdate;?>" onclick="showcalendar();"/>
       <?php echo lang("a_edate")?>：
@@ -79,7 +79,7 @@
       </div>
       	<div class="table2Title"><div class="table2TitleLeft"><span><?php echo lang("bar_graph")?></span></div></div>
       </div>
- 
+
     </div></td>
   </tr>
   <tr>
@@ -92,11 +92,11 @@
 				<strong>You need to upgrade your Flash Player</strong>
 			</div>
 <?php if($type=='time'){?>
-	
+
 <?php
 }else {?>
 	<script type="text/javascript">
-		// <![CDATA[		
+		// <![CDATA[
 		var so = new SWFObject("<?php echo $www_site_url?>/public/flash/amcolumn.swf", "amcolumn", "100%", "400px", "8", "#ffffff");
 		so.addParam("wmode", "transparent");
 		so.addVariable("path", "<?php echo $www_site_url?>/public/flash/");
@@ -117,12 +117,12 @@ function print(){
   document.getElementById("amcolumn").printAsBitmap();
 }
 function exportImage() {
-  document.getElementById("amcolumn").exportImage('/plugins/export.php');  
+  document.getElementById("amcolumn").exportImage('/plugins/export.php');
 }
 
 </script>
 <div style="float:right;margin-right:10px;">
-      <a href="javascript:printpage(1);"><img src="<?php echo $www_site_url?>/public/images/print_icon.jpg" border="0" title="Print"></a>
+      <a href="javascript:showprintpage(1);"><img src="<?php echo $www_site_url?>/public/images/print_icon.jpg" border="0" title="Print"></a>
       </div>
 <!--startprint1-->
 <?php if($type=='time'){?>
@@ -134,7 +134,7 @@ function exportImage() {
                   <td><?php echo lang("an_date")?></td>
                   <td><?php echo lang("assignment")?></td>
                   <td><?php echo lang("an_date")?>/<?php echo lang("minute")?></td>
-                 
+
                 </tr>
                 <?php
                 if(isset($assignments)){
@@ -150,10 +150,10 @@ function exportImage() {
                 	}
                 }
                 ?>
-               
+
               </table>
      <?php
-}else {?>         
+}else {?>
          <table width="100%" border="0" cellpadding="0" cellspacing="1" class="CinitData">
                 <tr>
                   <td colspan="5" class="title"><?php echo lang("original_figures")?></td>
@@ -161,7 +161,7 @@ function exportImage() {
                  <tr>
                   <td><?php echo lang("an_date")?></td>
                   <td><?php echo lang("assignment")?></td>
-                  <?php if($type=='yesorno'||$type=='summary'){?><td><?php echo lang("yesorno")?></td><?php }?> 
+                  <?php if($type=='yesorno'||$type=='summary'){?><td><?php echo lang("yesorno")?></td><?php }?>
                   <?php if($type=='vote'||$type=='summary'){?><td><?php echo lang("vote")?></td><?php }?>
                 </tr>
                 <?php
@@ -171,21 +171,21 @@ function exportImage() {
                 <tr>
                   <td width="15%"><?php echo $v['day']?></td>
                   <td width="40%"><a href="<?php echo $www_site_url?>/client.php/home/reportcomplete/re_id/<?php echo $v['re_id']?>/a_id/<?php echo $v['a_id']?>" target="_blank"><?php echo stripslashes($v['a_title'])?></a></td>
-                 <?php if($type=='yesorno'||$type=='summary'){?> <td width="15%"><?php echo $v['yesorno']?></td><?php }?> 
-                 <?php if($type=='vote'||$type=='summary'){?>  <td width="15%"><?php echo $v['vote']?></td><?php }?> 
+                 <?php if($type=='yesorno'||$type=='summary'){?> <td width="15%"><?php echo $v['yesorno']?></td><?php }?>
+                 <?php if($type=='vote'||$type=='summary'){?>  <td width="15%"><?php echo $v['vote']?></td><?php }?>
 
                 </tr>
                 <?php
                 	}
                 }
                 ?>
-               
-              </table>     
+
+              </table>
         <?php
                }
-                
-                ?>      
-<!--endprint1-->  
+
+                ?>
+<!--endprint1-->
           <p>&nbsp;</p></td>
         <td class="table2RightBorder"></td>
       </tr>
