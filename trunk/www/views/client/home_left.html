@@ -48,7 +48,7 @@ function showprintpage(oper){
 	prnhtml = bdhtml.substring(bdhtml.indexOf(sprnstr)+18);
 	prnhtml = prnhtml.substring(0,prnhtml.indexOf(eprnstr));
 
-	var url = "<?php echo $www_site_url?>/showpage.php";
+	var url = "<?php echo $www_site_url?>/plugins/showpage.php";
 
 	//window.document.body.innerHTML = prnhtml;
 	//window.print();
@@ -57,7 +57,7 @@ function showprintpage(oper){
 	//如果直接用window.open()，谷歌浏览器不会新弹出窗口，为了解决此问题，故这么写
 	var w = window.open();
 	w.opener = null;
-	w.document.location = "<?php echo $www_site_url?>/printpage.php";
+	w.document.location = "<?php echo $www_site_url?>/plugins/printpage.php";
 	/*window.open("<?php echo $www_site_url?>/printpage.php");*/},"c="+prnhtml);
 
 }
