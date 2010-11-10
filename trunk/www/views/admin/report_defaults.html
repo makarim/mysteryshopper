@@ -10,11 +10,97 @@
 <body><div id="append"></div>
 <div id="msg" style="color:red;text-align:center"></div>
 
+<script type="text/javascript">
+	function setTab(n){
+		document.getElementById("tabs_mainbox").style.display = 'block';
+		document.getElementById("close").style.display = 'block';
+		var tli=document.getElementById("tabs_menu").getElementsByTagName("li");
+		var mli=document.getElementById("tabs_main").getElementsByTagName("div");
+		for(i=0;i<tli.length;i++){
+		  tli[i].className=i==n?"hover":"";
+		  mli[i].style.display=i==n?"block":"none";
+		}
+	}
+	function hid(){
+		document.getElementById("tabs_mainbox").style.display = 'none';
+		document.getElementById("close").style.display = 'none';
+		var tli=document.getElementById("tabs_menu").getElementsByTagName("li");
+		for(i=0;i<tli.length;i++){
+		  tli[i].className="";
+		}
+	}
+
+
+	</script>
 
 	<div class="container">
-			
+
+
+			<div id="tabs">
+				<div class="tabs_menubox">
+					<ul id="tabs_menu">
+						<li onclick="setTab(0)"><?php echo lang('find_report')?></li>
+						<li onclick="hid()" id="close" style="display:none;"><?php echo lang('hide')?>×</li>
+
+					</ul>
+				</div>
+				<div id="tabs_mainbox" class="tabs_mainbox" style="display:none;">
+					<div class="main" id="tabs_main" >
+						<div  style="display:none;">
+							<form action="<?php echo $www_site_url?>/admin.php" method="GET">
+							<input type="hidden" name="action" value="report">
+							<input type="hidden" name="view" value="defaults">
+							<table width="100%">
+								<tr>
+									<td align="right"><?php echo lang('report_title')?>:</td>
+									<td align="left"><input type="text" name="re_title" value="<?php echo $con['re_title']?>" class="textfield" /></td>
+
+									<td rowspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
+								</tr>
+
+							</table>
+							</form>
+						</div>
+						<div class="block" style="display:none;">
+							<form id="addreportform" name="addreportform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addreportform');" >
+							<input type="hidden" name="action" value="report">
+							<input type="hidden" name="op" value="addques">
+							<table width="100%">
+								<tr>
+									<td align="left"><?php echo lang('question')?>:</td>
+									<td align="left"><input type="text" name="q_question" class="textfield" /><input type="button" value="Split" onclick="document.addreportform.q_question.value+='&lt;!--!--&gt;';"></td>
+
+									<td><?php echo lang('question_group')?>:</td>
+									<td align="left"><select name="q_group">
+							<option value="">--</option>
+							<?php foreach ($quesgroup as $v){?>
+							<option value="<?php echo $v['g_id'];?>"><?php echo  lang($v['g_name']);?></option>
+							<?php } ?>
+							</select></td>
+									<td><?php echo lang('question_type')?>:</td>
+									<td align="left"><select name="q_type">
+									<option value="">--</option>
+							<option value="1"><?php echo lang('yesorno')?></option>
+							<option value="2"><?php echo lang('vote')?></option>
+							<option value="3"><?php echo lang('fillblank')?></option>
+							<option value="4"><?php echo lang('score')?></option>
+							</select></td>
+									<td rowspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
+								</tr>
+							</table>
+							</form>
+
+						</div>
+
+				</div>
+			</div>
+
+		</div>
+
+	<div class="mainbox">
+
 		<h3><?php echo lang('report_list')?> <?php echo lang('report_total')?>:<?php echo $total?></h3>
-		
+
 		<div class="mainbox">
 				<form action="<?php echo $www_site_url?>/admin.php" onsubmit="return confirm('<?php echo lang('domain_delete_comfirm')?>');" method="post">
 				<input type="hidden" name="action" value="report">
@@ -30,7 +116,7 @@
 						<th><?php echo lang('edit')?></th>
 					</tr>
 						<?php if(isset($reports['records']) && is_array($reports['records'])){
-							foreach ($reports['records'] as $v){?>	
+							foreach ($reports['records'] as $v){?>
 						<tr>
 							<td class="option"><input type="checkbox" name="delete[]" value="<?php echo $v['re_id']?>" class="checkbox" /></td>
 							<td><?php echo $v['re_id']?></td>
@@ -40,12 +126,12 @@
 							<a href="/admin.php/report/editreport/re_id/<?php echo $v['re_id']?>"><?php echo lang('edit')?></a>
 							|
 							<a href="/admin.php/report/appendreport/re_id/<?php echo $v['re_id']?>"><?php echo lang('append')?></a>
-							
+
 							</td>
 						</tr>
 						<tr>
 						</tr>
-						
+
 						<?php }
 						}?>
 						<tr class="nobg">
