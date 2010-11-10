@@ -93,6 +93,7 @@ class AssignmentModel extends Model {
 		$r = true;
 		$r *= $this->db->execute("update assignment_rel set selected=0 where a_id='$a_id'");
 		$r *= $this->db->execute("update assignment set user_id='$user_id' where a_id='$a_id'");
+		$r *= $this->db->execute("update assignment set a_quiz_pass=0 where a_id='$a_id'");/* add by wendy 2010.11.9 当重新指定人时，小测试也要归0重新做*/
 		$r *= $this->db->execute("update assignment_rel set selected=1 where a_id='$a_id' and user_id='$user_id'");
 		if($r) return true;
 		else return false;
