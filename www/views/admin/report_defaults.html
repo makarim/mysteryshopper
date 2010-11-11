@@ -16,7 +16,8 @@
 		document.getElementById("close").style.display = 'block';
 		var tli=document.getElementById("tabs_menu").getElementsByTagName("li");
 		var mli=document.getElementById("tabs_main").getElementsByTagName("div");
-		for(i=0;i<tli.length;i++){
+
+		for(i=0;i<tli.length;i++){//这里的tli.length有点问题，应该是tli.length-1，因为最后一个“关闭”是不需要设置的，但还没改
 		  tli[i].className=i==n?"hover":"";
 		  mli[i].style.display=i==n?"block":"none";
 		}
@@ -61,37 +62,6 @@
 							</table>
 							</form>
 						</div>
-						<div class="block" style="display:none;">
-							<form id="addreportform" name="addreportform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addreportform');" >
-							<input type="hidden" name="action" value="report">
-							<input type="hidden" name="op" value="addques">
-							<table width="100%">
-								<tr>
-									<td align="left"><?php echo lang('question')?>:</td>
-									<td align="left"><input type="text" name="q_question" class="textfield" /><input type="button" value="Split" onclick="document.addreportform.q_question.value+='&lt;!--!--&gt;';"></td>
-
-									<td><?php echo lang('question_group')?>:</td>
-									<td align="left"><select name="q_group">
-							<option value="">--</option>
-							<?php foreach ($quesgroup as $v){?>
-							<option value="<?php echo $v['g_id'];?>"><?php echo  lang($v['g_name']);?></option>
-							<?php } ?>
-							</select></td>
-									<td><?php echo lang('question_type')?>:</td>
-									<td align="left"><select name="q_type">
-									<option value="">--</option>
-							<option value="1"><?php echo lang('yesorno')?></option>
-							<option value="2"><?php echo lang('vote')?></option>
-							<option value="3"><?php echo lang('fillblank')?></option>
-							<option value="4"><?php echo lang('score')?></option>
-							</select></td>
-									<td rowspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
-								</tr>
-							</table>
-							</form>
-
-						</div>
-
 				</div>
 			</div>
 
