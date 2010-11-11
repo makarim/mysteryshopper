@@ -883,9 +883,16 @@ class home{
 
 	function view_corprank(){
 		$type = !empty($_GET['view'])?$_GET['view']:"corp";
+		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
+		$edate = !empty($_GET['edate'])?$_GET['edate']:date("Y-m-d");
+
+		//echo "type=".$type."<br/>"."sdate=".$sdate."<br/>"."edate=".$edate."<br/>";
 		$this->tpl->assign("type",$type);
+		$this->tpl->assign("sdate",$sdate);
+		$this->tpl->assign("edate",$edate);
+
 		include_once("ChartModel.class.php");
-		$ChartModel = new ChartModel();
+		$ChartModel = new ChartModel($sdate,$edate);
 		include_once("CorporationModel.class.php");
 		$corpModel = new CorporationModel();
 		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
@@ -902,6 +909,7 @@ class home{
 		arsort($service);
 		arsort($environment);
 		arsort($product);
+
 		$this->tpl->assign("store_name",$store_name);
 		$this->tpl->assign("product",$product);
 		$this->tpl->assign("service",$service);
