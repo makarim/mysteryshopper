@@ -18,7 +18,7 @@ $GLOBALS['gLang'] = array(
 	'unwriteable' => '不可写',
 	'old_step' => '上一步',
 	'new_step' => '下一步',
-	
+
 	'database_errno_2003' => '无法连接数据库，请检查数据库是否启动，数据库服务器地址是否正确',
 	'database_errno_1044' => '无法创建新的数据库，请检查数据库名称填写是否正确',
 	'database_errno_1045' => '无法连接数据库，请检查数据库用户名或者密码是否正确',
@@ -39,7 +39,7 @@ $GLOBALS['gLang'] = array(
 	'step_env_check_desc' => '环境以及文件目录权限检查',
 	'step_db_init_title' => '安装数据库',
 	'step_db_init_desc' => '正在执行数据库安装',
-	
+
 	'step1_file' => '目录文件',
 	'step1_need_status' => '所需状态',
 	'step1_status' => '当前状态',
@@ -155,6 +155,13 @@ $GLOBALS['gLang'] = array(
 	'method_undefined' => '未定义方法',
 	'database_nonexistence' => '数据库操作对象不存在',
 );
+
+/************ added by Wendy 20101013 ************/
+
+$GLOBALS['gLang']['c_storesize'] = '分店规模';
+$GLOBALS['gLang']['cs_name_rule'] = '名称不能为空！';
+
+/************ added by Wendy 20101013 *************/
 
 $GLOBALS['gLang']['user'] = '帐号';
 $GLOBALS['gLang']['pwd'] = '密码';
@@ -538,14 +545,14 @@ $GLOBALS['gLang']['who_needs_mystery_shopping_answer'] = '任何想监控其业�
 
 $GLOBALS['gLang']['why_do_i_need_mystery_shopping'] = '为什么我需要神秘购物服务？';
 $GLOBALS['gLang']['why_do_i_need_mystery_shopping_answer'] = '<br />
-      提高消费者保持力<br />	
-      监测服务表现<br /> 
-      监测设备状况<br />	
-      保证服务和产品交付质量<br /> 
-      支持奖励性计划<br />	
-      审核价格和销售的配合关系<br /> 
-      确定培训需求<br />	
-      加强员工的诚实性 
+      提高消费者保持力<br />
+      监测服务表现<br />
+      监测设备状况<br />
+      保证服务和产品交付质量<br />
+      支持奖励性计划<br />
+      审核价格和销售的配合关系<br />
+      确定培训需求<br />
+      加强员工的诚实性
 ';
 
 $GLOBALS['gLang']['why_is_consistency_important'] = '一致性的重要性要哪里？';
@@ -764,6 +771,7 @@ $GLOBALS['gLang']['comment_analysis'] = '评论分析';
 $GLOBALS['gLang']['completed_visits'] = '已完成的任务';
 $GLOBALS['gLang']['overall'] = '综合对比';
 $GLOBALS['gLang']['general'] = '综览';
+//$GLOBALS['gLang']['general'] = '总分';
 $GLOBALS['gLang']['profile'] = '基本信息';
 $GLOBALS['gLang']['contact'] = '联系方式';
 $GLOBALS['gLang']['locations'] = '分店信息';
@@ -793,4 +801,6 @@ $GLOBALS['gLang']['brand_total'] = '品牌总数';
 $GLOBALS['gLang']['select_brand'] = '选择品牌';
 $GLOBALS['gLang']['all_brands'] = '所有品牌';
 $GLOBALS['gLang']['interal_avg'] = '内部平均值';
+$GLOBALS['gLang']['find_report'] = '查找问卷';
+$GLOBALS['gLang']['report_title'] = '问卷名称';
 ?>
