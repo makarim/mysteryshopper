@@ -128,6 +128,9 @@ class CorporationModel extends Model {
     function getTotalCompletedAssignments($c_id){
     	return $this->db->getOne("select count(*) from assignment where a_finish=1 and c_id='$c_id'");
     }
+    function getTotalCompletedAssignmentsByBid($b_id){//统计某品牌下的所有已完成任务，Jonson在home_corpstats.class.php中使用该函数，但他并未在此定义该函数。add by wendy 2010.11.11
+    	return $this->db->getOne("select count(*) from assignment where a_finish=1 and b_id='$b_id'");
+    }
     function getStoreCompletedAssignments($cs_id){
     	return $this->db->getOne("select count(*) from assignment where a_finish=1 and cs_id='$cs_id'");
     }
