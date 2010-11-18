@@ -13,27 +13,34 @@
     <li <?php if($type=='vote') echo 'class="on"';?>><a href="/client.php/home/service/vote"><span><?php echo lang("vote")?></span></a></li>
     <li <?php if($type=='time') echo 'class="on"';?>><a href="/client.php/home/service/time"><span><?php echo lang("score")?></span></a></li>
 
+    <li style="float:right;"><?php echo lang("select_brand")?>:<input name="selbrand" type="text" class="ClocationInput" onclick="showmitibrands();" id="selbrand" value="<?php if(isset($brand) && $brand){ echo splitx($brand['b_name']); }?>" /></li>
   </ul>
 </div>
 <br />
 <br />
-<form action="/client.php" method="GET" name="seachfrm">
-<input name="action" type="hidden" value="home"  />
- <input name="view" type="hidden" value="service"  />
- <input name="service" type="hidden" value="<?php echo $type?>"  />
- <div id="brandlist" style="width: 170px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:999;">
+
+<div id="brandlist" style="width: 170px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:999;">
   <ul>
   <?php
        if(isset($brands) && is_array($brands)){
+       ?>
+       <li style="padding:2px;"> <label><a href="/client.php?action=home&view=service&selbrands=-1"><?php echo "所有品牌";?></a></label></li>
+       <?php
          foreach ($brands as $b){
                 ?>
-	<li style="padding:2px;"> <label><input onclick="selectmitilbrand('<?php echo $b['b_id']."|".splitx($b['b_name']);?>');" type="checkbox" name="selbrands[]" value="<?php echo $b['b_id']?>" <?php if(in_array($b['b_id'],$selbrands)) echo 'checked'?>> &nbsp;<?php echo splitx($b['b_name']);?></label></li>
+	<li style="padding:2px;"> <label><a href="/client.php?action=home&view=service&selbrands=<?php echo $b['b_id']?>"><?php echo splitx($b['b_name']);?></a></label></li>
 	  <?php
 			}
       }
        ?>
      </ul>
 </div>
+
+<form action="/client.php" method="GET" name="seachfrm">
+<input name="action" type="hidden" value="home"  />
+ <input name="view" type="hidden" value="service"  />
+ <input name="service" type="hidden" value="<?php echo $type?>"  />
+
 <div id="storelist" style="width: 210px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:999;">
   <ul>
   <?php
@@ -53,7 +60,6 @@
   <tr>
     <td class="CsearchLeft">&nbsp;</td>
     <td align="center" class="CsearchCenter">
-     <?php echo lang("select_brand")?>:<input name="selbrand" type="text" class="ClocationInput" onclick="showmitibrands();" id="selbrand" value="<?php if(count($selbrands)==0){ echo "--"; }else { if(count($selbrands)==count($brands)) echo lang("all_brands"); else echo splitx($brand['b_name']); }?>" />
     <?php echo lang("select_location")?>:<input name="selstore" type="text" class="ClocationInput" onclick="showmitistores();" id="selstore" value="<?php if(count($selstores)==0){ echo "--"; }else { if(count($selstores)==count($stores)) echo lang("all_locations"); else echo ""; }?>" />
 
       <?php echo lang("a_sdate")?>：

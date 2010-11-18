@@ -6,29 +6,53 @@
 <?php include_once("home_left.html")?>
 <div class="admincontent">
 
-<div id="storelist" style="width: 210px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:150;"> 
-  <ul> 
-  <?php 
-       if(isset($stores) && is_array($stores)){
-         foreach ($stores as $s){	
+<div id="tabsD" style="width:100%">
+  <ul>
+   <li style="float:right;"><?php echo lang("select_brand")?>:<input name="selbrand" type="text" class="ClocationInput" onclick="showmitibrands();" id="selbrand" value="<?php if($brand){ echo splitx($brand['b_name']); }?>" /></li>
+  </ul>
+</div>
+<br />
+
+<div id="brandlist" style="width: 170px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:999;">
+  <ul>
+  <?php
+       if(isset($brands) && is_array($brands)){
+         foreach ($brands as $b){
                 ?>
-	<li style="padding:2px;"><a onclick="selectstore('<?php echo $s['cs_id']."|".$s['cs_name'];?>');return false;" href="#"><?php echo splitx($s['cs_name']);?></a></li> 
+	<li style="padding:2px;"> <label><a href="/client.php?action=home&view=assignment&selbrands=<?php echo $b['b_id']?>"><?php echo splitx($b['b_name']);?></a></label></li>
 	  <?php
 			}
       }
        ?>
-     </ul> 
+     </ul>
 </div>
-<form action="/client.php" method="GET">
+
+<form action="/client.php" method="GET" name="seachfrm">
  <input name="action" type="hidden" value="home"  />
  <input name="view" type="hidden" value="assignment"  />
  <input name="stores" type="hidden" value="<?php echo $type?>"  />
  <input name="cs_id" type="hidden" id="cs_id" value="<?php echo $cs_id;?>" />
+
+<div id="storelist" style="width: 210px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:150;">
+  <ul>
+  <?php
+       if(isset($stores) && is_array($stores)){
+         foreach ($stores as $s){
+                ?>
+	<li style="padding:2px;"><a onclick="selectstore('<?php echo $s['cs_id']."|".$s['cs_name'];?>');return false;" href="#"><?php echo splitx($s['cs_name']);?></a></li>
+	  <?php
+			}
+      }
+       ?>
+     </ul>
+</div>
 <table width="100%" height="50" border="0" cellpadding="0" cellspacing="0" class="clear">
   <tr>
     <td class="CsearchLeft">&nbsp;</td>
-    <td align="center" class="CsearchCenter"><input name="selstore" type="text" class="ClocationInput" onclick="showstores();" id="selstore" value="<?php if(empty($selstore)) echo "--"; else echo splitx($selstore);?>" />
-   
+    <td align="center" class="CsearchCenter">
+     <?php echo lang("select_brand")?>:
+    <input name="selstore" type="text" class="ClocationInput" onclick="showstores();" id="selstore" value="<?php if(empty($selstore)) echo "--"; else echo splitx($selstore);?>" />
+
       <?php echo lang("a_sdate")?>：
       <input name="sdate" type="text" class="CtimeInput" id="sdate" value="<?php echo $sdate;?>" onclick="showcalendar();"/>
       <?php echo lang("a_edate")?>：
@@ -58,13 +82,13 @@
                   <td><?php echo $v['c_title']?></td>
 
                   <td><?php echo splitx($v['cs_name'])?></td>
-                  <td><a href="/client.php?action=home&view=reportcomplete&re_id=<?php echo $v['re_id']?>&a_id=<?php echo $v['a_id']?>"><?php echo splitx(stripslashes($v['a_title']));?></a></td>
+                  <td><a href="/client.php?action=home&view=reportcomplete&re_id=<?php echo $v['re_id']?>&a_id=<?php echo $v['a_id']?>"><?php echo splitx($v['a_title']);?></a></td>
                   <td><?php echo $v['a_cost']?></td>
                 </tr>
              <?php }}?>
               </table>
          <br />
-          <? if(!empty( $myassignment['pagebar'])){?><div class="pages"><?php echo $myassignment['pagebar']?></div><?php }?>
+          <?php if(!empty( $myassignment['pagebar'])){?><div class="pages"><?php echo $myassignment['pagebar']?></div><?php }?>
 
 </div>
 
