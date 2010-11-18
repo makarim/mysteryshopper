@@ -4,31 +4,55 @@
 <div id="wrap">  <br />
 
 <?php include_once("home_left.html")?>
-
 <div class="admincontent">
-<div id="storelist" style="width: 210px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:150;"> 
-  <ul> 
-  <?php 
-       if(isset($stores) && is_array($stores)){
-         foreach ($stores as $s){	
+
+<div id="tabsD" style="width:100%">
+  <ul>
+   <li style="float:right;"><?php echo lang("select_brand")?>:<input name="selbrand" type="text" class="ClocationInput" onclick="showmitibrands();" id="selbrand" value="<?php if($brand){ echo splitx($brand['b_name']); }?>" /></li>
+  </ul>
+</div>
+<br />
+
+<div id="brandlist" style="width: 170px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:999;">
+  <ul>
+  <?php
+       if(isset($brands) && is_array($brands)){
+         foreach ($brands as $b){
                 ?>
-	<li style="padding:2px;"><a onclick="selectstore('<?php echo $s['cs_id']."|".splitx($s['cs_name']);?>');return false;" href="#"><?php echo splitx($s['cs_name']);?></a></li> 
+	<li style="padding:2px;"> <label><a href="/client.php?action=home&view=comments&selbrands=<?php echo $b['b_id']?>"><?php echo splitx($b['b_name']);?></a></label></li>
 	  <?php
 			}
       }
        ?>
-     </ul> 
+     </ul>
 </div>
-<form action="/client.php" method="GET">
+
+<form action="/client.php" method="GET" name="seachfrm">
  <input name="action" type="hidden" value="home"  />
  <input name="view" type="hidden" value="comments"  />
  <input name="stores" type="hidden" value="<?php echo $type?>"  />
  <input name="cs_id" type="hidden" id="cs_id" value="<?php echo $cs_id;?>" />
+
+<div id="storelist" style="width: 210px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:150;">
+  <ul>
+  <?php
+       if(isset($stores) && is_array($stores)){
+         foreach ($stores as $s){
+                ?>
+	<li style="padding:2px;"><a onclick="selectstore('<?php echo $s['cs_id']."|".splitx($s['cs_name']);?>');return false;" href="#"><?php echo splitx($s['cs_name']);?></a></li>
+	  <?php
+			}
+      }
+       ?>
+     </ul>
+</div>
 <table width="100%" height="50" border="0" cellpadding="0" cellspacing="0" class="clear">
   <tr>
     <td class="CsearchLeft">&nbsp;</td>
-    <td align="center" class="CsearchCenter"><input name="selstore" type="text" class="ClocationInput" onclick="showstores();" id="selstore" value="<?php if(empty($selstore)) echo "--"; else echo $selstore;?>" />
-   
+    <td align="center" class="CsearchCenter">
+     <?php echo lang("select_brand")?>:
+    <input name="selstore" type="text" class="ClocationInput" onclick="showstores();" id="selstore" value="<?php if(empty($selstore)) echo "--"; else echo $selstore;?>" />
+
       <?php echo lang("a_sdate")?>：
       <input name="sdate" type="text" class="CtimeInput" id="sdate" value="<?php echo $sdate;?>" onclick="showcalendar();"/>
       <?php echo lang("a_edate")?>：
@@ -47,7 +71,7 @@
 
       <div class="table2TitleBg2">
        <div style="float:right;margin-right:10px;">
-      <a href="javascript:printpage(1);"><img src="<?php echo $www_site_url?>/public/images/print_icon.jpg" border="0" title="Print"></a>
+      <a href="javascript:showprintpage(1);"><img src="<?php echo $www_site_url?>/public/images/print_icon.jpg" border="0" title="Print"></a>
       </div>
 
       	<div class="table2Title"><div class="table2TitleLeft"><span><?php echo lang("comment_analysis")?></span></div></div>
@@ -56,7 +80,7 @@
   </tr>
   <tr>
     <td>
-    
+
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td class="table2LeftBorder"></td>
@@ -70,24 +94,24 @@
             <td width="7%" bgcolor="#9F0000" class="title"><font color="#FFFFFF"><?php echo lang("scorenum")?></font></td>
           </tr>
           <?php if(isset($a['comments']) && is_array($a['comments'])){
-			foreach ($a['comments'] as $k=>$v) {  	
+			foreach ($a['comments'] as $k=>$v) {
           	?>
-          <tr>	
+          <tr>
             <td width="6%" align="left"><?php echo  lang($GLOBALS['gGroups'][$k]);?></td>
             <td width="87%"><span id="br_36"><?php echo nl2br(stripslashes(join("<br />",$v['content'])));?></span></td>
             <td align="center"><?php echo $v['score']?></td>
           </tr>
-           <?php 
+           <?php
         	}
 			}
-        ?> 
+        ?>
         </table>
-         <?php 
+         <?php
         	}
-        }?> 
-         <!--endprint1--> 
+        }?>
+         <!--endprint1-->
           <br />
-          <? if(!empty( $assignments['pagebar'])){?><div class="pages"><?php echo $assignments['pagebar']?></div><?php }?>
+          <?php if(!empty( $assignments['pagebar'])){?><div class="pages"><?php echo $assignments['pagebar']?></div><?php }?>
           </td>
         <td class="table2RightBorder"></td>
       </tr>
@@ -97,7 +121,7 @@
         <td class="table2BottomRight"></td>
       </tr>
     </table>
-  
+
     </td>
   </tr>
 </table>

@@ -6,13 +6,29 @@
 <?php include_once("home_left.html")?>
 
 <div class="admincontent">
-<div id="tabsD" style="width:100%"> 
-  <ul> 
-	<li <?php if($type=='summary') echo 'class="on"';?>><a href="/client.php/home/stores/summary"><span><?php echo lang("summary")?></span></a></li> 
-    <li <?php if($type=='yesorno') echo 'class="on"';?>><a href="/client.php/home/stores/yesorno"><span><?php echo lang("yesorno")?></span></a></li> 
-    <li <?php if($type=='vote') echo 'class="on"';?>><a href="/client.php/home/stores/vote"><span><?php echo lang("vote")?></span></a></li> 
-    <li <?php if($type=='time') echo 'class="on"';?>><a href="/client.php/home/stores/time"><span><?php echo lang("score")?></span></a></li> 
-  </ul> 
+<div id="tabsD" style="width:100%">
+  <ul>
+	<li <?php if($type=='summary') echo 'class="on"';?>><a href="/client.php/home/stores/summary"><span><?php echo lang("summary")?></span></a></li>
+    <li <?php if($type=='yesorno') echo 'class="on"';?>><a href="/client.php/home/stores/yesorno"><span><?php echo lang("yesorno")?></span></a></li>
+    <li <?php if($type=='vote') echo 'class="on"';?>><a href="/client.php/home/stores/vote"><span><?php echo lang("vote")?></span></a></li>
+    <li <?php if($type=='time') echo 'class="on"';?>><a href="/client.php/home/stores/time"><span><?php echo lang("score")?></span></a></li>
+
+    <li style="float:right;"><?php echo lang("select_brand")?>:<input name="selbrand" type="text" class="ClocationInput" onclick="showmitibrands();" id="selbrand" value="<?php if(isset($brand) && $brand){ echo splitx($brand['b_name']); }?>" /></li>
+  </ul>
+</div>
+
+<div id="brandlist" style="width: 170px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:999;">
+  <ul>
+  <?php
+       if(isset($brands) && is_array($brands)){
+         foreach ($brands as $b){
+                ?>
+	<li style="padding:2px;"> <label><a href="/client.php?action=home&view=stores&selbrands=<?php echo $b['b_id']?>"><?php echo splitx($b['b_name']);?></a></label></li>
+	  <?php
+			}
+      }
+       ?>
+     </ul>
 </div>
 
 <form action="/client.php" method="GET"  name="seachfrm">
@@ -20,41 +36,27 @@
  <input name="view" type="hidden" value="stores"  />
  <input name="stores" type="hidden" value="<?php echo $type?>"  />
  <input name="cs_id" type="hidden" id="cs_id" value="<?php echo $cs_id;?>" />
- 
- 
-<div id="brandlist" style="width: 170px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:999;"> 
-  <ul> 
-  <?php 
-       if(isset($brands) && is_array($brands)){
-         foreach ($brands as $b){	
-                ?>
-	<li style="padding:2px;"> <label><input onclick="selectmitilbrand('<?php echo $b['b_id']."|".splitx($b['b_name']);?>');" type="radio" name="selbrands[]" value="<?php echo $b['b_id']?>" <?php if(in_array($b['b_id'],$selbrands)) echo 'checked'?>> &nbsp;<?php echo splitx($b['b_name']);?></label></li> 
-	  <?php
-			}
-      }
-       ?>
-     </ul> 
-</div>
-<div id="storelist" style="width: 210px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:150;"> 
-  <ul> 
-  <?php 
+
+<div id="storelist" style="width: 210px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:150;">
+  <ul>
+  <?php
        if(isset($stores) && is_array($stores)){
-         foreach ($stores as $s){	
+         foreach ($stores as $s){
                 ?>
-	<li style="padding:2px;"><a onclick="selectstore('<?php echo $s['cs_id']."|".splitx($s['cs_name']);?>');return false;" href="#"><?php echo splitx($s['cs_name']);?></a></li> 
+	<li style="padding:2px;"><a onclick="selectstore('<?php echo $s['cs_id']."|".splitx($s['cs_name']);?>');return false;" href="#"><?php echo splitx($s['cs_name']);?></a></li>
 	  <?php
 			}
       }
        ?>
-     </ul> 
+     </ul>
 </div>
 <table width="100%" height="50" border="0" cellpadding="0" cellspacing="0" class="clear">
   <tr>
     <td class="CsearchLeft">&nbsp;</td>
     <td align="center" class="CsearchCenter">
-    <?php echo lang("select_brand")?>:<input name="selbrand" type="text" class="ClocationInput" onclick="showmitibrands();" id="selbrand" value="<?php if(count($selbrands)==0){ echo "--"; }else { if(count($selbrands)==count($brands)) echo lang("all_brands"); else echo splitx($brand['b_name']); }?>" />
+
      <?php echo lang("select_location")?>:<input name="selstore" type="text" class="ClocationInput" onclick="showstores();" id="selstore" value="<?php if(empty($selstore)) echo "--"; else echo $selstore;?>" />
-   
+
      <?php echo lang("a_sdate")?>：
       <input name="sdate" type="text" class="CtimeInput" id="sdate" value="<?php echo $sdate;?>" onclick="showcalendar();"/>
       <?php echo lang("a_edate")?>：
@@ -90,7 +92,7 @@
 	</div>
 <?php if($type=='time'){?>
         <script type="text/javascript">
-		// <![CDATA[		
+		// <![CDATA[
 		var so = new SWFObject("<?php echo $www_site_url?>/public/flash/amline.swf", "amline", "100%", "400px", "8", "#ffffff");
 		so.addParam("wmode", "transparent");
 		so.addVariable("path", "<?php echo $www_site_url?>/public/flash/");
@@ -104,9 +106,9 @@
 		// ]]>
 	</script>
      <?php
-}else {?>  
+}else {?>
 <script type="text/javascript">
-		// <![CDATA[		
+		// <![CDATA[
 		var so = new SWFObject("<?php echo $www_site_url?>/public/flash/amline.swf", "amline", "100%", "400px", "8", "#ffffff");
 		so.addParam("wmode", "transparent");
 		so.addVariable("path", "<?php echo $www_site_url?>/public/flash/");
@@ -120,7 +122,7 @@
 		// ]]>
 	</script>
     <?php
-}?>  
+}?>
         </p>
               <p>&nbsp;</p>
           <p>&nbsp;</p>
@@ -129,7 +131,7 @@ function print(){
   document.getElementById("amline").printAsBitmap();
 }
 function exportImage() {
-  document.getElementById("amline").exportImage('/plugins/export.php');  
+  document.getElementById("amline").exportImage('/plugins/export.php');
 }
 
 </script>
@@ -148,7 +150,7 @@ function exportImage() {
                   <?php
                   if(is_array($questions)){
 		foreach ($questions as $k=>$ques){
-			
+
 			?>
                   <td><?php echo "Q".($k+1)?> <?php echo lang("an_date")?></td>
                  <?php }
@@ -175,10 +177,10 @@ function exportImage() {
                 	}
                 }
                 ?>
-               
+
               </table>
      <?php
-}else {?>   
+}else {?>
           <table width="100%" border="0" cellpadding="0" cellspacing="1" class="CinitData">
                 <tr>
                   <td colspan="5" class="title"><?php echo lang("original_figures")?></td>
@@ -190,13 +192,13 @@ function exportImage() {
                   <td><?php echo lang("environment")?></td>
                   <td><?php echo lang("product")?></td>
                 </tr>
-                <?php 
+                <?php
                 if(isset($assignments) && is_array($assignments)){
                 	foreach ($assignments as $v){
-                		
+
                 ?>
-                		
-                	
+
+
                 <tr>
                    <td width="15%"><?php echo $v['day']?></td>
                   <td width="40%"><a href="<?php echo $www_site_url?>/client.php/home/reportcomplete/re_id/<?php echo $v['re_id']?>/a_id/<?php echo $v['a_id']?>" target="_blank"><?php echo stripslashes($v['a_title'])?></a></td>
@@ -211,9 +213,9 @@ function exportImage() {
               </table>
      <?php
                }
-                
-                ?>       
-<!--endprint1-->  
+
+                ?>
+<!--endprint1-->
                       <p>&nbsp;</p></td>
         <td class="table2RightBorder"></td>
       </tr>
