@@ -53,12 +53,33 @@ class home{
 		$brand = array();
 		$brands = $corpModel->getBrandByCid($this->login_corp['c_id']);
 
-		$brand_id = !empty($_GET['selbrands'])?$_GET['selbrands']:'';
+		$def_brands = array();
+		foreach ($brands as $b){
+			$def_brands[] = $b['b_id'];
+		}
+
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  start  add by wendy 2010.11.16*/
+		if(!empty($_GET['selbrands']) && ($_GET['selbrands'] != -1)){
+			$selbrands = array($_GET['selbrands']);
+		}else if(isset($_GET['selbrands']) && ($_GET['selbrands'] == -1)){
+			$selbrands = $def_brands;
+		}
+		else if(isset($_SESSION['brand_id']) && !empty($_SESSION['brand_id'])){
+			$selbrands = $_SESSION['brand_id'];
+		}
+		else{
+			$selbrands = $def_brands;
+		}
+		//$brand_id = !empty($_GET['selbrands'])?$_GET['selbrands']:'';
+		$_SESSION['brand_id'] = $selbrands;//存入全局变量中，以便在其他页面中使用.
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  end  */
 
 
 		$corp = $corpModel->getCorporationById($this->login_corp['c_id']);
 
-		if($brand_id) {
+		if(count($selbrands)<=1) {
+			$brand_id = isset($selbrands[0])?$selbrands[0]:0;
+
 			$brand = $corpModel->getBrandById($brand_id);
 			$stores = $corpModel->getStoreByBid($brand_id);
 			$totalcompleted = $corpModel->getTotalCompletedAssignmentsByBid($brand_id);
@@ -255,12 +276,32 @@ class home{
 		foreach ($brands as $b){
 			$def_brands[] = $b['b_id'];
 		}
-		$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  start  add by wendy 2010.11.16*/
+		if(!empty($_GET['selbrands']) && ($_GET['selbrands'] != -1)){
+			$selbrands = array($_GET['selbrands']);
+		}else if(isset($_GET['selbrands']) && ($_GET['selbrands'] == -1)){
+			$selbrands = $def_brands;
+		}
+		else if(isset($_SESSION['brand_id']) && !empty($_SESSION['brand_id'])){
+			$selbrands = $_SESSION['brand_id'];
+		}
+		else{
+			$selbrands = $def_brands;
+		}
+//		echo "<pre/>";
+//		print_r($selbrands);
+
+		$_SESSION['brand_id'] = $selbrands;
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  end  add by wendy 2010.11.16*/
+
+//		echo "<pre/>"."SESSION=";
+//		print_r($_SESSION['brand_id']);
 
 		if(count($selbrands)<=1){
 			$brand_id = isset($selbrands[0])?$selbrands[0]:0;
 			$brand = $this->corpModel->getBrandById($brand_id);
 			$internal_average = $this->get_assignment_avg($con,$brand_id);
+
 			$this->tpl->assign("brand",$brand);
 			$this->tpl->assign("brand_id",$brand_id);
 		}else{
@@ -345,13 +386,30 @@ class home{
 		foreach ($brands as $b){
 			$def_brands[] = $b['b_id'];
 		}
-		$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
+
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  start  add by wendy 2010.11.16*/
+		if(!empty($_GET['selbrands']) && ($_GET['selbrands'] != -1)){
+			$selbrands = array($_GET['selbrands']);
+		}else if(isset($_GET['selbrands']) && ($_GET['selbrands'] == -1)){
+			$selbrands = $def_brands;
+		}
+		else if(isset($_SESSION['brand_id']) && !empty($_SESSION['brand_id'])){
+			$selbrands = $_SESSION['brand_id'];
+		}
+		else{
+			$selbrands = $def_brands;
+		}
+
+		//$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
+		$_SESSION['brand_id'] = $selbrands;
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  end  add by wendy 2010.11.16*/
 
 		if(count($selbrands)<=1){
 			$brand_id = isset($selbrands[0])?$selbrands[0]:0;
 			$brand = $this->corpModel->getBrandById($brand_id);
 
 			$internal_average = $this->get_assignment_avg_overall($con,$brand_id);
+
 			$this->tpl->assign("brand",$brand);
 			$this->tpl->assign("brand_id",$brand_id);
 
@@ -408,19 +466,41 @@ class home{
 	}
 	function view_environment(){
 		$type = !empty($_GET['environment'])?$_GET['environment']:"summary";
+
 		$con = $this->prepare_con("environment",$type);
 
 		$brands = $this->corpModel->getBrandByCid($this->login_corp['c_id']);
+
+//		echo "<pre/>"."brands";
+//		print_r($brands);
+
 		$def_brands = array();
 		foreach ($brands as $b){
 			$def_brands[] = $b['b_id'];
 		}
-		$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  start  add by wendy 2010.11.16*/
+		if(!empty($_GET['selbrands']) && ($_GET['selbrands'] != -1)){
+			$selbrands = array($_GET['selbrands']);
+		}else if(isset($_GET['selbrands']) && ($_GET['selbrands'] == -1)){
+			$selbrands = $def_brands;
+		}
+		else if(isset($_SESSION['brand_id']) && !empty($_SESSION['brand_id'])){
+			$selbrands = $_SESSION['brand_id'];
+		}
+		else{
+			$selbrands = $def_brands;
+		}
+
+		//$selbrands = !empty($_GET['selbrands'])?array($_GET['selbrands']):$def_brands;
+		$_SESSION['brand_id'] = $selbrands;
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作 end  add by wendy 2010.11.16*/
+
 		if(count($selbrands)<=1){
 			$brand_id = isset($selbrands[0])?$selbrands[0]:0;
 			$brand = $this->corpModel->getBrandById($brand_id);
 
 			$internal_average = $this->get_assignment_avg_environment($con,$brand_id);
+
 			$this->tpl->assign("brand",$brand);
 			$this->tpl->assign("brand_id",$brand_id);
 
@@ -495,12 +575,30 @@ class home{
 		foreach ($brands as $b){
 			$def_brands[] = $b['b_id'];
 		}
-		$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
+
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  start  add by wendy 2010.11.16*/
+		if(!empty($_GET['selbrands']) && ($_GET['selbrands'] != -1)){
+			$selbrands = array($_GET['selbrands']);
+		}else if(isset($_GET['selbrands']) && ($_GET['selbrands'] == -1)){
+			$selbrands = $def_brands;
+		}
+		else if(isset($_SESSION['brand_id']) && !empty($_SESSION['brand_id'])){
+			$selbrands = $_SESSION['brand_id'];
+		}
+		else{
+			$selbrands = $def_brands;
+		}
+
+		//$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
+		$_SESSION['brand_id'] = $selbrands;
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  end  add by wendy 2010.11.16*/
+
 		if(count($selbrands)<=1){
 			$brand_id = isset($selbrands[0])?$selbrands[0]:0;
 			$brand = $this->corpModel->getBrandById($brand_id);
 
 			$internal_average = $this->get_assignment_avg_service($con,$brand_id);
+
 			$this->tpl->assign("brand",$brand);
 			$this->tpl->assign("brand_id",$brand_id);
 
@@ -562,12 +660,30 @@ class home{
 		foreach ($brands as $b){
 			$def_brands[] = $b['b_id'];
 		}
-		$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
+
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  start  add by wendy 2010.11.16*/
+		if(!empty($_GET['selbrands']) && ($_GET['selbrands'] != -1)){
+			$selbrands = array($_GET['selbrands']);
+		}else if(isset($_GET['selbrands']) && ($_GET['selbrands'] == -1)){
+			$selbrands = $def_brands;
+		}
+		else if(isset($_SESSION['brand_id']) && !empty($_SESSION['brand_id'])){
+			$selbrands = $_SESSION['brand_id'];
+		}
+		else{
+			$selbrands = $def_brands;
+		}
+
+		//$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
+		$_SESSION['brand_id'] = $selbrands;
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  end  add by wendy 2010.11.16*/
+
 		if(count($selbrands)<=1){
 			$brand_id = isset($selbrands[0])?$selbrands[0]:0;
 			$brand = $this->corpModel->getBrandById($brand_id);
 
 			$internal_average = $this->get_assignment_avg_product($con,$brand_id);
+
 			$this->tpl->assign("brand",$brand);
 			$this->tpl->assign("brand_id",$brand_id);
 
@@ -598,11 +714,24 @@ class home{
 		foreach ($brands as $b){
 			$def_brands[] = $b['b_id'];
 		}
-		$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
+
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  start  add by wendy 2010.11.16*/
+		if(!empty($_GET['selbrands'])){
+			$selbrands = array($_GET['selbrands']);
+		}
+		else if(isset($_SESSION['brand_id']) && !empty($_SESSION['brand_id'])){
+			$selbrands = $_SESSION['brand_id'];
+		}
+		else{
+			$selbrands = $def_brands;
+		}
+		//$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  end  add by wendy 2010.11.16*/
 
 		$brand_id =  isset($selbrands[0])?$selbrands[0]:0;
 
 		$brand = $corpModel->getBrandById($brand_id);
+		$_SESSION['brand_id'] = array($brand_id);
 
 		$this->tpl->assign("brand",$brand);
 
@@ -691,11 +820,25 @@ class home{
 		foreach ($brands as $b){
 			$def_brands[] = $b['b_id'];
 		}
-		$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
+
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  start  add by wendy 2010.11.16*/
+		if(!empty($_GET['selbrands'])){
+			$selbrands = array($_GET['selbrands']);
+		}
+		else if(isset($_SESSION['brand_id']) && !empty($_SESSION['brand_id'])){
+			$selbrands = $_SESSION['brand_id'];
+		}
+		else{
+			$selbrands = $def_brands;
+		}
+
+		//$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  end  add by wendy 2010.11.16*/
 
 		$brand_id =  isset($selbrands[0])?$selbrands[0]:0;
 
 		$brand = $corpModel->getBrandById($brand_id);
+		$_SESSION['brand_id'] = array($brand_id);
 
 		$this->tpl->assign("brand",$brand);
 
@@ -770,11 +913,25 @@ class home{
 		foreach ($brands as $b){
 			$def_brands[] = $b['b_id'];
 		}
-		$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
+
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  start  add by wendy 2010.11.16*/
+		if(!empty($_GET['selbrands'])){
+			$selbrands = array($_GET['selbrands']);
+		}
+		else if(isset($_SESSION['brand_id']) && !empty($_SESSION['brand_id'])){
+			$selbrands = $_SESSION['brand_id'];
+		}
+		else{
+			$selbrands = $def_brands;
+		}
+
+		//$selbrands = !empty($_GET['selbrands'])?$_GET['selbrands']:$def_brands;
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  end  add by wendy 2010.11.16*/
 
 		$brand_id =  isset($selbrands[0])?$selbrands[0]:0;
 
 		$brand = $corpModel->getBrandById($brand_id);
+		$_SESSION['brand_id'] = array($brand_id);
 
 		$this->tpl->assign("brand",$brand);
 
