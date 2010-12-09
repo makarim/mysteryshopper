@@ -1,0 +1,233 @@
+<?php include_once("header.html")?>
+
+<div id="wrap">  <br />
+<?php include_once("home_left.html")?>
+    <div class="admincontent">
+
+	    <div id="tabsD" style="width:100%">
+		  <ul>
+		    <li <?php if($type=='compdetail') echo 'class="on"';?>><a href="/index.php/home/coupon/compdetail"><span><?php echo "公司简介"?></span></a></li>
+		    <li <?php if($type=='newcoupon') echo 'class="on"';?>><a href="/index.php/home/coupon/newcoupon" ><span><?php echo "最新优惠券"?></span></a></li>
+		    <li <?php if($type=='couplist') echo 'class="on"';?>><a href="/index.php/home/coupon/couplist" ><span><?php echo "优惠券列表"?></span></a></li>
+		    <li <?php if($type=='coupview') echo 'class="on"';?>><a href="/index.php/home/coupon/coupview" ><span><?php echo "查看优惠券"?></span></a></li>
+		  </ul>
+		</div>
+
+<div class="clear"></div>
+
+<?php if($type=='compdetail'){
+if(isset($comp) && is_array($comp)){
+foreach($comp as $k=>$v){
+?>
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
+<TR>
+<TD width="30%" class="text"></TD>
+<TD width="70%"><div id="msg" style="margin:0 auto;"></div></TD>
+</TR>
+<TR>
+<TD align="center" width="30%"><img src="/public/images/<?php echo $v['b_img']?>"></TD>
+<TD width="70%"><div id="errorsDiv_realname"></div><font size="5" color="gray"><b><?php echo $v['b_name']?></b></font></TD>
+</TR>
+<TR>
+<td></td>
+<TD width="70%"><div id="errorsDiv_realname"></div>
+<?php echo $v['b_detail']?></TD>
+</TR>
+</table>
+<?php }
+    }
+}
+?>
+
+<?php if($type=='newcoupon'){ ?>
+<div id="coupother" style="width:28%;float:right;margin-top:10px">
+<table width="100%" border="0" bgcolor="#e0e2e3">
+<tr>
+<td bgcolor="#e0e2e3">店家简介</td></tr>
+<tr><td bgcolor="#ffffff">
+<?php echo $b_summary;?>
+</td></tr>
+
+<tr>
+<td bgcolor="#e0e2e3">优惠券信息</td></tr>
+<tr>
+<td bgcolor="#ffffff">本优惠券由店家提供</td></tr>
+
+<tr>
+<td bgcolor="#e0e2e3">温馨提示</td></tr>
+<tr>
+<td bgcolor="#ffffff">1.除特殊注明外，本优惠不能与其他优惠同时享受；<br/>
+2.本优惠由商家提供，如有疑问请与商家联系；<br/>
+3.本优惠请务必从其授权网站下载使用，否则无效。</td></tr>
+
+</table>
+</div>
+
+<div id="couponshow" style="width:70%">
+<?php if(isset($newcoup) && is_array($newcoup)){
+foreach($newcoup as $k=>$v){
+?>
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
+<TR>
+<TD class="text"></TD>
+</TR>
+<TR>
+<TD align="center"><font size="2" color="red"><b><?php echo $v['cp_title']?></b></font></TD>
+</TR>
+
+<TR>
+<TD align="center"><br/><input type="button" value="打印" onclick="printcoupon('<?php echo $v['cp_title']?>')"></TD>
+</TR>
+
+<TR>
+<TD align="center"><font size="2">已有<font color="red"><?php echo $v['cp_print']?></font>人下载</font></TD>
+</TR>
+<!--startprint-->
+<TR>
+<TD align="center"><img src="/public/images/<?php echo $v['cp_img']?>" style="width:520px" ></TD>
+</TR>
+
+<TR>
+<TD align="left"><font size="2"><b>优惠券说明:<br/>
+<?php echo $v['cp_notice']?>
+</b></font>
+</TD>
+</TR>
+<!--endprint-->
+<TR>
+<TD align="center"><input type="button" value="打印" onclick="printcoupon('<?php echo $v['cp_title']?>')"></TD>
+</TR>
+
+<TR>
+<TD align="left"><font size="2">地址：<br/>
+<?php echo $v['cp_address']?></font>
+</TD>
+</TR>
+</table>
+<?php }
+   }
+ }?>
+
+<?php if($type == 'couplist'){?>
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
+<tr>
+<th width="80%" align="left"><b>优惠券名称</b></th>
+<th width="20%" align="left"><b>发布日期</b></th>
+</tr>
+
+<?php if(isset($couplist) && is_array($couplist)){
+foreach($couplist as $k=>$v){
+?>
+<tr>
+<td width="80%"><a href="/index.php/home/coupon/coupview/cp_id/<?php echo $v['cp_id']?>"><?php echo $v['cp_title'];?></a></td>
+<td width="20%"><?php echo $v['cp_date']?></td>
+</tr>
+<?php }}?>
+
+</table>
+<?php }?>
+
+<?php if($type == 'coupview'){?>
+<div id="coupother" style="width:28%;float:right;margin-top:10px">
+<table width="100%" bgcolor="#e0e2e3" border="0">
+<tr>
+<td bgcolor="#e0e2e3">店家简介</td></tr>
+<tr><td bgcolor="#ffffff">
+<?php echo $b_summary;?>
+</td></tr>
+
+<tr>
+<td bgcolor="#e0e2e3">优惠券信息</td></tr>
+<tr>
+<td bgcolor="#ffffff">本优惠券由店家提供</td></tr>
+
+<tr>
+<td bgcolor="#e0e2e3">温馨提示</td></tr>
+<tr>
+<td bgcolor="#ffffff">1.除特殊注明外，本优惠不能与其他优惠同时享受；<br/>
+2.本优惠由商家提供，如有疑问请与商家联系；<br/>
+3.本优惠请务必从其授权网站下载使用，否则无效。</td></tr>
+
+</table>
+</div>
+
+<div id="couponshow" style="width:70%">
+<?php if(isset($coup) && is_array($coup)){
+foreach($coup as $k=>$v){
+?>
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
+<TR>
+<TD class="text"></TD>
+</TR>
+<TR>
+<TD align="center"><font size="2" color="red"><b><?php echo $v['cp_title']?></b></font></TD>
+</TR>
+
+<TR>
+<TD align="center"><br/><input type="button" value="打印" onclick="printcoupon('<?php echo $v['cp_title']?>')"></TD>
+</TR>
+
+<TR>
+<TD align="center"><font size="2">已有<font color="red"><?php echo $v['cp_print']?></font>人下载</font></TD>
+</TR>
+<!--startprint-->
+<TR>
+<TD align="center"><img src="/public/images/<?php echo $v['cp_img']?>" style="width:520px"></TD>
+</TR>
+
+<TR>
+<TD align="left"><font size="2"><b>优惠券说明:<br/>
+<?php echo $v['cp_notice']?>
+</b></font>
+</TD>
+</TR>
+<!--endprint-->
+<TR>
+<TD align="center"><input type="button" value="打印" onclick="printcoupon('<?php echo $v['cp_title']?>')"></TD>
+</TR>
+
+<TR>
+<TD align="left"><font size="2">地址：<br/>
+<?php echo $v['cp_address']?>
+</font>
+</TD>
+</TR>
+
+</table>
+<?php }
+}
+}?>
+
+</div>
+
+
+
+<SCRIPT>
+//only for test purposes
+
+function printcoupon(title){
+var bghtml = document.body.innerHTML;
+var srtprint = "<!--startprint-->";
+var endprint = "<!--endprint-->";
+
+var prnbdhtml;
+prnbdhtml = bghtml.substring(bghtml.indexOf(srtprint)+18);
+prnbdhtml = prnbdhtml.substring(0,prnbdhtml.indexOf(endprint));
+
+var prnhtml = "<html><body><center>";
+prnhtml += "<div style='width:700px;align:left;background:#FFF url(http://localhost:7000/public/images/bg_02.gif) repeat-x'><img border='0' src='/public/images/logo3.png'></div><div style='width:700px'><table width='100%' border='0' cellspacing='0' cellpadding='0' class='regInfo'><tr><td align='center'><font color='red'><b><br/>";
+prnhtml += title+"</b></font></td></tr>";
+prnhtml += prnbdhtml;
+prnhtml += "</table></div></center></body></html>";
+
+var prtwindow = window.open("about:blank");
+prtwindow.document.write(prnhtml);
+prtwindow.document.close();
+window.print();
+}
+
+</SCRIPT>
+  </div>
+</div>
+
+<?php include_once("footer.html")?>
