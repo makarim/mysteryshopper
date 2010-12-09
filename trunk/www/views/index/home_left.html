@@ -1,34 +1,35 @@
 
 <div class="adminmenupanel">
-        
+
 	    	<div class="panel">
 	        		<div class="title"><span><?php echo lang("user_panel")?></span></div>
 		      		<div class="content">
 		            	<li <?php if($view=='defaults') echo 'class="selected"';?>><a href="/index.php/home"><?php echo lang("main")?></a></li>
-		
+
 		            	<li <?php if($view=='lists' || $view=='read'|| $view=='write') echo 'class="selected"';?>><a href="/index.php/msgbox/lists"><?php echo lang("inbox")?></a></li>
 		            	<li <?php if($view=='history') echo 'class="selected"';?>><a href="/index.php/home/history"><?php echo lang("past_assignment")?></a></li>
 		                <li <?php if($view=='allassignment') echo 'class="selected"';?>><a href="/index.php/home/allassignment"><?php echo lang("assignment_board")?></a></li>
 		            	<li <?php if($view=='mydetail') echo 'class="selected"';?>><a href="/index.php/home/mydetail"><?php echo lang("my_profile")?></a></li>
+		            	<li <?php if($view=='coupcomp') echo 'class="selected"';?>><?php if(isset($userid) && ($userid == 'jason.wang@spotshoppers.com' || $userid == 'info@spotshoppers.com' || $userid == 'wendy.ewt@gmail.com')){?><a href="/index.php/home/coupcomp"><?php } echo lang("coupon")?></a></li>
 		            </div>
-	
+
 	        </div>
-        
+
 	    	<div class="panel">
 	        	<div class="title"><span><?php echo lang("top_spot_of_month")?></span></div>
 	            <div class="content">
 	       		  	<div class="mission">
 	               	  	<div class="logo"><p><img src="/public/upload/<?php if(isset($beststore['img']))echo $beststore['img']?>" width="68" height="68" border="0" /></p></div>
 	                	<div class="des"><span style="color:#000;"></span><b><?php if(isset($beststore['cs_name'])) echo splitx($beststore['cs_name']);?></b><br />
-	
+
 			                  <?php echo lang("client")?>：<?php if(isset($beststore['c_title']))echo splitx($beststore['c_title']);?><br />
-			              
+
 			             </div>
 	              	</div>
 	                <div class="clear"></div>
 	            </div>
 	      	</div>
-      
+
       		<div class="panel">
         		<div class="title"><span><?php echo lang("top_shopper_of_month")?></span></div>
 
