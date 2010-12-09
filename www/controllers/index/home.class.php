@@ -6,7 +6,7 @@ class home{
 	function __construct(){
 		global $tpl;
 		$this->tpl = $tpl;
-		$this->login_user = authenticate();	
+		$this->login_user = authenticate();
 		if(!$this->login_user){
 			redirect("/index.php/passport/login");
 		}
@@ -18,27 +18,29 @@ class home{
 		$beststore = $corpmod->getBestStoreByMonth(date('Ym'));
 		if($beststore){
 			$beststore = unserialize($beststore['rec_content']);
-		}		
+		}
 		if($bestshopper){
 			$bestshopper = unserialize($bestshopper['rec_content']);
 		}
+
 		$this->tpl->assign('bestshopper',$bestshopper);
 		$this->tpl->assign('beststore',$beststore);
 		$this->tpl->assign('user',$this->login_user);
 		$view = isset($_GET['view'])?$_GET['view']:"defaults";
 		$this->tpl->assign('view',$view);
+		$this->tpl->assign("userid",$this->login_user['user']);//控制优惠券的访问权限 start 暂时只有jason.wang@spotshoppers.com、info@spotshoppers.com、wendy.ewt@gmail.com三个账户能够访问到 add by wendy 2010.12.8
 	}
     function view_defaults(){
-		
+
 		include_once("AssignmentModel.class.php");
 		$assignmentModel = new AssignmentModel();
 		$myassignment = $assignmentModel->getMyAssignments($this->login_user['user_id']);
 		$lastestassignment = $assignmentModel->getLastestAssignments();
-		
+
 		include_once("AnnouncementModel.class.php");
 		$announcementModel = new AnnouncementModel();
 		$latestan = $announcementModel->getLatestAnnouncement(3);
-		
+
 		$reccomments = $announcementModel->getLastRecComments(10);
 		$this->tpl->assign("reccomments",$reccomments);
 		$this->tpl->assign("latestan",$latestan);
@@ -48,7 +50,7 @@ class home{
 
 
     function view_msgbox(){
-    	
+
     }
     function view_history(){
     	include_once("AssignmentModel.class.php");
@@ -67,7 +69,7 @@ class home{
 		$province= !empty($_GET['province'])?$_GET['province']:'';
 		$city= !empty($_GET['city'])?$_GET['city']:'';
 		$area= !empty($_GET['area'])?$_GET['area']:'';
-		
+
 		$con['order'] = $cur_sort;
 		$con['a_title'] = $a_title;
 		$con['c_id'] = $c_id;
@@ -78,16 +80,16 @@ class home{
 		$con['province'] = $province;
 		$con['city'] = $city;
 		$con['area'] = $area;
-		
+
 		include_once("AssignmentModel.class.php");
 		$assignmentModel = new AssignmentModel();
-				
+
 		$assignments = $assignmentModel->getItems($con,16);
 		$this->tpl->assign('assignments',$assignments);
 		$this->tpl->assign('con',$con);
 		$this->tpl->assign('total',$assignments['page']->total);
-    }    
-    function get_assignment($a_id){	
+    }
+    function get_assignment($a_id){
     	include_once("AssignmentModel.class.php");
     	$this->assignmentModel = new AssignmentModel();
     	$assignmentinfo = $this->assignmentModel->getAssignmentById($a_id);
@@ -95,7 +97,7 @@ class home{
     		show_message(lang('params_invalid'));
     		goback(10000);
     	}
-    
+
     	$is_view = '0';
 		if($assignmentinfo['user_id']==$this->login_user['user_id']){
 			$is_view =1;
@@ -111,13 +113,13 @@ class home{
 		}else{
 			$do_quiz = 'pass';
 		}
-		
+
 		if($assignmentinfo['a_fdate']=='0000-00-00 00:00:00' && $assignmentinfo['a_audit']==0){
 			$is_submitted = 0;
 		}elseif($assignmentinfo['a_audit']==2){
-			$is_submitted =2;	
+			$is_submitted =2;
 		}elseif($assignmentinfo['a_audit']==1){
-			$is_submitted =1;	
+			$is_submitted =1;
 		}elseif($assignmentinfo['a_audit']==0 && $assignmentinfo['a_fdate']!='0000-00-00 00:00:00'){
 			$is_submitted = 3;
 		}
@@ -144,20 +146,25 @@ class home{
 				}
 			}
 		}
-		
+
 		$assignmentinfo['a_demand']= $arr2;
 		$this->tpl->assign("is_submitted",$is_submitted);
 		$this->tpl->assign("do_quiz",$do_quiz);
 		$this->tpl->assign("is_view",$is_view);
 		$this->tpl->assign('a_id',$a_id);
     	$this->tpl->assign('assignmentinfo',$assignmentinfo);
+
+//    	echo "is_view=".$is_view."<br/>";
+//    	echo "<pre/>";
+//    	print_r($assignmentinfo);
+
     	return $assignmentinfo;
     }
     function view_assignment(){
     	$a_id = isset($_GET['a_id'])?intval($_GET['a_id']):'0';
     	$this->get_assignment($a_id);
 
-    }  
+    }
     function view_demand(){
     	$a_id = isset($_GET['a_id'])?intval($_GET['a_id']):'0';
     	$this->get_assignment($a_id);
@@ -173,17 +180,18 @@ class home{
 		foreach ($GLOBALS['gGroups'] as $k=>$v){
 			$report_questions[$v] = $ReportModel->getQuestionsByReId($re_id,$k);
 		}
+		$this->tpl->assign("mark_type",$assignment['a_markgrade']);
 		$this->tpl->assign("report_questions",$report_questions);
 	}
 	function view_quiz(){
 		$a_id = isset($_GET['a_id'])?intval($_GET['a_id']):'0';
-		
-		
+
+
 		$assignment = $this->get_assignment($a_id);
 		$quiz = $this->assignmentModel->generateQuiz(splitx($assignment['a_quiz']));
 		$this->tpl->assign("quiz",$quiz);
 
-		
+
 	}
 	function op_doquiz(){
 		$a_id = isset($_POST['a_id'])?intval($_POST['a_id']):'0';
@@ -214,18 +222,18 @@ class home{
 	function view_report(){
 		$a_id = isset($_GET['a_id'])?intval($_GET['a_id']):'0';
 		$assignment = $this->get_assignment($a_id);
-	
+
 		$re_id = $assignment['re_id'];
 		$a_id =isset($_GET['a_id'])?$_GET['a_id']:0;
-		
+
 		if($assignment['user_id']==$this->login_user['user_id']){
-		
+
 			include_once("ReportModel.class.php");
 			$ReportModel = new ReportModel();
 			$report_questions = array();
 			foreach ($GLOBALS['gGroups'] as $k=>$v){
 				$arr = $ReportModel->getQuestionsByReId($re_id,$k);
-				
+
 				if($arr){
 					foreach ($arr as $kk=>$vv){
 						$vv['answer'] = $ReportModel->getAnswerByAid($a_id,$vv['rq_id'],$vv['rq_type']);
@@ -233,14 +241,19 @@ class home{
 						$arr[$kk] = $vv;
 					}
 				}
-			
+
 				$report_questions[$v] = $arr;
-				
+
 			}
-		
+
+//			echo "<pre/>";
+//			print_r($assignment);
+
+			//分制类型信息 add by wendy 32010.11.24
+			$this->tpl->assign("mark_type",$assignment['a_markgrade']);
 			$this->tpl->assign("report_questions",$report_questions);
 		}
-	
+
 	}
 	function op_savereport(){
 		include_once("ReportModel.class.php");
@@ -254,6 +267,7 @@ class home{
 			foreach ($_POST as $k=>$v){
 				if(substr($k,0,7)=='rq_ans_'){
 					list(,,$rq_type,$rq_id) = split("_",$k);
+					//echo "k=".$k."  "."answer=".$v."<br/>";
 					$r *=$reportModel->saveAnswer($rq_id,$u_id,$a_id,$rq_type,addslashes($v));
 				}
 				if(substr($k,0,11)=='rq_comment_'){
@@ -261,9 +275,9 @@ class home{
 					if($v) $rs *=$reportModel->saveComment($rq_id,$u_id,$a_id,$rq_type,addslashes($v));
 				}
 			}
-			
+
 		}
-		
+
 		if($r){
 			$updates['a_fdate'] = "MY_F:NOW()";
 			$updates['a_finish'] =0.50;
@@ -271,10 +285,10 @@ class home{
 			show_message_goback(lang('success'));
 		}else{
 			show_message_goback(lang('failed'));
-		
+
 		}
 	}
-	
+
 	function op_apply(){
 		$rs = false;
 		$a_id = isset($_POST['a_id'])?intval($_POST['a_id']):'0';
@@ -311,8 +325,8 @@ class home{
 		$re = $upload->upload();
 		if(!$re){
 			$fname_arr=$upload->get_succ_file();
-			
-			
+
+
 			if($fname_arr){
 				include_once("AssignmentModel.class.php");
     			$this->assignmentModel = new AssignmentModel();
@@ -323,14 +337,14 @@ class home{
 					$this->assignmentModel->saveAttachment($fields,"assignment_attachment");
     			}
 				show_message_goback(lang("success"));
-				
+
 			}
 		}else{
-			show_message_goback(lang('failed'));		
+			show_message_goback(lang('failed'));
 		}
-		
+
 	}
-    
+
     function view_mydetail(){
     	$type = !empty($_GET['mydetail'])?$_GET['mydetail']:"contact";
     	include_once("PassportModel.class.php");
@@ -339,9 +353,74 @@ class home{
     	list($userinfo['year'],$userinfo['month'],$userinfo['day']) = explode("-",$userinfo['birthdate']);
     	$this->tpl->assign("type",$type);
     	$this->tpl->assign("userinfo",$userinfo);
-    
+
     	//$rs = $passmod->saveUserExt ( $user ,$this->login_user['user_id']);
     }
+
+    /************************************************/
+    //add by wendy 2010.11.29
+    function view_coupon(){
+    	include_once("CouponModel.class.php");
+    	$coupon = new CouponModel();
+
+    	$type = !empty($_GET['coupon'])?$_GET['coupon']:"newcoupon";
+
+    	if(isset($_GET['b_id']) && !empty($_GET['b_id'])){
+    		$_SESSION['b_id'] = $_GET['b_id'];
+
+    		//获得店家简介，并存入全局变量，供其他页面使用
+	    	$comp = $coupon->getBrand($_SESSION['b_id']);
+	    	foreach($comp as $k=>$v){
+	    		$_SESSION['b_summary'] = $v['b_summary'];
+	    	}
+    	}
+    	$b_id = $_SESSION['b_id'];
+
+    	//查看优惠券——默认为最新的
+    	$couplist  = $coupon->getCouponlist($b_id);
+    	if(!empty($couplist)){
+    	  $defcoup = $couplist[0]['cp_id'];
+    	}else $defcoup = '';
+
+    	if($type == 'couplist'){
+    		$couplist  = $coupon->getCouponlist($b_id);
+
+    		$this->tpl->assign("couplist",$couplist);
+//    		echo "<pre/>";
+//    		print_r($couplist);
+    	}else if($type == 'coupview'){
+    		$cp_id = !empty($_GET['cp_id'])?$_GET['cp_id']:$defcoup;
+
+    		if(!empty($cp_id)){
+    		$coup = $coupon->getCoupon($cp_id);
+    		$this->tpl->assign("coup",$coup);
+    		}
+//    		echo "<pre/>";
+//    		print_r($coup);
+    	}else if($type == 'newcoupon'){
+    		$newcoup = $coupon->getNewCoupon($b_id);
+//    		echo "<pre/>";
+//    		print_r($newcoup);
+    		$this->tpl->assign("newcoup",$newcoup);
+    	}else if($type == 'compdetail'){
+    		$comp = $coupon->getBrand($b_id);
+    		$this->tpl->assign("comp",$comp);
+    	}
+
+    	$this->tpl->assign("b_summary",$_SESSION['b_summary']);
+    	$this->tpl->assign("type",$type);
+    }
+
+    function view_coupcomp(){
+    	include_once("CouponModel.class.php");
+    	$cpcomp = new CouponModel();
+    	$allcomp = $cpcomp->getAllBrand();
+//    	echo "<pre/>";
+//    	print_r($allcomp);
+		$this->tpl->assign("allcomp",$allcomp);
+    }
+    /***********************************************/
+
     function op_updateuserdetail(){
     	include_once("PassportModel.class.php");
     	$user_id = $_POST['user_id'];
@@ -350,7 +429,7 @@ class home{
     	$user = array();
     	$msg ='';
     	switch ($type){
-    		
+
     		case "contact":
     			$user['realname'] = !empty($_POST['realname'])?$_POST['realname']:'';
     			$user['gender'] = !empty($_POST['gender'])?$_POST['gender']:'0';
@@ -365,7 +444,7 @@ class home{
 
     		break;
     		case "extinfo":
-    			
+
     			$birthdateyear = !empty($_POST['birthdateyear'])?$_POST['birthdateyear']:'';
 				$birthdatemonth = !empty($_POST['birthdatemonth'])?$_POST['birthdatemonth']:'';
 				$birthdateday = !empty($_POST['birthdateday'])?$_POST['birthdateday']:'';
@@ -383,7 +462,7 @@ class home{
 				$user['company_name'] = !empty($_POST['companyname'])?$_POST['companyname']:'';
 				$user['newletters'] = !empty($_POST['newletters'])?$_POST['newletters']:'0';
 				$user['birthplace'] = !empty($_POST['birthplace'])?$_POST['birthplace']:'';
-    		break;    		
+    		break;
     		case "other":
     			$user['eatwithwho'] = !empty($_POST['eatwithwho'])?intval($_POST['eatwithwho']):'0';
     			$user['eatlunchtimes'] = !empty($_POST['eatlunchtimes'])?intval($_POST['eatlunchtimes']):'0';
@@ -393,22 +472,22 @@ class home{
     			$user['eatdinneravgcost'] = !empty($_POST['eatdinneravgcost'])?$_POST['eatdinneravgcost']:'0';
     			$user['eatweekdaylunch_avgcost'] = !empty($_POST['eatweekdaylunchavgcost'])?$_POST['eatweekdaylunchavgcost']:'0';
     			$user['eatweekdaydinner_avgcost'] = !empty($_POST['eatweekdaydinneravgcost'])?$_POST['eatweekdaydinneravgcost']:'0';
-    			
-    			
+
+
     			$user['eatbooking'] = !empty($_POST['eatbooking'])?intval($_POST['eatbooking']):'0';
     			$user['eatvipcard'] = !empty($_POST['eatvipcard'])?intval($_POST['eatvipcard']):'0';
-    			
+
     			$user['eatcombo'] = !empty($_POST['eatcombo'])?intval($_POST['eatcombo']):'0';
     			$user['lunch_delivered'] = !empty($_POST['lunchdelivered'])?intval($_POST['lunchdelivered']):'0';
     			$user['meal_delivered'] = !empty($_POST['mealdelivered'])?intval($_POST['mealdelivered']):'0';
-    			
+
     			$user['dinnerhall'] = !empty($_POST['dinnerhall'])?intval($_POST['dinnerhall']):'0';
     			$user['eattraffic'] = !empty($_POST['eattraffic'])?$_POST['eattraffic']:'';
 
 
-				
+
 				$user['interests'] = !empty($_POST['interests'])?$_POST['interests']:'';
-		    		break;	
+		    		break;
     		case "payment":
     			$user['alipay'] = !empty($_POST['alipay'])?strip_tags($_POST['alipay']):"";
     			$user['alipayrealname'] = !empty($_POST['alipayrealname'])?strip_tags($_POST['alipayrealname']):"";
@@ -416,11 +495,11 @@ class home{
     			$user['bank_realname'] = !empty($_POST['bank_realname'])?strip_tags($_POST['bank_realname']):"";
     			$user['subbank_name'] = !empty($_POST['subbank_name'])?strip_tags($_POST['subbank_name']):"";
     			$user['bank_account'] = !empty($_POST['bank_account'])?strip_tags($_POST['bank_account']):"";
-    			
-    		break;    		
-    		
+
+    		break;
+
     		case "upload":
-	    		
+
 				include_once("FileUpload.class.php");
     			$upload=new FileUpload(APP_DIR."/public/upload/faceimg/",'jpg|png|gif|jpeg');
     			$upload->set_file_name("face_".$user_id);
@@ -433,28 +512,28 @@ class home{
 					}
 				}else{
 					//$user['face_img'] = '';
-					
+
 				}
-    			
+
     		break;
-    		
+
     		default:
-    			
+
     	}
     	$rs = false;
     	$passmod = new PassportModel();
 		if($user) $rs = $passmod->saveUserExt ( $user ,$user_id);
 		if(!$rs){
-				$msg = array('s'=> 400,'m'=>$msg,'d'=>"");				
+				$msg = array('s'=> 400,'m'=>$msg,'d'=>"");
 				if($type!="upload") exit(json_output($msg));
 		}else{
 				if($from=='user') {
-					$msg = array('s'=> 200,'m'=>lang("success"),'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/index.php/home/mydetail/$type");				
+					$msg = array('s'=> 200,'m'=>lang("success"),'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/index.php/home/mydetail/$type");
 				}else{
-					$msg = array('s'=> 200,'m'=>lang("success"),'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/?action=user&view=detail&detail=$type&user_id=$user_id");				
+					$msg = array('s'=> 200,'m'=>lang("success"),'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/?action=user&view=detail&detail=$type&user_id=$user_id");
 				}
 				if($type!="upload") exit(json_output($msg));
-				
+
 		}
 		show_message($re);
 		if($from=='user') {
@@ -462,19 +541,19 @@ class home{
 		}else{
 			goback();
 		}
-		
+
     }
-    
+
     function view_notice(){
     	$cur_sort = !empty($_GET['sort'])?$_GET['sort']:'an_id';
-		
+
 		$con['order'] = $cur_sort;
 		$con['an_title'] = '';
 		$con['an_date'] = '';
-		
+
 		include_once("AnnouncementModel.class.php");
 		$an = new AnnouncementModel();
-				
+
 		$data = $an->getItems($con,15);
 		$this->tpl->assign('data',$data);
 		$this->tpl->assign('total',$data['page']->total);
@@ -483,12 +562,12 @@ class home{
     	$an_id = isset($_GET['noticedetail'])?$_GET['noticedetail']:'';
     	include_once("AnnouncementModel.class.php");
 		$an = new AnnouncementModel();
-				
+
 		$data = $an->getAnnouncementById($an_id);
 		$this->tpl->assign('data',$data);
     }
     function view_calendar(){
-    	
+
     }
     function view_calendarjson(){
     	$color = array("#c63","#6c3","#36c","#63c","#3c6","#c36");
@@ -509,14 +588,14 @@ class home{
 			));
 		}
 		die;
-		
+
     }
-    
+
     function view_resetpwd(){
-    	
+
     }
     function op_resetpwd(){
-    	
+
     	if (empty ( $_POST ['oldpwd'] ) or empty ( $_POST ['newpwd1'] ) or empty ( $_POST ['newpwd2'] )) {
 			show_message_goback(lang('insertpwd'));
 		}
@@ -533,17 +612,17 @@ class home{
 
 		include_once("PassportModel.class.php");
 		$passmod = new PassportModel();
-		$user_info = $passmod->getUserById($this->login_user['user_id'],$this->login_user['user']);	
-		
+		$user_info = $passmod->getUserById($this->login_user['user_id'],$this->login_user['user']);
+
 		//print_r($user_info);
 		if ($user_info ['user_password'] == PassportModel::encryptpwd ($_POST ['oldpwd'],$this->login_user['user'],0)) {
-		
+
 			if (false!=$passmod->updatePassByUser ( $this->login_user['user'], PassportModel::encryptpwd( $new1,$this->login_user['user']) )) {
 				show_message_goback(lang('pwdreset'));
 			} else {
 				show_message_goback(lang('failture'));
 			}
-		} else { 
+		} else {
 			show_message_goback(lang('pwdwrong'));
 		}
     }
