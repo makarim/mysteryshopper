@@ -1,0 +1,55 @@
+<?php include_once("header.html")?>
+
+<div id="wrap">  <br />
+<?php include_once("home_left.html")?>
+<div class="admincontent">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+        <tr>
+          <td><div class="table2TitleBg">
+            <div class="table2TitleBg2">
+		      	<div class="table2Title"><div class="table2TitleLeft"><span><?php echo lang("couponslist")?></span></div></div>
+            </div>
+           </div></td>
+        </tr>
+
+        <tr>
+          <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="table2LeftBorder"></td>
+              <td>
+
+              <?php if(isset($allcomp) && is_array($allcomp)){
+              foreach($allcomp as $k=>$v){
+               ?>
+              <div class="mission">
+               	  <div class="logo"><p>
+               	   <a href="/index.php/home/coupon/newcoupon/b_id/<?php echo $v['b_id']?>"><img src="/public/images/<?php echo $v['b_img']?>" width="68" height="68" border="0" /></a>
+               	  </p></div>
+                <div class="des"><span style="color:#000;"></span>
+                <a href="/index.php/home/coupon/couplist/b_id/<?php echo $v['b_id']?>"><font size="2">优惠券列表</font></a>
+                <a href="/index.php/home/coupon/newcoupon/b_id/<?php echo $v['b_id']?>"><img src="/public/images/quan.png" border="0"></a><br />
+                </div>
+                </div>
+                </div>
+                <?php }
+                    }
+                  ?>
+
+              </td>
+
+              <td class="table2RightBorder"></td>
+              </tr>
+
+            <tr>
+              <td class="table2BottomLeft"></td>
+              <td class="table2Bottom"></td>
+              <td class="table2BottomRight"></td>
+            </tr>
+
+          </table></td>
+        </tr>
+      </table>
+</div>
+<?php include_once("footer.html")?>
