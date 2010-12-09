@@ -802,5 +802,12 @@ $GLOBALS['gLang']['select_brand'] = '选择品牌';
 $GLOBALS['gLang']['all_brands'] = '所有品牌';
 $GLOBALS['gLang']['interal_avg'] = '内部平均值';
 $GLOBALS['gLang']['find_report'] = '查找问卷';
+
+//add by wendy
 $GLOBALS['gLang']['report_title'] = '问卷名称';
+$GLOBALS['gLang']['report_title'] = '问卷名称';
+$GLOBALS['gLang']['markgrade'] = '评分题分制';
+$GLOBALS['gLang']['istest'] = '启用小测试';
+$GLOBALS['gLang']['coupon'] = '优惠券(即将推出)';
+$GLOBALS['gLang']['couponslist'] = '优惠券列表';
 ?>
