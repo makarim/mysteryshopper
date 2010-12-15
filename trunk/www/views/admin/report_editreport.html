@@ -10,43 +10,58 @@
 
 <script>
 function checkOnSubmit(formName) {
-  	
+
 	var url = "<?php echo $www_site_url?>/admin.php";
-	
-	var obj = document.getElementById('toBox[]'); 
 
-    for(var no=0;no<obj.options.length;no++){ 
-            obj.options[no].selected = true; 
-    } 
+	var obj = document.getElementById('toBox[]');
 
-       
+    for(var no=0;no<obj.options.length;no++){
+            obj.options[no].selected = true;
+    }
+}
+
+//从问题列表中查找问题 add by wendy
+function findQuestion(){
+  var ques = document.getElementById('find_question').value;
+
+  var sel = document.getElementById('fromBox');
+  var opt = sel.length;
+
+  for(var i=0; i<opt; i++){
+    var question = sel.options[i].innerHTML;
+    if(question.indexOf(ques) !== -1){
+      sel.options[i].selected = true;
+      return;
+    }
+  }
 }
 </script>
 </head>
 <body><div id="append"></div>
 <div id="msg" style="color:red;text-align:center"></div>
 	<div class="container">
-	
+
 		<div class="hastabmenu">
 				<ul class="tabmenu">
-					<li id="addreportbtn" class="tabcurrent"><a href="#"><?php echo lang('edit_report')?></a></li>	
+					<li id="addreportbtn" class="tabcurrent"><a href="#"><?php echo lang('edit_report')?></a></li>
 				</ul>
 				<div id="addreportdiv" class="tabcontentcur" style="display:;">
 					<form id="addreportform" name="addreportform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addreportform');" >
 					<input type="hidden" name="action" value="report">
 					<input type="hidden" name="op" value="updatereport">
 					<input type="hidden" name="re_id" value="<?php echo $report['re_id']?>">
-				
+
 					<table width="100%">
 						<tr>
 							<td width="10%"><?php echo lang('re_title')?>:</td>
 							<td><input type="text" name="re_title" class="textfield" value="<?php echo $report['re_title']?>" /> *</td>
-						</tr>					
+						</tr>
 						<tr>
 							<td><?php echo lang('a_desc')?>:</td>
 							<td>
-							
+
 						<table border="0" width="400">
+<tr><td colspan="3" algin="left">问题名称：<input type="text" size="32" id="find_question" />&nbsp;&nbsp;<input type="button" value="查找" onclick="findQuestion();"></td></tr>
  <tr>
   <td><CENTER>所有问题</CENTER></td>
   <td> </td>
@@ -54,11 +69,11 @@ function checkOnSubmit(formName) {
  </tr>
     <tr>
       <td width="40%">
-      <select multiple name="fromBox" id="fromBox"  size="8" style="width:300px;height:300px" ondblclick="moveOption(document.getElementById('fromBox'), document.getElementById('toBox[]'))"> 
+      <select multiple name="fromBox" id="fromBox"  size="8" style="width:300px;height:300px" ondblclick="moveOption(document.getElementById('fromBox'), document.getElementById('toBox[]'))">
 	<?php foreach ($questions as $q){?>
-    <option value="<?php echo $q['q_id']?>" title="<?php echo splitx($q['q_question']);?>">[<?php echo lang($groups[$q['q_group']]);?>]<?php echo splitx($q['q_question'])?></option> 
+    <option value="<?php echo $q['q_id']?>" title="<?php echo splitx($q['q_question']);?>">[<?php echo lang($groups[$q['q_group']]);?>]<?php echo splitx($q['q_question'])?></option>
  <?php }?>
-</select> 
+</select>
 
    </td>
       <td width="20%" align="center">
@@ -69,7 +84,7 @@ function checkOnSubmit(formName) {
   <select  multiple name="toBox[]" id="toBox[]" size="8" style="width:300px;height:300px"
   ondblclick="moveOption(document.getElementById('toBox[]'), document.getElementById('fromBox'))">
 <?php foreach ($report_questions as $q){?>
-    <option value="<?php echo $q['q_id']?>" title="<?php echo splitx($q['rq_question']);?>">[<?php echo lang($groups[$q['rq_group']]);?>]<?php echo splitx($q['rq_question']);?></option> 
+    <option value="<?php echo $q['q_id']?>" title="<?php echo splitx($q['rq_question']);?>">[<?php echo lang($groups[$q['rq_group']]);?>]<?php echo splitx($q['rq_question']);?></option>
  <?php }?>
   </select>
    </td>
@@ -81,32 +96,32 @@ function checkOnSubmit(formName) {
   <INPUT TYPE="button" value="↑" onclick="moveUp(document.getElementById('toBox[]'));">
   <INPUT TYPE="button" value="↓" onclick="moveDown(document.getElementById('toBox[]'));">
   <INPUT TYPE="button" value="＿" onclick="moveBottom(document.getElementById('toBox[]'));">
-  
+
   <br>
   <font color="Red">*注意：删除掉已经选择的问题，将会连同该问题的所有调查记录一起删掉！！
   <br /> Attentions! When you delete the selected items, all the survey logs of them will be deleted.</font>
   </CENTER>
   </td>
  </tr>
-  </table>	
+  </table>
 
 
 
 
 						</td>
-							</tr>					
-						
+							</tr>
+
 						<tr>
-						
+
 							<td colspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button"/ >  <input type="button" value="<?php echo lang('goback')?>" onclick="history.go(-1);" class="button" /></td>
 						</tr>
 					</table>
 					</form>
-	
+
 				</div>
 		</div>
 </div>
 
- 
+
 </body>
 </html>
