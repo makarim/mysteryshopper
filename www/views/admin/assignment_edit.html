@@ -38,14 +38,17 @@ function getBrand(c_id){
 /* Added by Wendy 2010.10.14 */
 //清除品牌选项
 var selobj = $('brand_container');
+//var slbrad = document.getElementById('brand_container');
 for(var i in selobj.options){
-	selobj.options[i] = null;
+	selobj.remove(i);
+	//selobj.options[i] = null;//IE不支持此方式
 	}
 
 //清除分店选项
 var selobj1 = $('store_container');
 for(var i in selobj1.options){
-	selobj1.options[i] = null;
+	selobj1.remove(i);
+	//selobj1.options[i] = null;
 	}
 /**** 清除所有的选择项 end ****/
 
@@ -92,7 +95,8 @@ function getStore(b_id){
 /* Added by Wendy 2010.10.14 */
 var selobj = $('store_container');
 for(var i in selobj.options){
-	selobj.options[i] = null;
+	selobj.remove(i);
+	//selobj.options[i] = null;//IE不支持此方式
 	}
 /**** 清除所有的选择项 end ****/
 
@@ -219,6 +223,16 @@ for(var i in selobj.options){
 							<td>格式说明,每一行输入一个测试题目。格式为 title:问题标题|A:答案|B:答案|C:答案|D:答案|answer:D
 							<textarea type="text" name="a_quiz" rows="10" style="width:900px" class="textfield"/><?php echo $info['a_quiz'];?></textarea><input type="button" value="Split" onclick="document.addassignmentform.a_quiz.value+='&lt;!--!--&gt;';"></td>
 						</tr>
+						<tr>
+						<td><?php echo lang('markgrade')?>:</td>
+						<td>
+						<input type="radio" name="a_markgrade" value="10" <?php if($info['a_markgrade']==10) echo 'checked';?> />0~10
+						<input type="radio" name="a_markgrade" value="5" <?php if($info['a_markgrade']==5) echo 'checked';?> />0~5
+						<input type="radio" name="a_markgrade" value="4" <?php if($info['a_markgrade']==4) echo 'checked';?> />0~4
+						<input type="radio" name="a_markgrade" value="2" <?php if($info['a_markgrade']==2) echo 'checked';?> />0~2
+						</td>
+						</tr>
+
 						<tr>
 
 							<td colspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button"/>  <input type="button" value="<?php echo lang('goback')?>" onclick="history.go(-1);" class="button" /></td>
