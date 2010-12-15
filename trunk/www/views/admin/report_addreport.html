@@ -35,7 +35,7 @@ function checkOnSubmit(formName) {
 
 }
 
-//从问题列表中查找问题
+//从问题列表中查找问题 add by wendy
 function findQuestion(){
   var ques = document.getElementById('find_question').value;
 
@@ -43,11 +43,20 @@ function findQuestion(){
   var opt = sel.length;
 
   for(var i=0; i<opt; i++){
+    if(sel.options[i].selected == true){
+      sel.options[i].selected = false;
+    }
+  }
+
+  for(var i=0; i<opt; i++){
     var question = sel.options[i].innerHTML;
     if(question.indexOf(ques) !== -1){
       sel.options[i].selected = true;
       return;
     }
+  }
+  if(i == opt){
+    alert("对不起！没有找到匹配问题");
   }
 }
 </script>
@@ -83,7 +92,7 @@ function findQuestion(){
  </tr>
     <tr>
       <td width="40%">
-      <select multiple name="fromBox" id="fromBox"  size="8" style="width:300px;height:300px" ondblclick="moveOption(document.getElementById('fromBox'), document.getElementById('toBox'))">
+      <select name="fromBox" id="fromBox"  size="8" style="width:300px;height:300px" ondblclick="moveOption(document.getElementById('fromBox'), document.getElementById('toBox'))">
 	<?php foreach ($questions as $q){?>
     <option value="<?php echo $q['q_id']?>" title="<?php echo splitx($q['q_question']);?>">[<?php echo lang($groups[$q['q_group']]);?>]<?php echo splitx($q['q_question']);?></option>
  <?php }?>
