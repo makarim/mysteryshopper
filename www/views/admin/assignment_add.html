@@ -35,18 +35,16 @@ function getBrand(c_id){
 
 /**** 清除所有的选择项 start ****/
 /* Added by Wendy 2010.10.14 */
-//清除品牌选项 IE对此不兼容， 列表显示不出来，要再看看
+//清除品牌选项
 var selobj = $('brand_container');
 for(var i in selobj.options){
-	selobj.remove(i);
-	//selobj.options[i] = null;//IE不支持此方式
+	selobj.options[i] = null;
 	}
 
 //清除分店选项
 var selobj1 = $('store_container');
 for(var i in selobj1.options){
-	selobj1.remove(i);
-	//selobj1.options[i] = null;
+	selobj1.options[i] = null;
 	}
 /**** 清除所有的选择项 end ****/
 
@@ -58,6 +56,7 @@ for(var i in selobj1.options){
 	}
 
 	var url = "<?php echo $www_site_url?>/admin.php?action=corporation&view=ajaxbrand&c_id="+c_id;
+
 	mini.ajax.get(url, function(r){
 
 		var r = eval('(' + r + ')');
@@ -80,9 +79,9 @@ for(var i in selobj1.options){
 			}
 
 		}
-		//if(r.s==400){
-		//	$('msg').innerHTML = r.m;
-		//}
+		if(r.s==400){
+			$('msg').innerHTML = r.m;
+		}
 	});
 
 	return false;
@@ -93,8 +92,7 @@ function getStore(b_id){
 /* Added by Wendy 2010.10.14 */
 var selobj = $('store_container');
 for(var i in selobj.options){
-	selobj.remove(i);
-	//selobj.options[i] = null;//IE不支持此方式
+	selobj.options[i] = null;
 	}
 /**** 清除所有的选择项 end ****/
 
@@ -227,10 +225,10 @@ title:用餐结束之后不要忘记什么？|A:买单|B:刷卡|C:要发票|D:�
 						<tr>
 						<td><?php echo lang('markgrade')?>:</td>
 						<td>
-						<input type="radio" name="a_markgrade" value="10" checked/>0~10
-						<input type="radio" name="a_markgrade" value="5"/>0~5
-						<input type="radio" name="a_markgrade" value="4"/>0~4
-						<input type="radio" name="a_markgrade" value="2"/>0~2
+						<input type="radio" name="a_markgrade" value="10" checked?> />0~10
+						<input type="radio" name="a_markgrade" value="5" />0~5
+						<input type="radio" name="a_markgrade" value="4" />0~4
+						<input type="radio" name="a_markgrade" value="2" />0~2
 						</td>
 						</tr>
 
