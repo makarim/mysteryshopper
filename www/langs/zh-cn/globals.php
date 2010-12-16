@@ -731,6 +731,7 @@ $GLOBALS['gLang']['level_4'] = '一般';
 $GLOBALS['gLang']['level_5'] = '好';
 $GLOBALS['gLang']['level_6'] = '很好';
 $GLOBALS['gLang']['level_7'] = '完美';
+$GLOBALS['gLang']['level_8'] = '没有做';
 $GLOBALS['gLang']['applicant'] = '申请人';
 
 $GLOBALS['gLang']['menu_site'] = '网站管理';
