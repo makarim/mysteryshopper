@@ -18,7 +18,7 @@ $GLOBALS['gLang'] = array(
 	'unwriteable' => 'not writeable',
 	'old_step' => 'Previout Step',
 	'new_step' => 'Next Step',
-	
+
 	'database_errno_2003' => 'Error in connecting database. Please check the server address.',
 	'database_errno_1044' => 'Error in connecting database. Please check the database name.',
 	'database_errno_1045' => 'Error in connecting database. Please check the username and password.',
@@ -39,7 +39,7 @@ $GLOBALS['gLang'] = array(
 	'step_env_check_desc' => 'Checking directory, file privilege',
 	'step_db_init_title' => 'Database Installation',
 	'step_db_init_desc' => 'Installing Database',
-	
+
 	'step1_file' => 'Directory',
 	'step1_need_status' => 'Need Status',
 	'step1_status' => 'Current Status',
@@ -332,19 +332,19 @@ $GLOBALS['gLang']['session_mentality'] = '<ul>
 $GLOBALS['gLang']['ticket_mentality'] = '<ul>
 	<li>When the user visit Application Service (AS), AS determine whether the user has logged locally. If no, AS call SSO client api to access sso server, taking a digital signature, user_name, and domain information.
 </li>
-<li>When SSO server receives the information from the client, it certified the legality of the signature verification first, 
+<li>When SSO server receives the information from the client, it certified the legality of the signature verification first,
 and then determine whether user_name exists in session. If yes, it return session id (as ticket), or redirecting to login page.
 </li>
-<li>	
+<li>
 After the user logged in successfully at authentication center, SSO server saved user data in session. Then jump back to application service, URL belt with ticket (session id).
 </li>
-<li>	
+<li>
 The SSO client, take ticket, domain, and signature (the signature encrypted by the ticket) to visited the SSO Server. SSO Server authorizes first, and then returns the encrypted data named as user token.
 </li>
-<li>	
+<li>
 User data is encrypted in transmission. SSO client uses the private key to decrypt the token data.
 </li>
-<li>	
+<li>
 If the user has been logged in step 3, and then skip this step.</li>
 <ul>';
 
@@ -719,6 +719,7 @@ $GLOBALS['gLang']['level_4'] = 'Common';
 $GLOBALS['gLang']['level_5'] = 'Good';
 $GLOBALS['gLang']['level_6'] = 'Very Good';
 $GLOBALS['gLang']['level_7'] = 'Perfect';
+$GLOBALS['gLang']['level_8'] = 'Have not do It';
 $GLOBALS['gLang']['applicant'] = 'Applicant';
 $GLOBALS['gLang']['menu_site'] = 'Website';
 $GLOBALS['gLang']['menu_shopper'] = 'Mystery Shoppers';
