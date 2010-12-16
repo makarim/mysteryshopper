@@ -23,7 +23,7 @@ function checkform(form){
 		return false;
 	}
 	var result = true;
-	
+
 	var input = g('input');
 	for(var i=0;i<input.length;i++){
 		var v = va(input[i]);
@@ -34,7 +34,7 @@ function checkform(form){
 			}else{
 				input[i].parentNode.style.border='';
 			}
-		} 
+		}
 		if(input[i].type=='radio'){
 			if(check(form.elements[input[i].name])){
 				input[i].parentNode.style.border='';
@@ -43,7 +43,7 @@ function checkform(form){
 			}
 		}
 	}
-	
+
 	var textarea = g('textarea');
 	for(var i=0;i<textarea.length;i++){
 		var v=va(textarea[i]);
@@ -72,7 +72,7 @@ function submitBillFrm(r){
 	document.auditBillFrm.auditbill_result.value = r;
 	document.auditBillFrm.submit();
 }
-	
+
 </script>
 </head>
 <body><div id="append"></div>
@@ -80,7 +80,7 @@ function submitBillFrm(r){
 
 
 	<div class="container">
-		
+
 		<h3> 本任务(<?php echo $assignmentinfo['a_sdate']?>～<?php echo $assignmentinfo['a_edate']?>)问卷由<?php echo $assignmentinfo['user_nickname']?> 在<?php echo $assignmentinfo['a_fdate']?>完成填写。</h3>
 		<br />
 		<h3> <?php if($assignmentinfo['a_audit']>0){ echo $assignmentinfo['a_auditor']?> 在<?php echo $assignmentinfo['a_audit_time']?>进行过问卷审查，结果：<?php if($assignmentinfo['a_audit']==1)echo"通过"; if($assignmentinfo['a_audit']==2) echo "不通过";?><?php }?></h3>
@@ -106,17 +106,17 @@ function submitBillFrm(r){
 				<input type="button" value="通过" onclick="submitBillFrm(1)">
 				<input type="button" value="不通过" onclick="submitBillFrm(2)">
 		</form>
-		
+
 		<div class="mainbox">
-		
-		
+
+
 		<TABLE width="100%" border="0" cellspacing="1" cellpadding="0" class="missionReport" style="margin-top:20px;">
 <TR>
 <TD width="20%" colspan="3" class="title"><?php echo lang("uploadattachment")?></TD>
 
 
 </TR>
-<?php 
+<?php
 if(is_array($attachments)){
 	foreach ($attachments as $k=>$a){
 	?>
@@ -132,7 +132,7 @@ if(is_array($attachments)){
 ?>
 <TR>
 </table>
-<br />	
+<br />
 <FORM name="uplaodform" id="uplaodform" method="POST" enctype="multipart/form-data" action="index.php">
 <input type="hidden" name="action" value="home">
 <input type="hidden" name="op" value="upload">
@@ -141,7 +141,7 @@ if(is_array($attachments)){
 <TR>
 <TD class="text"><?php echo lang("mp3_image")?></TD>
 <TD><div id="errorsDiv_face"></div>
-  
+
 <INPUT type="file" name="mfile" id="mfile" class="input" /> (<?php echo lang("support_file_format")?>：jpg|png|gif|jpeg|mp3|wma ,<?php echo lang("less_than")?>2MB)
 </TD>
 </TR>
@@ -155,23 +155,24 @@ if(is_array($attachments)){
   </tr>
 </table>
   </form>
-  
-  
+
+
 		<?php if(isset($report_questions) && is_array($report_questions)){?>
 			<br /><br />
 				 <br />
 		    <p>评分说明：</p>
 			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport clear">
+			<?php if($assignmentinfo['a_markgrade'] == 10 || empty($assignmentinfo['a_markgrade'])){?>
           <tr>
-            <td class="title">不适用</td>
-            <td class="title">差</td>
-            <td class="title">不好</td>
-            <td class="title">需要改进</td>
-            <td class="title">一般</td>
-            <td class="title">好</td>
-            <td class="title">很好</td>
-            <td class="title">完美</td>
-          </tr> 
+            <td class="title"><?php echo lang("level_0")?></td>
+            <td class="title"><?php echo lang("level_8")?></td>
+            <td class="title"><?php echo lang("level_1")?></td>
+            <td class="title"><?php echo lang("level_3")?></td>
+            <td class="title"><?php echo lang("level_4")?></td>
+            <td class="title"><?php echo lang("level_5")?></td>
+            <td class="title"><?php echo lang("level_6")?></td>
+            <td class="title"><?php echo lang("level_7")?></td>
+          </tr>
           <tr>
             <td align="center">n/a</td>
             <td align="center">0</td>
@@ -182,9 +183,59 @@ if(is_array($attachments)){
             <td align="center">8-9</td>
             <td align="center">10</td>
           </tr>
-       
+          <?php } else if($assignmentinfo['a_markgrade'] == 5){?>
+          <tr>
+            <td class="title"><?php echo lang("level_0")?></td>
+            <td class="title"><?php echo lang("level_8")?></td>
+            <td class="title"><?php echo lang("level_1")?></td>
+            <td class="title"><?php echo lang("level_3")?></td>
+            <td class="title"><?php echo lang("level_4")?></td>
+            <td class="title"><?php echo lang("level_5")?></td>
+            <td class="title"><?php echo lang("level_7")?></td>
+          </tr>
+          <tr>
+            <td align="center">n/a</td>
+            <td align="center">0</td>
+            <td align="center">1</td>
+            <td align="center">2</td>
+            <td align="center">3</td>
+            <td align="center">4</td>
+            <td align="center">5</td>
+          </tr>
+          <?php }else if($assignmentinfo['a_markgrade'] == 4){?>
+          <tr>
+            <td class="title"><?php echo lang("level_0")?></td>
+            <td class="title"><?php echo lang("level_8")?></td>
+            <td class="title"><?php echo lang("level_1")?></td>
+            <td class="title"><?php echo lang("level_4")?></td>
+            <td class="title"><?php echo lang("level_5")?></td>
+            <td class="title"><?php echo lang("level_7")?></td>
+          </tr>
+          <tr>
+            <td align="center">n/a</td>
+            <td align="center">0</td>
+            <td align="center">1</td>
+            <td align="center">2</td>
+            <td align="center">3</td>
+            <td align="center">4</td>
+          </tr>
+          <?php }else if($assignmentinfo['a_markgrade'] == 2){?>
+          <tr>
+            <td class="title"><?php echo lang("level_0")?></td>
+            <td class="title"><?php echo lang("level_8")?></td>
+            <td class="title"><?php echo lang("level_8")?></td>
+            <td class="title"><?php echo lang("level_7")?></td>
+          </tr>
+          <tr>
+            <td align="center">n/a</td>
+            <td align="center">0</td>
+            <td align="center">1</td>
+            <td align="center">2</td>
+          </tr>
+          <?php }?>
+
           </table>
-         
+
          <form action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkform(this);">
 				<input type="hidden" name="action" value="report">
 				<input type="hidden" name="op" value="saveanswer">
@@ -195,6 +246,7 @@ if(is_array($attachments)){
           <tr>
             <td colspan="3" class="title"><?php echo lang($k);?></td>
           </tr>
+
           <?php
 			foreach ($v as $kk=>$vv){
 				if($vv['rq_type']==2 || $vv['rq_type']==4 || $vv['rq_type']==1){
@@ -202,70 +254,74 @@ if(is_array($attachments)){
           <tr>
 			<td width="5%"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
             <td width="65%"><?php echo splitx($vv['rq_question']);?> <span id="span_ch_<?php echo $vv['rq_id'];?>" style="float:right;"></span></td>
-            <td  width="30%" align="center">
-           
+            <td width="30%" align="center">
+
             <?php if($vv['rq_type']==2){?>
-            	<?php if($vv['is_na']==1){?> <span style="float:left;"> <img id="icon_updown_<?php echo $vv['rq_id'];?>" style="cursor:pointer;" src="<?php echo $www_site_url?>/public/images/up_down.jpg" onclick="display_comment(<?php echo $vv['rq_id'];?>);"><input type="checkbox" id="votebox_<?php echo $vv['rq_id'];?>" name="votebox_<?php echo $vv['rq_id'];?>" onclick="out_fs('yes_<?php echo $vv['rq_id'];?>_10');"  <?php if($vv['answer']=='A') echo "checked"; ?>>N/A</span><?php }?>
-            					<div id="voteimg_<?php echo $vv['rq_id'];?>"></div>	
+            	<?php if($vv['is_na']==1){?> <span style="float:left;"> <img id="icon_updown_<?php echo $vv['rq_id'];?>" style="cursor:pointer;" src="<?php echo $www_site_url?>/public/images/up_down.jpg" onclick="display_comment(<?php echo $vv['rq_id'];?>);"><input type="checkbox" id="votebox_<?php echo $vv['rq_id'];?>" name="votebox_<?php echo $vv['rq_id'];?>" onclick="out_fs('yes_<?php echo $vv['rq_id'];?>_10_<?php if(isset($assignmentinfo['a_markgrade']))echo $assignmentinfo['a_markgrade']?>');"  <?php if($vv['answer']=='A') echo "checked"; ?>>N/A</span><?php }?>
+            					<div id="voteimg_<?php echo $vv['rq_id'];?>"></div>
 								<input type="hidden" id="rq_ans_<?php echo $vv['rq_id'];?>" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="<?php echo $vv['answer'];?>">
-								<script>create_vote_img(<?php echo $vv['rq_id'];?>,'<?php echo $vv['answer'];?>');</script>	
-								
-			<?php }else if($vv['rq_type']==1){ ?>		
+								<?php if(isset($assignmentinfo) && !empty($assignmentinfo)){?>
+								<script>create_vote_img_mark(<?php echo $vv['rq_id'];?>,'<?php echo $vv['answer'];?>',<?php echo $assignmentinfo['a_markgrade']?>);</script>
+								<?php } else{?>
+								<script>create_vote_img(<?php echo $vv['rq_id'];?>,'<?php echo $vv['answer'];?>');</script>
+								<?php }?>
+
+			<?php }else if($vv['rq_type']==1){ ?>
 								 <?php if($vv['is_na']==1){?><span> <img id="icon_updown_<?php echo $vv['rq_id'];?>" style="cursor:pointer;" src="<?php echo $www_site_url?>/public/images/up_down.jpg" onclick="display_comment(<?php echo $vv['rq_id'];?>);"><input type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="A" <?php if($vv['answer']=='A')echo 'checked'; ?> onclick="display_comment(<?php echo $vv['rq_id'];?>);">N/A ;<span><?php }?>
 								 <input type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="Y" <?php if($vv['answer']=='Y')echo 'checked'; ?> onclick="display_comment(<?php echo $vv['rq_id'];?>);">Yes ;</label>&nbsp;&nbsp;&nbsp;&nbsp;<label><input onclick="display_comment(<?php echo $vv['rq_id'];?>);" type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="N"  <?php if($vv['answer']=='N')echo 'checked'; ?>>No;</label>
-								
-			<?php }else if($vv['rq_type']==4){ ?>	
+
+			<?php }else if($vv['rq_type']==4){ ?>
 								<input type="text" size="6" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="<?php echo $vv['answer']; ?>">	分钟
 							<?php }?>
-			 
-   
+
+
             </td>
           </tr>
-          
+
           <?php if($vv['is_comment']==1){?>
           <tr <?php if(!$vv['comment']) echo 'style="display:none;"'?> id="td_comment_<?php echo $vv['rq_id'];?>">
-          <td colspan="3" ><textarea style="width:100%;font-size:12px;height:32px;" rows="2" name="rq_comment_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" id="rq_comment_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>"><?php echo $vv['comment'];?></textarea></td>
+          <td colspan="3" ><textarea style="width:100%;font-size:12px;height:32px;" rows="2" name="rq_comment_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" id="rq_comment_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>"><?php echo splitx($vv['comment']);?></textarea></td>
           </tr>
           <?php }?>
-          
-       		 <?php 
-				}else if($vv['rq_type']==3){ 
+
+       		 <?php
+				}else if($vv['rq_type']==3){
 			?>
-			  <?php  
+			  <?php
 					if($vv['rq_group']==5){
-					?>	
+					?>
 			<tr>
 			 <td width="5%" valign="top"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
 			 <td width="65%"><?php echo splitx($vv['rq_question']);?></td>
-            <td  width="30%" align="center"><input class="textfield" type="text" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="<?php echo $vv['answer']; ?>"></td>
-                        
+            <td  width="30%" align="center"><input class="textfield" type="text" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="<?php echo splitx($vv['answer']); ?>"></td>
+
           </tr>
           <? }else{?>
 			<tr>
 			 <td width="5%" valign="top"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
              <td width="95%" colspan="2" style="padding:0">
-            
+
 		            <table width="100%" border="0" cellpadding="0" cellspacing="0">
-			            <tr> 
+			            <tr>
 			            	<td width="50%" style="background-color:#ccc;"> <?php echo splitx($vv['rq_question']);?></td>
-			            
+
 			          	</tr>
 			           <tr>
 				           <td style="height:50px">
-													<textarea  style="width:100%;font-size:12px;height:60px;" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" id="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>"><?php echo $vv['answer']; ?></textarea>
+													<textarea  style="width:100%;font-size:12px;height:60px;" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" id="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>"><?php echo splitx($vv['answer']); ?></textarea>
 													<input type="button" value="Split" onclick="document.getElementById('rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>').value+='&lt;!--!--&gt;';">
 				           </td>
 			            </tr>
 		             </table>
             </td>
-          </tr>	
-	   <?php } 
-			
+          </tr>
+	   <?php }
+
 				}
-				
+
 			}
 			?>
-			
+
         </table>
  		<?php }
 		}?>
@@ -275,8 +331,8 @@ if(is_array($attachments)){
 			</tr>
 		</table>
 		</form>
-				
-		
+
+
 					</div>
 
 	</div>
