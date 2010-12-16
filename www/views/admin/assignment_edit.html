@@ -40,15 +40,15 @@ function getBrand(c_id){
 var selobj = $('brand_container');
 //var slbrad = document.getElementById('brand_container');
 for(var i in selobj.options){
-	selobj.remove(i);
-	//selobj.options[i] = null;//IE不支持此方式
+	//selobj.remove(i);
+	selobj.options[i] = null;//IE不支持此方式
 	}
 
 //清除分店选项
 var selobj1 = $('store_container');
 for(var i in selobj1.options){
-	selobj1.remove(i);
-	//selobj1.options[i] = null;
+	//selobj1.remove(i);
+	selobj1.options[i] = null;
 	}
 /**** 清除所有的选择项 end ****/
 
@@ -95,8 +95,8 @@ function getStore(b_id){
 /* Added by Wendy 2010.10.14 */
 var selobj = $('store_container');
 for(var i in selobj.options){
-	selobj.remove(i);
-	//selobj.options[i] = null;//IE不支持此方式
+	//selobj.remove(i);
+	selobj.options[i] = null;//IE不支持此方式
 	}
 /**** 清除所有的选择项 end ****/
 
