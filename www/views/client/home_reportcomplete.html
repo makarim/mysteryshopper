@@ -18,29 +18,80 @@
 			<?php echo lang("assignment");?>：《<?php echo splitx($assignment['a_title'])?>》 <?php echo substr($assignment['a_fdate'],0,10)?> <?php echo lang("stores");?>：<?php echo splitx(stripslashes($assignment['cs_name']));?>
 			<br />
 		   <?php echo lang("grade_info");?>：
-			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport">
-          <tr>
-            <td  height="20" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF"><?php echo lang("level_0");?></font></td>
-            <td  height="20" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF"><?php echo lang("level_1");?></font></td>
-            <td  height="20" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF"><?php echo lang("level_2");?></font></td>
-            <td  height="20" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF"><?php echo lang("level_3");?></font></td>
-            <td  height="20" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF"><?php echo lang("level_4");?></font></td>
-            <td  height="20" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF"><?php echo lang("level_5");?></font></td>
-            <td  height="20" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF"><?php echo lang("level_6");?></font></td>
-            <td  height="20" class="title" bgcolor="#9F0000" align="left"><font color="#FFFFFF"><?php echo lang("level_7");?></font></td>
-          </tr>
-          <tr>
-            <td align="left">n/a</td>
-            <td align="left">０</td>
-            <td align="left">１-２</td>
-            <td align="left">３-４</td>
-            <td align="left">５</td>
-            <td align="left">６-７</td>
-            <td align="left">８-９</td>
-            <td align="left">１０</td>
-          </tr>
+			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport" class="clear">
 
+          <?php if($mark_type == 10){?>
+          <tr>
+            <td class="title"><?php echo lang("level_0")?></td>
+            <td class="title"><?php echo lang("level_8")?></td>
+            <td class="title"><?php echo lang("level_1")?></td>
+            <td class="title"><?php echo lang("level_3")?></td>
+            <td class="title"><?php echo lang("level_4")?></td>
+            <td class="title"><?php echo lang("level_5")?></td>
+            <td class="title"><?php echo lang("level_6")?></td>
+            <td class="title"><?php echo lang("level_7")?></td>
+          </tr>
+          <tr>
+            <td align="center">n/a</td>
+            <td align="center">0</td>
+            <td align="center">1-2</td>
+            <td align="center">3-4</td>
+            <td align="center">5</td>
+            <td align="center">6-7</td>
+            <td align="center">8-9</td>
+            <td align="center">10</td>
+          </tr>
+          <?php }else if($mark_type == 5){?>
+          <tr>
+            <td class="title"><?php echo lang("level_0")?></td>
+            <td class="title"><?php echo lang("level_8")?></td>
+            <td class="title"><?php echo lang("level_1")?></td>
+            <td class="title"><?php echo lang("level_3")?></td>
+            <td class="title"><?php echo lang("level_4")?></td>
+            <td class="title"><?php echo lang("level_5")?></td>
+            <td class="title"><?php echo lang("level_7")?></td>
+          </tr>
+          <tr>
+            <td align="center">n/a</td>
+            <td align="center">0</td>
+            <td align="center">1</td>
+            <td align="center">2</td>
+            <td align="center">3</td>
+            <td align="center">4</td>
+            <td align="center">5</td>
+          </tr>
+          <?php }else if($mark_type == 4){?>
+          <tr>
+           <td class="title"><?php echo lang("level_0")?></td>
+            <td class="title"><?php echo lang("level_8")?></td>
+            <td class="title"><?php echo lang("level_1")?></td>
+            <td class="title"><?php echo lang("level_4")?></td>
+            <td class="title"><?php echo lang("level_5")?></td>
+            <td class="title"><?php echo lang("level_7")?></td>
+          </tr>
+          <tr>
+            <td align="center">n/a</td>
+            <td align="center">0</td>
+            <td align="center">1</td>
+            <td align="center">2</td>
+            <td align="center">3</td>
+            <td align="center">4</td>
+          </tr>
+          <?php }else if($mark_type == 2){?>
+          <tr>
+           <td class="title"><?php echo lang("level_0")?></td>
+            <td class="title"><?php echo lang("level_8")?></td>
+            <td class="title"><?php echo lang("level_1")?></td>
+            <td class="title"><?php echo lang("level_7")?></td>
+          </tr>
+          <tr>
+            <td align="center">n/a</td>
+            <td align="center">0</td>
+            <td align="center">1</td>
+            <td align="center">2</td>
+          <?php }?>
           </table>
+
          <table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport" style="margin-top:20px;">
           <tr>
             <td colspan="3" class="title" bgcolor="#9F0000" align="left" height="20"><font color="#FFFFFF"><?php echo lang('spot_mystery');?></font></td>
@@ -83,19 +134,20 @@
           <tr>
             <td colspan="3" class="title" bgcolor="#9F0000" align="left" height="20"><font color="#FFFFFF"><?php echo lang($k);?></font></td>
           </tr>
+
           <?php
 			foreach ($v as $kk=>$vv){
 				if($vv['rq_type']==2 || $vv['rq_type']==4 || $vv['rq_type']==1){
 				?>
           <tr>
 			 <td width="25"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
-            <td align="left"><span id="br_30"><?php echo splitx($vv['rq_question']);/*echo "haha";*/?></span></td>
+            <td align="left"><span id="br_30"><?php echo splitx($vv['rq_question']);?></span></td>
            <td width="80" align="left">
             <?php
             	if($vv['rq_type']==2){
             		if($vv['answer']=='A') echo 'N/A';
             		else
-            		echo ($vv['answer']==0)?"０":$vv['answer'];
+            		echo ($vv['answer']==0)?"０":splitx($vv['answer']);
             	}else if($vv['rq_type']==1){
 					if($vv['answer']=='Y')echo 'Yes';
 					if($vv['answer']=='N')echo 'No';
@@ -109,7 +161,7 @@
            <?php if($vv['is_comment']==1){?>
           <tr <?php if(!$vv['comment']) echo 'style="display:none;"'?> id="td_comment_<?php echo $vv['rq_id'];?>">
            <td></td>
-           <td colspan="2" ><span id="br_32"><?php echo $vv['comment'];?></span></td>
+           <td colspan="2" ><span id="br_32"><?php echo splitx($vv['comment']);?></span></td>
           </tr>
           <?php }?>
        		 <?php
@@ -131,7 +183,7 @@
           </tr>
           <tr>
              <td colspan="2" height="50">
-            		<span id="br_32"><?php echo splitx($vv['answer']); ?></span>
+            		<span id="br_32"><?php echo splitx($vv['answer']);?></span>
             </td>
           </tr>
 	   <?php }
