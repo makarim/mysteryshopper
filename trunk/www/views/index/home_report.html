@@ -4,7 +4,7 @@
 	<?php include_once("home_left.html")?>
     <div class="admincontent">
 		<?php include_once("home_assignmenttop.html")?>
-		
+
 <script src="<?php echo $www_site_url?>/public/js/common.js" type="text/javascript"></script>
 <script src="<?php echo $www_site_url?>/public/js/vote.js" type="text/javascript"></script>
 <script>
@@ -23,7 +23,7 @@ function checkform(form){
 		return false;
 	}
 	var result = true;
-	
+
 	var input = g('input');
 	for(var i=0;i<input.length;i++){
 		var v = va(input[i]);
@@ -34,7 +34,7 @@ function checkform(form){
 			}else{
 				input[i].parentNode.style.border='';
 			}
-		} 
+		}
 		if(input[i].type=='radio'){
 			if(check(form.elements[input[i].name])){
 				input[i].parentNode.style.border='';
@@ -43,7 +43,7 @@ function checkform(form){
 			}
 		}
 	}
-	
+
 	var textarea = g('textarea');
 	for(var i=0;i<textarea.length;i++){
 		var v=va(textarea[i]);
@@ -61,16 +61,16 @@ function checkform(form){
 	}else{
 		return false;
 	}
-	
+
 
 }
-	
-	
+
+
 </script>
 
 	<?php if($is_view && $assignmentinfo['a_quiz_pass']>0){
 		if($is_submitted==0 || $is_submitted==2){
-			
+
 			if($is_submitted==2){
 				echo ' <p>&nbsp;</p><div align="center">'.lang("approval_notpass")."</div>";
 			}
@@ -79,16 +79,17 @@ function checkform(form){
 				 <br />
 		    <p><?php echo lang("grade_info")?>：</p>
 			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport" class="clear">
+			<?php if($mark_type == 10){?>
           <tr>
             <td class="title"><?php echo lang("level_0")?></td>
+            <td class="title"><?php echo lang("level_8")?></td>
             <td class="title"><?php echo lang("level_1")?></td>
-            <td class="title"><?php echo lang("level_2")?></td>
             <td class="title"><?php echo lang("level_3")?></td>
             <td class="title"><?php echo lang("level_4")?></td>
             <td class="title"><?php echo lang("level_5")?></td>
             <td class="title"><?php echo lang("level_6")?></td>
             <td class="title"><?php echo lang("level_7")?></td>
-          </tr> 
+          </tr>
           <tr>
             <td align="center">n/a</td>
             <td align="center">0</td>
@@ -99,9 +100,59 @@ function checkform(form){
             <td align="center">8-9</td>
             <td align="center">10</td>
           </tr>
-       
+          <?php }else if($mark_type == 5){?>
+          <tr>
+            <td class="title"><?php echo lang("level_0")?></td>
+            <td class="title"><?php echo lang("level_8")?></td>
+            <td class="title"><?php echo lang("level_1")?></td>
+            <td class="title"><?php echo lang("level_3")?></td>
+            <td class="title"><?php echo lang("level_4")?></td>
+            <td class="title"><?php echo lang("level_5")?></td>
+            <td class="title"><?php echo lang("level_7")?></td>
+          </tr>
+          <tr>
+            <td align="center">n/a</td>
+            <td align="center">0</td>
+            <td align="center">1</td>
+            <td align="center">2</td>
+            <td align="center">3</td>
+            <td align="center">4</td>
+            <td align="center">5</td>
+          </tr>
+          <?php }else if($mark_type == 4){?>
+          <tr>
+            <td class="title"><?php echo lang("level_0")?></td>
+            <td class="title"><?php echo lang("level_8")?></td>
+            <td class="title"><?php echo lang("level_1")?></td>
+            <td class="title"><?php echo lang("level_4")?></td>
+            <td class="title"><?php echo lang("level_5")?></td>
+            <td class="title"><?php echo lang("level_7")?></td>
+          </tr>
+          <tr>
+            <td align="center">n/a</td>
+            <td align="center">0</td>
+            <td align="center">1</td>
+            <td align="center">2</td>
+            <td align="center">3</td>
+            <td align="center">4</td>
+          </tr>
+          <?php }else if($mark_type == 2){?>
+          <tr>
+            <td class="title"><?php echo lang("level_0")?></td>
+            <td class="title"><?php echo lang("level_8")?></td>
+            <td class="title"><?php echo lang("level_1")?></td>
+            <td class="title"><?php echo lang("level_7")?></td>
+          </tr>
+          <tr>
+            <td align="center">n/a</td>
+            <td align="center">0</td>
+            <td align="center">1</td>
+            <td align="center">2</td>
+          </tr>
+          <?php }?>
+
           </table>
-         
+
          <form action="<?php echo $www_site_url?>/index.php" method="post" onsubmit="return checkform(this);">
 				<input type="hidden" name="action" value="home">
 				<input type="hidden" name="op" value="savereport">
@@ -112,6 +163,7 @@ function checkform(form){
           <tr>
             <td colspan="3" class="title"><?php echo lang($k);?></td>
           </tr>
+
           <?php
 			foreach ($v as $kk=>$vv){
 				if($vv['rq_type']==2 || $vv['rq_type']==4 || $vv['rq_type']==1){
@@ -121,47 +173,47 @@ function checkform(form){
             <td width="60%"><?php echo splitx($vv['rq_question']);?> <span id="span_ch_<?php echo $vv['rq_id'];?>" style="float:right;"></span></td>
             <td  width="35%" align="center">
              <?php if($vv['rq_type']==2){?>
-            	<?php if($vv['is_na']==1){?> <span style="float:left;"> <img id="icon_updown_<?php echo $vv['rq_id'];?>" style="cursor:pointer;" src="<?php echo $www_site_url?>/public/images/up_down.jpg" onclick="display_comment(<?php echo $vv['rq_id'];?>);"><input type="checkbox" id="votebox_<?php echo $vv['rq_id'];?>" name="votebox_<?php echo $vv['rq_id'];?>" onclick="out_fs('yes_<?php echo $vv['rq_id'];?>_10');"  <?php if($vv['answer']=='A') echo "checked"; ?>>N/A</span><?php }?>
-            					<div id="voteimg_<?php echo $vv['rq_id'];?>"></div>	
+            	<?php if($vv['is_na']==1){?> <span style="float:left;"> <img id="icon_updown_<?php echo $vv['rq_id'];?>" style="cursor:pointer;" src="<?php echo $www_site_url?>/public/images/up_down.jpg" onclick="display_comment(<?php echo $vv['rq_id'];?>);"><input type="checkbox" id="votebox_<?php echo $vv['rq_id'];?>" name="votebox_<?php echo $vv['rq_id'];?>" onclick="out_fs('yes_<?php echo $vv['rq_id'];?>_10_<?php echo $mark_type;?>');"  <?php if($vv['answer']=='A') echo "checked"; ?>>N/A</span><?php }?>
+            					<div id="voteimg_<?php echo $vv['rq_id'];?>"></div>
 								<input type="hidden" id="rq_ans_<?php echo $vv['rq_id'];?>" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="<?php echo $vv['answer'];?>">
-								<script>create_vote_img(<?php echo $vv['rq_id'];?>,'<?php echo $vv['answer'];?>');</script>	
-								
-			<?php }else if($vv['rq_type']==1){ ?>		
+								<script>create_vote_img_mark(<?php echo $vv['rq_id'];?>,'<?php echo $vv['answer'];?>',<?php echo $mark_type;?>);</script>
+
+			<?php }else if($vv['rq_type']==1){ ?>
 								 <?php if($vv['is_na']==1){?><span> <img id="icon_updown_<?php echo $vv['rq_id'];?>" style="cursor:pointer;" src="<?php echo $www_site_url?>/public/images/up_down.jpg" onclick="display_comment(<?php echo $vv['rq_id'];?>);"><input type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="A" <?php if($vv['answer']=='A')echo 'checked'; ?> onclick="display_comment(<?php echo $vv['rq_id'];?>);">N/A ;<span><?php }?>
 								 <input type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="Y" <?php if($vv['answer']=='Y')echo 'checked'; ?> onclick="display_comment(<?php echo $vv['rq_id'];?>);">Yes ;</label>&nbsp;&nbsp;&nbsp;&nbsp;<label><input onclick="display_comment(<?php echo $vv['rq_id'];?>);" type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="N"  <?php if($vv['answer']=='N')echo 'checked'; ?>>No;</label>
-								
-			<?php }else if($vv['rq_type']==4){ ?>	
+
+			<?php }else if($vv['rq_type']==4){ ?>
 								<input type="text" size="6" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="<?php echo $vv['answer']; ?>">	分钟
 							<?php }?>
             </td>
           </tr>
-           
+
           <?php if($vv['is_comment']==1){?>
           <tr <?php if(!$vv['comment']) echo 'style="display:none;"'?> id="td_comment_<?php echo $vv['rq_id'];?>">
           <td colspan="3" ><textarea style="width:100%;font-size:12px;height:32px;" rows="2" name="rq_comment_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" id="rq_comment_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>"><?php echo $vv['comment'];?></textarea></td>
           </tr>
           <?php }?>
-       		 <?php 
-				}else if($vv['rq_type']==3){ 
+       		 <?php
+				}else if($vv['rq_type']==3){
 			?>
-			  <?php  
+			  <?php
 					if($vv['rq_group']==5){
-					?>	
+					?>
 			<tr>
 			 <td width="5%" valign="top"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
 			 <td width="60%"><?php echo splitx($vv['rq_question']);?></td>
             <td  width="35%" align="center"><input class="textfield" type="text" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="<?php echo $vv['answer']; ?>"></td>
-                        
+
           </tr>
           <? }else{?>
 			<tr>
 			 <td width="5%" valign="top"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
              <td width="95%" colspan="2" style="padding:0">
-            
+
 		            <table width="100%" border="0" cellpadding="0" cellspacing="0">
-			            <tr> 
+			            <tr>
 			            	<td width="50%" style="background-color:#ccc;"> <?php echo splitx($vv['rq_question'])?></td>
-			            
+
 			          	</tr>
 			           <tr>
 				           <td style="height:50px">
@@ -170,14 +222,14 @@ function checkform(form){
 			            </tr>
 		             </table>
             </td>
-          </tr>	
-	   <?php } 
-			
+          </tr>
+	   <?php }
+
 				}
-				
+
 			}
 			?>
-			
+
         </table>
  		<?php }?>
  		<table width="100%" height="50">
@@ -186,12 +238,12 @@ function checkform(form){
 			</tr>
 		</table>
 		</form>
-				
-			
 
-				
+
+
+
   <?php 	}
-  
+
 		}elseif($is_submitted==3){
 			echo ' <p>&nbsp;</p> <div align="center">'.lang('finish_report')."</div>";
 		}elseif($is_submitted==1){
@@ -203,7 +255,7 @@ function checkform(form){
    <p>&nbsp;</p>
    <div align="center"><?php echo lang("apply_second")?></div>
   <?php }?>
-  
+
   </div>
 </div>
 <?php include_once("footer.html")?>
