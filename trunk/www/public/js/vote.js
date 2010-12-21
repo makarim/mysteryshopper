@@ -132,19 +132,23 @@ function display_comment(id){
 		$("td_comment_"+id).style.display = '';
 		$("td_comment_"+id).focus();
 	}
+	if(obj){
 	if(is_ie6){
 		obj.setAttribute("onclick",function(){hide_comment(id);});
 	}else{
 		obj.setAttribute("onclick",'hide_comment('+id+');');
 	}
+	}
 }
 function hide_comment(id){
 	var obj = $("icon_updown_"+id);
 	if($("td_comment_"+id)) $("td_comment_"+id).style.display = 'none';
+	if(obj){
 	if(is_ie6){
 		obj.setAttribute("onclick",function(){display_comment(id);});
 	}else{
 		obj.setAttribute("onclick",'display_comment('+id+');');
+	}
 	}
 }
 
@@ -264,7 +268,8 @@ function is_fs_mark(id){
 
 	var vote_span_text=obj+"分";
 	document.getElementById("span_ch_"+q).innerHTML =vote_span_text;
-	document.getElementById("votebox_"+q).checked = 0;
+	if(document.getElementById("votebox_"+q)){
+	document.getElementById("votebox_"+q).checked = 0;}
 
 	/* 设置隐藏框的值前，将值转换成能存入数据库的值（10分制的） */
 	//定义保存分制的二维数组，一维的索引号表示分制类型，二维的索引号表示应在前端显示的数值，值表示应存入数据库中的value
