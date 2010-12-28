@@ -83,7 +83,7 @@ class assignment{
 		$_POST ['b_id'] = intval ( $_POST ['b_id'] );
 		$_POST ['a_desc'] = addslashes( $_POST ['a_desc'] );
 		$_POST ['a_demand'] = addslashes( $_POST ['a_demand']);
-		$_POST ['a_istest'] =  isset($_POST ['a_istest'])?1:0 ;
+		$_POST ['a_istest'] = isset($_POST ['a_istest'])?1:0;
 		$_POST ['a_quiz'] = addslashes( $_POST ['a_quiz'] );
 		$_POST ['a_hasphoto'] = !isset ( $_POST ['a_hasphoto'] )?0:1;
 		$_POST ['a_hasaudio'] = !isset ( $_POST ['a_hasaudio'] )?0:1;
@@ -100,17 +100,18 @@ class assignment{
 		include_once("AssignmentModel.class.php");
 		$assignmentMod = new AssignmentModel();
 
-		$assignment['a_title'] =  $_POST ['a_title'] ;
-		$assignment['a_sdate'] =  $_POST ['a_sdate'] ;
-		$assignment['a_edate'] =  $_POST ['a_edate'] ;
-		$assignment['c_id'] =  $_POST ['c_id'] ;
-		$assignment['cs_id'] =  $_POST ['cs_id'] ;
-		$assignment['re_id'] =  $_POST ['re_id'] ;
-		$assignment['b_id'] =  $_POST ['b_id'] ;
-		$assignment['a_desc'] =  $_POST ['a_desc'] ;
-		$assignment['a_demand'] =  $_POST ['a_demand'] ;
-		$assignment['a_istest'] =  $_POST ['a_istest'] ;
-		if($assignment['a_istest']==0) $assignment['a_quiz_pass'] = 1 ;
+		$assignment['a_title'] =  $_POST ['a_title'];
+		$assignment['a_sdate'] =  $_POST ['a_sdate'];
+		$assignment['a_edate'] =  $_POST ['a_edate'];
+		$assignment['c_id'] =  $_POST ['c_id'];
+		$assignment['cs_id'] =  $_POST ['cs_id'];
+		$assignment['re_id'] =  $_POST ['re_id'];
+		$assignment['b_id'] =  $_POST ['b_id'];
+		$assignment['a_desc'] =  $_POST ['a_desc'];
+		$assignment['a_demand'] =  $_POST ['a_demand'];
+		$assignment['a_istest'] =  $_POST ['a_istest'];
+		if($assignment['a_istest']==0) $assignment['a_quiz_pass']=1;
+		if($assignment['a_istest']==1) $assignment['a_quiz_pass']=0;
 		$assignment['a_quiz'] =  $_POST ['a_quiz'] ;
 		$assignment['a_hasphoto'] =  $_POST ['a_hasphoto'] ;
 		$assignment['a_hasaudio'] =  $_POST ['a_hasaudio'] ;
@@ -119,7 +120,7 @@ class assignment{
 		$assignment['a_markgrade'] = $_POST['a_markgrade'];
 
 		// 1. create db assignment
-		$row = $assignmentMod->createNewAssignment ( $assignment );
+		$row = $assignmentMod->createNewAssignment ($assignment);
 		if ($row !== false) {
 			$msg = array('s'=> 200,'m'=>lang('success'),'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/assignment/defaults");
 			exit(json_output($msg));
