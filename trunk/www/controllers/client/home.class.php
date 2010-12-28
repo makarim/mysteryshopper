@@ -58,6 +58,7 @@ class home{
 			$def_brands[] = $b['b_id'];
 		}
 
+
 		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  start  add by wendy 2010.11.16*/
 		if(!empty($_GET['selbrands']) && ($_GET['selbrands'] != -1)){
 			$selbrands = array($_GET['selbrands']);
@@ -83,6 +84,7 @@ class home{
 			$brand = $corpModel->getBrandById($brand_id);
 			$stores = $corpModel->getStoreByBid($brand_id);
 			$totalcompleted = $corpModel->getTotalCompletedAssignmentsByBid($brand_id);
+
 		}else{
 			$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
 			$totalcompleted = $corpModel->getTotalCompletedAssignments($this->login_corp['c_id']);
@@ -328,7 +330,7 @@ class home{
 		$this->tpl->assign("brands",$brands);
 	}
 
-	function get_assignment_avg_overall($con,$brand_id){
+	function get_assignment_avg_overall($con,$brand_id,$n=0){
 		if($brand_id){
 			$this->stores = $this->corpModel->getStoreByBid($brand_id);
 		}else{
@@ -371,7 +373,8 @@ class home{
 
 					$a_average += ($v['service']+$v['environment']+$v['product'])/3;
 				}
-				$this->assignments[$k] = $v;
+				//$this->assignments[$k] = $v;
+				$this->assignments[$n++] = $v;
 			}
 			if($count>0)$internal_average = round($a_average/$count,2);
 		}
@@ -415,8 +418,9 @@ class home{
 
 		}else{
 			$internal_average = 0;
+			$n = 0;
 			foreach ($selbrands as $b_id){
-				$internal_average +=$this->get_assignment_avg_overall($con,$b_id);
+				$internal_average +=$this->get_assignment_avg_overall($con,$b_id,&$n);
 			}
 			$internal_average = round($internal_average/count($selbrands),2);
 			$this->stores = array();
@@ -435,7 +439,7 @@ class home{
 
 	}
 
-	function get_assignment_avg_environment($con,$brand_id){
+	function get_assignment_avg_environment($con,$brand_id,$n=0){
 		if($brand_id){
 			$this->stores = $this->corpModel->getStoreByBid($brand_id);
 		}else{
@@ -452,13 +456,13 @@ class home{
 		$count = count($assignments);
 		if(is_array($assignments)){
 			foreach ($assignments as $k=>$v){
-
 				$v['yesorno'] = $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,$GLOBALS['gTypes']['yesorno']);
 				$v['vote'] = $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,$GLOBALS['gTypes']['vote']);
 				if($con['type']=='summary') $a_average += $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,'');
 				if($con['type']=='yesorno') $a_average += $v['yesorno'];
 				if($con['type']=='vote') $a_average += $v['vote'];
-				$this->assignments[$k] = $v;
+				//$this->assignments[$k] = $v;
+				$this->assignments[$n++] = $v;
 			}
 			if($count>0)$internal_average = round($a_average/$count,2);
 		}
@@ -506,13 +510,18 @@ class home{
 
 		}else{
 			$internal_average = 0;
+			$n = 0;
 			foreach ($selbrands as $b_id){
-				$internal_average +=$this->get_assignment_avg_environment($con,$b_id);
+				$internal_average +=$this->get_assignment_avg_environment($con,$b_id,&$n);
 			}
 			$internal_average = round($internal_average/count($selbrands),2);
 			$this->stores = array();
 			$this->selstores = array();
 		}
+
+//		echo "type=".$type;
+//		echo "<pre/>";
+//		print_r($this->assignments);
 
 		$this->tpl->assign("internal_average",$internal_average);
 		$this->tpl->assign("assignments",$this->assignments);
@@ -523,7 +532,7 @@ class home{
 
 	}
 
-	function get_assignment_avg_service($con,$brand_id){
+	function get_assignment_avg_service($con,$brand_id,$n=0){
 		if($brand_id){
 			$this->stores = $this->corpModel->getStoreByBid($brand_id);
 		}else{
@@ -560,7 +569,8 @@ class home{
 					if($con['type']=='yesorno') $a_average += $v['yesorno'];
 					if($con['type']=='vote') $a_average += $v['vote'];
 				}
-				$this->assignments[$k] = $v;
+				//$this->assignments[$k] = $v;
+				$this->assignments[$n++] = $v;
 			}
 			if($count>0)$internal_average = round($a_average/$count,2);
 		}
@@ -604,8 +614,9 @@ class home{
 
 		}else{
 			$internal_average = 0;
+			$n = 0;
 			foreach ($selbrands as $b_id){
-				$internal_average +=$this->get_assignment_avg_service($con,$b_id);
+				$internal_average +=$this->get_assignment_avg_service($con,$b_id,&$n);
 			}
 			$internal_average = round($internal_average/count($selbrands),2);
 			$this->stores = array();
@@ -622,7 +633,7 @@ class home{
 	}
 
 
-	function get_assignment_avg_product($con,$brand_id){
+	function get_assignment_avg_product($con,$brand_id,$n=0){
 		if($brand_id){
 			$this->stores = $this->corpModel->getStoreByBid($brand_id);
 		}else{
@@ -645,7 +656,8 @@ class home{
 				if($con['type']=='summary') $a_average += $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],3,'');
 				if($con['type']=='yesorno') $a_average += $v['yesorno'];
 				if($con['type']=='vote') $a_average += $v['vote'];
-				$this->assignments[$k] = $v;
+				//$this->assignments[$k] = $v;
+				$this->assignments[$n++] = $v;
 			}
 			if($count>0)$internal_average = round($a_average/$count,2);
 		}
@@ -689,8 +701,9 @@ class home{
 
 		}else{
 			$internal_average = 0;
+			$n = 0;
 			foreach ($selbrands as $b_id){
-				$internal_average +=$this->get_assignment_avg_product($con,$b_id);
+				$internal_average +=$this->get_assignment_avg_product($con,$b_id,&$n);
 			}
 			$internal_average = round($internal_average/count($selbrands),2);
 			$this->stores = array();
@@ -1009,10 +1022,10 @@ class home{
 					$comment = $ReportModel->getCommentByRqid($a_id,$vv['rq_id']);
 
 					/* 在显示前，将半角的转换为全角的 add by wendy at 20101029*/
-					$answer = strtr($answer,$array);
-					$comment = strtr($comment,$array);
-					$answer = strtr($answer,$array);
-					$comment = strtr($comment,$array);
+//					$answer = strtr($answer,$array);
+//					$comment = strtr($comment,$array);
+//					$answer = strtr($answer,$array);
+//					$comment = strtr($comment,$array);
 
 					/* 将\n转换成<br/> */
 //					$vv['answer'] = nl2br($ReportModel->getAnswerByAid($a_id,$vv['rq_id'],$vv['rq_type']));
@@ -1031,8 +1044,9 @@ class home{
 		$mystery_shopper_info = $UserModel->getUserInfoById($assignment['user_id'],'gender,birthdate,marital,nationality,householdincome');
 
 		$attachments = $assignmentModel->getUploadedAttachment($a_id);
-		$this->tpl->assign("attachments",$attachments);
 
+		$this->tpl->assign("attachments",$attachments);
+		$this->tpl->assign("mark_type",$assignment['a_markgrade']);
 		$this->tpl->assign("ms_info",$mystery_shopper_info);
 		$this->tpl->assign("assignment",$assignment);
 		$this->tpl->assign("report_questions",$report_questions);
