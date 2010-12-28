@@ -57,8 +57,8 @@ class AssignmentModel extends Model {
 	}
 	function createNewAssignment($as){
 		//user table
-		return	$this->db->execute ( "insert into assignment ( a_title,  a_desc,a_demand,a_sdate,a_edate, c_id, cs_id,a_hasphoto,a_hasaudio,re_id,a_quiz,b_id)
-		values ('{$as['a_title']}','" . $as ['a_desc'] . "','{$as['a_demand']}','{$as['a_sdate']}','{$as['a_edate']}','{$as['c_id']}','{$as['cs_id']}','{$as['a_hasphoto']}','{$as['a_hasaudio']}','{$as['re_id']}','{$as['a_quiz']}','{$as['b_id']}')" );
+		return	$this->db->execute ( "insert into assignment ( a_title,  a_desc,a_demand,a_sdate,a_edate, c_id, cs_id,a_hasphoto,a_hasaudio,re_id,a_quiz,a_istest,a_quiz_pass,b_id,a_markgrade)
+		values ('{$as['a_title']}','" . $as ['a_desc'] . "','{$as['a_demand']}','{$as['a_sdate']}','{$as['a_edate']}','{$as['c_id']}','{$as['cs_id']}','{$as['a_hasphoto']}','{$as['a_hasaudio']}','{$as['re_id']}','{$as['a_quiz']}',{$as['a_istest']},{$as['a_quiz_pass']},'{$as['b_id']}',{$as['a_markgrade']})" );
 
 	}
 	function deleteAssignment($a_id){
@@ -438,7 +438,7 @@ class AssignmentModel extends Model {
 						$sql = "select avg(ans_answer2) as avg from answer where rq_id='".$rq['rq_id']."' and a_id='".$a_id."' and rq_type=2 and ans_answer2!='A'";
 						$res = $this->db->getOne($sql);
 
-						if($res>=0 && $res !== null){//判断条件由$res>0改为现在这样，by wendy 20101102
+						if($res>=0 && $res !== null){//判断条件由$res>0改为现在这样，因为null也会被认为是0，而null的项是不计入的 by wendy 20101102
 							$sum +=$res;
 							$n++;
 						}
