@@ -244,7 +244,8 @@ class AssignmentModel extends Model {
     	$add =$addsql = '';
     	if(!empty($con['sdate'])) $add .= " and a_fdate >='".$con['sdate']."'";
     	if(!empty($con['edate'])) $add .= " and a_fdate <= '".$con['edate']."'";
-    	if(!empty($con['a_audit'])) $add .= " and a_audit = '".$con['a_audit']."'";
+    	if(!empty($con['a_finish'])) $add .= "and a_finish = 1";//表示该问卷已完成 modify by wendy 2010.12.30
+    	//if(!empty($con['a_audit'])) $add .= " and a_audit = '".$con['a_audit']."'";
     	if(is_array($cs_id) && count($cs_id)>0) $addsql = " and cs_id in (".join(",",$cs_id).")";
     	else  $addsql = " and cs_id ='".$cs_id."'";
     	//echo "select a_id,re_id,DATE_FORMAT(a_fdate, '%m-%d') as day,a_title from assignment where cs_id='$cs_id' $add order by day";
