@@ -212,6 +212,7 @@ class home{
 		$con['type'] = $type;
 		$con['type_id'] = $type_id;
 		$con['a_audit'] = 1;
+		$con['a_finish'] = 1;
 		$this->assignments = $this->selstores= $this->stores = array();
 		$internal_average = 0;
 
@@ -454,6 +455,9 @@ class home{
 		$assignments = $this->assignmentModel->getAssignmentsByCsId($con,$this->selstores);
 		$a_average = $internal_average= 0;
 		$count = count($assignments);
+//		echo "<pre/>";
+//		print_r($con);
+//		print_r($assignments);
 		if(is_array($assignments)){
 			foreach ($assignments as $k=>$v){
 				$v['yesorno'] = $this->assignmentModel->getSummaryScoreByAsId($v['a_id'],$v['re_id'],2,$GLOBALS['gTypes']['yesorno']);
