@@ -58,7 +58,7 @@ class corporation{
 
 		$_POST ['c_name'] = trim ( $_POST ['c_name'] );
 		$c_name_len = mb_strlen ( $_POST ['c_name'], "UTF-8");
-		if (empty ( $_POST ['c_name'] ) || ! preg_match ( $pattern, $_POST ['c_name'] ) || $c_name_len < 2 || $c_name_len > 16 ) {
+		if (empty ( $_POST ['c_name'] ) || ! preg_match ( $pattern, $_POST ['c_name'] ) || $c_name_len < 2 || $c_name_len > 30 ) {
 			//$msg = array('s'=> 400,'m'=>lang('cnamerule'),'d'=>'');
 			//exit(json_output($msg));
 			show_message(lang('cnamerule'));
