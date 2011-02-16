@@ -811,4 +811,15 @@ $GLOBALS['gLang']['markgrade'] = '评分题分制';
 $GLOBALS['gLang']['istest'] = '启用小测试';
 $GLOBALS['gLang']['coupon'] = '优惠券(即将推出)';
 $GLOBALS['gLang']['couponslist'] = '优惠券列表';
+$GLOBALS['gLang']['occupation'] = '职业';
+$GLOBALS['gLang']['holdincome'] = '月薪';
+$GLOBALS['gLang']['birthdate'] = '生日';
+
+$GLOBALS['gLang']['holdincome1'] = '<3,000';
+$GLOBALS['gLang']['holdincome2'] = '3,000-6,000';
+$GLOBALS['gLang']['holdincome3'] = '6,000-9,000';
+$GLOBALS['gLang']['holdincome4'] = '9,000-12,000';
+$GLOBALS['gLang']['holdincome5'] = '12,000-15,000';
+$GLOBALS['gLang']['holdincome6'] = '15,000-30,000';
+$GLOBALS['gLang']['holdincome7'] = '>30,000';
 ?>
