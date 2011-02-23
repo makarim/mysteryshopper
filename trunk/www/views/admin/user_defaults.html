@@ -11,27 +11,27 @@
 
 <script>
 function checkOnSubmit(formName) {
-  	
+
 	var url = "<?php echo $www_site_url?>/admin.php";
 	var params = mini.form.serialize($(formName));
 	mini.ajax.post(url, function(r){
-		var r = eval('(' + r + ')');   
+		var r = eval('(' + r + ')');
 		if(r.s==200){
 			window.location.href = r.d;
 		}
 		if(r.s==400){
-			$('msg').innerHTML = r.m;			
+			$('msg').innerHTML = r.m;
 		}
 	}, params);
-	
+
 	return false;
-       
+
 }
 function viewUser(user,user_id){
 	var url = "<?php echo $www_site_url?>/admin.php?action=user&view=detail&detail=contact&user_id="+user_id+'&user='+user;
 	window.location = url;
 //	mini.ajax.get(url, function(r){
-//		var r = eval('(' + r + ')');   
+//		var r = eval('(' + r + ')');
 //		if(r.s==200){
 //			$('userid_'+user_id).innerHTML = "<?php echo lang('img')?>:<img src='/public/upload/faceimg/"+r.d.face_img+"' width='60' height='60'>;<?php echo lang('sex')?>:"+r.d.user_sex+ ", <?php echo lang('signup')?>IP:"+ r.d.user_reg_ip +", <?php echo lang('lastlogin')?>:"+r.d.user_lastlogin_time+
 //		", <?php echo lang('lastlogin')?>IP:"+r.d.user_lastlogin_ip+" <?php echo lang('email')?>:"+r.d.user_email;
@@ -55,7 +55,7 @@ function viewUser(user,user_id){
 		document.getElementById("close").style.display = 'block';
 		var tli=document.getElementById("tabs_menu").getElementsByTagName("li");
 		var mli=document.getElementById("tabs_main").getElementsByTagName("div");
-		for(i=0;i<tli.length;i++){
+		for(i=0;i<tli.length-1;i++){
 		  tli[i].className=i==n?"hover":"";
 		  mli[i].style.display=i==n?"block":"none";
 		}
@@ -69,11 +69,11 @@ function viewUser(user,user_id){
 		}
 	}
 
-		
+
 	</script>
 
 	<div class="container">
-	
+
 
 			<div id="tabs">
 				<div class="tabs_menubox">
@@ -81,20 +81,20 @@ function viewUser(user,user_id){
 						<li onclick="setTab(0)"><?php echo lang('search_user')?></li>
 						<li onclick="setTab(1)"><?php echo lang('add_user')?></li>
 						<li onclick="hid()" id="close" style="display:none;"><?php echo lang('hide')?>×</li>
-		
+
 					</ul>
 				</div>
 				<div id="tabs_mainbox" class="tabs_mainbox" style="display:none;">
 					<div class="main" id="tabs_main" >
 						<div  style="display:none;">
 							<form action="<?php echo $www_site_url?>/admin.php" method="GET">
-							<input type="hidden" name="action" value="user">				
-							<input type="hidden" name="view" value="defaults">					
+							<input type="hidden" name="action" value="user">
+							<input type="hidden" name="view" value="defaults">
 							<table width="100%">
 								<tr>
 									<td align="right"><?php echo lang('user')?>:</td>
 									<td align="left"><input type="text" name="user" value="<?php echo $con['user']?>" class="textfield" /></td>
-			
+
 									<td>UID:</td>
 									<td align="left"><input type="text" name="user_id" value="<?php echo $con['user_id']?>" class="textfield" /></td>
 									<td><?php echo lang('nickname')?>:</td>
@@ -103,13 +103,13 @@ function viewUser(user,user_id){
 								</tr>
 								<tr>
 									<td align="right"><?php echo lang('reg_date')?>:</td>
-			
+
 									<td colspan="3" align="left"><input type="text" name="user_reg_time" onclick="showcalendar();" value="<?php echo $con['user_reg_time']?>" class="textfield" /> <?php echo lang('to')?> <input type="text" name="user_reg_time1" onclick="showcalendar();" value="<?php echo $con['user_reg_time1']?>" class="textfield" /></td>
-									
+
 								</tr>
 							</table>
 							</form>
-						</div>	
+						</div>
 						<div class="block" style="display:none;">
 							<form id="adduserform" name="adduserform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('adduserform');" >
 							<input type="hidden" name="action" value="user">
@@ -119,7 +119,7 @@ function viewUser(user,user_id){
 								<tr>
 									<td align="left"><?php echo lang('user')?>:</td>
 									<td align="left"><input type="text" name="email" class="textfield" /></td>
-			
+
 									<td><?php echo lang('pwd')?>:</td>
 									<td align="left"><input type="password" name="password" class="textfield" /></td>
 									<td><?php echo lang('nickname')?>:</td>
@@ -130,16 +130,16 @@ function viewUser(user,user_id){
 								</tr>
 							</table>
 							</form>
-			
+
 						</div>
-					
+
 				</div>
 			</div>
 
 		</div>
 <br>
 		<h3><?php echo lang('user_list')?> <?php echo lang('user_total')?>:<?php echo $total?></h3>
-		
+
 		<div class="mainbox">
 				<form action="<?php echo $www_site_url?>/admin.php" onsubmit="return confirm('<?php echo lang('domain_delete_comfirm')?>');" method="post">
 				<input type="hidden" name="action" value="user">
@@ -148,22 +148,24 @@ function viewUser(user,user_id){
 
 					<tr>
 						<th><input type="checkbox" name="chkall" id="chkall" onclick="checkall('delete[]')" class="checkbox" /><label for="chkall"><?php echo lang('delete')?></label></th>
-						
+
 						<th><?php echo lang('user')?></th>
 						<th><?php echo lang('nickname')?></th>
 						<th><?php echo lang('reg_date')?></th>
+						<th><?php echo lang('completetask')?></th>
 						<th><?php echo lang('more')?></th>
 
 						<th><?php echo lang('edit')?></th>
 					</tr>
 						<?php if(isset($users['records']) && is_array($users['records'])){
-							foreach ($users['records'] as $v){?>	
+							foreach ($users['records'] as $v){?>
 						<tr>
 							<td class="option"><input type="checkbox" name="delete[]" value="<?php echo $v['user']?>" class="checkbox" /></td>
-							
+
 							<td><strong><?php echo $v['user']?></strong></td>
 							<td><?php echo $v['user_nickname']?></td>
 							<td><?php echo date('y-m-d H:i:s',$v['user_reg_time'])?></td>
+							<td><?php echo $v['count']?></td>
 
 							<td><a href="javascript:viewUser('<?php echo $v['user']?>','<?php echo $v['user_id']?>')"><?php echo lang('view')?></a></td>
 							<td><a href="/admin.php/user/edit/user_id/<?php echo $v['user_id']?>/user/<?php echo $v['user']?>"><?php echo lang('edit')?></a></td>
@@ -171,7 +173,7 @@ function viewUser(user,user_id){
 						<tr>
 						<td colspan="7"><div style="display:none" id="userid_<?php echo $v['user_id']?>"></div></td>
 						</tr>
-						
+
 						<?php }
 						}?>
 										<tr class="nobg">
