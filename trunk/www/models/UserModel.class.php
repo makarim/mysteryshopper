@@ -7,7 +7,7 @@ class UserModel extends Model {
 		$select =$this->db->select();
 		$select->from ( " user_index ","*");
 		//$select->leftjoin ( " user_index ","*");
-		
+
 		//
 		if(isset($con['order'])) $select->order ( $con['order']." desc" );
 		if(isset($con['user']) && !empty($con['user'])) $select->where ( " user = '".$con['user']."'" );
@@ -15,15 +15,15 @@ class UserModel extends Model {
 		if(isset($con['user_nickname']) && !empty($con['user_nickname'])) $select->where ( " user_nickname like '".$con['user_nickname']."%'" );
 		if(isset($con['user_reg_time']) && !empty($con['user_reg_time'])) $select->where ( " user_reg_time >= '".strtotime($con['user_reg_time'])."'" );
 		if(isset($con['user_reg_time1'])&& !empty($con['user_reg_time1'])) $select->where ( " user_reg_time < '".strtotime($con['user_reg_time1'])."'" );
-		
+
 		$list = array();
 		$offset = '';
-		
+
 		$total = $select->count (); //获得查询到的记录数
 		include_once("Pager.class.php");
 	    $list ['page'] = new Pager ( $total, $pageCount ); //创建分页对象
 		$offset = $list ['page']->offset ();               //获得记录偏移量
-		
+
 		$pagerStyle = array ('firstPage' => 'page', 'prePage' => 'go_b', 'nextPage' => 'go_b','preGroup'=>'page','nextGroup'=>'page', 'totalPage' => '', 'numBar' => 'on', 'numBarMain' => 'page' );                      //翻页条的样式
 		$list ['page']->setLinkStyle ( $pagerStyle );
 		$label = array('first_page'=>lang('first_page'),'last_page'=>lang('last_page'),'next_page'=>lang('next_page'),'pre_page'=>lang('pre_page'),'next_group'=>lang('next_group'),'pre_group'=>lang('pre_group'));
@@ -33,13 +33,22 @@ class UserModel extends Model {
 		}else{
 			$list ['pagebar'] = '';
 		}
-		
+
 		$select->limit ( $list['page']->offset(), $pageCount );
 		$rs = $select->query();
-	
+
 		if ($rs) {
 			foreach ( $rs as $key => $record ) {
 				$list ['records'] [$key] = $record;
+
+				$select->from(" assignment ", "count(*)");
+				$select->where(" user_id='".$record['user_id']."'");
+				$select->where(" a_finish=1");
+
+				//echo $select->getSql();
+				$count = $this->db->getAll($select->getSql());
+
+				$list ['records'][$key]['count'] = $count[0]['count(*)'];
 			}
 		}
 		return (array) $list;
@@ -47,19 +56,19 @@ class UserModel extends Model {
 	function getOnlineUsers($con,$pageCount){
 		$select =$this->db->select();
 		$select->from ( " onlineuser ","*");
-		
+
 		//
 		if(isset($con['order'])) $select->order ( $con['order']." desc" );
 		if(isset($con['user']) && !empty($con['user'])) $select->where ( " user = '".$con['user']."'" );
-		
+
 		$list = array();
 		$offset = '';
-		
+
 		$total = $select->count (); //获得查询到的记录数
 		include_once("Pager.class.php");
 	    $list ['page'] = new Pager ( $total, $pageCount ); //创建分页对象
 		$offset = $list ['page']->offset ();               //获得记录偏移量
-		
+
 		$pagerStyle = array ('firstPage' => 'page', 'prePage' => 'go_b', 'nextPage' => 'go_b','preGroup'=>'page','nextGroup'=>'page', 'totalPage' => '', 'numBar' => 'on', 'numBarMain' => 'page' );                      //翻页条的样式
 		$list ['page']->setLinkStyle ( $pagerStyle );
 		$label = array('first_page'=>lang('first_page'),'last_page'=>lang('last_page'),'next_page'=>lang('next_page'),'pre_page'=>lang('pre_page'),'next_group'=>lang('next_group'),'pre_group'=>lang('pre_group'));
@@ -69,10 +78,10 @@ class UserModel extends Model {
 		}else{
 			$list ['pagebar'] = '';
 		}
-		
+
 		$select->limit ( $list['page']->offset(), $pageCount );
 		$rs = $select->query();
-	
+
 		if ($rs) {
 			foreach ( $rs as $key => $record ) {
 				$list ['records'] [$key] = $record;
