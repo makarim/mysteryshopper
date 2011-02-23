@@ -34,6 +34,7 @@ function viewUser(user_id){
 						<th>ID</th>
 						<th><?php echo lang('realname')?></th>
 						<th><?php echo lang('nickname')?></th>
+						<th><?php echo lang('completedassign')?></th>
 						<th><?php echo lang('gender')?></th>
 						<th><?php echo lang('mobile')?></th>
 						<th><?php echo lang('occupation')?></th>
@@ -48,6 +49,7 @@ function viewUser(user_id){
 							<td><?php echo $v['user_id']?></td>
 							<td><?php echo $v['realname']?></td>
 							<td><a href="javascript:viewUser('<?php echo $v['user_id']?>')"><strong><?php echo $v['nickname']?></strong></a></td>
+							<td><?php echo $v['completedassign']?></td>
 							<td><?php if($v['gender']==1)echo "先生";if($v['gender']==2)echo "女士";?></td>
 							<td><?php echo $v['mobile']?></td>
 							<td><?php echo $v['occupation']?></td>
