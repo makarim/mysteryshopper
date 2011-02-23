@@ -822,4 +822,7 @@ $GLOBALS['gLang']['holdincome4'] = '9,000-12,000';
 $GLOBALS['gLang']['holdincome5'] = '12,000-15,000';
 $GLOBALS['gLang']['holdincome6'] = '15,000-30,000';
 $GLOBALS['gLang']['holdincome7'] = '>30,000';
+
+$GLOBALS['gLang']['completetask'] = '已完成任务数';
+$GLOBALS['gLang']['completedassign'] = '已完成任务数';
 ?>
