@@ -13,7 +13,7 @@
 function viewUser(assignment,c_id){
 	var url = "<?php echo $www_site_url?>/admin.php/assignment/detail/c_id/"+c_id+'/assignment/'+assignment;
 	mini.ajax.get(url, function(r){
-		var r = eval('(' + r + ')');   
+		var r = eval('(' + r + ')');
 		if(r.s==200){
 			$('assignmentid_'+c_id).innerHTML = "<?php echo lang('sex')?>:"+r.d.assignment_sex+ ", <?php echo lang('signup')?>IP:"+ r.d.assignment_reg_ip +", <?php echo lang('lastlogin')?>:"+r.d.assignment_lastlogin_time+
 		", <?php echo lang('lastlogin')?>IP:"+r.d.assignment_lastlogin_ip+" <?php echo lang('email')?>:"+r.d.assignment_email;
@@ -34,7 +34,7 @@ function viewUser(assignment,c_id){
 		document.getElementById("close").style.display = 'block';
 		var tli=document.getElementById("tabs_menu").getElementsByTagName("li");
 		var mli=document.getElementById("tabs_main").getElementsByTagName("div");
-		for(i=0;i<tli.length;i++){
+		for(i=0;i<tli.length-1;i++){
 		  tli[i].className=i==n?"hover":"";
 		  mli[i].style.display=i==n?"block":"none";
 		}
@@ -57,51 +57,51 @@ function getStore(c_id){
 		return ;
 	}
 	var url = "<?php echo $www_site_url?>/admin.php?action=corporation&view=ajaxstore&c_id="+c_id;
-	
+
 	mini.ajax.get(url, function(r){
 
-		var r = eval('(' + r + ')');   
+		var r = eval('(' + r + ')');
 
 		if(r.s==200){
-			var obj = eval('(' + r.d + ')');   
+			var obj = eval('(' + r.d + ')');
 			var selobj = $('store_container');
 			for(var i in obj){
 				//if(i==0) selobj.options[0] = new Option(obj[i].cs_name, obj[i].cs_id) //replace 1st option with a new one
 				selobj.options[i]=new Option(obj[i].cs_abbr+' '+obj[i].cs_name, obj[i].cs_id) //add a new option to the end of SELECT
 			}
-			
+
 		}
 		if(r.s==400){
-			$('msg').innerHTML = r.m;			
+			$('msg').innerHTML = r.m;
 		}
 	});
-	
+
 	return false;
 }
-		
+
 	</script>
 
 	<div class="container">
-			
+
 			<div id="tabs">
 				<div class="tabs_menubox">
 					<ul id="tabs_menu">
 						<li onclick="setTab(0)"><?php echo lang('search_assignment')?></li>
 						<li onclick="hid()" id="close" style="display:none;"><?php echo lang('hide')?>×</li>
-		
+
 					</ul>
 				</div>
 				<div id="tabs_mainbox" class="tabs_mainbox" style="display:none;">
 					<div class="main" id="tabs_main" >
 						<div  style="display:none;">
 							<form action="<?php echo $www_site_url?>/admin.php" method="GET">
-							<input type="hidden" name="action" value="assignment">				
-							<input type="hidden" name="view" value="defaults">					
+							<input type="hidden" name="action" value="assignment">
+							<input type="hidden" name="view" value="defaults">
 							<table width="100%">
 								<tr>
 									<td align="right"><?php echo lang('a_title')?>:</td>
 									<td align="left"><input type="text" name="a_title" value="<?php echo $con['a_title']?>" class="textfield" /></td>
-			
+
 									<td><?php echo lang('c_title')?>:</td>
 									<td align="left"><select name="c_id" onchange="getStore(this.options[this.selectedIndex].value);">
 							<option value="">--</option>
@@ -117,20 +117,20 @@ function getStore(c_id){
 								</tr>
 								<tr>
 									<td align="right"><?php echo lang('a_sdate')?>:</td>
-			
+
 									<td colspan="3" align="left"><input type="text" name="a_sdate" onclick="showcalendar();" value="<?php echo $con['a_sdate']?>" class="textfield" /> <?php echo lang('to')?> <input type="text" name="a_edate" onclick="showcalendar();" value="<?php echo $con['a_edate']?>" class="textfield" /></td>
-									
+
 								</tr>
 							</table>
 							</form>
-						</div>		
+						</div>
 				</div>
 			</div>
 
 		</div>
 		<br>
 		<h3><?php echo lang('assignment_list')?> <?php echo lang('assignment_total')?>:<?php echo $total?></h3>
-		
+
 		<div class="mainbox">
 				<form action="<?php echo $www_site_url?>/admin.php" onsubmit="return confirm('<?php echo lang('domain_delete_comfirm')?>');" method="post">
 				<input type="hidden" name="action" value="assignment">
@@ -150,7 +150,7 @@ function getStore(c_id){
 						<th><?php echo lang('edit')?></th>
 					</tr>
 						<?php if(isset($assignments['records']) && is_array($assignments['records'])){
-							foreach ($assignments['records'] as $v){?>	
+							foreach ($assignments['records'] as $v){?>
 						<tr>
 							<td class="option"><input type="checkbox" name="delete[]" value="<?php echo $v['a_id']?>" class="checkbox" /></td>
 							<td><?php echo $v['a_id']?></td>
@@ -162,16 +162,16 @@ function getStore(c_id){
 							<td><?php echo splitx($v['cs_name'])?></td>
 							<td><?php echo $v['a_finish']?></td>
 							<td><a href="/admin.php/assignment/edit/a_id/<?php echo $v['a_id']?>"><?php echo lang('edit')?></a>
-							<a href="/admin.php?action=assignment&view=applicant&a_id=<?php echo $v['a_id']?>"><?php echo lang("applicant")?></a>
+							<a href="/admin.php?action=assignment&view=applicant&a_id=<?php echo $v['a_id'];?>&b_id=<?php echo $v['b_id']?>"><?php echo lang("applicant")?></a>
 							<a href="/admin.php?action=report&view=preview&a_id=<?php echo $v['a_id']?>&re_id=<?php echo $v['re_id']?>"><?php echo lang('view').lang('report')?></a>
 							<a href="/admin.php?action=assignment&view=assignto&a_id=<?php echo $v['a_id']?>"><?php echo lang('assign_to')?></a>
-							
+
 							</td>
 						</tr>
 						<tr>
 						<td colspan="9"><div style="display:none" id="assignmentid_<?php echo $v['a_id']?>"></div></td>
 						</tr>
-						
+
 						<?php }
 						}?>
 										<tr class="nobg">
