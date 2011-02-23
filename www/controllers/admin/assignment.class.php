@@ -39,7 +39,6 @@ class assignment{
 		$this->tpl->assign('corps',$corps);
 		$this->tpl->assign('assignments',$assignments);
 		$this->tpl->assign('con',$con);
-
     }
 
 	function view_search(){
@@ -221,13 +220,26 @@ class assignment{
 
     function view_applicant(){
     	$a_id = $_GET['a_id'];
+    	$b_id = $_GET['b_id'];
 
     	include_once("AssignmentModel.class.php");
     	$assignment = new AssignmentModel();
     	$applicant = $assignment->getAssignmentApplicantById($a_id);
+
+    	include_once("UserModel.class.php");
+    	$user = new UserModel();
+    	foreach($applicant as $k=>$v){
+    		$user_id = $v['user_id'];
+    		$compassign = $user->db->getRow("select count(*) from assignment where user_id='$user_id' and a_finish=1.00 and b_id='$b_id'");
+
+    		$applicant[$k]['completedassign'] = $compassign['count(*)'];
+    	}
+
     	$this->tpl->assign('applicant',$applicant);
     	$this->tpl->assign('a_id',$a_id);
 
+//    	echo "<pre/>";
+//    	print_r($applicant);
     }
     function op_choose(){
     	$a_id = $_POST['a_id'];
