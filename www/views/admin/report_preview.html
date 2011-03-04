@@ -124,7 +124,7 @@ if(is_array($attachments)){
 <TR>
 <TD width="20%"><?php echo $k+1;?>.</TD>
 <TD ><?php echo '<a href="/public/upload/'.$a['f_name'].'">'.$a['f_name'].'</a> '.$a['f_created'];?></TD>
-<TD ><a href="/admin.php?action=report&view=delattachment&f_id=<?php echo $a['f_id'];?>"><?php echo lang("delete");?></a></TD>
+<TD ><a href="/admin.php?action=report&view=delattachment&f_id=<?php echo $a['f_id'];?>&f_name=<?php echo $a['f_name']?>"><?php echo lang("delete");?></a></TD>
 </TR>
 <?php
 	}
