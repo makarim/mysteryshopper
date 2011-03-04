@@ -4,29 +4,29 @@ class report{
 	function __construct(){
 		global $tpl;
 		$this->tpl = $tpl;
-		$this->loginuser = authenticate();	
-		
+		$this->loginuser = authenticate();
+
 		if(isset($this->loginuser['user']) && $this->loginuser['user_id']==1){
-			
+
 		}else{
 			redirect("/index.php/passport/login");
 		}
 	}
 	function view_question(){
 		$cur_sort = !empty($_GET['sort'])?$_GET['sort']:'q_id';
-		
+
 		$q_question = !empty($_GET['q_question'])?$_GET['q_question']:'';
 		$g_id = !empty($_GET['g_id'])?$_GET['g_id']:'';
-		
-		
-		
+
+
+
 		include_once("ReportModel.class.php");
 		$ReportModel = new ReportModel();
-		
+
 		$con['order'] = $cur_sort;
 		$con['q_question'] = $q_question;
 		$con['g_id'] = $g_id;
-		
+
 		$questions = $ReportModel->getQuestion($con,10);
 		$quesgroup = $ReportModel->getQuesGroup();
 		$this->tpl->assign('total',$questions['page']->total);
@@ -34,40 +34,40 @@ class report{
 		$this->tpl->assign('quesgroup',$quesgroup);
 		$this->tpl->assign('con',$con);
 	}
-	
+
 	function op_addques(){
 		$arr['q_question'] = $_POST['q_question'];
 		if(empty($arr['q_question'])){
-			$msg = array('s'=> 400,'m'=>lang('need'),'d'=>'');				
+			$msg = array('s'=> 400,'m'=>lang('need'),'d'=>'');
 			exit(json_output($msg));
-		}		
+		}
 		$arr['q_group'] = $_POST['q_group'];
 		if(empty($arr['q_group'])){
-			$msg = array('s'=> 400,'m'=>lang('need'),'d'=>'');				
+			$msg = array('s'=> 400,'m'=>lang('need'),'d'=>'');
 			exit(json_output($msg));
-		}		
-		
+		}
+
 		$arr['q_type'] = $_POST['q_type'];
 		if(empty($arr['q_type'])){
-			$msg = array('s'=> 400,'m'=>lang('need'),'d'=>'');				
+			$msg = array('s'=> 400,'m'=>lang('need'),'d'=>'');
 			exit(json_output($msg));
 		}
 		include_once("ReportModel.class.php");
 		$reportModel = new ReportModel();
-		
+
 		$r = $reportModel->addNewQuestion($arr);
-		
+
 		if($r){
-			$msg = array('s'=> 200,'m'=>lang('success'),'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/report/question");				
+			$msg = array('s'=> 200,'m'=>lang('success'),'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/report/question");
 			exit(json_output($msg));
 		}else{
-			$msg = array('s'=> 400,'m'=>lang('failed'),'d'=>'');				
+			$msg = array('s'=> 400,'m'=>lang('failed'),'d'=>'');
 			exit(json_output($msg));
 		}
-		
-		
+
+
 	}
-	
+
 	function view_editques(){
 		include_once("ReportModel.class.php");
 		$reportModel = new ReportModel();
@@ -78,57 +78,57 @@ class report{
 		$quesgroup = $reportModel->getQuesGroup();
 		$this->tpl->assign('quesgroup',$quesgroup);
 	}
-	
+
 	function op_updateques(){
 		$q_id = $_POST['q_id'];
 		$arr['q_question'] = $_POST['q_question'];
 		if(empty($arr['q_question'])){
-			$msg = array('s'=> 400,'m'=>lang('need'),'d'=>'');				
+			$msg = array('s'=> 400,'m'=>lang('need'),'d'=>'');
 			exit(json_output($msg));
-		}		
+		}
 		$arr['q_group'] = $_POST['q_group'];
 		if(empty($arr['q_group'])){
-			$msg = array('s'=> 400,'m'=>lang('need'),'d'=>'');				
+			$msg = array('s'=> 400,'m'=>lang('need'),'d'=>'');
 			exit(json_output($msg));
-		}		
-		
+		}
+
 		$arr['q_type'] = $_POST['q_type'];
 		if(empty($arr['q_type'])){
-			$msg = array('s'=> 400,'m'=>lang('need'),'d'=>'');				
+			$msg = array('s'=> 400,'m'=>lang('need'),'d'=>'');
 			exit(json_output($msg));
 		}
 		include_once("ReportModel.class.php");
 		$reportModel = new ReportModel();
-		
+
 		$r = $reportModel->updateQuestion($arr,$q_id);
-		
+
 		if($r){
-			$msg = array('s'=> 200,'m'=>lang('success'),'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/report/question");				
+			$msg = array('s'=> 200,'m'=>lang('success'),'d'=>$GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/report/question");
 			exit(json_output($msg));
 		}else{
-			$msg = array('s'=> 400,'m'=>lang('failed'),'d'=>'');				
+			$msg = array('s'=> 400,'m'=>lang('failed'),'d'=>'');
 			exit(json_output($msg));
 		}
 	}
-	
+
 	function view_defaults(){
 		$cur_sort = !empty($_GET['sort'])?$_GET['sort']:'re_id';
 		$re_title = !empty($_GET['re_title'])?$_GET['re_title']:'';
-		
-		
+
+
 		include_once("ReportModel.class.php");
 		$reportModel = new ReportModel();
-		
+
 		$con['order'] = $cur_sort;
 		$con['re_title'] = $re_title;
-		
+
 		$items = $reportModel->getItems($con,10);
 
 		$this->tpl->assign('reports',$items);
 		$this->tpl->assign('total',$items['page']->total);
 		$this->tpl->assign('con',$con);
 	}
-	
+
 	function view_addreport(){
 		include_once("ReportModel.class.php");
 		$ReportModel = new ReportModel();
@@ -140,7 +140,7 @@ class report{
 		$this->tpl->assign("questions",$ReportModel->getAllQuestion());
 		$this->tpl->assign("groups",$arr);
 	}
-	
+
 	function view_editreport(){
 		$re_id = $_GET['re_id'];
 		include_once("ReportModel.class.php");
@@ -168,20 +168,20 @@ class report{
 		$this->tpl->assign("report",$report);
 		$this->tpl->assign("groups",$arr);
 	}
-	
+
 	function view_preview(){
 		$re_id = $_GET['re_id'];
 		$a_id =isset($_GET['a_id'])?$_GET['a_id']:0;
 		include_once("AssignmentModel.class.php");
     	$assignmentModel = new AssignmentModel();
     	$assignmentinfo = $assignmentModel->getAssignmentById($a_id);
-    	
+
 		include_once("ReportModel.class.php");
 		$ReportModel = new ReportModel();
 		$report_questions = array();
 			foreach ($GLOBALS['gGroups'] as $k=>$v){
 				$arr = $ReportModel->getQuestionsByReId($re_id,$k);
-				
+
 				if($arr){
 					foreach ($arr as $kk=>$vv){
 						$vv['answer'] = $ReportModel->getAnswerByAid($a_id,$vv['rq_id'],$vv['rq_type']);
@@ -189,11 +189,14 @@ class report{
 						$arr[$kk] = $vv;
 					}
 				}
-			
+
 				$report_questions[$v] = $arr;
-				
+
 			}
 		$attachments = $assignmentModel->getUploadedAttachment($a_id);
+
+//		echo "<pre/>";
+//		print_r($report_questions);
 		$this->tpl->assign("attachments",$attachments);
 		$this->tpl->assign("a_id",$a_id);
 		$this->tpl->assign("report_questions",$report_questions);
@@ -201,15 +204,18 @@ class report{
 	}
 	function view_delattachment(){
 		$f_id = $_GET['f_id'];
+		$f_name = $_GET['f_name'];
+
 		include_once("AssignmentModel.class.php");
     	$assignmentModel = new AssignmentModel();
-		$rs =  $assignmentModel->delUploadAttachment($f_id);
+		$rs = $assignmentModel->delUploadAttachment($f_id);
 		if($rs){
+			unlink('public/upload/'.$f_name);//delete file from disk Add by Wendy 2011.3.1
 			show_message_goback(lang('success'));
 			//redirect($GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/assignment/defaults");
 		}else{
 			show_message_goback(lang('failed'));
-		
+
 		}
 	}
 	function op_audit(){
@@ -239,9 +245,9 @@ class report{
 			//redirect($GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/assignment/defaults");
 		}else{
 			show_message_goback(lang('failed'));
-		
+
 		}
-	}	
+	}
 	function op_auditbill(){
 		$a_id= $_POST['a_id'];
 		include_once("AssignmentModel.class.php");
@@ -262,10 +268,10 @@ class report{
 			$assignment = $assignment->getAssignmentById($a_id);
 			$field['m_pid'] = 0;
 			$field['m_title'] = "发票审查通知！<!--!-->Notice of receipt examination!";
-			$field['m_content'] = '恭喜你，你提交的任务('.splitx($assignment['a_title']).')发票(金额:'.$item['a_cost'].'元)已经被审查通过。我们将会很快打钱到你的账户上!<!--!-->Congratulation! Your receipt about the assignment '.splitx($assignment['a_title']).' is ok. '; 
+			$field['m_content'] = '恭喜你，你提交的任务('.splitx($assignment['a_title']).')发票(金额:'.$item['a_cost'].'元)已经被审查通过。我们将会很快打钱到你的账户上!<!--!-->Congratulation! Your receipt about the assignment '.splitx($assignment['a_title']).' is ok. ';
 			$field['to_user_id'] = $assignment['user_id'];
 			$field['to_user_nickname'] = $assignment['user_nickname'];
-			
+
 			$field['from_user_id'] = $this->loginuser['user_id'];
 			$field['from_user_nickname'] = $this->loginuser['user_nickname'];
 			$field['m_date'] ="MY_F:NOW()";
@@ -276,14 +282,14 @@ class report{
 			//redirect($GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/assignment/defaults");
 		}else{
 			show_message_goback(lang('failed'));
-		
+
 		}
 	}
-	
+
 	function op_saveanswer(){
 		include_once("ReportModel.class.php");
 		$reportModel = new ReportModel();
-		
+
 		$u_id= $this->loginuser['user_id'];
 		$a_id= $_POST['a_id'];
 		$r = $rs =true;
@@ -292,25 +298,25 @@ class report{
 				if(substr($k,0,7)=='rq_ans_'){
 					list(,,$rq_type,$rq_id) = split("_",$k);
 					$r *=$reportModel->saveAnswer($rq_id,$u_id,$a_id,$rq_type,addslashes($v));
-				}				
+				}
 				if(substr($k,0,11)=='rq_comment_'){
 					list(,,$rq_type,$rq_id) = split("_",$k);
 					if($v) $rs *=$reportModel->saveComment($rq_id,$u_id,$a_id,$rq_type,addslashes($v));
 				}
 			}
 		}
-		
+
 		if($r){
 			show_message_goback(lang('success'));
 			//redirect($GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/assignment/defaults");
 		}else{
 			show_message_goback(lang('failed'));
-		
+
 		}
-	} 
-	
+	}
+
 	function op_savereport(){
-		
+
 		$arr['re_title'] = $_POST['re_title'];
 		if(empty($arr['re_title'])){
 			show_message_goback(lang('required'));
@@ -325,9 +331,9 @@ class report{
 			redirect($GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/report/defaults");
 		}else{
 			show_message_goback(lang('failed'));
-		
+
 		}
-		
+
 	}
 	function op_updatereport(){
 		$arr['re_title'] = $_POST['re_title'];
@@ -345,7 +351,7 @@ class report{
 			redirect($GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/report/defaults");
 		}else{
 			show_message_goback(lang('failed'));
-		
+
 		}
 	}
 	function op_delreport(){
@@ -374,7 +380,7 @@ class report{
     	show_message(lang('selectone'));
     	goback();
 	}
-	
+
 	function view_appendreport(){
 		$re_id = $_GET['re_id'];
 		include_once("ReportModel.class.php");
@@ -387,7 +393,7 @@ class report{
 		foreach ($GLOBALS['gGroups'] as $k=>$v){
 			$arr = $ReportModel->getQuestionsByReId($re_id,$k);
 			$report_questions[$v] = $arr;
-			
+
 		}
 		$this->tpl->assign("report",$report);
 		$this->tpl->assign("report_questions",$report_questions);
@@ -410,7 +416,7 @@ class report{
 			}else{
 				$data['is_comment'] =0;
 			}
-			
+
 			if($ReportModel->modifyReport($data)){
 				$data = array();
 			}
