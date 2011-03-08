@@ -47,6 +47,14 @@ class home{
 	}
 	function view_corpstats(){
 		$type = !empty($_GET['view'])?$_GET['view']:"corp";
+		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
+		$edate = !empty($_GET['edate'])?$_GET['edate']:date("Y-m-d");
+
+		list($y,$m,$d) = explode("-",$edate);
+			$enddate = date("Y-m-d",mktime(0, 0, 0, $m  , $d+1, $y));
+
+		//echo "sdate=".$sdate."<br/>"."edate=".$edate."<br/>"."endat=".$enddate;
+
 		$totalcompleted = 0 ;
 		include_once("CorporationModel.class.php");
 		$corpModel = new CorporationModel();
@@ -59,7 +67,7 @@ class home{
 		}
 
 
-		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  start  add by wendy 2010.11.16*/
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  start  add by wendy 2010.11.16
 		if(!empty($_GET['selbrands']) && ($_GET['selbrands'] != -1)){
 			$selbrands = array($_GET['selbrands']);
 		}else if(isset($_GET['selbrands']) && ($_GET['selbrands'] == -1)){
@@ -70,19 +78,37 @@ class home{
 		}
 		else{
 			$selbrands = $def_brands;
-		}
-		//$brand_id = !empty($_GET['selbrands'])?$_GET['selbrands']:'';
-		$_SESSION['brand_id'] = $selbrands;//存入全局变量中，以便在其他页面中使用.
-		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  end  */
+		}*/
 
+		if(!empty($_GET['selbrands'])){
+			$selbrands = array($_GET['selbrands']);
+		}
+		else if(isset($_SESSION['brand_id']) && !empty($_SESSION['brand_id'])){
+			$selbrands = $_SESSION['brand_id'];
+		}
+		else{
+			$selbrands = $def_brands;
+		}
+
+		$brand_id = isset($selbrands[0])?$selbrands[0]:0;
+
+		//$brand = $corpModel->getBrandById($brand_id);
+		$_SESSION['brand_id'] = array($brand_id);
+
+
+		//$brand_id = !empty($_GET['selbrands'])?$_GET['selbrands']:'';
+		//$_SESSION['brand_id'] = $selbrands;//存入全局变量中，以便在其他页面中使用.
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  end  */
 
 		$corp = $corpModel->getCorporationById($this->login_corp['c_id']);
 
-		if(count($selbrands)<=1) {
+		if($brand_id) {
+		//if(count($selbrands)<=1) {
 			$brand_id = isset($selbrands[0])?$selbrands[0]:0;
 
 			$brand = $corpModel->getBrandById($brand_id);
-			$stores = $corpModel->getStoreByBid($brand_id);
+			//$stores = $corpModel->getStoreByBid($brand_id);
+			$stores = $corpModel->getStoreByBidAsc($brand_id);
 			$totalcompleted = $corpModel->getTotalCompletedAssignmentsByBid($brand_id);
 
 		}else{
@@ -96,12 +122,19 @@ class home{
 				$v['store_completed'] = $corpModel->getStoreCompletedAssignments($v['cs_id']);
 				$v['store_latest_completed'] = $corpModel->getStoreLatestCompleted($v['cs_id']);
 				$v['store_next_assignment'] = $corpModel->getStoreNextAssignment($v['cs_id']);
+
+				$v['store_completed_assignments'] = $corpModel->getStoreCompletedAssignmentsBycsid($v['cs_id'],$sdate,$enddate);
 				$stores[$k] = $v;
 			}
 		}
 
+//		echo "<pre/>";
+//		print_r($stores);
+
 		$this->tpl->assign("brands",$brands);
 		$this->tpl->assign("brand",$brand);
+		$this->tpl->assign("sdate",$sdate);
+		$this->tpl->assign("edate",$edate);
 
 		$this->tpl->assign("corp",$corp);
 		$this->tpl->assign("stores",$stores);
@@ -1066,11 +1099,40 @@ class home{
 		$this->tpl->assign("sdate",$sdate);
 		$this->tpl->assign("edate",$edate);
 
-		include_once("ChartModel.class.php");
-		$ChartModel = new ChartModel($sdate,$edate);
 		include_once("CorporationModel.class.php");
 		$corpModel = new CorporationModel();
-		$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
+		$brand = array();
+		$brands = $corpModel->getBrandByCid($this->login_corp['c_id']);
+
+		$def_brands = array();
+		foreach ($brands as $b){
+			$def_brands[] = $b['b_id'];
+		}
+
+		if(!empty($_GET['selbrands'])){
+			$selbrands = array($_GET['selbrands']);
+		}
+		else if(isset($_SESSION['brand_id']) && !empty($_SESSION['brand_id'])){
+			$selbrands = $_SESSION['brand_id'];
+		}
+		else{
+			$selbrands = $def_brands;
+		}
+
+		$brand_id = isset($selbrands[0])?$selbrands[0]:0;
+
+		//$brand = $corpModel->getBrandById($brand_id);
+		$_SESSION['brand_id'] = array($brand_id);
+
+		if($brand_id){
+			$brand = $corpModel->getBrandById($brand_id);
+			$stores = $corpModel->getStoreByBid($brand_id);
+		}else{
+			$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
+		}
+
+		include_once("ChartModel.class.php");
+		$ChartModel = new ChartModel($sdate,$edate);
 		$general = $environment = $service = $product = $store_name= array();
 		foreach ($stores as $k=>$store){
 			$general[$store['cs_id']]	=  $ChartModel->getGeneralScoreByCsId($store['cs_id']);
@@ -1080,6 +1142,7 @@ class home{
 			$product[$store['cs_id']]	=  $ChartModel->getSummaryScoreByCsId($store['cs_id'],3);
 			$store_name[$store['cs_id']] = $store['cs_name'];
 		}
+
 		arsort($general);
 		arsort($service);
 		arsort($environment);
@@ -1090,6 +1153,90 @@ class home{
 		$this->tpl->assign("service",$service);
 		$this->tpl->assign("environment",$environment);
 		$this->tpl->assign("general",$general);
+		$this->tpl->assign('brand',$brand);
+		$this->tpl->assign('brands',$brands);
+	}
+
+	/***     Add by Wendy 2011.2.18    ***/
+	function view_corprankall(){
+		$type = !empty($_GET['view'])?$_GET['view']:"corp";
+		$sdate = !empty($_GET['sdate'])?$_GET['sdate']:"";
+		$edate = !empty($_GET['edate'])?$_GET['edate']:date("Y-m-d");
+
+		//echo "type=".$type."<br/>"."sdate=".$sdate."<br/>"."edate=".$edate."<br/>";
+		$this->tpl->assign("type",$type);
+		$this->tpl->assign("sdate",$sdate);
+		$this->tpl->assign("edate",$edate);
+
+		//$type = !empty($_GET['view'])?$_GET['view']:"corp";
+		$totalcompleted = 0 ;
+		include_once("CorporationModel.class.php");
+		$corpModel = new CorporationModel();
+		$brand = array();
+		$brands = $corpModel->getBrandByCid($this->login_corp['c_id']);
+
+		$def_brands = array();
+		foreach ($brands as $b){
+			$def_brands[] = $b['b_id'];
+		}
+
+
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  start  add by wendy 2010.11.16*/
+		if(!empty($_GET['selbrands']) && ($_GET['selbrands'] != -1)){
+			$selbrands = array($_GET['selbrands']);
+		}else if(isset($_GET['selbrands']) && ($_GET['selbrands'] == -1)){
+			$selbrands = $def_brands;
+		}
+		else if(isset($_SESSION['brand_id']) && !empty($_SESSION['brand_id'])){
+			$selbrands = $_SESSION['brand_id'];
+		}
+		else{
+			$selbrands = $def_brands;
+		}
+		//$brand_id = !empty($_GET['selbrands'])?$_GET['selbrands']:'';
+		$_SESSION['brand_id'] = $selbrands;//存入全局变量中，以便在其他页面中使用.
+		/* 实现选择一次品牌后，其他页面都是对该品牌的操作  end  */
+
+		if(count($selbrands)<=1){
+			$brand_id = isset($selbrands[0])?$selbrands[0]:0;
+
+			$brand = $corpModel->getBrandById($brand_id);
+			//$stores = $corpModel->getStoreByBid($brand_id);
+			$stores = $corpModel->getStoreByBidAsc($brand_id);
+		}else{
+			$stores = $corpModel->getStoreByCid($this->login_corp['c_id']);
+		}
+
+		include_once("ChartModel.class.php");
+		$ChartModel = new ChartModel($sdate,$edate);
+		$general = $environment = $service = $product = $store_name= array();
+		foreach ($stores as $k=>$store){
+			$general[$store['cs_id']]	=  $ChartModel->getGeneralScoreByCsId($store['cs_id']);
+
+			$service[$store['cs_id']]	=  $ChartModel->getSummaryScoreByCsId($store['cs_id'],1);
+			$environment[$store['cs_id']]	=  $ChartModel->getSummaryScoreByCsId($store['cs_id'],2);
+			$product[$store['cs_id']]	=  $ChartModel->getSummaryScoreByCsId($store['cs_id'],3);
+			$store_name[$store['cs_id']] = $store['cs_name'];
+
+			$all['name'] = $store['cs_name'];
+			$all['general'] =  $general[$store['cs_id']];
+			$all['service'] = $service[$store['cs_id']];
+			$all['environment'] = $environment[$store['cs_id']];
+			$all['product'] = $product[$store['cs_id']];
+
+			$allrank[$store['cs_id']] = $all;
+
+		}
+
+		$this->tpl->assign("store_name",$store_name);
+		$this->tpl->assign("product",$product);
+		$this->tpl->assign("service",$service);
+		$this->tpl->assign("environment",$environment);
+		$this->tpl->assign("general",$general);
+
+		$this->tpl->assign("allrank",$allrank);
+		$this->tpl->assign('brands',$brands);
+		$this->tpl->assign('brand',$brand);
 	}
 }
 ?>
