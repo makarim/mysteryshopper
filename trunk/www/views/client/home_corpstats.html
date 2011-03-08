@@ -10,21 +10,19 @@
   <ul>
     <li <?php if($type=='corpstats') echo 'class="on"';?>><a href="/client.php/home/corpstats" title="<?php echo lang("assignmentprogress");?>"><span><?php echo lang("assignmentprogress");?></span></a></li>
     <li <?php if($type=='corprank') echo 'class="on"';?>><a href="/client.php/home/corprank" title="<?php echo lang("ranking");?>"><span><?php echo lang("ranking");?></span></a></li>
+    <li <?php if($type=='corprankall') echo 'class="on"';?>><a href="/client.php/home/corprankall" title="<?php echo lang("ranking");?>"><span><?php echo "总汇";?></span></a></li>
 
    <li style="float:right;"><?php echo lang("select_brand")?>:<input name="selbrand" type="text" class="ClocationInput" onclick="showmitibrands();" id="selbrand" value="<?php if($brand){ echo splitx($brand['b_name']); }?>" /></li>
   </ul>
 </div>
 <br />
 <br />
-
 <br />
+
 <div id="brandlist" style="width: 170px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:999;">
   <ul>
   <?php
        if(isset($brands) && is_array($brands)){
-       ?>
-       <li style="padding:2px;"> <label><a href="/client.php?action=home&view=corpstats&selbrands=-1"><?php echo "所有品牌";?></a></label></li>
-       <?php
          foreach ($brands as $b){
                 ?>
 	<li style="padding:2px;"> <label><a href="/client.php?action=home&view=corpstats&selbrands=<?php echo $b['b_id']?>"><?php echo splitx($b['b_name']);?></a></label></li>
@@ -42,55 +40,15 @@
       </div>
     </div></td>
   </tr>
+
   <tr>
-
     <td>
-
-
-
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td class="table2LeftBorder"></td>
         <td>
          <?php echo lang("completed_visits");?>: <?php echo $totalcompleted;?>
                    </td>
-        <td class="table2RightBorder">
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="table2BottomLeft"></td>
-        <td class="table2Bottom"></td>
-        <td class="table2BottomRight"></td>
-      </tr>
-
-    </table></td>
-  </tr>
-</table>
-<br />
-<?php if(is_array($stores)){
-	foreach ($stores as $s){?>
-
-<table width="47%" border="0" cellspacing="0" cellpadding="0" style="float:left;margin:10px 22px 10px 0;">
-  <tr>
-    <td><div class="table2TitleBg">
-      <div class="table2TitleBg2">
-      	<div class="table2Title"><div class="table2TitleLeft"><span><?php echo splitx(stripslashes($s['cs_name']))?></span></div></div>
-      </div>
-    </div></td>
-  </tr>
-  <tr>
-
-    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td class="table2LeftBorder"></td>
-        <td>
-         <?php echo lang("latest_visits");?>: <?php echo $s['store_latest_completed']['a_fdate'];?><br />
-         <?php echo lang("completed_visits");?>: <?php echo $s['store_completed'];?><br />
-         <?php echo lang("to_visit");?> :<?php echo $s['store_next_assignment']['a_sdate'];?> / <?php echo $s['store_next_assignment']['a_edate'];?>
-                   </td>
-
         <td class="table2RightBorder"></td>
       </tr>
       <tr>
@@ -98,13 +56,83 @@
         <td class="table2Bottom"></td>
         <td class="table2BottomRight"></td>
       </tr>
-
     </table></td>
   </tr>
 </table>
+<br />
 
+<div style="float:right;margin-right:10px;">
+      <a href="javascript:showprintpage(1)"><img src="<?php echo $www_site_url?>/public/images/print_icon.jpg" border="0" title="Print"></a>
+      </div>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:10px 22px 10px 0;">
+  <tr>
+   <td class="table2LeftBorder"></td>
+   <td class="table2TitleBg"></td>
+   <td class="table2RightBorder"></td>
+  </tr>
+  <tr>
+  <td class="table2LeftBorder"></td>
+    <td>
+    <!--startprint1-->
+    <center><table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport">
+    	<tr  class="title" bgcolor="#9F0000">
+    		<th>序号</th>
+    		<th>店名</th>
+			<th><?php echo lang("latest_visits");?></th>
+			<th>已完成任务数</th>
+			<th><?php echo lang("completed_visits");?><br/>
+			<form method="GET" action="/client.php" name="seachfrm">
+				<input name="action" type="hidden" value="home"  />
+ 				<input name="view" type="hidden" value="corpstats"/>
+
+     			<input name="sdate" type="text" size="10" value="<?php echo $sdate;?>" onclick="showcalendar();"/>
+      			—
+      			<input name="edate" type="text" size="10" value="<?php echo $edate;?>" onclick="showcalendar();" />
+      			<input name="button" type="submit" id="button" value="<?php echo lang("search_report")?>" />
+   		   </form>
+			</th>
+			<th><?php echo lang("to_visit");?></th>
+		</tr>
+<?php if(is_array($stores)){
+	$n=0;
+	foreach ($stores as $s){
+	$n++;
+	/** $str = "<?php echo $www_site_url?>/client.php?action=home&view=reportcomplete&re_id=<?php echo $s['store_latest_completed']['re_id']?>&a_id=<?php echo $s['store_latest_completed']['a_id']?>";**/
+	?>
+      <tr align="center">
+      	<td><?php echo $n;?></td>
+        <td><?php echo splitx(stripslashes($s['cs_name']))?></td>
+        <td><a href="<?php echo $www_site_url?>/client.php?action=home&view=reportcomplete&re_id=<?php echo $s['store_latest_completed']['re_id']?>&a_id=<?php echo $s['store_latest_completed']['a_id']?>"><?php echo substr($s['store_latest_completed']['a_fdate'],0,10);?></a></td>
+        <td><?php echo $s['store_completed'];?></td>
+		<td><?php if(is_array($s['store_completed_assignments']))
+		{
+		if(!$sdate){
+		  for($j=0; $j<3&&$j<count($s['store_completed_assignments']); $j++){
+		  echo '<a href="'.$www_site_url."/client.php?action=home&view=reportcomplete&re_id=".$s['store_completed_assignments'][$j]['re_id']."&a_id=".$s['store_completed_assignments'][$j]['a_id'].'">'.substr($s['store_completed_assignments'][$j]['a_fdate'],0,10).'</a><br/>';
+		  }
+		}else{
+		  foreach($s['store_completed_assignments'] as $assign)
+		  echo '<a href="'.$www_site_url."/client.php?action=home&view=reportcomplete&re_id=".$assign['re_id']."&a_id=".$assign['a_id'].'">'.substr($assign['a_fdate'],0,10).'</a><br/>';
+		}
+		}?>
+		</td>
+        <td><?php echo $s['store_next_assignment']['a_sdate'];?> / <?php echo $s['store_next_assignment']['a_edate'];?></td>
+      </tr>
 <?php
 	}}?>
+
+</table></center>
+<!--endprint1-->
+</td>
+    <td class="table2RightBorder"></td>
+  </tr>
+<tr>
+  <td class="table2BottomLeft"></td>
+  <td class="table2Bottom"></td>
+  <td class="table2BottomRight"></td>
+</tr>
+</table>
 
 </div>
 
