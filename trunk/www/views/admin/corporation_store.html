@@ -12,9 +12,9 @@
 
 
 	<div class="container">
-			
+
 		<h3><?php echo $corp['c_title']?> <?php if(isset($brand['b_name'])) echo splitx($brand['b_name']);?> <?php echo lang('store_list')?>:<?php echo lang('store_total')?>:<?php echo $total?></h3>
-		
+
 		<div class="mainbox">
 				<form action="<?php echo $www_site_url?>/admin.php" onsubmit="return confirm('<?php echo lang('domain_delete_comfirm')?>');" method="post">
 				<input type="hidden" name="action" value="corporation">
@@ -27,26 +27,29 @@
 						<th><?php echo lang('cs_abbr')?></th>
 						<th><?php echo lang('cs_name')?></th>
 						<th><?php echo lang('cs_address')?></th>
+						<th>顺序</th>
 						<th><?php echo lang('assignment')?></th>
 						<th><?php echo lang('edit')?></th>
 					</tr>
 						<?php if(isset($stores) && is_array($stores)){
-							foreach ($stores as $v){?>	
+							foreach ($stores as $v){?>
 						<tr>
 							<td class="option"><input type="checkbox" name="delete[]" value="<?php echo $v['cs_id']?>" class="checkbox" /></td>
 							<td><?php echo $v['cs_id']?></td>
 							<td><?php echo $v['cs_abbr']?></td>
 							<td><strong><?php echo splitx($v['cs_name']);?></strong></td>
 							<td><?php echo splitx($v['cs_address']);?></td>
+							<td><?php echo $v['cs_order']?></td>
 							<td><a href="/admin.php/assignment/defaults/cs_id/<?php echo $v['cs_id']?>"><?php echo lang('assignment')?></a></td>
 							<td><a href="/admin.php/corporation/editstore/cs_id/<?php echo $v['cs_id']?>"><?php echo lang('edit')?></a></td>
 						</tr>
-												
+
 						<?php }
 						}?>
 										<tr class="nobg">
 						<td><input type="submit" value="<?php echo lang('submit')?>" class="button" />
-						 <input type="button" value="<?php echo lang('goback')?>" onclick="history.go(-1);" class="button" /></td>
+						 <input type="button" value="<?php echo lang('goback')?>" onclick="history.go(-1);" class="button" />
+						 </td>
 					</tr>
 				</table>
 
