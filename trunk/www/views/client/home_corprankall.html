@@ -1,0 +1,93 @@
+<?php include_once("header.html")?>
+<script src="<?php echo $www_site_url?>/public/js/calendar.js" type="text/javascript"></script>
+<div id="append"></div>
+<div id="wrap">  <br />
+
+<?php include_once("home_left.html")?>
+<div class="admincontent">
+
+<div id="tabsD" style="width:100%">
+  <ul>
+    <li <?php if($type=='corpstats') echo 'class="on"';?>><a href="/client.php/home/corpstats" title="<?php echo lang("assignmentprogress");?>"><span><?php echo lang("assignmentprogress");?></span></a></li>
+    <li <?php if($type=='corprank') echo 'class="on"';?>><a href="/client.php/home/corprank" title="<?php echo lang("ranking");?>"><span><?php echo lang("ranking");?></span></a></li>
+    <li <?php if($type=='corprankall') echo 'class="on"';?>><a href="/client.php/home/corprankall" title="<?php echo lang("ranking");?>"><span><?php echo "总汇";?></span></a></li>
+
+    <li style="float:right;"><?php echo lang("select_brand")?>:<input name="selbrand" type="text" class="ClocationInput" onclick="showmitibrands();" id="selbrand" value="<?php if($brand){ echo splitx($brand['b_name']); }?>" /></li>
+  </ul>
+</div>
+<br />
+<br />
+<br />
+
+<div id="brandlist" style="width: 170px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:999;">
+  <ul>
+  <?php
+       if(isset($brands) && is_array($brands)){
+         foreach ($brands as $b){
+                ?>
+	<li style="padding:2px;"> <label><a href="/client.php?action=home&view=corprankall&selbrands=<?php echo $b['b_id']?>"><?php echo splitx($b['b_name']);?></a></label></li>
+	  <?php
+			}
+      }
+       ?>
+     </ul>
+</div>
+
+<div style="margin-right:0px;float:right;clear:both;margin-bottom:10px; width:800px;">
+<div style="float:right; clear:both; width:50px">&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:showprintpage(1);"><img src="<?php echo $www_site_url?>/public/images/print_icon.jpg" border="0" title="Print"></a></div>
+
+<div style="float:right;width:400px">
+<form method="GET" action="/client.php" name="seachfrm">
+<input name="action" type="hidden" value="home"  />
+ <input name="view" type="hidden" value="corprankall"/>
+
+        <?php echo lang("a_sdate")?>：
+      <input name="sdate" type="text" class="CtimeInput" id="sdate" value="<?php echo $sdate;?>" onclick="showcalendar();"/>
+      <?php echo lang("a_edate")?>：
+      <input name="edate" type="text" class="CtimeInput" id="edate" value="<?php echo $edate;?>" onclick="showcalendar();" />
+      <input name="button" type="submit" class="btnblue" id="button" value="<?php echo lang("search_report")?>" />
+   </form>
+</div>
+</div>
+<br/>
+<!--startprint1-->
+<div style="margin-top:10px">
+
+ <table width="100%" border="0" style="float:left;margin-bottom:20px" cellpadding="0" cellspacing="1" class="missionReport">
+    <tr>
+      <td colspan="6" class="title" bgcolor="#9F0000"><font color="#ffffff"><?php echo "总汇";?></font></td>
+    </tr>
+    <tr>
+    <th class="title" bgcolor="#9F0000"><font color="#ffffff"><?php echo "序号";?></font></th>
+    <th class="title" bgcolor="#9F0000"><font color="#ffffff"><?php echo "店名";?></font></th>
+    <th class="title" bgcolor="#9F0000"><font color="#ffffff"><?php echo "综览";?></font></th>
+    <th class="title" bgcolor="#9F0000"><font color="#ffffff"><?php echo "环境";?></font></th>
+    <th class="title" bgcolor="#9F0000"><font color="#ffffff"><?php echo "服务";?></font></th>
+    <th class="title" bgcolor="#9F0000"><font color="#ffffff"><?php echo "产品";?></font></th>
+    </tr>
+    <?php
+  if(isset($allrank)&& is_array($allrank)){
+  	$n=0;
+				foreach ($allrank as $k=>$v){
+				if($v){
+					$n++;
+					?>
+    <tr>
+      <td><?php echo $n;?>.</td>
+      <td><?php echo stripslashes(splitx($v['name']));?></td>
+      <td><?php echo $v['general'];?></td>
+      <td><?php echo $v['environment'];?></td>
+      <td><?php echo $v['service'];?></td>
+      <td><?php echo $v['product'];?></td>
+    </tr>
+ <?php }}}?>
+  </table>
+
+  </div>
+<!--endprint1-->
+</div>
+
+</div>
+
+
+<?php include_once("footer.html")?>
