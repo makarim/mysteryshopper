@@ -54,7 +54,7 @@ class corporation{
     	$msg = '';
 
 
-		$pattern = "/^[a-zA-Z][a-zA-Z0-9_]{1,13}[a-zA-Z0-9]$/i";
+		$pattern = "/^[a-zA-Z][a-zA-Z0-9_]{1,28}[a-zA-Z0-9]$/i";
 
 		$_POST ['c_name'] = trim ( $_POST ['c_name'] );
 		$c_name_len = mb_strlen ( $_POST ['c_name'], "UTF-8");
@@ -334,6 +334,8 @@ class corporation{
 		$store['cs_district'] = empty($_POST ['cs_district'])?"":addslashes($_POST ['cs_district']);
 		$store['cs_phone'] = empty($_POST ['cs_phone'])?"":addslashes($_POST ['cs_phone']);
 		$store['cs_size'] = empty($_POST ['cs_size'])?"":addslashes($_POST ['cs_size']);
+
+		$store['cs_order'] = empty($_POST ['cs_order'])?1:intval($_POST ['cs_order']);
 		// 1. update db corporation
 		$row = $corpmod->updateStore( $store, $cs_id);
 		if ($row !== false) {
