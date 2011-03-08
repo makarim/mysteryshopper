@@ -10,13 +10,28 @@
   <ul>
     <li <?php if($type=='corpstats') echo 'class="on"';?>><a href="/client.php/home/corpstats" title="<?php echo lang("assignmentprogress");?>"><span><?php echo lang("assignmentprogress");?></span></a></li>
     <li <?php if($type=='corprank') echo 'class="on"';?>><a href="/client.php/home/corprank" title="<?php echo lang("ranking");?>"><span><?php echo lang("ranking");?></span></a></li>
+    <li <?php if($type=='corprankall') echo 'class="on"';?>><a href="/client.php/home/corprankall" title="<?php echo lang("ranking");?>"><span><?php echo "总汇";?></span></a></li>
 
-
+    <li style="float:right;"><?php echo lang("select_brand")?>:<input name="selbrand" type="text" class="ClocationInput" onclick="showmitibrands();" id="selbrand" value="<?php if($brand){ echo splitx($brand['b_name']); }?>" /></li>
   </ul>
 </div>
 <br />
 <br />
 <br />
+
+<div id="brandlist" style="width: 170px; border: 1px solid #B5CFD9; background:#fefefe;display:none; position:absolute;z-index:999;">
+  <ul>
+  <?php
+       if(isset($brands) && is_array($brands)){
+         foreach ($brands as $b){
+                ?>
+	<li style="padding:2px;"> <label><a href="/client.php?action=home&view=corprank&selbrands=<?php echo $b['b_id']?>"><?php echo splitx($b['b_name']);?></a></label></li>
+	  <?php
+			}
+      }
+       ?>
+     </ul>
+</div>
 
 <div style="margin-right:0px;float:right;clear:both;margin-bottom:10px; width:800px;">
 <div style="float:right; clear:both; width:50px">&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:showprintpage(1);"><img src="<?php echo $www_site_url?>/public/images/print_icon.jpg" border="0" title="Print"></a></div>
