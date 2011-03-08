@@ -64,6 +64,9 @@ class CorporationModel extends Model {
 	function getStoreByBid($b_id){
 		return $this->db->getAll("select * from store where b_id='{$b_id}'");
 	}
+	function getStoreByBidAsc($b_id){
+		return $this->db->getAll("select * from store where b_id='{$b_id}' order by cs_order ASC");
+	}
 	function getBrandByCid($c_id){
 		return $this->db->getAll("select * from brand where c_id='{$c_id}'");
 	}
@@ -133,6 +136,12 @@ class CorporationModel extends Model {
     }
     function getStoreCompletedAssignments($cs_id){
     	return $this->db->getOne("select count(*) from assignment where a_finish=1 and cs_id='$cs_id'");
+    }
+    function getStoreCompletedAssignmentsBycsid($cs_id,$sdate,$edate){/** Add by Wendy 2011.2.21  **/
+    	$condition = "";
+    	if($sdate) $condition .= " and a_fdate>='$sdate'";
+    	if($edate) $condition .= " and a_fdate<'$edate'";
+    	return $this->db->getAll("select * from assignment where a_finish=1 and cs_id='$cs_id'".$condition." order by a_fdate desc");
     }
     function getStoreLatestCompleted($cs_id){
     	return $this->db->getRow("select * from assignment where cs_id='$cs_id' and a_finish=1 order by a_fdate desc limit 1");
