@@ -10,7 +10,7 @@
   <ul>
     <li <?php if($type=='corpstats') echo 'class="on"';?>><a href="/client.php/home/corpstats" title="<?php echo lang("assignmentprogress");?>"><span><?php echo lang("assignmentprogress");?></span></a></li>
     <li <?php if($type=='corprank') echo 'class="on"';?>><a href="/client.php/home/corprank" title="<?php echo lang("ranking");?>"><span><?php echo lang("ranking");?></span></a></li>
-    <li <?php if($type=='corprankall') echo 'class="on"';?>><a href="/client.php/home/corprankall" title="<?php echo lang("ranking");?>"><span><?php echo "总汇";?></span></a></li>
+    <li <?php if($type=='corprankall') echo 'class="on"';?>><a href="/client.php/home/corprankall" title="<?php echo lang("summarize");?>"><span><?php echo lang("summarize");?></span></a></li>
 
    <li style="float:right;"><?php echo lang("select_brand")?>:<input name="selbrand" type="text" class="ClocationInput" onclick="showmitibrands();" id="selbrand" value="<?php if($brand){ echo splitx($brand['b_name']); }?>" /></li>
   </ul>
@@ -36,7 +36,7 @@
   <tr>
     <td><div class="table2TitleBg">
       <div class="table2TitleBg2">
-      	<div class="table2Title"><div class="table2TitleLeft"><span><?php echo $corp['c_title']?></span></div></div>
+      	<div class="table2Title"><div class="table2TitleLeft"><span><?php echo splitx($corp['c_title'])?></span></div></div>
       </div>
     </div></td>
   </tr>
@@ -77,10 +77,10 @@
     <!--startprint1-->
     <center><table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport">
     	<tr  class="title" bgcolor="#9F0000">
-    		<th>序号</th>
-    		<th>店名</th>
+    		<th><?php echo lang("num");?></th>
+    		<th><?php echo lang("cs_name");?></th>
 			<th><?php echo lang("latest_visits");?></th>
-			<th>已完成任务数</th>
+			<th><?php echo lang("completetask");?></th>
 			<th><?php echo lang("completed_visits");?><br/>
 			<form method="GET" action="/client.php" name="seachfrm">
 				<input name="action" type="hidden" value="home"  />
