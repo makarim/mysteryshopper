@@ -10,7 +10,7 @@
   <ul>
     <li <?php if($type=='corpstats') echo 'class="on"';?>><a href="/client.php/home/corpstats" title="<?php echo lang("assignmentprogress");?>"><span><?php echo lang("assignmentprogress");?></span></a></li>
     <li <?php if($type=='corprank') echo 'class="on"';?>><a href="/client.php/home/corprank" title="<?php echo lang("ranking");?>"><span><?php echo lang("ranking");?></span></a></li>
-    <li <?php if($type=='corprankall') echo 'class="on"';?>><a href="/client.php/home/corprankall" title="<?php echo lang("ranking");?>"><span><?php echo "总汇";?></span></a></li>
+    <li <?php if($type=='corprankall') echo 'class="on"';?>><a href="/client.php/home/corprankall" title="<?php echo lang("ranking");?>"><span><?php echo lang("summarize");?></span></a></li>
 
     <li style="float:right;"><?php echo lang("select_brand")?>:<input name="selbrand" type="text" class="ClocationInput" onclick="showmitibrands();" id="selbrand" value="<?php if($brand){ echo splitx($brand['b_name']); }?>" /></li>
   </ul>
