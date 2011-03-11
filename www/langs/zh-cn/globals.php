@@ -825,4 +825,7 @@ $GLOBALS['gLang']['holdincome7'] = '>30,000';
 
 $GLOBALS['gLang']['completetask'] = '已完成任务数';
 $GLOBALS['gLang']['completedassign'] = '已完成任务数';
+$GLOBALS['gLang']['num'] = '序号';
+$GLOBALS['gLang']['summarize'] = '汇总';
+
 ?>
