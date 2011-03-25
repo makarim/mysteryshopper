@@ -147,7 +147,7 @@ class CorporationModel extends Model {
     	return $this->db->getRow("select * from assignment where cs_id='$cs_id' and a_finish=1 order by a_fdate desc limit 1");
     }
     function getStoreNextAssignment($cs_id){
-    	return $this->db->getRow("select * from assignment where cs_id='$cs_id' and a_finish=0 order by a_sdate asc limit 1");
+    	return $this->db->getRow("select * from assignment where cs_id='$cs_id' and a_finish=0 and (a_sdate-1)>=now() order by a_sdate desc limit 1");
     }
 }
 ?>
