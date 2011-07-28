@@ -10,6 +10,7 @@
 <script>
 
 function checkform(form){
+
 	var g=function(n){
 		return form.getElementsByTagName(n);
 	};
@@ -40,6 +41,63 @@ function checkform(form){
 				input[i].parentNode.style.border='';
 			}else{
 				input[i].parentNode.style.border='1px solid red';
+				result=false;
+			}
+		}
+	}
+
+	var textarea = g('textarea');
+	for(var i=0;i<textarea.length;i++){
+		var v=va(textarea[i]);
+		if(textarea[i].name.indexOf("rq_comment_")!=-1) continue;
+		if(v==''){
+			textarea[i].style.border='1px solid red';
+			result=false;
+		}else{
+			textarea[i].style.border='';
+		}
+	}
+	if(!result) alert("<?php echo lang("fiinish_redmark_question")?>");
+	if(result && confirm("<?php echo lang("submit_alert");?>")){
+		return result;
+	}else{
+		return false;
+	}
+}
+
+function checktable(table){
+	var g=function(n){
+		return table.getElementsByTagName(n);
+	};
+	var va=function(e){
+		if(e.name) return encodeURIComponent(e.value);
+	};
+	var check=function(r){
+		var redio = document.getElementsByName(r);
+		for(var i=0;i<redio.length;i++){
+			if(redio[i].checked) return true;
+		}
+		return false;
+	}
+	var result = true;
+
+	var input = g('input');
+	for(var i=0;i<input.length;i++){
+		var v = va(input[i]);
+		if(input[i].type=='text' || input[i].type=='hidden'){
+			if( v==''){
+				input[i].parentNode.style.border='1px solid red';
+				result=false;
+			}else{
+				input[i].parentNode.style.border='';
+			}
+		}
+		if(input[i].type=='radio'){
+			if(check(input[i].name)){
+				input[i].parentNode.style.border='';
+			}else{
+				input[i].parentNode.style.border='1px solid red';
+				result=false;
 			}
 		}
 	}
@@ -150,13 +208,13 @@ function checkform(form){
 
           </table>
 
-         <form action="<?php echo $www_site_url?>/index.php" method="post" onsubmit="return checkform(this);">
+         <form action="<?php echo $www_site_url?>/index.php" method="post" id="reportform">
 				<input type="hidden" name="action" value="home">
 				<input type="hidden" name="op" value="savereport">
 				<input type="hidden" name="a_id" value="<?php echo $a_id;?>">
        <?php
 		foreach ($report_questions as $k=>$v){?>
-		<table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport" style="margin-top:10px;">
+		<table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport" style="margin-top:10px;" id="table_<?php echo $k;?>">
           <tr>
             <td colspan="3" class="title"><?php echo lang($k);?></td>
           </tr>
@@ -170,12 +228,15 @@ function checkform(form){
             <td width="60%"><?php echo splitx($vv['rq_question']);?> <span id="span_ch_<?php echo $vv['rq_id'];?>" style="float:right;"></span></td>
             <td  width="35%" align="center">
              <?php if($vv['rq_type']==2){?>
-            	<?php if($vv['is_na']==1){?> <span style="float:left;"> <img id="icon_updown_<?php echo $vv['rq_id'];?>" style="cursor:pointer;" src="<?php echo $www_site_url?>/public/images/up_down.jpg" onclick="display_comment(<?php echo $vv['rq_id'];?>);"><input type="checkbox" id="votebox_<?php echo $vv['rq_id'];?>" name="votebox_<?php echo $vv['rq_id'];?>" onclick="out_fs('yes_<?php echo $vv['rq_id'];?>_10_<?php echo $mark_type;?>');"  <?php if($vv['answer']=='A') echo "checked"; ?>>N/A</span><?php }?>
+            	<?php if($vv['is_na']==1){?> <span style="float:left;"> <img id="icon_updown_<?php echo $vv['rq_id'];?>" style="cursor:pointer;" src="<?php echo $www_site_url?>/public/images/up_down.jpg" onclick="display_comment(<?php echo $vv['rq_id'];?>);"><input type="checkbox" id="votebox_<?php echo $vv['rq_id'];?>" name="votebox_<?php echo $vv['rq_id'];?>" onclick="out_fs('yes_<?php echo $vv['rq_id'];?>_10_<?php if($vv['rq_markgrade'])echo $vv['rq_markgrade']; else echo $mark_type;?>');"  <?php if($vv['answer']=='A') echo "checked"; ?>>N/A</span><?php }?>
             					<div id="voteimg_<?php echo $vv['rq_id'];?>"></div>
 								<input type="hidden" id="rq_ans_<?php echo $vv['rq_id'];?>" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="<?php echo $vv['answer'];?>">
+								<?php if($vv['rq_markgrade']){?>
+								<script>create_vote_img_question_mark(<?php echo $vv['rq_id'];?>,'<?php echo $vv['answer'];?>',<?php echo $vv['rq_markgrade'];?>);</script>
+								<?php } else{?>
 								<script>create_vote_img_mark(<?php echo $vv['rq_id'];?>,'<?php echo $vv['answer'];?>',<?php echo $mark_type;?>);</script>
 
-			<?php }else if($vv['rq_type']==1){ ?>
+			<?php }}else if($vv['rq_type']==1){ ?>
 								 <?php if($vv['is_na']==1){?><span> <img id="icon_updown_<?php echo $vv['rq_id'];?>" style="cursor:pointer;" src="<?php echo $www_site_url?>/public/images/up_down.jpg" onclick="display_comment(<?php echo $vv['rq_id'];?>);"><input type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="A" <?php if($vv['answer']=='A')echo 'checked'; ?> onclick="display_comment(<?php echo $vv['rq_id'];?>);">N/A ;<span><?php }?>
 								 <input type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="Y" <?php if($vv['answer']=='Y')echo 'checked'; ?> onclick="display_comment(<?php echo $vv['rq_id'];?>);">Yes ;</label>&nbsp;&nbsp;&nbsp;&nbsp;<label><input onclick="display_comment(<?php echo $vv['rq_id'];?>);" type="radio" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="N"  <?php if($vv['answer']=='N')echo 'checked'; ?>>No;</label>
 
@@ -226,12 +287,18 @@ function checkform(form){
 
 			}
 			?>
+			<?php if($v){ ?>
+			<tr>
+				<td align="center" colspan="3"><input type="submit" value="保存" class="btn" onclick="return checktable(document.getElementById('table_<?php echo $k;?>'));"/></td>
+			</tr>
+			<?php } ?>
 
         </table>
+
  		<?php }?>
  		<table width="100%" height="50">
 	 		<tr>
-				<td align="center"><input type="submit" value="<?php echo lang('submit')?>" class="btn" /></td>
+				<td align="center"><input type="submit" value="<?php echo lang('submit')?>" class="btn" onclick="return checkform(document.getElementById('reportform'));" /></td>
 			</tr>
 		</table>
 		</form>
