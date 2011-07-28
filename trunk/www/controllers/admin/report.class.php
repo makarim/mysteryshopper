@@ -456,7 +456,7 @@ class report{
 		 * 因为我们的页面采用的是utf-8编码，而windows中文版操作系统是采用gb2312的字符集，因此保存的文件名会产生乱码问题
 		 * 用iconv将文件名重新编码为与操作系统一致的gb2312，从而解决文件名乱码问题；
 		 */
-		if(@move_uploaded_file($_FILES['mfile']['tmp_name'], iconv('utf-8','gb2312',$upload_dir.$_FILES['mfile']['name']))){
+		if(@move_uploaded_file($_FILES['mfile']['tmp_name'], $upload_dir.$_FILES['mfile']['name'])){
 			include_once 'AssignmentModel.class.php';
 			$assignmentmodel = new AssignmentModel();
 
