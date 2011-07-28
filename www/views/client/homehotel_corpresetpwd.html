@@ -1,0 +1,55 @@
+<?php include_once("homehotel_header.html")?>
+
+<div id="wrap">  <br />
+
+<?php include_once("homehotel_left.html")?>
+<div class="admincontent">
+<?php include_once("homehotel_corptop.html")?>
+
+<br/>
+<div class="clear"></div>
+<FORM name="resetpwdform" method="POST" action="<?php echo $www_site_url?>/client.php" onsubmit="return checkOnSubmit('resetpwdform', rules);" >
+<input type="hidden" name="action" value="homehotel">
+<input type="hidden" name="op" value="corpresetpwd">
+<TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="regInfo">
+
+<TR><TD width="40%" class="text"><?php echo lang('oldpwd')?>:</TD><TD width="60%"><INPUT class="input" type="password" name=oldpwd />&nbsp;&nbsp;<span id=errorsDiv_oldpwd></span></TD></TR>
+<TR><TD width="40%" class="text"><?php echo lang('newpwd')?>:</TD><TD width="60%"><INPUT class="input" type="password" name=newpwd1 />&nbsp;&nbsp;<span id=errorsDiv_newpwd1></span></TD></TR>
+<TR><TD class="text"><?php echo lang('newpwd2')?>:</TD><TD><INPUT class="input" type="password" name=newpwd2 />&nbsp;&nbsp;<span id=errorsDiv_newpwd2></span></TD></TR>
+
+<TR>
+<TD><br></TD>
+  <TD><br />
+      <input name="button" type="submit" class="btn" id="button" value="<?php echo lang('submit')?>" /></TD>
+</TR>
+</TABLE>
+</form>
+<SCRIPT>
+function checkOnSubmit(formName, r) {
+
+    if (yav.performCheck(formName, r, 'inline')) {
+       return true;
+    }
+    return false;
+}
+
+var rules=new Array();
+
+rules[0]='oldpwd|required|<?php echo lang('insertpwd')?>';
+rules[1]='newpwd1|required|<?php echo lang('insertpwd')?>';
+rules[2]='newpwd1|minlength|6|<?php echo lang('pwdrule')?>';
+rules[3]='newpwd2|equal|$newpwd1|<?php echo lang('pwdnotsame')?>';
+
+
+window.onload = function(){
+	yav.init('resetpwdform', rules);
+}
+</SCRIPT>
+
+
+</div>
+
+</div>
+
+
+<?php include_once("footer.html")?>
