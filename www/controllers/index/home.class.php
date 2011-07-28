@@ -7,7 +7,14 @@ class home{
 		global $tpl;
 		$this->tpl = $tpl;
 		$this->login_user = authenticate();
-		if(!$this->login_user){
+
+		/*****/
+		$this->login_user['Privs'] = array('authen'=>1,'modify_client_admin'=>1,'modify_store_admin'=>1,'modify_storers'=>1);
+		$_SESSION['LoginUser'] = $this->login_user;
+//		echo "<pre/>";
+//		print_r($this->login_user);
+		/*****/
+		if(empty($this->login_user['user'])){
 			redirect("/index.php/passport/login");
 		}
 		include_once("CorporationModel.class.php");
@@ -226,6 +233,8 @@ class home{
 		$re_id = $assignment['re_id'];
 		$a_id =isset($_GET['a_id'])?$_GET['a_id']:0;
 
+//		echo "<pre/>";
+//		print_r($assignment);
 		if($assignment['user_id']==$this->login_user['user_id']){
 
 			include_once("ReportModel.class.php");
@@ -247,7 +256,8 @@ class home{
 			}
 
 //			echo "<pre/>";
-//			print_r($assignment);
+//			//print_r($assignment);
+//			print_r($report_questions);
 
 			//分制类型信息 add by wendy 32010.11.24
 			$this->tpl->assign("mark_type",$assignment['a_markgrade']);
@@ -263,8 +273,10 @@ class home{
 		$u_id= $this->login_user['user_id'];
 		$a_id= $_POST['a_id'];
 		$r = $rs  = true;
+		$rall = true;
 		if($_POST){
 			foreach ($_POST as $k=>$v){
+				if(!$v) $rall = false;
 				if(substr($k,0,7)=='rq_ans_'){
 					list(,,$rq_type,$rq_id) = split("_",$k);
 					//echo "k=".$k."  "."answer=".$v."<br/>";
@@ -278,14 +290,16 @@ class home{
 
 		}
 
-		if($r){
+		if($r && $rall){
 			$updates['a_fdate'] = "MY_F:NOW()";
 			$updates['a_finish'] =0.50;
+			$updates['a_audit'] =0;
 			$assignment->updateAssignment($updates,$a_id);
+			show_message_goback(lang('success'));
+		}else if(!$rall){
 			show_message_goback(lang('success'));
 		}else{
 			show_message_goback(lang('failed'));
-
 		}
 	}
 
@@ -322,6 +336,9 @@ class home{
 		$a_id = isset($_POST['a_id'])?$_POST['a_id']:0;
 		$upload=new FileUpload(APP_DIR."/public/upload/",'jpg|png|gif|jpeg|mp3|wma');
 		$upload->renamed = true;
+
+		$upload->preview = true;
+
 		$re = $upload->upload();
 		if(!$re){
 			$fname_arr=$upload->get_succ_file();
@@ -337,12 +354,10 @@ class home{
 					$this->assignmentModel->saveAttachment($fields,"assignment_attachment");
     			}
 				show_message_goback(lang("success"));
-
 			}
 		}else{
 			show_message_goback(lang('failed'));
 		}
-
 	}
 
     function view_mydetail(){
@@ -441,6 +456,7 @@ class home{
 				$user['province'] = !empty($_POST['province'])?$_POST['province']:'';
 				$user['city'] = !empty($_POST['city'])?$_POST['city']:'';
 				$user['area'] = !empty($_POST['area'])?$_POST['area']:'';
+				$user['postaddress'] = !empty($_POST['postaddress'])?$_POST['postaddress']:'';
 
     		break;
     		case "extinfo":
