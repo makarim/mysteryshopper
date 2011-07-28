@@ -52,6 +52,9 @@ class report{
 			$msg = array('s'=> 400,'m'=>lang('need'),'d'=>'');
 			exit(json_output($msg));
 		}
+
+		$arr['q_markgrade'] = $_POST['q_markgrade'];
+
 		include_once("ReportModel.class.php");
 		$reportModel = new ReportModel();
 
@@ -176,11 +179,17 @@ class report{
     	$assignmentModel = new AssignmentModel();
     	$assignmentinfo = $assignmentModel->getAssignmentById($a_id);
 
+//    	echo "<pre/>";
+//    	print_r($assignmentinfo);
+
 		include_once("ReportModel.class.php");
 		$ReportModel = new ReportModel();
 		$report_questions = array();
+
 			foreach ($GLOBALS['gGroups'] as $k=>$v){
 				$arr = $ReportModel->getQuestionsByReId($re_id,$k);
+//				echo "<pre/>";
+//				print_r($arr);
 
 				if($arr){
 					foreach ($arr as $kk=>$vv){
@@ -196,6 +205,7 @@ class report{
 		$attachments = $assignmentModel->getUploadedAttachment($a_id);
 
 //		echo "<pre/>";
+//		//print_r($assignmentinfo);
 //		print_r($report_questions);
 		$this->tpl->assign("attachments",$attachments);
 		$this->tpl->assign("a_id",$a_id);
@@ -293,8 +303,10 @@ class report{
 		$u_id= $this->loginuser['user_id'];
 		$a_id= $_POST['a_id'];
 		$r = $rs =true;
+		$rall = true;
 		if($_POST){
 			foreach ($_POST as $k=>$v){
+				if(!$v) $rall = false;
 				if(substr($k,0,7)=='rq_ans_'){
 					list(,,$rq_type,$rq_id) = split("_",$k);
 					$r *=$reportModel->saveAnswer($rq_id,$u_id,$a_id,$rq_type,addslashes($v));
@@ -324,6 +336,9 @@ class report{
 		include_once("ReportModel.class.php");
 		$reportModel = new ReportModel();
 		$arr['q_id'] = $_POST['toBox'];
+//		echo "<pre/>";
+//		print_r($arr);
+
 		$r = $reportModel->addNewReport($arr);
 
 		if($r){
@@ -331,10 +346,9 @@ class report{
 			redirect($GLOBALS ['gSiteInfo'] ['www_site_url']."/admin.php/report/defaults");
 		}else{
 			show_message_goback(lang('failed'));
-
 		}
-
 	}
+
 	function op_updatereport(){
 		$arr['re_title'] = $_POST['re_title'];
 		$arr['re_id'] = $_POST['re_id'];
@@ -424,5 +438,48 @@ class report{
 		show_message(lang('success'));
     	goback();
 	}
+
+	function op_upload(){
+		/* 现在开始，写文件上传的功能 */
+		//需要任务ID a_id;
+		//需要文件名
+		//需要保存文件的路径
+
+		$a_id = $_POST['a_id'];
+		$filename = $_FILES['mfile']['name'];
+		$filetmp = $_FILES['mfile']['tmp_name'];
+
+		$upload_dir = 'public/upload/';
+
+		//保存到目录下时，中文为乱码
+		/**
+		 * 因为我们的页面采用的是utf-8编码，而windows中文版操作系统是采用gb2312的字符集，因此保存的文件名会产生乱码问题
+		 * 用iconv将文件名重新编码为与操作系统一致的gb2312，从而解决文件名乱码问题；
+		 */
+		if(@move_uploaded_file($_FILES['mfile']['tmp_name'], iconv('utf-8','gb2312',$upload_dir.$_FILES['mfile']['name']))){
+			include_once 'AssignmentModel.class.php';
+			$assignmentmodel = new AssignmentModel();
+
+			$fields['f_name'] = $_FILES['mfile']['name'];
+			$fields['a_id'] = $a_id;
+			$fields['f_created'] = 'MY_F:NOW()';
+
+			$items['a_finish'] = 1.00;
+
+			$assignmentmodel->saveAttachment($fields,'assignment_attachment');
+			$assignmentmodel->updateAssignment($items,$a_id);
+
+			show_message_goback(lang('success'));
+		}else{
+			show_message_goback(lang('failed'));
+		}
+
+//		echo "<pre/>";
+//		print_r($file);
+//		echo $file['name'];
+//		echo $a_id;
+		//show_message_goback(lang('success'));
+	}
 }
+
 ?>
