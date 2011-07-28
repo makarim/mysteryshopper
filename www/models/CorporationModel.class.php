@@ -149,5 +149,9 @@ class CorporationModel extends Model {
     function getStoreNextAssignment($cs_id){
     	return $this->db->getRow("select * from assignment where cs_id='$cs_id' and a_finish=0 and (a_sdate-1)>=now() order by a_sdate desc limit 1");
     }
+    public function updatePwdByCorp($corp,$pwd){
+		$sql = "Update  `corporation` set c_password='$pwd' WHERE c_id=$corp ";
+		return $this->db->execute ( $sql );
+	}
 }
 ?>
