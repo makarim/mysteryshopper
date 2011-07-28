@@ -1,0 +1,36 @@
+<?php include_once("header.html")?>
+
+<div id="wrap">  <br />
+
+<?php include_once("hometotal_left.html")?>
+<div class="admincontent">
+<?php include_once("hometotal_corptop.html")?>
+
+<br />
+      <br />
+      <br />
+<TABLE width="100%" border="0" cellspacing="1" cellpadding="0" class="clear missionReport">
+
+<TR><TD align="right" width="15%" ><?php echo lang('c_department')?>:</TD>
+<TD width="85%"><?php echo $corp['c_department'];?></TD>
+</TR>
+<TR><TD align="right"><?php echo lang('c_contacter')?>:</TD>
+<TD><?php echo $corp['c_contacter'];?></TD>
+</TR>
+<TR><TD align="right" ><?php echo lang('c_phone')?>:</TD>
+<TD><?php echo $corp['c_phone'];?></TD>
+</TR>
+<TR><TD align="right"><?php echo lang('c_name')?>:</TD>
+<TD><?php echo $corp['c_name'];?></TD>
+</TR>
+
+
+</table>
+
+
+</div>
+
+</div>
+
+
+<?php include_once("footer.html")?>
