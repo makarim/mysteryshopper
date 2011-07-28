@@ -1,0 +1,65 @@
+<?php include_once("homehotel_header.html")?>
+<script src="<?php echo $www_site_url?>/public/js/calendar.js" type="text/javascript"></script>
+<div id="append"></div>
+<div id="wrap">  <br />
+
+<?php include_once("homehotel_left.html")?>
+<div class="admincontent">
+
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><div class="table2TitleBg">
+      <div class="table2TitleBg2">
+      	<div class="table2Title"><div class="table2TitleLeft"><span><?php echo splitx($corp['c_title'])?></span></div></div>
+      </div>
+    </div></td>
+  </tr>
+
+  <tr>
+    <td>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td class="table2LeftBorder"></td>
+        <td>
+    <center><table width="100%" border="0" cellpadding="0" cellspacing="1" class="missionReport">
+    	<tr  class="title" bgcolor="#9F0000" height="40">
+    		<th><?php echo lang("num");?></th>
+			<th><?php echo lang('completed_visits');?></th>
+			<th><?php echo lang('finished_date');?></th>
+		</tr>
+<?php if(is_array($attachments)){
+	$n=0;
+	foreach ($attachments as $k=>$a){
+	$n++;
+	?>
+      <tr align="center">
+      	<td><?php echo $n;?></td>
+        <td align="left"><a href="/public/upload/<?php echo $a['f_name']?>"><?php echo splitx(stripslashes($a['f_name']))?></a></td>
+        <td><?php echo $a['f_created'];?></td>
+      </tr>
+<?php
+	}}?>
+
+</table>
+
+     </td>
+      <td class="table2RightBorder"></td>
+      </tr>
+      <tr>
+        <td class="table2BottomLeft"></td>
+        <td class="table2Bottom"></td>
+        <td class="table2BottomRight"></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+<br />
+
+</div>
+
+</div>
+
+
+<?php include_once("footer.html")?>
