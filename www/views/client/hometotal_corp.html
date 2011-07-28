@@ -1,0 +1,119 @@
+<?php include_once("header.html")?>
+
+<div id="wrap">  <br />
+
+<?php include_once("hometotal_left.html")?>
+<div class="admincontent">
+
+<?php include_once("hometotal_corptop.html")?>
+<br />
+<br />
+<br />
+
+<TABLE width="100%" border="0" cellspacing="1" cellpadding="0" class="clear missionReport">
+
+<TR width="15%"><TD align="right"><?php echo lang('c_title')?>:</TD>
+<TD width="85%"><?php echo $corp['c_title'];?></TD>
+</TR>
+<TR><TD align="right" ><?php echo lang('c_logo')?>:</TD>
+<TD><img src="/public/upload/logo/<?php echo $corp['c_logo'];?>"></TD>
+</TR>
+
+<TR>
+<TD align="right" ><?php echo lang('c_industry')?>:</TD>
+<TD>
+<?php
+foreach ($GLOBALS['gIndustry'] as $k=>$v){
+	if($k==$corp['c_industry']) echo lang($v);
+}
+?>
+</TD>
+</TR>
+<TR>
+<TD align="right" ><?php echo lang('c_companytype')?>:</TD>
+<TD>
+<?php
+foreach ($GLOBALS['gCompanytype'] as $k=>$v){
+	if($k==$corp['c_companytype']) echo lang($v);
+}
+?>
+</TD>
+</TR>
+<TR>
+<TD align="right" ><?php echo lang('c_companycate')?>:</TD>
+<TD>
+<?php
+foreach ($GLOBALS['gCompanycate'] as $k=>$v){
+	if($k==$corp['c_companycate']) echo lang($v);
+}
+?>
+</TD>
+</TR>
+<TR>
+<TD align="right" ><?php echo lang('c_foodcate')?>:</TD>
+<TD>
+<?php
+foreach ($GLOBALS['gFoodcate'] as $k=>$v){
+	if($k==$corp['c_foodcate']) echo lang($v);
+}
+?>
+</TD>
+</TR>
+<TR>
+<TD align="right" ><?php echo lang('c_companysize')?>:</TD>
+<TD>
+<?php
+foreach ($GLOBALS['gCompanysize'] as $k=>$v){
+	if($k==$corp['c_companysize']) echo ($v);
+}
+?>
+</TD>
+</TR>
+
+<TR>
+<TD align="right" ><?php echo lang('city_district')?>:</TD>
+<TD>
+<?php echo $corp['c_province'].$corp['c_city'].$corp['c_district']?>
+</TD>
+</TR>
+<TR>
+<TD align="right" ><?php echo lang('c_companyaddress')?>:</TD>
+<TD>
+<?php echo $corp['c_companyaddress']?>
+</TD>
+</TR>
+<TR>
+<TD align="right" ><?php echo lang('c_website')?>:</TD>
+<TD>
+<?php echo $corp['c_website']?>
+</TD>
+</TR><TR>
+<TD align="right" ><?php echo lang('c_otherphone')?>:</TD>
+<TD>
+<?php echo $corp['c_otherphone']?>
+</TD>
+</TR><TR>
+<TD align="right" ><?php echo lang('c_workemail')?>:</TD>
+<TD>
+<?php echo $corp['c_workemail']?>
+</TD>
+</TR>
+<TR><TD align="right"><?php echo lang('c_avgbill')?>:</TD>
+<TD><?php echo $corp['c_avgbill'];?></TD>
+</TR>
+<TR><TD align="right"><?php echo lang('c_intro')?>:</TD>
+<TD><?php echo $corp['c_intro'];?></TD>
+</TR>
+
+
+
+
+</table>
+
+
+</div>
+
+</div>
+
+
+<?php include_once("footer.html")?>
