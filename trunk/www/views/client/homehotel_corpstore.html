@@ -1,0 +1,44 @@
+<?php include_once("homehotel_header.html")?>
+
+<div id="wrap">  <br />
+
+<?php include_once("homehotel_left.html")?>
+<div class="admincontent">
+<?php include_once("homehotel_corptop.html")?>
+
+<br />
+      <br />
+      <br />
+<TABLE width="100%" border="0" cellspacing="1" cellpadding="0" class="clear missionReport">
+<TR>
+<TD width="15%"  style="background:#efefef"><?php echo lang("c_title");?></TD>
+<TD width="25%" style="background:#efefef"><?php echo lang("c_companysize");?></TD>
+<TD width="15%" style="background:#efefef"><?php echo lang("c_phone");?></TD>
+<TD width="45%" style="background:#efefef"><?php echo lang("c_companyaddress");?></TD>
+</TR>
+<TR>
+<?php if(isset($stores)){
+	foreach ($stores as $s){?>
+
+<TR><TD><?php echo stripslashes(splitx($s['cs_name']));?></TD>
+<TD><?php
+foreach ($GLOBALS['gCompanysize'] as $k=>$v){
+	if($k==$s['cs_size']) echo ($v);
+}
+?></TD>
+<TD><?php echo $s['cs_phone'];?></TD>
+<TD><?php echo stripslashes(splitx($s['cs_address']));?></TD>
+</TR>
+<?php }}?>
+</TR>
+
+
+</table>
+
+
+</div>
+
+</div>
+
+
+<?php include_once("footer.html")?>
