@@ -11,11 +11,11 @@
 
 <script>
 function checkOnSubmit(formName) {
-  	
+
 	var url = "<?php echo $www_site_url?>/admin.php";
 	var params = mini.form.serialize($(formName));
 	mini.ajax.post(url, function(r){
-		var r = eval('(' + r + ')');   
+		var r = eval('(' + r + ')');
 		if(r.s==200){
 			window.location.href = r.d;
 		}
@@ -23,14 +23,14 @@ function checkOnSubmit(formName) {
 			$('msg').innerHTML = r.m;
 		}
 	}, params);
-	
+
 	return false;
-       
+
 }
 function viewUser(report,report_id){
 	var url = "<?php echo $www_site_url?>/admin.php/report/detail/report_id/"+report_id+'/report/'+report;
 	mini.ajax.get(url, function(r){
-		var r = eval('(' + r + ')');   
+		var r = eval('(' + r + ')');
 		if(r.s==200){
 			$('reportid_'+report_id).innerHTML = "<?php echo lang('sex')?>:"+r.d.report_sex+ ", <?php echo lang('signup')?>IP:"+ r.d.report_reg_ip +", <?php echo lang('lastlogin')?>:"+r.d.report_lastlogin_time+
 		", <?php echo lang('lastlogin')?>IP:"+r.d.report_lastlogin_ip+" <?php echo lang('email')?>:"+r.d.report_email;
@@ -54,7 +54,7 @@ function viewUser(report,report_id){
 		document.getElementById("close").style.display = 'block';
 		var tli=document.getElementById("tabs_menu").getElementsByTagName("li");
 		var mli=document.getElementById("tabs_main").getElementsByTagName("div");
-		for(i=0;i<tli.length;i++){
+		for(i=0;i<tli.length-1;i++){
 		  tli[i].className=i==n?"hover":"";
 		  mli[i].style.display=i==n?"block":"none";
 		}
@@ -68,11 +68,11 @@ function viewUser(report,report_id){
 		}
 	}
 
-		
+
 	</script>
 
 	<div class="container">
-	
+
 
 			<div id="tabs">
 				<div class="tabs_menubox">
@@ -80,20 +80,20 @@ function viewUser(report,report_id){
 						<li onclick="setTab(0)"><?php echo lang('search_question')?></li>
 						<li onclick="setTab(1)"><?php echo lang('add_question')?></li>
 						<li onclick="hid()" id="close" style="display:none;"><?php echo lang('hide')?>×</li>
-		
+
 					</ul>
 				</div>
 				<div id="tabs_mainbox" class="tabs_mainbox" style="display:none;">
 					<div class="main" id="tabs_main" >
 						<div  style="display:none;">
 							<form action="<?php echo $www_site_url?>/admin.php" method="GET">
-							<input type="hidden" name="action" value="report">				
-							<input type="hidden" name="view" value="question">					
+							<input type="hidden" name="action" value="report">
+							<input type="hidden" name="view" value="question">
 							<table width="100%">
 								<tr>
 									<td align="right"><?php echo lang('question')?>:</td>
 									<td align="left"><input type="text" name="q_question" value="<?php echo $con['q_question']?>" class="textfield" /></td>
-			
+
 									<td><?php echo lang('question_group')?>:</td>
 									<td align="left"><select name="g_id">
 							<option value="">--</option>
@@ -101,13 +101,13 @@ function viewUser(report,report_id){
 							<option value="<?php echo $v['g_id'];?>"><?php echo  lang($v['g_name']);?></option>
 							<?php } ?>
 							</select></td>
-									
+
 									<td rowspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
 								</tr>
 
 							</table>
 							</form>
-						</div>	
+						</div>
 						<div class="block" style="display:none;">
 							<form id="addreportform" name="addreportform" action="<?php echo $www_site_url?>/admin.php" method="post" onsubmit="return checkOnSubmit('addreportform');" >
 							<input type="hidden" name="action" value="report">
@@ -116,7 +116,7 @@ function viewUser(report,report_id){
 								<tr>
 									<td align="left"><?php echo lang('question')?>:</td>
 									<td align="left"><input type="text" name="q_question" class="textfield" /><input type="button" value="Split" onclick="document.addreportform.q_question.value+='&lt;!--!--&gt;';"></td>
-			
+
 									<td><?php echo lang('question_group')?>:</td>
 									<td align="left"><select name="q_group">
 							<option value="">--</option>
@@ -131,21 +131,40 @@ function viewUser(report,report_id){
 							<option value="2"><?php echo lang('vote')?></option>
 							<option value="3"><?php echo lang('fillblank')?></option>
 							<option value="4"><?php echo lang('score')?></option>
+							<option value="5"><?php echo lang('explain')?></option>
 							</select></td>
+
+									<td>分制：</td>
+									<td align="left">
+									<select name="q_markgrade">
+									<option value="">--</option>
+									<option value="1">1分制</option>
+									<option value="2">2分制</option>
+									<option value="3">3分制</option>
+									<option value="4">4分制</option>
+									<option value="5">5分制</option>
+									<option value="6">6分制</option>
+									<option value="7">7分制</option>
+									<option value="8">8分制</option>
+									<option value="9">9分制</option>
+									<option value="10">10分制</option>
+									</select>
+									</td>
+
 									<td rowspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button" /></td>
 								</tr>
 							</table>
 							</form>
-			
+
 						</div>
-					
+
 				</div>
 			</div>
 
 		</div>
 <br>
 		<h3><?php echo lang('question_list')?> <?php echo lang('question_total')?>:<?php echo $total?></h3>
-		
+
 		<div class="mainbox">
 				<form action="<?php echo $www_site_url?>/admin.php" onsubmit="return confirm('<?php echo lang('domain_delete_comfirm')?>');" method="post">
 				<input type="hidden" name="action" value="report">
@@ -158,11 +177,12 @@ function viewUser(report,report_id){
 						<th><?php echo lang('question')?></th>
 						<th><?php echo lang('question_group')?></th>
 						<th><?php echo lang('question_type')?></th>
+						<th><?php echo '问题分制'?></th>
 
 						<th><?php echo lang('edit')?></th>
 					</tr>
 						<?php if(isset($questions['records']) && is_array($questions['records'])){
-							foreach ($questions['records'] as $v){?>	
+							foreach ($questions['records'] as $v){?>
 						<tr>
 							<td class="option"><input type="checkbox" name="delete[]" value="<?php echo $v['q_id']?>" class="checkbox" /></td>
 							<td><?php echo $v['q_id'];?></td>
@@ -174,10 +194,11 @@ function viewUser(report,report_id){
 							if($v['q_type']==4) echo lang('score');
 							?>
 							</td>
+							<td><?php echo $v['q_markgrade']?></td>
 
 							<td><a href="/admin.php/report/editques/q_id/<?php echo $v['q_id']?>"><?php echo lang('edit')?></a></td>
 						</tr>
-					
+
 						<?php }
 						}?>
 										<tr class="nobg">
