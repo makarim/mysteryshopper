@@ -306,20 +306,24 @@ if(is_array($attachments)){
           </tr>
 
           <?php
+			//问题序号
+			$question_num = 0;
+
 			foreach ($v as $kk=>$vv){
+				if($vv['rq_type'] != 5) $question_num++;
 				if($vv['rq_type']==2 || $vv['rq_type']==4 || $vv['rq_type']==1){
 				?>
           <tr>
-			<td width="5%"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
+			<td width="5%"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($question_num)?></td>
             <td width="65%"><?php echo splitx($vv['rq_question']);?> <span id="span_ch_<?php echo $vv['rq_id'];?>" style="float:right;"></span></td>
             <td width="30%" align="center">
 
             <?php if($vv['rq_type']==2){?>
-            	<?php if($vv['is_na']==1){?> <span style="float:left;"> <img id="icon_updown_<?php echo $vv['rq_id'];?>" style="cursor:pointer;" src="<?php echo $www_site_url?>/public/images/up_down.jpg" onclick="display_comment(<?php echo $vv['rq_id'];?>);"><input type="checkbox" id="votebox_<?php echo $vv['rq_id'];?>" name="votebox_<?php echo $vv['rq_id'];?>" onclick="out_fs('yes_<?php echo $vv['rq_id'];?>_10_<?php if($vv['rq_markgrade'])echo $vv['rq_markgrade'];  elseif(isset($assignmentinfo['a_markgrade']))echo $assignmentinfo['a_markgrade']?>');"  <?php if($vv['answer']=='A') echo "checked"; ?>>N/A</span><?php }?>
+            	<?php if($vv['is_na']==1){?> <span style="float:left;"> <img id="icon_updown_<?php echo $vv['rq_id'];?>" style="cursor:pointer;" src="<?php echo $www_site_url?>/public/images/up_down.jpg" onclick="display_comment(<?php echo $vv['rq_id'];?>);"><input type="checkbox" id="votebox_<?php echo $vv['rq_id'];?>" name="votebox_<?php echo $vv['rq_id'];?>" onclick="out_fs('yes_<?php echo $vv['rq_id'];?>_10_<?php if($assignmentinfo['a_markgrade'])echo $assignmentinfo['a_markgrade'];  elseif(isset($assignmentinfo['a_markgrade']))echo $assignmentinfo['a_markgrade']?>');"  <?php if($vv['answer']=='A') echo "checked"; ?>>N/A</span><?php }?>
             					<div id="voteimg_<?php echo $vv['rq_id'];?>"></div>
 								<input type="hidden" id="rq_ans_<?php echo $vv['rq_id'];?>" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="<?php echo $vv['answer'];?>">
-								<?php if($vv['rq_markgrade']){?>
-								<script>create_vote_img_question_mark(<?php echo $vv['rq_id'];?>,'<?php echo $vv['answer'];?>',<?php echo $vv['rq_markgrade']?>);</script>
+								<?php if($assignmentinfo['a_markgrade']){?>
+								<script>create_vote_img_question_mark(<?php echo $vv['rq_id'];?>,'<?php echo $vv['answer'];?>',<?php echo $assignmentinfo['a_markgrade']?>);</script>
 								<?php } elseif(isset($assignmentinfo) && !empty($assignmentinfo)){?>
 								<script>create_vote_img_mark(<?php echo $vv['rq_id'];?>,'<?php echo $vv['answer'];?>',<?php echo $assignmentinfo['a_markgrade']?>);</script>
 								<?php } else{?>
@@ -351,7 +355,7 @@ if(is_array($attachments)){
 					if($vv['rq_group']==5){
 					?>
 			<tr>
-			 <td width="5%" valign="top"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
+			 <td width="5%" valign="top"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($question_num)?></td>
 			 <td width="65%"><?php echo splitx($vv['rq_question']);?></td>
             <td  width="30%" align="center"><input class="textfield" type="text" name="rq_ans_<?php echo $vv['rq_type']."_".$vv['rq_id'];?>" value="<?php echo splitx($vv['answer']); ?>"></td>
 
@@ -359,7 +363,7 @@ if(is_array($attachments)){
           <?php }else{
           ?>
 			<tr>
-			 <td width="5%" valign="top"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($kk+1)?></td>
+			 <td width="5%" valign="top"><?php echo $GLOBALS['gGroupsCap'][$k]. "".($question_num)?></td>
              <td width="95%" colspan="2" style="padding:0">
 
 		            <table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -378,7 +382,20 @@ if(is_array($attachments)){
           </tr>
 	   <?php }
 
-				}
+				}else if($vv['rq_type']==5){
+				?>
+					<tr>
+             			<td width="100%" colspan="3" style="padding:0">
+
+		           			 <table width="100%" border="0" cellpadding="0" cellspacing="0">
+			         		   <tr>
+			            		<td width="50%" style="background-color:#ccc;"> <?php echo splitx($vv['rq_question']);?></td>
+			          			</tr>
+
+		             		</table>
+            			</td>
+          			</tr>
+				<?php }
 
 			}
 			?>
