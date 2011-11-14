@@ -378,6 +378,7 @@ $GLOBALS['gLang']['yesorno'] = '是非题';
 $GLOBALS['gLang']['vote'] = '打分题';
 $GLOBALS['gLang']['fillblank'] = '问答题';
 $GLOBALS['gLang']['score'] = '时间题';
+$GLOBALS['gLang']['explain'] = '说明题';
 
 
 $GLOBALS['gLang']['corporation_list'] = '企业列表';
@@ -704,7 +705,7 @@ $GLOBALS['gLang']['preview'] = '预览问卷';
 $GLOBALS['gLang']['fillout'] = '填写问卷';
 $GLOBALS['gLang']['uploadattachment'] = '上传附件';
 $GLOBALS['gLang']['params_invalid'] = '参数无效!';
-$GLOBALS['gLang']['pass_test'] = '恭喜您！测试通过！您可以执行任务了！';
+$GLOBALS['gLang']['pass_test'] = '恭喜您！测试通过！您可以执行任务了！请在就餐完的48小时内，填写完任务问卷，谢谢！';
 $GLOBALS['gLang']['have_apply_for'] = '您已经报过名了！';
 $GLOBALS['gLang']['apply_success'] = '恭喜您，报名成功！如果您从被选中，我们会联系您！';
 $GLOBALS['gLang']['apply_failed'] = '对不起，名额已满！请选择其他任务！';
@@ -827,5 +828,8 @@ $GLOBALS['gLang']['completetask'] = '已完成任务数';
 $GLOBALS['gLang']['completedassign'] = '已完成任务数';
 $GLOBALS['gLang']['num'] = '序号';
 $GLOBALS['gLang']['summarize'] = '汇总';
+$GLOBALS['gLang']['postaddress'] = '通信地址';
+
+$GLOBALS['gLang']['a_reim'] = '报销额度';
 
 ?>
