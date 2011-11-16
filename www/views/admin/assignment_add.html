@@ -37,15 +37,25 @@ function getBrand(c_id){
 /* Added by Wendy 2010.10.14 */
 //清除品牌选项
 var selobj = $('brand_container');
+/*
 for(var i in selobj.options){
 	selobj.options[i] = null;
-	}
+	}*/
+var selobj_len = selobj.options.length;
+for(var i=selobj_len-1; i>=0; i--){
+	selobj.options.remove(i);
+}
 
 //清除分店选项
 var selobj1 = $('store_container');
+/*
 for(var i in selobj1.options){
 	selobj1.options[i] = null;
-	}
+	}*/
+var selobj1_len = selobj1.options.length;
+for(var i=selobj1_len-1; i>=0; i--){
+	selobj1.options.remove(i);
+}
 /**** 清除所有的选择项 end ****/
 
 	if(c_id == ''){
@@ -70,7 +80,7 @@ for(var i in selobj1.options){
 				for(var i in obj){
 
 					//if(i==0) selobj.options[0] = new Option(obj[i].cs_name, obj[i].cs_id) //replace 1st option with a new one
-					selobj.options[j]=new Option(obj[i].b_name,obj[i].b_id) //add a new option to the end of SELECT
+					selobj.options[j]=new Option(obj[i].b_name,obj[i].b_id); //add a new option to the end of SELECT
 					j++;
 				}
 			}
@@ -91,9 +101,14 @@ function getStore(b_id){
 /**** 清除所有的选择项 start ****/
 /* Added by Wendy 2010.10.14 */
 var selobj = $('store_container');
+/*
 for(var i in selobj.options){
 	selobj.options[i] = null;
-	}
+	}*/
+var selobj_len = selobj.options.length;
+for(var i=selobj_len-1; i>=0; i--){
+	selobj.options.remove(0);
+}
 /**** 清除所有的选择项 end ****/
 
 	if(b_id == ''){
@@ -114,11 +129,49 @@ for(var i in selobj.options){
 			if(obj != ''){
 				for(var i in obj){
 					//if(i==0) selobj.options[0] = new Option(obj[i].cs_name, obj[i].cs_id) //replace 1st option with a new one
-					selobj.options[i]=new Option(obj[i].cs_abbr+' '+obj[i].cs_name, obj[i].cs_id) //add a new option to the end of SELECT
+					selobj.options[i]=new Option(obj[i].cs_abbr+' '+obj[i].cs_name, obj[i].cs_id); //add a new option to the end of SELECT
 				}
 			}
 			else{
 				selobj.options[0] = new Option('--', '');
+			}
+
+		}
+		if(r.s==400){
+			$('msg').innerHTML = r.m;
+		}
+	});
+
+	return false;
+}
+function getStoreInfo(cs_id){
+
+	var desc = $('a_desc');
+	var demand = $('a_demand');
+	var quiz = $('a_quiz');
+
+	if(cs_id == ''){
+		desc.innerHTML = '';
+		demand.innerHTML = '';
+		quiz.innerHTML = '';
+		return ;
+	}
+
+	var url = "<?php echo $www_site_url?>/admin.php?action=corporation&view=ajaxstoreinfo&cs_id="+cs_id;
+
+	mini.ajax.get(url, function(r){
+
+		var r = eval('(' + r + ')');
+
+		if(r.s==200){
+			var obj = eval('(' + r.d + ')');
+			var desc = $('a_desc');
+			var demand = $('a_demand');
+			var quiz = $('a_quiz');
+			if(obj != ''){
+				desc.innerHTML = obj.cs_desc;
+				demand.innerHTML = obj.cs_demand;
+				quiz.innerHTML = obj.cs_quiz;
 			}
 
 		}
@@ -149,7 +202,7 @@ for(var i in selobj.options){
 					<table width="100%">
 						<tr>
 							<td width="10%"><?php echo lang('a_title')?>:</td>
-							<td><input type="text" name="a_title" class="textfield" style="width:500px"/> *<input type="button" value="Split" onclick="document.addassignmentform.a_title.value+='&lt;!--!--&gt;';"></td>
+							<td><input type="text" name="a_title" id="a_title" class="textfield" style="width:500px"/> *<input type="button" value="Split" onclick="document.addassignmentform.a_title.value+='&lt;!--!--&gt;';"></td>
 						</tr>
 
 
@@ -172,14 +225,14 @@ for(var i in selobj.options){
 						</tr>
 						<tr>
 							<td><?php echo lang('b_name')?>:</td>
-							<td><select id="brand_container" name="b_id" onchange="getStore(this.options[this.selectedIndex].value);">
+							<td><select id="brand_container" name="b_id" onchange="getStore(this.options[this.selectedIndex].value);document.getElementById('a_title').value=this.options[this.selectedIndex].innerHTML;">
 							<option value="">--</option>
 							</select></td>
 						</tr>
 
 						<tr>
 							<td><?php echo lang('cs_name')?>:</td>
-							<td><select id="store_container" name="cs_id">
+							<td><select id="store_container" name="cs_id" onchange="getStoreInfo(this.options[this.selectedIndex].value);var title=document.getElementById('a_title').value;var titleadd=this.options[this.selectedIndex].innerHTML;document.getElementById('a_title').value =title+' '+titleadd.substring(2);">
 							<option value="">--</option>
 							</select></td>
 						</tr>
@@ -202,21 +255,21 @@ for(var i in selobj.options){
 						</tr>
 						<tr>
 							<td><?php echo lang('a_desc')?>:</td>
-							<td><textarea type="text" name="a_desc" rows="10" style="width:500px" class="textfield"/></textarea><input type="button" value="Split" onclick="document.addassignmentform.a_desc.value+='&lt;!--!--&gt;';"></td>
+							<td><textarea type="text" name="a_desc" id="a_desc" rows="10" style="width:500px" class="textfield"/></textarea><input type="button" value="Split" onclick="document.addassignmentform.a_desc.value+='&lt;!--!--&gt;';"></td>
 						</tr>
 						<tr>
 							<td><?php echo lang('a_demand')?>:</td>
-							<td><textarea type="text" name="a_demand" rows="10" style="width:500px" class="textfield"/></textarea><input type="button" value="Split" onclick="document.addassignmentform.a_demand.value+='&lt;!--!--&gt;';"></td>
+							<td><textarea type="text" name="a_demand" id="a_demand" rows="10" style="width:500px" class="textfield"/></textarea><input type="button" value="Split" onclick="document.addassignmentform.a_demand.value+='&lt;!--!--&gt;';"></td>
 						</tr>
 						<tr>
 							<td><?php echo lang('istest')?>:</td>
-							<td><input type="checkbox" name="a_istest" value="1" checked/></td>
+							<td><input type="checkbox" name="a_istest" value="1" checked /></td>
 						</tr>
 						<tr>
 							<td><?php echo lang('a_quiz')?>:</td>
 							<td>
 							格式说明,每一行输入一个测试题目。格式为 title:问题标题|A:答案|B:答案|C:答案|D:答案|answer:D
-							<textarea type="text" name="a_quiz" rows="10" style="width:900px" class="textfield"/>
+							<textarea type="text" name="a_quiz" id="a_quiz" rows="10" style="width:900px" class="textfield"/>
 title:去肯德基一定要点的是什么？|A:薯条|B:鸡翅|C:汉堡|D:可乐|answer:B
 title:用餐结束之后不要忘记什么？|A:买单|B:刷卡|C:要发票|D:贵重物品|answer:C
 </textarea><input type="button" value="Split" onclick="document.addassignmentform.a_quiz.value+='&lt;!--!--&gt;';"></td>
@@ -225,7 +278,7 @@ title:用餐结束之后不要忘记什么？|A:买单|B:刷卡|C:要发票|D:�
 						<tr>
 						<td><?php echo lang('markgrade')?>:</td>
 						<td>
-						<input type="radio" name="a_markgrade" value="10" checked?> />0~10
+						<input type="radio" name="a_markgrade" value="10" checked />0~10
 						<input type="radio" name="a_markgrade" value="5" />0~5
 						<input type="radio" name="a_markgrade" value="4" />0~4
 						<input type="radio" name="a_markgrade" value="2" />0~2
