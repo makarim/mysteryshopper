@@ -324,3 +324,80 @@ function is_fs_mark(id){
 
 // 解决评论分制的多样化 end -add by wendy 2010.11.23
 
+
+/***********************************************************************/
+/* 解决问题分制的多样化 start -add by wendy 2011.5.24*/
+/*加载图片
+
+* 入口参数：id:任务ID；
+*         value:数据库中的分值；
+*        mark_type:分制类型（1~10）
+*/
+
+function create_vote_img_question_mark(id,value,mark_type){
+//isNaN()用来判断value是否为数字，当value为0、‘’、‘ ’、‘12’等形式时，该函数都会判断为数字（‘’和‘ ’被判断为0）；当为‘12s’时，判断不为数字
+	value = isNaN(value) ? -1 : value;
+	value = value ? value : 0;
+//	alert("value="+value);
+//	alert("type="+mark_type);
+
+
+	var vote_div=document.getElementById("voteimg_"+id);
+	for(var i=0;i<=mark_type;i++){
+	    var vote_img=document.createElement('img');
+	  	vote_div.appendChild(vote_img);
+		if(i>value)
+			vote_img.setAttribute("src",eval('vote_imagen'+i));
+		else if(i == value)
+			vote_img.setAttribute("src",eval('vote_imageybig'+i));
+		else
+			vote_img.setAttribute("src",eval('vote_imagey'+i));
+		vote_img.setAttribute("id","yes_"+id+'_'+i+'_'+mark_type);
+		vote_img.setAttribute("title",i+"分");
+	    vote_img.style.cursor="pointer";
+
+		if(is_ie6){
+
+			 // vote_img.setAttribute("onmouseover",'put_fs(this.id)');
+			  //vote_img.setAttribute("onmouseout",'out_fs(this.id)');
+			  vote_img.setAttribute("onclick",function(){is_fs_question_mark(this);});
+			}else{
+			//  vote_img.setAttribute("onmouseover",'put_fs(this.id)');
+			//  vote_img.setAttribute("onmouseout",'out_fs(this.id)');
+			  vote_img.setAttribute("onclick",'is_fs_question_mark(this);');
+			}
+
+	}
+}
+
+/* 在前台显示页面，有个<input type="hidden" id="rq_ans_182" name="rq_ans_2_182" value="9">隐藏框，这里用来设置它的值，后续程序会读取这个值并存入数据库 */
+function is_fs_question_mark(id){
+	var str=id.id;
+	var q=str.split("_")[1];
+ 	var obj=str.split("_")[2];
+ 	var mark_type=str.split("_")[3];
+	var vote_span=document.createElement("div");
+	//out_fs=function(){return false;};
+	//put_fs=function(){return false;};
+	for(var i=0;i<=mark_type;i++){
+		$("yes_"+q+"_"+i+'_'+mark_type).src=eval('vote_imagen'+i);
+	}
+	for(var i=0;i<=obj;i++){
+		if(i == obj)
+			$("yes_"+q+"_"+i+'_'+mark_type).src = eval('vote_imageybig'+i);
+		else
+			$("yes_"+q+"_"+i+'_'+mark_type).src=eval('vote_imagey'+i);
+	}
+
+	var vote_span_text=obj+"分";
+	document.getElementById("span_ch_"+q).innerHTML =vote_span_text;
+	if(document.getElementById("votebox_"+q)){
+	document.getElementById("votebox_"+q).checked = 0;}
+
+	document.getElementById("rq_ans_"+q).value = obj;//设置隐藏框的值
+	//is_fs=function(){return false;};
+	display_comment(q);
+}
+
+// 解决问题分制的多样化 end -add by wendy 2011.5.24
+
