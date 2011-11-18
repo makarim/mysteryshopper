@@ -53,7 +53,7 @@ class CorporationModel extends Model {
 
 	}
 	function createNewStore($store){//将b_id的值存入数据库
-		return $this->db->execute("insert into store (cs_name,cs_abbr,cs_address,c_id,cs_province,cs_city,cs_district,cs_phone,cs_size,b_id) value ('{$store['cs_name']}','{$store['cs_abbr']}','{$store['cs_address']}','{$store['c_id']}','{$store['cs_province']}','{$store['cs_city']}','{$store['cs_district']}','{$store['cs_phone']}','{$store['cs_size']}','{$store['b_id']}') ");
+		return $this->db->execute("insert into store (cs_name,cs_abbr,cs_address,c_id,cs_province,cs_city,cs_district,cs_phone,cs_size,b_id,cs_desc,cs_demand,cs_quiz,cs_reim) value ('{$store['cs_name']}','{$store['cs_abbr']}','{$store['cs_address']}','{$store['c_id']}','{$store['cs_province']}','{$store['cs_city']}','{$store['cs_district']}','{$store['cs_phone']}','{$store['cs_size']}','{$store['b_id']}','{$store['cs_desc']}','{$store['cs_demand']}','{$store['cs_quiz']}','{$store['cs_reim']}') ");
 	}
 	function createNewBrand($brand){
 		return $this->db->execute("insert into brand (b_name,c_id,b_created,b_updated,b_logo) value ('{$brand['b_name']}','{$brand['c_id']}',NOW(),NOW(),'{$brand['b_logo']}') ");
