@@ -142,6 +142,26 @@ foreach ($GLOBALS['gCompanysize'] as $k=>$v){
 							<td><input type="text" name="cs_order" size="3" value="<?php echo $store['cs_order']?>" class="textfield" /></td>
 						</tr>
 						<tr>
+							<td><?php echo lang('a_desc')?>:</td>
+							<td><textarea type="text" name="cs_desc" rows="10" style="width:500px"  class="textfield"><?php echo splitx($store['cs_desc'])?></textarea><input type="button" value="Split" onclick="document.addcorporationform.cs_desc.value+='&lt;!--!--&gt;';"></td>
+						</tr>
+						<tr>
+							<td><?php echo lang('a_demand')?>:</td>
+							<td><textarea type="text" name="cs_demand" rows="10" style="width:500px"  class="textfield"><?php echo splitx($store['cs_demand'])?></textarea><input type="button" value="Split" onclick="document.addcorporationform.cs_demand.value+='&lt;!--!--&gt;';"></td>
+						</tr>
+						<tr>
+							<td><?php echo lang('a_quiz')?>:</td>
+							<td>
+							<div>格式说明,每一行输入一个测试题目。格式为 title:问题标题|A:答案|B:答案|C:答案|D:答案|answer:D</div>
+							<textarea type="text" name="cs_quiz" rows="10" style="width:500px"  class="textfield"><?php if($store['cs_quiz']) echo splitx($store['cs_quiz']); else echo "title:去肯德基一定要点的是什么？|A:薯条|B:鸡翅|C:汉堡|D:可乐|answer:B
+title:用餐结束之后不要忘记什么？|A:买单|B:刷卡|C:要发票|D:贵重物品|answer:C"; ?></textarea><input type="button" value="Split" onclick="document.addcorporationform.cs_quiz.value+='&lt;!--!--&gt;';">
+							</td>
+						</tr>
+						<tr>
+							<td><?php echo lang('a_reim')?>:</td>
+							<td><input type="text" name="cs_reim" value="<?php echo splitx($store['cs_reim'])?>"  class="textfield"/>元</td>
+						</tr>
+						<tr>
 
 							<td colspan="2"><input type="submit" value="<?php echo lang('submit')?>" class="button"/></td>
 						</tr>
