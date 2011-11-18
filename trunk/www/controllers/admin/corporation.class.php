@@ -276,6 +276,11 @@ class corporation{
 		$store['cs_phone'] = empty($_POST ['cs_phone'])?"":addslashes($_POST ['cs_phone']);
 		$store['cs_size'] = empty($_POST ['cs_size'])?"":addslashes($_POST ['cs_size']);
 
+		$store['cs_desc'] = empty($_POST ['cs_desc'])?"":addslashes($_POST ['cs_desc']);
+		$store['cs_demand'] = empty($_POST ['cs_demand'])?"":addslashes($_POST ['cs_demand']);
+		$store['cs_quiz'] = empty($_POST ['cs_quiz'])?"":addslashes($_POST ['cs_quiz']);
+		$store['cs_reim'] = empty($_POST ['cs_reim'])?"":addslashes($_POST ['cs_reim']);
+
 		include_once("CorporationModel.class.php");
 		$corpmod = new CorporationModel();
 		// 1. create db corporation
@@ -336,6 +341,10 @@ class corporation{
 		$store['cs_size'] = empty($_POST ['cs_size'])?"":addslashes($_POST ['cs_size']);
 
 		$store['cs_order'] = empty($_POST ['cs_order'])?1:intval($_POST ['cs_order']);
+		$store['cs_desc'] = empty($_POST ['cs_desc'])?"":addslashes($_POST ['cs_desc']);
+		$store['cs_demand'] = empty($_POST ['cs_demand'])?"":addslashes($_POST ['cs_demand']);
+		$store['cs_quiz'] = empty($_POST ['cs_quiz'])?"":addslashes($_POST ['cs_quiz']);
+		$store['cs_reim'] = empty($_POST ['cs_reim'])?"":addslashes($_POST ['cs_reim']);
 		// 1. update db corporation
 		$row = $corpmod->updateStore( $store, $cs_id);
 		if ($row !== false) {
@@ -367,6 +376,23 @@ class corporation{
 			}
 		}
     	$msg = array('s'=> 200,'m'=>'ok','d'=>json_encode($stores));
+		exit(json_output($msg));
+    }
+    function view_ajaxstoreinfo(){
+    	$cs_id = isset($_GET['cs_id'])?$_GET['cs_id']:'';
+
+    	include_once("CorporationModel.class.php");
+    	$corpmod = new CorporationModel();
+    	if($cs_id) {
+			$store = $corpmod->getStoreById($cs_id);
+		}
+
+		if(is_array($store)){
+			$storeinfo['cs_desc'] = $store['cs_desc'];
+			$storeinfo['cs_demand'] = $store['cs_demand'];
+			$storeinfo['cs_quiz'] = $store['cs_quiz'];
+		}
+    	$msg = array('s'=> 200,'m'=>'ok','d'=>json_encode($storeinfo));
 		exit(json_output($msg));
     }
 
@@ -495,5 +521,7 @@ class corporation{
     	$msg = array('s'=> 200,'m'=>'ok','d'=>json_encode($brands));
 		exit(json_output($msg));
     }
+
+
 }
 ?>
